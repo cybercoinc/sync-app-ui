@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/operator/map", '@angular2-material/icon'], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/operator/map", "@angular2-material/icon"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/oper
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, ng_semantic_1, icon_1;
-    var AppComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, http_1, ng_semantic_1, icon_1, AppComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -23,11 +22,13 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/oper
             function (ng_semantic_1_1) {
                 ng_semantic_1 = ng_semantic_1_1;
             },
-            function (_1) {},
+            function (_1) {
+            },
             function (icon_1_1) {
                 icon_1 = icon_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             AppComponent = (function () {
                 function AppComponent(http, mdIconRegistry) {
                     this.http = http;
@@ -75,23 +76,23 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/oper
                     localStorage.removeItem("id_token");
                     location.reload();
                 };
-                __decorate([
-                    core_1.ViewChild("myPopup"), 
-                    __metadata('design:type', ng_semantic_1.SemanticPopupComponent)
-                ], AppComponent.prototype, "myPopup", void 0);
-                AppComponent = __decorate([
-                    core_1.Component({
-                        selector: "app",
-                        template: "\n    <md-sidenav-layout class=\"demo-sidenav-layout\">\n        <md-sidenav #end align=\"end\">\n            <md-nav-list>\n              <a md-list-item [routerLink]=\"['home']\">Home</a>\n              <a md-list-item [routerLink]=\"['projects']\">Projects</a>\n              <a md-list-item [routerLink]=\"['contact']\">Contact</a>\n            </md-nav-list>\n            <button md-button (click)=\"end.close()\">Close</button>\n        </md-sidenav>\n        \n        <md-sidenav #start>\n            <md-nav-list>\n              <a md-list-item [routerLink]=\"['home']\">Home</a>\n              <a md-list-item [routerLink]=\"['projects']\">Projects</a>\n              <a md-list-item [routerLink]=\"['contact']\">Contact</a>\n            </md-nav-list>\n            <button md-button (click)=\"start.close()\">CLOSE</button>\n        </md-sidenav>\n          \n        <md-toolbar class=\"main-menu\" color=\"primary\">\n            <button md-icon-button (click)=\"start.open()\">\n                <md-icon class=\"md-24\" >menu</md-icon>\n            </button>\n      \n          <div class=\"main-menu\">\n            <h1>Schedule Connector</h1>\n            <button md-button (click)=\"end.open()\">\n              Profile\n            </button>\n          </div>\n        </md-toolbar>\n    \n          <div class=\"app-content\">\n            <router-outlet></router-outlet>\n          </div>\n</md-sidenav-layout>\n",
-                        viewProviders: [icon_1.MdIconRegistry],
-                        encapsulation: core_1.ViewEncapsulation.None,
-                    }), 
-                    __metadata('design:paramtypes', [http_1.Http, icon_1.MdIconRegistry])
-                ], AppComponent);
                 return AppComponent;
             }());
+            __decorate([
+                core_1.ViewChild("myPopup"),
+                __metadata("design:type", ng_semantic_1.SemanticPopupComponent)
+            ], AppComponent.prototype, "myPopup", void 0);
+            AppComponent = __decorate([
+                core_1.Component({
+                    selector: "app",
+                    template: "\n    <md-sidenav-layout class=\"demo-sidenav-layout\">\n        <md-sidenav #end align=\"end\">\n            <md-nav-list>\n              <a md-list-item [routerLink]=\"['home']\">Home</a>\n              <a md-list-item [routerLink]=\"['projects']\">Projects</a>\n              <a md-list-item [routerLink]=\"['contact']\">Contact</a>\n            </md-nav-list>\n            <button md-button (click)=\"end.close()\">Close</button>\n        </md-sidenav>\n        \n        <md-sidenav #start>\n            <md-nav-list>\n              <a md-list-item [routerLink]=\"['home']\">Home</a>\n              <a md-list-item [routerLink]=\"['projects']\">Projects</a>\n              <a md-list-item [routerLink]=\"['contact']\">Contact</a>\n            </md-nav-list>\n            <button md-button (click)=\"start.close()\">CLOSE</button>\n        </md-sidenav>\n          \n        <md-toolbar class=\"main-menu\" color=\"primary\">\n            <button md-icon-button (click)=\"start.open()\">\n                <md-icon class=\"md-24\" >menu</md-icon>\n            </button>\n      \n          <div class=\"main-menu\">\n            <h1>Schedule Connector</h1>\n            <button md-button (click)=\"end.open()\">\n              Profile\n            </button>\n          </div>\n        </md-toolbar>\n    \n          <div class=\"app-content\">\n            <router-outlet></router-outlet>\n          </div>\n</md-sidenav-layout>\n",
+                    viewProviders: [icon_1.MdIconRegistry],
+                    encapsulation: core_1.ViewEncapsulation.None,
+                }),
+                __metadata("design:paramtypes", [http_1.Http, icon_1.MdIconRegistry])
+            ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=app.component.js.map

@@ -1,6 +1,5 @@
-System.register(['@angular/core', "@angular/http", "ng-semantic", "./home/home.component", "./contact.routing", "../shared/shared.module", "./form/form.component", "./profile/profile.component", "./card-demo/card-demo", '@angular2-material/card', '@angular2-material/button'], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/http", "ng-semantic", "./home/home.component", "./contact.routing", "../shared/shared.module", "./form/form.component", "./profile/profile.component", "./card-demo/card-demo", "@angular2-material/card", "@angular2-material/button"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(['@angular/core', "@angular/http", "ng-semantic", "./home/home.c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, ng_semantic_1, home_component_1, contact_routing_1, shared_module_1, form_component_1, profile_component_1, card_demo_1, card_1, button_1;
-    var ContactModule;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, http_1, ng_semantic_1, home_component_1, contact_routing_1, shared_module_1, form_component_1, profile_component_1, card_demo_1, card_1, button_1, ContactModule;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -46,31 +45,32 @@ System.register(['@angular/core', "@angular/http", "ng-semantic", "./home/home.c
             },
             function (button_1_1) {
                 button_1 = button_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             ContactModule = (function () {
                 function ContactModule() {
                 }
-                ContactModule = __decorate([
-                    core_1.NgModule({
-                        imports: [
-                            http_1.HttpModule,
-                            ng_semantic_1.NgSemanticModule,
-                            contact_routing_1.routing,
-                            button_1.MdButtonModule,
-                            card_1.MdCardModule,
-                            shared_module_1.SharedModule.forRoot()
-                        ],
-                        exports: [profile_component_1.ProfileComponent],
-                        declarations: [home_component_1.ContactComponent, form_component_1.FormComponent, profile_component_1.ProfileComponent, card_demo_1.CardDemoComponent],
-                        bootstrap: [home_component_1.ContactComponent]
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], ContactModule);
                 return ContactModule;
             }());
+            ContactModule = __decorate([
+                core_1.NgModule({
+                    imports: [
+                        http_1.HttpModule,
+                        ng_semantic_1.NgSemanticModule,
+                        contact_routing_1.routing,
+                        button_1.MdButtonModule,
+                        card_1.MdCardModule,
+                        shared_module_1.SharedModule.forRoot()
+                    ],
+                    exports: [profile_component_1.ProfileComponent],
+                    declarations: [home_component_1.ContactComponent, form_component_1.FormComponent, profile_component_1.ProfileComponent, card_demo_1.CardDemoComponent],
+                    bootstrap: [home_component_1.ContactComponent]
+                }),
+                __metadata("design:paramtypes", [])
+            ], ContactModule);
             exports_1("ContactModule", ContactModule);
         }
-    }
+    };
 });
 //# sourceMappingURL=contact.module.js.map
