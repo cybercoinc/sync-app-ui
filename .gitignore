@@ -1,0 +1,3 @@
+**/wwwroot/app/**/*.map
+**/wwwroot/app/**/*.js
+node_modules
