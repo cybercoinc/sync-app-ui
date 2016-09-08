@@ -1,0 +1,16 @@
+#application:    scheduleconnector-dev
+#version:        1
+service:         ms-app-ui
+runtime: nodejs
+vm: true
+manual_scaling:
+  instances: 1
+
+# [START env_variables]
+env_variables:
+    GCLOUD_PROJECT: scheduleconnector-dev
+# [END env_variables]
+
+skip_files:
+  - ^(.*/)?.*/node_modules/.*$
+# [END app_yaml]
