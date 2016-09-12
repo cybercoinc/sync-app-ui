@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/common", "./home.component", "./home.routing", "../shared/shared.module", "../contact/contact.module", "../projects/projects.module"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/common", "./home.component", "./home.routing", "../shared/shared.module", "../projects/projects.module"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/comm
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, http_1, ng_semantic_1, common_1, home_component_1, home_routing_1, shared_module_1, contact_module_1, projects_module_1, HomeModule;
+    var core_1, http_1, ng_semantic_1, common_1, home_component_1, home_routing_1, shared_module_1, projects_module_1, HomeModule;
     return {
         setters: [
             function (core_1_1) {
@@ -34,9 +34,6 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/comm
             function (shared_module_1_1) {
                 shared_module_1 = shared_module_1_1;
             },
-            function (contact_module_1_1) {
-                contact_module_1 = contact_module_1_1;
-            },
             function (projects_module_1_1) {
                 projects_module_1 = projects_module_1_1;
             }
@@ -55,7 +52,6 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/comm
                         home_routing_1.routing,
                         shared_module_1.SharedModule.forRoot(),
                         ng_semantic_1.NgSemanticModule,
-                        contact_module_1.ContactModule,
                         projects_module_1.ProjectsModule,
                     ],
                     declarations: [

@@ -22,7 +22,6 @@ import {MdIconRegistry} from '@angular2-material/icon';
             <md-nav-list>
               <a md-list-item [routerLink]="['home']">Home</a>
               <a md-list-item [routerLink]="['projects']">Projects</a>
-              <a md-list-item [routerLink]="['contact']">Contact</a>
             </md-nav-list>
             <button md-button (click)="start.close()">CLOSE</button>
         </md-sidenav>

@@ -8,8 +8,6 @@ import {AppComponent}  from './app.component';
 import {routing} from "./routes";
 
 import {HelloComponent} from "./components/shared/hello.component";
-
-import {ContactModule} from "./modules/contact/contact.module";
 import {ProjectsModule} from "./modules/projects/projects.module";
 import {HomeModule} from "./modules/home/home.module";
 
@@ -25,7 +23,6 @@ import {MdListModule} from '@angular2-material/list';
         BrowserModule,
         HttpModule,
         NgSemanticModule,
-        ContactModule,
         ProjectsModule,
         HomeModule,
 
