@@ -10,20 +10,17 @@ import {MdIconRegistry} from '@angular2-material/icon';
     template: `
     <md-sidenav-layout class="demo-sidenav-layout">
         <md-sidenav #end align="end">
-            <md-nav-list>
+            <md-nav-list (click)="end.close()">
               <a md-list-item [routerLink]="['home']">Home</a>
               <a md-list-item [routerLink]="['projects']">Projects</a>
-              <a md-list-item [routerLink]="['contact']">Contact</a>
             </md-nav-list>
-            <button md-button (click)="end.close()">Close</button>
         </md-sidenav>
         
         <md-sidenav #start>
-            <md-nav-list>
+            <md-nav-list (click)="start.close()">
               <a md-list-item [routerLink]="['home']">Home</a>
               <a md-list-item [routerLink]="['projects']">Projects</a>
             </md-nav-list>
-            <button md-button (click)="start.close()">CLOSE</button>
         </md-sidenav>
           
         <md-toolbar class="main-menu" color="primary">
