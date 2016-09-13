@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/platform-browser", "angular2-jwt", "@angular/http", "ng-semantic", "./app.component", "./routes", "./components/shared/hello.component", "./modules/projects/projects.module", "./modules/home/home.module", "@angular2-material/card", "@angular2-material/button", "@angular2-material/toolbar", "@angular2-material/icon", "@angular2-material/sidenav", "@angular2-material/list"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/platform-browser", "angular2-jwt", "@angular/http", "ng-semantic", "./app.component", "./routes", "./components/shared/hello.component", "./modules/projects/projects.module", "./modules/home/home.module", "@angular2-material/card", "@angular2-material/button", "@angular2-material/toolbar", "@angular2-material/icon", "@angular2-material/sidenav", "@angular2-material/list", "./service/microservices/ms-project-client.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/platform-browser", "angular2-jwt", "
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, platform_browser_1, angular2_jwt_1, http_1, ng_semantic_1, app_component_1, routes_1, hello_component_1, projects_module_1, home_module_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, AppModule;
+    var core_1, platform_browser_1, angular2_jwt_1, http_1, ng_semantic_1, app_component_1, routes_1, hello_component_1, projects_module_1, home_module_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, ms_project_client_service_1, AppModule;
     return {
         setters: [
             function (core_1_1) {
@@ -60,6 +60,9 @@ System.register(["@angular/core", "@angular/platform-browser", "angular2-jwt", "
             },
             function (list_1_1) {
                 list_1 = list_1_1;
+            },
+            function (ms_project_client_service_1_1) {
+                ms_project_client_service_1 = ms_project_client_service_1_1;
             }
         ],
         execute: function () {
@@ -89,7 +92,8 @@ System.register(["@angular/core", "@angular/platform-browser", "angular2-jwt", "
                             globalHeaders: [{ "Content-type": "application/json" }],
                             newJwtError: true,
                             noTokenScheme: true
-                        })
+                        }),
+                        ms_project_client_service_1.MsProjectClientService
                     ],
                     declarations: [
                         hello_component_1.HelloComponent,

@@ -1,4 +1,4 @@
-System.register(["@angular/core"], function (exports_1, context_1) {
+System.register(["@angular/core", "../../../service/microservices/ms-project-client.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,17 +10,25 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, IndexComponent;
+    var core_1, ms_project_client_service_1, IndexComponent;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (ms_project_client_service_1_1) {
+                ms_project_client_service_1 = ms_project_client_service_1_1;
             }
         ],
         execute: function () {
             IndexComponent = (function () {
-                function IndexComponent() {
+                function IndexComponent(MsProjectClient) {
+                    this.MsProjectClient = MsProjectClient;
                 }
+                IndexComponent.prototype.ngOnInit = function () {
+                    this.projects = this.MsProjectClient.getProjects();
+                    console.log(this.projects);
+                };
                 return IndexComponent;
             }());
             IndexComponent = __decorate([
@@ -28,7 +36,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
                     selector: "index",
                     templateUrl: "client/modules/projects/index/index.component.html"
                 }),
-                __metadata("design:paramtypes", [])
+                __metadata("design:paramtypes", [ms_project_client_service_1.MsProjectClientService])
             ], IndexComponent);
             exports_1("IndexComponent", IndexComponent);
         }

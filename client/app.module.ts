@@ -18,6 +18,8 @@ import {MdIconModule} from '@angular2-material/icon';
 import {MdSidenavModule} from '@angular2-material/sidenav';
 import {MdListModule} from '@angular2-material/list';
 
+import {MsProjectClientService} from './service/microservices/ms-project-client.service';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -40,7 +42,9 @@ import {MdListModule} from '@angular2-material/list';
             globalHeaders: [{"Content-type": "application/json"}],
             newJwtError: true,
             noTokenScheme: true
-        })
+        }),
+
+        MsProjectClientService
     ],
 
     declarations: [
