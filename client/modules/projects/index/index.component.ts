@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from '../../../service/microservices/ms-project-client.service';
 
-
 @Component({
     selector: "index",
     templateUrl: `client/modules/projects/index/index.component.html`
@@ -11,11 +10,15 @@ export class IndexComponent implements OnInit {
         this.MsProjectClient = MsProjectClient
     }
 
+    projects: [{}];
+
     ngOnInit(): void {
-        this.projects = this.MsProjectClient.getActiveProjects();
-        console.log(this.projects);
+        this.getActiveProjects();
+    }
+
+    getActiveProjects(): void {
+        this.MsProjectClient.getActiveProjects().then(projects => this.projects = projects);
     }
 
     MsProjectClient: MsProjectClientService;
-    projects;
 }
