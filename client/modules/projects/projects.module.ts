@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {IndexComponent} from './index/index.component';
+import {ConnectComponent} from './connect/connect.component';
 import {routing} from "./projects.routing";
 
 import {MdCardModule} from '@angular2-material/card';
@@ -24,7 +25,7 @@ import {MdListModule} from '@angular2-material/list';
         routing,
     ],
     exports: [],
-    declarations: [IndexComponent, IndexComponent],
+    declarations: [IndexComponent, ConnectComponent],
     bootstrap: [IndexComponent]
 })
 export class ProjectsModule {

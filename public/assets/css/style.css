@@ -38,3 +38,9 @@ body md-toolbar .main-menu {
 body h1 {
     font-size: 20px;
 }
+
+.buttons-group {
+    margin: 8px 0;
+    padding: 8px;
+    border-radius: 2px;
+}

@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/common", "./index/index.component", "./projects.routing", "@angular2-material/card", "@angular2-material/button", "@angular2-material/toolbar", "@angular2-material/icon", "@angular2-material/sidenav", "@angular2-material/list"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/common", "./index/index.component", "./connect/connect.component", "./projects.routing", "@angular2-material/card", "@angular2-material/button", "@angular2-material/toolbar", "@angular2-material/icon", "@angular2-material/sidenav", "@angular2-material/list"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/common", "./index/index.component", 
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, common_1, index_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, ProjectsModule;
+    var core_1, common_1, index_component_1, connect_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, ProjectsModule;
     return {
         setters: [
             function (core_1_1) {
@@ -21,6 +21,9 @@ System.register(["@angular/core", "@angular/common", "./index/index.component", 
             },
             function (index_component_1_1) {
                 index_component_1 = index_component_1_1;
+            },
+            function (connect_component_1_1) {
+                connect_component_1 = connect_component_1_1;
             },
             function (projects_routing_1_1) {
                 projects_routing_1 = projects_routing_1_1;
@@ -63,7 +66,7 @@ System.register(["@angular/core", "@angular/common", "./index/index.component", 
                         projects_routing_1.routing,
                     ],
                     exports: [],
-                    declarations: [index_component_1.IndexComponent, index_component_1.IndexComponent],
+                    declarations: [index_component_1.IndexComponent, connect_component_1.ConnectComponent],
                     bootstrap: [index_component_1.IndexComponent]
                 }),
                 __metadata("design:paramtypes", [])

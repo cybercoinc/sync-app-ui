@@ -22,7 +22,7 @@ import {MdIconRegistry} from '@angular2-material/icon';
             </md-nav-list>
         </md-sidenav>
           
-        <md-toolbar class="main-menu" color="primary">
+        <md-toolbar class="main-menu">
             <button md-icon-button (click)="start.open()">
                 <md-icon class="md-24" >menu</md-icon>
             </button>
