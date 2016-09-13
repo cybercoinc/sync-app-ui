@@ -1,8 +1,6 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {provideAuth} from "angular2-jwt";
 import {HttpModule} from "@angular/http";
-import {NgSemanticModule} from "ng-semantic";
 
 import {AppComponent}  from './app.component';
 import {routing} from "./routes";
@@ -24,7 +22,6 @@ import {MsProjectClientService} from './service/microservices/ms-project-client.
     imports: [
         BrowserModule,
         HttpModule,
-        NgSemanticModule,
         ProjectsModule,
         HomeModule,
 
@@ -38,12 +35,6 @@ import {MsProjectClientService} from './service/microservices/ms-project-client.
         routing,
     ],
     providers: [
-        provideAuth({
-            globalHeaders: [{"Content-type": "application/json"}],
-            newJwtError: true,
-            noTokenScheme: true
-        }),
-
         MsProjectClientService
     ],
 

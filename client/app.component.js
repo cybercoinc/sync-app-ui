@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/operator/map", "@angular2-material/icon"], function (exports_1, context_1) {
+System.register(["@angular/core", "rxjs/add/operator/map", "@angular2-material/icon"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,17 +10,11 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/oper
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, http_1, ng_semantic_1, icon_1, AppComponent;
+    var core_1, icon_1, AppComponent;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (http_1_1) {
-                http_1 = http_1_1;
-            },
-            function (ng_semantic_1_1) {
-                ng_semantic_1 = ng_semantic_1_1;
             },
             function (_1) {
             },
@@ -30,58 +24,15 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/oper
         ],
         execute: function () {
             AppComponent = (function () {
-                function AppComponent(http, mdIconRegistry) {
-                    this.http = http;
-                    this.appName = "Angular 2 Express";
-                    this.user = {
-                        password: "angualr2express",
-                        username: "john"
-                    };
-                    this.isLogged = !!localStorage.getItem("id_token");
+                function AppComponent(mdIconRegistry) {
+                    this.appName = 'Schedule Connector';
                     mdIconRegistry
                         .addSvgIcon('thumb-up', '/assets/svg/thumbup-icon.svg')
                         .addSvgIconSetInNamespace('core', '/assets/svg/core-icon-set.svg')
                         .registerFontClassAlias('fontawesome', 'fa');
                 }
-                AppComponent.prototype.signup = function () {
-                    var _this = this;
-                    this.http.post("/login/signup", JSON.stringify({
-                        password: this.user.password,
-                        username: this.user.username
-                    }), new http_1.RequestOptions({
-                        headers: new http_1.Headers({ "Content-Type": "application/json" })
-                    }))
-                        .map(function (res) { return res.json(); })
-                        .subscribe(function (res) {
-                        _this.response = res;
-                    }, function (error) {
-                        console.log(error);
-                    });
-                };
-                AppComponent.prototype.login = function () {
-                    var _this = this;
-                    this.http.post("/login", JSON.stringify({ password: this.user.password }), new http_1.RequestOptions({
-                        headers: new http_1.Headers({ "Content-Type": "application/json" })
-                    }))
-                        .map(function (res) { return res.json(); })
-                        .subscribe(function (res) {
-                        localStorage.setItem("id_token", res.jwt);
-                        _this.myPopup.hide();
-                        location.reload();
-                    }, function (error) {
-                        console.log(error);
-                    });
-                };
-                AppComponent.prototype.logout = function () {
-                    localStorage.removeItem("id_token");
-                    location.reload();
-                };
                 return AppComponent;
             }());
-            __decorate([
-                core_1.ViewChild("myPopup"),
-                __metadata("design:type", ng_semantic_1.SemanticPopupComponent)
-            ], AppComponent.prototype, "myPopup", void 0);
             AppComponent = __decorate([
                 core_1.Component({
                     selector: "app",
@@ -89,7 +40,7 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "rxjs/add/oper
                     viewProviders: [icon_1.MdIconRegistry],
                     encapsulation: core_1.ViewEncapsulation.None,
                 }),
-                __metadata("design:paramtypes", [http_1.Http, icon_1.MdIconRegistry])
+                __metadata("design:paramtypes", [icon_1.MdIconRegistry])
             ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }

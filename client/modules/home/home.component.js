@@ -1,4 +1,4 @@
-System.register(["@angular/core", "../../service/api.service"], function (exports_1, context_1) {
+System.register(["@angular/core"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,30 +10,17 @@ System.register(["@angular/core", "../../service/api.service"], function (export
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, api_service_1, HomeComponent;
+    var core_1, HomeComponent;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (api_service_1_1) {
-                api_service_1 = api_service_1_1;
             }
         ],
         execute: function () {
             HomeComponent = (function () {
-                function HomeComponent(apiService) {
-                    this.apiService = apiService;
+                function HomeComponent() {
                 }
-                HomeComponent.prototype.protected = function () {
-                    var _this = this;
-                    this.apiService
-                        .get("/api")
-                        .subscribe(function (data) { _this.response = data; }, function (error) {
-                        _this.error = error.message;
-                        setTimeout(function () { return _this.error = null; }, 4000);
-                    });
-                };
                 return HomeComponent;
             }());
             HomeComponent = __decorate([
@@ -41,7 +28,7 @@ System.register(["@angular/core", "../../service/api.service"], function (export
                     selector: "home",
                     templateUrl: "client/modules/home/home.component.html"
                 }),
-                __metadata("design:paramtypes", [api_service_1.ApiService])
+                __metadata("design:paramtypes", [])
             ], HomeComponent);
             exports_1("HomeComponent", HomeComponent);
         }

@@ -1,12 +1,11 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpModule } from "@angular/http";
-import { NgSemanticModule } from "ng-semantic";
-import { CommonModule } from "@angular/common";
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {HttpModule} from "@angular/http";
+import {CommonModule} from "@angular/common";
 
-import { HomeComponent } from "./home.component";
-import { routing } from "./home.routing";
-import { SharedModule } from "../shared/shared.module";
-import { ProjectsModule } from "../projects/projects.module";
+import {HomeComponent} from "./home.component";
+import {routing} from "./home.routing";
+import {SharedModule} from "../shared/shared.module";
+import {ProjectsModule} from "../projects/projects.module";
 
 @NgModule({
     imports: [
@@ -14,7 +13,6 @@ import { ProjectsModule } from "../projects/projects.module";
         HttpModule,
         routing,
         SharedModule.forRoot(),
-        NgSemanticModule,
         ProjectsModule,
     ],
     declarations: [
@@ -27,4 +25,5 @@ import { ProjectsModule } from "../projects/projects.module";
         CUSTOM_ELEMENTS_SCHEMA
     ]
 })
-export class HomeModule { }
+export class HomeModule {
+}

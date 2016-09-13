@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/common", "./home.component", "./home.routing", "../shared/shared.module", "../projects/projects.module"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/http", "@angular/common", "./home.component", "./home.routing", "../shared/shared.module", "../projects/projects.module"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/comm
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, http_1, ng_semantic_1, common_1, home_component_1, home_routing_1, shared_module_1, projects_module_1, HomeModule;
+    var core_1, http_1, common_1, home_component_1, home_routing_1, shared_module_1, projects_module_1, HomeModule;
     return {
         setters: [
             function (core_1_1) {
@@ -18,9 +18,6 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/comm
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            },
-            function (ng_semantic_1_1) {
-                ng_semantic_1 = ng_semantic_1_1;
             },
             function (common_1_1) {
                 common_1 = common_1_1;
@@ -51,7 +48,6 @@ System.register(["@angular/core", "@angular/http", "ng-semantic", "@angular/comm
                         http_1.HttpModule,
                         home_routing_1.routing,
                         shared_module_1.SharedModule.forRoot(),
-                        ng_semantic_1.NgSemanticModule,
                         projects_module_1.ProjectsModule,
                     ],
                     declarations: [
