@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/http", "./index/index.component", "./projects.routing", "@angular2-material/card", "@angular2-material/button", "@angular2-material/toolbar", "@angular2-material/icon", "@angular2-material/sidenav", "@angular2-material/list"], function (exports_1, context_1) {
+System.register(["@angular/core", "./index/index.component", "./projects.routing", "@angular2-material/card", "@angular2-material/button", "@angular2-material/toolbar", "@angular2-material/icon", "@angular2-material/sidenav", "@angular2-material/list"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,14 +10,11 @@ System.register(["@angular/core", "@angular/http", "./index/index.component", ".
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, http_1, index_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, ProjectsModule;
+    var core_1, index_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, ProjectsModule;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (http_1_1) {
-                http_1 = http_1_1;
             },
             function (index_component_1_1) {
                 index_component_1 = index_component_1_1;
@@ -53,7 +50,6 @@ System.register(["@angular/core", "@angular/http", "./index/index.component", ".
             ProjectsModule = __decorate([
                 core_1.NgModule({
                     imports: [
-                        http_1.HttpModule,
                         card_1.MdCardModule,
                         button_1.MdButtonModule,
                         toolbar_1.MdToolbarModule,

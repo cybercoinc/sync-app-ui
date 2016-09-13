@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {HttpModule} from "@angular/http";
 import {IndexComponent} from './index/index.component';
 import {routing} from "./projects.routing";
 
@@ -13,8 +12,6 @@ import {MdListModule} from '@angular2-material/list';
 
 @NgModule({
     imports: [
-        HttpModule,
-
         MdCardModule,
         MdButtonModule,
         MdToolbarModule,

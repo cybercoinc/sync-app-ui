@@ -7,16 +7,15 @@ import {MsProjectClientService} from '../../../service/microservices/ms-project-
     templateUrl: `client/modules/projects/index/index.component.html`
 })
 export class IndexComponent implements OnInit {
-    ngOnInit(): void {
-        this.projects = this.MsProjectClient.getProjects();
+    constructor(MsProjectClient: MsProjectClientService) {
+        this.MsProjectClient = MsProjectClient
+    }
 
+    ngOnInit(): void {
+        this.projects = this.MsProjectClient.getActiveProjects();
         console.log(this.projects);
     }
 
     MsProjectClient: MsProjectClientService;
-    projects: [{}];
-
-    constructor(MsProjectClient: MsProjectClientService) {
-        this.MsProjectClient = MsProjectClient
-    }
+    projects;
 }

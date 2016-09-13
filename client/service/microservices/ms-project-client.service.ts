@@ -1,20 +1,28 @@
 import {MsClientService} from "./ms-client.service";
+import {Headers, Http, URLSearchParams} from '@angular/http';
 
 export class MsProjectClientService extends MsClientService {
     url = 'http://localhost:3003';
 
-    getProjects(): [{}] {
-        return [
-            {id: 11, name: 'Mr. Nice'},
-            {id: 12, name: 'Narco'},
-            {id: 13, name: 'Bombasto'},
-            {id: 14, name: 'Celeritas'},
-            {id: 15, name: 'Magneta'},
-            {id: 16, name: 'RubberMan'},
-            {id: 17, name: 'Dynama'},
-            {id: 18, name: 'Dr IQ'},
-            {id: 19, name: 'Magma'},
-            {id: 20, name: 'Tornado'}
-        ];
+    getProjects(): Promise<[{}]> {
+        return this.Http.get(this.url + '/find-where')
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
     }
+
+    getActiveProjects(): Promise<[{}]> {
+        let params: URLSearchParams = new URLSearchParams();
+        let paramsObj = {
+            status: 'active'
+        };
+
+        params.set('params', JSON.stringify(paramsObj));
+
+        return this.Http.get(this.url + '/find-where', {search: params})
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+    }
+
 }
