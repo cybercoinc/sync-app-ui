@@ -1,5 +1,6 @@
-import {Component, ViewChild, ViewEncapsulation} from "@angular/core";
+import {Component, ViewEncapsulation, OnInit} from "@angular/core";
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
+import {MsUserClientService} from './service/microservices/ms-user-client.service';
 import "rxjs/add/operator/map";
 
 import {MdIconRegistry} from '@angular2-material/icon';
@@ -22,8 +23,8 @@ import {MdIconRegistry} from '@angular2-material/icon';
       
           <div class="main-menu">
             <h1>Schedule Connector</h1>
-             <button md-button (click)="login()" *ngIf="!isLogged" color="primary">Login</button>
-             <button md-button (click)="logout()" *ngIf="isLogged" color="primary">Logout</button>
+             <!--<button md-button (click)="login()" *ngIf="!authUser" color="primary">Login</button>-->
+             <!--<button md-button (click)="logout()" *ngIf="authUser" color="primary">Logout</button>-->
           </div>
         </md-toolbar>
     
@@ -35,15 +36,21 @@ import {MdIconRegistry} from '@angular2-material/icon';
     viewProviders: [MdIconRegistry],
     encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     appName: string = 'Schedule Connector';
     response: Response;
 
-    user: {};
-    isLogged: boolean;
+    authUser: {};
 
-    constructor(private http: Http, mdIconRegistry: MdIconRegistry) {
-        this.isLogged = !!localStorage.getItem("id_token");
+    MsUserClientService: MsUserClientService;
+
+    ngOnInit(): void {
+        this.MsUserClientService.getMe()
+            .then(authUser => this.authUser = authUser);
+    }
+
+    constructor(mdIconRegistry: MdIconRegistry, msUserClientService: MsUserClientService) {
+        this.MsUserClientService = msUserClientService;
 
         mdIconRegistry
             .addSvgIcon('thumb-up', '/assets/svg/thumbup-icon.svg')
@@ -52,16 +59,10 @@ export class AppComponent {
     }
 
     login() {
-
-        // todo interact with ms-user
-        localStorage.setItem("id_token", 'MyRandomAccessToken$#@23231213$$$!!');
-        location.reload();
+        // todo
     }
 
     logout(): void {
-
-        // todo interact with ms-user
-        localStorage.removeItem("id_token");
-        location.reload();
+        // todo
     }
 }

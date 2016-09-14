@@ -17,6 +17,7 @@ import {MdSidenavModule} from '@angular2-material/sidenav';
 import {MdListModule} from '@angular2-material/list';
 
 import {MsProjectClientService} from './service/microservices/ms-project-client.service';
+import {MsUserClientService} from './service/microservices/ms-user-client.service';
 
 @NgModule({
     imports: [
@@ -35,7 +36,8 @@ import {MsProjectClientService} from './service/microservices/ms-project-client.
         routing,
     ],
     providers: [
-        MsProjectClientService
+        MsProjectClientService,
+        MsUserClientService,
     ],
 
     declarations: [
