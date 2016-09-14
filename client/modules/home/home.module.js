@@ -1,5 +1,6 @@
-System.register(["@angular/core", "@angular/http", "@angular/common", "./home.component", "./home.routing", "../shared/shared.module", "../projects/projects.module"], function (exports_1, context_1) {
+System.register(['@angular/core', "@angular/http", "@angular/common", "./home.component", "./home.routing", "../shared/shared.module", "../projects/projects.module"], function(exports_1, context_1) {
     "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,10 +10,10 @@ System.register(["@angular/core", "@angular/http", "@angular/common", "./home.co
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var __moduleName = context_1 && context_1.id;
-    var core_1, http_1, common_1, home_component_1, home_routing_1, shared_module_1, projects_module_1, HomeModule;
+    var core_1, http_1, common_1, home_component_1, home_routing_1, shared_module_1, projects_module_1;
+    var HomeModule;
     return {
-        setters: [
+        setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -33,37 +34,36 @@ System.register(["@angular/core", "@angular/http", "@angular/common", "./home.co
             },
             function (projects_module_1_1) {
                 projects_module_1 = projects_module_1_1;
-            }
-        ],
-        execute: function () {
+            }],
+        execute: function() {
             HomeModule = (function () {
                 function HomeModule() {
                 }
+                HomeModule = __decorate([
+                    core_1.NgModule({
+                        imports: [
+                            common_1.CommonModule,
+                            http_1.HttpModule,
+                            home_routing_1.routing,
+                            shared_module_1.SharedModule.forRoot(),
+                            projects_module_1.ProjectsModule,
+                        ],
+                        declarations: [
+                            home_component_1.HomeComponent
+                        ],
+                        bootstrap: [
+                            home_component_1.HomeComponent
+                        ],
+                        schemas: [
+                            core_1.CUSTOM_ELEMENTS_SCHEMA
+                        ]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], HomeModule);
                 return HomeModule;
             }());
-            HomeModule = __decorate([
-                core_1.NgModule({
-                    imports: [
-                        common_1.CommonModule,
-                        http_1.HttpModule,
-                        home_routing_1.routing,
-                        shared_module_1.SharedModule.forRoot(),
-                        projects_module_1.ProjectsModule,
-                    ],
-                    declarations: [
-                        home_component_1.HomeComponent
-                    ],
-                    bootstrap: [
-                        home_component_1.HomeComponent
-                    ],
-                    schemas: [
-                        core_1.CUSTOM_ELEMENTS_SCHEMA
-                    ]
-                }),
-                __metadata("design:paramtypes", [])
-            ], HomeModule);
             exports_1("HomeModule", HomeModule);
         }
-    };
+    }
 });
 //# sourceMappingURL=home.module.js.map

@@ -27,7 +27,6 @@ var isPublic = typeof window != "undefined";
             'rxjs': 'npm:rxjs',
             'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
             'angular2-jwt': 'npm:angular2-jwt/angular2-jwt.js',
-            'ng-semantic': 'npm:ng-semantic',
             '@angular2-material/core': 'npm:@angular2-material/core/core.umd.js',
             '@angular2-material/menu': 'npm:@angular2-material/menu/menu.umd.js',
             '@angular2-material/button': 'npm:@angular2-material/button/button.umd.js',
@@ -48,10 +47,6 @@ var isPublic = typeof window != "undefined";
             },
             'angular2-in-memory-web-api': {
                 main: './index.js',
-                defaultExtension: 'js'
-            },
-            'ng-semantic': {
-                main: 'ng-semantic',
                 defaultExtension: 'js'
             }
         }

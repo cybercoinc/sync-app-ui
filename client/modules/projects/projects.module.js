@@ -1,5 +1,6 @@
-System.register(["@angular/core", "@angular/common", "./index/index.component", "./connect/connect.component", "./projects.routing", "@angular2-material/card", "@angular2-material/button", "@angular2-material/toolbar", "@angular2-material/icon", "@angular2-material/sidenav", "@angular2-material/list"], function (exports_1, context_1) {
+System.register(['@angular/core', "@angular/common", './index/index.component', './connect/connect.component', "./projects.routing", '@angular2-material/card', '@angular2-material/button', '@angular2-material/toolbar', '@angular2-material/icon', '@angular2-material/sidenav', '@angular2-material/list'], function(exports_1, context_1) {
     "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,10 +10,10 @@ System.register(["@angular/core", "@angular/common", "./index/index.component", 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var __moduleName = context_1 && context_1.id;
-    var core_1, common_1, index_component_1, connect_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, ProjectsModule;
+    var core_1, common_1, index_component_1, connect_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1;
+    var ProjectsModule;
     return {
-        setters: [
+        setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -45,34 +46,33 @@ System.register(["@angular/core", "@angular/common", "./index/index.component", 
             },
             function (list_1_1) {
                 list_1 = list_1_1;
-            }
-        ],
-        execute: function () {
+            }],
+        execute: function() {
             ProjectsModule = (function () {
                 function ProjectsModule() {
                 }
+                ProjectsModule = __decorate([
+                    core_1.NgModule({
+                        imports: [
+                            card_1.MdCardModule,
+                            button_1.MdButtonModule,
+                            toolbar_1.MdToolbarModule,
+                            icon_1.MdIconModule,
+                            sidenav_1.MdSidenavModule,
+                            list_1.MdListModule,
+                            common_1.CommonModule,
+                            projects_routing_1.routing,
+                        ],
+                        exports: [],
+                        declarations: [index_component_1.IndexComponent, connect_component_1.ConnectComponent],
+                        bootstrap: [index_component_1.IndexComponent]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], ProjectsModule);
                 return ProjectsModule;
             }());
-            ProjectsModule = __decorate([
-                core_1.NgModule({
-                    imports: [
-                        card_1.MdCardModule,
-                        button_1.MdButtonModule,
-                        toolbar_1.MdToolbarModule,
-                        icon_1.MdIconModule,
-                        sidenav_1.MdSidenavModule,
-                        list_1.MdListModule,
-                        common_1.CommonModule,
-                        projects_routing_1.routing,
-                    ],
-                    exports: [],
-                    declarations: [index_component_1.IndexComponent, connect_component_1.ConnectComponent],
-                    bootstrap: [index_component_1.IndexComponent]
-                }),
-                __metadata("design:paramtypes", [])
-            ], ProjectsModule);
             exports_1("ProjectsModule", ProjectsModule);
         }
-    };
+    }
 });
 //# sourceMappingURL=projects.module.js.map

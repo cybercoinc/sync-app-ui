@@ -1,5 +1,6 @@
-System.register(["@angular/core"], function (exports_1, context_1) {
+System.register(["@angular/core"], function(exports_1, context_1) {
     "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,33 +10,32 @@ System.register(["@angular/core"], function (exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var __moduleName = context_1 && context_1.id;
-    var core_1, HelloComponent;
+    var core_1;
+    var HelloComponent;
     return {
-        setters: [
+        setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            }
-        ],
-        execute: function () {
+            }],
+        execute: function() {
             HelloComponent = (function () {
                 function HelloComponent() {
                 }
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', String)
+                ], HelloComponent.prototype, "name", void 0);
+                HelloComponent = __decorate([
+                    core_1.Component({
+                        selector: "hello",
+                        template: "<h2 class=\"ui header divided\">{{name}}</h2>"
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], HelloComponent);
                 return HelloComponent;
             }());
-            __decorate([
-                core_1.Input(),
-                __metadata("design:type", String)
-            ], HelloComponent.prototype, "name", void 0);
-            HelloComponent = __decorate([
-                core_1.Component({
-                    selector: "hello",
-                    template: "<h2 class=\"ui header divided\">{{name}}</h2>"
-                }),
-                __metadata("design:paramtypes", [])
-            ], HelloComponent);
             exports_1("HelloComponent", HelloComponent);
         }
-    };
+    }
 });
 //# sourceMappingURL=hello.component.js.map
