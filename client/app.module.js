@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/platform-browser', "@angular/http", './app.component', "./routes", "./components/shared/hello.component", "./modules/projects/projects.module", "./modules/home/home.module", '@angular2-material/card', '@angular2-material/button', '@angular2-material/toolbar', '@angular2-material/icon', '@angular2-material/sidenav', '@angular2-material/list', './service/microservices/ms-project-client.service', './service/microservices/ms-user-client.service'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/platform-browser', "@angular/http", './app.component', "./routes", "./components/shared/hello.component", "./modules/projects/projects.module", "./modules/home/home.module", '@angular2-material/card', '@angular2-material/button', '@angular2-material/toolbar', '@angular2-material/icon', '@angular2-material/sidenav', '@angular2-material/list', './service/microservices/ms-project-client.service', './service/microservices/ms-user-client.service', './service/auth.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/platform-browser', "@angular/http", 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, platform_browser_1, http_1, app_component_1, routes_1, hello_component_1, projects_module_1, home_module_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, ms_project_client_service_1, ms_user_client_service_1;
+    var core_1, platform_browser_1, http_1, app_component_1, routes_1, hello_component_1, projects_module_1, home_module_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, ms_project_client_service_1, ms_user_client_service_1, auth_service_1;
     var AppModule;
     return {
         setters:[
@@ -61,6 +61,9 @@ System.register(['@angular/core', '@angular/platform-browser', "@angular/http", 
             },
             function (ms_user_client_service_1_1) {
                 ms_user_client_service_1 = ms_user_client_service_1_1;
+            },
+            function (auth_service_1_1) {
+                auth_service_1 = auth_service_1_1;
             }],
         execute: function() {
             AppModule = (function () {
@@ -82,6 +85,7 @@ System.register(['@angular/core', '@angular/platform-browser', "@angular/http", 
                             routes_1.routing,
                         ],
                         providers: [
+                            auth_service_1.AuthService,
                             ms_project_client_service_1.MsProjectClientService,
                             ms_user_client_service_1.MsUserClientService,
                         ],

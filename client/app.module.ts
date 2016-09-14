@@ -18,6 +18,7 @@ import {MdListModule} from '@angular2-material/list';
 
 import {MsProjectClientService} from './service/microservices/ms-project-client.service';
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
+import {AuthService} from './service/auth.service';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import {MsUserClientService} from './service/microservices/ms-user-client.servic
         routing,
     ],
     providers: [
+        AuthService,
         MsProjectClientService,
         MsUserClientService,
     ],

@@ -1,4 +1,4 @@
-System.register(["@angular/core", '../../../service/microservices/ms-project-client.service'], function(exports_1, context_1) {
+System.register(["@angular/core", '../../../service/microservices/ms-project-client.service', '../../../service/auth.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["@angular/core", '../../../service/microservices/ms-project-cli
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, ms_project_client_service_1;
+    var core_1, ms_project_client_service_1, auth_service_1;
     var IndexComponent;
     return {
         setters:[
@@ -19,13 +19,19 @@ System.register(["@angular/core", '../../../service/microservices/ms-project-cli
             },
             function (ms_project_client_service_1_1) {
                 ms_project_client_service_1 = ms_project_client_service_1_1;
+            },
+            function (auth_service_1_1) {
+                auth_service_1 = auth_service_1_1;
             }],
         execute: function() {
             IndexComponent = (function () {
-                function IndexComponent(MsProjectClient) {
+                function IndexComponent(MsProjectClient, authService) {
+                    this.authService = authService;
                     this.MsProjectClient = MsProjectClient;
                 }
                 IndexComponent.prototype.ngOnInit = function () {
+                    console.log('inside projects index', this.authService.authUser);
+                    console.log('testProp', this.authService.testProp);
                     this.getActiveProjects();
                 };
                 IndexComponent.prototype.getActiveProjects = function () {
@@ -37,7 +43,7 @@ System.register(["@angular/core", '../../../service/microservices/ms-project-cli
                         selector: "index",
                         templateUrl: "client/modules/projects/index/index.component.html"
                     }), 
-                    __metadata('design:paramtypes', [ms_project_client_service_1.MsProjectClientService])
+                    __metadata('design:paramtypes', [ms_project_client_service_1.MsProjectClientService, auth_service_1.AuthService])
                 ], IndexComponent);
                 return IndexComponent;
             }());

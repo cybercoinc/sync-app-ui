@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation, OnInit} from "@angular/core";
-import {Http, Headers, RequestOptions, Response} from "@angular/http";
-import {MsUserClientService} from './service/microservices/ms-user-client.service';
+import {AuthService} from './service/auth.service'
 import "rxjs/add/operator/map";
 
 import {MdIconRegistry} from '@angular2-material/icon';
@@ -38,20 +37,13 @@ import {MdIconRegistry} from '@angular2-material/icon';
 })
 export class AppComponent implements OnInit {
     appName: string = 'Schedule Connector';
-    response: Response;
-
-    authUser: {};
-
-    MsUserClientService: MsUserClientService;
 
     ngOnInit(): void {
-        this.MsUserClientService.getMe()
-            .then(authUser => this.authUser = authUser);
+        this.authService.getAuthUser().then(me => console.log(me));
+        this.authService.testProp = 'asdf';
     }
 
-    constructor(mdIconRegistry: MdIconRegistry, msUserClientService: MsUserClientService) {
-        this.MsUserClientService = msUserClientService;
-
+    constructor(mdIconRegistry: MdIconRegistry, private authService: AuthService) {
         mdIconRegistry
             .addSvgIcon('thumb-up', '/assets/svg/thumbup-icon.svg')
             .addSvgIconSetInNamespace('core', '/assets/svg/core-icon-set.svg')

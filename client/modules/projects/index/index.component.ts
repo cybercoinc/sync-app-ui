@@ -1,18 +1,23 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from '../../../service/microservices/ms-project-client.service';
+import {AuthService} from '../../../service/auth.service';
 
 @Component({
     selector: "index",
     templateUrl: `client/modules/projects/index/index.component.html`
 })
 export class IndexComponent implements OnInit {
-    constructor(MsProjectClient: MsProjectClientService) {
+    constructor(MsProjectClient: MsProjectClientService, private authService: AuthService) {
         this.MsProjectClient = MsProjectClient
     }
 
     projects: [{}];
 
     ngOnInit(): void {
+        console.log('inside projects index', this.authService.authUser);
+
+        console.log('testProp', this.authService.testProp);
+
         this.getActiveProjects();
     }
 
