@@ -7,7 +7,9 @@ export class MsProjectClientService extends MsClientService {
         return this.makeMsCall(
             '/find-where',
             'GET',
-            {status: 'active'},
+            {
+                status: 'active'
+            },
             authUserSessionKey
         );
     }
