@@ -25,17 +25,17 @@ System.register(["@angular/core", '../../../service/microservices/ms-project-cli
             }],
         execute: function() {
             IndexComponent = (function () {
-                function IndexComponent(MsProjectClient, authService) {
-                    this.authService = authService;
+                function IndexComponent(MsProjectClient, AuthService) {
                     this.MsProjectClient = MsProjectClient;
+                    this.AuthService = AuthService;
                 }
                 IndexComponent.prototype.ngOnInit = function () {
-                    console.log(this.authService.authUser);
                     this.getActiveProjects();
                 };
                 IndexComponent.prototype.getActiveProjects = function () {
                     var _this = this;
-                    this.MsProjectClient.getActiveProjects().then(function (projects) { return _this.projects = projects; });
+                    this.MsProjectClient.getActiveProjects(this.AuthService.authUser.auth_session_key)
+                        .then(function (projects) { return _this.projects = projects; });
                 };
                 IndexComponent = __decorate([
                     core_1.Component({

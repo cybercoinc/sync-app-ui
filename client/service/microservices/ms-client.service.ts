@@ -11,7 +11,6 @@ export class MsClientService {
     callerMsName: string = 'app-ui';
 
     constructor(protected Http: Http) {
-        this.Http = Http;
     }
 
     protected handleError(error: any): Promise<any> {
@@ -27,10 +26,15 @@ export class MsClientService {
      * @param {String} action
      * @param {String} method GET, POST, PUT, DELETE
      * @param {} data
+     * @param {String} authUserSessionKey
+     *
      * @return {Promise<{}>}
      */
-    public makeMsCall(action: string, method: string, data: {} = {}): Promise<[{}]> {
+    public makeMsCall(action: string, method: string, data: {} = {}, authUserSessionKey: string): Promise<[{}]> {
         let params;
+
+        // console.log('action', action);
+        console.log('makeMsCall authUserSessionKey', authUserSessionKey);
 
         if (method === 'GET') {
             params = new URLSearchParams();

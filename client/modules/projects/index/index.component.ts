@@ -7,21 +7,18 @@ import {AuthService} from '../../../service/auth.service';
     templateUrl: `client/modules/projects/index/index.component.html`
 })
 export class IndexComponent implements OnInit {
-    constructor(MsProjectClient: MsProjectClientService, private authService: AuthService) {
-        this.MsProjectClient = MsProjectClient
+    constructor(protected MsProjectClient: MsProjectClientService, protected AuthService: AuthService) {
     }
 
     projects: [{}];
 
     ngOnInit(): void {
-        console.log(this.authService.authUser);
-
         this.getActiveProjects();
     }
 
     getActiveProjects(): void {
-        this.MsProjectClient.getActiveProjects().then(projects => this.projects = projects);
+        this.MsProjectClient.getActiveProjects(this.AuthService.authUser.auth_session_key)
+            .then(projects => this.projects = projects);
     }
 
-    MsProjectClient: MsProjectClientService;
 }

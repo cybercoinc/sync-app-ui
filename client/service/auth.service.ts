@@ -15,7 +15,7 @@ export class AuthService implements Resolve<{}> {
         return this.getAuthUser();
     }
 
-    authUser: {} = null;
+    authUser = null;
 
     getAuthUser(): Promise<{}> {
         const _self = this;
@@ -23,7 +23,7 @@ export class AuthService implements Resolve<{}> {
         return new Promise<{}>((resolve, reject) => {
             if (!_self.authUser) {
                 return _self.msUser.getMe()
-                    .then(function (authUser) {
+                    .then(function (authUser: {}) {
                         _self.authUser = authUser;
 
                         return resolve(_self.authUser);
