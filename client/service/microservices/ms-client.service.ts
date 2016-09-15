@@ -26,18 +26,18 @@ export class MsClientService {
      * @param {String} action
      * @param {String} method GET, POST, PUT, DELETE
      * @param {} data
-     * @param {String} authUserSessionKey
+     * @param {String} authSessionId
      *
      * @return {Promise<{}>}
      */
-    public makeMsCall(action: string, method: string, data: {} = {}, authUserSessionKey: string = ''): Promise<[{}]> {
+    public makeMsCall(action: string, method: string, data: {} = {}, authSessionId: string = ''): Promise<[{}]> {
         let params;
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'ms-auth-string': authUserSessionKey
+            'auth-session-id': authSessionId
         });
 
-        console.log('makeMsCall ' + action, authUserSessionKey);
+        console.log('makeMsCall ' + action, authSessionId);
 
         if (method === 'GET') {
             params = new URLSearchParams();

@@ -3,7 +3,7 @@ import {MsClientService} from "./ms-client.service";
 export class MsProjectClientService extends MsClientService {
     url = 'http://localhost:3003';
 
-    getActiveProjects(authUserId, authUserSessionKey): Promise<[{}]> {
+    getActiveProjects(authUserId, authUserSessionId): Promise<[{}]> {
         return this.makeMsCall(
             '/find-where',
             'GET',
@@ -11,7 +11,7 @@ export class MsProjectClientService extends MsClientService {
                 status: 'active',
                 user_id: authUserId
             },
-            authUserSessionKey
+            authUserSessionId
         );
     }
 

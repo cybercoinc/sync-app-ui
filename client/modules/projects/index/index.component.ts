@@ -17,7 +17,7 @@ export class IndexComponent implements OnInit {
     }
 
     getActiveProjects(): void {
-        this.MsProjectClient.getActiveProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_key)
+        this.MsProjectClient.getActiveProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
             .then(projects => this.projects = projects);
     }
 
