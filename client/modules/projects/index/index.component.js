@@ -30,8 +30,7 @@ System.register(["@angular/core", '../../../service/microservices/ms-project-cli
                     this.MsProjectClient = MsProjectClient;
                 }
                 IndexComponent.prototype.ngOnInit = function () {
-                    console.log('inside projects index', this.authService.authUser);
-                    console.log('testProp', this.authService.testProp);
+                    console.log(this.authService.authUser);
                     this.getActiveProjects();
                 };
                 IndexComponent.prototype.getActiveProjects = function () {

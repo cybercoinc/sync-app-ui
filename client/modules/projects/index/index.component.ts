@@ -14,9 +14,7 @@ export class IndexComponent implements OnInit {
     projects: [{}];
 
     ngOnInit(): void {
-        console.log('inside projects index', this.authService.authUser);
-
-        console.log('testProp', this.authService.testProp);
+        console.log(this.authService.authUser);
 
         this.getActiveProjects();
     }

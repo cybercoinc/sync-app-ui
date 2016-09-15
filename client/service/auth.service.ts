@@ -16,7 +16,6 @@ export class AuthService implements Resolve<{}> {
     }
 
     authUser: {} = null;
-    testProp;
 
     getAuthUser(): Promise<{}> {
         const _self = this;

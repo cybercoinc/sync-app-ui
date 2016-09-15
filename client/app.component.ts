@@ -39,8 +39,7 @@ export class AppComponent implements OnInit {
     appName: string = 'Schedule Connector';
 
     ngOnInit(): void {
-        this.authService.getAuthUser().then(me => console.log(me));
-        this.authService.testProp = 'asdf';
+        // todo interact with ms-main here, get prefs
     }
 
     constructor(mdIconRegistry: MdIconRegistry, private authService: AuthService) {

@@ -20,7 +20,10 @@ System.register(['@angular/router', './index/index.component', './connect/connec
         execute: function() {
             exports_1("routes", routes = [
                 {
-                    path: 'projects', component: index_component_1.IndexComponent, pathMatch: "full", component: index_component_1.IndexComponent,
+                    path: 'projects',
+                    component: index_component_1.IndexComponent,
+                    pathMatch: "full",
+                    component: index_component_1.IndexComponent,
                     resolve: {
                         authUser: auth_service_1.AuthService
                     }

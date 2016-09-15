@@ -35,8 +35,7 @@ System.register(["@angular/core", './service/auth.service', "rxjs/add/operator/m
                         .registerFontClassAlias('fontawesome', 'fa');
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    this.authService.getAuthUser().then(function (me) { return console.log(me); });
-                    this.authService.testProp = 'asdf';
+                    // todo interact with ms-main here, get prefs
                 };
                 AppComponent.prototype.login = function () {
                     // todo
