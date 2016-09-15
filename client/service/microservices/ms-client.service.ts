@@ -34,10 +34,9 @@ export class MsClientService {
         let params;
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'Ms-Auth-String': authUserSessionKey
+            'ms-auth-string': authUserSessionKey
         });
 
-        // console.log('action', action);
         console.log('makeMsCall ' + action, authUserSessionKey);
 
         if (method === 'GET') {
@@ -54,9 +53,9 @@ export class MsClientService {
             .then(function (response) {
                 let resObj = response.json();
 
-                if (!resObj.success) {
+                if (response.status !== 200) {
+                    // todo work with error, notify user of ui
                     throw new Error(resObj.message);
-                    // todo show errors from resObj.errors
                 }
 
                 return resObj.result;

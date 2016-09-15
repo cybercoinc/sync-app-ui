@@ -34,7 +34,7 @@ System.register(["@angular/core", '../../../service/microservices/ms-project-cli
                 };
                 IndexComponent.prototype.getActiveProjects = function () {
                     var _this = this;
-                    this.MsProjectClient.getActiveProjects(this.AuthService.authUser.auth_session_key)
+                    this.MsProjectClient.getActiveProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_key)
                         .then(function (projects) { return _this.projects = projects; });
                 };
                 IndexComponent = __decorate([
