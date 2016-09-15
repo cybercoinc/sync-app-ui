@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 export class MsClientService {
 
     url: string;
-    secureStr: string = 'someRandomGeneratedString123';
+    secureMsStr: string = 'someRandomGeneratedString123';
     callerMsName: string = 'app-ui';
 
     constructor(protected Http: Http) {
@@ -30,18 +30,26 @@ export class MsClientService {
      *
      * @return {Promise<{}>}
      */
-    public makeMsCall(action: string, method: string, data: {} = {}, authUserSessionKey: string): Promise<[{}]> {
+    public makeMsCall(action: string, method: string, data: {} = {}, authUserSessionKey: string = ''): Promise<[{}]> {
         let params;
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Ms-Auth-String': authUserSessionKey
+        });
 
         // console.log('action', action);
-        console.log('makeMsCall authUserSessionKey', authUserSessionKey);
+        console.log('makeMsCall ' + action, authUserSessionKey);
 
         if (method === 'GET') {
             params = new URLSearchParams();
             params.set('params', JSON.stringify(data));
         }
 
-        return this.Http.get(this.url + action, {search: params})
+        return this.Http
+            .get(this.url + action, {
+                search: params,
+                headers: headers
+            })
             .toPromise()
             .then(function (response) {
                 let resObj = response.json();

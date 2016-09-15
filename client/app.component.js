@@ -1,4 +1,4 @@
-System.register(["@angular/core", './service/auth.service', "rxjs/add/operator/map", '@angular2-material/icon'], function(exports_1, context_1) {
+System.register(["@angular/core", "rxjs/add/operator/map", '@angular2-material/icon'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,12 @@ System.register(["@angular/core", './service/auth.service', "rxjs/add/operator/m
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, auth_service_1, icon_1;
+    var core_1, icon_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (auth_service_1_1) {
-                auth_service_1 = auth_service_1_1;
             },
             function (_1) {},
             function (icon_1_1) {
@@ -26,8 +23,7 @@ System.register(["@angular/core", './service/auth.service', "rxjs/add/operator/m
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(mdIconRegistry, authService) {
-                    this.authService = authService;
+                function AppComponent(mdIconRegistry) {
                     this.appName = 'Schedule Connector';
                     mdIconRegistry
                         .addSvgIcon('thumb-up', '/assets/svg/thumbup-icon.svg')
@@ -50,7 +46,7 @@ System.register(["@angular/core", './service/auth.service', "rxjs/add/operator/m
                         viewProviders: [icon_1.MdIconRegistry],
                         encapsulation: core_1.ViewEncapsulation.None,
                     }), 
-                    __metadata('design:paramtypes', [icon_1.MdIconRegistry, auth_service_1.AuthService])
+                    __metadata('design:paramtypes', [icon_1.MdIconRegistry])
                 ], AppComponent);
                 return AppComponent;
             }());

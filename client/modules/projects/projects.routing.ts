@@ -1,7 +1,7 @@
 import {Routes, RouterModule} from '@angular/router';
 import {IndexComponent} from './index/index.component';
 import {ConnectComponent} from './connect/connect.component';
-import {AuthService} from '../../service/auth.service';
+import {AuthService} from '../../service/auth.service'; // todo AuthService should be attached to all components
 
 export const routes: Routes = [
     {

@@ -1,5 +1,4 @@
 import {Component, ViewEncapsulation, OnInit} from "@angular/core";
-import {AuthService} from './service/auth.service'
 import "rxjs/add/operator/map";
 
 import {MdIconRegistry} from '@angular2-material/icon';
@@ -42,7 +41,7 @@ export class AppComponent implements OnInit {
         // todo interact with ms-main here, get prefs
     }
 
-    constructor(mdIconRegistry: MdIconRegistry, private authService: AuthService) {
+    constructor(mdIconRegistry: MdIconRegistry) {
         mdIconRegistry
             .addSvgIcon('thumb-up', '/assets/svg/thumbup-icon.svg')
             .addSvgIconSetInNamespace('core', '/assets/svg/core-icon-set.svg')
@@ -53,7 +52,7 @@ export class AppComponent implements OnInit {
         // todo
     }
 
-    logout(): void {
+    logout() {
         // todo
     }
 }
