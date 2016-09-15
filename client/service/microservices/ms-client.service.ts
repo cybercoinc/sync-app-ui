@@ -47,7 +47,8 @@ export class MsClientService {
         return this.Http
             .get(this.url + action, {
                 search: params,
-                headers: headers
+                headers: headers,
+                withCredentials: true
             })
             .toPromise()
             .then(function (response) {
