@@ -7,6 +7,7 @@ import {routing} from "./routes";
 
 import {HelloComponent} from "./components/shared/hello.component";
 import {ProjectsModule} from "./modules/projects/projects.module";
+import {AuthModule} from "./modules/auth/auth.module";
 import {HomeModule} from "./modules/home/home.module";
 
 import {MdCardModule} from '@angular2-material/card';
@@ -25,6 +26,7 @@ import {AuthService} from './service/auth.service';
         BrowserModule,
         HttpModule,
         ProjectsModule,
+        AuthModule,
         HomeModule,
 
         MdCardModule,

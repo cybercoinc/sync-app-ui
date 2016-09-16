@@ -13,11 +13,6 @@ export class MsClientService {
     constructor(protected Http: Http) {
     }
 
-    protected handleError(error: any): Promise<any> {
-        console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
-    }
-
     /**
      * Make http call to microservice.
      *
@@ -54,13 +49,17 @@ export class MsClientService {
             .then(function (response) {
                 let resObj = response.json();
 
-                if (response.status !== 200) {
-                    // todo work with error, notify user of ui
-                    throw new Error(resObj.message);
-                }
-
                 return resObj.result;
             })
             .catch(this.handleError);
     }
+
+    protected handleError(response: any) {
+        if (response.status === 401) {
+            return window.location.href = '/#/auth/default';
+        }
+
+        return Promise.reject(response.message || response);
+    }
+
 }
