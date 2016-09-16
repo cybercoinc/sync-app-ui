@@ -8,4 +8,8 @@ export class MsUserClientService extends MsClientService {
         return this.makeMsCall('/me', 'GET');
     }
 
+    defaultAuth() {
+        return this.makeMsCall('/auth', 'GET');
+    }
+
 }

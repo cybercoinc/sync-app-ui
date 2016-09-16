@@ -38,4 +38,9 @@ export class AuthService implements Resolve<{}> {
             return resolve(_self.authUser);
         });
     }
+
+    authDefault() {
+        return this.msUser.defaultAuth()
+            .then(response => window.location.replace('/'));
+    }
 }
