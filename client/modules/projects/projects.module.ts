@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {IndexComponent} from './index/index.component';
-import {ProjectWizardComponent} from './connect/connect.component';
+import {ProjectWizardComponent} from './project-wizard/project-wizard.component';
 import {routing} from "./projects.routing";
 
 import {MdCardModule} from '@angular2-material/card';
