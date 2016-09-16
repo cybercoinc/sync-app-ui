@@ -29,7 +29,8 @@ export class MsClientService {
         let params;
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'auth-session-id': authSessionId
+            'auth-session-id': authSessionId,
+            'ms-secure-id': 'MsSecureIdGeneratedRandom123@@#' // todo hardcoded
         });
 
         console.log('makeMsCall ' + action, authSessionId);
