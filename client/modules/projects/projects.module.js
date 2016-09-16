@@ -68,7 +68,10 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
                             projects_routing_1.routing,
                         ],
                         exports: [],
-                        declarations: [index_component_1.IndexComponent, project_wizard_component_1.ProjectWizardComponent],
+                        declarations: [
+                            index_component_1.IndexComponent,
+                            project_wizard_component_1.ProjectWizardComponent,
+                        ],
                         bootstrap: [index_component_1.IndexComponent]
                     }), 
                     __metadata('design:paramtypes', [])

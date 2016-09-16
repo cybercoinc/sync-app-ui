@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 @Component({
     selector: "project-wizard",
-    templateUrl: `client/modules/projects/project-wizard/project-wizard.component.html`
+    templateUrl: `client/modules/projects/project-wizard/project-wizard.component.html`,
 })
 export class ProjectWizardComponent {
     constructor() {
@@ -12,7 +12,7 @@ export class ProjectWizardComponent {
         {
             label: 'Step 1 - Choose Procore project',
             content: `
-                <a href="#">Check it</a>
+                
             `,
 
             disabled: false,

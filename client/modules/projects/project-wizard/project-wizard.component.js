@@ -23,7 +23,7 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                     this.tabs = [
                         {
                             label: 'Step 1 - Choose Procore project',
-                            content: "\n                <a href=\"#\">Check it</a>\n            ",
+                            content: "\n                \n            ",
                             disabled: false,
                         },
                         {
@@ -51,7 +51,7 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                 ProjectWizardComponent = __decorate([
                     core_1.Component({
                         selector: "project-wizard",
-                        templateUrl: "client/modules/projects/project-wizard/project-wizard.component.html"
+                        templateUrl: "client/modules/projects/project-wizard/project-wizard.component.html",
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ProjectWizardComponent);

@@ -27,7 +27,10 @@ import {MdTabsModule} from '@angular2-material/tabs';
         routing,
     ],
     exports: [],
-    declarations: [IndexComponent, ProjectWizardComponent],
+    declarations: [
+        IndexComponent,
+        ProjectWizardComponent,
+    ],
     bootstrap: [IndexComponent]
 })
 export class ProjectsModule {
