@@ -1,10 +1,9 @@
 <md-tab-group class="demo-tab-group">
-    <md-tab *ngFor="let tab of tabs;">
+    <md-tab *ngFor="let tab of tabs;" [disabled]="tab.disabled">
         <template md-tab-label>{{tab.label}}</template>
         <template md-tab-content>
-
             <br>
-            {{tab.content}}
+            <div [innerHtml]="tab.content"></div>
             <br>
             <br>
             <br>
