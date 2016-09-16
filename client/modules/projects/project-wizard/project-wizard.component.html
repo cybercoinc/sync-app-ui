@@ -1,13 +1,47 @@
-<md-tab-group class="demo-tab-group">
-    <md-tab *ngFor="let tab of tabs;" [disabled]="tab.disabled">
-        <template md-tab-label>{{tab.label}}</template>
+<md-tab-group class="wizard-tab-group">
+    <md-tab>
+        <template md-tab-label>Step 1 - Choose Procore Project</template>
         <template md-tab-content>
             <br>
-            <div [innerHtml]="tab.content"></div>
+            <choose-procore-project></choose-procore-project>
             <br>
-            <br>
-            <br>
-
         </template>
     </md-tab>
+
+    <md-tab>
+        <template md-tab-label>Step 2 - Choose Smartsheet project</template>
+        <template md-tab-content>
+            <br>
+            <!--<choose-procore-project></choose-procore-project>-->
+            <br>
+        </template>
+    </md-tab>
+
+    <md-tab>
+        <template md-tab-label>Step 3 - Match Smartsheet column heading</template>
+        <template md-tab-content>
+            <br>
+            <!--<choose-procore-project></choose-procore-project>-->
+            <br>
+        </template>
+    </md-tab>
+
+    <md-tab>
+        <template md-tab-label>Step 4 - Set billing project name and PRB person</template>
+        <template md-tab-content>
+            <br>
+            <!--<choose-procore-project></choose-procore-project>-->
+            <br>
+        </template>
+    </md-tab>
+
+    <md-tab>
+        <template md-tab-label>Step 5 - Final step</template>
+        <template md-tab-content>
+            <br>
+            <!--<choose-procore-project></choose-procore-project>-->
+            <br>
+        </template>
+    </md-tab>
+
 </md-tab-group>

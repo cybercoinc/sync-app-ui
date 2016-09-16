@@ -1,4 +1,4 @@
-System.register(['@angular/core', "@angular/common", './index/index.component', './project-wizard/project-wizard.component', "./projects.routing", '@angular2-material/card', '@angular2-material/button', '@angular2-material/toolbar', '@angular2-material/icon', '@angular2-material/sidenav', '@angular2-material/list', '@angular2-material/tabs'], function(exports_1, context_1) {
+System.register(['@angular/core', "@angular/common", './index/index.component', './project-wizard/project-wizard.component', './project-wizard/choose-procore-project/choose-procore-project.component', "./projects.routing", '@angular2-material/card', '@angular2-material/button', '@angular2-material/toolbar', '@angular2-material/icon', '@angular2-material/sidenav', '@angular2-material/list', '@angular2-material/tabs', '@angular2-material/radio', '@angular2-material/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, index_component_1, project_wizard_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, tabs_1;
+    var core_1, common_1, index_component_1, project_wizard_component_1, choose_procore_project_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, tabs_1, radio_1, core_2;
     var ProjectsModule;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
             },
             function (project_wizard_component_1_1) {
                 project_wizard_component_1 = project_wizard_component_1_1;
+            },
+            function (choose_procore_project_component_1_1) {
+                choose_procore_project_component_1 = choose_procore_project_component_1_1;
             },
             function (projects_routing_1_1) {
                 projects_routing_1 = projects_routing_1_1;
@@ -49,6 +52,12 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
             },
             function (tabs_1_1) {
                 tabs_1 = tabs_1_1;
+            },
+            function (radio_1_1) {
+                radio_1 = radio_1_1;
+            },
+            function (core_2_1) {
+                core_2 = core_2_1;
             }],
         execute: function() {
             ProjectsModule = (function () {
@@ -63,7 +72,9 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
                             icon_1.MdIconModule,
                             sidenav_1.MdSidenavModule,
                             list_1.MdListModule,
+                            list_1.MdListModule,
                             tabs_1.MdTabsModule,
+                            radio_1.MdRadioModule,
                             common_1.CommonModule,
                             projects_routing_1.routing,
                         ],
@@ -71,6 +82,10 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
                         declarations: [
                             index_component_1.IndexComponent,
                             project_wizard_component_1.ProjectWizardComponent,
+                            choose_procore_project_component_1.ChooseProcoreProjectComponent,
+                        ],
+                        providers: [
+                            core_2.MdUniqueSelectionDispatcher
                         ],
                         bootstrap: [index_component_1.IndexComponent]
                     }), 

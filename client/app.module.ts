@@ -16,6 +16,7 @@ import {MdToolbarModule} from '@angular2-material/toolbar';
 import {MdIconModule} from '@angular2-material/icon';
 import {MdSidenavModule} from '@angular2-material/sidenav';
 import {MdListModule} from '@angular2-material/list';
+import {MdRadioModule} from '@angular2-material/radio';
 
 import {MsProjectClientService} from './service/microservices/ms-project-client.service';
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
@@ -35,6 +36,7 @@ import {AuthService} from './service/auth.service';
         MdIconModule,
         MdSidenavModule,
         MdListModule,
+        MdRadioModule,
 
         routing,
     ],
