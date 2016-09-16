@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {IndexComponent} from './index/index.component';
-import {ConnectComponent} from './connect/connect.component';
+import {ProjectWizardComponent} from './connect/connect.component';
 import {routing} from "./projects.routing";
 
 import {MdCardModule} from '@angular2-material/card';
@@ -10,6 +10,7 @@ import {MdToolbarModule} from '@angular2-material/toolbar';
 import {MdIconModule} from '@angular2-material/icon';
 import {MdSidenavModule} from '@angular2-material/sidenav';
 import {MdListModule} from '@angular2-material/list';
+import {MdTabsModule} from '@angular2-material/tabs';
 
 
 @NgModule({
@@ -20,12 +21,13 @@ import {MdListModule} from '@angular2-material/list';
         MdIconModule,
         MdSidenavModule,
         MdListModule,
+        MdTabsModule,
 
         CommonModule,
         routing,
     ],
     exports: [],
-    declarations: [IndexComponent, ConnectComponent],
+    declarations: [IndexComponent, ProjectWizardComponent],
     bootstrap: [IndexComponent]
 })
 export class ProjectsModule {

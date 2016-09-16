@@ -1,6 +1,6 @@
 import {Routes, RouterModule} from '@angular/router';
 import {IndexComponent} from './index/index.component';
-import {ConnectComponent} from './connect/connect.component';
+import {ProjectWizardComponent} from './project-wizard/project-wizard.component';
 import {AuthService} from '../../service/auth.service'; // todo AuthService should be attached to all components
 
 export const routes: Routes = [
@@ -14,7 +14,11 @@ export const routes: Routes = [
         }
     },
 
-    {path: 'projects/connect', component: ConnectComponent, pathMatch: "full"},
+    {
+        path: 'projects/wizard',
+        component: ProjectWizardComponent,
+        pathMatch: "full"
+    },
 
 ];
 

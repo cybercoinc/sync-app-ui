@@ -35,6 +35,7 @@ var isPublic = typeof window != "undefined";
             '@angular2-material/icon': 'npm:@angular2-material/icon/icon.umd.js',
             '@angular2-material/sidenav': 'npm:@angular2-material/sidenav/sidenav.umd.js',
             '@angular2-material/list': 'npm:@angular2-material/list/list.umd.js',
+            '@angular2-material/tabs': 'npm:@angular2-material/tabs/tabs.umd.js',
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {

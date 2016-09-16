@@ -1,4 +1,4 @@
-System.register(['@angular/core', "@angular/common", './index/index.component', './connect/connect.component', "./projects.routing", '@angular2-material/card', '@angular2-material/button', '@angular2-material/toolbar', '@angular2-material/icon', '@angular2-material/sidenav', '@angular2-material/list'], function(exports_1, context_1) {
+System.register(['@angular/core', "@angular/common", './index/index.component', './connect/connect.component', "./projects.routing", '@angular2-material/card', '@angular2-material/button', '@angular2-material/toolbar', '@angular2-material/icon', '@angular2-material/sidenav', '@angular2-material/list', '@angular2-material/tabs'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, index_component_1, connect_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1;
+    var core_1, common_1, index_component_1, connect_component_1, projects_routing_1, card_1, button_1, toolbar_1, icon_1, sidenav_1, list_1, tabs_1;
     var ProjectsModule;
     return {
         setters:[
@@ -46,6 +46,9 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
             },
             function (list_1_1) {
                 list_1 = list_1_1;
+            },
+            function (tabs_1_1) {
+                tabs_1 = tabs_1_1;
             }],
         execute: function() {
             ProjectsModule = (function () {
@@ -60,11 +63,12 @@ System.register(['@angular/core', "@angular/common", './index/index.component', 
                             icon_1.MdIconModule,
                             sidenav_1.MdSidenavModule,
                             list_1.MdListModule,
+                            tabs_1.MdTabsModule,
                             common_1.CommonModule,
                             projects_routing_1.routing,
                         ],
                         exports: [],
-                        declarations: [index_component_1.IndexComponent, connect_component_1.ConnectComponent],
+                        declarations: [index_component_1.IndexComponent, connect_component_1.ProjectWizardComponent],
                         bootstrap: [index_component_1.IndexComponent]
                     }), 
                     __metadata('design:paramtypes', [])
