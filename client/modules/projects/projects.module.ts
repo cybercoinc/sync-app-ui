@@ -17,6 +17,7 @@ import {MdListModule} from '@angular2-material/list';
 import {MdTabsModule} from '@angular2-material/tabs';
 import {MdListModule} from '@angular2-material/list';
 import {MdRadioModule} from '@angular2-material/radio';
+import {MdInputModule} from '@angular2-material/input';
 import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
 
 
@@ -31,6 +32,7 @@ import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
         MdListModule,
         MdTabsModule,
         MdRadioModule,
+        MdInputModule,
 
         CommonModule,
         routing,
@@ -40,7 +42,7 @@ import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
         IndexComponent,
 
         ProjectWizardComponent,
-        ChooseProcoreProjectComponent,
+        ChooseProcoreProjectComponent
 
     ],
     providers: [

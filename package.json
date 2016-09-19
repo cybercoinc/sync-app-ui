@@ -40,6 +40,7 @@
     "@angular2-material/tabs": "^2.0.0-alpha.8-2",
     "@angular2-material/toolbar": "^2.0.0-alpha.8-2",
     "@angular2-material/radio": "^2.0.0-alpha.8-2",
+    "@angular2-material/input": "^2.0.0-alpha.8-2",
 
     "angular2-in-memory-web-api": "0.0.20",
     "body-parser": "~1.13.2",

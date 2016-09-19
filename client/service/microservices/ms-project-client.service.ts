@@ -15,4 +15,41 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getProcoreProjects(authUserId, authUserSessionId): Promise<[{}]> {
+        console.log('getting pr projects...');
+
+        return new Promise<{}>((resolve, reject) => {
+            return resolve([
+                {
+                    id: 1,
+                    name: 'Project 1',
+                    disabled: false,
+                },
+
+                {
+                    id: 2,
+                    name: 'Project 2',
+                    disabled: false,
+                },
+
+                {
+                    id: 3,
+                    name: 'Project 3',
+                    disabled: true,
+                },
+            ])
+        });
+
+
+        // return this.makeMsCall(
+        //     '/get-procore-projects',
+        //     'GET',
+        //     {
+        //         status: 'active', // todo
+        //         user_id: authUserId
+        //     },
+        //     authUserSessionId
+        // );
+    }
+
 }

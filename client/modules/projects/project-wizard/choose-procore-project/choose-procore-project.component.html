@@ -1,6 +1,13 @@
-<h1>Basic Example</h1>
-<section class="demo-section">
-    <md-radio-button name="group1">Option 1</md-radio-button>
-    <md-radio-button name="group1">Option 2</md-radio-button>
-    <md-radio-button name="group1" disabled="true">Option 3 (disabled)</md-radio-button>
+<h1>Choose Procore project you want to connect</h1>
+
+<section class="left-padding">
+    <md-input #search_filter (keyup)="filterProjects(search_filter.value)" placeholder="Search" style="width: 20%;"></md-input>
+    <div style="clear:both"></div>
+
+    <!--<div *ngIf="procoreProjects">-->
+        <div *ngFor="let project of procoreProjects" >
+            <md-radio-button [disabled]="project.disabled" name="procore-project-connect" value="{{project.id}}">{{project.name}}</md-radio-button>
+            <div style="clear:both"></div>
+        </div>
+    <!--</div>-->
 </section>
