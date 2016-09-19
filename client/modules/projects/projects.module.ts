@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {IndexComponent} from './index/index.component';
+import {ProjectsComponent} from './projects.component';
 
 import {ProjectWizardComponent} from './project-wizard/project-wizard.component';
 import {ChooseProcoreProjectComponent} from './project-wizard/choose-procore-project/choose-procore-project.component';
@@ -40,15 +41,14 @@ import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
     exports: [],
     declarations: [
         IndexComponent,
-
+        ProjectsComponent,
         ProjectWizardComponent,
         ChooseProcoreProjectComponent
-
     ],
     providers: [
         MdUniqueSelectionDispatcher
     ],
-    bootstrap: [IndexComponent]
+    bootstrap: [ProjectsComponent]
 })
 export class ProjectsModule {
 }

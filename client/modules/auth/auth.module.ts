@@ -9,6 +9,7 @@ import {MdSidenavModule} from '@angular2-material/sidenav';
 import {MdListModule} from '@angular2-material/list';
 
 import {AuthDefaultComponent} from './auth-default/auth-default.component';
+import {AuthComponent} from './auth.component';
 
 @NgModule({
     imports: [
@@ -25,10 +26,11 @@ import {AuthDefaultComponent} from './auth-default/auth-default.component';
     exports: [],
 
     declarations: [
-        AuthDefaultComponent
+        AuthDefaultComponent,
+        AuthComponent
     ],
 
-    bootstrap: [AuthDefaultComponent]
+    bootstrap: [AuthComponent]
 })
 export class AuthModule {
 }

@@ -10,6 +10,6 @@ export class AuthDefaultComponent {
     }
 
     getDefaultAuth() {
-        return this.authService.authDefault();
+        return this.authService.defaultAuth();
     }
 }
