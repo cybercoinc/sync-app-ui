@@ -20,7 +20,9 @@ import {MdRadioModule} from '@angular2-material/radio';
 
 import {MsProjectClientService} from './service/microservices/ms-project-client.service';
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
+
 import {AuthService} from './service/auth.service';
+import {AuthGuardService} from 'client/service/auth-guard.service';
 
 @NgModule({
     imports: [
@@ -42,6 +44,7 @@ import {AuthService} from './service/auth.service';
     ],
     providers: [
         AuthService,
+        AuthGuardService,
         MsProjectClientService,
         MsUserClientService,
     ],

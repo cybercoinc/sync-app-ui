@@ -3,6 +3,7 @@ import {IndexComponent} from './index/index.component';
 import {ProjectWizardComponent} from './project-wizard/project-wizard.component';
 import {ProjectsComponent} from './projects.component';
 import {AuthService} from '../../service/auth.service'; // todo AuthService should be attached to all components
+import {AuthGuardService} from 'client/service/auth-guard.service';
 
 export const routes: Routes = [
     {
@@ -11,6 +12,7 @@ export const routes: Routes = [
         resolve: {
             authUser: AuthService
         },
+        canActivate: [AuthGuardService],
         children: [
             {
                 path: '',

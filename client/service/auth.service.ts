@@ -9,7 +9,6 @@ export class AuthService implements Resolve<{}> {
     }
 
     /**
-     * @todo This resolver should be called in routes for all components where it would be used. Move this async init to one place somewhere to AppComponent init.
      * @param route
      * @param state
      * @return {Promise<{}>}
