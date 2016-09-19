@@ -44,3 +44,7 @@ body h1 {
     padding: 8px;
     border-radius: 2px;
 }
+
+.left-padding {
+    padding-left: 2%;
+}
