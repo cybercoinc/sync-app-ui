@@ -21,6 +21,9 @@ export class AuthService implements Resolve<{}> {
 
     authUser = null;
 
+    // store the URL so we can redirect after logging in
+    redirectUrl: string;
+
     getAuthUser(): Promise<{}> {
         const _self = this;
 
@@ -38,8 +41,12 @@ export class AuthService implements Resolve<{}> {
         });
     }
 
-    defaultAuth() {
-        return this.msUser.defaultAuth()
-            .then(response => window.location.replace('/'));
+    defaultAuth(): Promise<{}> {
+        return this.msUser.defaultAuth();
+        // .then(response => window.location.replace('/'));
+    }
+
+    logout(): void {
+        this.authUser = null;
     }
 }

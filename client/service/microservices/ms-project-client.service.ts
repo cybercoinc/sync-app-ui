@@ -9,7 +9,7 @@ export class MsProjectClientService extends MsClientService {
             'GET',
             {
                 status: 'active',
-                user_id: authUserId
+                user_fk_id: authUserId
             },
             authUserSessionId
         );
