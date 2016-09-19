@@ -39,7 +39,7 @@ export class AuthService implements Resolve<{}> {
         });
     }
 
-    authDefault() {
+    defaultAuth() {
         return this.msUser.defaultAuth()
             .then(response => window.location.replace('/'));
     }
