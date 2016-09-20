@@ -26,4 +26,15 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getSmartsheetProjects(authUserId, authUserSessionId): Promise<[{}]> {
+        return this.makeMsCall(
+            '/get-smartsheet-projects',
+            'GET',
+            {
+                user_id: authUserId
+            },
+            authUserSessionId
+        );
+    }
+
 }

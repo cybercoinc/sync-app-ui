@@ -5,6 +5,7 @@ import {ProjectsComponent} from './projects.component';
 
 import {ProjectWizardComponent} from './project-wizard/project-wizard.component';
 import {ChooseProcoreProjectComponent} from './project-wizard/choose-procore-project/choose-procore-project.component';
+import {ChooseSmartsheetProjectComponent} from './project-wizard/choose-smartsheet-project/choose-smartsheet-project.component';
 
 import {routing} from "./projects.routing";
 
@@ -41,7 +42,8 @@ import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
         IndexComponent,
         ProjectsComponent,
         ProjectWizardComponent,
-        ChooseProcoreProjectComponent
+        ChooseProcoreProjectComponent,
+        ChooseSmartsheetProjectComponent
     ],
     providers: [
         MdUniqueSelectionDispatcher

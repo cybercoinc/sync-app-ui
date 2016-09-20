@@ -1,4 +1,3 @@
-{{selectedIndex}}
 <md-tab-group class="wizard-tab-group" style="min-height: 800px;" [selectedIndex]="selectedIndex">
 
     <md-tab [disabled]="steps.CHOOSE_PROCORE_PROJECT.isDisabled">
@@ -23,9 +22,15 @@
             <div (click)="showStepNum(1)">Step 2 - Choose Smartsheet project</div>
         </template>
         <template md-tab-content>
-            <br>
+            <div class="tab-content">
+                <choose-smartsheet-project [step]="steps.CHOOSE_SMARTSHEET_PROJECT"></choose-smartsheet-project>
+            </div>
 
-            <br>
+            <button md-raised-button style="padding-left: 20px" [disabled]="!steps.CHOOSE_SMARTSHEET_PROJECT.result"
+                    color="primary"
+                    (click)="showStepNum(2)">Next
+                step
+            </button>
         </template>
     </md-tab>
 
