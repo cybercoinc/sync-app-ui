@@ -24,15 +24,15 @@ export class ChooseSmartsheetProjectComponent implements OnInit {
 
     ngOnInit() {
         // todo find a way to prevent recreating of component. mb CanReuse interface will be implemented later.
-        if (!this.smartsheetProjects) {
-            this.getSmartsheetProjects()
-                .then(smartsheetProjects => this.smartsheetProjects = smartsheetProjects);
+        if (!this.smartsheetSheets) {
+            this.getSmartsheetSheets()
+                .then(smartsheetSheets => this.smartsheetSheets = smartsheetSheets);
         }
     }
 
     @Input() step: {result: {}|null};
 
-    smartsheetProjects: [{}]|null = null;
+    smartsheetSheets: [{}]|null = null;
     filterTimeout;
 
     filterProjects(name: string) {
@@ -44,20 +44,20 @@ export class ChooseSmartsheetProjectComponent implements OnInit {
         this.step.result = null;
 
         _self.filterTimeout = setTimeout(function () {
-            _self.smartsheetProjects = null;
+            _self.smartsheetSheets = null;
 
-            _self.getSmartsheetProjects()
+            _self.getSmartsheetSheets()
                 .then(function (smartsheetProjectsList) {
-                    _self.smartsheetProjects = smartsheetProjectsList.filter(function (project) {
+                    _self.smartsheetSheets = smartsheetProjectsList.filter(function (project) {
                         return project['name'].toLowerCase().indexOf(name.toLowerCase()) !== -1;
                     });
 
-                    return _self.smartsheetProjects;
+                    return _self.smartsheetSheets;
                 });
         }, 500);
     }
 
-    getSmartsheetProjects() {
+    getSmartsheetSheets() {
         return this.MsProjectClientService
             .getSmartsheetProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
     }

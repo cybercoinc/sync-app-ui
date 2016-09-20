@@ -1,4 +1,4 @@
-<h1>Choose Smartsheet project you want to connect</h1>
+<h1>Choose Smartsheet sheet you want to connect or <button md-button color="accent">create new sheet</button></h1>
 
 <section class="left-padding">
     <md-input #search_filter (keyup)="filterProjects(search_filter.value)" placeholder="Search"
@@ -6,16 +6,16 @@
     <div style="clear:both"></div>
 
     <div class="projects-list">
-        <h3 *ngIf="smartsheetProjects && !smartsheetProjects.length">
-            No projects found.
+        <h3 *ngIf="smartsheetSheets && !smartsheetSheets.length">
+            No sheets found.
         </h3>
-        <h3 *ngIf="smartsheetProjects === null">
-            <i class="fa fa-cog fa-spin fa-fw"></i> Searching for projects...
+        <h3 *ngIf="smartsheetSheets === null">
+            <i class="fa fa-cog fa-spin fa-fw"></i> Searching for sheets...
         </h3>
 
-        <div *ngFor="let project of smartsheetProjects">
-            <md-radio-button [disabled]="project.disabled" value="{{project.id}}" (click)="chooseProject(project)">
-                {{project.name}}
+        <div *ngFor="let sheet of smartsheetSheets">
+            <md-radio-button [disabled]="sheet.disabled" value="{{sheet.id}}" (click)="chooseProject(sheet)">
+                {{sheet.name}}
             </md-radio-button>
             <div style="clear:both"></div>
         </div>
