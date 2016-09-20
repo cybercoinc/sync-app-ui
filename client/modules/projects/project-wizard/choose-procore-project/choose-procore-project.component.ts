@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {AuthService} from 'client/service/auth.service';
 
@@ -11,11 +11,11 @@ export class ChooseProcoreProjectComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.MsProjectClientService.getProcoreProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
-            .then(procoreProjects => this.procoreProjects = procoreProjects);
+        this.getProcoreProjects()
+            .then(procoreProjects => this.procoreProjects = procoreProjects)
     }
 
-    procoreProjects: [{}];
+    procoreProjects: [{}] = [];
 
     filterTimeout;
 
@@ -24,11 +24,21 @@ export class ChooseProcoreProjectComponent implements OnInit {
             window.clearTimeout(this.filterTimeout);
         }
 
-        console.log(this.procoreProjects);
+        const _self = this;
 
-        this.filterTimeout = setTimeout(function () {
+        _self.filterTimeout = setTimeout(function () {
+            _self.getProcoreProjects()
+                .then(function (procoreProjects) {
+                    _self.procoreProjects = procoreProjects.filter(function (project) {
+                        return project['name'].toLowerCase().indexOf(name.toLowerCase()) !== -1;
+                    });
 
-            console.log(name);
+                    return _self.procoreProjects;
+                });
         }, 500);
+    }
+
+    getProcoreProjects() {
+        return this.MsProjectClientService.getProcoreProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
     }
 }
