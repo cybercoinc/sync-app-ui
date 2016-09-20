@@ -41,9 +41,9 @@ export class AuthService implements Resolve<{}> {
         });
     }
 
-    defaultAuth(): Promise<{}> {
-        return this.msUser.defaultAuth();
-        // .then(response => window.location.replace('/'));
+    defaultAuth() {
+        return this.msUser.defaultAuth()
+        .then(response => window.location.replace('/'));
     }
 
     logout(): void {
