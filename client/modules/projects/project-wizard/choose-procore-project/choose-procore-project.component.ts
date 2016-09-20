@@ -27,7 +27,7 @@ export class ChooseProcoreProjectComponent implements OnInit {
             .then(procoreProjects => this.procoreProjects = procoreProjects);
     }
 
-    @Output() stepResult: EventEmitter<{}> = new EventEmitter<{}>();
+    @Input() step: {result: {}|null};
 
     procoreProjects: [{}]|null = null;
 
@@ -39,6 +39,7 @@ export class ChooseProcoreProjectComponent implements OnInit {
         }
 
         const _self = this;
+        this.step.result = null;
 
         _self.filterTimeout = setTimeout(function () {
             _self.procoreProjects = null;
@@ -59,9 +60,6 @@ export class ChooseProcoreProjectComponent implements OnInit {
     }
 
     chooseProject(project) {
-        this.stepResult.emit({
-            name: 'CHOOSE_PROCORE_PROJECT',
-            result: project
-        });
+        this.step.result = project;
     }
 }

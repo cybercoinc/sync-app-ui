@@ -4,7 +4,7 @@
         <template md-tab-label>Step 1 - Choose Procore Project</template>
         <template md-tab-content>
             <div class="tab-content">
-                <choose-procore-project (stepResult)="processStep($event)"></choose-procore-project>
+                <choose-procore-project [step]="steps.CHOOSE_PROCORE_PROJECT"></choose-procore-project>
             </div>
 
             <button md-raised-button style="padding-left: 20px" [disabled]="!steps.CHOOSE_PROCORE_PROJECT.result" color="primary">Next step</button>
