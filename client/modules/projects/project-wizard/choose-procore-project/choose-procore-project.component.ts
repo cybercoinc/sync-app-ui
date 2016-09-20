@@ -12,10 +12,10 @@ export class ChooseProcoreProjectComponent implements OnInit {
 
     ngOnInit() {
         this.getProcoreProjects()
-            .then(procoreProjects => this.procoreProjects = procoreProjects)
+            .then(procoreProjects => this.procoreProjects = procoreProjects);
     }
 
-    procoreProjects: [{}] = [];
+    procoreProjects: [{}]|null = null;
 
     filterTimeout;
 
@@ -27,6 +27,8 @@ export class ChooseProcoreProjectComponent implements OnInit {
         const _self = this;
 
         _self.filterTimeout = setTimeout(function () {
+            _self.procoreProjects = null;
+
             _self.getProcoreProjects()
                 .then(function (procoreProjects) {
                     _self.procoreProjects = procoreProjects.filter(function (project) {

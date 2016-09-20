@@ -12,7 +12,10 @@
         <div style="clear:both"></div>
     </div>
 
-    <h3 *ngIf="!procoreProjects.length">
+    <h3 *ngIf="procoreProjects && !procoreProjects.length">
         No projects found.
+    </h3>
+    <h3 *ngIf="procoreProjects === null">
+        Searching for projects...
     </h3>
 </section>
