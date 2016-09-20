@@ -1,11 +1,14 @@
-<md-tab-group class="wizard-tab-group">
+<md-tab-group class="wizard-tab-group" style="min-height: 800px;">
     <md-tab>
         <template md-tab-label>Step 1 - Choose Procore Project</template>
         <template md-tab-content>
-            <br>
-            <choose-procore-project></choose-procore-project>
-            <br>
+            <div class="tab-content">
+                <choose-procore-project></choose-procore-project>
+            </div>
+
+            <button md-raised-button style="padding-left: 20px" [disabled]="true" color="primary">Next step</button>
         </template>
+
     </md-tab>
 
     <md-tab>

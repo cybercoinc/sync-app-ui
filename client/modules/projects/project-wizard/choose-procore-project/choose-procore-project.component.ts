@@ -5,6 +5,18 @@ import {AuthService} from 'client/service/auth.service';
 @Component({
     selector: "choose-procore-project",
     templateUrl: `client/modules/projects/project-wizard/choose-procore-project/choose-procore-project.component.html`,
+    styles: [`
+            .projects-list {
+                height: 250px;
+                width: 500px;
+                overflow-x: auto;
+                padding-top: 20px;
+            }
+
+            md-radio-button {
+                margin-left: 20px;
+            }
+        `]
 })
 export class ChooseProcoreProjectComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService, protected AuthService: AuthService) {
