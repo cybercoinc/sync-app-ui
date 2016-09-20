@@ -13,9 +13,9 @@ export class ProjectWizardComponent {
     constructor() {
     }
 
-    @Input() selectedIndex: number = 0;
+    selectedIndex: number = 0;
 
-    @Input() steps = {
+    steps = {
         "CHOOSE_PROCORE_PROJECT": {
             result: null,
             isDisabled: false
