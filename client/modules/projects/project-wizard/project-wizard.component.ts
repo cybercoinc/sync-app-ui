@@ -12,4 +12,18 @@ import {Component} from "@angular/core";
 export class ProjectWizardComponent {
     constructor() {
     }
+
+    processStep(event) {
+        this.steps[event.name].result = event.result;
+    }
+
+    steps = {
+        "CHOOSE_PROCORE_PROJECT": {
+            result: null
+        },
+
+        "CHOOSE_SMARTSHEET_PROJECT": {
+            result: null
+        },
+    }
 }

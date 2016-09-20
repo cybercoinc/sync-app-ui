@@ -14,7 +14,7 @@
         </h3>
 
         <div *ngFor="let project of procoreProjects">
-            <md-radio-button [disabled]="project.disabled" name="procore-project-connect" value="{{project.id}}">
+            <md-radio-button [disabled]="project.disabled" name="procore-project-connect" value="{{project.id}}" (click)="chooseProject(project)">
                 {{project.name}}
             </md-radio-button>
             <div style="clear:both"></div>

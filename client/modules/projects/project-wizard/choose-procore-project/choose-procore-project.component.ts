@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {AuthService} from 'client/service/auth.service';
 
@@ -27,6 +27,8 @@ export class ChooseProcoreProjectComponent implements OnInit {
             .then(procoreProjects => this.procoreProjects = procoreProjects);
     }
 
+    @Output() stepResult: EventEmitter<{}> = new EventEmitter<{}>();
+
     procoreProjects: [{}]|null = null;
 
     filterTimeout;
@@ -54,5 +56,12 @@ export class ChooseProcoreProjectComponent implements OnInit {
 
     getProcoreProjects() {
         return this.MsProjectClientService.getProcoreProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
+    }
+
+    chooseProject(project) {
+        this.stepResult.emit({
+            name: 'CHOOSE_PROCORE_PROJECT',
+            result: project
+        });
     }
 }
