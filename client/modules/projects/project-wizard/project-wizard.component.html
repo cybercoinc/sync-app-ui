@@ -1,18 +1,38 @@
-<md-tab-group class="wizard-tab-group" style="min-height: 800px;">
+{{selectedIndex}}
+<md-tab-group class="wizard-tab-group" style="min-height: 800px;" [selectedIndex]="selectedIndex">
 
-    <md-tab #choose_procore_project>
-        <template md-tab-label>Step 1 - Choose Procore Project</template>
+    <md-tab [disabled]="steps.CHOOSE_PROCORE_PROJECT.isDisabled">
+        <template md-tab-label>
+            <div (click)="showStepNum(0)">Step 1 - Choose Procore Project</div>
+        </template>
         <template md-tab-content>
             <div class="tab-content">
                 <choose-procore-project [step]="steps.CHOOSE_PROCORE_PROJECT"></choose-procore-project>
             </div>
 
-            <button md-raised-button style="padding-left: 20px" [disabled]="!steps.CHOOSE_PROCORE_PROJECT.result" color="primary">Next step</button>
+            <button md-raised-button style="padding-left: 20px" [disabled]="!steps.CHOOSE_PROCORE_PROJECT.result"
+                    color="primary"
+                    (click)="steps.CHOOSE_SMARTSHEET_PROJECT.isDisabled = false; showStepNum(1)">Next
+                step
+            </button>
         </template>
     </md-tab>
 
-    <md-tab disabled="true">
-        <template md-tab-label>Step 2 - Choose Smartsheet project</template>
+    <md-tab> <!-- TODO disable tabs later-->
+        <template md-tab-label>
+            <div (click)="showStepNum(1)">Step 2 - Choose Smartsheet project</div>
+        </template>
+        <template md-tab-content>
+            <br>
+
+            <br>
+        </template>
+    </md-tab>
+
+    <md-tab>
+        <template md-tab-label>
+            <div (click)="showStepNum(2)">Step 3 - Match Smartsheet column heading</div>
+        </template>
         <template md-tab-content>
             <br>
             <!--<choose-procore-project></choose-procore-project>-->
@@ -21,7 +41,9 @@
     </md-tab>
 
     <md-tab>
-        <template md-tab-label>Step 3 - Match Smartsheet column heading</template>
+        <template md-tab-label>
+            <div (click)="showStepNum(3)">Step 4 - Set billing project name and PRB person</div>
+        </template>
         <template md-tab-content>
             <br>
             <!--<choose-procore-project></choose-procore-project>-->
@@ -30,16 +52,9 @@
     </md-tab>
 
     <md-tab>
-        <template md-tab-label>Step 4 - Set billing project name and PRB person</template>
-        <template md-tab-content>
-            <br>
-            <!--<choose-procore-project></choose-procore-project>-->
-            <br>
+        <template md-tab-label>
+            <div (click)="showStepNum(4)">Step 5 - Final step</div>
         </template>
-    </md-tab>
-
-    <md-tab>
-        <template md-tab-label>Step 5 - Final step</template>
         <template md-tab-content>
             <br>
             <!--<choose-procore-project></choose-procore-project>-->

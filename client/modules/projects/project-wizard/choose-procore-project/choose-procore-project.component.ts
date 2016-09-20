@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+import {Component, OnInit, Input, Output} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {AuthService} from 'client/service/auth.service';
 
@@ -23,14 +23,16 @@ export class ChooseProcoreProjectComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getProcoreProjects()
-            .then(procoreProjects => this.procoreProjects = procoreProjects);
+        // todo find a way to prevent recreating of component. mb CanReuse interface will be implemented later.
+        if (!this.procoreProjects) {
+            this.getProcoreProjects()
+                .then(procoreProjects => this.procoreProjects = procoreProjects);
+        }
     }
 
     @Input() step: {result: {}|null};
 
     procoreProjects: [{}]|null = null;
-
     filterTimeout;
 
     filterProjects(name: string) {

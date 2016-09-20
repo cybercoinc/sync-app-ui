@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 
 @Component({
     selector: "project-wizard",
@@ -13,17 +13,21 @@ export class ProjectWizardComponent {
     constructor() {
     }
 
-    processStep(event) {
-        this.steps[event.name].result = event.result;
-    }
+    @Input() selectedIndex: number = 0;
 
-    steps = {
+    @Input() steps = {
         "CHOOSE_PROCORE_PROJECT": {
-            result: null
+            result: null,
+            isDisabled: false
         },
 
         "CHOOSE_SMARTSHEET_PROJECT": {
-            result: null
+            result: null,
+            isDisabled: true
         },
+    };
+
+    showStepNum(num: number) {
+        this.selectedIndex = num;
     }
 }
