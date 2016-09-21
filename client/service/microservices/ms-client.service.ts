@@ -37,7 +37,11 @@ export class MsClientService {
 
         if (method === 'GET') {
             params = new URLSearchParams();
-            params.set('params', JSON.stringify(data));
+            for (let prop in data) {
+                if (data.hasOwnProperty(prop)) {
+                    params.set(prop, data[prop])
+                }
+            }
         } else if (method === 'POST') {
             body = JSON.stringify(data);
         }
