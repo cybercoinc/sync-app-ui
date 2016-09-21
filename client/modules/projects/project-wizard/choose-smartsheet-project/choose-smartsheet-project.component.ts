@@ -31,6 +31,7 @@ export class ChooseSmartsheetProjectComponent implements OnInit {
     }
 
     @Input() step: {result: {}|null};
+    @Input() steps: {CHOOSE_PROCORE_PROJECT: {result: {name: string}}};
 
     smartsheetSheets: [{}]|null = null;
     filterTimeout;
@@ -62,7 +63,17 @@ export class ChooseSmartsheetProjectComponent implements OnInit {
             .getSmartsheetProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
     }
 
-    chooseProject(project) {
+    chooseExistingSheet(project) {
         this.step.result = project;
+
+        console.log('steps', this.steps);
+    }
+
+    createNewSheetWithWorkspace() {
+        let procoreProjectName = this.steps.CHOOSE_PROCORE_PROJECT.result.name;
+        let workspaceName = procoreProjectName.length > 30? procoreProjectName.slice(0, 30) : procoreProjectName;
+        let newSheetName = workspaceName + ' Procore Sync';
+
+
     }
 }

@@ -31,6 +31,7 @@ export class ChooseProcoreProjectComponent implements OnInit {
     }
 
     @Input() step: {result: {}|null};
+    @Input() steps: {};
 
     procoreProjects: [{}]|null = null;
     filterTimeout;

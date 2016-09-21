@@ -1,17 +1,17 @@
 <md-tab-group class="wizard-tab-group" style="min-height: 800px;" [selectedIndex]="selectedIndex">
 
-    <md-tab [disabled]="steps.CHOOSE_PROCORE_PROJECT.isDisabled">
+    <md-tab>
         <template md-tab-label>
             <div (click)="showStepNum(0)">Step 1 - Choose Procore Project</div>
         </template>
         <template md-tab-content>
             <div class="tab-content">
-                <choose-procore-project [step]="steps.CHOOSE_PROCORE_PROJECT"></choose-procore-project>
+                <choose-procore-project [steps]="steps" [step]="steps.CHOOSE_PROCORE_PROJECT"></choose-procore-project>
             </div>
 
             <button md-raised-button style="padding-left: 20px" [disabled]="!steps.CHOOSE_PROCORE_PROJECT.result"
                     color="primary"
-                    (click)="steps.CHOOSE_SMARTSHEET_PROJECT.isDisabled = false; showStepNum(1)">Next
+                    (click)="showStepNum(1)">Next
                 step
             </button>
         </template>
@@ -23,7 +23,7 @@
         </template>
         <template md-tab-content>
             <div class="tab-content">
-                <choose-smartsheet-project [step]="steps.CHOOSE_SMARTSHEET_PROJECT"></choose-smartsheet-project>
+                <choose-smartsheet-project [steps]="steps" [step]="steps.CHOOSE_SMARTSHEET_PROJECT"></choose-smartsheet-project>
             </div>
 
             <button md-raised-button style="padding-left: 20px" [disabled]="!steps.CHOOSE_SMARTSHEET_PROJECT.result"

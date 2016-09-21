@@ -1,4 +1,4 @@
-<h1>Choose Smartsheet sheet you want to connect or <button md-button color="accent">create new sheet</button></h1>
+<h1>Choose Smartsheet sheet you want to connect or <button md-button color="accent" (click)="createNewSheetWithWorkspace()">create new sheet</button></h1>
 
 <section class="left-padding">
     <md-input #search_filter (keyup)="filterProjects(search_filter.value)" placeholder="Search"
@@ -14,7 +14,7 @@
         </h3>
 
         <div *ngFor="let sheet of smartsheetSheets">
-            <md-radio-button [disabled]="sheet.disabled" value="{{sheet.id}}" (click)="chooseProject(sheet)">
+            <md-radio-button [disabled]="sheet.disabled" value="{{sheet.id}}" (click)="chooseExistingSheet(sheet)">
                 {{sheet.name}}
             </md-radio-button>
             <div style="clear:both"></div>
