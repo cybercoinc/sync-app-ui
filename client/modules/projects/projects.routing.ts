@@ -38,12 +38,7 @@ export const routes: Routes = [
                     },
                     {
                         path: 'test',
-                        children: [
-                            {
-                                path: '',
-                                component: ChooseSmartsheetSheetComponent
-                            }
-                        ]
+                        component: ChooseSmartsheetSheetComponent
                     }
 
                 ]
