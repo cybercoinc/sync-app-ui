@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {AuthService} from 'client/service/auth.service';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: "choose-procore-project",
@@ -19,7 +20,7 @@ import {AuthService} from 'client/service/auth.service';
         `]
 })
 export class ChooseProcoreProjectComponent implements OnInit {
-    constructor(protected MsProjectClientService: MsProjectClientService, protected AuthService: AuthService) {
+    constructor(protected MsProjectClientService: MsProjectClientService, protected AuthService: AuthService, private router: Router, private route: ActivatedRoute) {
         this.selectedProject = null;
     }
 
@@ -75,12 +76,17 @@ export class ChooseProcoreProjectComponent implements OnInit {
     }
 
     goToNextStep() {
-        this.MsProjectClientService.createProject({
+        let promise = this.MsProjectClientService.createProject({
             name: this.selectedProject.name,
             status: this.selectedProject.active ? 'active' : 'inactive',
             procore_company_id: this.selectedProject.company.id,
             procore_id: this.selectedProject.id,
             user_fk_id: this.AuthService.authUser.id
         }, this.AuthService.authUser.auth_session_id);
+
+        console.log(this.router);
+
+        // promise.then(projectId => this.router.navigate(['/wizard/choose-smartsheet-sheet', projectId]));
+        promise.then(projectId => this.router.navigate(['wizard/test']));
     }
 }

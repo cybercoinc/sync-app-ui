@@ -3,8 +3,8 @@ import {MsProjectClientService} from "client/service/microservices/ms-project-cl
 import {AuthService} from 'client/service/auth.service';
 
 @Component({
-    selector: "choose-smartsheet-project",
-    templateUrl: `client/modules/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-project.component.html`,
+    selector: "choose-smartsheet-sheet",
+    templateUrl: `client/modules/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.html`,
     styles: [`
             .projects-list {
                 height: 250px;
@@ -18,7 +18,7 @@ import {AuthService} from 'client/service/auth.service';
             }
         `]
 })
-export class ChooseSmartsheetProjectComponent implements OnInit {
+export class ChooseSmartsheetSheetComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService, protected AuthService: AuthService) {
     }
 
@@ -73,7 +73,5 @@ export class ChooseSmartsheetProjectComponent implements OnInit {
         let procoreProjectName = this.steps.CHOOSE_PROCORE_PROJECT.result.name;
         let workspaceName = procoreProjectName.length > 30? procoreProjectName.slice(0, 30) : procoreProjectName;
         let newSheetName = workspaceName + ' Procore Sync';
-
-
     }
 }

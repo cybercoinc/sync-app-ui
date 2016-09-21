@@ -3,9 +3,8 @@ import {CommonModule} from "@angular/common";
 import {IndexComponent} from './index/index.component';
 import {ProjectsComponent} from './projects.component';
 
-import {ProjectWizardComponent} from './project-wizard/project-wizard.component';
 import {ChooseProcoreProjectComponent} from './project-wizard/choose-procore-project/choose-procore-project.component';
-import {ChooseSmartsheetProjectComponent} from './project-wizard/choose-smartsheet-project/choose-smartsheet-project.component';
+import {ChooseSmartsheetSheetComponent} from './project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component';
 
 import {routing} from "./projects.routing";
 
@@ -41,9 +40,8 @@ import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
     declarations: [
         IndexComponent,
         ProjectsComponent,
-        ProjectWizardComponent,
         ChooseProcoreProjectComponent,
-        ChooseSmartsheetProjectComponent
+        ChooseSmartsheetSheetComponent
     ],
     providers: [
         MdUniqueSelectionDispatcher
