@@ -20,20 +20,29 @@ import {AuthService} from 'client/service/auth.service';
 })
 export class ChooseProcoreProjectComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService, protected AuthService: AuthService) {
+        this.selectedProject = null;
     }
 
     ngOnInit() {
-        // todo find a way to prevent recreating of component. mb CanReuse interface will be implemented later.
-        if (!this.procoreProjects) {
-            this.getProcoreProjects()
-                .then(procoreProjects => this.procoreProjects = procoreProjects);
-        }
+        this.getProcoreProjects()
+            .then(procoreProjects => this.procoreProjects = procoreProjects);
     }
 
-    @Input() step: {result: {}|null};
-    @Input() steps: {};
-
     procoreProjects: [{}]|null = null;
+    selectedProject: {
+        active: boolean,
+        name: string,
+        address: string,
+        city: string,
+        country_code: string,
+        created_at: string,
+        company: {
+            id: number,
+            name: string
+        },
+        id: number
+    }|null;
+
     filterTimeout;
 
     filterProjects(name: string) {
@@ -42,7 +51,6 @@ export class ChooseProcoreProjectComponent implements OnInit {
         }
 
         const _self = this;
-        this.step.result = null;
 
         _self.filterTimeout = setTimeout(function () {
             _self.procoreProjects = null;
@@ -63,6 +71,16 @@ export class ChooseProcoreProjectComponent implements OnInit {
     }
 
     chooseProject(project) {
-        this.step.result = project;
+        this.selectedProject = project;
+    }
+
+    goToNextStep() {
+        this.MsProjectClientService.createProject({
+            name: this.selectedProject.name,
+            status: this.selectedProject.active ? 'active' : 'inactive',
+            procore_company_id: this.selectedProject.company.id,
+            procore_id: this.selectedProject.id,
+            user_fk_id: this.AuthService.authUser.id
+        }, this.AuthService.authUser.auth_session_id);
     }
 }

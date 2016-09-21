@@ -14,10 +14,13 @@
         </h3>
 
         <div *ngFor="let project of procoreProjects">
-            <md-radio-button [disabled]="project.disabled" name="procore-project-connect" value="{{project.id}}" (click)="chooseProject(project)">
+            <md-radio-button [disabled]="project.disabled" name="procore-project-connect" value="{{project.id}}"
+                             (click)="chooseProject(project)">
                 {{project.name}}
             </md-radio-button>
             <div style="clear:both"></div>
         </div>
     </div>
+
+    <button md-raised-button style="padding-left: 20px" color="primary" [disabled]="!selectedProject" (click)="goToNextStep()">Next step</button>
 </section>

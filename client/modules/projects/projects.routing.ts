@@ -2,7 +2,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {IndexComponent} from './index/index.component';
 import {ProjectWizardComponent} from './project-wizard/project-wizard.component';
 import {ProjectsComponent} from './projects.component';
-import {AuthService} from '../../service/auth.service'; // todo AuthService should be attached to all components
+import {ChooseProcoreProjectComponent} from './project-wizard/choose-procore-project/choose-procore-project.component';
+import {AuthService} from '../../service/auth.service';
 import {AuthGuardService} from 'client/service/auth-guard.service';
 
 export const routes: Routes = [
@@ -20,7 +21,17 @@ export const routes: Routes = [
             },
             {
                 path: 'wizard',
-                component: ProjectWizardComponent
+                children: [
+                    {
+                        path: '',
+                        component: ProjectWizardComponent,
+                        redirectTo: 'choose-procore-project'
+                    },
+                    {
+                        path: 'choose-procore-project',
+                        component: ChooseProcoreProjectComponent
+                    }
+                ]
             }
         ]
     },

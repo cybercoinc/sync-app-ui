@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Headers, Http, URLSearchParams} from '@angular/http';
+import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -26,7 +26,7 @@ export class MsClientService {
      * @return {Promise<{}>}
      */
     public makeMsCall(action: string, method: string, data: {} = {}, authSessionId: string = ''): Promise<[{}]> {
-        let params;
+        let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
             'auth-session-id': authSessionId,
@@ -38,14 +38,19 @@ export class MsClientService {
         if (method === 'GET') {
             params = new URLSearchParams();
             params.set('params', JSON.stringify(data));
+        } else if (method === 'POST') {
+            body = JSON.stringify(data);
         }
 
-        return this.Http
-            .get(this.url + action, {
-                search: params,
-                headers: headers,
-                withCredentials: true
-            })
+        let requestOptions = new RequestOptions({
+            headers: headers,
+            method: method,
+            search: params ? params : null,
+            body: body ? body : null,
+            withCredentials: true
+        });
+
+        return this.Http.request(this.url + action, requestOptions)
             .toPromise()
             .then(function (response) {
                 let resObj = response.json();

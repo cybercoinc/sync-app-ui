@@ -2,7 +2,9 @@ import {Component, Input} from "@angular/core";
 
 @Component({
     selector: "project-wizard",
-    templateUrl: `client/modules/projects/project-wizard/project-wizard.component.html`,
+    template: `
+    <router-outlet></router-outlet>
+  `,
     styles: [`
             .tab-content {
                 padding: 20px;
@@ -11,23 +13,5 @@ import {Component, Input} from "@angular/core";
 })
 export class ProjectWizardComponent {
     constructor() {
-    }
-
-    selectedIndex: number = 0;
-
-    steps = {
-        "CHOOSE_PROCORE_PROJECT": {
-            result: null,
-            isDisabled: false
-        },
-
-        "CHOOSE_SMARTSHEET_PROJECT": {
-            result: null,
-            isDisabled: true
-        },
-    };
-
-    showStepNum(num: number) {
-        this.selectedIndex = num;
     }
 }
