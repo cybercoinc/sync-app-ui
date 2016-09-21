@@ -84,9 +84,6 @@ export class ChooseProcoreProjectComponent implements OnInit {
             user_fk_id: this.AuthService.authUser.id
         }, this.AuthService.authUser.auth_session_id);
 
-        console.log(this.router);
-
-        // promise.then(projectId => this.router.navigate(['/wizard/choose-smartsheet-sheet', projectId]));
-        promise.then(projectId => this.router.navigate(['wizard/test']));
+        promise.then(projectId => this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectId]));
     }
 }
