@@ -10,7 +10,7 @@ export class IndexComponent implements OnInit {
     constructor(protected MsProjectClient: MsProjectClientService, protected AuthService: AuthService) {
     }
 
-    projects: [{}];
+    projects: [{}] = null;
 
     ngOnInit(): void {
         this.getActiveProjects();

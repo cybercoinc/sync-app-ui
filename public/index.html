@@ -19,9 +19,13 @@
 
     <script src="assets/js/vendor/jquery.min.js"></script>
 
-    <!-- 2. Configure SystemJS -->
     <!--Development mod-->
     <script src="systemjs.config.js"></script>
+    <script>
+        window.config = {
+            ms_main_url: 'http://localhost:3001'
+        }
+    </script>
     <script>
         System.import('app').catch(function (err) {
             console.error(err);
@@ -36,6 +40,11 @@
     </div>
 </app>
 <!--  Production mod  -->
-<!--<script src="assets/js/bundle.min.js"></script>-->
+<!--<script src="assets/js/bundle.min.js"></script>
+<script>
+    window.config = {
+        ms_main_url: 'http://localhost:3001'
+    }
+</script>-->
 </body>
 </html>

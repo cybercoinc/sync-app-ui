@@ -4,20 +4,23 @@
     </button>
 </section>
 
-<md-card *ngFor="let project of projects">
-    <md-card-title>{{project.name}}</md-card-title>
-    <md-card-content>
-        <p>This is supporting text.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-            deserunt mollit anim id est laborum.</p>
-    </md-card-content>
-    <md-card-actions align="end">
-        <button md-raised-button>Sync Sessions</button>
-        <button md-raised-button color="warn">DELETE</button>
-    </md-card-actions>
-</md-card>
+
+<div *ngIf="!projects">
+    <i class="fa fa-cog fa-spin fa-fw"></i> Getting projects...
+</div>
+
+<div *ngIf="projects">
+    <md-card *ngFor="let project of projects">
+        <md-card-title>{{project.name}}</md-card-title>
+        <md-card-content>
+            <p>This is supporting text.</p>
+        </md-card-content>
+        <md-card-actions align="end">
+            <button md-raised-button>Sync Sessions</button>
+            <button md-raised-button color="warn">DELETE</button>
+        </md-card-actions>
+    </md-card>
+
+</div>
 
 
