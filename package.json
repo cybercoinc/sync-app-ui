@@ -12,10 +12,11 @@
     "typings": "typings install",
     "bundle": "node tools/builder.js",
     "bundle:prod": "node tools/builder.js --prod",
-    "devinstall": "typings install && tsc -p ./server && tsc -p ./client"
+    "devinstall": "typings install && tsc -p ./server && tsc -p ./client",
+    "compile": "tsc -p ./client && tsc -p ./server"
   },
   "engines": {
-    "node": ">= 5.4.1 < 6"
+    "node": "^6.6.0"
   },
   "author": "Vlado Tešanović",
   "license": "MIT",
