@@ -1,22 +1,28 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
+import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {Config} from 'client/config';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class MsClientService {
+export class MsClientService implements Resolve<{}> {
 
     url: string;
-    secureMsStr: string = 'someRandomGeneratedString123';
-    callerMsName: string = 'app-ui';
+
+    services: [{}] = [];
 
     constructor(protected Http: Http) {
     }
 
+    resolve(route: ActivatedRouteSnapshot,
+            state: RouterStateSnapshot): Promise<any> {
+
+        return this.getServices();
+    }
+
     /**
      * Make http call to microservice.
-     *
-     * @todo implement POST, PUT, DELETE
      *
      * @param {String} action
      * @param {String} method GET, POST, PUT, DELETE
@@ -26,11 +32,13 @@ export class MsClientService {
      * @return {Promise<{}>}
      */
     public makeMsCall(action: string, method: string, data: {} = {}, authSessionId: string = ''): Promise<[{}]> {
+        console.log('this.services', this.services);
+
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
             'auth-session-id': authSessionId,
-            'ms-secure-id': 'MsSecureIdGeneratedRandom123@@#' // todo hardcoded
+            'ms-secure-id': Config.getEnvironmentVariable('ms-secure-id')
         });
 
         console.log('makeMsCall ' + action, authSessionId);
