@@ -12,9 +12,9 @@ export class Config {
                     "ms-secure-id": 'MsSecureIdGeneratedRandom123@@#',
                 };
                 break;
-            case 'uat.server.com':
+            case 'ms-app-ui-dot-scheduleconnector-dev.appspot.com':
                 data = {
-                    "ms-main-url": 'http://localhost:3001',
+                    "ms-main-url": 'https://ms-main-dot-scheduleconnector-dev.appspot.com',
                     "ms-secure-id": 'MsSecureIdGeneratedRandom123@@#',
                 };
                 break;
