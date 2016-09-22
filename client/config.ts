@@ -21,7 +21,7 @@ export class Config {
 
             default:
                 data = {
-                    "ms-main-url": 'http://localhost:3001',
+                    "ms-main-url": 'https://ms-main-dot-scheduleconnector-dev.appspot.com',
                     "ms-secure-id": 'MsSecureIdGeneratedRandom123@@#',
                 };
         }
