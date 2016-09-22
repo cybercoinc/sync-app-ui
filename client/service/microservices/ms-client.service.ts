@@ -1,21 +1,24 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
+import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {Config} from 'client/config';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class MsClientService {
+export class MsClientService implements Resolve<{}> {
 
     url: string;
 
     services: [{}] = [];
 
     constructor(protected Http: Http) {
-        if (!this.services.length) {
-            this.getServices()
-                .then(response => this.services = response.json().result)
-        }
+    }
+
+    resolve(route: ActivatedRouteSnapshot,
+            state: RouterStateSnapshot): Promise<any> {
+
+        return this.getServices();
     }
 
     /**
@@ -70,6 +73,10 @@ export class MsClientService {
     }
 
     getServices(): Promise<> {
+        if (this.services.length) {
+            return;
+        }
+
         console.log('getting services from ms-main');
 
         let headers = new Headers({
@@ -83,7 +90,8 @@ export class MsClientService {
         });
 
         return this.Http.get(Config.getEnvironmentVariable('ms-main-url') + '/services', requestOptions)
-            .toPromise();
+            .toPromise()
+            .then(response => this.services = response.json().result);
     }
 
     protected handleError(response: any) {
