@@ -2,4 +2,3 @@
 node_modules
 client/**/*.js
 client/**/*.map
-#public/assets/js/bundle*
