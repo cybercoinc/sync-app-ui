@@ -2,14 +2,19 @@ import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
 
 export class MsUserClientService extends MsClientService {
-    url = 'http://localhost:3002';
+
+    constructor(protected Http: Http) {
+        super(Http);
+
+        this.url = this.getServiceUrl('ms-user');
+    }
 
     getMe() {
-        return this.makeMsCall('/me', 'GET');
+        return this.makeMsCall('me', 'GET');
     }
 
     defaultAuth() {
-        return this.makeMsCall('/auth', 'GET');
+        return this.makeMsCall('auth', 'GET');
     }
 
 }

@@ -1,11 +1,17 @@
 import {MsClientService} from "./ms-client.service";
+import {Headers, Http, URLSearchParams} from '@angular/http';
 
 export class MsProjectClientService extends MsClientService {
-    url = 'http://localhost:3003';
+
+    constructor(protected Http: Http) {
+        super(Http);
+
+        this.url = this.getServiceUrl('ms-project');
+    }
 
     getActiveProjects(userId, authUserSessionId): Promise<[{}]> {
         return this.makeMsCall(
-            '/find-where',
+            'find-where',
             'GET',
             {
                 status: 'active',
@@ -17,7 +23,7 @@ export class MsProjectClientService extends MsClientService {
 
     getProcoreProjects(userId, authUserSessionId): Promise<[{}]> {
         return this.makeMsCall(
-            '/get-procore-projects',
+            'get-procore-projects',
             'GET',
             {
                 user_id: userId
@@ -28,7 +34,7 @@ export class MsProjectClientService extends MsClientService {
 
     getSmartsheetProjects(userId, authUserSessionId): Promise<[{}]> {
         return this.makeMsCall(
-            '/get-smartsheet-projects',
+            'get-smartsheet-projects',
             'GET',
             {
                 user_id: userId
@@ -39,7 +45,7 @@ export class MsProjectClientService extends MsClientService {
 
     createProject(data: {}, authUserSessionId: string): Promise<[{}]> {
         return this.makeMsCall(
-            '/create-project',
+            'create-project',
             'POST',
             {
                 params: data

@@ -1,24 +1,34 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {Config} from 'client/config';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class MsClientService implements Resolve<{}> {
+export class MsClientService {
 
     url: string;
 
-    services: [{}] = [];
+    services: [{}] = window['services']; // todo move this to root route resolver
 
     constructor(protected Http: Http) {
     }
 
-    resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Promise<any> {
+    getServiceUrl(serviceName: string) {
+        let url = '';
 
-        return this.getServices();
+        this.services.forEach(function (service: {category: string, name: string, value: {url: string}}) {
+            if (service.category === 'services' && service.name === serviceName) {
+                url = service.value.url;
+                return;
+            }
+        });
+
+        if (!url) {
+            throw new Error('no url for ' + serviceName);
+        }
+
+        return url;
     }
 
     /**
@@ -32,8 +42,6 @@ export class MsClientService implements Resolve<{}> {
      * @return {Promise<{}>}
      */
     public makeMsCall(action: string, method: string, data: {} = {}, authSessionId: string = ''): Promise<[{}]> {
-        console.log('this.services', this.services);
-
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
