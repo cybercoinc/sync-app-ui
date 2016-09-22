@@ -12,7 +12,7 @@
     "typings": "typings install",
     "bundle": "node tools/builder.js",
     "bundle:prod": "node tools/builder.js --prod",
-    "postinstall": "typings install && tsc -p ./server"
+    "devinstall": "typings install && tsc -p ./server && tsc -p ./client"
   },
   "engines": {
     "node": ">= 5.4.1 < 6"
