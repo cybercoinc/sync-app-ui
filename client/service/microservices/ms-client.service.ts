@@ -72,28 +72,6 @@ export class MsClientService implements Resolve<{}> {
             .catch(this.handleError);
     }
 
-    getServices(): Promise<> {
-        if (this.services.length) {
-            return;
-        }
-
-        console.log('getting services from ms-main');
-
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            'ms-secure-id': Config.getEnvironmentVariable('ms-secure-id')
-        });
-
-        let requestOptions = new RequestOptions({
-            headers: headers,
-            withCredentials: true
-        });
-
-        return this.Http.get(Config.getEnvironmentVariable('ms-main-url') + '/services', requestOptions)
-            .toPromise()
-            .then(response => this.services = response.json().result);
-    }
-
     protected handleError(response: any) {
         if (response.status === 401) {
             return window.location.href = '/#/auth/default'; // todo use app.router here
