@@ -1,6 +1,5 @@
-import {Component, ViewEncapsulation, OnInit} from "@angular/core";
+import {Component, ViewEncapsulation} from "@angular/core";
 import "rxjs/add/operator/map";
-
 import {MdIconRegistry} from '@angular2-material/icon';
 
 @Component({
@@ -34,12 +33,8 @@ import {MdIconRegistry} from '@angular2-material/icon';
     viewProviders: [MdIconRegistry],
     encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     appName: string = 'Schedule Connector';
-
-    ngOnInit(): void {
-        // todo interact with ms-main here, get prefs
-    }
 
     constructor(mdIconRegistry: MdIconRegistry) {
         mdIconRegistry

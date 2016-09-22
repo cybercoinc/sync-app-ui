@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule} from "@angular/http";
 
 import {AppComponent}  from './app.component';
+
 import {routing} from "./routes";
 
 import {HelloComponent} from "./components/shared/hello.component";
@@ -55,6 +56,7 @@ import {AuthGuardService} from 'client/service/auth-guard.service';
     ],
 
     bootstrap: [AppComponent],
+
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ]
