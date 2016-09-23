@@ -9,7 +9,11 @@
     <i class="fa fa-cog fa-spin fa-fw"></i> Getting projects...
 </div>
 
-<div *ngIf="projects">
+<div *ngIf="projects && !projects.length">
+    You have no connected projects.
+</div>
+
+<div *ngIf="projects && projects.length">
     <md-card *ngFor="let project of projects">
         <md-card-title>{{project.name}}</md-card-title>
         <md-card-content>
@@ -20,7 +24,6 @@
             <button md-raised-button color="warn">DELETE</button>
         </md-card-actions>
     </md-card>
-
 </div>
 
 
