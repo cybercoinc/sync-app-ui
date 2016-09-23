@@ -13,7 +13,7 @@
     "bundle": "node tools/builder.js",
     "bundle:prod": "node tools/builder.js --prod",
     "devinstall": "typings install && tsc -p ./server && tsc -p ./client",
-    "compile": "tsc -p ./client && tsc -p ./server"
+    "compile": "tsc -p ./client && tsc -p ./server || true"
   },
   "engines": {
     "node": "^6.6.0"
@@ -29,7 +29,6 @@
     "@angular/platform-browser-dynamic": "2.0.0",
     "@angular/router": "3.0.0",
     "@angular/upgrade": "2.0.0",
-
     "@angular2-material/button": "^2.0.0-alpha.8-2",
     "@angular2-material/card": "^2.0.0-alpha.8-2",
     "@angular2-material/core": "^2.0.0-alpha.8-2",
@@ -41,7 +40,6 @@
     "@angular2-material/toolbar": "^2.0.0-alpha.8-2",
     "@angular2-material/radio": "^2.0.0-alpha.8-2",
     "@angular2-material/input": "^2.0.0-alpha.8-2",
-
     "angular2-in-memory-web-api": "0.0.20",
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
