@@ -37,6 +37,8 @@ export class AppComponent {
     appName: string = 'Schedule Connector';
 
     constructor(mdIconRegistry: MdIconRegistry) {
+        console.log('testing jenkins');
+
         mdIconRegistry
             .addSvgIcon('thumb-up', '/assets/svg/thumbup-icon.svg')
             .addSvgIconSetInNamespace('core', '/assets/svg/core-icon-set.svg')
