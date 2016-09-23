@@ -82,7 +82,7 @@ export class MsClientService {
 
     protected handleError(response: any) {
         if (response.status === 401) {
-            return window.location.href = '/#/auth/default'; // todo use app.router here
+            return window.location.href = '/#/auth/procore'; // todo use app.router here
         }
 
         return Promise.reject(response.message || response);

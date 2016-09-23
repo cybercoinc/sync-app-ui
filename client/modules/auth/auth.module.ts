@@ -9,6 +9,7 @@ import {MdSidenavModule} from '@angular2-material/sidenav';
 import {MdListModule} from '@angular2-material/list';
 
 import {AuthDefaultComponent} from './auth-default/auth-default.component';
+import {AuthProcoreComponent} from './auth-procore/auth-procore.component';
 import {AuthComponent} from './auth.component';
 
 @NgModule({
@@ -27,6 +28,7 @@ import {AuthComponent} from './auth.component';
 
     declarations: [
         AuthDefaultComponent,
+        AuthProcoreComponent,
         AuthComponent
     ],
 

@@ -17,4 +17,8 @@ export class MsUserClientService extends MsClientService {
         return this.makeMsCall('auth', 'GET');
     }
 
+    procoreAuth() {
+        return this.makeMsCall('auth/procore', 'GET');
+    }
+
 }
