@@ -21,6 +21,17 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getProjectByid(projectId: number, authUserSessionId: string): Promise<[{}]> {
+        return this.makeMsCall(
+            'find-where',
+            'GET',
+            {
+                id: projectId
+            },
+            authUserSessionId
+        );
+    }
+
     getProcoreProjects(userId, authUserSessionId): Promise<[{}]> {
         return this.makeMsCall(
             'get-procore-projects',
@@ -54,9 +65,18 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetWorkspace(data: {workspaceName: string, projectId: number},  authUserSessionId: string): Promise<[{}]> {
+    createSmartsheetWorkspace(data: {workspaceName: string, projectId: number},  authUserSessionId: string): Promise<{id: number, permalink: string}> {
         return this.makeMsCall(
             'create-smartsheet-workspace',
+            'POST',
+            data,
+            authUserSessionId
+        );
+    }
+
+    createSmartsheetSheetFromTemplate(data: {workspaceId: number, projectId: number, sheetName: string},  authUserSessionId: string): Promise<{}> {
+        return this.makeMsCall(
+            'create-sheet-from-template-in-workspace',
             'POST',
             data,
             authUserSessionId
