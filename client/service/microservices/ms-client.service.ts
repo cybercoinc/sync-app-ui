@@ -39,9 +39,8 @@ export class MsClientService {
      * @param {} data
      * @param {String} authSessionId
      *
-     * @return {Promise<{}>}
      */
-    public makeMsCall(action: string, method: string, data: {} = {}, authSessionId: string = ''): Promise<[{}]> {
+    public makeMsCall(action: string, method: string, data: {} = {}, authSessionId: string = '') {
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
