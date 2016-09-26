@@ -65,7 +65,13 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetWorkspace(data: {workspaceName: string, projectId: number},  authUserSessionId: string): Promise<{id: number, permalink: string}> {
+    createSmartsheetWorkspace(data: {
+        workspaceName: string,
+        projectId: number
+    }, authUserSessionId: string): Promise<{
+        id: number,
+        permalink: string
+    }> {
         return this.makeMsCall(
             'create-smartsheet-workspace',
             'POST',
@@ -74,7 +80,16 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetSheetFromTemplate(data: {workspaceId: number, projectId: number, sheetName: string},  authUserSessionId: string): Promise<{}> {
+    createSmartsheetSheetFromTemplate(data: {
+        workspaceId: number,
+        projectId: number,
+        sheetName: string
+    }, authUserSessionId: string): Promise<{
+        accessLevel: string,
+        id: number,
+        name: string,
+        permalink: string
+    }> {
         return this.makeMsCall(
             'create-sheet-from-template-in-workspace',
             'POST',
