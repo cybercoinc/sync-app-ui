@@ -65,13 +65,29 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
 
     chooseExistingSheet(project) {
         this.step.result = project;
-
-        console.log('steps', this.steps);
     }
 
     createNewSheetWithWorkspace() {
         let procoreProjectName = this.steps.CHOOSE_PROCORE_PROJECT.result.name;
         let workspaceName = procoreProjectName.length > 30? procoreProjectName.slice(0, 30) : procoreProjectName;
         let newSheetName = workspaceName + ' Procore Sync';
+
+        this.MsProjectClientService.createSmartsheetWorkspace({
+            workspaceName: workspaceName,
+            projectId: newSheetName
+        }, this.AuthService.authUser.auth_session_id);
+
+    }
+
+    goToNextStep() {
+        // let promise = this.MsProjectClientService.createProject({
+        //     name: this.selectedProject.name,
+        //     status: this.selectedProject.active ? 'active' : 'inactive',
+        //     procore_company_id: this.selectedProject.company.id,
+        //     procore_id: this.selectedProject.id,
+        //     user_fk_id: this.AuthService.authUser.id
+        // }, this.AuthService.authUser.auth_session_id);
+        //
+        // promise.then(projectId => this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectId]));
     }
 }
