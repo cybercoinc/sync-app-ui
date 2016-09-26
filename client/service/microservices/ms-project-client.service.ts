@@ -88,7 +88,13 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    matchDefaultSheetColumns(data: {projectId: number}, authUserSessionId: string): Promise<{}> {
+    /**
+     *
+     * @param data
+     * @param authUserSessionId
+     * @return {Promise<number>} project id
+     */
+    matchDefaultSheetColumns(data: {projectId: number}, authUserSessionId: string): Promise<number> {
         return this.makeMsCall(
             'match-default-sheet-columns',
             'POST',

@@ -121,7 +121,7 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
                 // matching columns
                 return this.MsProjectClientService
                     .matchDefaultSheetColumns({
-                        projectId: this.project.id
+                        projectId: projectId
                     }, this.AuthService.authUser.auth_session_id);
             })
             .then(response => {
