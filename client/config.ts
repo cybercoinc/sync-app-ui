@@ -10,12 +10,14 @@ export class Config {
                 data = {
                     "ms-main-url": 'http://localhost:3001',
                     "ms-secure-id": 'MsSecureIdGeneratedRandom123@@#',
+                    "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
                 };
                 break;
             case 'ms-app-ui-dot-scheduleconnector-dev.appspot.com':
                 data = {
                     "ms-main-url": 'https://ms-main-dot-scheduleconnector-dev.appspot.com',
                     "ms-secure-id": 'MsSecureIdGeneratedRandom123@@#',
+                    "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
                 };
                 break;
 
@@ -23,6 +25,7 @@ export class Config {
                 data = {
                     "ms-main-url": 'https://ms-main-dot-scheduleconnector-dev.appspot.com',
                     "ms-secure-id": 'MsSecureIdGeneratedRandom123@@#',
+                    "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
                 };
         }
 

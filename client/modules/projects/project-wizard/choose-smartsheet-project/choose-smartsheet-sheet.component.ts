@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {AuthService} from 'client/service/auth.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Config} from 'client/config';
 
 @Component({
     selector: "choose-smartsheet-sheet",
@@ -64,6 +65,7 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
 
         _self.filterTimeout = setTimeout(function () {
             _self.smartsheetSheets = null;
+            _self.selectedSheet = null;
 
             _self.getSmartsheetSheets()
                 .then(function (smartsheetProjectsList) {
@@ -95,29 +97,46 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
             projectId: this.project.id
         }, this.AuthService.authUser.auth_session_id)
             .then(result => {
+                // creating workspace
                 const workspaceId = result.id;
 
                 return this.MsProjectClientService.createSmartsheetSheetFromTemplate({
                     workspaceId: workspaceId,
                     projectId: this.project.id,
+                    templateId: Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'),
                     sheetName: newSheetName
-                }, this.AuthService.authUser.auth_session_id)
+                }, this.AuthService.authUser.auth_session_id);
             })
             .then(result => {
+                // creating sheet inside workspace
                 this.selectedSheet = result;
 
-                this.goToNextStep();
-            });
+                return this.MsProjectClientService
+                    .update(this.project.id, {
+                        sm_sheet_id: this.selectedSheet.id,
+                        permalink: this.selectedSheet.permalink
+                    }, this.AuthService.authUser.auth_session_id);
+            })
+            .then(projectId => {
+                // matching columns
+                return this.MsProjectClientService
+                    .matchDefaultSheetColumns({
+                        projectId: this.project.id
+                    }, this.AuthService.authUser.auth_session_id);
+            })
+            .then(response => {
+                console.log('response', response);
+            })
     }
 
     goToNextStep() {
-        this.MsProjectClientService
-            .update(this.project.id, {
-                sm_sheet_id: this.selectedSheet.id,
-                permalink: this.selectedSheet.permalink
-            }, this.AuthService.authUser.auth_session_id)
-            .then(result => {
-                console.log(result);
-            })
+        // this.MsProjectClientService
+        //     .update(this.project.id, {
+        //         sm_sheet_id: this.selectedSheet.id,
+        //         permalink: this.selectedSheet.permalink
+        //     }, this.AuthService.authUser.auth_session_id)
+        //     .then(result => {
+        //         return this.router.navigate(['projects/wizard/choose-smartsheet-sheet', this.project.id]);
+        //     })
     }
 }

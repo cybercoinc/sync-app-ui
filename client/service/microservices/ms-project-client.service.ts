@@ -72,6 +72,7 @@ export class MsProjectClientService extends MsClientService {
     createSmartsheetSheetFromTemplate(data: {
         workspaceId: number,
         projectId: number,
+        templateId: number,
         sheetName: string
     }, authUserSessionId: string): Promise<{
         accessLevel: string,
@@ -81,6 +82,15 @@ export class MsProjectClientService extends MsClientService {
     }> {
         return this.makeMsCall(
             'create-sheet-from-template-in-workspace',
+            'POST',
+            data,
+            authUserSessionId
+        );
+    }
+
+    matchDefaultSheetColumns(data: {projectId: number}, authUserSessionId: string): Promise<{}> {
+        return this.makeMsCall(
+            'match-default-sheet-columns',
             'POST',
             data,
             authUserSessionId
