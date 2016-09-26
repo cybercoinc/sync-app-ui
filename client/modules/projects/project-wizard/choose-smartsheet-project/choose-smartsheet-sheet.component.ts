@@ -111,19 +111,10 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
     }
 
     goToNextStep() {
-        // let promise = this.MsProjectClientService.createProject({
-        //     name: this.selectedProject.name,
-        //     status: this.selectedProject.active ? 'active' : 'inactive',
-        //     procore_company_id: this.selectedProject.company.id,
-        //     procore_id: this.selectedProject.id,
-        //     user_fk_id: this.AuthService.authUser.id
-        // }, this.AuthService.authUser.auth_session_id);
-        //
-        // promise.then(projectId => this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectId]));
-
         this.MsProjectClientService
             .update(this.project.id, {
-                status: 'testing update'
+                sm_sheet_id: this.selectedSheet.id,
+                permalink: this.selectedSheet.permalink
             }, this.AuthService.authUser.auth_session_id)
             .then(result => {
                 console.log(result);
