@@ -120,5 +120,13 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
         // }, this.AuthService.authUser.auth_session_id);
         //
         // promise.then(projectId => this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectId]));
+
+        this.MsProjectClientService
+            .update(this.project.id, {
+                status: 'testing update'
+            }, this.AuthService.authUser.auth_session_id)
+            .then(result => {
+                console.log(result);
+            })
     }
 }

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 import {Config} from 'client/config';
+// import {Config} from '../../config';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -57,7 +58,7 @@ export class MsClientService {
                     params.set(prop, data[prop])
                 }
             }
-        } else if (method === 'POST' || method === 'UPDATE') {
+        } else if (method === 'POST' || method === 'PUT') {
             body = JSON.stringify(data);
         }
 
@@ -86,7 +87,6 @@ export class MsClientService {
 
         return Promise.reject(response.message || response);
     }
-
 
     create(data: {} | [{}], authUserSessionId: string): Promise<[number]> {
         return this.makeMsCall(
