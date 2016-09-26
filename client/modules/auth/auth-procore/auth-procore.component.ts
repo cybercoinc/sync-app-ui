@@ -9,7 +9,7 @@ export class AuthProcoreComponent {
     constructor(protected authService: AuthService) {
     }
 
-    getDefaultAuth() {
-        return this.authService.procoreAuth();
+    getProcoreAuthLink() {
+        return this.authService.getProcoreAuthLink();
     }
 }

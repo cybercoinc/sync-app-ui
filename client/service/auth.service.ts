@@ -46,8 +46,8 @@ export class AuthService implements Resolve<{}> {
         .then(response => window.location.replace('/'));
     }
 
-    procoreAuth() {
-        return this.msUser.procoreAuth();
+    getProcoreAuthLink() {
+        return this.msUser.url + 'auth/procore';
     }
 
     logout(): void {
