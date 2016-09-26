@@ -84,9 +84,9 @@ export class ChooseProcoreProjectComponent implements OnInit {
             user_fk_id: this.AuthService.authUser.id
         };
 
-        this.MsProjectClientService.createProject(data, this.AuthService.authUser.auth_session_id)
-            .then(projectId => {
-                return this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectId]);
+        this.MsProjectClientService.create(data, this.AuthService.authUser.auth_session_id)
+            .then(projectIds => {
+                return this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectIds.shift()]);
             });
     }
 }

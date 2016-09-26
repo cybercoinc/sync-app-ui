@@ -54,20 +54,20 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createProject(data: {
-        name: string,
-        status: string,
-        procore_company_id: number,
-        procore_id: number,
-        user_fk_id: number
-    }, authUserSessionId: string): Promise<number> {
-        return this.makeMsCall(
-            'create-project',
-            'POST',
-            data,
-            authUserSessionId
-        );
-    }
+    // createProject(data: {
+    //     name: string,
+    //     status: string,
+    //     procore_company_id: number,
+    //     procore_id: number,
+    //     user_fk_id: number
+    // }, authUserSessionId: string): Promise<number> {
+    //     return this.makeMsCall(
+    //         'create-project',
+    //         'POST',
+    //         data,
+    //         authUserSessionId
+    //     );
+    // }
 
     updateProject(data: {
         projectId: number
@@ -75,7 +75,7 @@ export class MsProjectClientService extends MsClientService {
 
     }]> {
         return this.makeMsCall(
-            'update-project',
+            'update',
             'POST',
             {
                 params: data

@@ -57,7 +57,7 @@ export class MsClientService {
                     params.set(prop, data[prop])
                 }
             }
-        } else if (method === 'POST') {
+        } else if (method === 'POST' || method === 'UPDATE') {
             body = JSON.stringify(data);
         }
 
@@ -85,6 +85,25 @@ export class MsClientService {
         }
 
         return Promise.reject(response.message || response);
+    }
+
+
+    create(data: {} | [{}], authUserSessionId: string): Promise<[number]> {
+        return this.makeMsCall(
+            'create',
+            'POST',
+            data,
+            authUserSessionId
+        );
+    }
+
+    update(id, data: {}, authUserSessionId: string): Promise<> {
+        return this.makeMsCall(
+            'update/' + id,
+            'PUT',
+            data,
+            authUserSessionId
+        );
     }
 
 }

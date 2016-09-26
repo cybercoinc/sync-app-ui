@@ -25,6 +25,9 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
                 private route: ActivatedRoute,
                 private router: Router) {
 
+        this.project = null;
+        this.smartsheetSheets = null;
+        this.selectedSheet = null;
     }
 
     ngOnInit() {
@@ -39,9 +42,17 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
         });
     }
 
-    project: {name: string, id: number} | null = null;
+    project: {name: string, id: number} | null;
 
-    smartsheetSheets: [{}]|null = null;
+    smartsheetSheets: [{}]|null;
+
+    selectedSheet: {
+        accessLevel: string,
+        id: number,
+        name: string,
+        permalink: string
+    }|null;
+
     filterTimeout;
 
     filterProjects(name: string) {
@@ -70,8 +81,8 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
             .getSmartsheetProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
     }
 
-    chooseExistingSheet(project) {
-        // todo implement
+    chooseExistingSheet(sheet) {
+        this.selectedSheet = sheet;
     }
 
     createNewSheetWithWorkspace() {
@@ -93,9 +104,10 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
                 }, this.AuthService.authUser.auth_session_id)
             })
             .then(result => {
-                console.log(result);
-            })
+                this.selectedSheet = result;
 
+                this.goToNextStep();
+            });
     }
 
     goToNextStep() {
