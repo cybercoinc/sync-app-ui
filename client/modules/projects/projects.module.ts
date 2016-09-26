@@ -5,6 +5,8 @@ import {ProjectsComponent} from './projects.component';
 
 import {ChooseProcoreProjectComponent} from './project-wizard/choose-procore-project/choose-procore-project.component';
 import {ChooseSmartsheetSheetComponent} from './project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component';
+import {MatchSheetColumnsComponent} from './project-wizard/match-sheet-columns/match-sheet-columns.component';
+import {SetWorkingWeekDaysComponent} from './project-wizard/set-working-week-days/set-working-week-days.component';
 
 import {routing} from "./projects.routing";
 
@@ -41,7 +43,9 @@ import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
         IndexComponent,
         ProjectsComponent,
         ChooseProcoreProjectComponent,
-        ChooseSmartsheetSheetComponent
+        ChooseSmartsheetSheetComponent,
+        MatchSheetColumnsComponent,
+        SetWorkingWeekDaysComponent,
     ],
     providers: [
         MdUniqueSelectionDispatcher

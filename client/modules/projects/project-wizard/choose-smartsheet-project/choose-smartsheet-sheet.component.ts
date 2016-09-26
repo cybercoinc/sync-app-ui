@@ -107,9 +107,9 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
                     sheetName: newSheetName
                 }, this.AuthService.authUser.auth_session_id);
             })
-            .then(result => {
+            .then(createdSheetObj => {
                 // creating sheet inside workspace
-                this.selectedSheet = result;
+                this.selectedSheet = createdSheetObj;
 
                 return this.MsProjectClientService
                     .update(this.project.id, {
@@ -124,19 +124,12 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
                         projectId: projectId
                     }, this.AuthService.authUser.auth_session_id);
             })
-            .then(response => {
-                console.log('response', response);
+            .then(projectId => {
+                return this.router.navigate(['projects/wizard/set-working-week-days', projectId]);
             })
     }
 
     goToNextStep() {
-        // this.MsProjectClientService
-        //     .update(this.project.id, {
-        //         sm_sheet_id: this.selectedSheet.id,
-        //         permalink: this.selectedSheet.permalink
-        //     }, this.AuthService.authUser.auth_session_id)
-        //     .then(result => {
-        //         return this.router.navigate(['projects/wizard/choose-smartsheet-sheet', this.project.id]);
-        //     })
+        return this.router.navigate(['projects/wizard/match-sheet-columns', this.project.id]);
     }
 }

@@ -5,6 +5,8 @@ import {ChooseProcoreProjectComponent} from './project-wizard/choose-procore-pro
 import {AuthService} from '../../service/auth.service';
 import {AuthGuardService} from 'client/service/auth-guard.service';
 import {ChooseSmartsheetSheetComponent} from "./project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component";
+import {MatchSheetColumnsComponent} from "./project-wizard/match-sheet-columns/match-sheet-columns.component";
+import {SetWorkingWeekDaysComponent} from "./project-wizard/set-working-week-days/set-working-week-days.component";
 
 export const routes: Routes = [
     {
@@ -27,6 +29,7 @@ export const routes: Routes = [
                         path: 'choose-procore-project',
                         component: ChooseProcoreProjectComponent
                     },
+
                     {
                         path: 'choose-smartsheet-sheet',
                         children: [
@@ -36,10 +39,31 @@ export const routes: Routes = [
                             }
                         ]
                     },
+
                     {
-                        path: 'test',
-                        component: ChooseSmartsheetSheetComponent
-                    }
+                        path: 'match-sheet-columns',
+                        children: [
+                            {
+                                path: ':id',
+                                component: MatchSheetColumnsComponent
+                            }
+                        ]
+                    },
+
+
+                    {
+                        path: 'set-working-week-days',
+                        children: [
+                            {
+                                path: ':id',
+                                component: SetWorkingWeekDaysComponent
+                            }
+                        ]
+                    },
+
+
+
+
 
                 ]
             }
