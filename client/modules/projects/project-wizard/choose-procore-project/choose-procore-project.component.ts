@@ -76,14 +76,17 @@ export class ChooseProcoreProjectComponent implements OnInit {
     }
 
     goToNextStep() {
-        let promise = this.MsProjectClientService.createProject({
+        let data = {
             name: this.selectedProject.name,
             status: this.selectedProject.active ? 'active' : 'inactive',
             procore_company_id: this.selectedProject.company.id,
             procore_id: this.selectedProject.id,
             user_fk_id: this.AuthService.authUser.id
-        }, this.AuthService.authUser.auth_session_id);
+        };
 
-        promise.then(projectId => this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectId]));
+        this.MsProjectClientService.createProject(data, this.AuthService.authUser.auth_session_id)
+            .then(projectId => {
+                return this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectId]);
+            });
     }
 }

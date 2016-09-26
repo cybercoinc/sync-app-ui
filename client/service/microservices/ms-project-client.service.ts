@@ -54,9 +54,28 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createProject(data: {}, authUserSessionId: string): Promise<[{}]> {
+    createProject(data: {
+        name: string,
+        status: string,
+        procore_company_id: number,
+        procore_id: number,
+        user_fk_id: number
+    }, authUserSessionId: string): Promise<number> {
         return this.makeMsCall(
             'create-project',
+            'POST',
+            data,
+            authUserSessionId
+        );
+    }
+
+    updateProject(data: {
+        projectId: number
+    }, authUserSessionId: string): Promise<[{
+
+    }]> {
+        return this.makeMsCall(
+            'update-project',
             'POST',
             {
                 params: data
