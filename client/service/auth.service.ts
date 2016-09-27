@@ -25,19 +25,18 @@ export class AuthService implements Resolve<{}> {
     redirectUrl: string;
 
     getAuthUser(): Promise<{}> {
-        const _self = this;
 
         return new Promise<{}>((resolve, reject) => {
-            if (!_self.authUser) {
-                return _self.msUser.getMe()
-                    .then(function (authUser: {}) {
-                        _self.authUser = authUser;
+            if (!this.authUser) {
+                return this.msUser.getMe()
+                    .then(authUser => {
+                        this.authUser = authUser;
 
-                        return resolve(_self.authUser);
+                        return resolve(this.authUser);
                     })
             }
 
-            return resolve(_self.authUser);
+            return resolve(this.authUser);
         });
     }
 
