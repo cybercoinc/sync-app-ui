@@ -44,8 +44,7 @@ export class MsClientService {
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'auth-session-id': authSessionId,
-            'ms-secure-id': Config.getEnvironmentVariable('ms-secure-id')
+            'auth-session-id': authSessionId
         });
 
         console.log('makeMsCall ' + action, authSessionId);
