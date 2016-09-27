@@ -14,8 +14,8 @@
         </h3>
 
         <div *ngFor="let sheet of smartsheetSheets">
-            <md-radio-button [disabled]="sheet.disabled" value="{{sheet.id}}" (click)="chooseExistingSheet(sheet)">
-                {{sheet.name}}
+            <md-radio-button [disabled]="sheet.is_connected" value="{{sheet.id}}" (click)="chooseExistingSheet(sheet)">
+                {{sheet.name}} <div class="is-connected" *ngIf="sheet.is_connected">is connected</div>
             </md-radio-button>
             <div style="clear:both"></div>
         </div>

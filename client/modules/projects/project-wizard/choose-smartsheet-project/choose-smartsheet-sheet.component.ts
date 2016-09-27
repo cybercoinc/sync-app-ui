@@ -7,18 +7,7 @@ import {Config} from 'client/config';
 @Component({
     selector: "choose-smartsheet-sheet",
     templateUrl: `client/modules/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.html`,
-    styles: [`
-            .projects-list {
-                height: 250px;
-                width: 500px;
-                overflow-x: auto;
-                padding-top: 20px;
-            }
-
-            md-radio-button {
-                margin-left: 20px;
-            }
-        `]
+    styleUrls: ['client/modules/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.css'],
 })
 export class ChooseSmartsheetSheetComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
@@ -45,7 +34,9 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
 
     project: {name: string, id: number} | null;
 
-    smartsheetSheets: [{}]|null;
+    smartsheetSheets: [{
+        is_connected: boolean
+    }]|null;
 
     selectedSheet: {
         accessLevel: string,
@@ -82,7 +73,20 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
     }
 
     chooseExistingSheet(sheet) {
+        if (sheet.is_connected) {
+            return false;
+        }
+
         this.selectedSheet = sheet;
+
+        return this.MsProjectClientService
+            .update(this.project.id, {
+                sm_sheet_id: this.selectedSheet.id,
+                permalink: this.selectedSheet.permalink
+            }, this.AuthService.authUser.auth_session_id)
+            .then(projectId => {
+                this.goToNextStep();
+            });
     }
 
     createNewSheetWithWorkspace() {
