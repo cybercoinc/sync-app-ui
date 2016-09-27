@@ -14,9 +14,9 @@
         </h3>
 
         <div *ngFor="let project of procoreProjects">
-            <md-radio-button [disabled]="project.disabled" name="procore-project-connect" value="{{project.id}}"
+            <md-radio-button [disabled]="project.is_connected" name="procore-project-connect" value="{{project.id}}"
                              (click)="chooseProject(project)">
-                {{project.name}}
+                {{project.name}} <div class="is-connected" *ngIf="project.is_connected">is connected</div>
             </md-radio-button>
             <div style="clear:both"></div>
         </div>

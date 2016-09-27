@@ -61,20 +61,18 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
             window.clearTimeout(this.filterTimeout);
         }
 
-        const _self = this;
+        this.filterTimeout = setTimeout(e => {
+            this.smartsheetSheets = null;
+            this.selectedSheet = null;
 
-        _self.filterTimeout = setTimeout(function () {
-            _self.smartsheetSheets = null;
-            _self.selectedSheet = null;
-
-            _self.getSmartsheetSheets()
-                .then(function (smartsheetProjectsList) {
-                    _self.smartsheetSheets = smartsheetProjectsList.filter(function (project) {
-                        return project['name'].toLowerCase().indexOf(name.toLowerCase()) !== -1;
+            this.getSmartsheetSheets()
+                .then(smartsheetSheetsList => {
+                    this.smartsheetSheets = smartsheetSheetsList.filter(sheet => {
+                        return sheet['name'].toLowerCase().indexOf(name.toLowerCase()) !== -1;
                     });
 
-                    return _self.smartsheetSheets;
-                });
+                    return this.smartsheetSheets;
+                })
         }, 500);
     }
 

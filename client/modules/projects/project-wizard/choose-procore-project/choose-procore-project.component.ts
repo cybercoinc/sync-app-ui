@@ -6,18 +6,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 @Component({
     selector: "choose-procore-project",
     templateUrl: `client/modules/projects/project-wizard/choose-procore-project/choose-procore-project.component.html`,
-    styles: [`
-            .projects-list {
-                height: 250px;
-                width: 500px;
-                overflow-x: auto;
-                padding-top: 20px;
-            }
-
-            md-radio-button {
-                margin-left: 20px;
-            }
-        `]
+    styleUrls: ['client/modules/projects/project-wizard/choose-procore-project/choose-procore-project.component.css'],
 })
 export class ChooseProcoreProjectComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService, protected AuthService: AuthService, private router: Router, private route: ActivatedRoute) {
@@ -51,27 +40,34 @@ export class ChooseProcoreProjectComponent implements OnInit {
             window.clearTimeout(this.filterTimeout);
         }
 
-        const _self = this;
+        this.filterTimeout = setTimeout(e => {
+            this.procoreProjects = null;
+            this.selectedProject = null;
 
-        _self.filterTimeout = setTimeout(function () {
-            _self.procoreProjects = null;
-
-            _self.getProcoreProjects()
-                .then(function (procoreProjects) {
-                    _self.procoreProjects = procoreProjects.filter(function (project) {
+            this.getProcoreProjects()
+                .then(procoreProjects => {
+                    this.procoreProjects = procoreProjects.filter(project => {
                         return project['name'].toLowerCase().indexOf(name.toLowerCase()) !== -1;
                     });
 
-                    return _self.procoreProjects;
-                });
+                    return this.procoreProjects;
+                })
         }, 500);
     }
 
     getProcoreProjects() {
+        // todo show only 10-20 projects and ask for filtering them
+
         return this.MsProjectClientService.getProcoreProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
     }
 
-    chooseProject(project) {
+    chooseProject(project: {
+        is_connected: boolean
+    }) {
+        if (project.is_connected) {
+            return false;
+        }
+
         this.selectedProject = project;
     }
 
