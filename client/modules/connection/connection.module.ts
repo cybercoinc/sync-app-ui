@@ -11,8 +11,8 @@ import {MdListModule} from '@angular2-material/list';
 import {MdRadioModule} from '@angular2-material/radio';
 import {MdInputModule} from '@angular2-material/input';
 
-import {routing} from "modules/connection/connection.routing";
-import {ConnectionComponent} from "modules/connection/connection.component";
+import {routing} from "client/modules/connection/connection.routing";
+import {ConnectionComponent} from "client/modules/connection/connection.component";
 
 @NgModule({
     imports: [

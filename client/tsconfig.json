@@ -9,7 +9,7 @@
         "experimentalDecorators": true,
         "removeComments": false,
         "noImplicitAny": false,
-        "baseUrl": "."
+        "baseUrl": "../"
     },
     "exclude": [
         "../node_modules",

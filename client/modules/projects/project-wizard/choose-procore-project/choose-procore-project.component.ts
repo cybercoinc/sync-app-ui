@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, Output} from "@angular/core";
-import {MsProjectClientService} from "service/microservices/ms-project-client.service";
-import {AuthService} from 'service/auth.service';
+import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
+import {AuthService} from 'client/service/auth.service';
 import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({

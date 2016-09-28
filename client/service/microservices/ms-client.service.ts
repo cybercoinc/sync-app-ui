@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
-import {Config} from 'config';
+import {Config} from 'client/config';
 
 import 'rxjs/add/operator/toPromise';
 
