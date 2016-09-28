@@ -6,7 +6,6 @@ import {AppComponent}  from './app.component';
 
 import {routing} from "./routes";
 
-import {HelloComponent} from "./components/shared/hello.component";
 import {ProjectsModule} from "./modules/projects/projects.module";
 import {AuthModule} from "./modules/auth/auth.module";
 import {HomeModule} from "./modules/home/home.module";
@@ -51,12 +50,10 @@ import {AuthGuardService} from 'client/service/auth-guard.service';
     ],
 
     declarations: [
-        HelloComponent,
         AppComponent,
     ],
 
     bootstrap: [AppComponent],
-
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ]
