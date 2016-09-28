@@ -9,6 +9,7 @@ import {routing} from "./routes";
 import {ProjectsModule} from "./modules/projects/projects.module";
 import {AuthModule} from "./modules/auth/auth.module";
 import {HomeModule} from "./modules/home/home.module";
+import {ConnectionModule} from './modules/connection/connection.module'
 
 import {MdCardModule} from '@angular2-material/card';
 import {MdButtonModule} from '@angular2-material/button';
@@ -29,6 +30,7 @@ import {AuthGuardService} from 'client/service/auth-guard.service';
         BrowserModule,
         HttpModule,
         ProjectsModule,
+        ConnectionModule,
         AuthModule,
         HomeModule,
 
