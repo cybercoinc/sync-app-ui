@@ -1,8 +1,8 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
-import {AuthService} from 'client/service/auth.service';
+import {MsProjectClientService} from "service/microservices/ms-project-client.service";
+import {AuthService} from 'service/auth.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import {Config} from 'client/config';
+import {Config} from 'config';
 
 @Component({
     selector: "match-sheet-columns",
