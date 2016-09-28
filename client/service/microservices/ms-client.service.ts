@@ -86,7 +86,7 @@ export class MsClientService {
         return Promise.reject(response.message || response);
     }
 
-    create(data: {} | [{}], authUserSessionId: string): Promise<[number]> {
+    create(data: {}, authUserSessionId: string): Promise<[number]> {
         return this.makeMsCall(
             'create',
             'POST',
