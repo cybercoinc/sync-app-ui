@@ -111,12 +111,10 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
             })
             .then(createdSheetObj => {
                 // creating sheet inside workspace
-                this.selectedSheet = createdSheetObj;
-
                 return this.MsProjectClientService
                     .update(this.project.id, {
-                        sm_sheet_id: this.selectedSheet.id,
-                        permalink: this.selectedSheet.permalink
+                        sm_sheet_id: createdSheetObj.id,
+                        permalink: createdSheetObj.permalink
                     }, this.AuthService.authUser.auth_session_id);
             })
             .then(projectId => {
