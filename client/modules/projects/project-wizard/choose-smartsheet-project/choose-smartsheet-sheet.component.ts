@@ -78,15 +78,6 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
         }
 
         this.selectedSheet = sheet;
-
-        return this.MsProjectClientService
-            .update(this.project.id, {
-                sm_sheet_id: this.selectedSheet.id,
-                permalink: this.selectedSheet.permalink
-            }, this.AuthService.authUser.auth_session_id)
-            .then(projectId => {
-                this.goToNextStep();
-            });
     }
 
     createNewSheetWithWorkspace() {
@@ -130,6 +121,14 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
     }
 
     goToNextStep() {
-        return this.router.navigate(['projects/wizard/match-sheet-columns', this.project.id]);
+        this.MsProjectClientService
+            .update(this.project.id, {
+                sm_sheet_id: this.selectedSheet.id,
+                permalink: this.selectedSheet.permalink
+            }, this.AuthService.authUser.auth_session_id)
+            .then(projectId => {
+                return this.router.navigate(['projects/wizard/match-sheet-columns', projectId]);
+            });
+
     }
 }
