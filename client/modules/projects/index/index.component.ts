@@ -4,7 +4,8 @@ import {AuthService} from '../../../service/auth.service';
 
 @Component({
     selector: "index",
-    templateUrl: `client/modules/projects/index/index.component.html`
+    templateUrl: `client/modules/projects/index/index.component.html`,
+    styleUrls: ['client/modules/projects/index/index.component.css'],
 })
 export class IndexComponent implements OnInit {
     constructor(protected MsProjectClient: MsProjectClientService, protected AuthService: AuthService) {
