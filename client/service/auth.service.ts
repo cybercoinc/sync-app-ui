@@ -49,6 +49,10 @@ export class AuthService implements Resolve<{}> {
         return this.msUser.url + 'auth/procore';
     }
 
+    getSmartsheetAuthLink() {
+        return this.msUser.url + 'auth/smartsheet';
+    }
+
     logout(): void {
         this.authUser = null;
     }

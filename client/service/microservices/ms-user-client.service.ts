@@ -21,4 +21,7 @@ export class MsUserClientService extends MsClientService {
         return this.makeMsCall('auth/procore', 'GET');
     }
 
+    removeSmartsheetAuth() {
+        return this.makeMsCall('auth/remove/smartsheet', 'DELETE');
+    }
 }

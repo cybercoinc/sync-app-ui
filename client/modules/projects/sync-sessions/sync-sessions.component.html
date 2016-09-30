@@ -1,0 +1,25 @@
+<h2>Sync sessions</h2>
+
+<div *ngIf="!syncSessionsList">
+    Getting sync sessions list...
+</div>
+
+<div *ngIf="syncSessionsList">
+    <div *ngIf="!syncSessionsList.length">
+        No sync sessions for project.
+    </div>
+
+    <div *ngIf="syncSessionsList.length">
+        <div *ngFor="let syncSession of syncSessionsList">
+            <md-card>
+                <div>
+                    <ul>
+                        <li>Created at: {{syncSession.created_at}}</li>
+                        <li>Started by: {{syncSession.started_by}}</li>
+                        <li>Status: {{syncSession.status}}</li>
+                    </ul>
+                </div>
+            </md-card>
+        </div>
+    </div>
+</div>

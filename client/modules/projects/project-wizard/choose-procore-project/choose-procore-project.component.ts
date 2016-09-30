@@ -9,7 +9,10 @@ import {Router, ActivatedRoute} from '@angular/router';
     styleUrls: ['client/modules/projects/project-wizard/choose-procore-project/choose-procore-project.component.css'],
 })
 export class ChooseProcoreProjectComponent implements OnInit {
-    constructor(protected MsProjectClientService: MsProjectClientService, protected AuthService: AuthService, private router: Router, private route: ActivatedRoute) {
+    constructor(protected MsProjectClientService: MsProjectClientService,
+                protected AuthService: AuthService,
+                private router: Router,
+                private route: ActivatedRoute) {
         this.selectedProject = null;
     }
 
