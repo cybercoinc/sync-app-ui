@@ -8,7 +8,7 @@ import {AuthService} from 'client/service/auth.service';
     styleUrls: ['client/modules/connection/connection.component.css']
 })
 export class ConnectionComponent implements OnInit {
-    me: {} = null;
+    me: {} = {};
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
 
@@ -16,14 +16,17 @@ export class ConnectionComponent implements OnInit {
 
     ngOnInit() {
         this.MsUserClientService.getMe()
-            .then(me => this.me = me);
+            .then(me => {
+                this.me = me;
+            });
     }
 
     getProcoreAuthLink() {
         return this.AuthService.getProcoreAuthLink();
+
     }
 
     getSmartsheetAuthLink() {
-        return 'test';
+        return this.AuthService.getSmartsheetAuthLink();
     }
 }
