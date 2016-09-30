@@ -21,7 +21,7 @@
         </md-card-content>
         <md-card-actions align="end">
             <button md-raised-button [routerLink]="['sync-sessions', project.id]">Sync Sessions</button>
-            <button md-raised-button color="warn">DELETE</button>
+            <button md-raised-button color="warn" [disabled]="true">DELETE</button>
         </md-card-actions>
     </md-card>
 </div>
