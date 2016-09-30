@@ -49,7 +49,7 @@ export class MsClientService {
 
         console.log('makeMsCall ' + action, authSessionId);
 
-        if (method === 'GET') {
+        if (method === 'GET' || method === 'DELETE') {
             params = new URLSearchParams();
             for (let prop in data) {
                 if (data.hasOwnProperty(prop)) {
