@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {MsUserClientService} from '../../service/microservices/ms-user-client.service'
+import {MsUserClientService} from '../../service/microservices/ms-user-client.service';
+import {AuthService} from 'client/service/auth.service';
 
 @Component({
     selector: "connection",
@@ -7,15 +8,18 @@ import {MsUserClientService} from '../../service/microservices/ms-user-client.se
     styleUrls: ['client/modules/connection/connection.component.css']
 })
 export class ConnectionComponent implements OnInit {
+    me: {} = null;
 
-    me: {};
-
-    constructor(protected MsUserClientService: MsUserClientService) {
+    constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
 
     }
 
     ngOnInit() {
         this.MsUserClientService.getMe()
             .then(me => this.me = me);
+    }
+
+    getProcoreAuthLink() {
+        return this.AuthService.getProcoreAuthLink();
     }
 }
