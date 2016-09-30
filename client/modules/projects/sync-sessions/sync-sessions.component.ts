@@ -1,4 +1,7 @@
 import {Component, OnInit} from "@angular/core";
+import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.service';
+import {AuthService} from 'client/service/auth.service';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 @Component({
     selector: "sync-sessions",
@@ -6,11 +9,21 @@ import {Component, OnInit} from "@angular/core";
     styleUrls: ['client/modules/projects/sync-sessions/sync-sessions.component.css']
 })
 export class SyncSessionsComponent implements OnInit {
-    constructor() {
+    constructor(protected MsSyncClientService: MsSyncClientService,
+                protected AuthService: AuthService,
+                private route: ActivatedRoute,
+                private router: Router) {
 
     }
 
+    syncSessionsList: [{}] = null;
+
     ngOnInit() {
-        console.log('sync sessions');
+        this.route.params.forEach((params: Params) => {
+            let id = +params['id'];
+
+            this.MsSyncClientService.getSyncSessionsByProjectId(id, this.AuthService.authUser.auth_session_id)
+                .then(syncSessionsList => this.syncSessionsList = syncSessionsList);
+        });
     }
 }

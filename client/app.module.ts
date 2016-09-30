@@ -21,6 +21,7 @@ import {MdRadioModule} from '@angular2-material/radio';
 
 import {MsProjectClientService} from './service/microservices/ms-project-client.service';
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
+import {MsSyncClientService} from './service/microservices/ms-sync-client.service';
 
 import {AuthService} from './service/auth.service';
 import {AuthGuardService} from './service/auth-guard.service';
@@ -49,6 +50,7 @@ import {AuthGuardService} from './service/auth-guard.service';
         AuthGuardService,
         MsProjectClientService,
         MsUserClientService,
+        MsSyncClientService
     ],
 
     declarations: [
