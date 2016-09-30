@@ -22,4 +22,8 @@ export class ConnectionComponent implements OnInit {
     getProcoreAuthLink() {
         return this.AuthService.getProcoreAuthLink();
     }
+
+    getSmartsheetAuthLink() {
+        return 'test';
+    }
 }
