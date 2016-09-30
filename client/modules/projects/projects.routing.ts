@@ -7,6 +7,7 @@ import {AuthGuardService} from 'client/service/auth-guard.service';
 import {ChooseSmartsheetSheetComponent} from "./project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component";
 import {MatchSheetColumnsComponent} from "./project-wizard/match-sheet-columns/match-sheet-columns.component";
 import {SetWorkingWeekDaysComponent} from "./project-wizard/set-working-week-days/set-working-week-days.component";
+import {SyncSessionsComponent} from 'client/modules/projects/sync-sessions/sync-sessions.component';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,16 @@ export const routes: Routes = [
             {
                 path: '',
                 component: IndexComponent,
+            },
+
+            {
+                path: 'sync-sessions',
+                children: [
+                    {
+                        path: ':id',
+                        component: SyncSessionsComponent
+                    }
+                ]
             },
 
             {

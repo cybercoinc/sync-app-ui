@@ -22,6 +22,7 @@ import {MdRadioModule} from '@angular2-material/radio';
 import {MdInputModule} from '@angular2-material/input';
 import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
 
+import {SyncSessionsModule} from 'client/modules/projects/sync-sessions/sync-sessions.module'
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
         MdInputModule,
 
         CommonModule,
+        SyncSessionsModule,
         routing,
     ],
     exports: [],
