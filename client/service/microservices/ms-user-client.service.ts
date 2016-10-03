@@ -15,7 +15,7 @@ export class MsUserClientService extends MsClientService {
     }
 
     defaultAuth() {
-        return this.makeMsCall('auth', 'GET');
+        return this.makeMsCall('auth/default', 'GET');
     }
 
     procoreAuth() {
