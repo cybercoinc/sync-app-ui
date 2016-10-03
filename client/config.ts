@@ -14,14 +14,14 @@ export class Config {
                 break;
             case 'ms-app-ui-dot-scheduleconnector-dev.appspot.com':
                 data = {
-                    "ms-main-url": 'https://ms-main-dot-scheduleconnector-dev.appspot.com',
+                    "ms-main-url": 'https://scheduleconnector-dev.appspot.com',
                     "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
                 };
                 break;
 
             default:
                 data = {
-                    "ms-main-url": 'https://ms-main-dot-scheduleconnector-dev.appspot.com',
+                    "ms-main-url": 'https://scheduleconnector-dev.appspot.com',
                     "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
                 };
         }
