@@ -8,6 +8,7 @@ import {ChooseSmartsheetSheetComponent} from "./project-wizard/choose-smartsheet
 import {MatchSheetColumnsComponent} from "./project-wizard/match-sheet-columns/match-sheet-columns.component";
 import {SetWorkingWeekDaysComponent} from "./project-wizard/set-working-week-days/set-working-week-days.component";
 import {SyncSessionsComponent} from 'client/modules/projects/sync-sessions/sync-sessions.component';
+import {ChangesLogsComponent} from 'client/modules/projects/changes-logs/changes-logs.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,16 @@ export const routes: Routes = [
                     {
                         path: ':id',
                         component: SyncSessionsComponent
+                    }
+                ]
+            },
+
+            {
+                path: 'changes-logs',
+                children: [
+                    {
+                        path: ':id',
+                        component: ChangesLogsComponent
                     }
                 ]
             },

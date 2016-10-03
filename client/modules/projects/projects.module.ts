@@ -7,6 +7,7 @@ import {ChooseProcoreProjectComponent} from './project-wizard/choose-procore-pro
 import {ChooseSmartsheetSheetComponent} from './project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component';
 import {MatchSheetColumnsComponent} from './project-wizard/match-sheet-columns/match-sheet-columns.component';
 import {SetWorkingWeekDaysComponent} from './project-wizard/set-working-week-days/set-working-week-days.component';
+import {ChangesLogsComponent} from 'client/modules/projects/changes-logs/changes-logs.component';
 
 import {routing} from "./projects.routing";
 
@@ -48,6 +49,7 @@ import {SyncSessionsModule} from 'client/modules/projects/sync-sessions/sync-ses
         ChooseSmartsheetSheetComponent,
         MatchSheetColumnsComponent,
         SetWorkingWeekDaysComponent,
+        ChangesLogsComponent,
     ],
     providers: [
         MdUniqueSelectionDispatcher
