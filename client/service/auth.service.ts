@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {MsUserClientService} from './microservices/ms-user-client.service';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {User} from 'client/entities/entities';
 
 @Injectable()
 export class AuthService implements Resolve<{}> {
@@ -19,12 +20,9 @@ export class AuthService implements Resolve<{}> {
         return this.getAuthUser();
     }
 
-    authUser = null;
+    authUser: User = null;
 
-    // store the URL so we can redirect after logging in
-    redirectUrl: string;
-
-    getAuthUser(): Promise<{}> {
+    getAuthUser(): Promise<User> {
 
         return new Promise<{}>((resolve, reject) => {
             if (!this.authUser) {
@@ -42,7 +40,7 @@ export class AuthService implements Resolve<{}> {
 
     defaultAuth() {
         return this.msUser.defaultAuth()
-        .then(response => window.location.replace('/'));
+            .then(response => window.location.replace('/'));
     }
 
     getProcoreAuthLink() {
