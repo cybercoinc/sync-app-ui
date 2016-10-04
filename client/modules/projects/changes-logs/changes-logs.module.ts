@@ -11,7 +11,7 @@ import {MdListModule} from '@angular2-material/list';
 import {MdRadioModule} from '@angular2-material/radio';
 import {MdInputModule} from '@angular2-material/input';
 
-import {SyncSessionsComponent} from "client/modules/projects/sync-sessions/sync-sessions.component";
+import {ChangesLogsComponent} from "client/modules/projects/changes-logs/changes-logs.component";
 
 @NgModule({
     imports: [
@@ -29,14 +29,14 @@ import {SyncSessionsComponent} from "client/modules/projects/sync-sessions/sync-
 
     ],
     declarations: [
-        SyncSessionsComponent
+        ChangesLogsComponent
     ],
     bootstrap: [
-        SyncSessionsComponent
+        ChangesLogsComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ]
 })
-export class SyncSessionsModule {
+export class ChangesLogsModule {
 }

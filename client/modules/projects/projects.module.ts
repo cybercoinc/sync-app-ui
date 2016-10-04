@@ -7,6 +7,10 @@ import {ChooseProcoreProjectComponent} from './project-wizard/choose-procore-pro
 import {ChooseSmartsheetSheetComponent} from './project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component';
 import {MatchSheetColumnsComponent} from './project-wizard/match-sheet-columns/match-sheet-columns.component';
 import {SetWorkingWeekDaysComponent} from './project-wizard/set-working-week-days/set-working-week-days.component';
+import {ChangesLogsComponent} from 'client/modules/projects/changes-logs/changes-logs.component';
+
+import {SyncSessionsComponent} from 'client/modules/projects/sync-sessions/sync-sessions.component';
+import {ItemChangesComponent} from 'client/modules/projects/sync-sessions/item-changes/item-changes.component';
 
 import {routing} from "./projects.routing";
 
@@ -22,8 +26,6 @@ import {MdRadioModule} from '@angular2-material/radio';
 import {MdInputModule} from '@angular2-material/input';
 import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
 
-import {SyncSessionsModule} from 'client/modules/projects/sync-sessions/sync-sessions.module'
-
 @NgModule({
     imports: [
         MdCardModule,
@@ -37,7 +39,6 @@ import {SyncSessionsModule} from 'client/modules/projects/sync-sessions/sync-ses
         MdInputModule,
 
         CommonModule,
-        SyncSessionsModule,
         routing,
     ],
     exports: [],
@@ -48,6 +49,9 @@ import {SyncSessionsModule} from 'client/modules/projects/sync-sessions/sync-ses
         ChooseSmartsheetSheetComponent,
         MatchSheetColumnsComponent,
         SetWorkingWeekDaysComponent,
+        ChangesLogsComponent,
+        SyncSessionsComponent,
+        ItemChangesComponent,
     ],
     providers: [
         MdUniqueSelectionDispatcher
