@@ -22,6 +22,8 @@
                     <li>Started by: {{syncSession.started_by}}</li>
                     <li>Status: {{syncSession.status}}</li>
                 </ul>
+
+                <button md-raised-button [routerLink]="['item-changes', syncSession.id]">changes logs</button>
             </md-card>
         </div>
     </div>

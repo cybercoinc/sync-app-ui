@@ -1,0 +1,47 @@
+<h2>item-changes</h2>
+
+<div *ngIf="!itemChangesList">
+    Getting item changes list...
+</div>
+
+<div *ngIf="itemChangesList">
+    <div *ngIf="!itemChangesList.length">
+        No item changes.
+    </div>
+
+    <div *ngIf="itemChangesList.length">
+        <div *ngFor="let itemChanges of itemChangesList">
+            <md-card *ngIf="itemChanges.type === 'created_one'">
+                <ul>
+                    <li>Action: Item created</li>
+                    <li>Source: {{itemChanges.source}}</li>
+                    <li>Name: <b>{{itemChanges.data.item.name}}</b></li>
+                </ul>
+            </md-card>
+
+            <md-card *ngIf="itemChanges.type === 'changed_one'">
+                <ul>
+                    <li>Action: Item changed</li>
+                    <li>Source: {{itemChanges.source}}</li>
+                    <li>Name: <b>{{itemChanges.data.item.name}}</b></li>
+                    <li>
+                        Changes:
+                        <ul *ngFor="let change of itemChanges.data.changes">
+                            <li><b>{{change.property}}</b> (old value: "<i>{{change.old_value}}</i>", new value: "<i>{{change.new_value}}</i>")</li>
+                        </ul>
+                    </li>
+                </ul>
+            </md-card>
+
+             <md-card *ngIf="itemChanges.type === 'deleted_one'">
+                <ul>
+                    <li>Action: Item deleted</li>
+                    <li>Source: {{itemChanges.source}}</li>
+                    <li>Name: <b>{{itemChanges.data.item.name}}</b></li>
+                </ul>
+            </md-card>
+
+
+        </div>
+    </div>
+</div>

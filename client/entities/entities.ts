@@ -59,6 +59,6 @@ export class ItemChanges {
     type: 'created_one|changed_one|deleted_one';
     data: {
         item: Item,
-        changes: [{old_value: string|number;new_value: string|number}]
+        changes: [{property: string; old_value: string|number;new_value: string|number}]
     }
 }
