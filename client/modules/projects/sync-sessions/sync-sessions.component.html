@@ -13,9 +13,9 @@
         <div *ngFor="let syncSession of syncSessionsList">
             <md-card>
                 <md-card-subtitle>
-                    Total time: {{syncSession.sync_time.total_sync_seconds}} sec.;
-                    procore to smartsheet: {{syncSession.sync_time.pr_to_sm_sync_seconds}} sec.;
-                    smartsheet to procore: {{syncSession.sync_time.sm_to_pr_sync_seconds}} sec.
+                    Total time: {{syncSession.sync_time? syncSession.sync_time.total_sync_seconds : ''}} sec.;
+                    procore to smartsheet: {{syncSession.sync_time? syncSession.sync_time.pr_to_sm_sync_seconds: ''}} sec.;
+                    smartsheet to procore: {{syncSession.sync_time? syncSession.sync_time.sm_to_pr_sync_seconds: ''}} sec.
                 </md-card-subtitle>
                 <ul>
                     <li>Created at: {{syncSession.created_at}}</li>
