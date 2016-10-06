@@ -22,7 +22,7 @@ export class SyncSessionsComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = +params['project_id'];
 
-            this.MsSyncClientService.getSyncSessionsByProjectId(id, this.AuthService.authUser.auth_session_id)
+            this.MsSyncClientService.getProjectSyncSessions(id, this.AuthService.authUser.auth_session_id)
                 .then(syncSessionsList => {
                     this.syncSessionsList = this.orderByDate(syncSessionsList);
                 });

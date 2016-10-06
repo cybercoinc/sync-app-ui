@@ -53,7 +53,15 @@ export class MsClientService {
             params = new URLSearchParams();
             for (let prop in data) {
                 if (data.hasOwnProperty(prop)) {
-                    params.set(prop, data[prop])
+                    let value = data[prop];
+
+                    if (Array.isArray(value)) {
+                        value.forEach(function (val) {
+                            params.append(prop + '[]', val)
+                        })
+                    } else {
+                        params.set(prop, data[prop]);
+                    }
                 }
             }
         } else if (method === 'POST' || method === 'PUT') {
