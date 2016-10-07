@@ -1,9 +1,9 @@
 <md-sidenav-layout class="demo-sidenav-layout">
     <md-sidenav #start>
         <md-nav-list (click)="start.close()">
-            <a md-list-item [routerLink]="['home']">Home</a>
-            <a md-list-item [routerLink]="['projects']">Projects</a>
-            <a md-list-item [routerLink]="['connection']">Connections</a>
+            <a md-list-item [routerLink]="['/home']">Home</a>
+            <a md-list-item [routerLink]="['/projects']">Projects</a>
+            <a md-list-item [routerLink]="['/connection']">Connections</a>
         </md-nav-list>
     </md-sidenav>
 
@@ -15,7 +15,8 @@
         <div class="main-menu">
             <h1>Schedule Connector</h1>
             <!--<button md-button (click)="login()" *ngIf="!authUser" color="primary">Login</button>-->
-            <!--<button md-button (click)="logout()" *ngIf="authUser" color="primary">Logout</button>-->
+
+            <button md-button *ngIf="authUser" color="default">{{authUser.email}}</button>
         </div>
     </md-toolbar>
 

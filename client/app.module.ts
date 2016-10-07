@@ -6,10 +6,8 @@ import {AppComponent}  from './app.component';
 
 import {routing} from "./routes";
 
-import {ProjectsModule} from "./modules/projects/projects.module";
+import {UserApplicationModule} from 'client/modules/user-application/user-application.module';
 import {AuthModule} from "./modules/auth/auth.module";
-import {HomeModule} from "./modules/home/home.module";
-import {ConnectionModule} from './modules/connection/connection.module'
 
 import {MdCardModule} from '@angular2-material/card';
 import {MdButtonModule} from '@angular2-material/button';
@@ -30,10 +28,8 @@ import {AuthGuardService} from './service/auth-guard.service';
     imports: [
         BrowserModule,
         HttpModule,
-        ProjectsModule,
-        ConnectionModule,
         AuthModule,
-        HomeModule,
+        UserApplicationModule,
 
         MdCardModule,
         MdButtonModule,

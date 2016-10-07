@@ -5,8 +5,8 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: "choose-procore-project",
-    templateUrl: `client/modules/projects/project-wizard/choose-procore-project/choose-procore-project.component.html`,
-    styleUrls: ['client/modules/projects/project-wizard/choose-procore-project/choose-procore-project.component.css'],
+    templateUrl: `client/modules/user-application/projects/project-wizard/choose-procore-project/choose-procore-project.component.html`,
+    styleUrls: ['client/modules/user-application/projects/project-wizard/choose-procore-project/choose-procore-project.component.css'],
 })
 export class ChooseProcoreProjectComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,

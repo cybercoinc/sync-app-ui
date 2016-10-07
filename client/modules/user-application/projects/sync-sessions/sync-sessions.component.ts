@@ -5,8 +5,8 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 @Component({
     selector: "sync-sessions",
-    templateUrl: `client/modules/projects/sync-sessions/sync-sessions.component.html`,
-    styleUrls: ['client/modules/projects/sync-sessions/sync-sessions.component.css']
+    templateUrl: `client/modules/user-application/projects/sync-sessions/sync-sessions.component.html`,
+    styleUrls: ['client/modules/user-application/projects/sync-sessions/sync-sessions.component.css']
 })
 export class SyncSessionsComponent implements OnInit {
     constructor(protected MsSyncClientService: MsSyncClientService,
@@ -22,7 +22,7 @@ export class SyncSessionsComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = +params['project_id'];
 
-            this.MsSyncClientService.getSyncSessionsByProjectId(id, this.AuthService.authUser.auth_session_id)
+            this.MsSyncClientService.getProjectSyncSessions(id, this.AuthService.authUser.auth_session_id)
                 .then(syncSessionsList => {
                     this.syncSessionsList = this.orderByDate(syncSessionsList);
                 });

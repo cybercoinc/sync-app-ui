@@ -1,11 +1,11 @@
 import {Component, OnInit} from "@angular/core";
-import {MsProjectClientService} from '../../../service/microservices/ms-project-client.service';
-import {AuthService} from '../../../service/auth.service';
+import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
+import {AuthService} from 'client/service/auth.service';
 
 @Component({
     selector: "index",
-    templateUrl: `client/modules/projects/index/index.component.html`,
-    styleUrls: ['client/modules/projects/index/index.component.css'],
+    templateUrl: `client/modules/user-application/projects/index/index.component.html`,
+    styleUrls: ['client/modules/user-application/projects/index/index.component.css'],
 })
 export class IndexComponent implements OnInit {
     constructor(protected MsProjectClient: MsProjectClientService, protected AuthService: AuthService) {
