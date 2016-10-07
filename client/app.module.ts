@@ -7,7 +7,6 @@ import {AppComponent}  from './app.component';
 import {routing} from "./routes";
 
 import {UserApplicationModule} from 'client/modules/user-application/user-application.module';
-import {ProjectsModule} from "./modules/projects/projects.module";
 import {AuthModule} from "./modules/auth/auth.module";
 
 import {MdCardModule} from '@angular2-material/card';
@@ -29,7 +28,6 @@ import {AuthGuardService} from './service/auth-guard.service';
     imports: [
         BrowserModule,
         HttpModule,
-        ProjectsModule,
         AuthModule,
         UserApplicationModule,
 

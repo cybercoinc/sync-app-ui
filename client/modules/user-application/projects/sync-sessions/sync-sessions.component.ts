@@ -2,29 +2,29 @@ import {Component, OnInit} from "@angular/core";
 import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.service';
 import {AuthService} from 'client/service/auth.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import {ItemChanges} from 'client/entities/entities';
 
 @Component({
-    selector: "item-changes",
-    templateUrl: 'client/modules/projects/sync-sessions/item-changes/item-changes.component.html',
-    styleUrls: ['client/modules/projects/sync-sessions/item-changes/item-changes.component.css']
+    selector: "sync-sessions",
+    templateUrl: `client/modules/user-application/projects/sync-sessions/sync-sessions.component.html`,
+    styleUrls: ['client/modules/user-application/projects/sync-sessions/sync-sessions.component.css']
 })
-export class ItemChangesComponent implements OnInit {
+export class SyncSessionsComponent implements OnInit {
     constructor(protected MsSyncClientService: MsSyncClientService,
                 protected AuthService: AuthService,
                 private route: ActivatedRoute,
                 private router: Router) {
+
     }
 
-    itemChangesList: [ItemChanges] = null;
+    syncSessionsList: [{}] = null;
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
-            let syncSessionId = +params['sync_session_id'];
+            let id = +params['project_id'];
 
-            this.MsSyncClientService.getItemChangesBySyncSessionsId(syncSessionId, this.AuthService.authUser.auth_session_id)
-                .then(itemChangesList => {
-                    this.itemChangesList = this.orderByDate(itemChangesList);
+            this.MsSyncClientService.getProjectSyncSessions(id, this.AuthService.authUser.auth_session_id)
+                .then(syncSessionsList => {
+                    this.syncSessionsList = this.orderByDate(syncSessionsList);
                 });
         });
     }

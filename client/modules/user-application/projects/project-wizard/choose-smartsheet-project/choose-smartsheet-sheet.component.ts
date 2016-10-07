@@ -6,8 +6,8 @@ import {Config} from 'client/config';
 
 @Component({
     selector: "choose-smartsheet-sheet",
-    templateUrl: `client/modules/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.html`,
-    styleUrls: ['client/modules/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.css'],
+    templateUrl: `client/modules/user-application/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.html`,
+    styleUrls: ['client/modules/user-application/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.css'],
 })
 export class ChooseSmartsheetSheetComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
