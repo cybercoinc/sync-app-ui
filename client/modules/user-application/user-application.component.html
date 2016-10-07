@@ -15,7 +15,8 @@
         <div class="main-menu">
             <h1>Schedule Connector</h1>
             <!--<button md-button (click)="login()" *ngIf="!authUser" color="primary">Login</button>-->
-            <!--<button md-button (click)="logout()" *ngIf="authUser" color="primary">Logout</button>-->
+
+            <button md-button *ngIf="authUser" color="default">{{authUser.email}}</button>
         </div>
     </md-toolbar>
 
