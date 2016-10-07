@@ -1,5 +1,11 @@
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+
+import {UserApplicationComponent} from 'client/modules/user-application/user-application.component';
+import {HomeComponent} from 'client/modules/user-application/home/home.component';
+import {ConnectionComponent} from 'client/modules/user-application/connection/connection.component';
+
+import {routing} from 'client/modules/user-application/user-application.routing';
 
 import {MdCardModule} from '@angular2-material/card';
 import {MdButtonModule} from '@angular2-material/button';
@@ -10,9 +16,7 @@ import {MdTabsModule} from '@angular2-material/tabs';
 import {MdListModule} from '@angular2-material/list';
 import {MdRadioModule} from '@angular2-material/radio';
 import {MdInputModule} from '@angular2-material/input';
-
-import {routing} from "client/modules/connection/connection.routing";
-import {ConnectionComponent} from "client/modules/connection/connection.component";
+import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
 
 @NgModule({
     imports: [
@@ -30,15 +34,16 @@ import {ConnectionComponent} from "client/modules/connection/connection.componen
 
         routing,
     ],
+    exports: [],
     declarations: [
-        ConnectionComponent
+        UserApplicationComponent,
+        HomeComponent,
+        ConnectionComponent,
     ],
-    bootstrap: [
-        ConnectionComponent
+    providers: [
+        MdUniqueSelectionDispatcher
     ],
-    schemas: [
-        CUSTOM_ELEMENTS_SCHEMA
-    ]
+    bootstrap: [UserApplicationComponent]
 })
-export class ConnectionModule {
+export class UserApplicationModule {
 }

@@ -1,12 +1,12 @@
 import {Component, OnInit} from "@angular/core";
-import {MsUserClientService} from '../../service/microservices/ms-user-client.service';
-import {AuthService} from 'client/service/auth.service';
-import {User} from 'client/entities/entities'
+import {MsUserClientService} from 'client/service/microservices/ms-user-client.service';
+import {AuthService} from '../../../service/auth.service';
+import {User} from 'client/entities/entities';
 
 @Component({
     selector: "connection",
-    templateUrl: `client/modules/connection/connection.component.html`,
-    styleUrls: ['client/modules/connection/connection.component.css']
+    templateUrl: `client/modules/user-application/connection/connection.component.html`,
+    styleUrls: ['client/modules/user-application/connection/connection.component.css']
 })
 export class ConnectionComponent implements OnInit {
     me: User = null;
