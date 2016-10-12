@@ -5,7 +5,11 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {AppModule} from './app.module';
 import {Config} from './config';
 
-enableProdMode();
+let env = Config.getEnvironmentVariable('environment');
+
+if (env !== 'development') {
+    enableProdMode();
+}
 
 fetch(Config.getEnvironmentVariable('ms-main-url') + '/services') // todo move this to root route resolver
     .then(resp => resp.json())

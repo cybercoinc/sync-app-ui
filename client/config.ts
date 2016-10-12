@@ -8,12 +8,14 @@ export class Config {
         switch (environment) {
             case 'localhost':
                 data = {
+                    environment: 'development',
                     "ms-main-url": 'http://localhost:3001',
                     "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
                 };
                 break;
             case 'ms-app-ui-dot-scheduleconnector-dev.appspot.com':
                 data = {
+                    environment: 'production',
                     "ms-main-url": 'https://scheduleconnector-dev.appspot.com',
                     "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
                 };
@@ -21,6 +23,7 @@ export class Config {
 
             default:
                 data = {
+                    environment: 'production',
                     "ms-main-url": 'https://scheduleconnector-dev.appspot.com',
                     "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
                 };
