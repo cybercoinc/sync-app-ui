@@ -3,7 +3,7 @@ import {SandboxComponent} from './sandbox.component'
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'sandbox',
         component: SandboxComponent,
     },
 ];

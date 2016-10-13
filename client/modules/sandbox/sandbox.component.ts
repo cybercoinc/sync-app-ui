@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
 @Component({
+    moduleId: module.id,
     selector: 'sandbox',
-    template: 'sandbox html template',
+    templateUrl: 'sandbox.component.html',
 })
 export class SandboxComponent implements OnInit {
 
