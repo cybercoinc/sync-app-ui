@@ -3,6 +3,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {routing} from './sandbox.routing';
 import {SandboxComponent} from './sandbox.component';
 
+import {ColumnsMatchingComponent} from './columns-matching/columns-matching.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -13,6 +15,7 @@ import {SandboxComponent} from './sandbox.component';
     ],
     declarations: [
         SandboxComponent,
+        ColumnsMatchingComponent,
     ],
     providers: [
     ],
