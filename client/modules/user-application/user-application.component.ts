@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {Component, ViewEncapsulation} from "@angular/core";
-import {MdIconRegistry} from '@angular2-material/icon';
+import {ViewEncapsulation} from "@angular/core";
 import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
 
@@ -8,7 +7,9 @@ import {User} from 'client/entities/entities';
     selector: 'user-application',
     templateUrl: 'client/modules/user-application/user-application.component.html',
     styleUrls: ['client/modules/user-application/user-application.component.css'],
-    viewProviders: [MdIconRegistry],
+    viewProviders: [
+
+    ],
     encapsulation: ViewEncapsulation.None
 })
 export class UserApplicationComponent implements OnInit {

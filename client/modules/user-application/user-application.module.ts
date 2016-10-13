@@ -13,32 +13,14 @@ import {ChooseSmartsheetSheetComponent} from 'client/modules/user-application/pr
 import {MatchSheetColumnsComponent} from 'client/modules/user-application/projects/project-wizard/match-sheet-columns/match-sheet-columns.component';
 import {SetWorkingWeekDaysComponent} from 'client/modules/user-application/projects/project-wizard/set-working-week-days/set-working-week-days.component';
 
-import {routing} from 'client/modules/user-application/user-application.routing';
+import {MaterialModule} from '@angular/material';
 
-import {MdCardModule} from '@angular2-material/card';
-import {MdButtonModule} from '@angular2-material/button';
-import {MdToolbarModule} from '@angular2-material/toolbar';
-import {MdIconModule} from '@angular2-material/icon';
-import {MdSidenavModule} from '@angular2-material/sidenav';
-import {MdTabsModule} from '@angular2-material/tabs';
-import {MdListModule} from '@angular2-material/list';
-import {MdRadioModule} from '@angular2-material/radio';
-import {MdInputModule} from '@angular2-material/input';
-import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
+import {routing} from 'client/modules/user-application/user-application.routing';
 
 @NgModule({
     imports: [
+        MaterialModule.forRoot(),
         BrowserModule,
-
-        MdCardModule,
-        MdButtonModule,
-        MdToolbarModule,
-        MdIconModule,
-        MdSidenavModule,
-        MdListModule,
-        MdTabsModule,
-        MdRadioModule,
-        MdInputModule,
 
         routing,
     ],
@@ -55,9 +37,6 @@ import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
         ChooseSmartsheetSheetComponent,
         MatchSheetColumnsComponent,
         SetWorkingWeekDaysComponent,
-    ],
-    providers: [
-        MdUniqueSelectionDispatcher
     ],
     bootstrap: [UserApplicationComponent]
 })

@@ -10,13 +10,7 @@ import {UserApplicationModule} from 'client/modules/user-application/user-applic
 import {AuthModule} from "./modules/auth/auth.module";
 import {SandboxModule} from './modules/sandbox/sandbox.module';
 
-import {MdCardModule} from '@angular2-material/card';
-import {MdButtonModule} from '@angular2-material/button';
-import {MdToolbarModule} from '@angular2-material/toolbar';
-import {MdIconModule} from '@angular2-material/icon';
-import {MdSidenavModule} from '@angular2-material/sidenav';
-import {MdListModule} from '@angular2-material/list';
-import {MdRadioModule} from '@angular2-material/radio';
+import {MaterialModule} from '@angular/material';
 
 import {MsProjectClientService} from './service/microservices/ms-project-client.service';
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
@@ -27,18 +21,11 @@ import {AuthGuardService} from './service/auth-guard.service';
 
 @NgModule({
     imports: [
+        MaterialModule.forRoot(),
         BrowserModule,
         HttpModule,
         AuthModule,
         UserApplicationModule,
-
-        MdCardModule,
-        MdButtonModule,
-        MdToolbarModule,
-        MdIconModule,
-        MdSidenavModule,
-        MdListModule,
-        MdRadioModule,
 
         SandboxModule,
 

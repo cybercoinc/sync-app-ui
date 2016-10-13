@@ -1,26 +1,15 @@
 import {NgModule} from '@angular/core';
 import {routing} from "./auth.routing";
 
-import {MdCardModule} from '@angular2-material/card';
-import {MdButtonModule} from '@angular2-material/button';
-import {MdToolbarModule} from '@angular2-material/toolbar';
-import {MdIconModule} from '@angular2-material/icon';
-import {MdSidenavModule} from '@angular2-material/sidenav';
-import {MdListModule} from '@angular2-material/list';
-
 import {AuthDefaultComponent} from './auth-default/auth-default.component';
 import {AuthProcoreComponent} from './auth-procore/auth-procore.component';
 import {AuthComponent} from './auth.component';
 
+import {MaterialModule} from '@angular/material';
+
 @NgModule({
     imports: [
-        MdCardModule,
-        MdButtonModule,
-        MdToolbarModule,
-        MdIconModule,
-        MdSidenavModule,
-        MdListModule,
-
+        MaterialModule.forRoot(),
         routing,
     ],
 

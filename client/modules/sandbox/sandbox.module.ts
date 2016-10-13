@@ -5,22 +5,20 @@ import {SandboxComponent} from './sandbox.component';
 
 import {ColumnsMatchingComponent} from './columns-matching/columns-matching.component';
 
+import {MaterialModule} from '@angular/material';
+
 @NgModule({
     imports: [
+        MaterialModule.forRoot(),
         BrowserModule,
         routing,
     ],
-    exports: [
-
-    ],
+    exports: [],
     declarations: [
         SandboxComponent,
         ColumnsMatchingComponent,
     ],
-    providers: [
-    ],
-    bootstrap: [
-    ]
+    bootstrap: []
 })
 
 export class SandboxModule {

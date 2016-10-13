@@ -26,18 +26,7 @@ var isPublic = typeof window != "undefined";
             // other libraries
             'rxjs': 'npm:rxjs',
             'angular2-in-memory-web-api': 'npm:angular2-in-memory-web-api',
-            'angular2-jwt': 'npm:angular2-jwt/angular2-jwt.js',
-            '@angular2-material/core': 'npm:@angular2-material/core/core.umd.js',
-            '@angular2-material/menu': 'npm:@angular2-material/menu/menu.umd.js',
-            '@angular2-material/button': 'npm:@angular2-material/button/button.umd.js',
-            '@angular2-material/toolbar': 'npm:@angular2-material/toolbar/toolbar.umd.js',
-            '@angular2-material/card': 'npm:@angular2-material/card/card.umd.js',
-            '@angular2-material/icon': 'npm:@angular2-material/icon/icon.umd.js',
-            '@angular2-material/sidenav': 'npm:@angular2-material/sidenav/sidenav.umd.js',
-            '@angular2-material/list': 'npm:@angular2-material/list/list.umd.js',
-            '@angular2-material/tabs': 'npm:@angular2-material/tabs/tabs.umd.js',
-            '@angular2-material/radio': 'npm:@angular2-material/radio/radio.umd.js',
-            '@angular2-material/input': 'npm:@angular2-material/input/input.umd.js',
+            'angular2-jwt': 'npm:angular2-jwt/angular2-jwt.js'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -47,7 +36,11 @@ var isPublic = typeof window != "undefined";
             },
             rxjs: {
                 defaultExtension: 'js'
-            }
+            },
+            '@angular/material': {
+                format: 'cjs',
+                main: 'material.umd.js'
+            },
         }
     });
 })(this);
