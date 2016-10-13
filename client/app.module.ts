@@ -8,6 +8,7 @@ import {routing} from "./routes";
 
 import {UserApplicationModule} from 'client/modules/user-application/user-application.module';
 import {AuthModule} from "./modules/auth/auth.module";
+import {SandboxModule} from './modules/sandbox/sandbox.module';
 
 import {MdCardModule} from '@angular2-material/card';
 import {MdButtonModule} from '@angular2-material/button';
@@ -39,8 +40,11 @@ import {AuthGuardService} from './service/auth-guard.service';
         MdListModule,
         MdRadioModule,
 
+        SandboxModule,
+
         routing,
     ],
+
     providers: [
         AuthService,
         AuthGuardService,
