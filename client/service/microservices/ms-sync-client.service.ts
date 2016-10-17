@@ -31,4 +31,13 @@ export class MsSyncClientService extends MsClientService {
             authUserSessionId
         );
     }
+
+    getProcoreTodosColumns(authUserSessionId: string): Promise<[{}]> {
+        return this.makeMsCall(
+            'get-procore-todos-columns',
+            'GET',
+            {},
+            authUserSessionId
+        )
+    }
 }

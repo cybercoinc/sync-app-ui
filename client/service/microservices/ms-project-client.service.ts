@@ -105,7 +105,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getSmartsheetSheetColumns(userId: number, smSheetId: number, authUserSessionId: string): Promise<number> {
+    getSmartsheetSheetColumns(userId: number, smSheetId: number, authUserSessionId: string): Promise<[{}]> {
         return this.makeMsCall(
             'get-smartsheet-sheet-columns',
             'GET',
