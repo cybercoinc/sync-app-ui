@@ -1,7 +1,9 @@
 .sandbox {
-    width: 1080px;
-    margin: 0 auto;
     background-color: #fff;
     min-height: 70vh;
-    padding: 10px 20px;
+    padding: 20px;
+}
+
+.wizard-component-container {
+    padding: 25px 15px;
 }

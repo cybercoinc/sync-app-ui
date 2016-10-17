@@ -1,16 +1,20 @@
-<div class="wizard-component-container">
-    <form>
-        <fieldset>
-            <legend>Match columns</legend>
-            <div *ngFor="let procoreTodoColumn of procoreTodosColumns">
-                <label>
-                    Procore column: <b>{{procoreTodoColumn.title}}</b>
-                    <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
-                        <option value="">- Smartsheet column -</option>
-                        <option *ngFor="let column of sheetColumns" [value]="column.id">{{column.title}}</option>
-                    </select>
-                </label>
-            </div>
-        </fieldset>
-    </form>
+<div class="container-fluid wizard-component-container">
+    <div class="row">
+        <div class="col-xs-12">
+            <form>
+                <fieldset>
+                    <legend>Match columns</legend>
+                    <div *ngFor="let procoreTodoColumn of procoreTodosColumns">
+                        <label>
+                            Procore column: <b>{{procoreTodoColumn.title}}</b>
+                            <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
+                                <option value="">- Smartsheet column -</option>
+                                <option *ngFor="let column of sheetColumns" [value]="column.id">{{column.title}}</option>
+                            </select>
+                        </label>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>
