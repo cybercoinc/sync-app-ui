@@ -1,0 +1,44 @@
+<div class="wizard-component-container">
+    <form>
+        <fieldset>
+            <legend>Choose working and week days</legend>
+
+            <h3>Working days:</h3>
+            <md-checkbox [(ngModel)]="model.workingDays.mon" name="mon">
+                Monday
+            </md-checkbox>
+
+            <md-checkbox [(ngModel)]="model.workingDays.tue" name="tue">
+                Tuesday
+            </md-checkbox>
+
+            <md-checkbox [(ngModel)]="model.workingDays.wed" name="wed">
+                Wednesday
+            </md-checkbox>
+
+            <md-checkbox [(ngModel)]="model.workingDays.thu" name="thu">
+                Thursday
+            </md-checkbox>
+
+            <md-checkbox [(ngModel)]="model.workingDays.fri" name="fri">
+                Friday
+            </md-checkbox>
+
+            <md-checkbox [(ngModel)]="model.workingDays.sat" name="sat">
+                Saturday
+            </md-checkbox>
+
+            <md-checkbox [(ngModel)]="model.workingDays.sun" name="sun">
+                Sunday
+            </md-checkbox>
+
+            <br>
+            <br>
+            <h3>Non-Working Days (holidays, exceptions):</h3>
+            <textarea placeholder="Type or paste dates here (12/15/15), separated by commas"
+                      [(ngModel)]="model.nonWorkingDays" name="nonWorkingDays"></textarea>
+
+            <a (click)="checkModel()">check model</a>
+        </fieldset>
+    </form>
+</div>
