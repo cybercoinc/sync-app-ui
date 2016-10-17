@@ -1,9 +1,12 @@
-<div *ngFor="let procoreTodoColumn of procoreTodosColumns">
-    <label>
-        Smartsheet column: <b>{{procoreTodoColumn.title}}</b>
-        <select>
-            <option value="">Procore column</option>
-            <option *ngFor="let column of sheetColumns">{{column.title}}</option>
-        </select>
-    </label>
-</div>
+<form>
+    <div *ngFor="let procoreTodoColumn of procoreTodosColumns">
+        <label>
+            Procore column: <b>{{procoreTodoColumn.title}}</b>
+            <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
+                <option value="">- Smartsheet column -</option>
+                <option *ngFor="let column of sheetColumns" [value]="column.id">{{column.title}}</option>
+            </select>
+        </label>
+    </div>
+</form>
+<a (click)="checkModel()">check model</a>

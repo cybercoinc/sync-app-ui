@@ -6,11 +6,14 @@ import {SandboxComponent} from './sandbox.component';
 import {ColumnsMatchingComponent} from './columns-matching/columns-matching.component';
 
 import {MaterialModule} from '@angular/material';
+import {FormsModule}  from '@angular/forms';
+
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
+        FormsModule,
         routing,
     ],
     exports: [],

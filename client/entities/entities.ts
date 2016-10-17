@@ -62,3 +62,17 @@ export class ItemChanges {
         changes: [{property: string; old_value: string|number;new_value: string|number}]
     }
 }
+
+export class ProcoreTodoColumn {
+    slug: string;
+    title: string;
+}
+
+export class SmartsheetSheetColumn {
+    id: number;
+    index: number;
+    primary: string;
+    title: string;
+    type: string;
+    width: number;
+}
