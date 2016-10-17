@@ -36,11 +36,8 @@ export class ColumnsMatchingComponent implements OnInit, WizardComponentInterfac
     }
 
     performAction() {
+        // todo submit this.model to service
         console.log('action performed');
-    }
-
-    checkModel() {
-        console.log(this.model);
     }
 
     @Input('sheet-id') smartsheetSheetId: number;
