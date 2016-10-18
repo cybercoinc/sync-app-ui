@@ -19,8 +19,11 @@ export class ColumnsMatchingComponent implements OnInit, WizardComponentInterfac
     }
 
     ngOnInit() {
-        this.MsProjectClientService.getSmartsheetSheetColumns(this.AuthService.authUser.id, this.smartsheetSheetId,
-            this.AuthService.authUser.auth_session_id)
+        this.MsProjectClientService.getSmartsheetSheetColumns(
+            this.AuthService.authUser.id,
+            this.smartsheetSheetId,
+            this.AuthService.authUser.auth_session_id
+        )
             .then(sheetColumns => {
                 this.sheetColumns = sheetColumns
             });
@@ -40,10 +43,22 @@ export class ColumnsMatchingComponent implements OnInit, WizardComponentInterfac
         console.log('action performed');
     }
 
+    checkIfOptionDisabled(columnId, dropdownName) {
+        for (let prop in this.model) {
+            if (this.model.hasOwnProperty(prop)) {
+                if (prop !== dropdownName && this.model[prop] === String(columnId)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     @Input('sheet-id') smartsheetSheetId: number;
 
-    protected sheetColumns: [SmartsheetSheetColumn];
-    protected procoreTodosColumns: [ProcoreTodoColumn];
+    protected sheetColumns: SmartsheetSheetColumn[];
+    protected procoreTodosColumns: ProcoreTodoColumn[];
 
     public model: {} = {};
 }

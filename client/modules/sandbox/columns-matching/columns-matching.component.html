@@ -9,7 +9,9 @@
                     <div class="col-xs-10">
                         <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
                             <option value="">- Smartsheet column -</option>
-                            <option *ngFor="let column of sheetColumns" [value]="column.id">{{column.title}}</option>
+                            <option *ngFor="let column of sheetColumns" [value]="column.id"
+                                    [disabled]="checkIfOptionDisabled(column.id, procoreTodoColumn.slug)">{{column.title}}
+                            </option>
                         </select>
                     </div>
                 </div>
