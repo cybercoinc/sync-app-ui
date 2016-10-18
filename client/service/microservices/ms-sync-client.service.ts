@@ -1,6 +1,6 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
-import {SyncSession, ItemChanges} from 'client/entities/entities'
+import {SyncSession, ItemChanges, ProcoreTodoColumn} from 'client/entities/entities'
 
 export class MsSyncClientService extends MsClientService {
 
@@ -30,5 +30,14 @@ export class MsSyncClientService extends MsClientService {
             },
             authUserSessionId
         );
+    }
+
+    getProcoreTodosColumns(authUserSessionId: string): Promise<[ProcoreTodoColumn]> {
+        return this.makeMsCall(
+            'get-procore-todos-columns',
+            'GET',
+            {},
+            authUserSessionId
+        )
     }
 }

@@ -1,5 +1,6 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
+import {SmartsheetSheetColumn} from 'client/entities/entities'
 
 export class MsProjectClientService extends MsClientService {
 
@@ -105,7 +106,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getSmartsheetSheetColumns(userId: number, smSheetId: number, authUserSessionId: string): Promise<number> {
+    getSmartsheetSheetColumns(userId: number, smSheetId: number, authUserSessionId: string): Promise<[SmartsheetSheetColumn]> {
         return this.makeMsCall(
             'get-smartsheet-sheet-columns',
             'GET',

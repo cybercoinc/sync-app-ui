@@ -18,6 +18,7 @@ import {MsSyncClientService} from './service/microservices/ms-sync-client.servic
 
 import {AuthService} from './service/auth.service';
 import {AuthGuardService} from './service/auth-guard.service';
+import {FormsModule}  from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -26,7 +27,7 @@ import {AuthGuardService} from './service/auth-guard.service';
         HttpModule,
         AuthModule,
         UserApplicationModule,
-
+        FormsModule,
         SandboxModule,
 
         routing,
