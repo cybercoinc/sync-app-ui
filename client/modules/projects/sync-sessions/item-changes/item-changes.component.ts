@@ -5,9 +5,10 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {ItemChanges} from 'client/entities/entities';
 
 @Component({
+    moduleId: module.id,
     selector: "item-changes",
-    templateUrl: 'client/modules/user-application/projects/sync-sessions/item-changes/item-changes.component.html',
-    styleUrls: ['client/modules/user-application/projects/sync-sessions/item-changes/item-changes.component.css']
+    templateUrl: 'item-changes.component.html',
+    styleUrls: ['item-changes.component.css']
 })
 export class ItemChangesComponent implements OnInit {
     constructor(protected MsSyncClientService: MsSyncClientService,

@@ -1,10 +1,23 @@
 import {Component} from "@angular/core";
-import "rxjs/add/operator/map";
+import {AuthService} from 'client/service/auth.service';
+import {User} from 'client/entities/entities';
 
 @Component({
+    moduleId: module.id,
     selector: 'app',
-    template: `<router-outlet></router-outlet>`,
+    templateUrl: 'app.component.html',
 })
 export class AppComponent {
     appName: string = 'Schedule Connector';
+
+    constructor(protected AuthService: AuthService) {
+
+    }
+
+    ngOnInit() {
+        this.AuthService.getAuthUser()
+            .then(authUser => this.authUser = authUser);
+    }
+
+    authUser: User = null;
 }

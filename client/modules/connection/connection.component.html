@@ -1,8 +1,8 @@
-<h2>Connections</h2>
+<h4>Connections</h4>
 
 <div *ngIf="me && me.role && me.role !== 'guest'">
     <md-card>
-        <h3>Procore connection:</h3>
+        <h5>Procore connection:</h5>
 
         <div *ngIf="me.procore_oauth">
             <ul>
@@ -15,7 +15,7 @@
     </md-card>
 
     <md-card>
-        <h3>Smartsheet connection:</h3>
+        <h5>Smartsheet connection:</h5>
 
         <div *ngIf="me.smartsheet_oauth">
             <a md-raised-button color="danger" (click)="removeSmartsheetAuth()">Remove Smartsheet connection</a>
