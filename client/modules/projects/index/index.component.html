@@ -1,30 +1,36 @@
-<section class="buttons-group">
-    <button md-fab color="primary" [routerLink]="['wizard/choose-procore-project']">
-        <i class="material-icons">add</i>
-    </button>
-</section>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="buttons-group">
+                <button md-fab color="primary" [routerLink]="['wizard/choose-procore-project']">
+                    <i class="material-icons">add</i>
+                </button>
+            </section>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-xs-12" *ngIf="!projects">
+            <i class="fa fa-cog fa-spin fa-fw"></i> Getting projects...
+        </div>
 
-<div *ngIf="!projects">
-    <i class="fa fa-cog fa-spin fa-fw"></i> Getting projects...
+        <div class="col-xs-12" *ngIf="projects && !projects.length">
+            You have no connected projects.
+        </div>
+
+        <div class="col-xs-12"  *ngIf="projects && projects.length">
+            <md-card *ngFor="let project of projects">
+                <md-card-title>{{project.name}}</md-card-title>
+                <md-card-content>
+                    <p>This is supporting text.</p>
+                </md-card-content>
+                <md-card-actions align="end">
+                    <button md-raised-button [routerLink]="['sync-sessions', project.id]">Sync Sessions</button>
+                    <!--<button md-raised-button [routerLink]="['changes-logs', project.id]">Changes logs</button>-->
+                    <button md-raised-button color="warn" [disabled]="true">DELETE</button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </div>
 </div>
-
-<div *ngIf="projects && !projects.length">
-    You have no connected projects.
-</div>
-
-<div *ngIf="projects && projects.length">
-    <md-card *ngFor="let project of projects">
-        <md-card-title>{{project.name}}</md-card-title>
-        <md-card-content>
-            <p>This is supporting text.</p>
-        </md-card-content>
-        <md-card-actions align="end">
-            <button md-raised-button [routerLink]="['sync-sessions', project.id]">Sync Sessions</button>
-            <!--<button md-raised-button [routerLink]="['changes-logs', project.id]">Changes logs</button>-->
-            <button md-raised-button color="warn" [disabled]="true">DELETE</button>
-        </md-card-actions>
-    </md-card>
-</div>
-
 
