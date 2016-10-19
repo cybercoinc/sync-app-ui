@@ -1,0 +1,22 @@
+.navbar-sc {
+    background-color: #2C3E50;
+    border-radius: 0px;
+    color: #fff;
+}
+
+.navbar-sc a {
+    color: #fff;
+    font-size: 19px;
+}
+
+.navbar-sc a:hover, .navbar-sc a:focus {
+    color: #EBEBEB;
+}
+
+.logo-container {
+    height: auto;
+}
+
+.navbar-nav > li > a {
+    padding-top: 32px;
+}
