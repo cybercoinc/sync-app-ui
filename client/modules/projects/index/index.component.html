@@ -1,4 +1,13 @@
-<div class="container">
+<div class="container-fluid">
+    <div class="row module-header">
+        <div class="col-xs-12">
+            <div class="module-name">Projects</div>
+
+            <a href="#" class="btn btn-success">CREATE PROJECT</a>
+        </div>
+    </div>
+
+
     <div class="row">
         <div class="col-xs-12">
             <section class="buttons-group">
@@ -18,7 +27,7 @@
             You have no connected projects.
         </div>
 
-        <div class="col-xs-12"  *ngIf="projects && projects.length">
+        <div class="col-xs-12" *ngIf="projects && projects.length">
             <md-card *ngFor="let project of projects">
                 <md-card-title>{{project.name}}</md-card-title>
                 <md-card-content>
