@@ -1,0 +1,47 @@
+<div class="container-fluid">
+
+    <div class="row module-header">
+        <div class="col-xs-12">
+            <div class="module-name">Create Project</div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-4">
+            <h5>Please choose one of your Procore projects</h5>
+
+            <input type="text" class="full-width" (keyup)="filterProjects($event.target.value)"
+                   placeholder="Filter by name">
+        </div>
+
+        <div class="col-xs-12">
+            <div class="projects-list">
+                <h5 *ngIf="procoreProjects && !procoreProjects.length">
+                    No projects found.
+                </h5>
+
+                <h5 *ngIf="procoreProjects === null">
+                    <i class="fa fa-cog fa-spin fa-fw"></i> Searching for projects...
+                </h5>
+
+                <div *ngFor="let project of procoreProjects">
+                    <md-radio-button [disabled]="checkIfAlreadyConnected(project)" name="procore-project-connect"
+                                     value="{{project.id}}"
+                                     (click)="chooseProject(project)">
+                        {{project.name}}
+
+                        <div class="is-connected" *ngIf="checkIfAlreadyConnected(project)">is connected</div>
+                    </md-radio-button>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a (click)="createNewProject()" class="btn btn-success" [class.disabled]="!selectedProject">CREATE AND CONTINUE</a>
+        </div>
+    </div>
+</div>
