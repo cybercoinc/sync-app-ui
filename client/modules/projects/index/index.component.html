@@ -8,48 +8,43 @@
         </div>
     </div>
 
-
-    <div class="row" *ngIf="!projectRows">
-        <div class="col-xs-12">
-            <i class="fa fa-cog fa-spin fa-fw"></i> Getting projects...
+    <div class="row">
+        <div class="col-xs-12" *ngIf="!projectRows">
+            <h5><i class="fa fa-cog fa-spin fa-fw"></i> Getting projects...</h5>
         </div>
-    </div>
 
-    <div class="row" *ngIf="projectRows && !projectRows.length">
-        <div class="col-xs-12">
-            You have no connected projects.
+        <div class="col-xs-12" *ngIf="projectRows && !projectRows.length">
+            <h5>You have no connected projects.</h5>
         </div>
-    </div>
 
-    <div class="row" *ngIf="projectRows && projectRows.length">
+        <div *ngIf="projectRows && projectRows.length">
+            <div class="col-xs-12" *ngFor="let projectRow of projectRows">
+                <div class="project-row" [class.row-expanded]="projectRow.is_expanded">
+                    <div class="container-fluid">
 
-        <div class="col-xs-12" *ngFor="let projectRow of projectRows">
-            <div class="project-row" [class.row-expanded]="projectRow.is_expanded">
-                <div class="container-fluid">
-
-                    <div class="row" (click)="projectRowExpand(projectRow)">
-                        <div class="col-xs-5">
-                            {{projectRow.project.name}}
+                        <div class="row" (click)="projectRowExpand(projectRow)">
+                            <div class="col-xs-5">
+                                {{projectRow.project.name}}
+                            </div>
+                            <div class="col-xs-4">
+                                <i class="material-icons pipe-connected">date_range</i>
+                                <i class="material-icons pipe-disabled">list</i>
+                                <i class="material-icons pipe-not-connected">verified_user</i>
+                            </div>
+                            <div class="col-xs-3">
+                                <a href="#" class="pull-right btn btn-primary btn-sm">edit</a>
+                            </div>
                         </div>
-                        <div class="col-xs-4">
-                            <i class="material-icons pipe-connected">date_range</i>
-                            <i class="material-icons pipe-disabled">list</i>
-                            <i class="material-icons pipe-not-connected">verified_user</i>
-                        </div>
-                        <div class="col-xs-3">
-                            <a href="#" class="pull-right btn btn-primary btn-sm">edit</a>
-                        </div>
-                    </div>
 
-                    <div class="row" *ngIf="projectRow.is_expanded">
-                        <div class="col-xs-12">
-                           info tabs here
+                        <div class="row" *ngIf="projectRow.is_expanded">
+                            <div class="col-xs-12">
+                                info tabs here
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <!--<div class="col-xs-12">-->
         <!--<md-card *ngFor="let project of projects">-->

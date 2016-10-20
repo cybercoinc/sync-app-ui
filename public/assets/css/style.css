@@ -109,3 +109,11 @@ body h1 {
 .pipe-disabled {
     color: #000;
 }
+
+.full-width {
+    width: 100%;
+}
+
+input {
+    outline: none;
+}

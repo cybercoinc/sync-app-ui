@@ -63,6 +63,28 @@ export class ItemChanges {
     }
 }
 
+export class ProcoreProject {
+    active: boolean;
+    name: string;
+    address: string;
+    city: string;
+    country_code: string;
+    created_at: string;
+    company: {
+        id: number,
+        name: string
+    };
+    id: number
+}
+
+export class Project {
+    procore_project_id: number;
+    name: string;
+    status: 'active'  | 'inactive';
+    procore_company_id: number;
+    user_fk_id: number
+}
+
 export class ProcoreTodoColumn {
     slug: string;
     title: string;
