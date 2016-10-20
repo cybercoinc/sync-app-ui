@@ -1,45 +1,69 @@
 <div class="container-fluid">
+
     <div class="row module-header">
         <div class="col-xs-12">
             <div class="module-name">Projects</div>
 
-            <a href="#" class="btn btn-success">CREATE PROJECT</a>
+            <a [routerLink]="['wizard/choose-procore-project']" class="btn btn-success">CREATE PROJECT</a>
         </div>
     </div>
 
 
-    <div class="row">
+    <div class="row" *ngIf="!projectRows">
         <div class="col-xs-12">
-            <section class="buttons-group">
-                <button md-fab color="primary" [routerLink]="['wizard/choose-procore-project']">
-                    <i class="material-icons">add</i>
-                </button>
-            </section>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12" *ngIf="!projects">
             <i class="fa fa-cog fa-spin fa-fw"></i> Getting projects...
         </div>
+    </div>
 
-        <div class="col-xs-12" *ngIf="projects && !projects.length">
+    <div class="row" *ngIf="projectRows && !projectRows.length">
+        <div class="col-xs-12">
             You have no connected projects.
         </div>
+    </div>
 
-        <div class="col-xs-12" *ngIf="projects && projects.length">
-            <md-card *ngFor="let project of projects">
-                <md-card-title>{{project.name}}</md-card-title>
-                <md-card-content>
-                    <p>This is supporting text.</p>
-                </md-card-content>
-                <md-card-actions align="end">
-                    <button md-raised-button [routerLink]="['sync-sessions', project.id]">Sync Sessions</button>
-                    <!--<button md-raised-button [routerLink]="['changes-logs', project.id]">Changes logs</button>-->
-                    <button md-raised-button color="warn" [disabled]="true">DELETE</button>
-                </md-card-actions>
-            </md-card>
+    <div class="row" *ngIf="projectRows && projectRows.length">
+
+        <div class="col-xs-12" *ngFor="let projectRow of projectRows">
+            <div class="project-row" [class.row-expanded]="projectRow.is_expanded">
+                <div class="container-fluid">
+
+                    <div class="row" (click)="projectRowExpand(projectRow)">
+                        <div class="col-xs-5">
+                            {{projectRow.project.name}}
+                        </div>
+                        <div class="col-xs-4">
+                            <i class="material-icons pipe-connected">date_range</i>
+                            <i class="material-icons pipe-disabled">list</i>
+                            <i class="material-icons pipe-not-connected">verified_user</i>
+                        </div>
+                        <div class="col-xs-3">
+                            <a href="#" class="pull-right btn btn-primary btn-sm">edit</a>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="projectRow.is_expanded">
+                        <div class="col-xs-12">
+                           info tabs here
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        <!--<div class="col-xs-12">-->
+        <!--<md-card *ngFor="let project of projects">-->
+        <!--<md-card-title>{{project.name}}</md-card-title>-->
+        <!--<md-card-content>-->
+        <!--<p>This is supporting text.</p>-->
+        <!--</md-card-content>-->
+        <!--<md-card-actions align="end">-->
+        <!--<button md-raised-button [routerLink]="['sync-sessions', project.id]">Sync Sessions</button>-->
+        <!--&lt;!&ndash;<button md-raised-button [routerLink]="['changes-logs', project.id]">Changes logs</button>&ndash;&gt;-->
+        <!--<button md-raised-button color="warn" [disabled]="true">DELETE</button>-->
+        <!--</md-card-actions>-->
+        <!--</md-card>-->
+        <!--</div>-->
     </div>
 </div>
 

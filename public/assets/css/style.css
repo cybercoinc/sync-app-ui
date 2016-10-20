@@ -72,10 +72,13 @@ body h1 {
     color: #fff;
     font-size: 19px;
     padding-top: 32px;
+    display: inline-flex;
+    vertical-align: middle;
 }
 
 .module-header {
     padding-bottom: 10px;
+    margin-bottom: 20px;
     line-height: 55px;
     border-bottom: 1px solid #EBEBEB;
 }
@@ -93,4 +96,16 @@ body h1 {
 
 .btn-success:hover, .btn-success:focus {
     background-color: #10827B;
+}
+
+.pipe-connected {
+    color: #2A8039;
+}
+
+.pipe-not-connected {
+    color: #A0A0A0;
+}
+
+.pipe-disabled {
+    color: #000;
 }

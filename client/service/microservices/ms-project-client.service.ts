@@ -10,7 +10,7 @@ export class MsProjectClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-project');
     }
 
-    getActiveProjects(userId, authUserSessionId): Promise<[{}]> {
+    getActiveProjects(userId, authUserSessionId): Promise<[{id: number}]> {
         return this.makeMsCall(
             'find-where',
             'GET',

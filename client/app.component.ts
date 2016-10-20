@@ -2,6 +2,9 @@ import {Component} from "@angular/core";
 import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
 
+import {MyInhertLink} from 'client/directives/href.directive';
+
+
 @Component({
     moduleId: module.id,
     selector: 'app',
