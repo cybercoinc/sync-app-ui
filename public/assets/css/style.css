@@ -48,3 +48,49 @@ body h1 {
 .left-padding {
     padding-left: 2%;
 }
+
+.navbar-sc {
+    background-color: #2C3E50;
+    border-radius: 0px;
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+    font-size: 19px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #EBEBEB;
+}
+
+.logo-container {
+    height: auto;
+}
+
+.navbar-nav > li > a {
+    color: #fff;
+    font-size: 19px;
+    padding-top: 32px;
+}
+
+.module-header {
+    padding-bottom: 10px;
+    line-height: 55px;
+    border-bottom: 1px solid #EBEBEB;
+}
+
+.module-name {
+    display: block;
+    float: left;
+    font-size: 30px;
+    margin-right: 50px;
+}
+
+.btn-success {
+    background-color: #14A39A;
+}
+
+.btn-success:hover, .btn-success:focus {
+    background-color: #10827B;
+}

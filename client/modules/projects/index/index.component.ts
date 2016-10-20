@@ -3,9 +3,10 @@ import {MsProjectClientService} from 'client/service/microservices/ms-project-cl
 import {AuthService} from 'client/service/auth.service';
 
 @Component({
+    moduleId: module.id,
     selector: "index",
-    templateUrl: `client/modules/user-application/projects/index/index.component.html`,
-    styleUrls: ['client/modules/user-application/projects/index/index.component.css'],
+    templateUrl: `index.component.html`,
+    styleUrls: ['index.component.css'],
 })
 export class IndexComponent implements OnInit {
     constructor(protected MsProjectClient: MsProjectClientService, protected AuthService: AuthService) {
