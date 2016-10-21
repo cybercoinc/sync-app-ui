@@ -64,6 +64,10 @@ body h1 {
     color: #EBEBEB;
 }
 
+.navbar-default .navbar-nav > li > a.active {
+    text-decoration: underline;
+}
+
 .logo-container {
     height: auto;
 }
