@@ -1,6 +1,7 @@
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {MaterialModule} from '@angular/material';
+
 import {routing} from './projects.routing';
 
 import {EditProjectModule} from './edit-project/edit-project.module';
@@ -25,6 +26,9 @@ import {CreateProjectComponent} from './create-project/create-project.component'
         SyncSessionsComponent,
         ItemChangesComponent,
         CreateProjectComponent,
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
     ]
 })
 export class ProjectsModule {

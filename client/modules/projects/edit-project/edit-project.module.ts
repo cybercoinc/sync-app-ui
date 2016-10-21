@@ -1,24 +1,32 @@
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {MaterialModule} from '@angular/material';
-import {routing} from './edit-project.routing';
+
+import {editProjectRouting} from './edit-project.routing';
 
 import {EditProjectComponent} from './edit-project.component';
 import {PipeConfigComponent} from './components/pipe-config.component';
+import {PipePublicTodoComponent} from './components/pipe-public-todo.component';
+import {PipePrivateTodoComponent} from './components/pipe-private-todo.component';
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
 
-        routing,
+        editProjectRouting,
     ],
     exports: [],
     declarations: [
         EditProjectComponent,
-        PipeConfigComponent
+        PipeConfigComponent,
+        PipePublicTodoComponent,
+        PipePrivateTodoComponent
     ],
-    bootstrap: [EditProjectComponent]
+    bootstrap: [EditProjectComponent],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ]
 })
 export class EditProjectModule {
 }

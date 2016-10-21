@@ -7,7 +7,6 @@ import {IndexComponent} from './index/index.component';
 import {SyncSessionsComponent} from './sync-sessions/sync-sessions.component';
 import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.component';
 import {CreateProjectComponent} from './create-project/create-project.component';
-import {EditProjectComponent} from './edit-project/edit-project.component';
 
 export const routes: Routes = [
     {
@@ -28,11 +27,6 @@ export const routes: Routes = [
             },
 
             {
-                path: ':project_id/edit-project',
-                component: EditProjectComponent,
-            },
-
-            {
                 path: 'sync-sessions',
                 children: [
                     {
@@ -50,47 +44,6 @@ export const routes: Routes = [
                     }
                 ]
             },
-
-            // {
-            //     path: 'wizard',
-            //     children: [
-            //         {
-            //             path: 'choose-procore-project',
-            //             component: ChooseProcoreProjectComponent
-            //         },
-            //
-            //         {
-            //             path: 'choose-smartsheet-sheet',
-            //             children: [
-            //                 {
-            //                     path: ':id',
-            //                     component: ChooseSmartsheetSheetComponent
-            //                 }
-            //             ]
-            //         },
-            //
-            //         {
-            //             path: 'match-sheet-columns',
-            //             children: [
-            //                 {
-            //                     path: ':id',
-            //                     component: MatchSheetColumnsComponent
-            //                 }
-            //             ]
-            //         },
-            //
-            //
-            //         {
-            //             path: 'set-working-week-days',
-            //             children: [
-            //                 {
-            //                     path: ':id',
-            //                     component: SetWorkingWeekDaysComponent
-            //                 }
-            //             ]
-            //         },
-            //     ]
-            // }
         ],
     },
 ];
