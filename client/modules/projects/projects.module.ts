@@ -7,6 +7,7 @@ import {IndexComponent} from './index/index.component';
 import {SyncSessionsComponent} from './sync-sessions/sync-sessions.component';
 import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.component';
 import {CreateProjectComponent} from './create-project/create-project.component';
+import {EditProjectComponent} from './edit-project/edit-project.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import {CreateProjectComponent} from './create-project/create-project.component'
         IndexComponent,
         SyncSessionsComponent,
         ItemChangesComponent,
-        CreateProjectComponent
+        CreateProjectComponent,
+        EditProjectComponent
     ]
 })
 export class ProjectsModule {
