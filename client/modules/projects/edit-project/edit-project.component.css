@@ -1,9 +1,6 @@
-.pipes-list {
-}
-
 .right-lined {
     border-right: 1px solid #A1A1A1;
-    min-height: 80vh;
+    height: 100%;
 }
 
 .bottom-lined {
@@ -30,5 +27,30 @@
 .pipe-description {
     font-size: 12px;
     color: grey;
-    padding: 0px 20px 5px;
+    padding: 0px 20px 10px;
+}
+
+.step-completed i {
+    color: #2A8039;
+}
+
+.step-not-completed {
+
+}
+
+.step-failed i {
+    color: #FF530D;
+}
+
+.pipes-wizard-container {
+    height: 700px;
+    border-bottom: 1px solid #A1A1A1;
+}
+
+.pipes-list {
+    height: 700px;
+}
+
+.pipe-config-steps {
+    height: 640px;
 }

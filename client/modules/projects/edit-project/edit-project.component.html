@@ -1,5 +1,5 @@
 <div class="">
-    <div class="row">
+    <div class="row pipes-wizard-container">
         <!-- PIPES LIST -->
         <div class="col-xs-3 col-lg-2 pipes-list right-lined">
             <div class="row bottom-lined clickable-row">
@@ -56,26 +56,38 @@
             <!-- end STATUS ROW -->
 
             <div class="row">
-                <div class="col-xs-3 right-lined">
+                <div class="col-xs-3 right-lined pipe-config-steps">
 
-                    <div class="row bottom-lined clickable-row">
+                    <div class="row bottom-lined clickable-row step-completed">
                         <div class="col-xs-12">
                             <div class="pipe-header-average">
-                                <i class="material-icons">settings</i> Smartsheet Connection
+                                <i class="material-icons">check</i> Completed step
                             </div>
                             <div class="pipe-description">
-                                Description for Smartsheet Connection.
+                                Description for Smartsheet Connection. Double rows long text here may be.
                             </div>
                         </div>
                     </div>
 
-                    <div class="row bottom-lined clickable-row">
+
+                    <div class="row bottom-lined clickable-row step-not-completed">
                         <div class="col-xs-12">
                             <div class="pipe-header-average">
-                                <i class="material-icons">settings</i> Settings
+                                <i class="material-icons">arrow_forward</i> Need to complete step
                             </div>
                             <div class="pipe-description">
-                                Description for settings.
+                                Description for some step.Double rows long text here may be.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row bottom-lined clickable-row step-failed">
+                        <div class="col-xs-12">
+                            <div class="pipe-header-average">
+                                <i class="material-icons">close</i> Failed validation step
+                            </div>
+                            <div class="pipe-description">
+                                Description.
                             </div>
                         </div>
                     </div>
