@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
 import {AuthService} from 'client/service/auth.service';
+import {Project} from 'client/entities/entities';
 
 @Component({
     moduleId: module.id,
@@ -13,7 +14,7 @@ export class IndexComponent implements OnInit {
     }
 
     projectRows: [{
-        project: {id: number},
+        project: Project,
         is_expanded: boolean
     }];
 

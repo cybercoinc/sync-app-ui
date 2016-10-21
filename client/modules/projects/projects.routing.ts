@@ -7,6 +7,7 @@ import {IndexComponent} from './index/index.component';
 import {SyncSessionsComponent} from './sync-sessions/sync-sessions.component';
 import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.component';
 import {CreateProjectComponent} from './create-project/create-project.component';
+import {EditProjectComponent} from './edit-project/edit-project.component';
 
 export const routes: Routes = [
     {
@@ -16,14 +17,19 @@ export const routes: Routes = [
         },
         canActivate: [AuthGuardService],
         children: [
-
             {
                 path: '',
                 component: IndexComponent,
             },
+
             {
                 path: 'create-project',
                 component: CreateProjectComponent,
+            },
+
+            {
+                path: ':project_id/edit-project',
+                component: EditProjectComponent,
             },
 
             {

@@ -1,6 +1,6 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
-import {SmartsheetSheetColumn, ProcoreProject} from 'client/entities/entities'
+import {SmartsheetSheetColumn, ProcoreProject, Project} from 'client/entities/entities'
 
 export class MsProjectClientService extends MsClientService {
 
@@ -10,7 +10,7 @@ export class MsProjectClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-project');
     }
 
-    getActiveProjects(userId, authUserSessionId): Promise<[{id: number}]> {
+    getActiveProjects(userId, authUserSessionId): Promise<Project[]> {
         return this.makeMsCall(
             'find-where',
             'GET',

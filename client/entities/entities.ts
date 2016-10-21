@@ -77,7 +77,11 @@ export class ProcoreProject {
     id: number
 }
 
+/**
+ * Schedule Connector project entity.
+ */
 export class Project {
+    id: number;
     procore_project_id: number;
     name: string;
     status: 'active'  | 'inactive';

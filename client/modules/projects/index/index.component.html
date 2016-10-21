@@ -4,7 +4,7 @@
         <div class="col-xs-12">
             <div class="module-name">Projects</div>
 
-            <a [routerLink]="['create-project']" class="btn btn-success">CREATE PROJECT</a>
+            <a [routerLink]="['create-project']" class="btn btn-success">create project</a>
         </div>
     </div>
 
@@ -27,12 +27,12 @@
                                 {{projectRow.project.name}}
                             </div>
                             <div class="col-xs-4">
-                                <i class="material-icons pipe-connected">date_range</i>
-                                <i class="material-icons pipe-disabled">list</i>
+                                <i class="material-icons pipe-connected">event_note</i>
+                                <i class="material-icons pipe-disabled">event_available</i>
                                 <i class="material-icons pipe-not-connected">verified_user</i>
                             </div>
                             <div class="col-xs-3">
-                                <a href="#" class="pull-right btn btn-primary btn-sm">edit</a>
+                                <a [routerLink]="[projectRow.project.id, 'edit-project']" class="pull-right btn btn-primary btn-sm">edit</a>
                             </div>
                         </div>
 
