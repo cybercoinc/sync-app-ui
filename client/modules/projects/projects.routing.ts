@@ -28,7 +28,7 @@ export const routes: Routes = [
             },
 
             {
-                path: 'edit-project',
+                path: ':project_id/edit-project',
                 component: EditProjectComponent,
             },
 
