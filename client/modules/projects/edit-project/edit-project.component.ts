@@ -1,7 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {Router} from '@angular/router';
-
-import {ProcoreProject} from 'client/entities/entities';
 
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
 import {AuthService} from 'client/service/auth.service';

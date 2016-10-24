@@ -9,14 +9,24 @@
     <!--<link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="@angular/material/core/theming/prebuilt/indigo-pink.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <script src="assets/js/vendor/system.js"></script>
     <script src="assets/js/vendor/shim.min.js"></script>
     <script src="assets/js/vendor/zone.js"></script>
     <script src="assets/js/vendor/Reflect.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!--Development mod-->
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function (err) {
+            console.error(err);
+        });
+    </script>
 </head>
 
 <body>
@@ -25,8 +35,8 @@
         <i class="fa fa-cog fa-spin fa-3x fa-fw"></i> Loading ...
     </div>
 </app>
-<!--  START Production mod  -->
-<script src="assets/js/bundle.min.js"></script>
-<!--  END Production mod  -->
+<!--  Production mod  -->
+<!--<script src="assets/js/bundle.min.js"></script>
+-->
 </body>
 </html>

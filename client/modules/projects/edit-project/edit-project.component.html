@@ -1,45 +1,19 @@
 <div class="">
     <div class="row pipes-wizard-container">
+
         <!-- PIPES LIST -->
         <div class="col-xs-3 col-lg-2 pipes-list right-lined">
+
             <div class="row bottom-lined clickable-row">
                 <div class="col-xs-12">
                     <div class="pipe-header-large">Toy Story Building</div>
                 </div>
             </div>
 
-            <div class="row bottom-lined clickable-row">
-                <div class="col-xs-12">
-                    <div class="pipe-header-average">
-                        <i class="material-icons">event_available</i> Public Todos
-                    </div>
-                    <div class="pipe-description">
-                        Here can be some text to provide more information for this section.
-                    </div>
-                </div>
-            </div>
+            <pipe-config [routerLink]="['pipe-public-todo']" material-icon="event_available" pipe-title="Public Todos" description="Description."></pipe-config>
+            <pipe-config [routerLink]="['pipe-private-todo']" material-icon="verified_user" pipe-title="Private Todos" description="Another description for pipe here."></pipe-config>
+            <pipe-config material-icon="settings" pipe-title="General Settings" description="Description for project settings."></pipe-config>
 
-            <div class="row bottom-lined clickable-row">
-                <div class="col-xs-12">
-                    <div class="pipe-header-average">
-                        <i class="material-icons">verified_user</i> Private Todos
-                    </div>
-                    <div class="pipe-description">
-                        Another description for pipe here.
-                    </div>
-                </div>
-            </div>
-
-            <div class="row bottom-lined clickable-row">
-                <div class="col-xs-12">
-                    <div class="pipe-header-average">
-                        <i class="material-icons">settings</i> General Settings
-                    </div>
-                    <div class="pipe-description">
-                        Description for project settings.
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- end PIPES LIST -->
 
@@ -56,50 +30,10 @@
             <!-- end STATUS ROW -->
 
             <div class="row">
-                <div class="col-xs-3 right-lined pipe-config-steps">
-
-                    <div class="row bottom-lined clickable-row step-completed">
-                        <div class="col-xs-12">
-                            <div class="pipe-header-average">
-                                <i class="material-icons">check</i> Completed step
-                            </div>
-                            <div class="pipe-description">
-                                Description for Smartsheet Connection. Double rows long text here may be.
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row bottom-lined clickable-row step-not-completed">
-                        <div class="col-xs-12">
-                            <div class="pipe-header-average">
-                                <i class="material-icons">arrow_forward</i> Need to complete step
-                            </div>
-                            <div class="pipe-description">
-                                Description for some step.Double rows long text here may be.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row bottom-lined clickable-row step-failed">
-                        <div class="col-xs-12">
-                            <div class="pipe-header-average">
-                                <i class="material-icons">close</i> Failed validation step
-                            </div>
-                            <div class="pipe-description">
-                                Description.
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-xs-9">
-
+                <div class="inner-outlet">
+                    <router-outlet></router-outlet>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
