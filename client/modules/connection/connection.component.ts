@@ -4,10 +4,10 @@ import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: "connection",
-    templateUrl: 'connection.component.html',
-    styleUrls: ['connection.component.css']
+    templateUrl: 'client/modules/connection/connection.component.html',
+    styleUrls: ['client/modules/connection/connection.component.css']
 })
 export class ConnectionComponent implements OnInit {
     me: User = null;

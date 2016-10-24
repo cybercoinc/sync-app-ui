@@ -4,9 +4,9 @@ import {User} from 'client/entities/entities';
 
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'app',
-    templateUrl: 'app.component.html',
+    templateUrl: 'client/app.component.html',
 })
 export class AppComponent {
     appName: string = 'Schedule Connector';

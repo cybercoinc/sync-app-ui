@@ -7,10 +7,10 @@ import {MsProjectClientService} from 'client/service/microservices/ms-project-cl
 import {AuthService} from 'client/service/auth.service';
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: "create-project",
-    templateUrl: 'create-project.component.html',
-    styleUrls: ['create-project.component.css'],
+    templateUrl: 'client/modules/projects/create-project/create-project.component.html',
+    styleUrls: ['client/modules/projects/create-project/create-project.component.css'],
 })
 export class CreateProjectComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,

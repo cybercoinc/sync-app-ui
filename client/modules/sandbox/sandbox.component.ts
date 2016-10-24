@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'sandbox',
-    templateUrl: 'sandbox.component.html',
-    styleUrls: ['sandbox.component.css']
+    templateUrl: 'client/modules/sandbox/sandbox.component.html',
+    styleUrls: ['client/modules/sandbox/sandbox.component.css']
 })
 export class SandboxComponent implements OnInit {
 
