@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row module-header">
+        <div class="col-xs-12">
+            <div class="module-name">Billing</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12" *ngIf="!licensesList">
+            <h5><i class="fa fa-cog fa-spin fa-fw"></i> Getting licenses...</h5>
+        </div>
+
+        <div class="col-xs-12" *ngIf="licensesList && !licensesList.length">
+            <h5>No Licenses Yet.</h5>
+        </div>
+
+        <div *ngIf="licensesList && licensesList.length">
+            <div class="col-xs-12" *ngFor="let license of licensesList">
+
+                <div class="project-row" [class.row-expanded]="license.status=='active'">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-xs-5">
+                                Licensed entity:{{license.entity_type}}<br>
+                                ID:{{license.entity_id}}
+                            </div>
+
+                            <div *ngIf="license.entity_type=='project'" class="col-xs-3">
+
+                                <a [routerLink]="[license.entity_id, 'edit-project']" class="pull-right btn btn-primary btn-sm">edit entity</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

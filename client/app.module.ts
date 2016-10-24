@@ -10,6 +10,7 @@ import {routing} from "./routes";
 import {MsProjectClientService} from './service/microservices/ms-project-client.service';
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
 import {MsSyncClientService} from './service/microservices/ms-sync-client.service';
+import {MsLicenseClientService} from './service/microservices/ms-license-client.service';
 import {AuthService} from './service/auth.service';
 import {AuthGuardService} from './service/auth-guard.service';
 
@@ -17,7 +18,7 @@ import {AuthModule} from "./modules/auth/auth.module";
 import {SandboxModule} from './modules/sandbox/sandbox.module';
 import {ConnectionModule} from 'client/modules/connection/connection.module';
 import {ProjectsModule} from 'client/modules/projects/projects.module';
-
+import {BillingModule} from 'client/modules/billing/billing.module';
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
@@ -28,6 +29,7 @@ import {ProjectsModule} from 'client/modules/projects/projects.module';
         SandboxModule,
         ConnectionModule,
         ProjectsModule,
+        BillingModule,
 
         routing,
     ],
@@ -37,6 +39,7 @@ import {ProjectsModule} from 'client/modules/projects/projects.module';
         AuthGuardService,
         MsProjectClientService,
         MsUserClientService,
+        MsLicenseClientService,
         MsSyncClientService
     ],
 

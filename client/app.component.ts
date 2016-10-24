@@ -8,6 +8,7 @@ import {User} from 'client/entities/entities';
     selector: 'app',
     templateUrl: 'client/app.component.html',
 })
+
 export class AppComponent {
     appName: string = 'Schedule Connector';
 
