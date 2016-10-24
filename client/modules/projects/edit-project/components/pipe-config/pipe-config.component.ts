@@ -1,10 +1,9 @@
 import {Component, OnInit, Input} from "@angular/core";
 
 @Component({
-    // moduleId: module.id,
     selector: 'pipe-config',
     template: `
-            <div class="row bottom-lined clickable-row">
+            <div class="row bottom-lined clickable-row" [routerLink]="[routerLink]">
                 <div class="col-xs-12">
                     <div class="pipe-header-average">
                         <i class="material-icons">{{materialIcon}}</i> {{pipeTitle}}
@@ -30,4 +29,5 @@ export class PipeConfigComponent implements OnInit {
     @Input('material-icon') materialIcon: string;
     @Input('pipe-title') pipeTitle: string;
     @Input('description') description: string;
+    @Input('router-link') routerLink: string;
 }

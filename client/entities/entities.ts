@@ -94,6 +94,15 @@ export class ProcoreTodoColumn {
     title: string;
 }
 
+export class SmartsheetSheet {
+    accessLevel: string;
+    createdAt: string;
+    id: number;
+    modifiedAt: string;
+    name: string;
+    permalink: string;
+}
+
 export class SmartsheetSheetColumn {
     id: number;
     index: number;

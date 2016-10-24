@@ -7,7 +7,6 @@ import {MsProjectClientService} from 'client/service/microservices/ms-project-cl
 import {AuthService} from 'client/service/auth.service';
 
 @Component({
-    // moduleId: module.id,
     selector: "create-project",
     templateUrl: 'client/modules/projects/create-project/create-project.component.html',
     styleUrls: ['client/modules/projects/create-project/create-project.component.css'],
