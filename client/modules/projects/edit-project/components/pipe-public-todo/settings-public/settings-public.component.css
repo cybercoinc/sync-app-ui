@@ -15,3 +15,10 @@ md-radio-button {
     color: grey;
     padding-left: 5px;
 }
+
+textarea {
+    width: 100%;
+    border-radius: 2px;
+    resize: vertical;
+    height: 100px;
+}

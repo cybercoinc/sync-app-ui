@@ -1,5 +1,6 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule}  from '@angular/forms';
 import {MaterialModule} from '@angular/material';
 
 import {editProjectRouting} from './edit-project.routing';
@@ -16,6 +17,7 @@ import {SettingsPublicComponent} from './components/pipe-public-todo/settings-pu
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
+        FormsModule,
 
         editProjectRouting,
     ],
