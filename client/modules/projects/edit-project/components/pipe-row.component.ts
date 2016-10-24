@@ -1,9 +1,9 @@
 import {Component, OnInit, Input} from "@angular/core";
 
 @Component({
-    selector: 'pipe-config',
+    selector: 'pipe-row',
     template: `
-            <div class="row bottom-lined clickable-row" [routerLink]="[routerLink]">
+            <div class="row bottom-lined clickable-row" [routerLink]="[routerLink]" routerLinkActive="pipe-step-active">
                 <div class="col-xs-12">
                     <div class="pipe-header-average">
                         <i class="material-icons">{{materialIcon}}</i> {{pipeTitle}}
@@ -17,7 +17,7 @@ import {Component, OnInit, Input} from "@angular/core";
              `,
     styleUrls: ['client/modules/projects/edit-project/edit-project.component.css'],
 })
-export class PipeConfigComponent implements OnInit {
+export class PipeRowComponent implements OnInit {
 
     constructor() {
 

@@ -54,3 +54,7 @@
 .pipe-config-steps {
     height: 640px;
 }
+
+.pipe-step-active {
+    background-color: #F7F7F7;
+}
