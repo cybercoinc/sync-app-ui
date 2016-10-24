@@ -17,6 +17,14 @@
     <script src="assets/js/vendor/Reflect.js"></script>
 
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <!--Development mod-->
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function (err) {
+            console.error(err);
+        });
+    </script>
 </head>
 
 <body>
@@ -26,7 +34,7 @@
     </div>
 </app>
 <!--  START Production mod  -->
-<script src="assets/js/bundle.min.js"></script>
+<!--<script src="assets/js/bundle.min.js"></script>-->
 <!--  END Production mod  -->
 </body>
 </html>
