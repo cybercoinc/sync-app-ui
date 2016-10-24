@@ -6,10 +6,10 @@ import {WizardComponentInterface} from 'client/intefraces/wizard-component.inter
 import {ProcoreTodoColumn, SmartsheetSheetColumn} from 'client/entities/entities';
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'columns-matching',
-    templateUrl: 'columns-matching.component.html',
-    styleUrls: ['columns-matching.component.css']
+    templateUrl: 'client/modules/sandbox/columns-matching/columns-matching.component.html',
+    styleUrls: ['client/modules/sandbox/columns-matching/columns-matching.component.css']
 })
 export class ColumnsMatchingComponent implements OnInit, WizardComponentInterface {
 

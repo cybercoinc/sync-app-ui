@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'pipe-config',
     template: `
             <div class="row bottom-lined clickable-row">
@@ -16,7 +16,7 @@ import {Component, OnInit, Input} from "@angular/core";
                 </div>
             </div>
              `,
-    styleUrls: ['../edit-project.component.css'],
+    styleUrls: ['client/modules/projects/edit-project/edit-project.component.css'],
 })
 export class PipeConfigComponent implements OnInit {
 

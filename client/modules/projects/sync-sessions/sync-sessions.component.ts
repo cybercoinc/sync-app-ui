@@ -4,10 +4,10 @@ import {AuthService} from 'client/service/auth.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: "sync-sessions",
-    templateUrl: `sync-sessions.component.html`,
-    styleUrls: ['sync-sessions.component.css']
+    templateUrl: `client/modules/projects/sync-sessions/sync-sessions.component.html`,
+    styleUrls: ['client/modules/projects/sync-sessions/sync-sessions.component.css']
 })
 export class SyncSessionsComponent implements OnInit {
     constructor(protected MsSyncClientService: MsSyncClientService,

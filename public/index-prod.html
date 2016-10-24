@@ -19,14 +19,6 @@
     <script src="assets/js/vendor/shim.min.js"></script>
     <script src="assets/js/vendor/zone.js"></script>
     <script src="assets/js/vendor/Reflect.js"></script>
-
-    <!--Development mod-->
-    <script src="systemjs.config.js"></script>
-    <script>
-        System.import('app').catch(function (err) {
-            console.error(err);
-        });
-    </script>
 </head>
 
 <body>
@@ -35,8 +27,8 @@
         <i class="fa fa-cog fa-spin fa-3x fa-fw"></i> Loading ...
     </div>
 </app>
-<!--  Production mod  -->
-<!--<script src="assets/js/bundle.min.js"></script>
--->
+<!--  START Production mod  -->
+<script src="assets/js/bundle.min.js"></script>
+<!--  END Production mod  -->
 </body>
 </html>

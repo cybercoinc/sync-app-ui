@@ -7,8 +7,8 @@ import {ItemChanges} from 'client/entities/entities';
 @Component({
     moduleId: module.id,
     selector: "item-changes",
-    templateUrl: 'item-changes.component.html',
-    styleUrls: ['item-changes.component.css']
+    templateUrl: 'client/modules/projects/sync-sessions/item-changes/item-changes.component.html',
+    styleUrls: ['client/modules/projects/sync-sessions/item-changes/item-changes.component.css']
 })
 export class ItemChangesComponent implements OnInit {
     constructor(protected MsSyncClientService: MsSyncClientService,

@@ -6,8 +6,8 @@ import {AuthService} from 'client/service/auth.service';
 @Component({
     moduleId: module.id,
     selector: "edit-project",
-    templateUrl: 'edit-project.component.html',
-    styleUrls: ['edit-project.component.css'],
+    templateUrl: 'client/modules/projects/edit-project/edit-project.component.html',
+    styleUrls: ['client/modules/projects/edit-project/edit-project.component.css'],
 })
 export class EditProjectComponent implements OnInit {
     ngOnInit() {

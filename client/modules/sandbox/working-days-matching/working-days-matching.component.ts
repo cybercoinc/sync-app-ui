@@ -6,10 +6,10 @@ import {WizardComponentInterface} from 'client/intefraces/wizard-component.inter
 import {ProcoreTodoColumn, SmartsheetSheetColumn} from 'client/entities/entities';
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'working-days-matching',
-    templateUrl: 'working-days-matching.component.html',
-    styleUrls: ['working-days-matching.component.css']
+    templateUrl: 'client/modules/sandbox/working-days-matching/working-days-matching.component.html',
+    styleUrls: ['client/modules/sandbox/working-days-matching/working-days-matching.component.css']
 })
 export class WorkingDaysMatchingComponent implements OnInit, WizardComponentInterface {
 

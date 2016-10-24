@@ -4,10 +4,10 @@ import {AuthService} from 'client/service/auth.service';
 import {Project} from 'client/entities/entities';
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: "index",
-    templateUrl: `index.component.html`,
-    styleUrls: ['index.component.css'],
+    templateUrl: `client/modules/projects/index/index.component.html`,
+    styleUrls: ['client/modules/projects/index/index.component.css'],
 })
 export class IndexComponent implements OnInit {
     constructor(protected MsProjectClient: MsProjectClientService, protected AuthService: AuthService) {

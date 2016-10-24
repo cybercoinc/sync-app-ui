@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: 'pipe-public-todo',
     template: `
                 <div class="col-xs-3 right-lined pipe-config-steps">
@@ -46,7 +46,7 @@ import {Component, OnInit, Input} from "@angular/core";
                     public todo settings here
                 </div>
              `,
-    styleUrls: ['../edit-project.component.css'],
+    styleUrls: ['client/modules/projects/edit-project/edit-project.component.css'],
 })
 export class PipePublicTodoComponent implements OnInit {
 
