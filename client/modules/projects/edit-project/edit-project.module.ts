@@ -5,9 +5,9 @@ import {MaterialModule} from '@angular/material';
 import {editProjectRouting} from './edit-project.routing';
 
 import {EditProjectComponent} from './edit-project.component';
-import {PipeConfigComponent} from './components/pipe-config.component';
-import {PipePublicTodoComponent} from './components/pipe-public-todo.component';
-import {PipePrivateTodoComponent} from './components/pipe-private-todo.component';
+import {PipeConfigComponent} from './components/pipe-config/pipe-config.component';
+import {PipePublicTodoComponent} from './components/pipe-public-todo/pipe-public-todo.component';
+import {PipePrivateTodoComponent} from './components/pipe-private-todo/pipe-private-todo.component';
 
 @NgModule({
     imports: [

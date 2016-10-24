@@ -5,7 +5,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {ItemChanges} from 'client/entities/entities';
 
 @Component({
-    moduleId: module.id,
+    // moduleId: module.id,
     selector: "item-changes",
     templateUrl: 'client/modules/projects/sync-sessions/item-changes/item-changes.component.html',
     styleUrls: ['client/modules/projects/sync-sessions/item-changes/item-changes.component.css']

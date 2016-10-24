@@ -1,7 +1,7 @@
 import {Routes, RouterModule} from '@angular/router';
 import {EditProjectComponent} from './edit-project.component';
-import {PipePublicTodoComponent} from './components/pipe-public-todo.component';
-import {PipePrivateTodoComponent} from './components/pipe-private-todo.component';
+import {PipePublicTodoComponent} from './components/pipe-public-todo/pipe-public-todo.component';
+import {PipePrivateTodoComponent} from './components/pipe-private-todo/pipe-private-todo.component';
 
 export const routes: Routes = [
     {
