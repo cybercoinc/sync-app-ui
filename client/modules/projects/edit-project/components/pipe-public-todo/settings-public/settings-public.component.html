@@ -1,11 +1,13 @@
 <div class="container-fluid">
+
     <div class="row">
+        <div class="col-xs-12">
+            <h4>Working Days: </h4>
+        </div>
+
         <div class="col-xs-12">
             <form>
                 <fieldset>
-                    <legend>Choose working and week days</legend>
-
-                    <h3>Working days:</h3>
                     <md-checkbox [(ngModel)]="model.workingDays.mon" name="mon">
                         Monday
                     </md-checkbox>
@@ -36,7 +38,7 @@
 
                     <br>
                     <br>
-                    <h3>Holidays:</h3>
+                    <h4>Holidays:</h4>
                     <textarea placeholder="Type or paste dates here (12/15/15), separated by commas"
                               [(ngModel)]="model.nonWorkingDays" name="nonWorkingDays"></textarea>
 
