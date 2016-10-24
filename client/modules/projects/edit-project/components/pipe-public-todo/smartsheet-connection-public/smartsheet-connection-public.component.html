@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h5>Choose Smartsheet sheet you want to connect or
+                <a class="btn btn-primary bt-xs" [class.disabled]="!project" (click)="createNewSheetWithWorkspace()">create
+                    new sheet</a>
+            </h5>
+
+            <input type="text" class="full-width" #search_filter (keyup)="filterProjects(search_filter.value)"
+                   placeholder="Search">
+        </div>
+
+        <div class="col-xs-12">
+            <div class="projects-list">
+                <h5 *ngIf="!smartsheetSheets">
+                    <i class="fa fa-cog fa-spin fa-fw"></i> Searching for sheets...
+                </h5>
+
+                <h5 *ngIf="smartsheetSheets && !smartsheetSheets.length">
+                    No sheets found.
+                </h5>
+
+                <div *ngFor="let sheet of smartsheetSheets">
+                    <md-radio-button [disabled]="sheet.is_connected" value="{{sheet.id}}"
+                                     (click)="chooseExistingSheet(sheet)">
+                        {{sheet.name}}
+                        <div class="is-connected" *ngIf="checkIfAlreadyConnected(sheet)">is connected</div>
+                    </md-radio-button>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a [class.disabled]="!selectedSheet" class="btn btn-success" (click)="goToNextStep()">Select and continue</a>
+            <a class="btn btn-default" href="#">cancel</a>
+        </div>
+    </div>
+</div>

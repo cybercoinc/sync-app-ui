@@ -1,6 +1,6 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
-import {SmartsheetSheetColumn, ProcoreProject, Project} from 'client/entities/entities'
+import {SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet} from 'client/entities/entities'
 
 export class MsProjectClientService extends MsClientService {
 
@@ -55,12 +55,23 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getSmartsheetProjects(userId, authUserSessionId): Promise<[{}]> {
+    getSmartsheetSheets(userId, authUserSessionId): Promise<SmartsheetSheet[]> {
         return this.makeMsCall(
-            'get-smartsheet-projects',
+            'get-smartsheet-sheets',
             'GET',
             {
                 user_id: userId
+            },
+            authUserSessionId
+        );
+    }
+
+    getConnectedSmartsheetSheetsIds(projectId: number, authUserSessionId): Promise<[number]> {
+        return this.makeMsCall(
+            'get-connected-smartsheet-sheets-ids',
+            'GET',
+            {
+                project_id: projectId
             },
             authUserSessionId
         );

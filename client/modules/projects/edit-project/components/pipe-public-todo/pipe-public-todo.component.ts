@@ -13,6 +13,4 @@ export class PipePublicTodoComponent implements OnInit {
 
     ngOnInit() {
     }
-
-    @Input('material-icon') materialIcon: string;
 }

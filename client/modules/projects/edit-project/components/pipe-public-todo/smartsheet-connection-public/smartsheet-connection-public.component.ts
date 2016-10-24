@@ -3,51 +3,54 @@ import {MsProjectClientService} from "client/service/microservices/ms-project-cl
 import {AuthService} from 'client/service/auth.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Config} from 'client/config';
+import {Project, SmartsheetSheet} from 'client/entities/entities';
 
 @Component({
-    selector: "choose-smartsheet-sheet",
-    templateUrl: `client/modules/user-application/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.html`,
-    styleUrls: ['client/modules/user-application/projects/project-wizard/choose-smartsheet-project/choose-smartsheet-sheet.component.css'],
+    selector: "smartsheet-connection-public",
+    templateUrl: 'client/modules/projects/edit-project/components/pipe-public-todo/smartsheet-connection-public/smartsheet-connection-public.component.html',
+    styleUrls: ['client/modules/projects/edit-project/components/pipe-public-todo/smartsheet-connection-public/smartsheet-connection-public.component.css'],
 })
-export class ChooseSmartsheetSheetComponent implements OnInit {
+export class SmartsheetConnectionPublicComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService,
                 private route: ActivatedRoute,
                 private router: Router) {
-
-        this.project = null;
-        this.smartsheetSheets = null;
-        this.selectedSheet = null;
     }
 
     ngOnInit() {
-        this.getSmartsheetSheets()
-            .then(smartsheetSheets => this.smartsheetSheets = smartsheetSheets);
+        let projectId = null;
 
-        this.route.params.forEach((params: Params) => {
-            let id = +params['id'];
-
-            this.MsProjectClientService.getProjectByid(id, this.AuthService.authUser.auth_session_id)
-                .then(projects => this.project = projects.shift());
+        // todo find better way to get route param
+        this.route.parent.parent.params.forEach((params: Params) => {
+            projectId = +params['project_id'];
         });
+
+        this.MsProjectClientService.getConnectedSmartsheetSheetsIds(projectId, this.AuthService.authUser.auth_session_id)
+            .then(connectedSmSheetsList => {
+                this.connectedSmSheetsIdsList = connectedSmSheetsList;
+
+                return this.getSmartsheetSheets();
+            })
+            .then(smartsheetSheets => {
+                this.smartsheetSheets = smartsheetSheets;
+            });
+
+
+        // this.getSmartsheetSheets()
+        //     .then(smartsheetSheets => this.smartsheetSheets = smartsheetSheets);
+        //
+        // this.MsProjectClientService.getProjectByid(this.route.params['project_id'], this.AuthService.authUser.auth_session_id)
+        //     .then(projects => this.project = projects.shift());
     }
 
-    project: {name: string, id: number} | null;
+    public project: Project|null = null;
+    public smartsheetSheets: SmartsheetSheet[]|null = null;
+    public connectedSmSheetsIdsList: [number] | null = null;
+    public selectedSheet: SmartsheetSheet|null = null;
 
-    smartsheetSheets: [{
-        is_connected: boolean
-    }]|null;
+    protected filterTimeout;
 
-    selectedSheet: {
-        accessLevel: string,
-        id: number,
-        name: string,
-        permalink: string
-    }|null;
-
-    filterTimeout;
-
-    filterProjects(name: string) {
+    filterProjects(inputName: string) {
         if (this.filterTimeout) {
             window.clearTimeout(this.filterTimeout);
         }
@@ -59,7 +62,7 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
             this.getSmartsheetSheets()
                 .then(smartsheetSheetsList => {
                     this.smartsheetSheets = smartsheetSheetsList.filter(sheet => {
-                        return sheet['name'].toLowerCase().indexOf(name.toLowerCase()) !== -1;
+                        return sheet['name'].toLowerCase().indexOf(inputName.toLowerCase()) !== -1;
                     });
 
                     return this.smartsheetSheets;
@@ -69,15 +72,19 @@ export class ChooseSmartsheetSheetComponent implements OnInit {
 
     getSmartsheetSheets() {
         return this.MsProjectClientService
-            .getSmartsheetProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
+            .getSmartsheetSheets(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
     }
 
     chooseExistingSheet(sheet) {
-        if (sheet.is_connected) {
+        if (this.checkIfAlreadyConnected(sheet)) {
             return false;
         }
 
         this.selectedSheet = sheet;
+    }
+
+    checkIfAlreadyConnected(smSheet: SmartsheetSheet): boolean {
+        return this.connectedSmSheetsIdsList.indexOf(smSheet.id) !== -1;
     }
 
     createNewSheetWithWorkspace() {
