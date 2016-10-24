@@ -10,6 +10,7 @@ import {PipeStepRowComponent} from './components/pipe-step-row.component';
 import {PipePublicTodoComponent} from './components/pipe-public-todo/pipe-public-todo.component';
 import {PipePrivateTodoComponent} from './components/pipe-private-todo/pipe-private-todo.component';
 import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo/smartsheet-connection-public/smartsheet-connection-public.component';
+import {SettingsPublicComponent} from './components/pipe-public-todo/settings-public/settings-public.component';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo
         PipeStepRowComponent,
         PipePublicTodoComponent,
         PipePrivateTodoComponent,
-        SmartsheetConnectionPublicComponent
+        SmartsheetConnectionPublicComponent,
+        SettingsPublicComponent,
     ],
     bootstrap: [EditProjectComponent],
     schemas: [
