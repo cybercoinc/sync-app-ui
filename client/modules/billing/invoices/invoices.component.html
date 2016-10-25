@@ -1,36 +1,10 @@
-<div class="container-fluid">
-    <div class="row module-header">
-        <div class="col-xs-12">
-            <div class="module-name">Billing</div>
-        </div>
-    </div>
+<invoice-card *ngFor="let invoice of invocesArray"
+        invoice-number="{{invoice.invoice_number}}"
+        invoice-id="{{invoice.id}}"
+        invoice-bill-dot-com-id="{{invoice.bill_dot_com_invoice_id}}"
+        invoice-amount="{{invoice.amount}}"
+        invoice-date="{{invoice.created_at|date}}"
 
-    <div class="row">
-        <div *ngIf="me && me.role && me.role !== 'guest'">
-            <div class="col-xs-12">
+>
 
-
-                <md-card>
-                    <h5>license....:</h5>
-
-                    <div >
-                        <a md-raised-button color="danger" >btn</a>
-                    </div>
-
-
-                    <div >
-                        <a md-raised-button color="primary" href="">btn2</a>
-                    </div>
-                </md-card>
-            </div>
-        </div>
-
-        <div *ngIf="me && me.role && me.role === 'guest'">
-            <div class="col-xs-6">
-                <md-card>
-                    You are guest, please authenticate yourself.
-                </md-card>
-            </div>
-        </div>
-    </div>
-</div>
+</invoice-card>
