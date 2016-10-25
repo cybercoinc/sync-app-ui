@@ -34,9 +34,9 @@ export class PipeConnectionService implements Resolve<{}> {
 
     public project: Project;
     public pipesListObj: {
-        "public_todos": ProjectPipe,
-        "private_todos": ProjectPipe,
-        "tasks": ProjectPipe,
+        public_todos: ProjectPipe,
+        private_todos: ProjectPipe,
+        tasks: ProjectPipe,
     }|{} = {};
 
     getProject(projectId: number, authSessionId: string): Promise<Project> {

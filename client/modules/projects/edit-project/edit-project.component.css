@@ -58,3 +58,15 @@
 .pipe-step-active {
     background-color: #F7F7F7;
 }
+
+.pipe-status-active i {
+    color: #2A8039;
+}
+
+.pipe-status-disabled i {
+    color: #FF530D;
+}
+
+.pipe-status-inactive i {
+    color: #B7B7B7;
+}

@@ -116,6 +116,7 @@ export class ProjectPipe {
     id: number;
     created_at: Date;
     type: 'public_todos' | 'private_todos' | 'tasks';
+    status: 'active' | 'disabled';
     project_fk_id: number;
     sm_sheet_id: number;
     sm_sheet_columns: {
