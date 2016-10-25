@@ -3,7 +3,7 @@ import {Component, OnInit, Input} from "@angular/core";
 @Component({
     selector: 'pipe-step-row',
     template: `
-            <div class="row bottom-lined clickable-row {{getStatusRowClass()}}" [routerLink]="routerLink" routerLinkActive="pipe-step-active">
+            <div class="row bottom-lined clickable-row {{getStatusRowClass()}}" [routerLink]="action" routerLinkActive="pipe-step-active">
                 <div class="col-xs-12">
                     <div class="pipe-header-average">
                         <i class="material-icons">{{getStatusIcon()}}</i> {{stepName}}
@@ -28,7 +28,7 @@ export class PipeStepRowComponent implements OnInit {
     @Input('step-status') stepStatus: 'completed' | 'not-completed' | 'failed';
     @Input('step-name') stepName: string;
     @Input('step-description') stepDescription: string;
-    @Input('router-link') routerLink: string;
+    @Input('action') action: string;
 
     getStatusIcon() {
         switch (this.stepStatus) {

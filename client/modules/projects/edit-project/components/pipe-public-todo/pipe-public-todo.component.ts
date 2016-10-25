@@ -1,4 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
+import {PipeConnectionService} from 'client/service/pipe-connection.service';
+import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
+import {AuthService} from 'client/service/auth.service';
 
 @Component({
     selector: 'pipe-public-todo',
@@ -7,10 +10,18 @@ import {Component, OnInit, Input} from "@angular/core";
 })
 export class PipePublicTodoComponent implements OnInit {
 
-    constructor() {
+    constructor(protected PipeConnectionService: PipeConnectionService,
+                protected MsProjectClientService: MsProjectClientService,
+                protected AuthService: AuthService) {
 
     }
 
     ngOnInit() {
+        // this.MsProjectClientService.getPipesByProjectId(this.PipeConnectionService.project.id, this.AuthService.authUser.auth_session_id)
+        //     .then(pipesList => {
+        //         console.log('pipesList', pipesList);
+        //     });
     }
+
+    // connectedPipe = null;
 }
