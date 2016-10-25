@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {MsProjectClientService} from './microservices/ms-project-client.service';
 import {AuthService} from './auth.service';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import {Project} from 'client/entities/entities';
+import {Project, ProjectPipe} from 'client/entities/entities';
 
 @Injectable()
 export class PipeConnectionService implements Resolve<{}> {
@@ -23,11 +23,21 @@ export class PipeConnectionService implements Resolve<{}> {
 
         return this.AuthService.getAuthUser()
             .then(authUser => {
-                return this.getProject(projectId, authUser.auth_session_id);
+
+                return Promise.all([
+                    this.getProject(projectId, authUser.auth_session_id),
+                    this.getPipesList(projectId, authUser.auth_session_id)
+                ]);
+
             });
     }
 
-    project: Project;
+    public project: Project;
+    public pipesListObj: {
+        "public_todos": ProjectPipe,
+        "private_todos": ProjectPipe,
+        "tasks": ProjectPipe,
+    }|{} = {};
 
     getProject(projectId: number, authSessionId: string): Promise<Project> {
         return new Promise<{}>((resolve, reject) => {
@@ -47,6 +57,23 @@ export class PipeConnectionService implements Resolve<{}> {
             }
 
             return resolve(this.project);
+        });
+    }
+
+    getPipesList(projectId: number, authSessionId: string): Promise<ProjectPipe[]> {
+        return new Promise<{}>((resolve, reject) => {
+            if (!Object.keys(this.pipesListObj).length) {
+                return this.MsProjectClientService.getPipesByProjectId(projectId, authSessionId)
+                    .then(pipesList => {
+                        pipesList.forEach((pipe: ProjectPipe) => {
+                            this.pipesListObj[pipe.type] = pipe;
+                        });
+
+                        return resolve(this.pipesListObj);
+                    })
+            }
+
+            return resolve(this.pipesListObj);
         });
     }
 }

@@ -117,5 +117,15 @@ export class ProjectPipe {
     created_at: Date;
     type: 'public_todos' | 'private_todos' | 'tasks';
     project_fk_id: number;
-    smartsheet_sheet_id: number;
+    sm_sheet_id: number;
+    sm_sheet_columns: {
+        description: number,
+        task_name: number,
+        duration: number,
+        end_datetime: number,
+        assigned_to: number,
+        start_datetime: number,
+        percentage_complete: number
+    };
+    sm_permalink: string;
 }
