@@ -1,6 +1,8 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {AuthService} from 'client/service/auth.service';
+import {PipeConnectionService} from 'client/service/pipe-connection.service';
+
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Config} from 'client/config';
 import {Project, SmartsheetSheet} from 'client/entities/entities';
@@ -13,19 +15,15 @@ import {Project, SmartsheetSheet} from 'client/entities/entities';
 export class SmartsheetConnectionPublicComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService,
+                protected PipeConnectionService: PipeConnectionService,
                 private route: ActivatedRoute,
                 private router: Router) {
     }
 
     ngOnInit() {
-        let projectId = null;
+        let project = this.PipeConnectionService.project;
 
-        // todo find better way to get route param
-        this.route.parent.parent.params.forEach((params: Params) => {
-            projectId = +params['project_id'];
-        });
-
-        this.MsProjectClientService.getConnectedSmartsheetSheetsIds(projectId, this.AuthService.authUser.auth_session_id)
+        this.MsProjectClientService.getConnectedSmartsheetSheetsIds(project.id, this.AuthService.authUser.auth_session_id)
             .then(connectedSmSheetsList => {
                 this.connectedSmSheetsIdsList = connectedSmSheetsList;
 
@@ -34,13 +32,6 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
             .then(smartsheetSheets => {
                 this.smartsheetSheets = smartsheetSheets;
             });
-
-
-        // this.getSmartsheetSheets()
-        //     .then(smartsheetSheets => this.smartsheetSheets = smartsheetSheets);
-        //
-        // this.MsProjectClientService.getProjectByid(this.route.params['project_id'], this.AuthService.authUser.auth_session_id)
-        //     .then(projects => this.project = projects.shift());
     }
 
     public project: Project|null = null;

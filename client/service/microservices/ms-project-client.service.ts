@@ -22,7 +22,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getProjectByid(projectId: number, authUserSessionId: string): Promise<[{}]> {
+    getProjectByid(projectId: number, authUserSessionId: string): Promise<Project[]> {
         return this.makeMsCall(
             'find-where',
             'GET',

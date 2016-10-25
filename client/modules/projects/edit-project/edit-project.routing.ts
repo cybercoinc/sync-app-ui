@@ -7,13 +7,15 @@ import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo
 import {SettingsPublicComponent} from './components/pipe-public-todo/settings-public/settings-public.component';
 
 import {AuthService} from 'client/service/auth.service';
+import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
 export const routes: Routes = [
     {
         path: 'projects/:project_id/edit-project',
         component: EditProjectComponent,
         resolve: {
-            authUser: AuthService
+            authUser: AuthService,
+            project: PipeConnectionService
         },
         children: [
             {
