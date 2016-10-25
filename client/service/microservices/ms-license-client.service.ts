@@ -10,12 +10,12 @@ export class MsLicenseClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-license');
     }
 
-    getLicenses(userId,authUserSessionId): Promise<> {
-        return this.makeMsCall('find-where', 'GET', {user_id: userId},authUserSessionId);
+    getLicenses(userId, authUserSessionId): Promise<> {
+        return this.makeMsCall('get-licenses', 'GET', {user_id: userId}, authUserSessionId);
     }
 
-    getInvoices(userId): Promise<>  {
-        return this.makeMsCall('get-invoices', 'GET', {user_id: userId});
+    getInvoices(userId, authUserSessionId): Promise<>  {
+        return this.makeMsCall('get-invoices', 'GET', {user_id: userId}, authUserSessionId);
     }
 
 

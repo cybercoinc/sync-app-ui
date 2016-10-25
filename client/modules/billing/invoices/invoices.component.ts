@@ -12,21 +12,21 @@ import {User} from '../../../entities/entities';
 })
 export class InvoicesComponent implements OnInit {
 
-    licensesList = [];
+    invocesArray = [];
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService, protected MsLicenseClientService: MsLicenseClientService) {
 
     }
 
     ngOnInit(): void {
-        this.getActiveLicenses();
+        this.getInvoices();
     }
 
-    getActiveLicenses() {
-        this.MsLicenseClientService.getLicenses(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
-            .then(licensesList => {
-                console.log('licensesList>>>',licensesList)
-                this.licensesList = licensesList;
+    getInvoices() {
+        this.MsLicenseClientService.getInvoices(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
+            .then(invocesArray => {
+                console.log('licensesList>>>',invocesArray)
+                this.invocesArray = invocesArray;
             });
     }
 

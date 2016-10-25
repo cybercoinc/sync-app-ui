@@ -1,0 +1,46 @@
+<div class="">
+    <div class="row sc-sidebar-container">
+        <div class="col-xs-3 col-lg-2 sc-list right-lined">
+            <div class="row bottom-lined clickable-row" [routerLink]="['billing-info']">
+                <div class="col-xs-12">
+
+                    <div class="sc-sidebar-header-med">
+                        <i class="material-icons">attach_money</i>
+                        Billing Information
+                    </div>
+                    <div class="sc-sidebar-description">
+                        Here can be some text to provide more information for this section
+                    </div>
+                </div>
+            </div>
+            <div class="row bottom-lined clickable-row" [routerLink]="['invoices']">
+                <div class="col-xs-12">
+
+                    <div class="sc-sidebar-header-med">
+                        <i class="material-icons">date_range</i>
+                        Invoices
+                    </div>
+                    <div class="sc-sidebar-description">
+
+                    </div>
+                </div>
+            </div>
+            <div class="row bottom-lined clickable-row" [routerLink]="['licenses']">
+                <div class="col-xs-12">
+                    <div class="sc-sidebar-header-med">
+                        <i class="material-icons">playlist_play</i>
+                        Licenses
+                    </div>
+                    <div class="sc-sidebar-description">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-9">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>
