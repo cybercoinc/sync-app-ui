@@ -1,6 +1,6 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
-import {SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet} from 'client/entities/entities'
+import {SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet, ProjectPipe} from 'client/entities/entities'
 
 export class MsProjectClientService extends MsClientService {
 
@@ -133,6 +133,17 @@ export class MsProjectClientService extends MsClientService {
             {
                 user_id: userId,
                 sm_sheet_id: smSheetId
+            },
+            authUserSessionId
+        );
+    }
+
+    getPipesByProjectId(projectId: number, authUserSessionId: string): Promise<ProjectPipe[]> {
+        return this.makeMsCall(
+            'get-pipes-by-project-id',
+            'GET',
+            {
+                project_id: projectId,
             },
             authUserSessionId
         );

@@ -21,6 +21,9 @@ export class EditProjectComponent implements OnInit {
     }
 
     ngOnInit() {
-        // console.log(this.PipeConnectionService.project);
+        this.MsProjectClientService.getPipesByProjectId(this.PipeConnectionService.project.id, this.AuthService.authUser.auth_session_id)
+            .then(pipesList => {
+                console.log('pipesList', pipesList);
+            });
     }
 }
