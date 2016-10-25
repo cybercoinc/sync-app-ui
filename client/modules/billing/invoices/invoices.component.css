@@ -1,3 +1,7 @@
-md-card {
-    margin-bottom: 5px;
+.sc-invoices{
+    padding-top: 10px;
+    margin-top: 10px;
+}
+.sc-invoices .panel-header{
+    background-color: darkgray;
 }
