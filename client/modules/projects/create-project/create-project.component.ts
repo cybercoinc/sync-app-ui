@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {ProcoreProject} from 'client/entities/entities';
 
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
+import {MsBillingClientService} from 'client/service/microservices/ms-billing-client.service';
 import {AuthService} from 'client/service/auth.service';
 
 @Component({
@@ -14,6 +15,7 @@ import {AuthService} from 'client/service/auth.service';
 export class CreateProjectComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService,
+                protected MsBillingClientService: MsBillingClientService,
                 private router: Router) {
     }
 
@@ -82,9 +84,17 @@ export class CreateProjectComponent implements OnInit {
             user_fk_id: this.AuthService.authUser.id
         };
 
+        let _projectId;
+
         this.MsProjectClientService.create(data, this.AuthService.authUser.auth_session_id)
             .then(projectIds => {
-                return this.router.navigate(['projects/wizard/choose-smartsheet-sheet', projectIds.shift()]);
-            });
+                _projectId = projectIds.shift();
+
+                return this.MsBillingClientService.createStartLicense(_projectId, data.name,
+                    this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
+            })
+            .then(() => {
+                return this.router.navigate(['projects/wizard/choose-smartsheet-sheet', _projectId]);
+            })
     }
 }
