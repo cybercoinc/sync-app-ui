@@ -129,4 +129,6 @@ export class ProjectPipe {
         percentage_complete: number
     };
     sm_permalink: string;
+    sm_working_days: {};
+    sm_weekends: [string];
 }

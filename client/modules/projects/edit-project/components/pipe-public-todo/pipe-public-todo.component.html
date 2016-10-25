@@ -1,8 +1,8 @@
 <div class="col-xs-3 right-lined pipe-config-steps">
-    <pipe-step-row step-status="not-completed" step-name="SmartSheet Connection" step-description=""
+    <pipe-step-row step-status="{{smConnectionStepCompleted? 'completed' : 'not-completed'}}" step-name="SmartSheet Connection" step-description=""
                    [action]="['smartsheet-connection-public']"></pipe-step-row>
 
-    <pipe-step-row step-status="not-completed" step-name="Settings" step-description=""
+    <pipe-step-row step-status="{{settingsStepCompleted? 'completed' : 'not-completed'}}" step-name="Settings" step-description=""
                    [action]="['settings-public']"></pipe-step-row>
 </div>
 
