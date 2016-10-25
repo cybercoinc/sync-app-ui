@@ -148,4 +148,31 @@ export class MsProjectClientService extends MsClientService {
             authUserSessionId
         );
     }
+
+    createPipe(projectId: number, type: 'public_todos' | 'private_todos' | 'tasks', status: 'active' | 'disabled', authUserSessionId: string): Promise<[number]> {
+        return this.makeMsCall(
+            'create-pipe',
+            'POST',
+            {
+                project_id: projectId,
+                type: type,
+                status: status,
+            },
+            authUserSessionId
+        );
+    }
+
+    updatePipe(pipeId: number, dataToSet, authUserSessionId: string): Promise<[number]> {
+        return this.makeMsCall(
+            'update-pipe',
+            'PUT',
+            {
+                pipe_id: pipeId,
+                data: dataToSet,
+            },
+            authUserSessionId
+        );
+    }
+
+
 }

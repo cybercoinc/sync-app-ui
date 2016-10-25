@@ -34,7 +34,6 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
             });
     }
 
-    public project: Project|null = null;
     public smartsheetSheets: SmartsheetSheet[]|null = null;
     public connectedSmSheetsIdsList: [number] | null = null;
     public selectedSheet: SmartsheetSheet|null = null;
@@ -79,32 +78,41 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
     }
 
     createNewSheetWithWorkspace() {
-        let procoreProjectName = this.project.name;
+        let project = this.PipeConnectionService.project;
+
+        let procoreProjectName = project.name;
         let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) : procoreProjectName;
         let newSheetName = workspaceName + ' Procore Sync';
 
-        return this.MsProjectClientService.createSmartsheetWorkspace({
-            workspaceName: workspaceName,
-            projectId: this.project.id
-        }, this.AuthService.authUser.auth_session_id)
+        let createdPipeId;
+
+        return this.MsProjectClientService.createPipe(project.id, 'public_todos', 'active', this.AuthService.authUser.auth_session_id)
+            .then(pipesIds => {
+                createdPipeId = pipesIds.shift();
+
+                return this.MsProjectClientService.createSmartsheetWorkspace({
+                    workspaceName: workspaceName,
+                    projectId: project.id // todo pass user id here?
+                }, this.AuthService.authUser.auth_session_id)
+            })
             .then(result => {
                 // creating workspace
                 const workspaceId = result.id;
 
                 return this.MsProjectClientService.createSmartsheetSheetFromTemplate({
                     workspaceId: workspaceId,
-                    projectId: this.project.id,
+                    projectId: project.id,
                     templateId: Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'),
                     sheetName: newSheetName
                 }, this.AuthService.authUser.auth_session_id);
             })
             .then(createdSheetObj => {
-                // creating sheet inside workspace
-                return this.MsProjectClientService
-                    .update(this.project.id, {
-                        sm_sheet_id: createdSheetObj.id,
-                        permalink: createdSheetObj.permalink
-                    }, this.AuthService.authUser.auth_session_id);
+
+                // todo update pipe here, not project
+                return this.MsProjectClientService.update(project.id, {
+                    sm_sheet_id: createdSheetObj.id,
+                    permalink: createdSheetObj.permalink
+                }, this.AuthService.authUser.auth_session_id);
             })
             .then(projectId => {
                 // matching columns
@@ -114,19 +122,20 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
                     }, this.AuthService.authUser.auth_session_id);
             })
             .then(projectId => {
-                return this.router.navigate(['projects/wizard/set-working-week-days', projectId]);
-            })
+                return this.router.navigate(['edit-project/pipe-public-todo/settings-public', projectId]);
+            });
     }
 
     goToNextStep() {
-        this.MsProjectClientService
-            .update(this.project.id, {
-                sm_sheet_id: this.selectedSheet.id,
-                permalink: this.selectedSheet.permalink
-            }, this.AuthService.authUser.auth_session_id)
-            .then(projectId => {
-                return this.router.navigate(['projects/wizard/match-sheet-columns', projectId]);
-            });
+
+        // this.MsProjectClientService
+        //     .update(this.project.id, {
+        //         sm_sheet_id: this.selectedSheet.id,
+        //         permalink: this.selectedSheet.permalink
+        //     }, this.AuthService.authUser.auth_session_id)
+        //     .then(projectId => {
+        //         return this.router.navigate(['projects/wizard/match-sheet-columns', projectId]);
+        //     });
 
     }
 }
