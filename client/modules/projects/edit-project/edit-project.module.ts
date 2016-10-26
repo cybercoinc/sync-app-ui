@@ -6,11 +6,14 @@ import {MaterialModule} from '@angular/material';
 import {editProjectRouting} from './edit-project.routing';
 
 import {EditProjectComponent} from './edit-project.component';
-import {PipeRowComponent} from './components/pipe-row.component';
-import {PipeStepRowComponent} from './components/pipe-step-row.component';
+import {PipeRowComponent} from './components/shared/pipe-row.component';
+import {PipeStepRowComponent} from './components/shared/pipe-step-row.component';
 import {PipePublicTodoComponent} from './components/pipe-public-todo/pipe-public-todo.component';
 import {PipePrivateTodoComponent} from './components/pipe-private-todo/pipe-private-todo.component';
+
 import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo/smartsheet-connection-public/smartsheet-connection-public.component';
+import {SmartsheetConnectionComponent} from './components/shared/smartsheet-connection/smartsheet-connection.component';
+
 import {SettingsPublicComponent} from './components/pipe-public-todo/settings-public/settings-public.component';
 
 @NgModule({
@@ -29,6 +32,7 @@ import {SettingsPublicComponent} from './components/pipe-public-todo/settings-pu
         PipePublicTodoComponent,
         PipePrivateTodoComponent,
         SmartsheetConnectionPublicComponent,
+        SmartsheetConnectionComponent,
         SettingsPublicComponent,
     ],
     bootstrap: [EditProjectComponent],
