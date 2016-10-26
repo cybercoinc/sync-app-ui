@@ -1,7 +1,7 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
 import {User} from 'client/entities/entities';
-вк
+
 export class MsLicenseClientService extends MsClientService {
 
     constructor(protected Http: Http) {
