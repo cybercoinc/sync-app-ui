@@ -13,9 +13,11 @@
             <pipe-row status="{{pipesListObj.public_todos? pipesListObj.public_todos.status : 'inactive'}}"
                       router-link="pipe-public-todo" material-icon="event_available" pipe-title="Public Todos"
                       description="Description."></pipe-row>
+
             <pipe-row status="{{pipesListObj.private_todos? pipesListObj.private_todos.status : 'inactive'}}"
                       router-link="pipe-private-todo" material-icon="verified_user" pipe-title="Private Todos"
                       description="Another description for pipe here."></pipe-row>
+
             <pipe-row material-icon="settings" pipe-title="General Settings"
                       description="Description for project settings."></pipe-row>
 

@@ -76,4 +76,13 @@ export class PipeConnectionService implements Resolve<{}> {
             return resolve(this.pipesListObj);
         });
     }
+
+    refreshPipesList() {
+        return this.MsProjectClientService.getPipesByProjectId(this.project.id, this.AuthService.authUser.auth_session_id)
+            .then(pipesList => {
+                pipesList.forEach((pipe: ProjectPipe) => {
+                    this.pipesListObj[pipe.type] = pipe;
+                });
+            });
+    }
 }

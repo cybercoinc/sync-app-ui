@@ -116,8 +116,11 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
                 // matching columns
                 return this.MsProjectClientService.matchDefaultSheetColumns(project.id, createdPipeId, this.AuthService.authUser.auth_session_id);
             })
-            .then(projectId => {
-                return this.router.navigate(['projects', projectId, 'edit-project', 'pipe-public-todo', 'settings-public']);
+            .then(() => {
+                return this.PipeConnectionService.refreshPipesList();
+            })
+            .then(() => {
+                return this.router.navigate(['projects', project.id, 'edit-project', 'pipe-public-todo', 'settings-public']);
             });
     }
 

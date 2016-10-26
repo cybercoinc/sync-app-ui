@@ -18,21 +18,10 @@ export class PipePublicTodoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.pipeObj = this.PipeConnectionService.pipesListObj['public_todos'];
-
-        if (this.pipeObj) {
-            if (this.pipeObj.sm_sheet_id) {
-                this.smConnectionStepCompleted = true;
-            }
-
-            if (this.pipeObj.sm_working_days && this.pipeObj.sm_weekends) {
-                this.smConnectionStepCompleted = true;
-            }
-        }
+        this.pipesListObj = this.PipeConnectionService.pipesListObj;
     }
 
-    protected pipeObj: ProjectPipe;
+    protected pipesListObj;
 
-    protected smConnectionStepCompleted: boolean = false;
-    protected settingsStepCompleted: boolean = false;
+    // this.pipeObj = this.PipeConnectionService.pipesListObj['public_todos'];
 }
