@@ -1,11 +1,15 @@
 import {Routes, RouterModule} from '@angular/router';
 
 import {EditProjectComponent} from './edit-project.component';
+
 import {PipePublicTodoComponent} from './components/pipe-public-todo/pipe-public-todo.component';
 import {PipePrivateTodoComponent} from './components/pipe-private-todo/pipe-private-todo.component';
 
-import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo/smartsheet-connection-public/smartsheet-connection-public.component';
-import {PipeSettingsPublicComponent} from './components/pipe-public-todo/pipe-settings-public/pipe-settings-public.component';
+import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo/smartsheet-connection-public.component';
+import {PipeSettingsPublicComponent} from './components/pipe-public-todo/pipe-settings-public.component';
+
+import {SmartsheetConnectionPrivateComponent} from './components/pipe-private-todo/smartsheet-connection-private.component';
+import {PipeSettingsPrivateComponent} from './components/pipe-private-todo/pipe-settings-private.component';
 
 import {AuthService} from 'client/service/auth.service';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
@@ -26,7 +30,23 @@ export const routes: Routes = [
 
             {
                 path: 'pipe-private-todo',
-                component: PipePrivateTodoComponent
+                component: PipePrivateTodoComponent,
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'smartsheet-connection-private'
+                    },
+
+                    {
+                        path: 'smartsheet-connection-private',
+                        component: SmartsheetConnectionPrivateComponent
+                    },
+
+                    {
+                        path: 'settings-private',
+                        component: PipeSettingsPrivateComponent,
+                    },
+                ]
             },
 
             {
@@ -47,8 +67,6 @@ export const routes: Routes = [
                         path: 'settings-public',
                         component: PipeSettingsPublicComponent,
                     },
-
-
                 ]
             },
         ]

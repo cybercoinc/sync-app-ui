@@ -21,6 +21,9 @@ export class SmartsheetConnectionComponent implements OnInit {
                 private router: Router) {
     }
 
+    @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
+    @Input('redirect-route') redirectRoute;
+
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
 
@@ -93,7 +96,7 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         // create new pipe
         return this.MsProjectClientService.createPipe(project.id, {
-            type: PIPE_TYPE_PUBLIC_TODOS,
+            type: this.pipeType,
             status: PIPE_STATUS_DISABLED
         }, this.AuthService.authUser.auth_session_id)
             .then(pipesIds => {
@@ -124,7 +127,7 @@ export class SmartsheetConnectionComponent implements OnInit {
                 return this.PipeConnectionService.refreshPipesList();
             })
             .then(() => {
-                return this.router.navigate(['projects', project.id, 'edit-project', 'pipe-public-todo', 'settings-public']);
+                return this.router.navigate(this.redirectRoute);
             });
     }
 }

@@ -22,6 +22,9 @@ export class PipeSettingsComponent implements OnInit {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
     }
 
+    @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
+    @Input('redirect-route') redirectRoute;
+
     protected pipesListObj;
 
     public workingDays = {
@@ -49,7 +52,7 @@ export class PipeSettingsComponent implements OnInit {
 
     saveAndContinue() {
         let project = this.PipeConnectionService.project;
-        let pipe = this.pipesListObj.public_todos;
+        let pipe = this.pipesListObj[this.pipeType];
 
         return this.MsProjectClientService.updatePipe(pipe.id, {
             sm_working_days: this.model.workingDays,

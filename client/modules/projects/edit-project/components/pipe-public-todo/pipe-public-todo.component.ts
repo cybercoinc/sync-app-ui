@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from "@angular/core";
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
 import {AuthService} from 'client/service/auth.service';
+import {PIPE_TYPE_PUBLIC_TODOS} from 'client/entities/entities';
 import {ProjectPipe} from 'client/entities/entities';
 
 @Component({
@@ -14,7 +15,6 @@ export class PipePublicTodoComponent implements OnInit {
     constructor(protected PipeConnectionService: PipeConnectionService,
                 protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService) {
-
     }
 
     ngOnInit() {
@@ -22,6 +22,5 @@ export class PipePublicTodoComponent implements OnInit {
     }
 
     protected pipesListObj;
-
-    // this.pipeObj = this.PipeConnectionService.pipesListObj['public_todos'];
+    protected pipeType = PIPE_TYPE_PUBLIC_TODOS;
 }

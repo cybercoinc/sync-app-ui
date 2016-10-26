@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="!pipesListObj.public_todos?.sm_sheet_id">
+<div class="container-fluid" *ngIf="!pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
         <div class="col-xs-12">
             <h5>Choose Smartsheet sheet you want to connect or
@@ -42,12 +42,12 @@
     </div>
 </div>
 
-<div class="container-fluid" *ngIf="pipesListObj.public_todos?.sm_sheet_id">
+<div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
         <div class="col-xs-12">
+            <h5> SmartsheetSheet connected: </h5>
             <div *ngFor="let sheet of smartsheetSheets">
-                <div *ngIf="sheet.id === pipesListObj.public_todos.sm_sheet_id">
-                    <h5> SmartsheetSheet connected: </h5>
+                <div *ngIf="sheet.id === pipesListObj[pipeType].sm_sheet_id">
                     <md-radio-button [disabled]="true">
                         {{sheet.name}}
                     </md-radio-button>

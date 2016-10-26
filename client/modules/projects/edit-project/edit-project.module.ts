@@ -11,10 +11,13 @@ import {PipeStepRowComponent} from './components/shared/pipe-step-row.component'
 import {PipePublicTodoComponent} from './components/pipe-public-todo/pipe-public-todo.component';
 import {PipePrivateTodoComponent} from './components/pipe-private-todo/pipe-private-todo.component';
 
-import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo/smartsheet-connection-public/smartsheet-connection-public.component';
+import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo/smartsheet-connection-public.component';
 import {SmartsheetConnectionComponent} from './components/shared/smartsheet-connection/smartsheet-connection.component';
 
-import {PipeSettingsPublicComponent} from './components/pipe-public-todo/pipe-settings-public/pipe-settings-public.component';
+import {SmartsheetConnectionPrivateComponent} from './components/pipe-private-todo/smartsheet-connection-private.component';
+import {PipeSettingsPrivateComponent} from './components/pipe-private-todo/pipe-settings-private.component';
+
+import {PipeSettingsPublicComponent} from './components/pipe-public-todo/pipe-settings-public.component';
 import {PipeSettingsComponent} from './components/shared/pipe-settings/pipe-settings.component';
 
 @NgModule({
@@ -35,6 +38,10 @@ import {PipeSettingsComponent} from './components/shared/pipe-settings/pipe-sett
 
         SmartsheetConnectionPublicComponent,
         SmartsheetConnectionComponent,
+
+        SmartsheetConnectionPrivateComponent,
+        PipeSettingsPrivateComponent,
+
         PipeSettingsPublicComponent,
         PipeSettingsComponent,
     ],
