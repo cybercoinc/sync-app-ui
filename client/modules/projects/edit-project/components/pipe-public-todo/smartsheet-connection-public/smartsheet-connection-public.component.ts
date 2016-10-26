@@ -6,6 +6,7 @@ import {PipeConnectionService} from 'client/service/pipe-connection.service';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Config} from 'client/config';
 import {Project, SmartsheetSheet} from 'client/entities/entities';
+import {PIPE_TYPE_PUBLIC_TODOS, PIPE_STATUS_DISABLED} from 'client/entities/entities';
 
 @Component({
     selector: "smartsheet-connection-public",
@@ -86,40 +87,34 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
 
         let createdPipeId;
 
-        return this.MsProjectClientService.createPipe(project.id, 'public_todos', 'active', this.AuthService.authUser.auth_session_id)
+        // create new pipe
+        return this.MsProjectClientService.createPipe(project.id, {
+            type: PIPE_TYPE_PUBLIC_TODOS,
+            status: PIPE_STATUS_DISABLED
+        }, this.AuthService.authUser.auth_session_id)
             .then(pipesIds => {
                 createdPipeId = pipesIds.shift();
 
-                return this.MsProjectClientService.createSmartsheetWorkspace({
-                    workspaceName: workspaceName,
-                    projectId: project.id // todo pass user id here?
-                }, this.AuthService.authUser.auth_session_id)
+                // create new workspace at smartsheet
+                return this.MsProjectClientService
+                    .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authUser.auth_session_id)
             })
-            .then(result => {
-                // creating workspace
-                const workspaceId = result.id;
-
-                return this.MsProjectClientService.createSmartsheetSheetFromTemplate({
-                    workspaceId: workspaceId,
-                    projectId: project.id,
-                    templateId: Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'),
-                    sheetName: newSheetName
-                }, this.AuthService.authUser.auth_session_id);
+            .then(workspace => {
+                // create new sheet inside workspace
+                return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
+                    project.id, workspace.id, Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'), newSheetName, this.AuthService.authUser.auth_session_id
+                );
             })
             .then(createdSheetObj => {
-
-                // todo update pipe here, not project
-                return this.MsProjectClientService.update(project.id, {
+                // updating pipe
+                return this.MsProjectClientService.updatePipe(createdPipeId, {
                     sm_sheet_id: createdSheetObj.id,
-                    permalink: createdSheetObj.permalink
+                    sm_permalink: createdSheetObj.permalink
                 }, this.AuthService.authUser.auth_session_id);
             })
-            .then(projectId => {
+            .then(pipeId => {
                 // matching columns
-                return this.MsProjectClientService
-                    .matchDefaultSheetColumns({
-                        projectId: projectId
-                    }, this.AuthService.authUser.auth_session_id);
+                return this.MsProjectClientService.matchDefaultSheetColumns(project.id, createdPipeId, this.AuthService.authUser.auth_session_id);
             })
             .then(projectId => {
                 return this.router.navigate(['edit-project/pipe-public-todo/settings-public', projectId]);

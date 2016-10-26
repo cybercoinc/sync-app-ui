@@ -1,6 +1,7 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
-import {SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet, ProjectPipe} from 'client/entities/entities'
+import {SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet, ProjectPipe} from 'client/entities/entities';
+import {PIPE_TYPE_PUBLIC_TODOS} from 'client/entities/entities';
 
 export class MsProjectClientService extends MsClientService {
 
@@ -77,51 +78,42 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetWorkspace(data: {
-        workspaceName: string,
-        projectId: number
-    }, authUserSessionId: string): Promise<{
+    createSmartsheetWorkspace(projectId: number, workspaceName: string, authUserSessionId: string): Promise<{
         id: number,
         permalink: string
     }> {
         return this.makeMsCall(
             'create-smartsheet-workspace',
             'POST',
-            data,
+            {
+                workspace_name: workspaceName,
+                project_id: projectId
+            },
             authUserSessionId
         );
     }
 
-    createSmartsheetSheetFromTemplate(data: {
-        workspaceId: number,
-        projectId: number,
-        templateId: number,
-        sheetName: string
-    }, authUserSessionId: string): Promise<{
-        accessLevel: string,
-        id: number,
-        name: string,
-        permalink: string
-    }> {
+    createSmartsheetSheetFromTemplate(projectId: number, workspaceId: number, templateId: number, sheetName: string, authUserSessionId: string): Promise<SmartsheetSheet> {
         return this.makeMsCall(
             'create-sheet-from-template-in-workspace',
-            'POST',
-            data,
+            'POST', {
+                project_id: projectId,
+                workspace_id: workspaceId,
+                template_id: templateId,
+                sheet_name: sheetName
+            },
             authUserSessionId
         );
     }
 
-    /**
-     *
-     * @param data
-     * @param authUserSessionId
-     * @return {Promise<number>} project id
-     */
-    matchDefaultSheetColumns(data: {projectId: number}, authUserSessionId: string): Promise<number> {
+    matchDefaultSheetColumns(projectId: number, pipeId: number, authUserSessionId: string): Promise<number> {
         return this.makeMsCall(
             'match-default-sheet-columns',
             'POST',
-            data,
+            {
+                project_id: projectId,
+                pipe_id: pipeId
+            },
             authUserSessionId
         );
     }
@@ -149,13 +141,13 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createPipe(projectId: number, type: 'public_todos' | 'private_todos' | 'tasks', status: 'active' | 'disabled', authUserSessionId: string): Promise<[number]> {
+    createPipe(projectId: number, dataToSet, authUserSessionId: string): Promise<[number]> {
         return this.makeMsCall(
             'create-pipe',
             'POST',
             {
                 project_id: projectId,
-                type: type,
+                data: dataToSet,
                 status: status,
             },
             authUserSessionId

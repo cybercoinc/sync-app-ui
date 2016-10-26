@@ -132,3 +132,10 @@ export class ProjectPipe {
     sm_working_days: {};
     sm_weekends: [string];
 }
+
+export const PIPE_TYPE_PUBLIC_TODOS = 'public_todos';
+export const PIPE_TYPE_PRIVATE_TODOS = 'private_todos';
+export const PIPE_TYPE_TASKS = 'tasks';
+
+export const PIPE_STATUS_ACTIVE = 'active';
+export const PIPE_STATUS_DISABLED = 'disabled';
