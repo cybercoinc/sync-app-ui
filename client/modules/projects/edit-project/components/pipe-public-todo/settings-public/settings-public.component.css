@@ -19,6 +19,12 @@ md-radio-button {
 textarea {
     width: 100%;
     border-radius: 2px;
+    border: 1px solid grey;
     resize: vertical;
     height: 100px;
+}
+
+textarea:focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
 }
