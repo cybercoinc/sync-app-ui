@@ -83,6 +83,8 @@ export class PipeConnectionService implements Resolve<{}> {
                 pipesList.forEach((pipe: ProjectPipe) => {
                     this.pipesListObj[pipe.type] = pipe;
                 });
+
+                return this.pipesListObj;
             });
     }
 }
