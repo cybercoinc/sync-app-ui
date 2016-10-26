@@ -3,8 +3,9 @@ import {Routes, RouterModule} from '@angular/router';
 import {EditProjectComponent} from './edit-project.component';
 import {PipePublicTodoComponent} from './components/pipe-public-todo/pipe-public-todo.component';
 import {PipePrivateTodoComponent} from './components/pipe-private-todo/pipe-private-todo.component';
+
 import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo/smartsheet-connection-public/smartsheet-connection-public.component';
-import {SettingsPublicComponent} from './components/pipe-public-todo/settings-public/settings-public.component';
+import {PipeSettingsPublicComponent} from './components/pipe-public-todo/pipe-settings-public/pipe-settings-public.component';
 
 import {AuthService} from 'client/service/auth.service';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
@@ -44,7 +45,7 @@ export const routes: Routes = [
 
                     {
                         path: 'settings-public',
-                        component: SettingsPublicComponent,
+                        component: PipeSettingsPublicComponent,
                     },
 
 

@@ -1,25 +1,19 @@
 import {Component, OnInit, Input} from "@angular/core";
 
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
-import {MsSyncClientService} from "client/service/microservices/ms-sync-client.service";
 import {AuthService} from 'client/service/auth.service';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {Config} from 'client/config';
-import {Project, SmartsheetSheet} from 'client/entities/entities';
-
 @Component({
-    selector: "settings-public",
-    templateUrl: 'client/modules/projects/edit-project/components/pipe-public-todo/settings-public/settings-public.component.html',
+    selector: 'pipe-settings',
+    templateUrl: 'client/modules/projects/edit-project/components/shared/pipe-settings/pipe-settings.component.html',
     styleUrls: [
-        'client/modules/projects/edit-project/components/pipe-public-todo/settings-public/settings-public.component.css',
+        'client/modules/projects/edit-project/components/shared/pipe-settings/pipe-settings.component.css',
         'client/modules/projects/edit-project/edit-project.component.css',
     ],
 })
-export class SettingsPublicComponent implements OnInit {
+export class PipeSettingsComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
-                protected MsSyncClientService: MsSyncClientService,
                 protected PipeConnectionService: PipeConnectionService,
                 protected AuthService: AuthService) {
     }
