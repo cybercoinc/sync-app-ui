@@ -10,9 +10,14 @@
                 </div>
             </div>
 
-            <pipe-row status="{{pipesListObj.public_todos? pipesListObj.public_todos.status : 'inactive'}}" router-link="pipe-public-todo" material-icon="event_available" pipe-title="Public Todos" description="Description."></pipe-row>
-            <pipe-row status="{{pipesListObj.private_todos? pipesListObj.private_todos.status : 'inactive'}}" router-link="pipe-private-todo" material-icon="verified_user" pipe-title="Private Todos" description="Another description for pipe here."></pipe-row>
-            <pipe-row material-icon="settings" pipe-title="General Settings" description="Description for project settings."></pipe-row>
+            <pipe-row status="{{pipesListObj.public_todos? pipesListObj.public_todos.status : 'inactive'}}"
+                      router-link="pipe-public-todo" material-icon="event_available" pipe-title="Public Todos"
+                      description="Description."></pipe-row>
+            <pipe-row status="{{pipesListObj.private_todos? pipesListObj.private_todos.status : 'inactive'}}"
+                      router-link="pipe-private-todo" material-icon="verified_user" pipe-title="Private Todos"
+                      description="Another description for pipe here."></pipe-row>
+            <pipe-row material-icon="settings" pipe-title="General Settings"
+                      description="Description for project settings."></pipe-row>
 
         </div>
         <!-- end PIPES LIST -->
@@ -24,6 +29,10 @@
                 <div class="col-xs-12">
                     <div class="pipe-header-large">Current status: disabled
                         <a href="" class="btn btn-success">enable</a>
+
+                        <!-- BUSY INDICATOR TODO IMPLEMENT LATER -->
+                        <!--<md-progress-circle style="height: 30px; margin-top: 5px; float: right;" mode="indeterminate"></md-progress-circle>-->
+                        <!-- end BUSY INDICATOR -->
                     </div>
                 </div>
             </div>
