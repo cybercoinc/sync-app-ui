@@ -117,7 +117,7 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
                 return this.MsProjectClientService.matchDefaultSheetColumns(project.id, createdPipeId, this.AuthService.authUser.auth_session_id);
             })
             .then(projectId => {
-                return this.router.navigate(['edit-project/pipe-public-todo/settings-public', projectId]);
+                return this.router.navigate(['projects', projectId, 'edit-project', 'pipe-public-todo', 'settings-public']);
             });
     }
 
