@@ -11,7 +11,7 @@ import {MsProjectClientService} from './service/microservices/ms-project-client.
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
 import {MsSyncClientService} from './service/microservices/ms-sync-client.service';
 import {MsLicenseClientService} from './service/microservices/ms-license-client.service';
-import {MsBillingClientService} from './service/microservices/ms-billing-client.service';
+
 import {AuthService} from './service/auth.service';
 import {PipeConnectionService} from './service/pipe-connection.service';
 import {AuthGuardService} from './service/auth-guard.service';
@@ -44,7 +44,6 @@ import {BillingModule} from 'client/modules/billing/billing.module';
         MsLicenseClientService,
         MsSyncClientService,
         PipeConnectionService,
-        MsBillingClientService
     ],
 
     declarations: [

@@ -4,7 +4,8 @@ import {Router} from '@angular/router';
 import {ProcoreProject} from 'client/entities/entities';
 
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
-import {MsBillingClientService} from 'client/service/microservices/ms-billing-client.service';
+import {MsLicenseClientService} from "../../../service/microservices/ms-license-client.service";
+
 import {AuthService} from 'client/service/auth.service';
 
 @Component({
@@ -15,7 +16,7 @@ import {AuthService} from 'client/service/auth.service';
 export class CreateProjectComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService,
-                protected MsBillingClientService: MsBillingClientService,
+                protected MsLicenseClientService: MsLicenseClientService,
                 private router: Router) {
     }
 
@@ -90,7 +91,7 @@ export class CreateProjectComponent implements OnInit {
             .then(projectIds => {
                 _projectId = projectIds.shift();
 
-                return this.MsBillingClientService.createStartLicense(_projectId, data.name,
+                return this.MsLicenseClientService.createStartLicense(_projectId, data.name,
                     this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
             })
             .then(() => {
