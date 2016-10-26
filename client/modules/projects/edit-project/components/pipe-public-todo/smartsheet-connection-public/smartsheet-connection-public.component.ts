@@ -22,6 +22,8 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.pipesListObj = this.PipeConnectionService.pipesListObj;
+
         let project = this.PipeConnectionService.project;
 
         this.MsProjectClientService.getConnectedSmartsheetSheetsIds(project.id, this.AuthService.authUser.auth_session_id)
@@ -38,6 +40,8 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
     public smartsheetSheets: SmartsheetSheet[]|null = null;
     public connectedSmSheetsIdsList: [number] | null = null;
     public selectedSheet: SmartsheetSheet|null = null;
+
+    protected pipesListObj;
 
     protected filterTimeout;
 
@@ -122,18 +126,5 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
             .then(() => {
                 return this.router.navigate(['projects', project.id, 'edit-project', 'pipe-public-todo', 'settings-public']);
             });
-    }
-
-    goToNextStep() {
-
-        // this.MsProjectClientService
-        //     .update(this.project.id, {
-        //         sm_sheet_id: this.selectedSheet.id,
-        //         permalink: this.selectedSheet.permalink
-        //     }, this.AuthService.authUser.auth_session_id)
-        //     .then(projectId => {
-        //         return this.router.navigate(['projects/wizard/match-sheet-columns', projectId]);
-        //     });
-
     }
 }
