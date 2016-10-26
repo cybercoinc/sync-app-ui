@@ -19,6 +19,16 @@
     vertical-align: middle;
 }
 
+.pipe-step-header-large {
+    font-size: 24px;
+}
+
+.pipe-step-description {
+    font-size: 12px;
+    color: grey;
+    margin-bottom: 10px;
+}
+
 .pipe-header-average i {
     margin-right: 10px;
     font-size: 30px;

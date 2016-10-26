@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="!pipesListObj.public_todos">
+<div class="container-fluid" *ngIf="!pipesListObj.public_todos?.sm_sheet_id">
     <div class="row">
         <div class="col-xs-12">
             <h5>Choose Smartsheet sheet you want to connect or
@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<div class="container-fluid" *ngIf="pipesListObj.public_todos">
+<div class="container-fluid" *ngIf="pipesListObj.public_todos?.sm_sheet_id">
     <div class="row">
         <div class="col-xs-12">
             <div *ngFor="let sheet of smartsheetSheets">
