@@ -25,44 +25,7 @@
         <!-- end PIPES LIST -->
 
         <div class="col-xs-9 col-lg-10">
-
-            <!-- STATUS ROW -->
-            <div class="row bottom-lined">
-                <div class="col-xs-12">
-                    <div class="pipe-header-large">
-                        <div style="display: block; float: left; margin-right: 20px;">Current status:
-                            {{pipesListObj?.public_todos?.status || 'inactive'}}
-                        </div>
-
-                        <div *ngIf="pipesListObj.public_todos" style="display: block;">
-
-                            <div *ngIf="(pipesListObj.public_todos?.status != 'active')"
-                                 style="display: block; float: left">
-                                <a (click)="enablePipe()"
-                                   [class.disabled]="!(pipesListObj.public_todos?.sm_sheet_id && pipesListObj.public_todos?.sm_working_days)"
-                                   class="btn btn-success">enable</a>
-                            </div>
-
-                            <div *ngIf="(pipesListObj.public_todos?.status == 'active')"
-                                 style="display: block; float: left">
-                                <a (click)="disablePipe()"
-                                   class="btn btn-danger">disable</a>
-                            </div>
-                        </div>
-
-                        <!-- BUSY INDICATOR TODO IMPLEMENT LATER -->
-                        <!--<md-progress-circle style="height: 30px; margin-top: 5px; float: right;" mode="indeterminate"></md-progress-circle>-->
-                        <!-- end BUSY INDICATOR -->
-                    </div>
-                </div>
-            </div>
-            <!-- end STATUS ROW -->
-
-            <div class="row">
-                <div class="inner-outlet">
-                    <router-outlet></router-outlet>
-                </div>
-            </div>
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

@@ -32,34 +32,4 @@ export class EditProjectComponent implements OnInit {
 
     protected pipesListObj;
     protected project;
-
-    enablePipe() {
-        let pipe = this.pipesListObj.public_todos ? this.pipesListObj.public_todos : null;
-
-        if (!pipe) {
-            return false;
-        }
-
-        this.MsProjectClientService.updatePipe(pipe.id, {
-            status: PIPE_STATUS_ACTIVE
-        }, this.AuthService.authUser.auth_session_id)
-            .then(() => {
-                return this.PipeConnectionService.refreshPipesList();
-            });
-    }
-
-    disablePipe() {
-        let pipe = this.pipesListObj.public_todos ? this.pipesListObj.public_todos : null;
-
-        if (!pipe) {
-            return false;
-        }
-
-        this.MsProjectClientService.updatePipe(pipe.id, {
-            status: PIPE_STATUS_DISABLED
-        }, this.AuthService.authUser.auth_session_id)
-            .then(() => {
-                return this.PipeConnectionService.refreshPipesList();
-            });
-    }
 }

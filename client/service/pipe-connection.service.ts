@@ -3,6 +3,7 @@ import {MsProjectClientService} from './microservices/ms-project-client.service'
 import {AuthService} from './auth.service';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {Project, ProjectPipe} from 'client/entities/entities';
+import {PIPE_STATUS_ACTIVE, PIPE_STATUS_DISABLED} from 'client/entities/entities';
 
 @Injectable()
 export class PipeConnectionService implements Resolve<{}> {
@@ -85,6 +86,24 @@ export class PipeConnectionService implements Resolve<{}> {
                 });
 
                 return this.pipesListObj;
+            });
+    }
+
+    enablePipe(pipeId: number) {
+        this.MsProjectClientService.updatePipe(pipeId, {
+            status: PIPE_STATUS_ACTIVE
+        }, this.AuthService.authUser.auth_session_id)
+            .then(() => {
+                return this.refreshPipesList();
+            });
+    }
+
+    disablePipe(pipeId) {
+        this.MsProjectClientService.updatePipe(pipeId, {
+            status: PIPE_STATUS_DISABLED
+        }, this.AuthService.authUser.auth_session_id)
+            .then(() => {
+                return this.refreshPipesList();
             });
     }
 }
