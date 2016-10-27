@@ -118,6 +118,18 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    saveMatchedColumns(pipeId: number, matchedColumns, authUserSessionId: string): Promise<number> {
+        return this.makeMsCall(
+            'save-matched-columns',
+            'POST',
+            {
+                pipe_id: pipeId,
+                matched_columns: matchedColumns
+            },
+            authUserSessionId
+        );
+    }
+
     getSmartsheetSheetColumns(userId: number, smSheetId: number, authUserSessionId: string): Promise<[SmartsheetSheetColumn]> {
         return this.makeMsCall(
             'get-smartsheet-sheet-columns',

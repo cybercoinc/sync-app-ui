@@ -23,7 +23,7 @@
                 </h5>
 
                 <div *ngFor="let sheet of smartsheetSheets">
-                    <md-radio-button [disabled]="sheet.is_connected" value="{{sheet.id}}"
+                    <md-radio-button [disabled]="sheet.is_connected || columnsMatchingIsVisible" value="{{sheet.id}}"
                                      (click)="chooseExistingSheet(sheet)">
                         {{sheet.name}}
                         <div class="is-connected" *ngIf="checkIfAlreadyConnected(sheet)">is connected</div>
@@ -36,13 +36,13 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <a [class.disabled]="!selectedSheet" class="btn btn-success" (click)="showColumnsMatching()">Select and continue</a>
-            <a class="btn btn-default" href="#">cancel</a>
+            <a [class.disabled]="!selectedSheet || columnsMatchingIsVisible" class="btn btn-success" (click)="showColumnsMatching()">Select and continue</a>
+            <a [class.disabled]="true" class="btn btn-default" href="#">cancel</a>
         </div>
     </div>
 
     <br>
-    <columns-matching *ngIf="selectedSheet" sheet-id="{{selectedSheet.id}}"></columns-matching>
+    <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}" (columnsMatched)="onColumnsMatched($event)"></columns-matching>
 </div>
 
 <div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">

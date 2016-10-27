@@ -48,6 +48,8 @@ export class SmartsheetConnectionComponent implements OnInit {
 
     protected filterTimeout;
 
+    protected columnsMatchingIsVisible: boolean = false;
+
     filterProjects(inputName: string) {
         if (this.filterTimeout) {
             window.clearTimeout(this.filterTimeout);
@@ -95,10 +97,7 @@ export class SmartsheetConnectionComponent implements OnInit {
         let createdPipeId;
 
         // create new pipe
-        return this.MsProjectClientService.createPipe(project.id, {
-            type: this.pipeType,
-            status: PIPE_STATUS_DISABLED
-        }, this.AuthService.authUser.auth_session_id)
+        return this.createNewPipe()
             .then(pipesIds => {
                 createdPipeId = pipesIds.shift();
 
@@ -132,6 +131,58 @@ export class SmartsheetConnectionComponent implements OnInit {
     }
 
     showColumnsMatching() {
-        console.log(this.selectedSheet);
+        this.columnsMatchingIsVisible = true;
+    }
+
+    onColumnsMatched(columnsObj) {
+        let project = this.PipeConnectionService.project;
+
+        let procoreProjectName = project.name;
+        let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) : procoreProjectName;
+        let newSheetName = workspaceName + ' Procore Sync';
+
+        let createdPipeId;
+
+        // create new pipe
+        return this.createNewPipe()
+            .then(pipesIds => {
+                createdPipeId = pipesIds.shift();
+
+                // create new workspace at smartsheet
+                return this.MsProjectClientService
+                    .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authUser.auth_session_id)
+            })
+            .then(workspace => {
+                // create new sheet inside workspace
+                return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
+                    project.id, workspace.id, Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'), newSheetName, this.AuthService.authUser.auth_session_id
+                );
+            })
+            .then(createdSheetObj => {
+                // updating pipe
+                return this.MsProjectClientService.updatePipe(createdPipeId, {
+                    sm_sheet_id: createdSheetObj.id,
+                    sm_permalink: createdSheetObj.permalink
+                }, this.AuthService.authUser.auth_session_id);
+            })
+            .then(pipeId => {
+                // matching columns
+                return this.MsProjectClientService.saveMatchedColumns(createdPipeId, columnsObj, this.AuthService.authUser.auth_session_id);
+            })
+            .then(() => {
+                return this.PipeConnectionService.refreshPipesList();
+            })
+            .then(() => {
+                return this.router.navigate(this.redirectRoute);
+            });
+    }
+
+    createNewPipe(): Promise<[number]> {
+        let project = this.PipeConnectionService.project;
+
+        return this.MsProjectClientService.createPipe(project.id, {
+            type: this.pipeType,
+            status: PIPE_STATUS_DISABLED
+        }, this.AuthService.authUser.auth_session_id)
     }
 }
