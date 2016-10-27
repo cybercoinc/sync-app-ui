@@ -95,7 +95,7 @@ export class CreateProjectComponent implements OnInit {
                     this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
             })
             .then(() => {
-                return this.router.navigate(['projects/wizard/choose-smartsheet-sheet', _projectId]);
+                return this.router.navigate(['projects', _projectId, 'edit-project']);
             })
     }
 }
