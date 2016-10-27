@@ -25,7 +25,12 @@ export class User {
 
 export class SyncSession {
     created_at: Date;
-    project_fk_id: number;
+    project_fk_id: {
+        id: number;
+        kind: string;
+        namespace: string;
+        path: string|number[]
+    };
     started_by: 'cron' | 'user';
     status: 'created' | 'completed';
     sync_timte: {
@@ -55,7 +60,12 @@ export class Item {
 export class ItemChanges {
     created_at: Date;
     source: 'smartsheet' | 'procore';
-    sync_session_fk_id: number;
+    sync_session_fk_id: {
+        id: number;
+        kind: string;
+        namespace: string;
+        path: string|number[]
+    };
     type: 'created_one|changed_one|deleted_one';
     data: {
         item: Item,
@@ -86,7 +96,12 @@ export class Project {
     name: string;
     status: 'active'  | 'inactive';
     procore_company_id: number;
-    user_fk_id: number
+    user_fk_id: {
+        id: number;
+        kind: string;
+        namespace: string;
+        path: string|number[]
+    }
 }
 
 export class ProcoreTodoColumn {
@@ -117,8 +132,18 @@ export class ProjectPipe {
     created_at: Date;
     type: 'public_todos' | 'private_todos' | 'tasks';
     status: 'active' | 'disabled';
-    project_fk_id: number;
-    user_fk_id: number;
+    project_fk_id: {
+        id: number;
+        kind: string;
+        namespace: string;
+        path: string|number[]
+    };
+    user_fk_id: {
+        id: number;
+        kind: string;
+        namespace: string;
+        path: string|number[]
+    };
     procore_project_id: number;
     procore_company_id: number;
     sm_sheet_id: number;

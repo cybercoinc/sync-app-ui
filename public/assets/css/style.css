@@ -107,11 +107,11 @@ body h1 {
     background-color: #10827B;
 }
 
-.pipe-connected {
+.pipe-active {
     color: #2A8039;
 }
 
-.pipe-not-connected {
+.pipe-inactive {
     color: #A0A0A0;
 }
 

@@ -6,6 +6,7 @@
                 <div class="col-xs-5">
                     Current status: {{pipesListObj[pipeType]?.status || 'inactive'}}
                 </div>
+
                 <div class="col-xs-7">
                     <div *ngIf="pipesListObj[pipeType]">
                         <div *ngIf="(pipesListObj[pipeType]?.status != 'active')"
@@ -21,6 +22,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
