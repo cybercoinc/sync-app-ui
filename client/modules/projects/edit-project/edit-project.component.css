@@ -53,16 +53,20 @@
 }
 
 .pipes-wizard-container {
-    height: 700px;
+    height: auto;
     border-bottom: 1px solid #A1A1A1;
 }
 
-.pipes-list {
+/*.pipes-list {
     height: 700px;
 }
 
 .pipe-config-steps {
     height: 640px;
+}*/
+
+.pipe-step-container {
+    border-left: 1px solid #A1A1A1;
 }
 
 .pipe-step-active {
@@ -79,4 +83,28 @@
 
 .pipe-status-inactive i {
     color: #B7B7B7;
+}
+
+@media only screen and (min-width: 768px) {
+    .pipes-wizard-container {
+        display: table;
+        height: calc(100vh - 81px);
+    }
+
+    .pipes-wizard-container [class*="col-"] {
+        float: none;
+        display: table-cell;
+        vertical-align: top;
+    }
+
+    .pipe-step-container {
+        display: table;
+        height: calc(100vh - 81px);
+    }
+
+    .pipe-step-container [class*="col-"] {
+        float: none;
+        display: table-cell;
+        vertical-align: top;
+    }
 }

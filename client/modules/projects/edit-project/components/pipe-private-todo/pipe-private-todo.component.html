@@ -34,7 +34,7 @@
 <!-- end STATUS ROW -->
 
 <div class="row">
-    <div class="col-xs-3 right-lined pipe-config-steps">
+    <div class="col-xs-3 pipe-config-steps">
         <pipe-step-row step-status="{{pipesListObj[pipeType]?.sm_sheet_id? 'completed' : 'not-completed'}}"
                        step-name="SmartSheet Connection" step-description=""
                        [action]="['smartsheet-connection-private']"></pipe-step-row>
@@ -45,7 +45,7 @@
                 [action]="['settings-private']"></pipe-step-row>
     </div>
 
-    <div class="col-xs-9">
+    <div class="col-xs-9 pipe-step-container">
         <router-outlet></router-outlet>
     </div>
 </div>

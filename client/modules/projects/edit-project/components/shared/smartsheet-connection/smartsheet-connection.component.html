@@ -36,10 +36,13 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <a [class.disabled]="!selectedSheet" class="btn btn-success" (click)="goToNextStep()">Select and continue</a>
+            <a [class.disabled]="!selectedSheet" class="btn btn-success" (click)="showColumnsMatching()">Select and continue</a>
             <a class="btn btn-default" href="#">cancel</a>
         </div>
     </div>
+
+    <br>
+    <columns-matching *ngIf="selectedSheet" sheet-id="{{selectedSheet.id}}"></columns-matching>
 </div>
 
 <div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">

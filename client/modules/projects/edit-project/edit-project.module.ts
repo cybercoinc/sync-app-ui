@@ -12,11 +12,11 @@ import {PipePublicTodoComponent} from './components/pipe-public-todo/pipe-public
 import {PipePrivateTodoComponent} from './components/pipe-private-todo/pipe-private-todo.component';
 
 import {SmartsheetConnectionPublicComponent} from './components/pipe-public-todo/smartsheet-connection-public.component';
-import {SmartsheetConnectionComponent} from './components/shared/smartsheet-connection/smartsheet-connection.component';
-
 import {SmartsheetConnectionPrivateComponent} from './components/pipe-private-todo/smartsheet-connection-private.component';
-import {PipeSettingsPrivateComponent} from './components/pipe-private-todo/pipe-settings-private.component';
+import {SmartsheetConnectionComponent} from './components/shared/smartsheet-connection/smartsheet-connection.component';
+import {ColumnsMatchingComponent} from './components/shared/columns-matching/columns-matching.component';
 
+import {PipeSettingsPrivateComponent} from './components/pipe-private-todo/pipe-settings-private.component';
 import {PipeSettingsPublicComponent} from './components/pipe-public-todo/pipe-settings-public.component';
 import {PipeSettingsComponent} from './components/shared/pipe-settings/pipe-settings.component';
 
@@ -37,11 +37,11 @@ import {PipeSettingsComponent} from './components/shared/pipe-settings/pipe-sett
         PipePrivateTodoComponent,
 
         SmartsheetConnectionPublicComponent,
-        SmartsheetConnectionComponent,
-
         SmartsheetConnectionPrivateComponent,
-        PipeSettingsPrivateComponent,
+        SmartsheetConnectionComponent,
+        ColumnsMatchingComponent,
 
+        PipeSettingsPrivateComponent,
         PipeSettingsPublicComponent,
         PipeSettingsComponent,
     ],

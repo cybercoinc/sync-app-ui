@@ -130,4 +130,8 @@ export class SmartsheetConnectionComponent implements OnInit {
                 return this.router.navigate(this.redirectRoute);
             });
     }
+
+    showColumnsMatching() {
+        console.log(this.selectedSheet);
+    }
 }
