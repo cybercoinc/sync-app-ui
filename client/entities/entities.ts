@@ -118,6 +118,9 @@ export class ProjectPipe {
     type: 'public_todos' | 'private_todos' | 'tasks';
     status: 'active' | 'disabled';
     project_fk_id: number;
+    user_fk_id: number;
+    procore_project_id: number;
+    procore_company_id: number;
     sm_sheet_id: number;
     sm_sheet_columns: {
         description: number,

@@ -181,7 +181,10 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         return this.MsProjectClientService.createPipe(project.id, {
             type: this.pipeType,
-            status: PIPE_STATUS_DISABLED
+            status: PIPE_STATUS_DISABLED,
+            procore_company_id: project.procore_company_id,
+            procore_project_id: project.procore_project_id,
+            user_fk_id: this.AuthService.authUser.id
         }, this.AuthService.authUser.auth_session_id)
     }
 }
