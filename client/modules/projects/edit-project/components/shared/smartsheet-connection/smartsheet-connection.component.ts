@@ -139,7 +139,6 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         let procoreProjectName = project.name;
         let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) : procoreProjectName;
-        let newSheetName = workspaceName + ' Procore Sync';
 
         let createdPipeId;
 
@@ -153,16 +152,16 @@ export class SmartsheetConnectionComponent implements OnInit {
                     .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authUser.auth_session_id)
             })
             .then(workspace => {
-                // create new sheet inside workspace
-                return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
-                    project.id, workspace.id, Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'), newSheetName, this.AuthService.authUser.auth_session_id
+                // move sheet to new workspace
+                return this.MsProjectClientService.moveSheetToWorkspace(
+                    project.id, this.selectedSheet.id, workspace.id, this.AuthService.authUser.auth_session_id
                 );
             })
-            .then(createdSheetObj => {
+            .then(sheetId => {
                 // updating pipe
                 return this.MsProjectClientService.updatePipe(createdPipeId, {
-                    sm_sheet_id: createdSheetObj.id,
-                    sm_permalink: createdSheetObj.permalink
+                    sm_sheet_id: sheetId.id,
+                    sm_permalink: sheetId.permalink
                 }, this.AuthService.authUser.auth_session_id);
             })
             .then(pipeId => {

@@ -106,6 +106,18 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    moveSheetToWorkspace(projectId: number, sheetId: number, workspaceId: number, authUserSessionId: string): Promise<SmartsheetSheet> {
+        return this.makeMsCall(
+            'move-sheet-to-workspace',
+            'POST', {
+                project_id: projectId,
+                workspace_id: workspaceId,
+                sheet_id: sheetId
+            },
+            authUserSessionId
+        );
+    }
+
     matchDefaultSheetColumns(projectId: number, pipeId: number, authUserSessionId: string): Promise<number> {
         return this.makeMsCall(
             'match-default-sheet-columns',
