@@ -1,31 +1,34 @@
 <!-- STATUS ROW -->
 <div class="row bottom-lined">
-    <div class="col-xs-12">
-        <div class="pipe-header-large">
-            <div style="display: block; float: left; margin-right: 20px;">Current status:
-                {{pipesListObj[pipeType]?.status || 'inactive'}}
-            </div>
-
-            <div *ngIf="pipesListObj[pipeType]" style="display: block;">
-
-                <div *ngIf="(pipesListObj[pipeType]?.status != 'active')"
-                     style="display: block; float: left">
-                    <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
-                       [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id && pipesListObj[pipeType]?.sm_working_days)"
-                       class="btn btn-success">enable</a>
+    <div class="col-xs-8 pipe-header-large">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4">
+                    Current status: {{pipesListObj[pipeType]?.status || 'inactive'}}
                 </div>
-
-                <div *ngIf="(pipesListObj[pipeType]?.status == 'active')"
-                     style="display: block; float: left">
-                    <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
-                       class="btn btn-danger">disable</a>
+                <div class="col-xs-8">
+                    <div *ngIf="pipesListObj[pipeType]">
+                        <div *ngIf="(pipesListObj[pipeType]?.status != 'active')"
+                             style="display: block; float: left">
+                            <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
+                               [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id && pipesListObj[pipeType]?.sm_working_days)"
+                               class="btn btn-success">enable</a>
+                        </div>
+                        <div *ngIf="(pipesListObj[pipeType]?.status == 'active')"
+                             style="display: block; float: left">
+                            <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
+                               class="btn btn-danger">disable</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <!-- BUSY INDICATOR TODO IMPLEMENT LATER -->
-            <!--<md-progress-circle style="height: 30px; margin-top: 5px; float: right;" mode="indeterminate"></md-progress-circle>-->
-            <!-- end BUSY INDICATOR -->
         </div>
+    </div>
+
+    <div class="col-xs-4">
+        <!-- BUSY INDICATOR TODO IMPLEMENT LATER -->
+        <!--<md-progress-circle style="height: 30px; margin-top: 5px; float: right;" mode="indeterminate"></md-progress-circle>-->
+        <!-- end BUSY INDICATOR -->
     </div>
 </div>
 <!-- end STATUS ROW -->

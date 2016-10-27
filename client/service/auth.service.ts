@@ -42,7 +42,6 @@ export class AuthService implements Resolve<{}> {
     }
 
     defaultAuth() {
-        console.log('make default auth');
         return this.msUser.defaultAuth()
             .then(response => window.location.replace('/'));
     }
