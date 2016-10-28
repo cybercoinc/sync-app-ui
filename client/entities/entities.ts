@@ -6,7 +6,9 @@ export class User {
     smartsheet_oauth: {
         access_token: string,
         refresh_token: string,
-        expires_in: number
+        expires_in: number,
+        account_email: string;
+        token_type: string;
     };
 
     auth_session_id: string;

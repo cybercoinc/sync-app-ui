@@ -25,6 +25,9 @@
                     <h5>Smartsheet connection:</h5>
 
                     <div *ngIf="me.smartsheet_oauth">
+                        <ul>
+                            <li>Email: {{me.smartsheet_oauth?.account_email}}</li>
+                        </ul>
                         <a md-raised-button color="danger" (click)="removeSmartsheetAuth()">Remove Smartsheet
                             connection</a>
                     </div>
