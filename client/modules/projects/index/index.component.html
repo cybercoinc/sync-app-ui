@@ -38,7 +38,7 @@
 
                         <div class="row" *ngIf="projectRow.is_expanded">
                             <div class="col-xs-12">
-                                info tabs here
+                                <a [routerLink]="[projectRow.project.id, 'sync-sessions']" class="btn btn-primary btn-sm">Sync Sessions</a>
                             </div>
                         </div>
                     </div>
