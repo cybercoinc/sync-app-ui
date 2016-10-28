@@ -1,7 +1,10 @@
 import {Injectable} from "@angular/core";
+import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+
 import {MsProjectClientService} from './microservices/ms-project-client.service';
 import {AuthService} from './auth.service';
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.service';
+
 import {Project, ProjectPipe} from 'client/entities/entities';
 import {PIPE_STATUS_ACTIVE, PIPE_STATUS_DISABLED} from 'client/entities/entities';
 
@@ -9,6 +12,7 @@ import {PIPE_STATUS_ACTIVE, PIPE_STATUS_DISABLED} from 'client/entities/entities
 export class PipeConnectionService implements Resolve<{}> {
 
     constructor(protected MsProjectClientService: MsProjectClientService,
+                protected MsSyncClientService: MsSyncClientService,
                 protected AuthService: AuthService) {
     }
 
@@ -90,10 +94,13 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     enablePipe(pipeId: number) {
+
         this.MsProjectClientService.updatePipe(pipeId, {
             status: PIPE_STATUS_ACTIVE
         }, this.AuthService.authUser.auth_session_id)
             .then(() => {
+                this.MsSyncClientService.startPipeSync(pipeId, this.AuthService.authUser.auth_session_id);
+
                 return this.refreshPipesList();
             });
     }

@@ -32,6 +32,17 @@ export class MsSyncClientService extends MsClientService {
         );
     }
 
+    startPipeSync(pipeId: number, authUserSessionId: string): Promise<boolean> {
+        return this.makeMsCall(
+            'start-pipe-sync',
+            'GET',
+            {
+                pipe_id: pipeId
+            },
+            authUserSessionId
+        );
+    }
+
     getProcoreTodosColumns(authUserSessionId: string): Promise<[ProcoreTodoColumn]> {
         return this.makeMsCall(
             'get-procore-todos-columns',
