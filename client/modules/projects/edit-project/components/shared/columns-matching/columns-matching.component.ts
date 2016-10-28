@@ -53,11 +53,26 @@ export class ColumnsMatchingComponent implements OnInit {
     protected sheetColumns: SmartsheetSheetColumn[];
     protected procoreTodosColumns: ProcoreTodoColumn[];
 
+    protected validationError: boolean = false;
+
     public model: {} = {};
 
     @Output() columnsMatched = new EventEmitter();
 
     matchColumns() {
+        this.validationError = false;
+        // check if all fields are filled
+
+        for (let columnConst in this.model) {
+            if (this.model.hasOwnProperty(columnConst)) {
+                if (!this.model[columnConst]) {
+                    this.validationError = true;
+
+                    return false;
+                }
+            }
+        }
+
         this.columnsMatched.emit(this.model);
     }
 }

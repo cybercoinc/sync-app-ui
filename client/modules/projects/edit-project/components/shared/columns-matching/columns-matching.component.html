@@ -4,12 +4,29 @@
             <h5>Match columns</h5>
         </div>
 
+        <div class="col-xs-12" *ngIf="validationError">
+            <div class="alert alert-danger">
+                All columns should be matched.
+            </div>
+        </div>
+
         <div class="col-xs-12">
             <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-2">
+                        <div class="pull-right">
+                            <b>Procore</b>
+                        </div>
+                    </div>
+                    <div class="col-xs-10">
+                        <b>SmartSheet</b>
+                    </div>
+                </div>
+
                 <div class="form-group" *ngFor="let procoreTodoColumn of procoreTodosColumns">
                     <label class="col-xs-2 control-label">{{procoreTodoColumn.title}}</label>
                     <div class="col-xs-10">
-                        <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
+                        <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug" required>
                             <option value="">- Smartsheet column -</option>
                             <option *ngFor="let column of sheetColumns" [value]="column.id"
                                     [disabled]="checkIfOptionDisabled(column.id, procoreTodoColumn.slug)">

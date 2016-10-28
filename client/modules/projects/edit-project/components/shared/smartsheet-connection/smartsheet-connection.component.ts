@@ -31,6 +31,8 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         this.MsProjectClientService.getConnectedSmartsheetSheetsIds(project.id, this.AuthService.authUser.auth_session_id)
             .then(connectedSmSheetsList => {
+                console.log('connectedSmSheetsList', connectedSmSheetsList);
+
                 this.connectedSmSheetsIdsList = connectedSmSheetsList;
 
                 return this.getSmartsheetSheets();
