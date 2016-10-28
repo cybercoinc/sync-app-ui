@@ -5,7 +5,11 @@ import {PipeConnectionService} from 'client/service/pipe-connection.service';
 import {AuthGuardService} from 'client/service/auth-guard.service';
 
 import {IndexComponent} from './index/index.component';
+
 import {SyncSessionsComponent} from './sync-sessions/sync-sessions.component';
+import {SyncSessionsPipePublicTodoComponent} from './sync-sessions/components/pipe-public-todo/pipe-public-todo.component';
+import {SyncSessionsPipePrivateTodoComponent} from './sync-sessions/components/pipe-private-todo/pipe-private-todo.component';
+
 import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.component';
 import {CreateProjectComponent} from './create-project/create-project.component';
 
@@ -37,18 +41,31 @@ export const routes: Routes = [
 
             {
                 path: ':project_id/sync-sessions',
+                component: SyncSessionsComponent,
                 resolve: {
                     project: PipeConnectionService
                 },
                 children: [
                     {
                         path: '',
-                        component: SyncSessionsComponent,
+                        redirectTo: 'pipe-public-todos',
                     },
+
+                    {
+                        path: 'pipe-public-todos',
+                        component: SyncSessionsPipePublicTodoComponent
+                    },
+
+                    {
+                        path: 'pipe-private-todos',
+                        component: SyncSessionsPipePrivateTodoComponent
+                    },
+
                     {
                         path: 'item-changes/:sync_session_id',
                         component: ItemChangesComponent
-                    }
+                    },
+
                 ]
             },
 

@@ -21,7 +21,11 @@ import {PipeSettingsPublicComponent} from './edit-project/components/pipe-public
 import {PipeSettingsComponent} from './edit-project/components/shared/pipe-settings/pipe-settings.component';
 
 import {IndexComponent} from './index/index.component';
+
 import {SyncSessionsComponent} from './sync-sessions/sync-sessions.component';
+import {SyncSessionsPipePublicTodoComponent} from './sync-sessions/components/pipe-public-todo/pipe-public-todo.component';
+import {SyncSessionsPipePrivateTodoComponent} from './sync-sessions/components/pipe-private-todo/pipe-private-todo.component';
+
 import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.component';
 import {CreateProjectComponent} from './create-project/create-project.component';
 
@@ -37,6 +41,8 @@ import {CreateProjectComponent} from './create-project/create-project.component'
     declarations: [
         IndexComponent,
         SyncSessionsComponent,
+        SyncSessionsPipePublicTodoComponent,
+        SyncSessionsPipePrivateTodoComponent,
         ItemChangesComponent,
         CreateProjectComponent,
         PipeRowComponent,
