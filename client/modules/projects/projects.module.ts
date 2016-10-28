@@ -23,8 +23,9 @@ import {PipeSettingsComponent} from './edit-project/components/shared/pipe-setti
 import {IndexComponent} from './index/index.component';
 
 import {SyncSessionsComponent} from './sync-sessions/sync-sessions.component';
-import {SyncSessionsPipePublicTodoComponent} from './sync-sessions/components/pipe-public-todo/pipe-public-todo.component';
-import {SyncSessionsPipePrivateTodoComponent} from './sync-sessions/components/pipe-private-todo/pipe-private-todo.component';
+import {SyncSessionsListComponent} from './sync-sessions/list/sync-sessions-list.component';
+
+import {SyncSessionRowComponent} from './sync-sessions/sync-session-row/sync-session-row.component';
 
 import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.component';
 import {CreateProjectComponent} from './create-project/create-project.component';
@@ -41,8 +42,8 @@ import {CreateProjectComponent} from './create-project/create-project.component'
     declarations: [
         IndexComponent,
         SyncSessionsComponent,
-        SyncSessionsPipePublicTodoComponent,
-        SyncSessionsPipePrivateTodoComponent,
+        SyncSessionsListComponent,
+        SyncSessionRowComponent,
         ItemChangesComponent,
         CreateProjectComponent,
         PipeRowComponent,

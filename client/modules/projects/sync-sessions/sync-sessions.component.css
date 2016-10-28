@@ -1,3 +1,8 @@
 md-card {
     margin-bottom: 5px;
 }
+
+.sync-sessions-container {
+    padding-top: 20px;
+    min-height: 100vh;
+}

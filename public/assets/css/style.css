@@ -138,3 +138,48 @@ select > option:disabled {
 .clickable-row:hover {
     background-color: #F7F7F7;
 }
+
+.project-row {
+    background-color: #EBEBEB;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    -webkit-transition: max-height .1s;
+    -moz-transition: max-height .1s;
+    -ms-transition: max-height .1s;
+    -o-transition: max-height .1s;
+    transition: max-height .1s;
+    overflow: hidden;
+    max-height: 45px;
+}
+
+.expandable-row {
+    background-color: #EBEBEB;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    -webkit-transition: max-height .1s;
+    -moz-transition: max-height .1s;
+    -ms-transition: max-height .1s;
+    -o-transition: max-height .1s;
+    transition: max-height .1s;
+    overflow: hidden;
+    max-height: 45px;
+    border: 1px solid #C9C9C9;
+    border-radius: 2px;
+}
+
+.row-expanded {
+    max-height: 400px;
+    background-color: #fff;
+    border: 1px solid #EBEBEB;
+    -webkit-transition: background .1s linear;
+    -moz-transition: background .1s linear;
+    -ms-transition: background .1s linear;
+    -o-transition: background .1s linear;
+    transition: background .1s linear;
+}
+
+.left-lined {
+    border-left: 1px solid #A1A1A1;
+}

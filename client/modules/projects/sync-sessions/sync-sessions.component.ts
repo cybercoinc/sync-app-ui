@@ -29,6 +29,8 @@ export class SyncSessionsComponent implements OnInit {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
         this.project = this.PipeConnectionService.project;
 
+        console.log('this.pipesListObj', this.pipesListObj);
+
         // this.route.params.forEach((params: Params) => {
         //     let id = +params['project_id'];
         //

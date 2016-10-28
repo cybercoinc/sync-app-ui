@@ -1,7 +1,7 @@
 <div class="">
-    <div class="row pipes-wizard-container">
+    <div class="row">
         <!-- PIPES LIST -->
-        <div class="col-xs-3 pipes-list right-lined">
+        <div class="col-xs-3">
 
             <div class="row bottom-lined clickable-row">
                 <div class="col-xs-12">
@@ -20,49 +20,9 @@
         </div>
         <!-- end PIPES LIST -->
 
-        <div class="col-xs-9">
+        <div class="col-xs-9 left-lined sync-sessions-container">
             <router-outlet></router-outlet>
         </div>
     </div>
 </div>
-
-
-<!--<div class="container-fluid">-->
-<!--<h4>Sync sessions</h4>-->
-
-<!--<div class="row">-->
-<!--<div class="col-xs-12">-->
-<!--<div *ngIf="!syncSessionsList">-->
-<!--Getting sync sessions list...-->
-<!--</div>-->
-
-<!--<div *ngIf="syncSessionsList">-->
-<!--<div *ngIf="!syncSessionsList.length">-->
-<!--No sync sessions for project.-->
-<!--</div>-->
-
-<!--<div *ngIf="syncSessionsList.length">-->
-<!--<div *ngFor="let syncSession of syncSessionsList">-->
-<!--<md-card>-->
-<!--<md-card-subtitle>-->
-<!--Total time: {{syncSession.sync_time? syncSession.sync_time.total_sync_seconds : ''}} sec.;-->
-<!--procore to smartsheet: {{syncSession.sync_time? syncSession.sync_time.pr_to_sm_sync_seconds: ''}} sec.;-->
-<!--smartsheet to procore: {{syncSession.sync_time? syncSession.sync_time.sm_to_pr_sync_seconds: ''}} sec.-->
-<!--</md-card-subtitle>-->
-<!--<ul>-->
-<!--<li>Created at: {{syncSession.created_at}}</li>-->
-<!--<li>Started by: {{syncSession.started_by}}</li>-->
-<!--<li>Status: {{syncSession.status}}</li>-->
-<!--</ul>-->
-
-<!--<button md-raised-button [routerLink]="['item-changes', syncSession.id]">changes logs</button>-->
-<!--</md-card>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-
 

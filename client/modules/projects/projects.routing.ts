@@ -7,8 +7,6 @@ import {AuthGuardService} from 'client/service/auth-guard.service';
 import {IndexComponent} from './index/index.component';
 
 import {SyncSessionsComponent} from './sync-sessions/sync-sessions.component';
-import {SyncSessionsPipePublicTodoComponent} from './sync-sessions/components/pipe-public-todo/pipe-public-todo.component';
-import {SyncSessionsPipePrivateTodoComponent} from './sync-sessions/components/pipe-private-todo/pipe-private-todo.component';
 
 import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.component';
 import {CreateProjectComponent} from './create-project/create-project.component';
@@ -20,6 +18,8 @@ import {PipeSettingsPrivateComponent} from './edit-project/components/pipe-priva
 import {PipePublicTodoComponent} from './edit-project/components/pipe-public-todo/pipe-public-todo.component';
 import {SmartsheetConnectionPublicComponent} from './edit-project/components/pipe-public-todo/smartsheet-connection-public.component';
 import {PipeSettingsPublicComponent} from './edit-project/components/pipe-public-todo/pipe-settings-public.component';
+
+import {SyncSessionsListComponent} from './sync-sessions/list/sync-sessions-list.component';
 
 export const routes: Routes = [
     {
@@ -48,23 +48,18 @@ export const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'pipe-public-todos',
+                        redirectTo: 'public-todos',
                     },
 
                     {
-                        path: 'pipe-public-todos',
-                        component: SyncSessionsPipePublicTodoComponent
+                        path: ':pipe_type',
+                        component: SyncSessionsListComponent
                     },
-
-                    {
-                        path: 'pipe-private-todos',
-                        component: SyncSessionsPipePrivateTodoComponent
-                    },
-
-                    {
-                        path: 'item-changes/:sync_session_id',
-                        component: ItemChangesComponent
-                    },
+                    //
+                    // {
+                    //     path: 'item-changes/:sync_session_id',
+                    //     component: ItemChangesComponent
+                    // },
 
                 ]
             },
