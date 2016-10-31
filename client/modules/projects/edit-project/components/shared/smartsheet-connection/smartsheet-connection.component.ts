@@ -31,8 +31,6 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         this.MsProjectClientService.getConnectedSmartsheetSheetsIds(project.id, this.AuthService.authUser.auth_session_id)
             .then(connectedSmSheetsList => {
-                console.log('connectedSmSheetsList', connectedSmSheetsList);
-
                 this.connectedSmSheetsIdsList = connectedSmSheetsList;
 
                 return this.getSmartsheetSheets();
@@ -142,12 +140,12 @@ export class SmartsheetConnectionComponent implements OnInit {
         let procoreProjectName = project.name;
         let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) : procoreProjectName;
 
-        let createdPipeId;
+        let _createdPipeId;
 
         // create new pipe
         return this.createNewPipe()
             .then(pipesIds => {
-                createdPipeId = pipesIds.shift();
+                _createdPipeId = pipesIds.shift();
 
                 // create new workspace at smartsheet
                 return this.MsProjectClientService
@@ -161,14 +159,14 @@ export class SmartsheetConnectionComponent implements OnInit {
             })
             .then(sheetId => {
                 // updating pipe
-                return this.MsProjectClientService.updatePipe(createdPipeId, {
+                return this.MsProjectClientService.updatePipe(_createdPipeId, {
                     sm_sheet_id: sheetId.id,
                     sm_permalink: sheetId.permalink
                 }, this.AuthService.authUser.auth_session_id);
             })
             .then(pipeId => {
                 // matching columns
-                return this.MsProjectClientService.saveMatchedColumns(createdPipeId, columnsObj, this.AuthService.authUser.auth_session_id);
+                return this.MsProjectClientService.saveMatchedColumns(_createdPipeId, columnsObj, this.AuthService.authUser.auth_session_id);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
@@ -187,6 +185,6 @@ export class SmartsheetConnectionComponent implements OnInit {
             procore_company_id: project.procore_company_id,
             procore_project_id: project.procore_project_id,
             user_fk_id: this.AuthService.authUser.id
-        }, this.AuthService.authUser.auth_session_id)
+        }, this.PipeConnectionService.getPipeLabelByType(this.pipeType), this.AuthService.authUser.auth_session_id);
     }
 }

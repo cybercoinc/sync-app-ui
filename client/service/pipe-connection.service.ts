@@ -94,23 +94,62 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     enablePipe(pipeId: number) {
+        let _pipeObj: ProjectPipe;
 
-        this.MsProjectClientService.updatePipe(pipeId, {
-            status: PIPE_STATUS_ACTIVE
-        }, this.AuthService.authUser.auth_session_id)
+        return this.MsProjectClientService.getPipe(pipeId, this.AuthService.authUser.auth_session_id)
+            .then(pipeObj => {
+                _pipeObj = pipeObj;
+
+                return this.MsProjectClientService.updatePipe(pipeId, {
+                    status: PIPE_STATUS_ACTIVE
+                }, this.AuthService.authUser.auth_session_id);
+            })
             .then(() => {
-                this.MsSyncClientService.startPipeSync(pipeId, this.AuthService.authUser.auth_session_id);
+                this.refreshPipesList();
 
-                return this.refreshPipesList();
+                return this.MsSyncClientService.startPipeSync(pipeId, this.AuthService.authUser.auth_session_id);
+            })
+            .then(() => {
+                if (!_pipeObj.sm_webhook_id) {
+                    return this.MsProjectClientService.createSmPipeWebhook(pipeId, this.AuthService.authUser.auth_session_id);
+                }
+
+                return _pipeObj.sm_webhook_id;
+            })
+            .then(() => {
+                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, true, this.AuthService.authUser.auth_session_id);
             });
     }
 
     disablePipe(pipeId) {
-        this.MsProjectClientService.updatePipe(pipeId, {
+        return this.MsProjectClientService.updatePipe(pipeId, {
             status: PIPE_STATUS_DISABLED
         }, this.AuthService.authUser.auth_session_id)
             .then(() => {
                 return this.refreshPipesList();
+            })
+            .then(() => {
+                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, false, this.AuthService.authUser.auth_session_id);
             });
+    }
+
+    getPipeLabelByType(pipeType: string): string {
+        let label = '';
+
+        switch (pipeType) {
+            case 'public_todos':
+                label = 'Public Todos';
+                break;
+            case 'private_todos': {
+                label = 'Private Todos';
+                break;
+            }
+            case 'tasks': {
+                label = 'Tasks';
+                break;
+            }
+        }
+
+        return label;
     }
 }

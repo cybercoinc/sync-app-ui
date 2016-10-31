@@ -59,7 +59,6 @@ export class PipeSettingsComponent implements OnInit {
             sm_weekends: this.model.nonWorkingDays.split(',')
         }, this.AuthService.authUser.auth_session_id)
             .then(() => {
-                console.log('pipe updated');
                 return this.PipeConnectionService.refreshPipesList();
             });
     }

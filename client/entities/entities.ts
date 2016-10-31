@@ -161,6 +161,8 @@ export class ProjectPipe {
     sm_permalink: string;
     sm_working_days: {};
     sm_weekends: [string];
+    sm_webhook_id: number;
+    sm_webhook_status: string;
 }
 
 export const PIPE_TYPE_PUBLIC_TODOS = 'public_todos';

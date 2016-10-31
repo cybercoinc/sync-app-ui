@@ -165,14 +165,25 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createPipe(projectId: number, dataToSet, authUserSessionId: string): Promise<[number]> {
+    getPipe(pipeId: number, authUserSessionId: string): Promise<ProjectPipe> {
+        return this.makeMsCall(
+            'get-pipe',
+            'GET',
+            {
+                pipe_id: pipeId,
+            },
+            authUserSessionId
+        );
+    }
+
+    createPipe(projectId: number, dataToSet, pipeName: string, authUserSessionId: string): Promise<[number]> {
         return this.makeMsCall(
             'create-pipe',
             'POST',
             {
                 project_id: projectId,
                 data: dataToSet,
-                status: status,
+                pipe_name: pipeName
             },
             authUserSessionId
         );
@@ -190,5 +201,32 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    /**
+     *
+     * @param pipeId
+     * @param authUserSessionId
+     * @return {Promise<{Number}>} created webhook id
+     */
+    createSmPipeWebhook(pipeId: number, authUserSessionId: string): Promise<number> {
+        return this.makeMsCall(
+            'create-pipe-webhook',
+            'PUT',
+            {
+                pipe_id: pipeId,
+            },
+            authUserSessionId
+        );
+    }
 
+    changeSmPipeWebhookStatus(pipeId: number, isEnabled: boolean, authUserSessionId: string): Promise<boolean> {
+        return this.makeMsCall(
+            'change-pipe-webhook-status',
+            'PUT',
+            {
+                pipe_id: pipeId,
+                status: isEnabled
+            },
+            authUserSessionId
+        );
+    }
 }
