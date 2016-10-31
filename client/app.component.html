@@ -1,13 +1,13 @@
-<nav class="navbar navbar-default navbar-sc" *ngIf="authUser && authUser.role !=='guest'">
+<nav class="navbar navbar-default navbar-sc">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand logo-container" href="#">
+            <a class="navbar-brand logo-container" href="#" >
                 <img src="/assets/img/logo.png" style="height: 40px;" alt="logo">
             </a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" *ngIf="authUser && authUser.role !=='guest'">
             <ul class="nav navbar-nav">
                 <li class="">
                     <a [routerLink]="['/projects']" routerLinkActive="active">Projects</a>

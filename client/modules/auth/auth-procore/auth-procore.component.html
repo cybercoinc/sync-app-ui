@@ -1,5 +1,9 @@
-<md-card>
+<md-card class="col-md-6 col-md-offset-3 text-center" style="margin-top:100px;">
+    <md-card-subtitle>ScheduleConnector require your Procore authorization to perform synchonization.</md-card-subtitle>
     <md-card-content>
-        <a md-raised-button color="primary" href="{{getProcoreAuthLink()}}">Procore Auth</a>
+        <a class="btn btn-success btn-lg" href="{{getProcoreAuthLink()}}">
+            Login with your &nbsp;&nbsp;<img style="height: 21px; margin-bottom: 3px;" src="/assets/img/procore-logo.png" />&nbsp; account
+        </a>
     </md-card-content>
 </md-card>
+
