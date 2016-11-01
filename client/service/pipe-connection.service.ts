@@ -26,9 +26,9 @@ export class PipeConnectionService implements Resolve<{}> {
 
         let projectId = +route.params['project_id'];
 
+        // todo may double /me request. check it later
         return this.AuthService.getAuthUser()
             .then(authUser => {
-
                 return Promise.all([
                     this.getProject(projectId, authUser.auth_session_id),
                     this.getPipesList(projectId, authUser.auth_session_id)
