@@ -25,7 +25,6 @@ export class InvoicesComponent implements OnInit {
     getInvoices() {
         this.MsLicenseClientService.getInvoices(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
             .then(invocesArray => {
-                console.log('licensesList>>>',invocesArray)
                 this.invocesArray = invocesArray;
             });
     }

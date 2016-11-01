@@ -24,7 +24,6 @@ export class LicensesComponent implements OnInit {
     getActiveLicenses() {
         this.MsLicenseClientService.getLicenses(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
             .then(licensesList => {
-                console.log('licensesList>>>',licensesList)
                 this.licensesList = licensesList;
             });
     }
