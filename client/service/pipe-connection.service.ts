@@ -45,41 +45,24 @@ export class PipeConnectionService implements Resolve<{}> {
     }|{} = {};
 
     getProject(projectId: number, authSessionId: string): Promise<Project> {
-        return new Promise<{}>((resolve, reject) => {
-            if (!this.project) {
-                return this.MsProjectClientService.getProjectByid(projectId, authSessionId)
-                    .then(projectsList => {
-                        let project = projectsList.shift();
+        return this.MsProjectClientService.getProjectByid(projectId, authSessionId)
+            .then(projectsList => {
 
-                        if (!project) {
-                            return reject(new Error('no project found'));
-                        }
+                this.project = projectsList.shift();
 
-                        this.project = project;
-
-                        return resolve(this.project);
-                    })
-            }
-
-            return resolve(this.project);
-        });
+                return this.project;
+            });
     }
 
     getPipesList(projectId: number, authSessionId: string): Promise<ProjectPipe[]> {
-        return new Promise<{}>((resolve, reject) => {
-            if (!Object.keys(this.pipesListObj).length) {
-                return this.MsProjectClientService.getPipesByProjectId(projectId, authSessionId)
-                    .then(pipesList => {
-                        pipesList.forEach((pipe: ProjectPipe) => {
-                            this.pipesListObj[pipe.type] = pipe;
-                        });
+        return this.MsProjectClientService.getPipesByProjectId(projectId, authSessionId)
+            .then(pipesList => {
+                pipesList.forEach((pipe: ProjectPipe) => {
+                    this.pipesListObj[pipe.type] = pipe;
+                });
 
-                        return resolve(this.pipesListObj);
-                    })
-            }
-
-            return resolve(this.pipesListObj);
-        });
+                return this.pipesListObj;
+            })
     }
 
     refreshPipesList() {
