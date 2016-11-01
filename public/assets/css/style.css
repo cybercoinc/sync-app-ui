@@ -1,7 +1,7 @@
 body {
     font-family: Roboto, 'Helvetica Neue', sans-serif;
     margin: 0;
-    /*background-color: #eeeeee;*/
+    background-color: #eeeeee;
 }
 
 body * {
@@ -142,7 +142,7 @@ select > option:disabled {
 }
 
 .project-row {
-    background-color: #EBEBEB;
+    background-color: #ffffff;
     margin-bottom: 10px;
     padding: 10px 20px;
     cursor: pointer;
@@ -153,6 +153,7 @@ select > option:disabled {
     transition: max-height .1s;
     overflow: hidden;
     max-height: 45px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .expandable-row {
@@ -174,7 +175,6 @@ select > option:disabled {
 .row-expanded {
     max-height: 400px;
     background-color: #fff;
-    border: 1px solid #EBEBEB;
     -webkit-transition: background .1s linear;
     -moz-transition: background .1s linear;
     -ms-transition: background .1s linear;

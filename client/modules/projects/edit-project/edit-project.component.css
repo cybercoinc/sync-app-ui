@@ -55,6 +55,7 @@
 .pipes-wizard-container {
     height: auto;
     border-bottom: 1px solid #A1A1A1;
+    background-color: #FFFFFF;
 }
 
 /*.pipes-list {
