@@ -1,3 +1,4 @@
+import {Timestamp} from "rxjs";
 export class User {
     id: number;
     first_name: string;
@@ -26,15 +27,19 @@ export class User {
 }
 
 export class SyncSession {
+    id: number;
     created_at: Date;
-    project_fk_id: {
+    started_at: Timestamp<number>;
+    finished_at: Timestamp<number>;
+    pipe_fk_id: {
         id: number;
         kind: string;
         namespace: string;
         path: string|number[]
     };
     started_by: 'cron' | 'user' | 'webhook';
-    status: 'created' | 'completed';
+    status: 'created' | 'completed' | 'failed';
+    has_item_changes: boolean;
     sync_timte: {
         sm_to_pr_sync_seconds: number;
         pr_to_sm_sync_seconds: number;

@@ -38,13 +38,15 @@ export class SyncSessionsListComponent implements OnInit {
         });
 
         this.sub = this.ActivatedRoute.params.subscribe(params => {
+            this.syncSessionsList = null;
+
             this.pipeType = params['pipe_type'];
 
             this.MsProjectClientService.getPipesWhere({
                 type: this.pipeType,
                 project_fk_id: projectId
             }, this.AuthService.authUser.auth_session_id)
-                .then((pipesList) => {
+                .then((pipesList) => { // todo find how to resolve this in TS
                     this.projectPipe = pipesList.shift();
 
                     if (!this.projectPipe) {
@@ -55,7 +57,8 @@ export class SyncSessionsListComponent implements OnInit {
                 })
                 .then(syncSessionsList => {
                     this.syncSessionsList = syncSessionsList;
-                    console.log('syncSessions', syncSessionsList);
+
+                    return this.syncSessionsList;
                 })
         });
     }

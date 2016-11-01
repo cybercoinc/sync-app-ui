@@ -166,7 +166,7 @@ select > option:disabled {
     -o-transition: max-height .1s;
     transition: max-height .1s;
     overflow: hidden;
-    max-height: 45px;
+    max-height: 145px;
     border: 1px solid #C9C9C9;
     border-radius: 2px;
 }

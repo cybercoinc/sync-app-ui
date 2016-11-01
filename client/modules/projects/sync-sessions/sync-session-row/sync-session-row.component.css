@@ -1,0 +1,20 @@
+.sync-session-row .status {
+    color: green;
+    display: block;
+    float: left;
+    margin-right: 15px;
+}
+
+.sync-session-row {
+    font-size: 16px;
+}
+
+.items-changed-flag {
+    color: #FF530D;
+}
+
+.total-sync-time {
+    font-weight: bolder;
+    font-size: 25px;
+    padding-top: 5px;
+}
