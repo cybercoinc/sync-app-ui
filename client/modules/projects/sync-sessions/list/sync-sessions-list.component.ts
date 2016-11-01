@@ -56,10 +56,16 @@ export class SyncSessionsListComponent implements OnInit {
                     return this.MsSyncClientService.getPipeSyncSessions(this.projectPipe.id, this.AuthService.authUser.auth_session_id);
                 })
                 .then(syncSessionsList => {
-                    this.syncSessionsList = syncSessionsList;
+                    this.syncSessionsList = this.orderByDate(syncSessionsList);
 
                     return this.syncSessionsList;
                 })
+        });
+    }
+
+    orderByDate(list: SyncSession[]) { // todo move this to some common pipe filter
+        return list.sort(function (b, a) {
+            return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
         });
     }
 }

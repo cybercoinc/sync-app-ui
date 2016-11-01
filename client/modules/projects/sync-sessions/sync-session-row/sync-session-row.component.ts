@@ -25,7 +25,7 @@ export class SyncSessionRowComponent implements OnInit {
     }
 
     getStartedByLabel() {
-        return this.syncSession.started_by.charAt(0).toUpperCase() + this.syncSession.startedBy.slice(1);
+        return this.syncSession.started_by.charAt(0).toUpperCase() + this.syncSession.started_by.slice(1);
     }
 
     getTotalTime() {
