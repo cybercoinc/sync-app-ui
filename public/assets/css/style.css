@@ -186,3 +186,16 @@ select > option:disabled {
 .left-lined {
     border-left: 1px solid #A1A1A1;
 }
+
+.filter-container {
+    background-color: #fff;
+    font-size: 16px;
+    border: 1px solid #C9C9C9;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+
+.filter-container a {
+    cursor: pointer;
+}

@@ -1,7 +1,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            <!--<a href="#">Only changes</a> | <a href="#">All</a>-->
+            <div class="filter-container">
+                <a (click)="showOnlyWithItemChanges(true)">Only changes</a> | <a (click)="showOnlyWithItemChanges(false)">All</a>
+            </div>
         </div>
     </div>
 

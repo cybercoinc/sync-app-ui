@@ -25,47 +25,55 @@ export class SyncSessionsListComponent implements OnInit {
     }
 
     private sub: any;
+
     pipeType: string;
+    projectId: number;
 
     syncSessionsList: SyncSession[] = null;
     projectPipe: ProjectPipe;
 
     ngOnInit() {
-        let projectId = null;
-
         this.ActivatedRoute.parent.params.forEach((params) => {
-            projectId = +params['project_id'];
+            this.projectId = +params['project_id'];
         });
 
         this.sub = this.ActivatedRoute.params.subscribe(params => {
-            this.syncSessionsList = null;
-
             this.pipeType = params['pipe_type'];
 
-            this.MsProjectClientService.getPipesWhere({
-                type: this.pipeType,
-                project_fk_id: projectId
-            }, this.AuthService.authUser.auth_session_id)
-                .then((pipesList) => { // todo find how to resolve this in TS
-                    this.projectPipe = pipesList.shift();
-
-                    if (!this.projectPipe) {
-                        return [];
-                    }
-
-                    return this.MsSyncClientService.getPipeSyncSessions(this.projectPipe.id, this.AuthService.authUser.auth_session_id);
-                })
-                .then(syncSessionsList => {
-                    this.syncSessionsList = this.orderByDate(syncSessionsList);
-
-                    return this.syncSessionsList;
-                })
+            this.getSyncSessionsList(this.projectId, this.pipeType, false);
         });
+    }
+
+    getSyncSessionsList(projectId, pipeType, onlyWithChanges: boolean) {
+        this.syncSessionsList = null;
+
+        this.MsProjectClientService.getPipesWhere({
+            type: pipeType,
+            project_fk_id: projectId
+        }, this.AuthService.authUser.auth_session_id)
+            .then((pipesList) => { // todo find how to resolve this in TS
+                this.projectPipe = pipesList.shift();
+
+                if (!this.projectPipe) {
+                    return [];
+                }
+
+                return this.MsSyncClientService.getPipeSyncSessions(this.projectPipe.id, onlyWithChanges, this.AuthService.authUser.auth_session_id);
+            })
+            .then(syncSessionsList => {
+                this.syncSessionsList = this.orderByDate(syncSessionsList);
+
+                return this.syncSessionsList;
+            })
     }
 
     orderByDate(list: SyncSession[]) { // todo move this to some common pipe filter
         return list.sort(function (b, a) {
             return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
         });
+    }
+
+    showOnlyWithItemChanges(onlyWithChanges: boolean) {
+        return this.getSyncSessionsList(this.projectId, this.pipeType, onlyWithChanges);
     }
 }
