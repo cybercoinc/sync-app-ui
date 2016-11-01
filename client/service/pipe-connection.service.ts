@@ -79,7 +79,7 @@ export class PipeConnectionService implements Resolve<{}> {
     enablePipe(pipeId: number) {
         let _pipeObj: ProjectPipe;
 
-        return this.MsProjectClientService.getPipe(pipeId, this.AuthService.authUser.auth_session_id)
+        return this.MsProjectClientService.getPipeById(pipeId, this.AuthService.authUser.auth_session_id)
             .then(pipeObj => {
                 _pipeObj = pipeObj;
 

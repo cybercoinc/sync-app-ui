@@ -33,7 +33,7 @@ export class SyncSession {
         namespace: string;
         path: string|number[]
     };
-    started_by: 'cron' | 'user';
+    started_by: 'cron' | 'user' | 'webhook';
     status: 'created' | 'completed';
     sync_timte: {
         sm_to_pr_sync_seconds: number;

@@ -18,27 +18,18 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 export class SyncSessionsComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected PipeConnectionService: PipeConnectionService,
-                protected MsSyncClientService: MsSyncClientService,
     ) {
 
     }
 
     syncSessionsList: [{}] = null;
 
+    protected pipesListObj;
+    protected project;
+
     ngOnInit() {
-        this.pipesListObj = this.PipeConnectionService.pipesListObj;
         this.project = this.PipeConnectionService.project;
-
-        console.log('this.pipesListObj', this.pipesListObj);
-
-        // this.route.params.forEach((params: Params) => {
-        //     let id = +params['project_id'];
-        //
-        //     this.MsSyncClientService.getProjectSyncSessions(id, this.AuthService.authUser.auth_session_id)
-        //         .then(syncSessionsList => {
-        //             this.syncSessionsList = this.orderByDate(syncSessionsList);
-        //         });
-        // });
+        this.pipesListObj = this.PipeConnectionService.pipesListObj;
     }
 
     orderByDate(list: [{created_at}]) { // todo move this to some common pipe filter
@@ -46,7 +37,4 @@ export class SyncSessionsComponent implements OnInit {
             return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
         });
     }
-
-    protected pipesListObj;
-    protected project;
 }

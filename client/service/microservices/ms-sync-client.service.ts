@@ -10,12 +10,12 @@ export class MsSyncClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-sync');
     }
 
-    getProjectSyncSessions(projectId: number, authUserSessionId: string): Promise<[SyncSession]> {
+    getPipeSyncSessions(pipeId: number, authUserSessionId: string): Promise<[SyncSession]> {
         return this.makeMsCall(
             'sync-sessions',
             'GET',
             {
-                ancestors_path: ['project', projectId]
+                pipe_fk_id: pipeId
             },
             authUserSessionId
         );
