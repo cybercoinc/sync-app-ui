@@ -48,7 +48,7 @@ export const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'public-todos',
+                        redirectTo: 'public_todos',
                     },
 
                     {
@@ -120,25 +120,6 @@ export const routes: Routes = [
                     },
                 ]
             },
-
-            // {
-            //     path: 'sync-sessions',
-            //     children: [
-            //         {
-            //             path: ':project_id',
-            //             children: [
-            //                 {
-            //                     path: '',
-            //                     component: SyncSessionsComponent,
-            //                 },
-            //                 {
-            //                     path: 'item-changes/:sync_session_id',
-            //                     component: ItemChangesComponent
-            //                 }
-            //             ]
-            //         }
-            //     ]
-            // },
         ],
     },
 ];

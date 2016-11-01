@@ -1,8 +1,15 @@
 import {Component, OnInit} from "@angular/core";
 
+import 'rxjs/add/operator/filter';
+
+import {Router, ActivatedRoute} from '@angular/router';
+
 import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.service';
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
+import {AuthService} from 'client/service/auth.service';
+
+import {SyncSession, ProjectPipe} from 'client/entities/entities';
 
 @Component({
     selector: 'sync-sessions-list',
@@ -11,14 +18,62 @@ import {PipeConnectionService} from 'client/service/pipe-connection.service';
 export class SyncSessionsListComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected PipeConnectionService: PipeConnectionService,
-                protected MsSyncClientService: MsSyncClientService,
-    ) {
-
+                protected ActivatedRoute: ActivatedRoute,
+                protected AuthService: AuthService,
+                protected Router: Router,
+                protected MsSyncClientService: MsSyncClientService) {
     }
 
-    syncSessionsList: [{}] = null;
+    private sub: any;
+
+    pipeType: string;
+    projectId: number;
+
+    syncSessionsList: SyncSession[] = null;
+    projectPipe: ProjectPipe;
 
     ngOnInit() {
+        this.ActivatedRoute.parent.params.forEach((params) => {
+            this.projectId = +params['project_id'];
+        });
+
+        this.sub = this.ActivatedRoute.params.subscribe(params => {
+            this.pipeType = params['pipe_type'];
+
+            this.getSyncSessionsList(this.projectId, this.pipeType, false);
+        });
     }
 
+    getSyncSessionsList(projectId, pipeType, onlyWithChanges: boolean) {
+        this.syncSessionsList = null;
+
+        this.MsProjectClientService.getPipesWhere({
+            type: pipeType,
+            project_fk_id: projectId
+        }, this.AuthService.authUser.auth_session_id)
+            .then((pipesList) => { // todo find how to resolve this in TS
+                this.projectPipe = pipesList.shift();
+
+                if (!this.projectPipe) {
+                    return [];
+                }
+
+                return this.MsSyncClientService.getPipeSyncSessions(this.projectPipe.id, onlyWithChanges, this.AuthService.authUser.auth_session_id);
+            })
+            .then(syncSessionsList => {
+                this.syncSessionsList = this.orderByDate(syncSessionsList);
+
+                return this.syncSessionsList;
+            })
+    }
+
+    orderByDate(list: SyncSession[]) { // todo move this to some common pipe filter
+        return list.sort(function (b, a) {
+            return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+        });
+    }
+
+    showOnlyWithItemChanges(onlyWithChanges: boolean) {
+        return this.getSyncSessionsList(this.projectId, this.pipeType, onlyWithChanges);
+    }
 }

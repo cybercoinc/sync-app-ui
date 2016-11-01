@@ -26,9 +26,9 @@ export class PipeConnectionService implements Resolve<{}> {
 
         let projectId = +route.params['project_id'];
 
+        // todo may double /me request. check it later
         return this.AuthService.getAuthUser()
             .then(authUser => {
-
                 return Promise.all([
                     this.getProject(projectId, authUser.auth_session_id),
                     this.getPipesList(projectId, authUser.auth_session_id)
@@ -45,41 +45,24 @@ export class PipeConnectionService implements Resolve<{}> {
     }|{} = {};
 
     getProject(projectId: number, authSessionId: string): Promise<Project> {
-        return new Promise<{}>((resolve, reject) => {
-            if (!this.project) {
-                return this.MsProjectClientService.getProjectByid(projectId, authSessionId)
-                    .then(projectsList => {
-                        let project = projectsList.shift();
+        return this.MsProjectClientService.getProjectByid(projectId, authSessionId)
+            .then(projectsList => {
 
-                        if (!project) {
-                            return reject(new Error('no project found'));
-                        }
+                this.project = projectsList.shift();
 
-                        this.project = project;
-
-                        return resolve(this.project);
-                    })
-            }
-
-            return resolve(this.project);
-        });
+                return this.project;
+            });
     }
 
     getPipesList(projectId: number, authSessionId: string): Promise<ProjectPipe[]> {
-        return new Promise<{}>((resolve, reject) => {
-            if (!Object.keys(this.pipesListObj).length) {
-                return this.MsProjectClientService.getPipesByProjectId(projectId, authSessionId)
-                    .then(pipesList => {
-                        pipesList.forEach((pipe: ProjectPipe) => {
-                            this.pipesListObj[pipe.type] = pipe;
-                        });
+        return this.MsProjectClientService.getPipesByProjectId(projectId, authSessionId)
+            .then(pipesList => {
+                pipesList.forEach((pipe: ProjectPipe) => {
+                    this.pipesListObj[pipe.type] = pipe;
+                });
 
-                        return resolve(this.pipesListObj);
-                    })
-            }
-
-            return resolve(this.pipesListObj);
-        });
+                return this.pipesListObj;
+            })
     }
 
     refreshPipesList() {
@@ -96,7 +79,7 @@ export class PipeConnectionService implements Resolve<{}> {
     enablePipe(pipeId: number) {
         let _pipeObj: ProjectPipe;
 
-        return this.MsProjectClientService.getPipe(pipeId, this.AuthService.authUser.auth_session_id)
+        return this.MsProjectClientService.getPipeById(pipeId, this.AuthService.authUser.auth_session_id)
             .then(pipeObj => {
                 _pipeObj = pipeObj;
 

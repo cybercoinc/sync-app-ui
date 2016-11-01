@@ -135,6 +135,7 @@ select > option:disabled {
 
 .clickable-row {
     cursor: pointer;
+    background-color: #FCFCFC;
 }
 
 .clickable-row:hover {
@@ -142,7 +143,7 @@ select > option:disabled {
 }
 
 .project-row {
-    background-color: #EBEBEB;
+    background-color: #ffffff;
     margin-bottom: 10px;
     padding: 10px 20px;
     cursor: pointer;
@@ -153,10 +154,11 @@ select > option:disabled {
     transition: max-height .1s;
     overflow: hidden;
     max-height: 45px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .expandable-row {
-    background-color: #EBEBEB;
+    background-color: #fff;
     margin-bottom: 10px;
     padding: 10px 20px;
     cursor: pointer;
@@ -166,7 +168,7 @@ select > option:disabled {
     -o-transition: max-height .1s;
     transition: max-height .1s;
     overflow: hidden;
-    max-height: 45px;
+    max-height: 145px;
     border: 1px solid #C9C9C9;
     border-radius: 2px;
 }
@@ -174,7 +176,6 @@ select > option:disabled {
 .row-expanded {
     max-height: 400px;
     background-color: #fff;
-    border: 1px solid #EBEBEB;
     -webkit-transition: background .1s linear;
     -moz-transition: background .1s linear;
     -ms-transition: background .1s linear;
@@ -184,4 +185,17 @@ select > option:disabled {
 
 .left-lined {
     border-left: 1px solid #A1A1A1;
+}
+
+.filter-container {
+    background-color: #fff;
+    font-size: 16px;
+    border: 1px solid #C9C9C9;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+
+.filter-container a {
+    cursor: pointer;
 }
