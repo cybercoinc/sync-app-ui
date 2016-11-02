@@ -187,6 +187,10 @@ select > option:disabled {
     border-left: 1px solid #A1A1A1;
 }
 
+.top-lined {
+    border-top: 1px solid #A1A1A1;
+}
+
 .filter-container {
     background-color: #fff;
     font-size: 16px;

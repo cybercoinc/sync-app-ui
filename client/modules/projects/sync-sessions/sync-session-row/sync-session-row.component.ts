@@ -36,4 +36,10 @@ export class SyncSessionRowComponent implements OnInit {
 
         return new Date().setTime(diff);
     }
+
+    protected isExpanded: boolean = false;
+
+    rowExpand() {
+        this.isExpanded = !this.isExpanded;
+    }
 }
