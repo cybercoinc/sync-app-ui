@@ -31,6 +31,7 @@ import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.co
 import {CreateProjectComponent} from './create-project/create-project.component';
 import {ItemChangesDetailComponent} from "./sync-sessions/item-changes/item-changes-detail/item-changes-detail.component";
 import {ItemChangesRowComponent} from "./sync-sessions/item-changes/item-changes-row/item-changes-row.component";
+import {ProjectSettingsComponent} from "./edit-project/components/project-settings/project-settings.component";
 
 @NgModule({
     imports: [
@@ -55,6 +56,7 @@ import {ItemChangesRowComponent} from "./sync-sessions/item-changes/item-changes
         PipeStepRowComponent,
         PipePublicTodoComponent,
         PipePrivateTodoComponent,
+        ProjectSettingsComponent,
         SmartsheetConnectionPublicComponent,
         SmartsheetConnectionPrivateComponent,
         SmartsheetConnectionComponent,

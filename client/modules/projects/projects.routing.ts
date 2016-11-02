@@ -20,6 +20,7 @@ import {SmartsheetConnectionPublicComponent} from './edit-project/components/pip
 import {PipeSettingsPublicComponent} from './edit-project/components/pipe-public-todo/pipe-settings-public.component';
 
 import {SyncSessionsListComponent} from './sync-sessions/list/sync-sessions-list.component';
+import {ProjectSettingsComponent} from './edit-project/components/project-settings/project-settings.component';
 
 export const routes: Routes = [
     {
@@ -55,12 +56,6 @@ export const routes: Routes = [
                         path: ':pipe_type',
                         component: SyncSessionsListComponent
                     },
-                    //
-                    // {
-                    //     path: 'item-changes/:sync_session_id',
-                    //     component: ItemChangesComponent
-                    // },
-
                 ]
             },
 
@@ -117,6 +112,11 @@ export const routes: Routes = [
                                 component: PipeSettingsPublicComponent,
                             },
                         ]
+                    },
+
+                    {
+                        path: 'settings',
+                        component: ProjectSettingsComponent
                     },
                 ]
             },
