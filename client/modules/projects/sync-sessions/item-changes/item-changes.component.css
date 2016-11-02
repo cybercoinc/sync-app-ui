@@ -1,3 +1,28 @@
 .item-changes-container {
     margin-top: 20px;
 }
+
+.item-changes-list-container {
+    padding: 20px 0px;
+}
+
+.item-changes-ul {
+    list-style-type: none;
+}
+
+.item-changes-row {
+    border: 1px solid #F7F7F7;
+    border-radius: 2px;
+    padding: 0px 10px;
+    display: inline-flex;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.item-changes-row:hover {
+    background-color: #F7F7F7;
+}
+
+.item-changes-container p {
+    margin: 0;
+}

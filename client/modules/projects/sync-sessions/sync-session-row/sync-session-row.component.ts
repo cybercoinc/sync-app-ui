@@ -15,7 +15,6 @@ export class SyncSessionRowComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('sync row init');
     }
 
     @Input('sync-session') syncSession: SyncSession;

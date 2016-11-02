@@ -29,6 +29,8 @@ import {SyncSessionRowComponent} from './sync-sessions/sync-session-row/sync-ses
 
 import {ItemChangesComponent} from './sync-sessions/item-changes/item-changes.component';
 import {CreateProjectComponent} from './create-project/create-project.component';
+import {ItemChangesDetailComponent} from "./sync-sessions/item-changes/item-changes-detail/item-changes-detail.component";
+import {ItemChangesRowComponent} from "./sync-sessions/item-changes/item-changes-row/item-changes-row.component";
 
 @NgModule({
     imports: [
@@ -45,6 +47,8 @@ import {CreateProjectComponent} from './create-project/create-project.component'
         SyncSessionsListComponent,
         SyncSessionRowComponent,
         ItemChangesComponent,
+        ItemChangesDetailComponent,
+        ItemChangesRowComponent,
         CreateProjectComponent,
         PipeRowComponent,
         EditProjectComponent,

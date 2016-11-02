@@ -64,6 +64,11 @@ export class Item {
     type: 'todos'
 }
 
+
+export const ITEM_CHANGES_TYPE_CREATED_ONE = 'created_one';
+export const ITEM_CHANGES_TYPE_CHANGED_ONE = 'changed_one';
+export const ITEM_CHANGES_TYPE_DELETED_ONE = 'deleted_one';
+
 export class ItemChanges {
     created_at: Date;
     source: 'smartsheet' | 'procore';
@@ -73,11 +78,9 @@ export class ItemChanges {
         namespace: string;
         path: string|number[]
     };
-    type: 'created_one|changed_one|deleted_one';
-    data: {
-        item: Item,
-        changes: [{property: string; old_value: string|number;new_value: string|number}]
-    }
+    type: 'created_one'|'changed_one'|'deleted_one';
+    item: Item;
+    changes: [{property: string; old_value: string|number;new_value: string|number}];
 }
 
 export class ProcoreProject {
