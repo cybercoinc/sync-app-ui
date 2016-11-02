@@ -1,11 +1,11 @@
 <div class="container-fluid item-changes-container">
     <div class="row">
         <div class="col-xs-12" *ngIf="itemChangesObj?.type === 'created_one'">
-            <p>Name: {{itemChangesObj.item.name}}</p>
-            <p>Description: {{itemChangesObj.item.description}}</p>
-            <p>Percentage: {{itemChangesObj.item.percentage}}</p>
-            <p>Start: {{itemChangesObj.item.start_datetime}}</p>
-            <p>Finish: {{itemChangesObj.item.finish_datetime}}</p>
+            <p>Name: {{itemChangesObj.item?.name}}</p>
+            <p>Description: {{itemChangesObj.item?.description}}</p>
+            <p>Percentage: {{itemChangesObj.item?.percentage}}</p>
+            <p>Start: {{itemChangesObj.item?.start_datetime}}</p>
+            <p>Finish: {{itemChangesObj.item?.finish_datetime}}</p>
         </div>
 
         <div class="col-xs-12" *ngIf="itemChangesObj?.type === 'changed_one'">
