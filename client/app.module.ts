@@ -7,6 +7,8 @@ import {MaterialModule} from '@angular/material';
 import {AppComponent}  from './app.component';
 import {routing} from "./routes";
 
+import {UserMenuComponent}  from './components/shared/usermenu.component';
+
 import {MsProjectClientService} from './service/microservices/ms-project-client.service';
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
 import {MsSyncClientService} from './service/microservices/ms-sync-client.service';
@@ -48,6 +50,7 @@ import {BillingModule} from 'client/modules/billing/billing.module';
 
     declarations: [
         AppComponent,
+        UserMenuComponent
     ],
 
     bootstrap: [AppComponent],
