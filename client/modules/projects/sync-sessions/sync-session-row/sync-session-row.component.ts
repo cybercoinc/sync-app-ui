@@ -29,12 +29,14 @@ export class SyncSessionRowComponent implements OnInit {
     }
 
     getTotalTime() {
-        let d2 = new Date().setTime(+this.syncSession.finished_at);
-        let d1 = new Date().setTime(+this.syncSession.started_at);
+        if (!this.syncSession.finished_at || !this.syncSession.started_at) {
+            return 0;
+        }
 
-        let diff = d2 - d1;
+        let d2 = new Date(+this.syncSession.finished_at);
+        let d1 = new Date(+this.syncSession.started_at);
 
-        return new Date().setTime(diff);
+        return d2.getTime() - d1.getTime();
     }
 
     protected isExpanded: boolean = false;
