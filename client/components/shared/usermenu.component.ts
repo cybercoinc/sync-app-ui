@@ -17,11 +17,11 @@ import {User} from 'client/entities/entities';
     <li>
         <a href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">{{authUserEmail}} <i class="material-icons">arrow_drop_down</i></a>
         <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;">
-            <li><a href="javascript: void(0);"  (click)="showUserMenu = !showUserMenu;">Company Settings</a></li>
+            <li><a href="javascript: void(0);"  (click)="showUserMenu = !showUserMenu;">**Company Settings</a></li>
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
             <li><a [routerLink]="['/billing/licenses']" (click)="showUserMenu = !showUserMenu;">Billing Information</a></li>
             <li class="divider"></li>
-            <li><a href="javascript: void(0);"  (click)="showUserMenu = !showUserMenu;">Log out</a></li>
+            <li><a href="javascript: void(0);"  (click)="showUserMenu = !showUserMenu;">**Log out</a></li>
         </ul>
     </li>
 </ul>
