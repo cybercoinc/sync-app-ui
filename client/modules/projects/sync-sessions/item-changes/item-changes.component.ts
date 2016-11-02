@@ -32,18 +32,13 @@ export class ItemChangesComponent implements OnInit {
                     deleted_one: [],
                 };
 
-                console.log('this.formattedItemChangesObj', this.formattedItemChangesObj);
-
                 itemChangesList.forEach((itemChangesObj) => {
                     this.formattedItemChangesObj[itemChangesObj.type].push(itemChangesObj);
                 });
-
-                console.log('this.formattedItemChangesObj', this.formattedItemChangesObj);
             });
     }
 
     viewDetails(itemChanges) {
-        console.log('view details', itemChanges);
         this.selectedItemChanges = itemChanges;
     }
 
