@@ -1,6 +1,5 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
-import {User} from 'client/entities/entities';
 import {PendingRequestsService} from "../peding-requests.service";
 
 export class MsLicenseClientService extends MsClientService {
@@ -23,11 +22,12 @@ export class MsLicenseClientService extends MsClientService {
             authUserSessionId
         );
     }
+
     getLicenses(userId, authUserSessionId): Promise<> {
         return this.makeMsCall('get-licenses', 'GET', {user_id: userId}, authUserSessionId);
     }
 
-    getInvoices(userId, authUserSessionId): Promise<>  {
+    getInvoices(userId, authUserSessionId): Promise<> {
         return this.makeMsCall('get-invoices', 'GET', {user_id: userId}, authUserSessionId);
     }
 

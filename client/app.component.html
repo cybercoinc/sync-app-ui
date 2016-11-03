@@ -9,8 +9,7 @@
         <usermenu *ngIf="authUser && authUser.role !=='guest'"></usermenu>
     </div>
 
-    <md-progress-bar *ngIf="PendingRequestsService.hasPendingRequest" mode="indeterminate" color="primary"
-                     class="demo-progress-bar-margins"></md-progress-bar>
+    <loader-progress-bar [is-visible]="PendingRequestsService.hasPendingRequest"></loader-progress-bar>
 </nav>
 
 <div class="container-fluid">

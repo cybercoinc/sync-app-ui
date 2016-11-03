@@ -3,7 +3,7 @@ import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 // import {Config} from 'client/config';
 
 import 'rxjs/add/operator/toPromise';
-import {PendingRequestsService} from "client/service/peding-requests.service";
+import {PendingRequestsService} from "../peding-requests.service";
 
 @Injectable()
 export class MsClientService {
@@ -88,6 +88,7 @@ export class MsClientService {
             })
             .catch((response: any) => {
                 this.PendingRequestsService.hasPendingRequest = false;
+
                 this.handleError(response);
             });
     }
