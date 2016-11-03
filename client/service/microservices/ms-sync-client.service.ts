@@ -16,7 +16,7 @@ export class MsSyncClientService extends MsClientService {
             'sync-sessions',
             'GET',
             {
-                pipe_fk_id: pipeId,
+                pipe_id: pipeId,
                 only_with_changes: onlyWithChanges
             },
             authUserSessionId
