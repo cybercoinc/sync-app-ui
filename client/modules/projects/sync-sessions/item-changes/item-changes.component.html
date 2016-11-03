@@ -21,7 +21,7 @@
                     <b>Created ({{formattedItemChangesObj.created_one.length}}):</b>
                     <ul class="item-changes-ul">
                         <li *ngFor="let itemChangesObj of formattedItemChangesObj.created_one">
-                            <item-changes-row (click)="viewDetails(itemChangesObj)"
+                            <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
                                               [item-changes]="itemChangesObj"></item-changes-row>
                         </li>
                     </ul>
@@ -33,7 +33,7 @@
                     <b>Updated ({{formattedItemChangesObj.changed_one.length}}):</b>
                     <ul class="item-changes-ul">
                         <li *ngFor="let itemChangesObj of formattedItemChangesObj.changed_one">
-                            <item-changes-row (click)="viewDetails(itemChangesObj)"
+                            <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
                                               [item-changes]="itemChangesObj"></item-changes-row>
                         </li>
                     </ul>

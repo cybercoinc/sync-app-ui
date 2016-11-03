@@ -26,3 +26,7 @@
 .item-changes-container p {
     margin: 0;
 }
+
+.selected {
+    font-weight: bolder;
+}
