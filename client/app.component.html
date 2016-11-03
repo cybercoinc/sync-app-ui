@@ -1,16 +1,14 @@
 <nav class="navbar navbar-default navbar-sc">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand logo-container" [routerLink]="['/projects']" >
+            <a class="navbar-brand logo-container" [routerLink]="['/projects']">
                 <img src="/assets/img/logo.png" style="height: 40px;" alt="logo">
             </a>
         </div>
 
         <usermenu *ngIf="authUser && authUser.role !=='guest'"></usermenu>
-
-
-    </div><!-- /.container-fluid -->
+    </div>
+    <loader-progress-bar [is-visible]="PendingRequestsService.hasPendingRequest"></loader-progress-bar>
 </nav>
 
 <div class="container-fluid">

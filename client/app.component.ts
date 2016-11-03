@@ -1,10 +1,9 @@
 import {Component} from "@angular/core";
 import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
-
+import {PendingRequestsService} from "./service/pending-requests.service";
 
 @Component({
-    // moduleId: module.id,
     selector: 'app',
     templateUrl: 'client/app.component.html',
 })
@@ -12,13 +11,12 @@ import {User} from 'client/entities/entities';
 export class AppComponent {
     appName: string = 'Schedule Connector';
 
-    constructor(protected AuthService: AuthService) {
+    constructor(protected AuthService: AuthService, protected PendingRequestsService: PendingRequestsService) {
 
     }
 
     ngOnInit() {
-        this.AuthService.getAuthUser()
-            .then(authUser => this.authUser = authUser);
+        this.authUser = this.AuthService.authUser;
     }
 
     authUser: User = null;

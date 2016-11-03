@@ -146,7 +146,6 @@ select > option:disabled {
     background-color: #ffffff;
     margin-bottom: 10px;
     padding: 10px 20px;
-    cursor: pointer;
     -webkit-transition: max-height .1s;
     -moz-transition: max-height .1s;
     -ms-transition: max-height .1s;
@@ -155,6 +154,10 @@ select > option:disabled {
     overflow: hidden;
     max-height: 45px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.project-row i {
+    cursor: pointer;
 }
 
 .expandable-row {
