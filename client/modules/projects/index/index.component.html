@@ -3,7 +3,6 @@
     <div class="row module-header">
         <div class="col-xs-12">
             <div class="module-name">Projects</div>
-
             <a [routerLink]="['create-project']" class="btn btn-success">create project</a>
         </div>
     </div>
@@ -19,46 +18,29 @@
 
         <div *ngIf="projectRows && projectRows.length">
             <div class="col-xs-12" *ngFor="let projectRow of projectRows">
-                <div class="project-row" [class.row-expanded]="projectRow.is_expanded">
+                <div class="project-row">
                     <div class="container-fluid">
-
                         <div class="row">
-                            <div class="col-xs-5" (click)="projectRowExpand(projectRow)">
+                            <div class="col-xs-5">
                                 {{projectRow.project.name}}
                             </div>
                             <div class="col-xs-4">
-                                <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event_note</i>
-                                <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
-                                <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i>
+                                <!--<i [routerLink]="[projectRow.project.id, 'sync-sessions', 'tasks']"-->
+                                   <!--class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event_note</i>-->
+                                <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'public_todos']"
+                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
+                                <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'private_todos']"
+                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i>
                             </div>
                             <div class="col-xs-3">
-                                <a [routerLink]="[projectRow.project.id, 'edit-project']" class="pull-right btn btn-primary btn-sm">edit</a>
-                            </div>
-                        </div>
-
-                        <div class="row" *ngIf="projectRow.is_expanded">
-                            <div class="col-xs-12">
-                                <a [routerLink]="[projectRow.project.id, 'sync-sessions']" class="btn btn-primary btn-sm">Sync Sessions</a>
+                                <a [routerLink]="[projectRow.project.id, 'edit-project']"
+                                   class="pull-right btn btn-primary btn-sm">edit</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!--<div class="col-xs-12">-->
-        <!--<md-card *ngFor="let project of projects">-->
-        <!--<md-card-title>{{project.name}}</md-card-title>-->
-        <!--<md-card-content>-->
-        <!--<p>This is supporting text.</p>-->
-        <!--</md-card-content>-->
-        <!--<md-card-actions align="end">-->
-        <!--<button md-raised-button [routerLink]="['sync-sessions', project.id]">Sync Sessions</button>-->
-        <!--&lt;!&ndash;<button md-raised-button [routerLink]="['changes-logs', project.id]">Changes logs</button>&ndash;&gt;-->
-        <!--<button md-raised-button color="warn" [disabled]="true">DELETE</button>-->
-        <!--</md-card-actions>-->
-        <!--</md-card>-->
-        <!--</div>-->
     </div>
 </div>
 

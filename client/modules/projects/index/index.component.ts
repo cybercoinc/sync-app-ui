@@ -1,13 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
-import {PipeConnectionService} from 'client/service/pipe-connection.service';
 import {AuthService} from 'client/service/auth.service';
 import {Project, ProjectPipe} from 'client/entities/entities';
 
 @Component({
     selector: 'index',
-    templateUrl: `client/modules/projects/index/index.component.html`,
-    styleUrls: ['client/modules/projects/index/index.component.css'],
+    templateUrl: `client/modules/projects/index/index.component.html`
 })
 export class IndexComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
@@ -16,7 +14,6 @@ export class IndexComponent implements OnInit {
 
     projectRows: [{
         project: Project,
-        is_expanded: boolean,
         projectPipesList: ProjectPipe[]
     }];
 
@@ -56,23 +53,12 @@ export class IndexComponent implements OnInit {
 
                     this.projectRows.push({
                         project: project,
-                        is_expanded: false,
                         projectPipesList: projectPipesList
                     })
                 });
 
                 return this.projectRows;
             })
-    }
-
-    projectRowExpand(projectRow): void {
-        this.projectRows.forEach(projRow => {
-            if (projectRow.project.id !== projRow.project.id) {
-                projRow.is_expanded = false;
-            }
-        });
-
-        projectRow.is_expanded = !projectRow.is_expanded;
     }
 
     getPipeStatus(projectPipesList, pipeType): string {
