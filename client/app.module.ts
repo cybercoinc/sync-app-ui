@@ -24,7 +24,7 @@ import {ConnectionModule} from 'client/modules/connection/connection.module';
 import {ProjectsModule} from 'client/modules/projects/projects.module';
 import {BillingModule} from 'client/modules/billing/billing.module';
 import {MsClientService} from "./service/microservices/ms-client.service";
-import {PendingRequestsService} from "./service/peding-requests.service";
+import {PendingRequestsService} from "./service/pending-requests.service";
 import {LoaderProgressBarComponent} from "./components/shared/loader.component";
 
 @NgModule({

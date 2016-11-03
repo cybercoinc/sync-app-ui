@@ -3,7 +3,7 @@ import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 // import {Config} from 'client/config';
 
 import 'rxjs/add/operator/toPromise';
-import {PendingRequestsService} from "../peding-requests.service";
+import {PendingRequestsService} from "../pending-requests.service";
 
 @Injectable()
 export class MsClientService {

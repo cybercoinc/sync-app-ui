@@ -1,7 +1,7 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
 import {SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet, ProjectPipe} from 'client/entities/entities';
-import {PendingRequestsService} from "../peding-requests.service";
+import {PendingRequestsService} from "../pending-requests.service";
 
 export class MsProjectClientService extends MsClientService {
 

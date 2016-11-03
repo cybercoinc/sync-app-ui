@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
-import {PendingRequestsService} from "./service/peding-requests.service";
+import {PendingRequestsService} from "./service/pending-requests.service";
 
 @Component({
     selector: 'app',
