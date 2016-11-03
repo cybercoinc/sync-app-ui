@@ -3,15 +3,14 @@ import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 // import {Config} from 'client/config';
 
 import 'rxjs/add/operator/toPromise';
+import {PendingRequestsService} from "client/service/peding-requests.service";
 
 @Injectable()
 export class MsClientService {
-
     url: string;
-
     services: [{}] = window['services']; // todo move this to root route resolver
 
-    constructor(protected Http: Http) {
+    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService) {
     }
 
     getServiceUrl(serviceName: string) {
@@ -47,6 +46,8 @@ export class MsClientService {
             'auth-session-id': authSessionId
         });
 
+        this.PendingRequestsService.hasPendingRequest = true;
+
         console.log('makeMsCall ' + action, authSessionId);
 
         if (method === 'GET' || method === 'DELETE') {
@@ -78,12 +79,17 @@ export class MsClientService {
 
         return this.Http.request(this.url + action, requestOptions)
             .toPromise()
-            .then(function (response) {
+            .then(response => {
+                this.PendingRequestsService.hasPendingRequest = false;
+
                 let resObj = response.json();
 
                 return resObj.result;
             })
-            .catch(this.handleError);
+            .catch((response: any) => {
+                this.PendingRequestsService.hasPendingRequest = false;
+                this.handleError(response);
+            });
     }
 
     protected handleError(response: any) {
@@ -103,7 +109,7 @@ export class MsClientService {
         );
     }
 
-    update(id, data: {}, authUserSessionId: string): Promise<> {
+    update(id, data: {}, authUserSessionId: string): Promise<number> {
         return this.makeMsCall(
             'update/' + id,
             'PUT',

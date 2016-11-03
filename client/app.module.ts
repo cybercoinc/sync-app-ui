@@ -23,6 +23,9 @@ import {SandboxModule} from './modules/sandbox/sandbox.module';
 import {ConnectionModule} from 'client/modules/connection/connection.module';
 import {ProjectsModule} from 'client/modules/projects/projects.module';
 import {BillingModule} from 'client/modules/billing/billing.module';
+import {MsClientService} from "./service/microservices/ms-client.service";
+import {PendingRequestsService} from "./service/peding-requests.service";
+
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
@@ -41,6 +44,8 @@ import {BillingModule} from 'client/modules/billing/billing.module';
     providers: [
         AuthService,
         AuthGuardService,
+        PendingRequestsService,
+        MsClientService,
         MsProjectClientService,
         MsUserClientService,
         MsLicenseClientService,

@@ -1,11 +1,12 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
 import {SyncSession, ItemChanges, ProcoreTodoColumn} from 'client/entities/entities'
+import {PendingRequestsService} from "../peding-requests.service";
 
 export class MsSyncClientService extends MsClientService {
 
-    constructor(protected Http: Http) {
-        super(Http);
+    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService) {
+        super(Http, PendingRequestsService);
 
         this.url = this.getServiceUrl('ms-sync');
     }
