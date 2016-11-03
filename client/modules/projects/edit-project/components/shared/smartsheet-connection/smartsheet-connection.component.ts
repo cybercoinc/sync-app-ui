@@ -7,6 +7,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {Config} from 'client/config';
 import {Project, SmartsheetSheet} from 'client/entities/entities';
 import {PIPE_TYPE_PUBLIC_TODOS, PIPE_STATUS_DISABLED} from 'client/entities/entities';
+import {PendingRequestsService} from "client/service/pending-requests.service";
 
 @Component({
     selector: 'smartsheet-connection',
@@ -17,6 +18,7 @@ export class SmartsheetConnectionComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService,
                 protected PipeConnectionService: PipeConnectionService,
+                protected PendingRequestsService: PendingRequestsService,
                 private route: ActivatedRoute,
                 private router: Router) {
     }
@@ -87,7 +89,11 @@ export class SmartsheetConnectionComponent implements OnInit {
         return this.connectedSmSheetsIdsList.indexOf(smSheet.id) !== -1;
     }
 
-    createNewSheetWithWorkspace() {
+    createNewSheetWithWorkspace(): boolean | Promise<boolean>{
+        if (this.PendingRequestsService.hasPendingRequest) {
+            return false;
+        }
+
         let project = this.PipeConnectionService.project;
 
         let procoreProjectName = project.name;
@@ -134,7 +140,11 @@ export class SmartsheetConnectionComponent implements OnInit {
         this.columnsMatchingIsVisible = true;
     }
 
-    onColumnsMatched(columnsObj) {
+    onColumnsMatched(columnsObj): boolean | Promise<boolean> {
+        if (this.PendingRequestsService.hasPendingRequest) {
+            return false;
+        }
+
         let project = this.PipeConnectionService.project;
 
         let procoreProjectName = project.name;

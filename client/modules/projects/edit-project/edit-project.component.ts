@@ -19,11 +19,10 @@ export class EditProjectComponent implements OnInit {
 
     ngOnInit() {
         // todo implement pipes refreshing
-        // this.PipeConnectionService.refreshPipesList()
-        //     .then(() => {
+        this.PipeConnectionService.refreshPipesList();
+
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
         this.project = this.PipeConnectionService.project;
-        // });
     }
 
     protected pipesListObj;

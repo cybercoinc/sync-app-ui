@@ -23,22 +23,16 @@ export class AuthService implements Resolve<{}> {
     authUser: User = null;
 
     getAuthUser(): Promise<User> {
-        return new Promise<{}>((resolve, reject) => {
-            if (!this.authUser) {
-                return this.msUser.getMe()
-                    .then(authUser => {
-                        if (!authUser) {
-                            return reject(new Error('no user found'));
-                        }
+        return this.msUser.getMe()
+            .then(authUser => {
+                if (!authUser) {
+                    throw new Error('no user found');
+                }
 
-                        this.authUser = authUser;
+                this.authUser = authUser;
 
-                        return resolve(this.authUser);
-                    })
-            }
-
-            return resolve(this.authUser);
-        });
+                return this.authUser
+            })
     }
 
     defaultAuth() {

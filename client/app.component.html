@@ -6,7 +6,7 @@
             </a>
         </div>
 
-        <usermenu *ngIf="authUser && authUser.role !=='guest'"></usermenu>
+        <usermenu [user]="AuthService.authUser"></usermenu>
     </div>
     <loader-progress-bar [is-visible]="PendingRequestsService.hasPendingRequest"></loader-progress-bar>
 </nav>
