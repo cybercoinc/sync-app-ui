@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
-import {AuthService} from 'client/service/auth.service';
-import {User} from 'client/entities/entities';
 import {PendingRequestsService} from "./service/pending-requests.service";
+import {AuthService} from "./service/auth.service";
 
 @Component({
     selector: 'app',
@@ -16,8 +15,5 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        this.authUser = this.AuthService.authUser;
     }
-
-    authUser: User = null;
 }

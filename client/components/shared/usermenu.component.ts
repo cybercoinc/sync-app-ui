@@ -1,9 +1,9 @@
-import { Component, ElementRef } from "@angular/core";
+import {Component, ElementRef, Input} from "@angular/core";
 import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
 
 @Component({
-    selector: "usermenu",
+    selector: 'usermenu',
     host: {
         '(document:click)': 'onClick($event)',
     },
@@ -13,9 +13,9 @@ import {User} from 'client/entities/entities';
         'ul {background-color: #44556b;}'
     ],
     template: `
-<ul class="nav navbar-nav navbar-right">
+<ul class="nav navbar-nav navbar-right" *ngIf="authUser">
     <li>
-        <a href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">{{authUserEmail}} <i class="material-icons">arrow_drop_down</i></a>
+        <a href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">{{authUser?.email}} <i class="material-icons">arrow_drop_down</i></a>
         <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;">
             <li><a href="javascript: void(0);"  (click)="showUserMenu = !showUserMenu;">**Company Settings</a></li>
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
@@ -29,26 +29,16 @@ import {User} from 'client/entities/entities';
 })
 export class UserMenuComponent {
 
-    constructor(protected AuthService: AuthService, private _eref: ElementRef) { }
+    constructor(private _eref: ElementRef) {
+    }
 
     showUserMenu: boolean = false;
-
-    authUserEmail: string = '';
-
-    authUser: User = null;
-
-    ngOnInit() {
-        this.AuthService.getAuthUser()
-            .then(authUser => {
-                this.authUser = authUser;
-                this.authUserEmail = authUser.email;
-            });
-    }
+    @Input('user') authUser: User;
 
     onClick(event) {
         event.stopPropagation();
 
-        if (!this._eref.nativeElement.contains(event.target)){
+        if (!this._eref.nativeElement.contains(event.target)) {
             this.showUserMenu = false;
         }
     }
