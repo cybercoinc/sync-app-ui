@@ -8,7 +8,6 @@
 
         <usermenu *ngIf="authUser && authUser.role !=='guest'"></usermenu>
     </div>
-
     <loader-progress-bar [is-visible]="PendingRequestsService.hasPendingRequest"></loader-progress-bar>
 </nav>
 
