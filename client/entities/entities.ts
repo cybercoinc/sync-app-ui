@@ -44,6 +44,10 @@ export class SyncSession {
         sm_to_pr_sync_seconds: number;
         pr_to_sm_sync_seconds: number;
         total_sync_seconds: number;
+    };
+    err: {
+        message: string;
+        stack: string;
     }
 }
 

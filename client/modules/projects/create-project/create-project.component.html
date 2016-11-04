@@ -35,8 +35,9 @@
                     </div>
                 </div>
 
-                <a (click)="createNewProject()" class="btn btn-success" [class.disabled]="!selectedProject">CREATE AND CONTINUE</a>
-
+                <a (click)="createNewProject()" class="btn btn-success" [class.disabled]="!selectedProject">CREATE AND
+                    CONTINUE</a>
+                <a [routerLink]="['/','projects']" class="btn btn-warning">cancel</a>
             </md-card-content>
         </md-card>
 

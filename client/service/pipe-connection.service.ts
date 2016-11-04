@@ -57,6 +57,8 @@ export class PipeConnectionService implements Resolve<{}> {
     getPipesList(projectId: number, authSessionId: string): Promise<ProjectPipe[]> {
         return this.MsProjectClientService.getPipesByProjectId(projectId, authSessionId)
             .then(pipesList => {
+                this.pipesListObj = [];
+
                 pipesList.forEach((pipe: ProjectPipe) => {
                     this.pipesListObj[pipe.type] = pipe;
                 });
