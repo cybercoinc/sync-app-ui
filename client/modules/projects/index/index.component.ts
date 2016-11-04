@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
     projectRows: [{
         project: Project,
         projectPipesList: ProjectPipe[]
-    }];
+    }] | any;
 
     ngOnInit(): void {
         this.getActiveProjectsWithPipes();
