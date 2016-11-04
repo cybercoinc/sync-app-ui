@@ -61,7 +61,6 @@ export const routes: Routes = [
                 path: ':project_id/edit-project',
                 component: EditProjectComponent,
                 resolve: {
-                    authUser: AuthService,
                     project: PipeConnectionService
                 },
                 children: [
