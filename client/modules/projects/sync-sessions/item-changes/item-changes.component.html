@@ -49,4 +49,14 @@
             <item-changes-detail [item-changes]="selectedItemChanges"></item-changes-detail>
         </div>
     </div>
+
+    <div class="row top-lined item-changes-list-container" *ngIf="syncSession.err">
+        <div class="col-xs-12">
+            <b>Error:</b>
+            <ul>
+                <li>{{syncSession.err?.message}}</li>
+                <li>{{syncSession.err?.stack}}</li>
+            </ul>
+        </div>
+    </div>
 </div>

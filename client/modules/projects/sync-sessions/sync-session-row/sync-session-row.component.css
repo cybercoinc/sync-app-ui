@@ -1,8 +1,19 @@
 .sync-session-row .status {
-    color: green;
     display: block;
     float: left;
     margin-right: 15px;
+}
+
+.sync-session-row .status-completed {
+    color: green;
+}
+
+.sync-session-row .status-failed {
+    color: red;
+}
+
+.sync-session-row .status-created {
+    /*color: ;*/
 }
 
 .sync-session-row {
