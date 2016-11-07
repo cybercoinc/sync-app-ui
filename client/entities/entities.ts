@@ -175,6 +175,8 @@ export class ProjectPipe {
     sm_weekends: [string];
     sm_webhook_id: number;
     sm_webhook_status: string;
+    summary_tasks_enabled: boolean;
+    colors_coding_enabled: boolean;
 }
 
 export const PIPE_TYPE_PUBLIC_TODOS = 'public_todos';
