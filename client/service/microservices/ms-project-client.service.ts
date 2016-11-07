@@ -185,7 +185,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createPipe(projectId: number, dataToSet, pipeName: string, authUserSessionId: string): Promise<[number]> {
+    createPipe(projectId: number, dataToSet, pipeName: string, authUserSessionId: string): Promise<number> {
         return this.makeMsCall(
             'create-pipe',
             'POST',

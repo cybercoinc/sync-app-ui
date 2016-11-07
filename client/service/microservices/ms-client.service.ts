@@ -93,8 +93,10 @@ export class MsClientService {
             });
     }
 
-    protected handleError(response: any) {
+    protected handleError(response: any): Promise<any>|string {
         if (response.status === 401) {
+            Promise.reject(new Error('not authorized'));
+
             return window.location.href = '/#/auth/procore'; // todo use app.router here
         }
 

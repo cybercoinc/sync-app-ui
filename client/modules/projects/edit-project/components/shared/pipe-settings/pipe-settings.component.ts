@@ -46,18 +46,16 @@ export class PipeSettingsComponent implements OnInit {
         colors_coding_enabled: false,
     };
 
-    checkModel() {
-        console.log(this.model);
-    }
-
     saveAndContinue() {
-        let project = this.PipeConnectionService.project;
-        let pipe = this.pipesListObj[this.pipeType];
-
-        return this.MsProjectClientService.updatePipe(pipe.id, {
-            sm_working_days: this.model.workingDays,
-            sm_weekends: this.model.nonWorkingDays.split(',')
-        }, this.AuthService.authUser.auth_session_id)
+        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
+            .then(pipeId => {
+                return this.MsProjectClientService.updatePipe(pipeId, {
+                    sm_working_days: this.model.workingDays,
+                    sm_weekends: this.model.nonWorkingDays.split(','),
+                    summary_tasks_enabled: this.model.summary_tasks_enabled,
+                    colors_coding_enabled: this.model.colors_coding_enabled
+                }, this.AuthService.authUser.auth_session_id);
+            })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
             });

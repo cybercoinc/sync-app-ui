@@ -64,47 +64,48 @@
 
     <!-- TASK TITLES -->
     <br>
-    <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-    <!--<div class="pipe-step-header-large">Task Titles:</div>-->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="pipe-step-header-large">Task Titles:</div>
 
-    <!--<div class="pipe-step-description">-->
-    <!--Here can be some text to provide more information for this section-->
-    <!--</div>-->
-    <!--</div>-->
+            <div class="pipe-step-description">
+                User hierarchy todos' names at Procore project depending on SmartSheet rows relations.
+            </div>
+        </div>
 
-    <!--<div class="col-xs-12">-->
-    <!--<form>-->
-    <!--<md-checkbox [(ngModel)]="model.summary_tasks_enabled" name="summary_tasks_enabled">-->
-    <!--Include Summary Tasks-->
-    <!--</md-checkbox>-->
-    <!--</form>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!-- end TASK TITLES -->
+        <div class="col-xs-12">
+            <form>
+                <md-checkbox [(ngModel)]="model.summary_tasks_enabled" name="summary_tasks_enabled">
+                    Include Summary Tasks
+                </md-checkbox>
+            </form>
+        </div>
+    </div>
+    <!--end TASK TITLES -->
 
 
-    <!-- COLOR CODING -->
-    <!--<br>-->
-    <!--<div class="row">-->
-    <!--<div class="col-xs-12">-->
-    <!--<div class="pipe-step-header-large">Color Coding:</div>-->
+    <!--COLOR CODING -->
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="pipe-step-header-large">Color Coding:</div>
 
-    <!--<div class="pipe-step-description">-->
-    <!--Here can be some text to provide more information for this section-->
-    <!--</div>-->
-    <!--</div>-->
+            <div class="pipe-step-description">
+                Here can be some text to provide more information for this section
+            </div>
+        </div>
 
-    <!--<div class="col-xs-12">-->
-    <!--<form>-->
-    <!--<md-checkbox [(ngModel)]="model.summary_tasks_enabled" name="summary_tasks_enabled">-->
-    <!--Include Summary Tasks-->
-    <!--</md-checkbox>-->
-    <!--</form>-->
-    <!--</div>-->
-    <!--</div>-->
+        <div class="col-xs-12">
+            <form>
+                <md-checkbox [(ngModel)]="model.colors_coding_enabled" name="colors_coding_enabled">
+                    Enable color coding
+                </md-checkbox>
+            </form>
+        </div>
+    </div>
     <!-- end COLOR CODING -->
 
+    <br>
     <div class="row">
         <div class="col-xs-12">
             <a [class.disabled]="false" class="btn btn-success" (click)="saveAndContinue()">Save and continue</a>
@@ -179,6 +180,48 @@
         <div class="col-xs-12">
             <textarea placeholder="Type or paste dates here (12/15/15), separated by commas" name="nonWorkingDays"
                       [disabled]="true">{{pipesListObj[pipeType]?.sm_weekends?.join(',')}}</textarea>
+        </div>
+    </div>
+
+    <!-- TASK TITLES -->
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="pipe-step-header-large">Task Titles:</div>
+
+            <div class="pipe-step-description">
+                User hierarchy todos' names at Procore project depending on SmartSheet rows relations.
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <form>
+                <md-checkbox [disabled]="true" [checked]="pipesListObj[pipeType]?.summary_tasks_enabled">
+                    Include Summary Tasks
+                </md-checkbox>
+            </form>
+        </div>
+    </div>
+    <!--end TASK TITLES -->
+
+
+    <!--COLOR CODING -->
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="pipe-step-header-large">Color Coding:</div>
+
+            <div class="pipe-step-description">
+                Here can be some text to provide more information for this section
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <form>
+                <md-checkbox [disabled]="true" [checked]="pipesListObj[pipeType]?.colors_coding_enabled">
+                    Enable color coding
+                </md-checkbox>
+            </form>
         </div>
     </div>
 </div>
