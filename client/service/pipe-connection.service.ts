@@ -118,6 +118,30 @@ export class PipeConnectionService implements Resolve<{}> {
             });
     }
 
+    createNewOrGetExistingPipe(pipeType) {
+        let project = this.project;
+
+        return this.MsProjectClientService.getPipesWhere({
+            project_fk_id: this.project.id,
+            type: pipeType
+        }, this.AuthService.authUser.auth_session_id)
+            .then(pipesList => {
+                let existingPipeObj = pipesList.shift();
+
+                if (existingPipeObj) {
+                    return existingPipeObj.id;
+                } else {
+                    return this.MsProjectClientService.createPipe(project.id, {
+                        type: pipeType,
+                        status: PIPE_STATUS_DISABLED,
+                        procore_company_id: project.procore_company_id,
+                        procore_project_id: project.procore_project_id,
+                        user_fk_id: this.AuthService.authUser.id
+                    }, this.getPipeLabelByType(pipeType), this.AuthService.authUser.auth_session_id);
+                }
+            });
+    }
+
     getPipeLabelByType(pipeType: string): string {
         let label = '';
 

@@ -100,12 +100,11 @@ export class SmartsheetConnectionComponent implements OnInit {
         let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) : procoreProjectName;
         let newSheetName = workspaceName + ' Procore Sync';
 
-        let createdPipeId;
+        let _pipeId;
 
-        // create new pipe
-        return this.createNewPipe()
-            .then(pipesIds => {
-                createdPipeId = pipesIds.shift();
+        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
+            .then(pipeId => {
+                _pipeId = pipeId;
 
                 // create new workspace at smartsheet
                 return this.MsProjectClientService
@@ -119,14 +118,14 @@ export class SmartsheetConnectionComponent implements OnInit {
             })
             .then(createdSheetObj => {
                 // updating pipe
-                return this.MsProjectClientService.updatePipe(createdPipeId, {
+                return this.MsProjectClientService.updatePipe(_pipeId, {
                     sm_sheet_id: createdSheetObj.id,
                     sm_permalink: createdSheetObj.permalink
                 }, this.AuthService.authUser.auth_session_id);
             })
             .then(pipeId => {
                 // matching columns
-                return this.MsProjectClientService.matchDefaultSheetColumns(project.id, createdPipeId, this.AuthService.authUser.auth_session_id);
+                return this.MsProjectClientService.matchDefaultSheetColumns(project.id, _pipeId, this.AuthService.authUser.auth_session_id);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
@@ -150,12 +149,11 @@ export class SmartsheetConnectionComponent implements OnInit {
         let procoreProjectName = project.name;
         let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) : procoreProjectName;
 
-        let _createdPipeId;
+        let _pipeId;
 
-        // create new pipe
-        return this.createNewPipe()
-            .then(pipesIds => {
-                _createdPipeId = pipesIds.shift();
+        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
+            .then(pipeId => {
+                _pipeId = pipeId;
 
                 // create new workspace at smartsheet
                 return this.MsProjectClientService
@@ -169,14 +167,14 @@ export class SmartsheetConnectionComponent implements OnInit {
             })
             .then(sheetId => {
                 // updating pipe
-                return this.MsProjectClientService.updatePipe(_createdPipeId, {
+                return this.MsProjectClientService.updatePipe(_pipeId, {
                     sm_sheet_id: sheetId.id,
                     sm_permalink: sheetId.permalink
                 }, this.AuthService.authUser.auth_session_id);
             })
             .then(pipeId => {
                 // matching columns
-                return this.MsProjectClientService.saveMatchedColumns(_createdPipeId, columnsObj, this.AuthService.authUser.auth_session_id);
+                return this.MsProjectClientService.saveMatchedColumns(_pipeId, columnsObj, this.AuthService.authUser.auth_session_id);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
@@ -184,17 +182,5 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(() => {
                 return this.router.navigate(this.redirectRoute);
             });
-    }
-
-    createNewPipe(): Promise<[number]> {
-        let project = this.PipeConnectionService.project;
-
-        return this.MsProjectClientService.createPipe(project.id, {
-            type: this.pipeType,
-            status: PIPE_STATUS_DISABLED,
-            procore_company_id: project.procore_company_id,
-            procore_project_id: project.procore_project_id,
-            user_fk_id: this.AuthService.authUser.id
-        }, this.PipeConnectionService.getPipeLabelByType(this.pipeType), this.AuthService.authUser.auth_session_id);
     }
 }

@@ -51,13 +51,13 @@ export class PipeSettingsComponent implements OnInit {
     }
 
     saveAndContinue() {
-        let project = this.PipeConnectionService.project;
-        let pipe = this.pipesListObj[this.pipeType];
-
-        return this.MsProjectClientService.updatePipe(pipe.id, {
-            sm_working_days: this.model.workingDays,
-            sm_weekends: this.model.nonWorkingDays.split(',')
-        }, this.AuthService.authUser.auth_session_id)
+        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
+            .then(pipeId => {
+                return this.MsProjectClientService.updatePipe(pipeId, {
+                    sm_working_days: this.model.workingDays,
+                    sm_weekends: this.model.nonWorkingDays.split(',')
+                }, this.AuthService.authUser.auth_session_id);
+            })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
             });
