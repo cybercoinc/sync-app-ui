@@ -53,7 +53,6 @@ export class SyncSession {
 
 export class Item {
     created_at: Date;
-    assignee_email: string;
     description: string;
     finish_datetime: string; // for example 2016-10-04
     name: string;
@@ -63,6 +62,7 @@ export class Item {
     procore_project_id: number;
     sm_sheet_id: number;
     smartsheet_id: number;
+    assignee_fk_id: number;
     smartsheet_parent_id: number;
     start_datetime: string; // for example 2016-10-04
     type: 'todos'
