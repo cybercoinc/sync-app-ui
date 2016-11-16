@@ -6,6 +6,7 @@
             <p>Percentage: {{itemChangesObj.item?.percentage}}</p>
             <p>Start: {{itemChangesObj.item?.start_datetime}}</p>
             <p>Finish: {{itemChangesObj.item?.finish_datetime}}</p>
+            <p>Assignee: {{itemChangesObj?.assignee}}</p>
         </div>
 
         <div class="col-xs-12" *ngIf="itemChangesObj?.type === 'changed_one'">
