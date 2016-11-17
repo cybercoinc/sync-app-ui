@@ -11,6 +11,13 @@
     <loader-progress-bar [is-visible]="PendingRequestsService.hasPendingRequest"></loader-progress-bar>
 </nav>
 
+<div class="alert alert-danger" role="alert" *ngIf="PendingRequestsService.httpResponseError">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="dismissResponseError()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    Error: {{PendingRequestsService.httpResponseError}}
+</div>
+
 <div class="container-fluid">
     <div class="outer-outlet">
         <router-outlet></router-outlet>

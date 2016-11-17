@@ -16,4 +16,8 @@ export class AppComponent {
 
     ngOnInit() {
     }
+
+    dismissResponseError() {
+        this.PendingRequestsService.httpResponseError = '';
+    }
 }

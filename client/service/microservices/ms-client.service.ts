@@ -94,6 +94,18 @@ export class MsClientService {
     }
 
     protected handleError(response: any): Promise<any>|string {
+        let message = response.statusText;
+
+        if (response['_body']) {
+            let jsonBody = JSON.parse(response['_body']);
+
+            if (jsonBody.message) {
+                message += ': ' + jsonBody.message;
+            }
+        }
+
+        this.PendingRequestsService.httpResponseError = message;
+
         if (response.status === 401) {
             Promise.reject(new Error('not authorized'));
 
