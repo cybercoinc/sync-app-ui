@@ -20,28 +20,32 @@ export class PipeSettingsComponent implements OnInit {
 
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
+
+        if (this.pipesListObj[this.pipeType]) {
+            let pipeObj = this.pipesListObj[this.pipeType];
+
+            this.model.sm_working_days = pipeObj.sm_working_days;
+            this.model.sm_weekends = pipeObj.sm_weekends.join(',');
+            this.model.summary_tasks_enabled = pipeObj.summary_tasks_enabled;
+            this.model.colors_coding_enabled = pipeObj.colors_coding_enabled;
+        }
     }
 
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
-    @Input('redirect-route') redirectRoute;
 
     protected pipesListObj;
 
-    public workingDays = {
-        mon: true,
-        tue: true,
-        wed: true,
-        thu: true,
-        fri: true,
-        sat: false,
-        sun: false
-    };
-
-    public nonWorkingDays = '';
-
-    public model: {workingDays: {}, nonWorkingDays: string, summary_tasks_enabled: boolean, colors_coding_enabled: boolean} = {
-        workingDays: this.workingDays,
-        nonWorkingDays: this.nonWorkingDays,
+    public model: {sm_working_days: {}, sm_weekends: string, summary_tasks_enabled: boolean, colors_coding_enabled: boolean} = {
+        sm_working_days: {
+            mon: true,
+            tue: true,
+            wed: true,
+            thu: true,
+            fri: true,
+            sat: false,
+            sun: false
+        },
+        sm_weekends: '',
         summary_tasks_enabled: false,
         colors_coding_enabled: false,
     };
@@ -50,8 +54,8 @@ export class PipeSettingsComponent implements OnInit {
         return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
             .then(pipeId => {
                 return this.MsProjectClientService.updatePipe(pipeId, {
-                    sm_working_days: this.model.workingDays,
-                    sm_weekends: this.model.nonWorkingDays.split(','),
+                    sm_working_days: this.model.sm_working_days,
+                    sm_weekends: this.model.sm_weekends.split(','),
                     summary_tasks_enabled: this.model.summary_tasks_enabled,
                     colors_coding_enabled: this.model.colors_coding_enabled
                 }, this.AuthService.authUser.auth_session_id);
