@@ -104,7 +104,9 @@ export class MsClientService {
             }
         }
 
-        this.PendingRequestsService.httpResponseError = message;
+        this.PendingRequestsService.httpResponseErrors.push(
+            message
+        );
 
         if (response.status === 401) {
             Promise.reject(new Error('not authorized'));

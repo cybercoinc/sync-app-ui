@@ -213,3 +213,11 @@ select > option:disabled {
 .procore-source-icon {
     color: #FF530D;
 }
+
+.error-row {
+    padding: 5px 10px;
+    background-color: #FFCBCC;
+    border: 1px solid red;
+    border-radius: 2px;
+    color: #000;
+}
