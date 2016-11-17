@@ -32,6 +32,7 @@ import {CreateProjectComponent} from './create-project/create-project.component'
 import {ItemChangesDetailComponent} from "./sync-sessions/item-changes/item-changes-detail/item-changes-detail.component";
 import {ItemChangesRowComponent} from "./sync-sessions/item-changes/item-changes-row/item-changes-row.component";
 import {ProjectSettingsComponent} from "./edit-project/components/project-settings/project-settings.component";
+import {StatusRowComponent} from "./edit-project/components/shared/status-row/status-row.component";
 
 @NgModule({
     imports: [
@@ -61,6 +62,7 @@ import {ProjectSettingsComponent} from "./edit-project/components/project-settin
         SmartsheetConnectionPrivateComponent,
         SmartsheetConnectionComponent,
         ColumnsMatchingComponent,
+        StatusRowComponent,
         PipeSettingsPrivateComponent,
         PipeSettingsPublicComponent,
         PipeSettingsComponent,

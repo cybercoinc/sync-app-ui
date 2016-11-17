@@ -1,34 +1,4 @@
-<!-- STATUS ROW -->
-<div class="row bottom-lined">
-    <div class="col-xs-8 pipe-header-large">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-5">
-                    Current status: {{pipesListObj[pipeType]?.status || 'inactive'}}
-                </div>
-
-                <div class="col-xs-7">
-                    <div *ngIf="pipesListObj[pipeType]">
-                        <div *ngIf="(pipesListObj[pipeType]?.status != 'active')"
-                             style="display: block; float: left">
-                            <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
-                               [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id && pipesListObj[pipeType]?.sm_working_days)"
-                               class="btn btn-success">enable</a>
-                        </div>
-                        <div *ngIf="(pipesListObj[pipeType]?.status == 'active')"
-                             style="display: block; float: left">
-                            <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
-                               class="btn btn-danger">disable</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end STATUS ROW -->
-
+<status-row pipe-type="{{pipeType}}"></status-row>
 <div class="row">
     <div class="col-xs-3 pipe-config-steps">
         <pipe-step-row step-status="{{pipesListObj[pipeType]?.sm_sheet_id? 'completed' : 'not-completed'}}"
