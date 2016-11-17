@@ -100,7 +100,7 @@ export class MsClientService {
             let jsonBody = JSON.parse(response['_body']);
 
             if (jsonBody.message) {
-                message += ': ' + jsonBody.message;
+                message = jsonBody.message;
             }
         }
 
