@@ -115,7 +115,7 @@ export class PipeConnectionService implements Resolve<{}> {
             })
             .then(() => {
                 return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, false, this.AuthService.authUser.auth_session_id);
-            });
+            })
     }
 
     createNewOrGetExistingPipe(pipeType) {

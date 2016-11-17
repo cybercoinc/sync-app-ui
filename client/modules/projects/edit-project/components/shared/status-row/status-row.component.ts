@@ -16,8 +16,6 @@ export class StatusRowComponent implements OnInit {
 
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
-        console.log(this.pipeType);
-        console.log(this.pipesListObj);
     }
 
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';

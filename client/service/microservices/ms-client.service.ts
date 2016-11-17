@@ -89,7 +89,7 @@ export class MsClientService {
             .catch((response: any) => {
                 this.PendingRequestsService.hasPendingRequest = false;
 
-                this.handleError(response);
+                return this.handleError(response);
             });
     }
 
