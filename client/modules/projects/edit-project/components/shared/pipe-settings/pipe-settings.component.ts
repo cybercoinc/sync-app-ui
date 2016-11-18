@@ -24,10 +24,21 @@ export class PipeSettingsComponent implements OnInit {
         if (this.pipesListObj[this.pipeType]) {
             let pipeObj = this.pipesListObj[this.pipeType];
 
-            this.model.sm_working_days = pipeObj.sm_working_days;
-            this.model.sm_weekends = pipeObj.sm_weekends.join(',');
-            this.model.summary_tasks_enabled = pipeObj.summary_tasks_enabled;
-            this.model.colors_coding_enabled = pipeObj.colors_coding_enabled;
+            let propsToSet = [
+                'sm_working_days',
+                'summary_tasks_enabled',
+                'colors_coding_enabled'
+            ];
+
+            propsToSet.forEach(propName => {
+                if (pipeObj[propName]) {
+                    this.model[propName] = pipeObj[propName]
+                }
+            });
+
+            if (pipeObj.sm_weekends) {
+                this.model.sm_weekends = pipeObj.sm_weekends.join(',');
+            }
         }
     }
 
