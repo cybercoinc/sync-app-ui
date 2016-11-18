@@ -118,6 +118,13 @@ export class PipeConnectionService implements Resolve<{}> {
             })
     }
 
+    deletePipe(pipeId) {
+        return this.MsProjectClientService.deletePipe(pipeId, this.AuthService.authUser.auth_session_id)
+            .then(() => {
+                return this.refreshPipesList();
+            });
+    }
+
     createNewOrGetExistingPipe(pipeType) {
         let project = this.project;
 

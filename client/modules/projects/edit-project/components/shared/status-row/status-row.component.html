@@ -17,8 +17,25 @@
                         <div *ngIf="(pipesListObj[pipeType]?.status == 'active')"
                              style="display: block; float: left">
                             <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
-                               class="btn btn-danger">disable</a>
+                               class="btn btn-warning">disable</a>
                         </div>
+
+                        <div *ngIf="(pipesListObj[pipeType]?.status == 'disabled' && !deleteConfirmationIsVisible)"
+                             style="display: block; float: right">
+                            <a (click)="showDeleteConfirmation()"
+                               class="btn btn-danger">delete pipe</a>
+                        </div>
+
+                        <div *ngIf="(pipesListObj[pipeType]?.status == 'disabled' && deleteConfirmationIsVisible)"
+                             style="display: block; float: right">
+                            Are you sure?
+                            <a (click)="deletePipe(pipesListObj[pipeType]?.id)"
+                               class="btn btn-danger">Delete</a>
+                            <a (click)="hideDeleteConfirmation()"
+                               class="btn btn-default">No</a>
+                        </div>
+
+
                     </div>
                 </div>
 

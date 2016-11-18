@@ -210,6 +210,17 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    deletePipe(pipeId: number, authUserSessionId: string): Promise<boolean> {
+        return this.makeMsCall(
+            'delete-pipe',
+            'DELETE',
+            {
+                pipe_id: pipeId,
+            },
+            authUserSessionId
+        );
+    }
+
     /**
      *
      * @param pipeId
