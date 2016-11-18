@@ -19,6 +19,7 @@ import {PipeSettingsPublicComponent} from './edit-project/components/pipe-public
 
 import {SyncSessionsListComponent} from './sync-sessions/list/sync-sessions-list.component';
 import {ProjectSettingsComponent} from './edit-project/components/project-settings/project-settings.component';
+import {DeleteProjectComponent} from "./delete-project/delete-project.component";
 
 export const routes: Routes = [
     {
@@ -36,6 +37,11 @@ export const routes: Routes = [
             {
                 path: 'create-project',
                 component: CreateProjectComponent,
+            },
+
+            {
+                path: ':project_id/delete-project',
+                component: DeleteProjectComponent,
             },
 
             {

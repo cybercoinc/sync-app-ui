@@ -34,7 +34,9 @@
                             </div>
                             <div class="col-xs-3">
                                 <a [routerLink]="[projectRow.project.id, 'edit-project']"
-                                   class="pull-right btn btn-primary btn-sm">edit</a>
+                                   class="btn btn-primary btn-sm">edit</a>
+                                <a [routerLink]="[projectRow.project.id, 'delete-project']"
+                                   class="btn btn-danger btn-sm">delete</a>
                             </div>
                         </div>
                     </div>
