@@ -23,6 +23,7 @@ import {SandboxModule} from './modules/sandbox/sandbox.module';
 import {ConnectionModule} from 'client/modules/connection/connection.module';
 import {ProjectsModule} from 'client/modules/projects/projects.module';
 import {BillingModule} from 'client/modules/billing/billing.module';
+import {CompaniesModule} from 'client/modules/companies/companies.module';
 import {MsClientService} from "./service/microservices/ms-client.service";
 import {PendingRequestsService} from "./service/pending-requests.service";
 import {LoaderProgressBarComponent} from "./components/shared/loader.component";
@@ -38,6 +39,7 @@ import {LoaderProgressBarComponent} from "./components/shared/loader.component";
         ConnectionModule,
         ProjectsModule,
         BillingModule,
+        CompaniesModule,
 
         routing,
     ],

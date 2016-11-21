@@ -1,0 +1,8 @@
+<md-card class="col-md-6">
+    <md-card-subtitle>Billing</md-card-subtitle>
+    <md-card-content>
+        <div *ngIf="company && company.pbr!= undefined">
+            {{company.pbr.first_name}} {{company.pbr.last_name}} ({{company.pbr.email}}) <a class="btn btn-success" >Edit</a>
+        </div>
+    </md-card-content>
+</md-card>
