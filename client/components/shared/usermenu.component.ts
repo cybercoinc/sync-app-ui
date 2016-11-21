@@ -21,7 +21,7 @@ import {User} from 'client/entities/entities';
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
             <li><a [routerLink]="['/billing/licenses']" (click)="showUserMenu = !showUserMenu;">Billing Information</a></li>
             <li class="divider"></li>
-            <li><a href="javascript: void(0);"  (click)="showUserMenu = !showUserMenu;">**Log out</a></li>
+            <li><a href="javascript: void(0);"  (click)="logout()">Log out</a></li>
         </ul>
     </li>
 </ul>
@@ -29,7 +29,7 @@ import {User} from 'client/entities/entities';
 })
 export class UserMenuComponent {
 
-    constructor(private _eref: ElementRef) {
+    constructor(private _eref: ElementRef, protected AuthService: AuthService) {
     }
 
     showUserMenu: boolean = false;
@@ -41,5 +41,10 @@ export class UserMenuComponent {
         if (!this._eref.nativeElement.contains(event.target)) {
             this.showUserMenu = false;
         }
+    }
+
+    logout() {
+        return this.AuthService.logout()
+            .then(response => window.location.replace('/'));
     }
 }

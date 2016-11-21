@@ -53,7 +53,10 @@ export class AuthService implements Resolve<{}> {
         return this.msUser.url + 'auth/smartsheet';
     }
 
-    logout(): void {
-        this.authUser = null;
+    logout() {
+        return this.msUser.logout(this.authUser.id, this.authUser.auth_session_id)
+            .then(() => {
+                this.authUser = null;
+            });
     }
 }
