@@ -14,6 +14,7 @@ export class User {
 
     auth_session_id: string;
     created_at: Date;
+    role: string;
     email: string;
     pr_user_id: number; // procore user id
     procore_oauth: {
