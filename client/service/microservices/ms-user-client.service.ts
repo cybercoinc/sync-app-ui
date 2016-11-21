@@ -28,4 +28,10 @@ export class MsUserClientService extends MsClientService {
             user_id: userId
         }, authSessionId);
     }
+
+    logout(userId, authSessionId) {
+        return this.makeMsCall('auth/logout', 'POST', {
+            user_id: userId
+        }, authSessionId);
+    }
 }
