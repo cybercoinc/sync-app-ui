@@ -4,13 +4,15 @@ import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import {PendingRequestsService} from "../pending-requests.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class MsClientService {
     url: string;
     services: [{}] = window['services']; // todo move this to root route resolver
 
-    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService) {
+    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService,
+                private router: Router) {
     }
 
     getServiceUrl(serviceName: string) {
@@ -111,7 +113,9 @@ export class MsClientService {
         if (response.status === 401) {
             Promise.reject(new Error('not authorized'));
 
-            return window.location.href = '/#/auth/procore'; // todo use app.router here
+            this.router.navigate(['/auth', 'procore']);
+
+            // return window.location.href = '/#/auth/procore'; // todo use app.router here
         }
 
         return Promise.reject(response.message || response);
