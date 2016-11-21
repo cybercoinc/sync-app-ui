@@ -1,3 +1,9 @@
 md-card {
     margin-bottom: 5px;
 }
+.company_settings_card{
+    min-height: 500px
+}
+.company_settings_card h3{
+font-size: 1.3em;
+}

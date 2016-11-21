@@ -13,32 +13,32 @@ import {User} from '../../../entities/entities';
 export class CompanySettingsComponent implements OnInit {
     me: User = null;
     company = null;
-    pbr = null;
+    usersList = null;
+    edit_pbr_show = false;
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService, protected MsProjectClientService: MsProjectClientService) {
 
     }
 
     ngOnInit(): void {
-        this.getCompanyWithPbrUser(this.AuthService.authUser.id,  this.AuthService.authUser.auth_session_id);
-
+        this.getSettings(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
     }
 
-    getUsers() {
-
-    }
-    getCompanyWithPbrUser(userId, authSessionId) {
-
-         this.MsUserClientService.getCompany(userId, authSessionId) .then(company => {
-             this.company = company
-        });
-
-
+    showEditPBR(){
+        this.edit_pbr_show = !this.edit_pbr_show;
     }
 
-    getSettings(){
+    getSettings(userId, authSessionId) {
 
+        this.MsUserClientService.getCompany(userId, authSessionId)
+            .then(company => {
+                this.company = company;
+                if (company) {
+                    this.MsUserClientService.getCompanyUsers(company.id, authSessionId).then(usersList => {
+                        this.usersList = usersList;
+                    });
+                }
+            });
     }
-
 
 }

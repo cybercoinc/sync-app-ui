@@ -15,7 +15,8 @@
                 <license-table-row *ngFor="let license of licensesList"
                             license-id="{{license.id}}"
                             license-status="{{license.status}}"
-                            license-type="{{license.license}}"
+                            license-link="{{license.link_to_project}}"
+                            license-type="{{license.type}}"
                             license-exp-date="{{license.expiration_date|date}}"
                     >
 

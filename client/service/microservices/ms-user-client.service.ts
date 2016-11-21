@@ -21,6 +21,12 @@ export class MsUserClientService extends MsClientService {
         }, authSessionId);
     }
 
+    getCompanyUsers(companyId, authSessionId): Promise<> {
+        return this.makeMsCall('get-company-users', 'GET', {
+            companyId:companyId
+        }, authSessionId);
+    }
+
     defaultAuth() {
         return this.makeMsCall('auth/default', 'GET');
     }

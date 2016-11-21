@@ -1,8 +1,38 @@
-<md-card class="col-md-6">
-    <md-card-subtitle>Billing</md-card-subtitle>
+<md-card *ngIf="company" class="col-xs-12 company_settings_card">
+    <md-card-subtitle><h1>Company Settings:{{company.name}}</h1></md-card-subtitle>
     <md-card-content>
-        <div *ngIf="company && company.pbr!= undefined">
-            {{company.pbr.first_name}} {{company.pbr.last_name}} ({{company.pbr.email}}) <a class="btn btn-success" >Edit</a>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-12" *ngIf="company.pbr!= undefined">
+                <h3 style="font-size: 1.3em">Billing</h3>
+                {{company.pbr.first_name}} {{company.pbr.last_name}} ({{company.pbr.email}})
+                <a class="btn btn-success" (click)="showEditPBR()">Edit</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12" *ngIf="edit_pbr_show">
+                <ul class="dropdown-menu" style="display: block;">
+                    <li *ngFor="let user of usersList" value="{{user.id}}">{{user.first_name}}
+                        {{user.last_name}}({{user.email}})
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-xs-12" *ngIf="usersList">
+                <h3 style="font-size: 1.3em">Users</h3>
+                <ul>
+                    <li *ngFor="let user of usersList">{{user.first_name}} {{user.last_name}}({{user.email}})</li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="row" *ngIf="!usersList">
+
+            <div class=" col-xs-12">
+                <span>No users for this company yet</span>
+            </div>
         </div>
     </md-card-content>
 </md-card>
