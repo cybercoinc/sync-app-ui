@@ -1,0 +1,74 @@
+md-card {
+    margin-bottom: 5px;
+}
+.company_settings_card{
+    min-height: 500px
+}
+.company_settings_card h3{
+font-size: 1.3em;
+}
+
+/* Style Select Field */
+.dem1k-md-dd select {
+    font-family: inherit;
+    /*background-color: transparent;*/
+    width: 100%;
+    padding: 4px 0;
+    font-size: 16px;
+    color: rgba(0,0,0, 0.26);
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0, 0.12);
+}
+
+/* Remove focus */
+.dem1k-md-dd select:focus {
+    outline: none;
+}
+
+/* Hide label */
+.mdl-selectfield label {
+    display: none;
+}
+
+/* Use custom arrow */
+.mdl-selectfield select {
+    appearance: none;
+}
+
+.mdl-selectfield {
+    position: relative;
+}
+.mdl-selectfield:after {
+    position: absolute;
+    top: 0.75em;
+    right: 0.5em;
+    /* Styling the down arrow */
+    width: 0;
+    height: 0;
+    padding: 0;
+    content: '';
+    border-left: .25em solid transparent;
+    border-right: .25em solid transparent;
+    border-top: 0.375em solid rgba(0,0,0, 0.12);
+    pointer-events: none;
+}
+
+
+/*
+body {
+    padding: 20px;
+    background: #fafafa;
+    font-family: 'Roboto','Helvetica','Arial',sans-serif;
+}
+*/
+
+.dem1k-md-dd {
+    /*width: 200px;*/
+    /*padding: 20px;*/
+    /*margin: 0 auto;*/
+    /*top: 50%;*/
+    /*margin-top: -2em;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*left: 0;*/
+}

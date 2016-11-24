@@ -7,6 +7,7 @@ import {Component, OnInit, Input} from "@angular/core";
                     <div class="col-xs-3">{{licenseId}}</div>
                     <div class="col-xs-3">{{licenseStatus}}</div>
                     <div class="col-xs-3">{{licenseType}}</div>
+                    <div class="col-xs-3">{{projectLink}}</div>
                     <div class="col-xs-3">{{licenseExpDate}}</div>
                 </div>
              `,
@@ -24,5 +25,6 @@ export class LicenseTableRowComponent implements OnInit {
     @Input('license-id') licenseId: string;
     @Input('license-status') licenseStatus: string;
     @Input('license-type') licenseType: string;
+    @Input('license-project-link') projectLink: string;
     @Input('license-exp-date') licenseExpDate: string;
 }

@@ -1,5 +1,5 @@
 .idea
 node_modules
-client/**/*.js
-client/**/*.map
+*.js
+*.map
 typings
