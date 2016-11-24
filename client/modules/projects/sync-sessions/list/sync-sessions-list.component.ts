@@ -40,7 +40,7 @@ export class SyncSessionsListComponent implements OnInit {
         this.sub = this.ActivatedRoute.params.subscribe(params => {
             this.pipeType = params['pipe_type'];
 
-            this.getSyncSessionsList(this.projectId, this.pipeType, false);
+            this.getSyncSessionsList(this.projectId, this.pipeType, true);
         });
     }
 
