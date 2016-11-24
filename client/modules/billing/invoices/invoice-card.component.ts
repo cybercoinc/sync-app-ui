@@ -10,13 +10,18 @@ import {Component, OnInit, Input} from "@angular/core";
                         <div class="col-xs-4">
                             {{invoiceDate}}:{{invoiceAmount}}
                         </div>
-                        <div class="col-xs-4">
-                            <button class="btn-danger" (click)="alert(invoiceBillDotComId)">Pay Now</button>
-                        </div>
+                       
                     </div>
+                    <br>
                     <div class="panel-body">
-                        <p>That is payment for next projects:</p>
-                        <p>{{invoiceItemsList}}</p>
+                        <div class="col-xs-8">
+                            <p>That is payment for next projects:</p>
+                            <p>{{projectsList(invoiceItemsList)}}</p>
+                        </div>
+
+                        <div class="col-xs-4">
+                            <a class="btn btn-danger" href="{{getPayNowUrl(invoiceBillDotComId)}}" target="_blank">Pay Now</a>
+                        </div>
                     </div>
                     
                </div>
@@ -30,6 +35,22 @@ export class InvoiceCardComponent implements OnInit {
     }
 
     ngOnInit() {
+
+    }
+
+    projectsList = function (list) {
+        //TODO!!! >>>
+        return false;
+        console.log('list>>>>',list)
+        if(!list) return '';
+        var links_text  = [];
+        list.forEach(item => {
+            links_text.push("<a href='#'>"+item+"</a>");
+        })
+        return links_text.join(', ')
+    }
+    getPayNowUrl = function (invoiceId) {
+        return 'https://app.bill.com/p/00801MAASGBADZVDwzj1?id='+invoiceId // TODO >>> +'&email=anton.demydov%40cyberco.com#'
     }
 
     @Input('invoice-id') invoiceId: string;
