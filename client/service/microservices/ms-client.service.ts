@@ -12,7 +12,7 @@ export class MsClientService {
     services: [{}] = window['services']; // todo move this to root route resolver
 
     constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService,
-                private router: Router) {
+                protected router: Router) {
     }
 
     getServiceUrl(serviceName: string) {

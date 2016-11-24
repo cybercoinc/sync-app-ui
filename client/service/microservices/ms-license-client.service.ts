@@ -1,11 +1,12 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
 import {PendingRequestsService} from "../pending-requests.service";
+import {Router} from "@angular/router";
 
 export class MsLicenseClientService extends MsClientService {
 
-    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService) {
-        super(Http, PendingRequestsService);
+    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService, protected router: Router) {
+        super(Http, PendingRequestsService, router);
 
         this.url = this.getServiceUrl('ms-license');
     }
@@ -23,11 +24,11 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
-    getLicenses(userId, authUserSessionId): Promise<> {
+    getLicenses(userId, authUserSessionId): Promise<any> {
         return this.makeMsCall('get-licenses', 'GET', {user_id: userId}, authUserSessionId);
     }
 
-    getInvoices(userId, authUserSessionId): Promise<> {
+    getInvoices(userId, authUserSessionId): Promise<any> {
         return this.makeMsCall('get-invoices', 'GET', {user_id: userId}, authUserSessionId);
     }
 

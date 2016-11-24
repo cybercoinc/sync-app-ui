@@ -91,8 +91,11 @@ export class CreateProjectComponent implements OnInit {
             .then(projectIds => {
                 _projectId = projectIds.shift();
 
-                return this.MsLicenseClientService.createStartLicense(_projectId, data.name,
-                    this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
+                return Promise.all([
+                    this.MsLicenseClientService.createStartLicense(_projectId, data.name,
+                        this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id),
+                    this.MsProjectClientService.syncProjectUsers(_projectId, this.AuthService.authUser.auth_session_id)
+                ]);
             })
             .then(() => {
                 return this.router.navigate(['projects', _projectId, 'edit-project']);

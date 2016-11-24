@@ -2,11 +2,12 @@ import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
 import {SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet, ProjectPipe} from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
+import {Router} from "@angular/router";
 
 export class MsProjectClientService extends MsClientService {
 
-    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService) {
-        super(Http, PendingRequestsService);
+    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService, protected router: Router) {
+        super(Http, PendingRequestsService, router);
 
         this.url = this.getServiceUrl('ms-project');
     }
@@ -256,6 +257,17 @@ export class MsProjectClientService extends MsClientService {
             {
                 pipe_id: pipeId,
                 status: isEnabled
+            },
+            authUserSessionId
+        );
+    }
+
+    syncProjectUsers(projectId: number, authUserSessionId: string): Promise<any> {
+        return this.makeMsCall(
+            'sync-project-users',
+            'POST',
+            {
+                project_id: projectId
             },
             authUserSessionId
         );

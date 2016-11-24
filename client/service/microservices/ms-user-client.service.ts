@@ -2,11 +2,12 @@ import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
 import {User} from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
+import {Router} from "@angular/router";
 
 export class MsUserClientService extends MsClientService {
 
-    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService) {
-        super(Http, PendingRequestsService);
+    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService, protected router: Router) {
+        super(Http, PendingRequestsService, router);
 
         this.url = this.getServiceUrl('ms-user');
     }
