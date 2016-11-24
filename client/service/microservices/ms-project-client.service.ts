@@ -14,11 +14,10 @@ export class MsProjectClientService extends MsClientService {
 
     getActiveProjects(userId, authUserSessionId): Promise<Project[]> {
         return this.makeMsCall(
-            'find-where',
+            'get-active-projects',
             'GET',
             {
-                status: 'active',
-                user_fk_id: userId
+                user_id: userId
             },
             authUserSessionId
         );
