@@ -1,6 +1,9 @@
 import {MsClientService} from "./ms-client.service";
 import {Headers, Http, URLSearchParams} from '@angular/http';
-import {SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet, ProjectPipe} from 'client/entities/entities';
+import {
+    SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet, ProjectPipe,
+    User
+} from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 
@@ -265,6 +268,17 @@ export class MsProjectClientService extends MsClientService {
         return this.makeMsCall(
             'sync-project-users',
             'POST',
+            {
+                project_id: projectId
+            },
+            authUserSessionId
+        );
+    }
+
+    getProjectUsers(projectId: number, authUserSessionId: string): Promise<User[]> {
+        return this.makeMsCall(
+            'get-project-users',
+            'GET',
             {
                 project_id: projectId
             },

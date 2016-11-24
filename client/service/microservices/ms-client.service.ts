@@ -139,4 +139,15 @@ export class MsClientService {
         );
     }
 
+    findManyByIdsList(idsList: [number], authUserSessionId: string): Promise<[any]> {
+        return this.makeMsCall(
+            'find-many-by-ids-list',
+            'GET',
+            idsList,
+            authUserSessionId
+        );
+    }
+
+
+
 }

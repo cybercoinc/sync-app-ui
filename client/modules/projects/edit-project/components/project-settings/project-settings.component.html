@@ -1,7 +1,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            Project settings.
+            <h4>Project settings</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h5>Users allowed to access:</h5>
+
+            <span *ngFor="let user of usersList">
+                <b>{{user.first_name}} {{user.last_name}}</b> ({{user.email}})
+            </span>
         </div>
     </div>
 </div>
