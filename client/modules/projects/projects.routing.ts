@@ -21,6 +21,10 @@ import {SyncSessionsListComponent} from './sync-sessions/list/sync-sessions-list
 import {ProjectSettingsComponent} from './edit-project/components/project-settings/project-settings.component';
 import {DeleteProjectComponent} from "./delete-project/delete-project.component";
 
+import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-tasks.component";
+import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
+import {PipeSettingsTasksComponent} from "./edit-project/components/pipe-tasks/pipe-settings-tasks.component";
+
 export const routes: Routes = [
     {
         path: 'projects',
@@ -113,6 +117,26 @@ export const routes: Routes = [
                             {
                                 path: 'settings-public',
                                 component: PipeSettingsPublicComponent,
+                            },
+                        ]
+                    },
+                    {
+                        path: 'pipe-tasks',
+                        component: PipeTasksTodoComponent,
+                        children: [
+                            {
+                                path: '',
+                                redirectTo: 'smartsheet-connection',
+                            },
+
+                            {
+                                path: 'smartsheet-connection',
+                                component: SmartsheetConnectionTasksComponent,
+                            },
+
+                            {
+                                path: 'settings',
+                                component: PipeSettingsTasksComponent,
                             },
                         ]
                     },

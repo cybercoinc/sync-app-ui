@@ -34,6 +34,9 @@ import {ItemChangesRowComponent} from "./sync-sessions/item-changes/item-changes
 import {ProjectSettingsComponent} from "./edit-project/components/project-settings/project-settings.component";
 import {StatusRowComponent} from "./edit-project/components/shared/status-row/status-row.component";
 import {DeleteProjectComponent} from "./delete-project/delete-project.component";
+import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-tasks.component";
+import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
+import {PipeSettingsTasksComponent} from "./edit-project/components/pipe-tasks/pipe-settings-tasks.component";
 
 @NgModule({
     imports: [
@@ -57,6 +60,11 @@ import {DeleteProjectComponent} from "./delete-project/delete-project.component"
         EditProjectComponent,
         PipeStepRowComponent,
         PipePublicTodoComponent,
+
+        PipeTasksTodoComponent,
+        SmartsheetConnectionTasksComponent,
+        PipeSettingsTasksComponent,
+
         PipePrivateTodoComponent,
         ProjectSettingsComponent,
         SmartsheetConnectionPublicComponent,
