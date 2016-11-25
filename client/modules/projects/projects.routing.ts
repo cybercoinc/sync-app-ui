@@ -23,7 +23,7 @@ import {DeleteProjectComponent} from "./delete-project/delete-project.component"
 
 import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-tasks.component";
 import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
-import {PipeSettingsTasksComponent} from "./edit-project/components/pipe-tasks/pipe-settings-tasks.component";
+import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
 
 export const routes: Routes = [
     {
@@ -136,7 +136,7 @@ export const routes: Routes = [
 
                             {
                                 path: 'settings',
-                                component: PipeSettingsTasksComponent,
+                                component: TasksSettingsComponent,
                             },
                         ]
                     },
