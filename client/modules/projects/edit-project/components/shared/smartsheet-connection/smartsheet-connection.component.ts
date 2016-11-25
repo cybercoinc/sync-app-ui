@@ -89,7 +89,7 @@ export class SmartsheetConnectionComponent implements OnInit {
         return this.connectedSmSheetsIdsList.indexOf(smSheet.id) !== -1;
     }
 
-    createNewSheetWithWorkspace(): boolean | Promise<boolean>{
+    createNewSheetWithWorkspace(): boolean | Promise<boolean> {
         if (this.PendingRequestsService.hasPendingRequest) {
             return false;
         }
@@ -97,8 +97,8 @@ export class SmartsheetConnectionComponent implements OnInit {
         let project = this.PipeConnectionService.project;
 
         let procoreProjectName = project.name;
-        let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) : procoreProjectName;
-        let newSheetName = workspaceName + ' Procore Sync';
+        let workspaceName = procoreProjectName.length > 20 ? procoreProjectName.slice(0, 20) + '...' : procoreProjectName;
+        let newSheetName = workspaceName + ' ' + this.PipeConnectionService.getPipeLabelByType(this.pipeType) + ' Procore Sync';
 
         let _pipeId;
 
