@@ -28,6 +28,10 @@ export class IndexComponent implements OnInit {
             .then(projects => {
                 _projects = projects;
 
+                if (_projects.length === 0) {
+                    return [];
+                }
+
                 let promises = [];
 
                 projects.forEach(project => {
