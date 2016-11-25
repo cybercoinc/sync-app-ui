@@ -14,4 +14,15 @@
             <br>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h5>Primary billing responsibility person:</h5>
+
+            <span *ngIf="pbrUser">
+                <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
+            </span>
+            <br>
+        </div>
+    </div>
 </div>

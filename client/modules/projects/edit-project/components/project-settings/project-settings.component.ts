@@ -19,17 +19,22 @@ export class ProjectSettingsComponent implements OnInit {
     }
 
     ngOnInit() {
-        let projectId;
+        let projectId = null;
 
         this.ActivatedRoute.parent.params.forEach((params) => {
             projectId = +params['project_id'];
         });
 
-        this.MsProjectClientService.getProjectUsers(projectId, this.AuthService.authUser.auth_session_id)
-            .then(usersList => {
-                this.usersList = usersList;
+        Promise.all([
+            this.MsProjectClientService.getPbrUser(projectId, this.AuthService.authUser.auth_session_id),
+            this.MsProjectClientService.getProjectUsers(projectId, this.AuthService.authUser.auth_session_id)
+        ])
+            .then(resultsList => {
+                this.pbrUser = resultsList[0];
+                this.usersList = resultsList[1];
             })
     }
 
     protected usersList: User[];
+    protected pbrUser: User;
 }

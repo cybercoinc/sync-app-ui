@@ -285,4 +285,15 @@ export class MsProjectClientService extends MsClientService {
             authUserSessionId
         );
     }
+
+    getPbrUser(projectId: number, authUserSessionId: string): Promise<User> {
+        return this.makeMsCall(
+            'get-pbr-user',
+            'GET',
+            {
+                project_id: projectId
+            },
+            authUserSessionId
+        );
+    }
 }
