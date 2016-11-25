@@ -4,16 +4,6 @@
             <h4>Project settings</h4>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <h5>Users allowed to access:</h5>
-
-            <span *ngFor="let user of usersList">
-                <b>{{user.first_name}} {{user.last_name}}</b> ({{user.email}})
-            </span>
-            <br>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-xs-12">
@@ -21,6 +11,21 @@
 
             <span *ngIf="pbrUser">
                 <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
+            </span>
+            <br>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h5>Users allowed to access:</h5>
+
+            <span *ngFor="let user of usersList">
+                <b>{{user.first_name}} {{user.last_name}}</b> ({{user.email}})
             </span>
             <br>
         </div>
