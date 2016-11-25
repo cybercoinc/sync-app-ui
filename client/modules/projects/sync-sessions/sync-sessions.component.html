@@ -17,6 +17,10 @@
                       router-link="private_todos" material-icon="verified_user" pipe-title="Private Todos"
                       description=""></pipe-row>
 
+            <pipe-row status="{{pipesListObj.tasks? pipesListObj.tasks.status : 'inactive'}}"
+                      router-link="tasks" material-icon="event" pipe-title="Tasks"
+                      description=""></pipe-row>
+
         </div>
         <!-- end PIPES LIST -->
 
