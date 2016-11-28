@@ -28,13 +28,13 @@
                         <ul>
                             <li>Email: {{me.smartsheet_oauth?.account_email}}</li>
                         </ul>
-                        <a class="btn btn-primary" (click)="removeSmartsheetAuth()">Remove Smartsheet
+                        <a class="btn btn-default" (click)="removeSmartsheetAuth()">Remove Smartsheet
                             connection</a>
                     </div>
 
 
                     <div *ngIf="!me.smartsheet_oauth">
-                        <a md-raised-button color="primary" href="{{getSmartsheetAuthLink()}}">Get Smartsheet
+                        <a class="btn btn-primary"  href="{{getSmartsheetAuthLink()}}">Get Smartsheet
                             connection</a>
                     </div>
                 </md-card>
