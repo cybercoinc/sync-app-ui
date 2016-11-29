@@ -149,6 +149,34 @@ export class PipeConnectionService implements Resolve<{}> {
             });
     }
 
+    createNewOrGetExistingWorkspaceId(workspaceName): Promise<number> {
+        let project = this.project;
+        let _workspaceId;
+
+        return new Promise((resolve, reject) => {
+            if (!project.smartsheet_workspace_id) {
+                // create new workspace at smartsheet
+                return this.MsProjectClientService
+                    .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authUser.auth_session_id)
+                    .then(workspace => {
+                        _workspaceId = workspace.id;
+
+                        return this.MsProjectClientService.update(project.id, {
+                            smartsheet_workspace_id: _workspaceId
+                        }, this.AuthService.authUser.auth_session_id);
+                    })
+                    .then(() => {
+                        this.project.smartsheet_workspace_id = _workspaceId;
+
+                        resolve(_workspaceId);
+                    })
+                    .catch(err => reject(err));
+            } else {
+                resolve(project.smartsheet_workspace_id);
+            }
+        });
+    }
+
     getPipeLabelByType(pipeType: string): string {
         let label = '';
 

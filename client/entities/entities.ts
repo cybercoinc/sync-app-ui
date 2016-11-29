@@ -116,7 +116,8 @@ export class Project {
         kind: string;
         namespace: string;
         path: string|number[]
-    }
+    };
+    smartsheet_workspace_id: number;
 }
 
 export class ProcoreTodoColumn {

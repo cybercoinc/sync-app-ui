@@ -105,14 +105,12 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(pipeId => {
                 _pipeId = pipeId;
 
-                // create new workspace at smartsheet
-                return this.MsProjectClientService
-                    .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authUser.auth_session_id)
+                return this.PipeConnectionService.createNewOrGetExistingWorkspaceId(workspaceName);
             })
-            .then(workspace => {
+            .then(workspaceId => {
                 // create new sheet inside workspace
                 return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
-                    project.id, workspace.id, Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'), newSheetName, this.AuthService.authUser.auth_session_id
+                    project.id, workspaceId, Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'), newSheetName, this.AuthService.authUser.auth_session_id
                 );
             })
             .then(createdSheetObj => {
@@ -154,14 +152,12 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(pipeId => {
                 _pipeId = pipeId;
 
-                // create new workspace at smartsheet
-                return this.MsProjectClientService
-                    .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authUser.auth_session_id)
+                return this.PipeConnectionService.createNewOrGetExistingWorkspaceId(workspaceName);
             })
-            .then(workspace => {
+            .then(workspaceId => {
                 // move sheet to new workspace
                 return this.MsProjectClientService.moveSheetToWorkspace(
-                    project.id, this.selectedSheet.id, workspace.id, this.AuthService.authUser.auth_session_id
+                    project.id, this.selectedSheet.id, workspaceId, this.AuthService.authUser.auth_session_id
                 );
             })
             .then(sheetId => {
