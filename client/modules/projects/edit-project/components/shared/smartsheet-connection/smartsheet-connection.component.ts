@@ -3,10 +3,9 @@ import {MsProjectClientService} from "client/service/microservices/ms-project-cl
 import {AuthService} from 'client/service/auth.service';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {Config} from 'client/config';
-import {Project, SmartsheetSheet} from 'client/entities/entities';
-import {PIPE_TYPE_PUBLIC_TODOS, PIPE_STATUS_DISABLED} from 'client/entities/entities';
+import {SmartsheetSheet} from 'client/entities/entities';
 import {PendingRequestsService} from "client/service/pending-requests.service";
 
 @Component({
