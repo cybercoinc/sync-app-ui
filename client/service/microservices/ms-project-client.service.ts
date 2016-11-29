@@ -70,13 +70,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getConnectedSmartsheetSheetsIds(projectId: number, authUserSessionId): Promise<[number]> {
+    getConnectedSmartsheetSheetsIds(authUserSessionId): Promise<[number]> {
         return this.makeMsCall(
             'get-connected-smartsheet-sheets-ids',
             'GET',
-            {
-                project_id: projectId
-            },
+            {},
             authUserSessionId
         );
     }

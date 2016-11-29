@@ -28,9 +28,7 @@ export class SmartsheetConnectionComponent implements OnInit {
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
 
-        let project = this.PipeConnectionService.project;
-
-        this.MsProjectClientService.getConnectedSmartsheetSheetsIds(project.id, this.AuthService.authUser.auth_session_id)
+        this.MsProjectClientService.getConnectedSmartsheetSheetsIds(this.AuthService.authUser.auth_session_id)
             .then(connectedSmSheetsList => {
                 this.connectedSmSheetsIdsList = connectedSmSheetsList;
 
