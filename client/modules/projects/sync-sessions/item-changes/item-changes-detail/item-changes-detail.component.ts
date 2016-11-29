@@ -18,4 +18,31 @@ export class ItemChangesDetailComponent implements OnInit {
     ngOnInit() {
         // console.log(this.itemChanges);
     }
+
+    protected propertiesToLabels = [
+        {
+            property: 'name',
+            label: 'Name',
+        },
+        {
+            property: 'percentage',
+            label: 'Percentage',
+        },
+        {
+            property: 'start_datetime',
+            label: 'Start Datetime',
+        },
+        {
+            property: 'finish_datetime',
+            label: 'Finish Datetime',
+        },
+        {
+            property: 'description',
+            label: 'Description',
+        },
+        {
+            property: 'assignee',
+            label: 'Assignee'
+        }
+    ]
 }

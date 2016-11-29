@@ -1,12 +1,10 @@
 <div class="container-fluid item-changes-container">
     <div class="row">
         <div class="col-xs-12" *ngIf="itemChangesObj?.type === 'created_one'">
-            <p>Name: {{itemChangesObj.item?.name}}</p>
-            <p>Description: {{itemChangesObj.item?.description}}</p>
-            <p>Percentage: {{itemChangesObj.item?.percentage}}</p>
-            <p>Start: {{itemChangesObj.item?.start_datetime}}</p>
-            <p>Finish: {{itemChangesObj.item?.finish_datetime}}</p>
-            <p>Assignee: {{itemChangesObj?.assignee}}</p>
+            <p *ngFor="let propToLabelObj of propertiesToLabels">
+                <span *ngIf="itemChangesObj.item[propToLabelObj.property]">{{propToLabelObj.label}}:
+                    {{itemChangesObj.item[propToLabelObj.property]}}</span>
+            </p>
         </div>
 
         <div class="col-xs-12" *ngIf="itemChangesObj?.type === 'changed_one'">
@@ -14,7 +12,8 @@
 
             <ul>
                 <li *ngFor="let changesObj of itemChangesObj.changes">
-                    <b>{{changesObj.property}}</b>: old value - {{changesObj.old_value}}, new value - {{changesObj.new_value}}
+                    <b>{{changesObj.property}}</b>: old value - {{changesObj.old_value}}, new value -
+                    {{changesObj.new_value}}
                 </li>
             </ul>
         </div>
