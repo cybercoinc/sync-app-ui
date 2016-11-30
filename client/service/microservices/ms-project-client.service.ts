@@ -48,13 +48,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getConnectedProcoreProjectsIds(userId, authUserSessionId): Promise<[number]> {
+    getConnectedProcoreProjectsIds(authUserSessionId): Promise<[number]> {
         return this.makeMsCall(
             'get-connected-procore-projects-ids',
             'GET',
-            {
-                user_id: userId
-            },
+            {},
             authUserSessionId
         );
     }

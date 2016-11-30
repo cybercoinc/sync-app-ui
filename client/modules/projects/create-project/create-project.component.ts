@@ -21,8 +21,7 @@ export class CreateProjectComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.MsProjectClientService.getConnectedProcoreProjectsIds(this.AuthService.authUser.id,
-            this.AuthService.authUser.auth_session_id)
+        this.MsProjectClientService.getConnectedProcoreProjectsIds(this.AuthService.authUser.auth_session_id)
             .then(connectedProcoreProjectsIdsList => {
                 this.connectedProcoreProjectsIdsList = connectedProcoreProjectsIdsList;
 
