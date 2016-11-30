@@ -42,6 +42,18 @@ export class ItemChangesComponent implements OnInit {
         this.selectedItemChanges = itemChanges;
     }
 
+    readonly ITEM_CHANGES_DEFAULT_NUM = 20;
+
+    protected itemChangesToShowNumber = this.ITEM_CHANGES_DEFAULT_NUM;
+
+    viewAll() {
+        this.itemChangesToShowNumber = null;
+    }
+
+    viewLess() {
+        this.itemChangesToShowNumber = this.ITEM_CHANGES_DEFAULT_NUM;
+    }
+
     isFormattedItemChangesObjEmpty(): boolean {
         return this.formattedItemChangesObj.created_one && this.formattedItemChangesObj.created_one.length === 0
             && this.formattedItemChangesObj.changed_one && this.formattedItemChangesObj.changed_one.length === 0

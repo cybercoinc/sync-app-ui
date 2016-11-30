@@ -21,10 +21,16 @@
                     <b>Created ({{formattedItemChangesObj.created_one.length}}):</b>
                     <ul class="item-changes-ul">
                         <li *ngFor="let itemChangesObj of formattedItemChangesObj.created_one">
-                            <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
-                                              [item-changes]="itemChangesObj"></item-changes-row>
+                            <section *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.created_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
+                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
+                                                  [item-changes]="itemChangesObj"></item-changes-row>
+                            </section>
                         </li>
                     </ul>
+                    <div *ngIf="formattedItemChangesObj.created_one.length > ITEM_CHANGES_DEFAULT_NUM">
+                        <a (click)="viewAll()" *ngIf="itemChangesToShowNumber">View all</a>
+                        <a (click)="viewLess()" *ngIf="!itemChangesToShowNumber">View less</a>
+                    </div>
                 </div>
             </div>
 
@@ -33,13 +39,18 @@
                     <b>Updated ({{formattedItemChangesObj.changed_one.length}}):</b>
                     <ul class="item-changes-ul">
                         <li *ngFor="let itemChangesObj of formattedItemChangesObj.changed_one">
-                            <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
-                                              [item-changes]="itemChangesObj"></item-changes-row>
+                            <section *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.changed_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
+                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
+                                                  [item-changes]="itemChangesObj"></item-changes-row>
+                            </section>
                         </li>
                     </ul>
+                    <div *ngIf="formattedItemChangesObj.changed_one.length > ITEM_CHANGES_DEFAULT_NUM">
+                        <a (click)="viewAll()" *ngIf="itemChangesToShowNumber">View all</a>
+                        <a (click)="viewLess()" *ngIf="!itemChangesToShowNumber">View less</a>
+                    </div>
                 </div>
             </div>
-
         </div>
 
         <div class="col-xs-6">
