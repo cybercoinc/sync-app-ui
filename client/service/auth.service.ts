@@ -24,22 +24,28 @@ export class AuthService implements Resolve<{}> {
     authTokenId: number = null;
 
     getAuthUser(): Promise<User> {
-        return this.msUser.getMe()
-            .then(authUserResponse => {
-                if (!authUserResponse.user) {
-                    throw new Error('no user found');
-                }
+        return new Promise((resolve, reject) => {
+            if (this.authUser && this.authTokenId) {
+                return resolve(this.authUser)
+            }
 
-                this.authUser = authUserResponse.user;
-                this.authTokenId = authUserResponse.auth_token_id;
+            return this.msUser.getMe()
+                .then(authUserResponse => {
+                    if (!authUserResponse.user) {
+                        return reject('no user found');
+                    }
 
-                if (this.authUser.role === 'guest') {
-                    this.router.navigate(['/auth', 'procore']);
-                    return false;
-                }
+                    this.authUser = authUserResponse.user;
+                    this.authTokenId = authUserResponse.auth_token_id;
 
-                return this.authUser;
-            })
+                    if (this.authUser.role === 'guest') {
+                        this.router.navigate(['/auth', 'procore']);
+                        return false;
+                    }
+
+                    return resolve(this.authUser);
+                })
+        });
     }
 
     defaultAuth() {

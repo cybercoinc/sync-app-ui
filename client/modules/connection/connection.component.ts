@@ -4,7 +4,6 @@ import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
 
 @Component({
-    // moduleId: module.id,
     selector: "connection",
     templateUrl: 'client/modules/connection/connection.component.html',
     styleUrls: ['client/modules/connection/connection.component.css']
@@ -17,10 +16,7 @@ export class ConnectionComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.MsUserClientService.getMe()
-            .then(me => {
-                this.me = me;
-            });
+        this.me = this.AuthService.authUser;
     }
 
     getProcoreAuthLink() {
