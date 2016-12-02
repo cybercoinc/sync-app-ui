@@ -20,13 +20,13 @@ export class ColumnsMatchingComponent implements OnInit {
         this.MsProjectClientService.getSmartsheetSheetColumns(
             this.AuthService.authUser.id,
             this.smartsheetSheetId,
-            this.AuthService.authUser.auth_session_id
+            this.AuthService.authTokenId
         )
             .then(sheetColumns => {
                 this.sheetColumns = sheetColumns
             });
 
-        this.MsSyncClientService.getProcoreTodosColumns(this.AuthService.authUser.auth_session_id)
+        this.MsSyncClientService.getProcoreTodosColumns(this.AuthService.authTokenId)
             .then(todosColumns => {
                 this.procoreTodosColumns = todosColumns;
 

@@ -47,18 +47,18 @@ export class SyncSessionsListComponent implements OnInit {
     getSyncSessionsList(projectId, pipeType, onlyWithChanges: boolean) {
         this.syncSessionsList = null;
 
-        this.MsProjectClientService.getPipesWhere({
+        return this.MsProjectClientService.getPipesWhere({
             type: pipeType,
             project_fk_id: projectId
-        }, this.AuthService.authUser.auth_session_id)
-            .then((pipesList) => { // todo find how to resolve this in TS
+        }, this.AuthService.authTokenId)
+            .then((pipesList) => {
                 this.projectPipe = pipesList.shift();
 
                 if (!this.projectPipe) {
                     return [];
                 }
 
-                return this.MsSyncClientService.getPipeSyncSessions(this.projectPipe.id, onlyWithChanges, this.AuthService.authUser.auth_session_id);
+                return this.MsSyncClientService.getPipeSyncSessions(this.projectPipe.id, onlyWithChanges, this.AuthService.authTokenId);
             })
             .then(syncSessionsList => {
                 this.syncSessionsList = this.orderByDate(syncSessionsList);

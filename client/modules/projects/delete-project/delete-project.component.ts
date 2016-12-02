@@ -25,7 +25,7 @@ export class DeleteProjectComponent implements OnInit {
     protected projectId: number;
 
     deleteProject() {
-        this.MsProjectClientService.deleteProject(this.projectId, this.AuthService.authUser.auth_session_id)
+        this.MsProjectClientService.deleteProject(this.projectId, this.AuthService.authTokenId)
             .then(() => {
                 return this.router.navigate(['projects']);
             })

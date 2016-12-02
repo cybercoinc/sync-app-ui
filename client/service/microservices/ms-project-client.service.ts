@@ -1,7 +1,11 @@
 import {MsClientService} from "./ms-client.service";
-import {Headers, Http, URLSearchParams} from '@angular/http';
+import {Http} from '@angular/http';
 import {
-    SmartsheetSheetColumn, ProcoreProject, Project, SmartsheetSheet, ProjectPipe,
+    SmartsheetSheetColumn,
+    ProcoreProject,
+    Project,
+    SmartsheetSheet,
+    ProjectPipe,
     User
 } from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
@@ -15,69 +19,69 @@ export class MsProjectClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-project');
     }
 
-    getActiveProjects(userId, authUserSessionId): Promise<Project[]> {
+    getActiveProjects(userId, authTokenId): Promise<Project[]> {
         return this.makeMsCall(
             'get-active-projects',
             'GET',
             {
                 user_id: userId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getProjectByid(projectId: number, authUserSessionId: string): Promise<Project[]> {
+    getProjectByid(projectId: number, authTokenId): Promise<Project[]> {
         return this.makeMsCall(
             'find-where',
             'GET',
             {
                 id: projectId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getProcoreProjects(userId, authUserSessionId): Promise<ProcoreProject[]> {
+    getProcoreProjects(userId, authTokenId): Promise<ProcoreProject[]> {
         return this.makeMsCall(
             'get-procore-projects',
             'GET',
             {
                 user_id: userId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getConnectedProcoreProjectsIds(authUserSessionId): Promise<[number]> {
+    getConnectedProcoreProjectsIds(authTokenId): Promise<[number]> {
         return this.makeMsCall(
             'get-connected-procore-projects-ids',
             'GET',
             {},
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getSmartsheetSheets(userId, authUserSessionId): Promise<SmartsheetSheet[]> {
+    getSmartsheetSheets(userId, authTokenId): Promise<SmartsheetSheet[]> {
         return this.makeMsCall(
             'get-smartsheet-sheets',
             'GET',
             {
                 user_id: userId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getConnectedSmartsheetSheetsIds(authUserSessionId): Promise<[number]> {
+    getConnectedSmartsheetSheetsIds(authTokenId): Promise<[number]> {
         return this.makeMsCall(
             'get-connected-smartsheet-sheets-ids',
             'GET',
             {},
-            authUserSessionId
+            authTokenId
         );
     }
 
-    createSmartsheetWorkspace(projectId: number, workspaceName: string, authUserSessionId: string): Promise<{
+    createSmartsheetWorkspace(projectId: number, workspaceName: string, authTokenId): Promise<{
         id: number,
         permalink: string
     }> {
@@ -88,11 +92,11 @@ export class MsProjectClientService extends MsClientService {
                 workspace_name: workspaceName,
                 project_id: projectId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    createSmartsheetSheetFromTemplate(projectId: number, workspaceId: number, templateId: number, sheetName: string, authUserSessionId: string): Promise<SmartsheetSheet> {
+    createSmartsheetSheetFromTemplate(projectId: number, workspaceId: number, templateId: number, sheetName: string, authTokenId): Promise<SmartsheetSheet> {
         return this.makeMsCall(
             'create-sheet-from-template-in-workspace',
             'POST', {
@@ -101,11 +105,11 @@ export class MsProjectClientService extends MsClientService {
                 template_id: templateId,
                 sheet_name: sheetName
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    moveSheetToWorkspace(projectId: number, sheetId: number, workspaceId: number, authUserSessionId: string): Promise<SmartsheetSheet> {
+    moveSheetToWorkspace(projectId: number, sheetId: number, workspaceId: number, authTokenId): Promise<SmartsheetSheet> {
         return this.makeMsCall(
             'move-sheet-to-workspace',
             'POST', {
@@ -113,11 +117,11 @@ export class MsProjectClientService extends MsClientService {
                 workspace_id: workspaceId,
                 sheet_id: sheetId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    matchDefaultSheetColumns(projectId: number, pipeId: number, authUserSessionId: string): Promise<number> {
+    matchDefaultSheetColumns(projectId: number, pipeId: number, authTokenId): Promise<number> {
         return this.makeMsCall(
             'match-default-sheet-columns',
             'POST',
@@ -125,11 +129,11 @@ export class MsProjectClientService extends MsClientService {
                 project_id: projectId,
                 pipe_id: pipeId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    saveMatchedColumns(pipeId: number, matchedColumns, authUserSessionId: string): Promise<number> {
+    saveMatchedColumns(pipeId: number, matchedColumns, authTokenId): Promise<number> {
         return this.makeMsCall(
             'save-matched-columns',
             'POST',
@@ -137,11 +141,11 @@ export class MsProjectClientService extends MsClientService {
                 pipe_id: pipeId,
                 matched_columns: matchedColumns
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getSmartsheetSheetColumns(userId: number, smSheetId: number, authUserSessionId: string): Promise<[SmartsheetSheetColumn]> {
+    getSmartsheetSheetColumns(userId: number, smSheetId: number, authTokenId): Promise<[SmartsheetSheetColumn]> {
         return this.makeMsCall(
             'get-smartsheet-sheet-columns',
             'GET',
@@ -149,42 +153,42 @@ export class MsProjectClientService extends MsClientService {
                 user_id: userId,
                 sm_sheet_id: smSheetId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getPipesByProjectId(projectId: number, authUserSessionId: string): Promise<ProjectPipe[]> {
+    getPipesByProjectId(projectId: number, authTokenId): Promise<ProjectPipe[]> {
         return this.makeMsCall(
             'get-pipes-by-project-id',
             'GET',
             {
                 project_id: projectId,
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getPipeById(pipeId: number, authUserSessionId: string): Promise<ProjectPipe> {
+    getPipeById(pipeId: number, authTokenId): Promise<ProjectPipe> {
         return this.makeMsCall(
             'get-pipe',
             'GET',
             {
                 pipe_id: pipeId,
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getPipesWhere(whereObj, authUserSessionId: string): Promise<ProjectPipe[]> {
+    getPipesWhere(whereObj, authTokenId): Promise<ProjectPipe[]> {
         return this.makeMsCall(
             'get-pipe-where',
             'GET',
             whereObj,
-            authUserSessionId
+            authTokenId
         );
     }
 
-    createPipe(projectId: number, dataToSet, pipeName: string, authUserSessionId: string): Promise<number> {
+    createPipe(projectId: number, dataToSet, pipeName: string, authTokenId): Promise<number> {
         return this.makeMsCall(
             'create-pipe',
             'POST',
@@ -193,11 +197,11 @@ export class MsProjectClientService extends MsClientService {
                 data: dataToSet,
                 pipe_name: pipeName
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    updatePipe(pipeId: number, dataToSet, authUserSessionId: string): Promise<[number]> {
+    updatePipe(pipeId: number, dataToSet, authTokenId): Promise<[number]> {
         return this.makeMsCall(
             'update-pipe',
             'PUT',
@@ -205,50 +209,50 @@ export class MsProjectClientService extends MsClientService {
                 pipe_id: pipeId,
                 data: dataToSet,
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    deletePipe(pipeId: number, authUserSessionId: string): Promise<boolean> {
+    deletePipe(pipeId: number, authTokenId): Promise<boolean> {
         return this.makeMsCall(
             'delete-pipe',
             'DELETE',
             {
                 pipe_id: pipeId,
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    deleteProject(projectId: number, authUserSessionId: string): Promise<boolean> {
+    deleteProject(projectId: number, authTokenId): Promise<boolean> {
         return this.makeMsCall(
             'delete-project',
             'DELETE',
             {
                 project_id: projectId,
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
     /**
      *
      * @param pipeId
-     * @param authUserSessionId
+     * @param authTokenId
      * @return {Promise<{Number}>} created webhook id
      */
-    createSmPipeWebhook(pipeId: number, authUserSessionId: string): Promise<number> {
+    createSmPipeWebhook(pipeId: number, authTokenId): Promise<number> {
         return this.makeMsCall(
             'create-pipe-webhook',
             'PUT',
             {
                 pipe_id: pipeId,
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    changeSmPipeWebhookStatus(pipeId: number, isEnabled: boolean, authUserSessionId: string): Promise<boolean> {
+    changeSmPipeWebhookStatus(pipeId: number, isEnabled: boolean, authTokenId): Promise<boolean> {
         return this.makeMsCall(
             'change-pipe-webhook-status',
             'PUT',
@@ -256,40 +260,40 @@ export class MsProjectClientService extends MsClientService {
                 pipe_id: pipeId,
                 status: isEnabled
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    syncProjectUsers(projectId: number, authUserSessionId: string): Promise<any> {
+    syncProjectUsers(projectId: number, authTokenId): Promise<any> {
         return this.makeMsCall(
             'sync-project-users',
             'POST',
             {
                 project_id: projectId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getProjectUsers(projectId: number, authUserSessionId: string): Promise<User[]> {
+    getProjectUsers(projectId: number, authTokenId): Promise<User[]> {
         return this.makeMsCall(
             'get-project-users',
             'GET',
             {
                 project_id: projectId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getPbrUser(projectId: number, authUserSessionId: string): Promise<User> {
+    getPbrUser(projectId: number, authTokenId): Promise<User> {
         return this.makeMsCall(
             'get-pbr-user',
             'GET',
             {
                 project_id: projectId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 }

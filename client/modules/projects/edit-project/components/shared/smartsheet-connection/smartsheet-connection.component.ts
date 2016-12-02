@@ -28,7 +28,7 @@ export class SmartsheetConnectionComponent implements OnInit {
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
 
-        this.MsProjectClientService.getConnectedSmartsheetSheetsIds(this.AuthService.authUser.auth_session_id)
+        this.MsProjectClientService.getConnectedSmartsheetSheetsIds(this.AuthService.authTokenId)
             .then(connectedSmSheetsList => {
                 this.connectedSmSheetsIdsList = connectedSmSheetsList;
 
@@ -71,7 +71,7 @@ export class SmartsheetConnectionComponent implements OnInit {
 
     getSmartsheetSheets() {
         return this.MsProjectClientService
-            .getSmartsheetSheets(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
+            .getSmartsheetSheets(this.AuthService.authUser.id, this.AuthService.authTokenId);
     }
 
     chooseExistingSheet(sheet) {
@@ -108,7 +108,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(workspaceId => {
                 // create new sheet inside workspace
                 return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
-                    project.id, workspaceId, Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'), newSheetName, this.AuthService.authUser.auth_session_id
+                    project.id, workspaceId, Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'), newSheetName, this.AuthService.authTokenId
                 );
             })
             .then(createdSheetObj => {
@@ -116,11 +116,11 @@ export class SmartsheetConnectionComponent implements OnInit {
                 return this.MsProjectClientService.updatePipe(_pipeId, {
                     sm_sheet_id: createdSheetObj.id,
                     sm_permalink: createdSheetObj.permalink
-                }, this.AuthService.authUser.auth_session_id);
+                }, this.AuthService.authTokenId);
             })
             .then(pipeId => {
                 // matching columns
-                return this.MsProjectClientService.matchDefaultSheetColumns(project.id, _pipeId, this.AuthService.authUser.auth_session_id);
+                return this.MsProjectClientService.matchDefaultSheetColumns(project.id, _pipeId, this.AuthService.authTokenId);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
@@ -155,7 +155,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(workspaceId => {
                 // move sheet to new workspace
                 return this.MsProjectClientService.moveSheetToWorkspace(
-                    project.id, this.selectedSheet.id, workspaceId, this.AuthService.authUser.auth_session_id
+                    project.id, this.selectedSheet.id, workspaceId, this.AuthService.authTokenId
                 );
             })
             .then(sheetId => {
@@ -163,11 +163,11 @@ export class SmartsheetConnectionComponent implements OnInit {
                 return this.MsProjectClientService.updatePipe(_pipeId, {
                     sm_sheet_id: sheetId.id,
                     sm_permalink: sheetId.permalink
-                }, this.AuthService.authUser.auth_session_id);
+                }, this.AuthService.authTokenId);
             })
             .then(pipeId => {
                 // matching columns
-                return this.MsProjectClientService.saveMatchedColumns(_pipeId, columnsObj, this.AuthService.authUser.auth_session_id);
+                return this.MsProjectClientService.saveMatchedColumns(_pipeId, columnsObj, this.AuthService.authTokenId);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();

@@ -12,27 +12,27 @@ export class MsUserClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-user');
     }
 
-    getMe(): Promise<User> {
+    getMe(): Promise< {user: User, auth_token_id: number}> {
         return this.makeMsCall('me', 'GET');
     }
 
-    getCompany(userId, authSessionId): Promise<> {
+    getCompany(userId, authTokenId): Promise<any> {
         return this.makeMsCall('get-company', 'GET', {
-            userId:userId
-        }, authSessionId);
+            userId: userId
+        }, authTokenId);
     }
 
-    updatePbr(companyId,pbrId, authSessionId): Promise<> {
+    updatePbr(companyId, pbrId, authTokenId): Promise<any> {
         return this.makeMsCall('update-pbr', 'POST', {
-            pbrId:pbrId,
-            companyId:companyId
-        }, authSessionId);
+            pbrId: pbrId,
+            companyId: companyId
+        }, authTokenId);
     }
 
-    getCompanyUsers(companyId, authSessionId): Promise<> {
+    getCompanyUsers(companyId, authTokenId): Promise<any> {
         return this.makeMsCall('get-company-users', 'GET', {
-            companyId:companyId
-        }, authSessionId);
+            companyId: companyId
+        }, authTokenId);
     }
 
     defaultAuth() {
@@ -43,15 +43,15 @@ export class MsUserClientService extends MsClientService {
         return this.makeMsCall('auth/procore', 'GET');
     }
 
-    removeSmartsheetAuth(userId, authSessionId) {
+    removeSmartsheetAuth(userId, authTokenId) {
         return this.makeMsCall('auth/remove/smartsheet', 'DELETE', {
             user_id: userId
-        }, authSessionId);
+        }, authTokenId);
     }
 
-    logout(userId, authSessionId) {
+    logout(userId, authTokenId) {
         return this.makeMsCall('auth/logout', 'POST', {
             user_id: userId
-        }, authSessionId);
+        }, authTokenId);
     }
 }

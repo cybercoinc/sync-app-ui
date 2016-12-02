@@ -23,12 +23,12 @@ export class LicensesComponent implements OnInit {
     }
 
     getActiveLicenses() {
-        this.MsLicenseClientService.getLicenses(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
+        this.MsLicenseClientService.getLicenses(this.AuthService.authUser.id, this.AuthService.authTokenId)
             .then(licensesList => {
                 this.licensesList = licensesList;
                 var projects = [];
                 licensesList.forEach(license => {
-                    projects.push( this.MsProjectClientService.getProjectByid(license.entity_id, this.AuthService.authUser.auth_session_id));
+                    projects.push( this.MsProjectClientService.getProjectByid(license.entity_id, this.AuthService.authTokenId));
                 });
 
                 return Promise.all(projects);

@@ -30,8 +30,8 @@ export class PipeConnectionService implements Resolve<{}> {
         return this.AuthService.getAuthUser()
             .then(authUser => {
                 return Promise.all([
-                    this.getProject(projectId, authUser.auth_session_id),
-                    this.getPipesList(projectId, authUser.auth_session_id)
+                    this.getProject(projectId, this.AuthService.authTokenId),
+                    this.getPipesList(projectId, this.AuthService.authTokenId)
                 ]);
 
             });
@@ -44,8 +44,8 @@ export class PipeConnectionService implements Resolve<{}> {
         tasks: ProjectPipe,
     }|{} = {};
 
-    getProject(projectId: number, authSessionId: string): Promise<Project> {
-        return this.MsProjectClientService.getProjectByid(projectId, authSessionId)
+    getProject(projectId: number, authTokenId): Promise<Project> {
+        return this.MsProjectClientService.getProjectByid(projectId, authTokenId)
             .then(projectsList => {
 
                 this.project = projectsList.shift();
@@ -54,8 +54,8 @@ export class PipeConnectionService implements Resolve<{}> {
             });
     }
 
-    getPipesList(projectId: number, authSessionId: string): Promise<ProjectPipe[]> {
-        return this.MsProjectClientService.getPipesByProjectId(projectId, authSessionId)
+    getPipesList(projectId: number, authTokenId): Promise<ProjectPipe[]> {
+        return this.MsProjectClientService.getPipesByProjectId(projectId, authTokenId)
             .then(pipesList => {
                 this.pipesListObj = [];
 
@@ -68,7 +68,7 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     refreshPipesList() {
-        return this.MsProjectClientService.getPipesByProjectId(this.project.id, this.AuthService.authUser.auth_session_id)
+        return this.MsProjectClientService.getPipesByProjectId(this.project.id, this.AuthService.authTokenId)
             .then(pipesList => {
                 pipesList.forEach((pipe: ProjectPipe) => {
                     this.pipesListObj[pipe.type] = pipe;
@@ -81,45 +81,45 @@ export class PipeConnectionService implements Resolve<{}> {
     enablePipe(pipeId: number) {
         let _pipeObj: ProjectPipe;
 
-        return this.MsProjectClientService.getPipeById(pipeId, this.AuthService.authUser.auth_session_id)
+        return this.MsProjectClientService.getPipeById(pipeId, this.AuthService.authTokenId)
             .then(pipeObj => {
                 _pipeObj = pipeObj;
 
                 return this.MsProjectClientService.updatePipe(pipeId, {
                     status: PIPE_STATUS_ACTIVE
-                }, this.AuthService.authUser.auth_session_id);
+                }, this.AuthService.authTokenId);
             })
             .then(() => {
                 this.refreshPipesList();
 
-                return this.MsSyncClientService.startPipeSync(pipeId, this.AuthService.authUser.auth_session_id);
+                return this.MsSyncClientService.startPipeSync(pipeId, this.AuthService.authTokenId);
             })
             .then(() => {
                 if (!_pipeObj.sm_webhook_id) {
-                    return this.MsProjectClientService.createSmPipeWebhook(pipeId, this.AuthService.authUser.auth_session_id);
+                    return this.MsProjectClientService.createSmPipeWebhook(pipeId, this.AuthService.authTokenId);
                 }
 
                 return _pipeObj.sm_webhook_id;
             })
             .then(() => {
-                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, true, this.AuthService.authUser.auth_session_id);
+                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, true, this.AuthService.authTokenId);
             });
     }
 
     disablePipe(pipeId) {
         return this.MsProjectClientService.updatePipe(pipeId, {
             status: PIPE_STATUS_DISABLED
-        }, this.AuthService.authUser.auth_session_id)
+        }, this.AuthService.authTokenId)
             .then(() => {
                 return this.refreshPipesList();
             })
             .then(() => {
-                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, false, this.AuthService.authUser.auth_session_id);
+                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, false, this.AuthService.authTokenId);
             })
     }
 
     deletePipe(pipeId) {
-        return this.MsProjectClientService.deletePipe(pipeId, this.AuthService.authUser.auth_session_id)
+        return this.MsProjectClientService.deletePipe(pipeId, this.AuthService.authTokenId)
             .then(() => {
                 return this.refreshPipesList();
             });
@@ -131,7 +131,7 @@ export class PipeConnectionService implements Resolve<{}> {
         return this.MsProjectClientService.getPipesWhere({
             project_fk_id: this.project.id,
             type: pipeType
-        }, this.AuthService.authUser.auth_session_id)
+        }, this.AuthService.authTokenId)
             .then(pipesList => {
                 let existingPipeObj = pipesList.shift();
 
@@ -144,7 +144,7 @@ export class PipeConnectionService implements Resolve<{}> {
                         procore_company_id: project.procore_company_id,
                         procore_project_id: project.procore_project_id,
                         user_fk_id: this.AuthService.authUser.id
-                    }, this.getPipeLabelByType(pipeType), this.AuthService.authUser.auth_session_id);
+                    }, this.getPipeLabelByType(pipeType), this.AuthService.authTokenId);
                 }
             });
     }
@@ -157,13 +157,13 @@ export class PipeConnectionService implements Resolve<{}> {
             if (!project.smartsheet_workspace_id) {
                 // create new workspace at smartsheet
                 return this.MsProjectClientService
-                    .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authUser.auth_session_id)
+                    .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authTokenId)
                     .then(workspace => {
                         _workspaceId = workspace.id;
 
                         return this.MsProjectClientService.update(project.id, {
                             smartsheet_workspace_id: _workspaceId
-                        }, this.AuthService.authUser.auth_session_id);
+                        }, this.AuthService.authTokenId);
                     })
                     .then(() => {
                         this.project.smartsheet_workspace_id = _workspaceId;

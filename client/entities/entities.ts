@@ -11,8 +11,6 @@ export class User {
         account_email: string;
         token_type: string;
     };
-
-    auth_session_id: string;
     created_at: Date;
     role: string;
     email: string;

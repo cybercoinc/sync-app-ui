@@ -64,7 +64,7 @@ export class TasksSettingsComponent implements OnInit {
                 return this.MsProjectClientService.updatePipe(pipeId, {
                     sm_working_days: this.model.sm_working_days,
                     sm_weekends: this.model.sm_weekends.split(','),
-                }, this.AuthService.authUser.auth_session_id);
+                }, this.AuthService.authTokenId);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();

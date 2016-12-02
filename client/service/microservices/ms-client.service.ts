@@ -38,19 +38,19 @@ export class MsClientService {
      * @param {String} action
      * @param {String} method GET, POST, PUT, DELETE
      * @param {} data
-     * @param {String} authSessionId
+     * @param {Number|null} authTokenId
      *
      */
-    public makeMsCall(action: string, method: string, data: {} = {}, authSessionId: string = '') {
+    public makeMsCall(action: string, method: string, data: {} = {}, authTokenId = null) {
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'auth-session-id': authSessionId
+            'auth-token-id': authTokenId
         });
 
         this.PendingRequestsService.hasPendingRequest = true;
 
-        console.log('makeMsCall ' + action, authSessionId);
+        console.log('makeMsCall ' + action, authTokenId);
 
         if (method === 'GET' || method === 'DELETE') {
             params = new URLSearchParams();
@@ -98,7 +98,7 @@ export class MsClientService {
     protected handleError(response: any): Promise<any>|string {
         let message = response.statusText;
 
-        if (response['_body']) {
+        if (response['ok'] && response['_body']) {
             let jsonBody = JSON.parse(response['_body']);
 
             if (jsonBody.message) {
@@ -121,30 +121,30 @@ export class MsClientService {
         return Promise.reject(response.message || response);
     }
 
-    create(data: {}, authUserSessionId: string): Promise<[number]> {
+    create(data: {}, authTokenId): Promise<[number]> {
         return this.makeMsCall(
             'create',
             'POST',
             data,
-            authUserSessionId
+            authTokenId
         );
     }
 
-    update(id, data: {}, authUserSessionId: string): Promise<number> {
+    update(id, data: {}, authTokenId): Promise<number> {
         return this.makeMsCall(
             'update/' + id,
             'PUT',
             data,
-            authUserSessionId
+            authTokenId
         );
     }
 
-    findManyByIdsList(idsList: [number], authUserSessionId: string): Promise<[any]> {
+    findManyByIdsList(idsList: [number], authTokenId): Promise<[any]> {
         return this.makeMsCall(
             'find-many-by-ids-list',
             'GET',
             idsList,
-            authUserSessionId
+            authTokenId
         );
     }
 

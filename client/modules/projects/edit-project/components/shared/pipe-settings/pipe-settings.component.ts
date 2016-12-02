@@ -69,7 +69,7 @@ export class PipeSettingsComponent implements OnInit {
                     sm_weekends: this.model.sm_weekends.split(','),
                     summary_tasks_enabled: this.model.summary_tasks_enabled,
                     colors_coding_enabled: this.model.colors_coding_enabled
-                }, this.AuthService.authUser.auth_session_id);
+                }, this.AuthService.authTokenId);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();

@@ -24,7 +24,7 @@ export class IndexComponent implements OnInit {
     getActiveProjectsWithPipes(): void {
         let _projects;
 
-        this.MsProjectClientService.getActiveProjects(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
+        this.MsProjectClientService.getActiveProjects(this.AuthService.authUser.id, this.AuthService.authTokenId)
             .then(projects => {
                 _projects = projects;
 
@@ -36,7 +36,7 @@ export class IndexComponent implements OnInit {
 
                 projects.forEach(project => {
                     promises.push(
-                        this.MsProjectClientService.getPipesByProjectId(project.id, this.AuthService.authUser.auth_session_id)
+                        this.MsProjectClientService.getPipesByProjectId(project.id, this.AuthService.authTokenId)
                     )
                 });
 

@@ -22,7 +22,7 @@ export class CompanySettingsComponent implements OnInit {
     }
     savePbr(){
 
-        this.MsUserClientService.updatePbr(this.company.id, this.pbrId, this.AuthService.authUser.auth_session_id).then(() => {
+        this.MsUserClientService.updatePbr(this.company.id, this.pbrId, this.AuthService.authTokenId).then(() => {
             this.isPbrIdChanged = false;
             this.showPbrDropDown = false;
         })
@@ -33,7 +33,7 @@ export class CompanySettingsComponent implements OnInit {
         this.isPbrIdChanged = true;
     }
     ngOnInit(): void {
-        this.getSettings(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id);
+        this.getSettings(this.AuthService.authUser.id, this.AuthService.authTokenId);
     }
 
     showEditPBR() {

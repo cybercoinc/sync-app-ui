@@ -1,5 +1,5 @@
 import {MsClientService} from "./ms-client.service";
-import {Headers, Http, URLSearchParams} from '@angular/http';
+import {Http} from '@angular/http';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 
@@ -11,7 +11,7 @@ export class MsLicenseClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-license');
     }
 
-    createStartLicense(projectId: number, projectName: string, userId: number, authUserSessionId: string): Promise<number> {
+    createStartLicense(projectId: number, projectName: string, userId: number, authTokenId): Promise<number> {
         return this.makeMsCall(
             'create-start-license',
             'POST',
@@ -20,16 +20,16 @@ export class MsLicenseClientService extends MsClientService {
                 project_name: projectName,
                 user_id: userId,
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getLicenses(userId, authUserSessionId): Promise<any> {
-        return this.makeMsCall('get-licenses', 'GET', {user_id: userId}, authUserSessionId);
+    getLicenses(userId, authTokenId): Promise<any> {
+        return this.makeMsCall('get-licenses', 'GET', {user_id: userId}, authTokenId);
     }
 
-    getInvoices(userId, authUserSessionId): Promise<any> {
-        return this.makeMsCall('get-invoices', 'GET', {user_id: userId}, authUserSessionId);
+    getInvoices(userId, authTokenId): Promise<any> {
+        return this.makeMsCall('get-invoices', 'GET', {user_id: userId}, authTokenId);
     }
 
 

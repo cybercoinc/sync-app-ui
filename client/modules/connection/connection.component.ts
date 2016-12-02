@@ -33,7 +33,7 @@ export class ConnectionComponent implements OnInit {
     }
 
     removeSmartsheetAuth() {
-        return this.MsUserClientService.removeSmartsheetAuth(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
+        return this.MsUserClientService.removeSmartsheetAuth(this.AuthService.authUser.id, this.AuthService.authTokenId)
             .then(() => {
                 this.me.smartsheet_oauth = null;
             })

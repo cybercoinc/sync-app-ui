@@ -23,7 +23,7 @@ export class InvoicesComponent implements OnInit {
     }
 
     getInvoices() {
-        this.MsLicenseClientService.getInvoices(this.AuthService.authUser.id, this.AuthService.authUser.auth_session_id)
+        this.MsLicenseClientService.getInvoices(this.AuthService.authUser.id, this.AuthService.authTokenId)
             .then(invocesArray => {
                 this.invocesArray = invocesArray;
             });

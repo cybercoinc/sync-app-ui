@@ -12,7 +12,7 @@ export class MsSyncClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-sync');
     }
 
-    getPipeSyncSessions(pipeId: number, onlyWithChanges: boolean, authUserSessionId: string): Promise<[SyncSession]> {
+    getPipeSyncSessions(pipeId: number, onlyWithChanges: boolean, authTokenId): Promise<SyncSession[]> {
         return this.makeMsCall(
             'sync-sessions',
             'GET',
@@ -20,38 +20,38 @@ export class MsSyncClientService extends MsClientService {
                 pipe_id: pipeId,
                 only_with_changes: onlyWithChanges
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getItemChangesBySyncSessionsId(syncSessionId: number, authUserSessionId: string): Promise<[ItemChanges]> {
+    getItemChangesBySyncSessionsId(syncSessionId: number, authTokenId): Promise<[ItemChanges]> {
         return this.makeMsCall(
             'item-changes-by-sync-session-id',
             'GET',
             {
                 sync_session_id: syncSessionId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    startPipeSync(pipeId: number, authUserSessionId: string): Promise<boolean> {
+    startPipeSync(pipeId: number, authTokenId): Promise<boolean> {
         return this.makeMsCall(
             'start-pipe-sync',
             'GET',
             {
                 pipe_id: pipeId
             },
-            authUserSessionId
+            authTokenId
         );
     }
 
-    getProcoreTodosColumns(authUserSessionId: string): Promise<[ProcoreTodoColumn]> {
+    getProcoreTodosColumns(authTokenId): Promise<[ProcoreTodoColumn]> {
         return this.makeMsCall(
             'get-procore-todos-columns',
             'GET',
             {},
-            authUserSessionId
+            authTokenId
         )
     }
 }
