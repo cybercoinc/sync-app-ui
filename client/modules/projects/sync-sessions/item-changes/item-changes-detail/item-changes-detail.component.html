@@ -5,6 +5,10 @@
                 <span *ngIf="itemChangesObj.item[propToLabelObj.property]">{{propToLabelObj.label}}:
                     {{itemChangesObj.item[propToLabelObj.property]}}</span>
             </p>
+            <p>
+                <span *ngIf="itemChangesObj.assignee">Assignee:
+                    {{itemChangesObj.assignee}}</span>
+            </p>
         </div>
 
         <div class="col-xs-12" *ngIf="itemChangesObj?.type === 'changed_one'">
