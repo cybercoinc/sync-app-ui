@@ -11,11 +11,13 @@ import {InvoiceCardComponent} from './invoices/invoice-card.component';
 import {InfoComponent} from "./info/Info.component";
 
 import {routing} from './billing.routing';
+import {PaytraceModule} from "client/modules/paytrace/paytrace.module";
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
+        PaytraceModule,
         routing
     ],
     exports: [],
