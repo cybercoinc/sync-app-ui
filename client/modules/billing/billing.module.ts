@@ -8,6 +8,7 @@ import {LicensesComponent} from './licenses/licenses.component';
 import {LicenseTableHeaderComponent} from './licenses/license-table-header.component';
 import {LicenseTableRowComponent} from './licenses/license-table-row.component';
 import {InvoiceCardComponent} from './invoices/invoice-card.component';
+import {InfoComponent} from "./info/Info.component";
 
 import {routing} from './billing.routing';
 
@@ -15,13 +16,14 @@ import {routing} from './billing.routing';
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
-        routing,
+        routing
     ],
     exports: [],
     declarations: [
         BillingComponent,
         InvoicesComponent,
         LicensesComponent,
+        InfoComponent,
         LicenseTableHeaderComponent,
         LicenseTableRowComponent,
         InvoiceCardComponent,

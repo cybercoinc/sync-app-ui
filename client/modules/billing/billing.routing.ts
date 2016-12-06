@@ -5,6 +5,7 @@ import {AuthGuardService} from 'client/service/auth-guard.service';
 import {BillingComponent} from './billing.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {LicensesComponent} from './licenses/licenses.component';
+import {InfoComponent} from "./info/Info.component";
 
 
 
@@ -20,6 +21,10 @@ export const routes: Routes = [
             {
                 path: '',
                 redirectTo: 'licenses'
+            },
+            {
+                path: 'info',
+                component: InfoComponent,
             },
             {
                 path: 'licenses',

@@ -32,5 +32,7 @@ export class MsLicenseClientService extends MsClientService {
         return this.makeMsCall('get-invoices', 'GET', {user_id: userId}, authTokenId);
     }
 
-
+    createCustomer(userId, authTokenId): Promise<any> {
+        return this.makeMsCall('create-customer', 'GET', {user_id: userId}, authTokenId);
+    }
 }
