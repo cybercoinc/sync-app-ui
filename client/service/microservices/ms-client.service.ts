@@ -98,7 +98,7 @@ export class MsClientService {
     protected handleError(response: any): Promise<any>|string {
         let message = response.statusText;
 
-        if (response['ok'] && response['_body']) {
+        if (response['_body']) {
             let jsonBody = JSON.parse(response['_body']);
 
             if (jsonBody.message) {
