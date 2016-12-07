@@ -255,7 +255,7 @@ export class MsProjectClientService extends MsClientService {
 
     syncProjectUsers(projectId: number, authTokenId): Promise<any> {
         return this.makeMsCall(
-            'sync-project-users',
+            'procore/sync-project-users',
             'POST',
             {
                 project_id: projectId
