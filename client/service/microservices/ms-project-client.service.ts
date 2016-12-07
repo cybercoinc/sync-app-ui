@@ -63,7 +63,7 @@ export class MsProjectClientService extends MsClientService {
 
     getSmartsheetSheets(userId, authTokenId): Promise<SmartsheetSheet[]> {
         return this.makeMsCall(
-            'get-smartsheet-sheets',
+            'smartsheet/sheets',
             'GET',
             {
                 user_id: userId
@@ -86,7 +86,7 @@ export class MsProjectClientService extends MsClientService {
         permalink: string
     }> {
         return this.makeMsCall(
-            'create-smartsheet-workspace',
+            'smartsheet/create-workspace',
             'POST',
             {
                 workspace_name: workspaceName,
@@ -98,7 +98,7 @@ export class MsProjectClientService extends MsClientService {
 
     createSmartsheetSheetFromTemplate(projectId: number, workspaceId: number, templateId: number, sheetName: string, authTokenId): Promise<SmartsheetSheet> {
         return this.makeMsCall(
-            'create-sheet-from-template-in-workspace',
+            'smartsheet/create-sheet-from-template-in-workspace',
             'POST', {
                 project_id: projectId,
                 workspace_id: workspaceId,
@@ -111,7 +111,7 @@ export class MsProjectClientService extends MsClientService {
 
     moveSheetToWorkspace(projectId: number, sheetId: number, workspaceId: number, authTokenId): Promise<SmartsheetSheet> {
         return this.makeMsCall(
-            'move-sheet-to-workspace',
+            'smartsheet/move-sheet-to-workspace',
             'POST', {
                 project_id: projectId,
                 workspace_id: workspaceId,
@@ -123,7 +123,7 @@ export class MsProjectClientService extends MsClientService {
 
     matchDefaultSheetColumns(projectId: number, pipeId: number, authTokenId): Promise<number> {
         return this.makeMsCall(
-            'match-default-sheet-columns',
+            'smartsheet/match-default-sheet-columns',
             'POST',
             {
                 project_id: projectId,
