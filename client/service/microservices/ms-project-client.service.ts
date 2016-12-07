@@ -243,7 +243,7 @@ export class MsProjectClientService extends MsClientService {
 
     changeSmPipeWebhookStatus(pipeId: number, isEnabled: boolean, authTokenId): Promise<boolean> {
         return this.makeMsCall(
-            'change-pipe-webhook-status',
+            'pipes/change-pipe-webhook-status',
             'PUT',
             {
                 pipe_id: pipeId,
