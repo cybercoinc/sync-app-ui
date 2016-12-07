@@ -43,7 +43,7 @@ export class MsProjectClientService extends MsClientService {
 
     getProcoreProjects(userId, authTokenId): Promise<ProcoreProject[]> {
         return this.makeMsCall(
-            'get-procore-projects',
+            'procore/projects',
             'GET',
             {
                 user_id: userId
