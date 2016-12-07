@@ -170,7 +170,7 @@ export class MsProjectClientService extends MsClientService {
 
     getPipesWhere(whereObj, authTokenId): Promise<ProjectPipe[]> {
         return this.makeMsCall(
-            'get-pipe-where',
+            'pipes/find-where',
             'GET',
             whereObj,
             authTokenId
