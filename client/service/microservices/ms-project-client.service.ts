@@ -179,7 +179,7 @@ export class MsProjectClientService extends MsClientService {
 
     createPipe(projectId: number, dataToSet, pipeName: string, authTokenId): Promise<number> {
         return this.makeMsCall(
-            'create-pipe',
+            'pipes/create-pipe',
             'POST',
             {
                 project_id: projectId,
@@ -192,7 +192,7 @@ export class MsProjectClientService extends MsClientService {
 
     updatePipe(pipeId: number, dataToSet, authTokenId): Promise<[number]> {
         return this.makeMsCall(
-            'update-pipe',
+            'pipes/update-pipe',
             'PUT',
             {
                 pipe_id: pipeId,
@@ -204,7 +204,7 @@ export class MsProjectClientService extends MsClientService {
 
     deletePipe(pipeId: number, authTokenId): Promise<boolean> {
         return this.makeMsCall(
-            'delete-pipe',
+            'pipes/delete-pipe',
             'DELETE',
             {
                 pipe_id: pipeId,
@@ -232,7 +232,7 @@ export class MsProjectClientService extends MsClientService {
      */
     createSmPipeWebhook(pipeId: number, authTokenId): Promise<number> {
         return this.makeMsCall(
-            'create-pipe-webhook',
+            'pipes/create-pipe-webhook',
             'PUT',
             {
                 pipe_id: pipeId,
