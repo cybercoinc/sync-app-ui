@@ -23,7 +23,8 @@
                 </h5>
 
                 <div *ngFor="let sheet of smartsheetSheets">
-                    <md-radio-button [disabled]="checkIfAlreadyConnected(sheet) || columnsMatchingIsVisible" value="{{sheet.id}}"
+                    <md-radio-button [disabled]="checkIfAlreadyConnected(sheet) || columnsMatchingIsVisible"
+                                     value="{{sheet.id}}"
                                      (click)="chooseExistingSheet(sheet)">
                         {{sheet.name}}
                         <div class="is-connected" *ngIf="checkIfAlreadyConnected(sheet)">is connected</div>
@@ -50,12 +51,11 @@
 <div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
         <div class="col-xs-12">
-            <h5> SmartsheetSheet connected: </h5>
-            <div *ngFor="let sheet of smartsheetSheets">
-                <div *ngIf="sheet.id === pipesListObj[pipeType].sm_sheet_id">
-                    Sheet name: <i>{{sheet.name}}</i>
-                </div>
-            </div>
+            <h5> Smartsheet connected: </h5>
+            Sheet name: <i>{{pipesListObj[pipeType]?.name}}</i>
+            <a href="{{pipesListObj[pipeType]?.sm_permalink}}"
+               class="btn btn-success btn-sm"
+               target="_blank">open</a>
         </div>
     </div>
 </div>

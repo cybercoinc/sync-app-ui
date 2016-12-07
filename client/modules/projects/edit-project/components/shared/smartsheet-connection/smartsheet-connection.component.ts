@@ -28,15 +28,17 @@ export class SmartsheetConnectionComponent implements OnInit {
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
 
-        this.MsProjectClientService.getConnectedSmartsheetSheetsIds(this.AuthService.authTokenId)
-            .then(connectedSmSheetsList => {
-                this.connectedSmSheetsIdsList = connectedSmSheetsList;
+        if (!this.pipesListObj[this.pipeType] || !this.pipesListObj[this.pipeType].sm_sheet_id) {
+            this.MsProjectClientService.getConnectedSmartsheetSheetsIds(this.AuthService.authTokenId)
+                .then(connectedSmSheetsList => {
+                    this.connectedSmSheetsIdsList = connectedSmSheetsList;
 
-                return this.getSmartsheetSheets();
-            })
-            .then(smartsheetSheets => {
-                this.smartsheetSheets = smartsheetSheets;
-            });
+                    return this.getSmartsheetSheets();
+                })
+                .then(smartsheetSheets => {
+                    this.smartsheetSheets = smartsheetSheets;
+                });
+        }
     }
 
     public smartsheetSheets: SmartsheetSheet[]|null = null;
