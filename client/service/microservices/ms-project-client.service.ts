@@ -157,23 +157,12 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getPipesByProjectId(projectId: number, authTokenId): Promise<ProjectPipe[]> {
-        return this.makeMsCall(
-            'get-pipes-by-project-id',
-            'GET',
-            {
-                project_id: projectId,
-            },
-            authTokenId
-        );
-    }
-
     getPipeById(pipeId: number, authTokenId): Promise<ProjectPipe> {
         return this.makeMsCall(
-            'get-pipe',
+            'pipes/find-where',
             'GET',
             {
-                pipe_id: pipeId,
+                id: pipeId,
             },
             authTokenId
         );

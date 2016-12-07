@@ -36,7 +36,9 @@ export class IndexComponent implements OnInit {
 
                 projects.forEach(project => {
                     promises.push(
-                        this.MsProjectClientService.getPipesByProjectId(project.id, this.AuthService.authTokenId)
+                        this.MsProjectClientService.getPipesWhere({
+                            project_fk_id: project.id
+                        }, this.AuthService.authTokenId)
                     )
                 });
 

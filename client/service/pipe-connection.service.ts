@@ -55,7 +55,9 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     getPipesList(projectId: number, authTokenId): Promise<ProjectPipe[]> {
-        return this.MsProjectClientService.getPipesByProjectId(projectId, authTokenId)
+        return this.MsProjectClientService.getPipesWhere({
+            project_fk_id: projectId
+        }, authTokenId)
             .then(pipesList => {
                 this.pipesListObj = [];
 
@@ -68,7 +70,9 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     refreshPipesList() {
-        return this.MsProjectClientService.getPipesByProjectId(this.project.id, this.AuthService.authTokenId)
+        return this.MsProjectClientService.getPipesWhere({
+            project_fk_id: this.project.id
+        }, this.AuthService.authTokenId)
             .then(pipesList => {
                 pipesList.forEach((pipe: ProjectPipe) => {
                     this.pipesListObj[pipe.type] = pipe;
