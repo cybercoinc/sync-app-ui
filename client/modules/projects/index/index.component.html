@@ -24,9 +24,12 @@
                             <div class="col-xs-5">
                                 {{projectRow.project.name}}
                             </div>
-                            <div class="col-xs-4">
-                                <!--<i [routerLink]="[projectRow.project.id, 'sync-sessions', 'tasks']"-->
-                                   <!--class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event_note</i>-->
+                            <div class="col-xs-2">
+                                <div class="project-status-warning" *ngIf="projectRow.project.status === 'disabled'">
+                                    <i title="project disabled" class="material-icons">warning</i> disabled
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
                                 <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'public_todos']"
                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
                                 <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'private_todos']"
@@ -34,7 +37,7 @@
                                 <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'tasks']"
                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-2">
                                 <a [routerLink]="[projectRow.project.id, 'edit-project']"
                                    class="btn btn-primary btn-sm">edit</a>
                                 <a [routerLink]="[projectRow.project.id, 'delete-project']"

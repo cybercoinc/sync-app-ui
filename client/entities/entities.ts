@@ -107,7 +107,7 @@ export class Project {
     id: number;
     procore_project_id: number;
     name: string;
-    status: 'active'  | 'inactive';
+    status: 'active'  | 'disabled';
     procore_company_id: number;
     user_fk_id: {
         id: number;
@@ -185,3 +185,5 @@ export const PIPE_TYPE_TASKS = 'tasks';
 
 export const PIPE_STATUS_ACTIVE = 'active';
 export const PIPE_STATUS_DISABLED = 'disabled';
+
+export const PROJECT_STATUS_DISABLED = 'disabled';

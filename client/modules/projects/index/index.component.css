@@ -1,0 +1,11 @@
+.project-status-warning {
+    display: inline-flex;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: grey;
+}
+
+.project-status-warning i {
+    padding-right: 5px;
+    cursor: default;
+}

@@ -5,7 +5,10 @@ import {Project, ProjectPipe} from 'client/entities/entities';
 
 @Component({
     selector: 'index',
-    templateUrl: `client/modules/projects/index/index.component.html`
+    templateUrl: `client/modules/projects/index/index.component.html`,
+    styleUrls: [
+        'client/modules/projects/index/index.component.css'
+    ]
 })
 export class IndexComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
