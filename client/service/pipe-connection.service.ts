@@ -89,9 +89,7 @@ export class PipeConnectionService implements Resolve<{}> {
             .then(pipeObj => {
                 _pipeObj = pipeObj;
 
-                return this.MsProjectClientService.updatePipe(pipeId, {
-                    status: PIPE_STATUS_ACTIVE
-                }, this.AuthService.authTokenId);
+                return this.MsProjectClientService.enablePipe(pipeId, this.AuthService.authTokenId);
             })
             .then(() => {
                 this.refreshPipesList();

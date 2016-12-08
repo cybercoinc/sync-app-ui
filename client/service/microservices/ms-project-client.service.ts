@@ -202,6 +202,17 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    enablePipe(pipeId: number, authTokenId): Promise<boolean> {
+        return this.makeMsCall(
+            'pipes/enable',
+            'PUT',
+            {
+                pipe_id: pipeId,
+            },
+            authTokenId
+        );
+    }
+
     deletePipe(pipeId: number, authTokenId): Promise<boolean> {
         return this.makeMsCall(
             'pipes/delete-pipe',
