@@ -1,0 +1,32 @@
+:host {
+    position: absolute;
+    left: 30%;
+}
+
+.modal-dialog {
+    z-index: 2;
+}
+
+p {
+    font-size: 18px;
+    margin: 0;
+}
+
+fieldset {
+    margin-bottom: 25px;
+}
+
+legend {
+    margin-bottom: 5px;
+    border: none;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 14px;
+}
+
+.md-overlay-backdrop {
+    position: fixed;
+    background-color: #616971;
+    opacity: 0.2;
+}

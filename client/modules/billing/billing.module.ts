@@ -11,13 +11,14 @@ import {InvoiceCardComponent} from './invoices/invoice-card.component';
 import {InfoComponent} from "./info/Info.component";
 
 import {routing} from './billing.routing';
-import {PaytraceModule} from "client/modules/paytrace/paytrace.module";
+import {FormsModule} from "@angular/forms";
+import {Dialog} from "../paytrace/dialog.component";
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
-        PaytraceModule,
+        FormsModule,
         routing
     ],
     exports: [],
@@ -29,8 +30,10 @@ import {PaytraceModule} from "client/modules/paytrace/paytrace.module";
         LicenseTableHeaderComponent,
         LicenseTableRowComponent,
         InvoiceCardComponent,
+        Dialog
     ],
     bootstrap: [BillingComponent],
+    entryComponents: [Dialog],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ],

@@ -27,7 +27,6 @@ import {CompaniesModule} from 'client/modules/companies/companies.module';
 import {MsClientService} from "./service/microservices/ms-client.service";
 import {PendingRequestsService} from "./service/pending-requests.service";
 import {LoaderProgressBarComponent} from "./components/shared/loader.component";
-import { PaytraceModule } from "./modules/paytrace/paytrace.module";
 
 @NgModule({
     imports: [
@@ -41,7 +40,6 @@ import { PaytraceModule } from "./modules/paytrace/paytrace.module";
         ProjectsModule,
         BillingModule,
         CompaniesModule,
-        PaytraceModule,
 
         routing,
     ],

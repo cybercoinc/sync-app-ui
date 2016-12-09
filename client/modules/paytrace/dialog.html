@@ -1,0 +1,40 @@
+<div class="modal-dialog modal-sm" role="document" *ngIf="isVisible">
+    <div class="modal-content">
+        <div class="modal-body">
+            <form id="pay-trace-form">
+                <fieldset>
+                    <legend>Credit Card</legend>
+
+                    <div class="col-md-12">
+                        <input type="text" class="col-md-12" name="number" placeholder="Credit Card Number" [(ngModel)]="creditCard.number">
+                        <input type="text" class="col-md-4" maxlength="2" name="month" placeholder="Exp. month" [(ngModel)]="creditCard.expMonth">
+                        <input type="text" class="col-md-4" maxlength="4" name="year" placeholder="Exp. year" [(ngModel)]="creditCard.expYear">
+                        <input type="text" class="col-md-4" maxlength="3" name="cvv" placeholder="CVV" [(ngModel)]="creditCard.cvv">
+                    </div>
+                </fieldset>
+
+                <fieldset *ngIf="billingEnable">
+                    <legend>Billing Address</legend>
+
+                    <div class="col-md-12">
+                        <input type="text" class="col-md-12" name="name" placeholder="Cardholder Name" [(ngModel)]="creditCard.customerName">
+                        <input type="text" class="col-md-12" name="street" placeholder="Street Address" [(ngModel)]="creditCard.street">
+                        <input type="text" class="col-md-12" name="city" placeholder="City" [(ngModel)]="creditCard.city">
+                        <input type="text" class="col-md-12" name="state" placeholder="State" [(ngModel)]="creditCard.state">
+                        <input type="text" class="col-md-12" name="zip" placeholder="Zip Code" [(ngModel)]="creditCard.zip">
+                    </div>
+                </fieldset>
+            </form>
+
+            <div id="errors">
+                <div *ngFor="let er of errors">Error: {{er}}</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="submit()">Save</button>
+            <button type="button" class="btn btn-default" (click)="closeDialog()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div class="md-overlay-backdrop" *ngIf="isVisible" (click)="closeDialog()"></div>
