@@ -19,22 +19,26 @@ export class Dialog {
     constructor(protected MsLicenseClientService: MsLicenseClientService, protected AuthService: AuthService) {}
 
     submit() {
-        this.creditCard.encrypt();
-
-        this.MsLicenseClientService.createCustomer(this.AuthService.authUser.id, this.AuthService.authTokenId, this.creditCard)
+        this.MsLicenseClientService.getPemKey(this.AuthService.authUser.id, this.AuthService.authTokenId)
             .then(response => {
-                if (response.success) {
-                    this.creditCard.maskedCardNumber = response.masked_card_number;
-                    this.creditCard.customerId = response.customer_id;
-                    this.creditCard.id = response.id;
-                    this.isVisible = false;
-                }
-                else {
-                    this.errors = [];
-                    for (let prop in response.errors) {
-                        this.errors.push(response.errors[prop][0]);
-                    }
-                }
+                this.creditCard.setKey(response);
+                this.creditCard.encrypt();
+
+                this.MsLicenseClientService.createCustomer(this.AuthService.authUser.id, this.AuthService.authTokenId, this.creditCard)
+                    .then(response => {
+                        if (response.success) {
+                            this.creditCard.maskedCardNumber = response.masked_card_number;
+                            this.creditCard.customerId = response.customer_id;
+                            this.creditCard.id = response.id;
+                            this.isVisible = false;
+                        }
+                        else {
+                            this.errors = [];
+                            for (let prop in response.errors) {
+                                this.errors.push(response.errors[prop][0]);
+                            }
+                        }
+                    });
             });
     }
 
@@ -45,6 +49,7 @@ export class Dialog {
 
 export class CreditCard {
     private paytraceModule = paytrace;
+    private pemKey: string;
 
     name:     string;
     number:   number;
@@ -62,7 +67,10 @@ export class CreditCard {
     encrypted_csc:    string;
 
     constructor(public id?: number, public maskedCardNumber?: string, public customerId?: string) {
-        this.paytraceModule.setKeyAjax('/public_key.pem');
+    }
+
+    setKey(key) {
+        this.paytraceModule.setKey(key);
     }
 
     encrypt() {

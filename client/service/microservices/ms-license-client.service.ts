@@ -58,6 +58,17 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
+    getPemKey(userId, authTokenId): Promise<any> {
+        return this.makeMsCall(
+            'public-key',
+            'GET',
+            {
+                user_id: userId,
+            },
+            authTokenId
+        );
+    }
+
     removeCard(userId, authTokenId, cardId): Promise<any> {
         return this.makeMsCall(
             'remove-customer',
