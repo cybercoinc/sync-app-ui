@@ -2,7 +2,7 @@
 #version:        1
 service:         ms-app-ui
 runtime: nodejs
-env: flex
+vm: true
 
 # [START env_variables]
 env_variables:
