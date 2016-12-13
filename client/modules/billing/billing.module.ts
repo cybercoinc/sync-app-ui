@@ -11,7 +11,7 @@ import {InvoiceCardComponent} from './invoices/invoice-card.component';
 import {InfoComponent} from "./info/Info.component";
 
 import {routing} from './billing.routing';
-import {FormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {Dialog} from "../paytrace/dialog.component";
 
 @NgModule({
@@ -19,6 +19,7 @@ import {Dialog} from "../paytrace/dialog.component";
         MaterialModule.forRoot(),
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         routing
     ],
     exports: [],

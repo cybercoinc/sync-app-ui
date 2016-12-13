@@ -1,15 +1,15 @@
 <div class="modal-dialog modal-sm" role="document" *ngIf="isVisible">
     <div class="modal-content">
         <div class="modal-body">
-            <form id="pay-trace-form">
+            <form id="pay-trace-form" [formGroup]="form">
                 <fieldset>
                     <legend>Credit Card</legend>
 
                     <div class="col-md-12">
-                        <input type="text" class="col-md-12" name="number" placeholder="Credit Card Number" [(ngModel)]="creditCard.number">
-                        <input type="text" class="col-md-4" maxlength="2" name="month" placeholder="Exp. month" [(ngModel)]="creditCard.expMonth">
-                        <input type="text" class="col-md-4" maxlength="4" name="year" placeholder="Exp. year" [(ngModel)]="creditCard.expYear">
-                        <input type="text" class="col-md-4" maxlength="3" name="cvv" placeholder="CVV" [(ngModel)]="creditCard.cvv">
+                        <input type="text" class="col-md-12" maxlength="16" formControlName="number" placeholder="Credit Card Number">
+                        <input type="text" class="col-md-4"  maxlength="2" formControlName="month" placeholder="Exp. month">
+                        <input type="text" class="col-md-4"  maxlength="4" formControlName="year" placeholder="Exp. year">
+                        <input type="text" class="col-md-4"  maxlength="3" formControlName="cvv" placeholder="CVV">
                     </div>
                 </fieldset>
 
@@ -26,12 +26,12 @@
                 </fieldset>
             </form>
 
-            <div id="errors">
-                <div *ngFor="let er of errors">Error: {{er}}</div>
+            <div id="errors" *ngIf="errors.length > 0">
+                <div *ngFor="let er of errors">{{er}}</div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="submit()">Save</button>
+            <button type="submit" form="pay-trace-form" class="btn btn-success pull-left" (click)="submit()">Save</button>
             <button type="button" class="btn btn-default" (click)="closeDialog()">Cancel</button>
         </div>
     </div>
