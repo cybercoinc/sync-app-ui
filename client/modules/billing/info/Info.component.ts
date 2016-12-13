@@ -24,6 +24,10 @@ export class InfoComponent {
         this.dialogComponent.isVisible = true;
     }
 
+    updateCard() {
+        this.dialogComponent.isVisible = true;
+    }
+
     clearCard() {
         this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.AuthService.authTokenId, this.dialogComponent.creditCard.id).then(response => {
             this.dialogComponent.creditCard = new CreditCard();
