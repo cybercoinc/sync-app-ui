@@ -17,11 +17,11 @@
                     <legend>Billing Address</legend>
 
                     <div class="col-md-12">
-                        <input type="text" class="col-md-12" name="name" placeholder="Cardholder Name" [(ngModel)]="creditCard.customerName">
-                        <input type="text" class="col-md-12" name="street" placeholder="Street Address" [(ngModel)]="creditCard.street">
-                        <input type="text" class="col-md-12" name="city" placeholder="City" [(ngModel)]="creditCard.city">
-                        <input type="text" class="col-md-12" name="state" placeholder="State" [(ngModel)]="creditCard.state">
-                        <input type="text" class="col-md-12" name="zip" placeholder="Zip Code" [(ngModel)]="creditCard.zip">
+                        <input type="text" class="col-md-12" formControlName="name" placeholder="Cardholder Name" [(ngModel)]="creditCard.customerName">
+                        <input type="text" class="col-md-12" formControlName="street" placeholder="Street Address" [(ngModel)]="creditCard.street">
+                        <input type="text" class="col-md-12" formControlName="city" placeholder="City" [(ngModel)]="creditCard.city">
+                        <input type="text" class="col-md-12" formControlName="state" placeholder="State" [(ngModel)]="creditCard.state">
+                        <input type="text" class="col-md-12" formControlName="zip" placeholder="Zip Code" [(ngModel)]="creditCard.zip">
                     </div>
                 </fieldset>
             </form>

@@ -34,7 +34,12 @@ export class Dialog {
             ]],
             cvv: ['', [
                 Validators.required
-            ]]
+            ]],
+            name: [''],
+            street: [''],
+            city: [''],
+            state: [''],
+            zip: ['']
         });
 
         this.form.valueChanges.subscribe(data => {
@@ -67,22 +72,26 @@ export class Dialog {
         }
 
         if (this.isUpdate) {
-            console.log(this.creditCard);
-            // this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.AuthService.authTokenId, this.creditCard.id).then(response => {
-            //     this.createCreditCard();
-            // });
+            this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.AuthService.authTokenId, this.creditCard.id).then(response => {
+                this.createCreditCard();
+            });
         }
         else {
-            // this.createCreditCard();
+            this.createCreditCard();
         }
     }
 
     private createCreditCard() {
         this.creditCard = new CreditCard({
-            number:   this.form.value.number,
-            expMonth: this.form.value.month,
-            expYear:  this.form.value.year,
-            cvv:      this.form.value.cvv
+            number:       this.form.value.number,
+            expMonth:     this.form.value.month,
+            expYear:      this.form.value.year,
+            cvv:          this.form.value.cvv,
+            customerName: this.form.value.name,
+            street:       this.form.value.street,
+            city:         this.form.value.city,
+            state:        this.form.value.state,
+            zip:          this.form.value.zip,
         });
 
         this.MsLicenseClientService.getPemKey(this.AuthService.authUser.id, this.AuthService.authTokenId)
