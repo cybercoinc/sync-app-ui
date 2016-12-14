@@ -7,8 +7,8 @@
 
                     <div class="col-md-12">
                         <input type="text" class="col-md-12" maxlength="16" formControlName="number" placeholder="Credit Card Number">
-                        <input type="text" class="col-md-4"  maxlength="2" formControlName="month" placeholder="Exp. month">
-                        <input type="text" class="col-md-4"  maxlength="4" formControlName="year" placeholder="Exp. year">
+                        <input type="text" class="col-md-4"  maxlength="2" formControlName="month" placeholder="Exp. month" [(ngModel)]="creditCard.expMonth">
+                        <input type="text" class="col-md-4"  maxlength="4" formControlName="year" placeholder="Exp. year" [(ngModel)]="creditCard.expYear">
                         <input type="text" class="col-md-4"  maxlength="3" formControlName="cvv" placeholder="CVV">
                     </div>
                 </fieldset>

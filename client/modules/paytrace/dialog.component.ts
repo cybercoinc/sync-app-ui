@@ -2,8 +2,7 @@ import { Component, Input } from "@angular/core";
 import { MsLicenseClientService } from "../../service/microservices/ms-license-client.service";
 import { AuthService } from "../../service/auth.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-
-declare let paytrace:any;
+import { CreditCard } from "./creditCard";
 
 @Component({
     selector: 'modal-dialog',
@@ -13,10 +12,11 @@ declare let paytrace:any;
 export class Dialog {
     @Input('is-visible') isVisible: boolean = false;
 
+    errors                    = [];
     creditCard                = new CreditCard();
     billingEnable: boolean    = false;
-    errors                    = [];
     form:          FormGroup;
+    isUpdate:      boolean    = false;
 
     constructor(protected MsLicenseClientService: MsLicenseClientService, protected AuthService: AuthService, private fb: FormBuilder) {
         this.form = this.fb.group({
@@ -66,10 +66,24 @@ export class Dialog {
             return false;
         }
 
-        this.creditCard.number = this.form.value.number;
-        this.creditCard.expMonth = this.form.value.month;
-        this.creditCard.expYear = this.form.value.year;
-        this.creditCard.cvv = this.form.value.cvv;
+        if (this.isUpdate) {
+            console.log(this.creditCard);
+            // this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.AuthService.authTokenId, this.creditCard.id).then(response => {
+            //     this.createCreditCard();
+            // });
+        }
+        else {
+            // this.createCreditCard();
+        }
+    }
+
+    private createCreditCard() {
+        this.creditCard = new CreditCard({
+            number:   this.form.value.number,
+            expMonth: this.form.value.month,
+            expYear:  this.form.value.year,
+            cvv:      this.form.value.cvv
+        });
 
         this.MsLicenseClientService.getPemKey(this.AuthService.authUser.id, this.AuthService.authTokenId)
             .then(response => {
@@ -117,32 +131,4 @@ export class Dialog {
     }
 }
 
-export class CreditCard {
-    private paytraceModule = paytrace;
 
-    name:     string;
-    number:   number;
-    expMonth: number;
-    expYear:  number;
-    cvv:      number;
-
-    customerName: string;
-    street:       string;
-    city:         string;
-    state:        string;
-    zip:          string;
-
-    encrypted_number: string;
-    encrypted_csc:    string;
-
-    constructor(public id?: number, public maskedCardNumber?: string, public customerId?: string) {}
-
-    setKey(key) {
-        this.paytraceModule.setKey(key);
-    }
-
-    encrypt() {
-        this.encrypted_number = this.paytraceModule.encryptValue(this.number);
-        this.encrypted_csc    = this.paytraceModule.encryptValue(this.cvv);
-    }
-}
