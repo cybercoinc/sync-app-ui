@@ -90,6 +90,10 @@ export class CreateProjectComponent implements OnInit {
             .then(projectIds => {
                 _projectId = projectIds.shift();
 
+                if (!_projectId) {
+                    throw new Error('no project id found');
+                }
+
                 return Promise.all([
                     this.MsLicenseClientService.createStartLicense(_projectId, data.name,
                         this.AuthService.authUser.id, this.AuthService.authTokenId),
