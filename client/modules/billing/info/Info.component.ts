@@ -1,7 +1,8 @@
 import { Component, ViewChild } from "@angular/core";
 import { AuthService } from "../../../service/auth.service";
 import { MsLicenseClientService } from '../../../service/microservices/ms-license-client.service';
-import { Dialog, CreditCard } from "../../paytrace/dialog.component";
+import { Dialog } from "../../paytrace/dialog.component";
+import { CreditCard } from "../../paytrace/creditCard";
 
 @Component({
     selector: 'info',
@@ -15,8 +16,15 @@ export class InfoComponent {
 
     constructor(protected MsLicenseClientService: MsLicenseClientService, protected AuthService: AuthService) {
         MsLicenseClientService.getCreditCard(AuthService.authUser.id, this.AuthService.authTokenId).then(response => {
-            if (Object.keys(response).length > 0)
-                this.dialogComponent.creditCard = new CreditCard(response.id, response.masked_number, response.customer_id);
+            if (Object.keys(response).length > 0) {
+                this.dialogComponent.creditCard = new CreditCard({
+                    id:               response.id,
+                    maskedCardNumber: response.credit_card.masked_number,
+                    customerId:       response.customer_id,
+                    expMonth:         response.credit_card.expiration_month,
+                    expYear:          response.credit_card.expiration_year
+                });
+            }
         });
     }
 
@@ -26,6 +34,7 @@ export class InfoComponent {
 
     updateCard() {
         this.dialogComponent.isVisible = true;
+        this.dialogComponent.isUpdate  = true;
     }
 
     clearCard() {

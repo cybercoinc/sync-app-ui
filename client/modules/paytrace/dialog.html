@@ -7,8 +7,8 @@
 
                     <div class="col-md-12">
                         <input type="text" class="col-md-12" maxlength="16" formControlName="number" placeholder="Credit Card Number">
-                        <input type="text" class="col-md-4"  maxlength="2" formControlName="month" placeholder="Exp. month">
-                        <input type="text" class="col-md-4"  maxlength="4" formControlName="year" placeholder="Exp. year">
+                        <input type="text" class="col-md-4"  maxlength="2" formControlName="month" placeholder="Exp. month" [(ngModel)]="creditCard.expMonth">
+                        <input type="text" class="col-md-4"  maxlength="4" formControlName="year" placeholder="Exp. year" [(ngModel)]="creditCard.expYear">
                         <input type="text" class="col-md-4"  maxlength="3" formControlName="cvv" placeholder="CVV">
                     </div>
                 </fieldset>
@@ -17,11 +17,11 @@
                     <legend>Billing Address</legend>
 
                     <div class="col-md-12">
-                        <input type="text" class="col-md-12" name="name" placeholder="Cardholder Name" [(ngModel)]="creditCard.customerName">
-                        <input type="text" class="col-md-12" name="street" placeholder="Street Address" [(ngModel)]="creditCard.street">
-                        <input type="text" class="col-md-12" name="city" placeholder="City" [(ngModel)]="creditCard.city">
-                        <input type="text" class="col-md-12" name="state" placeholder="State" [(ngModel)]="creditCard.state">
-                        <input type="text" class="col-md-12" name="zip" placeholder="Zip Code" [(ngModel)]="creditCard.zip">
+                        <input type="text" class="col-md-12" formControlName="name" placeholder="Cardholder Name" [(ngModel)]="creditCard.customerName">
+                        <input type="text" class="col-md-12" formControlName="street" placeholder="Street Address" [(ngModel)]="creditCard.street">
+                        <input type="text" class="col-md-12" formControlName="city" placeholder="City" [(ngModel)]="creditCard.city">
+                        <input type="text" class="col-md-12" formControlName="state" placeholder="State" [(ngModel)]="creditCard.state">
+                        <input type="text" class="col-md-12" formControlName="zip" placeholder="Zip Code" [(ngModel)]="creditCard.zip">
                     </div>
                 </fieldset>
             </form>

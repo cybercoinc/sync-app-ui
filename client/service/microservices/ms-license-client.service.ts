@@ -2,7 +2,7 @@ import {MsClientService} from "./ms-client.service";
 import {Http} from '@angular/http';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
-import {CreditCard} from "../../modules/paytrace/dialog.component";
+import {CreditCard} from "../../modules/paytrace/creditCard";
 
 export class MsLicenseClientService extends MsClientService {
 
