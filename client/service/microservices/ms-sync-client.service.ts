@@ -12,9 +12,9 @@ export class MsSyncClientService extends MsClientService {
         this.url = this.getServiceUrl('ms-sync');
     }
 
-    getPipeSyncSessions(pipeId: number, onlyWithChanges: boolean, authTokenId): Promise<SyncSession[]> {
+    getLastPipeSyncSessions(pipeId: number, onlyWithChanges: boolean, authTokenId): Promise<SyncSession[]> {
         return this.makeMsCall(
-            'sync-sessions',
+            'last-sync-sessions',
             'GET',
             {
                 pipe_id: pipeId,
