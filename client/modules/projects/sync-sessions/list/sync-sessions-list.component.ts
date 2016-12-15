@@ -32,6 +32,8 @@ export class SyncSessionsListComponent implements OnInit {
     syncSessionsList: SyncSession[] = null;
     projectPipe: ProjectPipe;
 
+    protected onlyWithChanges: boolean = true;
+
     ngOnInit() {
         this.ActivatedRoute.parent.params.forEach((params) => {
             this.projectId = +params['project_id'];
@@ -40,11 +42,11 @@ export class SyncSessionsListComponent implements OnInit {
         this.sub = this.ActivatedRoute.params.subscribe(params => {
             this.pipeType = params['pipe_type'];
 
-            this.getSyncSessionsList(this.projectId, this.pipeType, true);
+            this.getSyncSessionsList(this.projectId, this.pipeType);
         });
     }
 
-    getSyncSessionsList(projectId, pipeType, onlyWithChanges: boolean) {
+    getSyncSessionsList(projectId, pipeType) {
         this.syncSessionsList = null;
 
         return this.MsProjectClientService.getPipesWhere({
@@ -58,7 +60,7 @@ export class SyncSessionsListComponent implements OnInit {
                     return [];
                 }
 
-                return this.MsSyncClientService.getLastPipeSyncSessions(this.projectPipe.id, onlyWithChanges, this.AuthService.authTokenId);
+                return this.MsSyncClientService.getLastPipeSyncSessions(this.projectPipe.id, this.onlyWithChanges, this.AuthService.authTokenId);
             })
             .then(syncSessionsList => {
                 this.syncSessionsList = this.orderByDate(syncSessionsList);
@@ -73,7 +75,8 @@ export class SyncSessionsListComponent implements OnInit {
         });
     }
 
-    showOnlyWithItemChanges(onlyWithChanges: boolean) {
-        return this.getSyncSessionsList(this.projectId, this.pipeType, onlyWithChanges);
+    showOnlyWithItemChanges(onlyWithChanges) {
+        this.onlyWithChanges = onlyWithChanges;
+        return this.getSyncSessionsList(this.projectId, this.pipeType);
     }
 }
