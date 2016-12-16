@@ -58,7 +58,7 @@ export const routes: Routes = [
                     {
                         path: '',
                         redirectTo: 'public_todos',
-                        pathMatch: 'prefix'
+                        pathMatch: 'full'
                     },
 
                     {
@@ -78,7 +78,7 @@ export const routes: Routes = [
                     {
                         path: '',
                         redirectTo: 'pipe-public-todo',
-                        pathMatch: 'prefix'
+                        pathMatch: 'full'
                     },
 
                     {
@@ -88,7 +88,7 @@ export const routes: Routes = [
                             {
                                 path: '',
                                 redirectTo: 'smartsheet-connection-private',
-                                pathMatch: 'prefix'
+                                pathMatch: 'full'
                             },
 
                             {
@@ -110,7 +110,7 @@ export const routes: Routes = [
                             {
                                 path: '',
                                 redirectTo: 'smartsheet-connection-public',
-                                pathMatch: 'prefix'
+                                pathMatch: 'full'
                             },
 
                             {
@@ -131,7 +131,7 @@ export const routes: Routes = [
                             {
                                 path: '',
                                 redirectTo: 'smartsheet-connection',
-                                pathMatch: 'prefix'
+                                pathMatch: 'full'
                             },
 
                             {
