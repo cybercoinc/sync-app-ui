@@ -23,12 +23,12 @@
                     </div>
                 </div>
 
-                <div class="form-group" *ngFor="let procoreTodoColumn of procoreTodosColumns">
+                <div class="form-group" *ngFor="let procoreTodoColumn of prColumns">
                     <label class="col-xs-2 control-label">{{procoreTodoColumn.title}}</label>
                     <div class="col-xs-10">
                         <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug" required>
                             <option value="">- Smartsheet column -</option>
-                            <option *ngFor="let column of sheetColumns" [value]="column.id"
+                            <option *ngFor="let column of smColumns" [value]="column.id"
                                     [disabled]="isNotAvailable(column, procoreTodoColumn)">
                                 {{column.title}}
                             </option>

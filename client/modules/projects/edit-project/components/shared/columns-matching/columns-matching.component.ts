@@ -17,23 +17,39 @@ export class ColumnsMatchingComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.MsProjectClientService.getSmartsheetSheetColumns(
-            this.AuthService.authUser.id,
-            this.smartsheetSheetId,
-            this.AuthService.authTokenId
-        )
-            .then(sheetColumns => {
-                this.sheetColumns = sheetColumns
-            });
+        return Promise.all([
+            this.MsProjectClientService.getSmartsheetSheetColumns(
+                this.AuthService.authUser.id,
+                this.smartsheetSheetId,
+                this.AuthService.authTokenId
+            ),
+            this.MsSyncClientService.getProcoreTodosColumns(this.AuthService.authTokenId)
+        ])
+            .then(resultsList => {
+                let smColumns = resultsList[0];
+                let prColumns = resultsList[1];
 
-        this.MsSyncClientService.getProcoreTodosColumns(this.AuthService.authTokenId)
-            .then(todosColumns => {
-                this.procoreTodosColumns = todosColumns;
+                this.smColumns = smColumns;
+                this.prColumns = prColumns;
 
-                this.procoreTodosColumns.forEach(todoColumn => {
-                    this.model[todoColumn.slug] = '';
+                this.prColumns.forEach(prColumn => {
+                    this.model[prColumn.slug] = this.prefillDropdownValue(prColumn.title) || '';
                 });
             });
+    }
+
+    prefillDropdownValue(prColumnName) {
+        let prefilledId = null;
+
+        this.smColumns.forEach(smColumn => {
+            if (prColumnName === smColumn.title) {
+                prefilledId = smColumn.id;
+
+                return false;
+            }
+        });
+
+        return prefilledId;
     }
 
     isNotAvailable(smColumn, prColumn): boolean {
@@ -42,14 +58,11 @@ export class ColumnsMatchingComponent implements OnInit {
         for (let prop in this.model) {
             if (this.model.hasOwnProperty(prop)) {
                 // if not in current dropdown
-                if (prop !== prColumn.slug) {
-                    if (this.model[prop] === String(smColumn.id)) {
-                        // if already used in another dropdown
-                        notAvailable = true;
-                    } else if (smColumn.type !== prColumn.type) {
-                        // if type is not allowed
-                        notAvailable = true;
-                    }
+                if (prop !== prColumn.slug && this.model[prop] === smColumn.id) {
+                    notAvailable = true;
+                } else if (smColumn.type !== prColumn.type) {
+                    // if type is not allowed
+                    notAvailable = true;
                 }
             }
         }
@@ -59,8 +72,8 @@ export class ColumnsMatchingComponent implements OnInit {
 
     @Input('sheet-id') smartsheetSheetId: number;
 
-    protected sheetColumns: SmartsheetSheetColumn[];
-    protected procoreTodosColumns: ProcoreTodoColumn[];
+    protected smColumns: SmartsheetSheetColumn[];
+    protected prColumns: ProcoreTodoColumn[];
 
     protected validationError: boolean = false;
 
