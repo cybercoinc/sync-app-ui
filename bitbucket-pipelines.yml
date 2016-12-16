@@ -7,15 +7,16 @@ pipelines:
       - step:
           script:
             - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-            #- curl -sSL https://sdk.cloud.google.com | bash
-            #- export PATH=${PATH}:${HOME}/google-cloud-sdk/bin
+            - curl -sSL https://sdk.cloud.google.com | bash
+            - export PATH=${PATH}:${HOME}/google-cloud-sdk/bin
 
             # Auth gcloud
-            #- echo ${GOOGLE_CLIENT_SECRET} > client-secret.json
-            #- gcloud auth activate-service-account --key-file client-secret.json
-            - npm -v
+            - echo ${GOOGLE_CLIENT_SECRET} > client-secret.json
+            - gcloud auth activate-service-account --key-file client-secret.json
+            - gcloud info
+            
             # Prepare app
-            #- npm install
+            - npm install
 
             # Deploy app
             #- gcloud app deploy
