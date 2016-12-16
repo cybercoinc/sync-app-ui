@@ -36,16 +36,25 @@ export class ColumnsMatchingComponent implements OnInit {
             });
     }
 
-    checkIfOptionDisabled(columnId, dropdownName) {
+    isNotAvailable(smColumn, prColumn): boolean {
+        let notAvailable = false;
+
         for (let prop in this.model) {
             if (this.model.hasOwnProperty(prop)) {
-                if (prop !== dropdownName && this.model[prop] === String(columnId)) {
-                    return true;
+                // if not in current dropdown
+                if (prop !== prColumn.slug) {
+                    if (this.model[prop] === String(smColumn.id)) {
+                        // if already used in another dropdown
+                        notAvailable = true;
+                    } else if (smColumn.type !== prColumn.type) {
+                        // if type is not allowed
+                        notAvailable = true;
+                    }
                 }
             }
         }
 
-        return false;
+        return notAvailable;
     }
 
     @Input('sheet-id') smartsheetSheetId: number;

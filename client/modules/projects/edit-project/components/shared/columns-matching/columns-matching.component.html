@@ -29,7 +29,7 @@
                         <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug" required>
                             <option value="">- Smartsheet column -</option>
                             <option *ngFor="let column of sheetColumns" [value]="column.id"
-                                    [disabled]="checkIfOptionDisabled(column.id, procoreTodoColumn.slug)">
+                                    [disabled]="isNotAvailable(column, procoreTodoColumn)">
                                 {{column.title}}
                             </option>
                         </select>
