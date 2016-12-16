@@ -7,3 +7,7 @@ select {
     cursor: pointer;
     border-radius: 2px;
 }
+
+.match-columns-container {
+    margin-bottom: 20px;
+}

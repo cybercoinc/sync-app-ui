@@ -2,7 +2,9 @@
     height: 250px;
     width: 500px;
     overflow-x: auto;
-    padding-top: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 md-radio-button {
