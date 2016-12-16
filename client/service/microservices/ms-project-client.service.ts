@@ -10,10 +10,13 @@ import {
 } from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
+import {Inject} from "@angular/core";
 
 export class MsProjectClientService extends MsClientService {
 
-    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService, protected router: Router) {
+    constructor(@Inject(Http) protected Http: Http,
+                @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
+                @Inject(Router) protected router: Router) {
         super(Http, PendingRequestsService, router);
 
         this.url = this.getServiceUrl('ms-project');

@@ -58,13 +58,14 @@ export const routes: Routes = [
                     {
                         path: '',
                         redirectTo: 'public_todos',
+                        pathMatch: 'prefix'
                     },
 
                     {
                         path: ':pipe_type',
                         component: SyncSessionsListComponent
                     },
-                ]
+                ],
             },
 
             {
@@ -76,7 +77,8 @@ export const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'pipe-public-todo'
+                        redirectTo: 'pipe-public-todo',
+                        pathMatch: 'prefix'
                     },
 
                     {
@@ -85,7 +87,8 @@ export const routes: Routes = [
                         children: [
                             {
                                 path: '',
-                                redirectTo: 'smartsheet-connection-private'
+                                redirectTo: 'smartsheet-connection-private',
+                                pathMatch: 'prefix'
                             },
 
                             {
@@ -107,6 +110,7 @@ export const routes: Routes = [
                             {
                                 path: '',
                                 redirectTo: 'smartsheet-connection-public',
+                                pathMatch: 'prefix'
                             },
 
                             {
@@ -127,6 +131,7 @@ export const routes: Routes = [
                             {
                                 path: '',
                                 redirectTo: 'smartsheet-connection',
+                                pathMatch: 'prefix'
                             },
 
                             {

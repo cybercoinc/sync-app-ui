@@ -19,7 +19,8 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'settings'
+                redirectTo: 'settings',
+                pathMatch: 'prefix'
             },
             {
                 path: 'settings',

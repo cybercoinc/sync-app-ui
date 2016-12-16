@@ -3,10 +3,13 @@ import {Http} from '@angular/http';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 import {CreditCard} from "../../modules/paytrace/creditCard";
+import {Inject} from "@angular/core";
 
 export class MsLicenseClientService extends MsClientService {
 
-    constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService, protected router: Router) {
+    constructor(@Inject(Http) protected Http: Http,
+                @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
+                @Inject(Router) protected router: Router) {
         super(Http, PendingRequestsService, router);
 
         this.url = this.getServiceUrl('ms-license');
@@ -46,7 +49,7 @@ export class MsLicenseClientService extends MsClientService {
                 customerName: creditCard.name,
                 number: creditCard.encrypted_number,
                 expMonth: creditCard.expMonth,
-                expYear:  creditCard.expYear,
+                expYear: creditCard.expYear,
                 csc: creditCard.encrypted_csc,
                 customer_name: creditCard.customerName,
                 street: creditCard.street,

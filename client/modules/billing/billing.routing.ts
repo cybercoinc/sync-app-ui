@@ -20,7 +20,8 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'licenses'
+                redirectTo: 'licenses',
+                pathMatch: 'prefix'
             },
             {
                 path: 'info',

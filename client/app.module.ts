@@ -19,7 +19,6 @@ import {PipeConnectionService} from './service/pipe-connection.service';
 import {AuthGuardService} from './service/auth-guard.service';
 
 import {AuthModule} from "./modules/auth/auth.module";
-import {SandboxModule} from './modules/sandbox/sandbox.module';
 import {ConnectionModule} from 'client/modules/connection/connection.module';
 import {ProjectsModule} from 'client/modules/projects/projects.module';
 import {BillingModule} from 'client/modules/billing/billing.module';
@@ -35,7 +34,6 @@ import {LoaderProgressBarComponent} from "./components/shared/loader.component";
         HttpModule,
         AuthModule,
         FormsModule,
-        SandboxModule,
         ConnectionModule,
         ProjectsModule,
         BillingModule,
