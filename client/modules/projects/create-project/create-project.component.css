@@ -1,8 +1,8 @@
 .projects-list {
     height: 250px;
-    width: 500px;
     overflow-x: auto;
-    padding-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     margin: 20px 0 40px;
 }
 
