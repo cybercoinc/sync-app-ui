@@ -17,7 +17,7 @@ export class MsLicenseClientService extends MsClientService {
 
     createStartLicense(projectId: number, projectName: string, userId: number, authTokenId): Promise<number> {
         return this.makeMsCall(
-            'create-start-license',
+            'create-standard-license',
             'POST',
             {
                 project_id: projectId,
