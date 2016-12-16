@@ -22,4 +22,4 @@ pipelines:
             - unlink public/index.html; mv public/index-prod.html public/index.html
 
             # Deploy app
-            #- gcloud app deploy
+            - gcloud app deploy
