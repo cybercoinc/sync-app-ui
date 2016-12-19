@@ -11,7 +11,10 @@ import {PendingRequestsService} from "client/service/pending-requests.service";
 @Component({
     selector: 'smartsheet-connection',
     templateUrl: 'client/modules/projects/edit-project/components/shared/smartsheet-connection/smartsheet-connection.component.html',
-    styleUrls: ['client/modules/projects/edit-project/components/shared/smartsheet-connection/smartsheet-connection.component.css'],
+    styleUrls: [
+        'client/modules/projects/edit-project/components/shared/smartsheet-connection/smartsheet-connection.component.css',
+        'client/modules/projects/edit-project/edit-project.component.css',
+    ],
 })
 export class SmartsheetConnectionComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
@@ -50,6 +53,18 @@ export class SmartsheetConnectionComponent implements OnInit {
     protected filterTimeout;
 
     protected columnsMatchingIsVisible: boolean = false;
+
+    protected haveExistingSheet: boolean;
+
+    setExistingSheetParam(doHave: boolean) {
+        this.haveExistingSheet = doHave;
+    }
+
+    cancel() {
+        this.haveExistingSheet = false;
+        this.selectedSheet = null;
+        this.columnsMatchingIsVisible = false;
+    }
 
     filterProjects(inputName: string) {
         if (this.filterTimeout) {

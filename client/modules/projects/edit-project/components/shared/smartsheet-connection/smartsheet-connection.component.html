@@ -1,51 +1,64 @@
 <div class="container-fluid" *ngIf="!pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
         <div class="col-xs-12">
-            <h5>Choose Smartsheet sheet you want to connect or
-                <a class="btn btn-primary bt-xs" (click)="createNewSheetWithWorkspace()">create
-                    new sheet</a>
-            </h5>
+            <h5>Do you have an existing SmartSheet schedule that you would like to merge with your Procore project
+                schedule?</h5>
         </div>
 
-        <div class="col-xs-6">
-            <input type="text" class="full-width" #search_filter (keyup)="filterProjects(search_filter.value)"
-                   placeholder="Filter by name">
+        <div class="col-xs-6 col-xs-offset-4" *ngIf="!haveExistingSheet">
+            <a class="btn btn-primary" (click)="setExistingSheetParam(true)">Yes</a>
+            <a class="btn btn-primary" (click)="createNewSheetWithWorkspace()">No</a>
         </div>
 
-        <div class="col-xs-12">
-            <div class="projects-list">
-                <h5 *ngIf="!smartsheetSheets">
-                    <i class="fa fa-cog fa-spin fa-fw"></i> Searching for sheets...
-                </h5>
+        <section *ngIf="haveExistingSheet">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <input type="text" class="full-width" #search_filter
+                                   (keyup)="filterProjects(search_filter.value)"
+                                   placeholder="Filter by name">
+                        </div>
 
-                <h5 *ngIf="smartsheetSheets && !smartsheetSheets.length">
-                    No sheets found.
-                </h5>
+                        <div class="col-xs-12">
+                            <div class="projects-list">
+                                <h5 *ngIf="!smartsheetSheets">
+                                    <i class="fa fa-cog fa-spin fa-fw"></i> Searching for sheets...
+                                </h5>
 
-                <div *ngFor="let sheet of smartsheetSheets">
-                    <md-radio-button [disabled]="checkIfAlreadyConnected(sheet) || columnsMatchingIsVisible"
-                                     value="{{sheet.id}}"
-                                     (click)="chooseExistingSheet(sheet)">
-                        {{sheet.name}}
-                        <div class="is-connected" *ngIf="checkIfAlreadyConnected(sheet)">is connected</div>
-                    </md-radio-button>
-                    <div style="clear:both"></div>
+                                <h5 *ngIf="smartsheetSheets && !smartsheetSheets.length">
+                                    No sheets found.
+                                </h5>
+
+                                <div *ngFor="let sheet of smartsheetSheets">
+                                    <md-radio-button
+                                            [disabled]="checkIfAlreadyConnected(sheet) || columnsMatchingIsVisible"
+                                            value="{{sheet.id}}"
+                                            (click)="chooseExistingSheet(sheet)">
+                                        {{sheet.name}}
+                                        <div class="is-connected" *ngIf="checkIfAlreadyConnected(sheet)">is connected
+                                        </div>
+                                    </md-radio-button>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <a [class.disabled]="!selectedSheet || columnsMatchingIsVisible" class="btn btn-success"
-               (click)="showColumnsMatching()">Select and continue</a>
-            <a [class.disabled]="true" class="btn btn-default" href="#">cancel</a>
-        </div>
-    </div>
+            <div class="col-xs-6 col-xs-offset-4">
+                <a [class.disabled]="!selectedSheet || columnsMatchingIsVisible" class="btn btn-success"
+                   (click)="showColumnsMatching()">Select and continue</a>
+                <a class="btn btn-default" (click)="cancel()">cancel</a>
+            </div>
 
-    <br>
-    <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}"
-                      (columnsMatched)="onColumnsMatched($event)"></columns-matching>
+            <div class="col-xs-8 col-xs-offset-2">
+                <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}"
+                                  (columnsMatched)="onColumnsMatched($event)"></columns-matching>
+            </div>
+        </section>
+    </div>
 </div>
 
 <div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
