@@ -13,7 +13,7 @@ import {User} from 'client/entities/entities';
         'ul {background-color: #44556b;}'
     ],
     template: `
-<ul class="nav navbar-nav navbar-right" *ngIf="authUser">
+<ul class="nav navbar-nav navbar-right" *ngIf="authUser && authUser.role !== 'guest'">
     <li>
         <a href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">{{authUser?.email}} <i class="material-icons">arrow_drop_down</i></a>
         <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;">
