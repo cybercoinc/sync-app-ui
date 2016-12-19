@@ -1,5 +1,5 @@
 # Check our guides at https://confluence.atlassian.com/x/VYk8Lw for more examples.
-image: python:2.7
+image: node:6.6.0
 
 pipelines:
   custom:
