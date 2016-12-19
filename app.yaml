@@ -2,11 +2,11 @@
 #version:        1
 service:         ms-app-ui
 runtime: nodejs
-vm: true
+env: flex
 
 # [START env_variables]
 env_variables:
-    GCLOUD_PROJECT: scheduleconnector-dev
+#    GCLOUD_PROJECT: scheduleconnector-dev
 # [END env_variables]
 
 skip_files:
