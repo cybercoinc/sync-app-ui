@@ -6,10 +6,4 @@ env: flex
 #  NODE_ENV: dev
 
 skip_files:
-  - ^(.*/)?#.*#$
-  - ^(.*/)?.*~$
-  - ^(.*/)?.*\.py[co]$
-  - ^(.*/)?.*/RCS/.*$
-  - ^(.*/)?\..*$
   - ^(.*/)?node_modules/.*$
-  - ^(.*/)?local.json$
