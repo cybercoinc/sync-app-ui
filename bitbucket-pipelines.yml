@@ -23,7 +23,7 @@ pipelines:
             - unlink public/index.html; mv public/index-prod.html public/index.html
 
             # Deploy app
-            - gcloud app deploy app.yaml --no-stop-previous-version --version=master
+            - gcloud app deploy app.yaml --no-stop-previous-version --version=master --verbosity=debug
 
     deploy-qa:
       - step:
