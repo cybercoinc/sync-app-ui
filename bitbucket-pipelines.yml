@@ -17,8 +17,8 @@ pipelines:
 
             # Prepare app
             - npm install
-            - npm run compile
             - npm run typings
+            - npm run compile
             - npm run bundle:prod
             - unlink public/index.html; mv public/index-prod.html public/index.html
 
@@ -39,8 +39,8 @@ pipelines:
 
             # Prepare app
             - npm install
-            - npm run compile
             - npm run typings
+            - npm run compile
             - npm run bundle:prod
             - unlink public/index.html; mv public/index-prod.html public/index.html
 
