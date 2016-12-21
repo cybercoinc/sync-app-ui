@@ -2,8 +2,11 @@ service: ms-app-ui
 runtime: nodejs
 env: flex
 
-#env_variables:
-#  NODE_ENV: dev
+manual_scaling:
+  instances: 1
+
+health_check:
+  enable_health_check: false
 
 skip_files:
   - ^(.*/)?node_modules/.*$
