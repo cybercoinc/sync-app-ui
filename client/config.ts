@@ -21,6 +21,14 @@ export class Config {
                 };
                 break;
 
+            case 'ms-app-ui-dot-scheduleconnector-qa.appspot-preview.com':
+                data = {
+                    environment: 'production',
+                    "ms-main-url": 'https://ms-main-dot-scheduleconnector-qa.appspot-preview.com',
+                    "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
+                };
+                break;
+
             default:
                 data = {
                     environment: 'production',
