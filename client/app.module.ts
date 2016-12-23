@@ -26,6 +26,7 @@ import {CompaniesModule} from 'client/modules/companies/companies.module';
 import {MsClientService} from "./service/microservices/ms-client.service";
 import {PendingRequestsService} from "./service/pending-requests.service";
 import {LoaderProgressBarComponent} from "./components/shared/loader.component";
+import { UiDemoModule } from "./modules/ui-demo/ui-demo.module";
 
 @NgModule({
     imports: [
@@ -38,6 +39,7 @@ import {LoaderProgressBarComponent} from "./components/shared/loader.component";
         ProjectsModule,
         BillingModule,
         CompaniesModule,
+        UiDemoModule,
 
         routing,
     ],

@@ -1,0 +1,38 @@
+:host .drop-down {
+    width: 200px;
+}
+
+:host ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    background-color: #fff;
+}
+
+:host .item.select {
+    background-color: #fff;
+}
+
+:host .item {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+:host ul li:hover {
+    background-color: #f1f1f1;
+}
+
+:host button {
+    width: 100%;
+}
+
+:host input {
+    width: 100%;
+    padding-left: 10px;
+}
+
+:host .selected {
+    background-color: #e4e4e4;
+}

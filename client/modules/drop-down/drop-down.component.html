@@ -1,0 +1,15 @@
+<div class="drop-down">
+    <div class="item select" (click)="toggle()">{{placeholderDisplay}}</div>
+
+    <div *ngIf="isVisible">
+        <div *ngIf="searchEnable">
+            <input #input type="text" placeholder="search text" [(ngModel)]="searchText">
+        </div>
+
+        <ul>
+            <li *ngFor="let item of items | search: searchText" class="item" [ngClass]="{'selected': item == selected}" (click)="selectItem(item)">
+                {{item}}
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {MsUserClientService} from '../../../service/microservices/ms-user-client.service';
 import {AuthService} from '../../../service/auth.service';
 import {MsLicenseClientService} from '../../../service/microservices/ms-license-client.service';
@@ -10,23 +10,15 @@ import {User} from '../../../entities/entities';
     templateUrl: 'client/modules/billing/licenses/licenses.component.html',
     styleUrls: ['client/modules/billing/licenses/licenses.component.css']
 })
-export class LicensesComponent implements OnInit {
+export class LicensesComponent {
     me: User = null;
     licensesList = [];
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService, protected MsLicenseClientService: MsLicenseClientService, protected MsProjectClientService: MsProjectClientService) {
-
-    }
-
-    ngOnInit(): void {
-        this.getActiveLicenses();
-    }
-
-    getActiveLicenses() {
-        this.MsLicenseClientService.getLicenses(this.AuthService.authUser.id, this.AuthService.authTokenId)
+        this.MsLicenseClientService.getLicenses(AuthService.authUser.id, AuthService.authTokenId)
             .then(licensesList => {
                 this.licensesList = licensesList;
-                var projects = [];
+                let projects = [];
                 licensesList.forEach(license => {
                     projects.push( this.MsProjectClientService.getProjectByid(license.entity_id, this.AuthService.authTokenId));
                 });
@@ -36,7 +28,7 @@ export class LicensesComponent implements OnInit {
             }).then(projectsList => {
 
 
-            var ll = this.licensesList.map(license => {
+            // let ll = this.licensesList.map(license => {
 
                 // var license_project = projectsList.filter(project => {
                 //     console.log('>>>>> filter project[0].id', project[0].id);
@@ -59,11 +51,8 @@ export class LicensesComponent implements OnInit {
                 //     license.link_to_project = '<a href="#/projects/' + id + '/edit-project">' + name + '</a>';
                 // }
 
-            });
-            this.licensesList = ll;
+            // });
+            this.licensesList = projectsList;
         });
     }
-
-
-
 }
