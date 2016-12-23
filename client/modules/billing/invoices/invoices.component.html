@@ -1,11 +1,16 @@
-<invoice-card *ngFor="let invoice of invocesArray"
-        invoice-number="{{invoice.invoice_number}}"
-        invoice-id="{{invoice.id}}"
-        invoice-bill-dot-com-id="{{invoice.bill_dot_com_invoice_id}}"
-        invoice-amount="{{invoice.amount}}"
-        invoice-date="{{invoice.created_at|date}}"
-        invoice-items-list="{{invoice.billing_entities}}"
+<div class="sc-invoices panel panel-default" *ngFor="let invoice of invoices">
+    <div class="panel-body">
+        <div class="col-xs-8">
+            <div class="col-xs-4">
+                {{invoice.invoice_number}}
+            </div>
+            <div class="col-xs-4">
+                {{invoice.created_at|date}} <span *ngIf="invoice.amount">: {{invoice.amount}}</span>
+            </div>
+        </div>
 
->
-
-</invoice-card>
+        <div class="col-xs-4">
+            <a class="btn btn-danger" href="https://app.bill.com/p/00801MAASGBADZVDwzj1?id={{invoice.bill_dot_com_invoice_id}}" target="_blank">Pay Now</a>
+        </div>
+    </div>
+</div>

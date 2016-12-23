@@ -1,3 +1,12 @@
-md-card {
-    margin-bottom: 5px;
+.license-table-header {
+    font-weight: bold;
+
+    font-size: 18px;
+    border-bottom: solid 1px darkgray;
+    line-height: 32px;
+}
+.license-table-row {
+    font-size: 14px;
+    border-bottom: solid 1px darkgray;
+    line-height: 32px;
 }
