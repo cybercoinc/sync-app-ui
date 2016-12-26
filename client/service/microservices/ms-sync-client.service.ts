@@ -4,57 +4,54 @@ import {SyncSession, ItemChanges, ProcoreTodoColumn} from 'client/entities/entit
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 import {Inject} from "@angular/core";
+import {AuthService} from "../auth.service";
 
 export class MsSyncClientService extends MsClientService {
 
     constructor(@Inject(Http) protected Http: Http,
                 @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
-                @Inject(Router) protected router: Router) {
-        super(Http, PendingRequestsService, router);
+                @Inject(Router) protected router: Router, @Inject(AuthService) protected AuthService: AuthService) {
+        super(Http, PendingRequestsService, router, AuthService);
 
         this.url = this.getServiceUrl('ms-sync');
     }
 
-    getLastPipeSyncSessions(pipeId: number, onlyWithChanges: boolean, authTokenId): Promise<SyncSession[]> {
+    getLastPipeSyncSessions(pipeId: number, onlyWithChanges: boolean): Promise<SyncSession[]> {
         return this.makeMsCall(
             'last-sync-sessions',
             'GET',
             {
                 pipe_id: pipeId,
                 only_with_changes: onlyWithChanges
-            },
-            authTokenId
+            }
         );
     }
 
-    getItemChangesBySyncSessionsId(syncSessionId: number, authTokenId): Promise<[ItemChanges]> {
+    getItemChangesBySyncSessionsId(syncSessionId: number): Promise<[ItemChanges]> {
         return this.makeMsCall(
             'item-changes-by-sync-session-id',
             'GET',
             {
                 sync_session_id: syncSessionId
-            },
-            authTokenId
+            }
         );
     }
 
-    startPipeSync(pipeId: number, authTokenId): Promise<boolean> {
+    startPipeSync(pipeId: number): Promise<boolean> {
         return this.makeMsCall(
             'start-pipe-sync',
             'GET',
             {
                 pipe_id: pipeId
-            },
-            authTokenId
+            }
         );
     }
 
-    getProcoreTodosColumns(authTokenId): Promise<[ProcoreTodoColumn]> {
+    getProcoreTodosColumns(): Promise<[ProcoreTodoColumn]> {
         return this.makeMsCall(
             'get-procore-todos-columns',
             'GET',
-            {},
-            authTokenId
+            {}
         )
     }
 }

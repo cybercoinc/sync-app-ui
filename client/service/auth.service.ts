@@ -1,12 +1,13 @@
 import {Injectable} from "@angular/core";
-import {MsUserClientService} from './microservices/ms-user-client.service';
 import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {User} from 'client/entities/entities';
+import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
+
 
 @Injectable()
 export class AuthService implements Resolve<{}> {
 
-    constructor(private msUser: MsUserClientService, protected router: Router) {
+    constructor(protected router: Router, protected Http: Http) {
     }
 
     /**
@@ -29,7 +30,7 @@ export class AuthService implements Resolve<{}> {
                 return resolve(this.authUser)
             }
 
-            return this.msUser.getMe()
+            return this.getMe()
                 .then(authUserResponse => {
                     if (!authUserResponse.user) {
                         return reject('no user found');
@@ -50,23 +51,23 @@ export class AuthService implements Resolve<{}> {
         });
     }
 
-    defaultAuth() {
-        return this.msUser.defaultAuth()
-            .then(response => window.location.replace('/'));
-    }
+    getMe() {
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+        });
 
-    getProcoreAuthLink() {
-        return this.msUser.url + 'auth/procore';
-    }
+        let requestOptions = new RequestOptions({
+            headers: headers,
+            method: 'GET',
+            withCredentials: true
+        });
 
-    getSmartsheetAuthLink() {
-        return this.msUser.url + 'auth/smartsheet';
-    }
+        return this.Http.request('http://localhost:3002' + '/me', requestOptions)
+            .toPromise()
+            .then(response => {
+                let resObj = response.json();
 
-    logout() {
-        return this.msUser.logout(this.authUser.id, this.authTokenId)
-            .then(() => {
-                this.authUser = null;
+                return resObj.result;
             });
     }
 }

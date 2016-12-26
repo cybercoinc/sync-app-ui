@@ -1,6 +1,7 @@
 import {Component, ElementRef, Input} from "@angular/core";
 import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
+import {MsUserClientService} from "../../service/microservices/ms-user-client.service";
 
 @Component({
     selector: 'usermenu',
@@ -29,7 +30,7 @@ import {User} from 'client/entities/entities';
 })
 export class UserMenuComponent {
 
-    constructor(private _eref: ElementRef, protected AuthService: AuthService) {
+    constructor(private _eref: ElementRef, protected AuthService: AuthService, protected MsUserClientService: MsUserClientService) {
     }
 
     showUserMenu: boolean = false;
@@ -44,7 +45,7 @@ export class UserMenuComponent {
     }
 
     logout() {
-        return this.AuthService.logout()
+        return this.MsUserClientService.logout()
             .then(response => window.location.replace('/'));
     }
 }

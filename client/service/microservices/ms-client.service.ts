@@ -5,6 +5,7 @@ import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../auth.service";
 
 @Injectable()
 export class MsClientService {
@@ -12,7 +13,7 @@ export class MsClientService {
     services: [{}] = window['services']; // todo move this to root route resolver
 
     constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService,
-                protected router: Router) {
+                protected router: Router, protected AuthService: AuthService) {
     }
 
     getServiceUrl(serviceName: string) {
@@ -45,7 +46,7 @@ export class MsClientService {
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'auth-token-id': authTokenId
+            'auth-token-id': this.AuthService? this.AuthService.authTokenId : null
         });
 
         this.PendingRequestsService.hasPendingRequest = true;
@@ -121,30 +122,27 @@ export class MsClientService {
         return Promise.reject(response.message || response);
     }
 
-    create(data: {}, authTokenId): Promise<[number]> {
+    create(data: {}): Promise<[number]> {
         return this.makeMsCall(
             'create',
             'POST',
-            data,
-            authTokenId
+            data
         );
     }
 
-    update(id, data: {}, authTokenId): Promise<number> {
+    update(id, data: {}): Promise<number> {
         return this.makeMsCall(
             'update/' + id,
             'PUT',
-            data,
-            authTokenId
+            data
         );
     }
 
-    findManyByIdsList(idsList: [number], authTokenId): Promise<[any]> {
+    findManyByIdsList(idsList: [number]): Promise<[any]> {
         return this.makeMsCall(
             'find-many-by-ids-list',
             'GET',
-            idsList,
-            authTokenId
+            idsList
         );
     }
 

@@ -30,8 +30,8 @@ export class PipeConnectionService implements Resolve<{}> {
         return this.AuthService.getAuthUser()
             .then(authUser => {
                 return Promise.all([
-                    this.getProject(projectId, this.AuthService.authTokenId),
-                    this.getPipesList(projectId, this.AuthService.authTokenId)
+                    this.getProject(projectId),
+                    this.getPipesList(projectId)
                 ]);
 
             });
@@ -44,8 +44,8 @@ export class PipeConnectionService implements Resolve<{}> {
         tasks: ProjectPipe,
     }|{} = {};
 
-    getProject(projectId: number, authTokenId): Promise<Project> {
-        return this.MsProjectClientService.getProjectByid(projectId, authTokenId)
+    getProject(projectId: number): Promise<Project> {
+        return this.MsProjectClientService.getProjectByid(projectId)
             .then(projectsList => {
 
                 this.project = projectsList.shift();
@@ -54,10 +54,10 @@ export class PipeConnectionService implements Resolve<{}> {
             });
     }
 
-    getPipesList(projectId: number, authTokenId): Promise<ProjectPipe[]> {
+    getPipesList(projectId: number): Promise<ProjectPipe[]> {
         return this.MsProjectClientService.getPipesWhere({
             project_fk_id: projectId
-        }, authTokenId)
+        })
             .then(pipesList => {
                 this.pipesListObj = [];
 
@@ -72,7 +72,7 @@ export class PipeConnectionService implements Resolve<{}> {
     refreshPipesList() {
         return this.MsProjectClientService.getPipesWhere({
             project_fk_id: this.project.id
-        }, this.AuthService.authTokenId)
+        })
             .then(pipesList => {
                 pipesList.forEach((pipe: ProjectPipe) => {
                     this.pipesListObj[pipe.type] = pipe;
@@ -85,43 +85,43 @@ export class PipeConnectionService implements Resolve<{}> {
     enablePipe(pipeId: number) {
         let _pipeObj: ProjectPipe;
 
-        return this.MsProjectClientService.getPipeById(pipeId, this.AuthService.authTokenId)
+        return this.MsProjectClientService.getPipeById(pipeId)
             .then(pipeObj => {
                 _pipeObj = pipeObj;
 
-                return this.MsProjectClientService.enablePipe(pipeId, this.AuthService.authTokenId);
+                return this.MsProjectClientService.enablePipe(pipeId);
             })
             .then(() => {
                 this.refreshPipesList();
 
-                return this.MsSyncClientService.startPipeSync(pipeId, this.AuthService.authTokenId);
+                return this.MsSyncClientService.startPipeSync(pipeId);
             })
             .then(() => {
                 if (!_pipeObj.sm_webhook_id) {
-                    return this.MsProjectClientService.createSmPipeWebhook(pipeId, this.AuthService.authTokenId);
+                    return this.MsProjectClientService.createSmPipeWebhook(pipeId);
                 }
 
                 return _pipeObj.sm_webhook_id;
             })
             .then(() => {
-                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, true, this.AuthService.authTokenId);
+                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, true);
             });
     }
 
     disablePipe(pipeId) {
         return this.MsProjectClientService.updatePipe(pipeId, {
             status: PIPE_STATUS_DISABLED
-        }, this.AuthService.authTokenId)
+        })
             .then(() => {
                 return this.refreshPipesList();
             })
             .then(() => {
-                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, false, this.AuthService.authTokenId);
+                return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, false);
             })
     }
 
     deletePipe(pipeId) {
-        return this.MsProjectClientService.deletePipe(pipeId, this.AuthService.authTokenId)
+        return this.MsProjectClientService.deletePipe(pipeId)
             .then(() => {
                 return this.refreshPipesList();
             });
@@ -133,7 +133,7 @@ export class PipeConnectionService implements Resolve<{}> {
         return this.MsProjectClientService.getPipesWhere({
             project_fk_id: this.project.id,
             type: pipeType
-        }, this.AuthService.authTokenId)
+        })
             .then(pipesList => {
                 let existingPipeObj = pipesList.shift();
 
@@ -146,7 +146,7 @@ export class PipeConnectionService implements Resolve<{}> {
                         procore_company_id: project.procore_company_id,
                         procore_project_id: project.procore_project_id,
                         user_fk_id: this.AuthService.authUser.id
-                    }, this.getPipeLabelByType(pipeType), this.AuthService.authTokenId);
+                    }, this.getPipeLabelByType(pipeType));
                 }
             });
     }
@@ -159,13 +159,13 @@ export class PipeConnectionService implements Resolve<{}> {
             if (!project.smartsheet_workspace_id) {
                 // create new workspace at smartsheet
                 return this.MsProjectClientService
-                    .createSmartsheetWorkspace(project.id, workspaceName, this.AuthService.authTokenId)
+                    .createSmartsheetWorkspace(project.id, workspaceName)
                     .then(workspace => {
                         _workspaceId = workspace.id;
 
                         return this.MsProjectClientService.update(project.id, {
                             smartsheet_workspace_id: _workspaceId
-                        }, this.AuthService.authTokenId);
+                        });
                     })
                     .then(() => {
                         this.project.smartsheet_workspace_id = _workspaceId;

@@ -20,10 +20,9 @@ export class ColumnsMatchingComponent implements OnInit {
         return Promise.all([
             this.MsProjectClientService.getSmartsheetSheetColumns(
                 this.AuthService.authUser.id,
-                this.smartsheetSheetId,
-                this.AuthService.authTokenId
+                this.smartsheetSheetId
             ),
-            this.MsSyncClientService.getProcoreTodosColumns(this.AuthService.authTokenId)
+            this.MsSyncClientService.getProcoreTodosColumns()
         ])
             .then(resultsList => {
                 let smColumns = resultsList[0];

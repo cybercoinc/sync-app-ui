@@ -12,7 +12,7 @@ export class LicensesComponent {
     licenses = [];
 
     constructor(protected AuthService: AuthService, protected MsLicenseClientService: MsLicenseClientService, protected MsProjectClientService: MsProjectClientService) {
-        this.MsLicenseClientService.getLicenses(AuthService.authUser.id, AuthService.authTokenId)
+        this.MsLicenseClientService.getLicenses(AuthService.authUser.id)
             .then(licenses => {
                 this.licenses = licenses;
             });

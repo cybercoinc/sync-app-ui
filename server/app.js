@@ -3,10 +3,10 @@
 var express = require("express");
 var path_1 = require("path");
 var body_parser_1 = require("body-parser");
+var config = require('config');
 var app = express();
 exports.app = app;
 app.disable("x-powered-by");
-// app.use(favicon(join(__dirname, "../public", "favicon.ico")));
 app.use(express.static(path_1.join(__dirname, '../public')));
 app.use(body_parser_1.json());
 app.use(body_parser_1.urlencoded({ extended: true }));
@@ -25,6 +25,11 @@ if (app.get("env") === "development") {
         });
     });
 }
+app.get('/config', function (req, res, next) {
+    return res.json({
+        result: config
+    });
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error("Not Found");

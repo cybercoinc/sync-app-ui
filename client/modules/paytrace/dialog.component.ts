@@ -72,7 +72,7 @@ export class Dialog {
         }
 
         if (this.isUpdate) {
-            this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.AuthService.authTokenId, this.creditCard.id).then(response => {
+            this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.creditCard.id).then(response => {
                 this.createCreditCard();
             });
         }
@@ -94,12 +94,12 @@ export class Dialog {
             zip:          this.form.value.zip,
         });
 
-        this.MsLicenseClientService.getPemKey(this.AuthService.authUser.id, this.AuthService.authTokenId)
+        this.MsLicenseClientService.getPemKey(this.AuthService.authUser.id)
             .then(response => {
                 this.creditCard.setKey(response);
                 this.creditCard.encrypt();
 
-                this.MsLicenseClientService.createCustomer(this.AuthService.authUser.id, this.AuthService.authTokenId, this.creditCard)
+                this.MsLicenseClientService.createCustomer(this.AuthService.authUser.id, this.creditCard)
                     .then(response => {
                         if (response.success) {
                             this.creditCard.maskedCardNumber = response.masked_card_number;

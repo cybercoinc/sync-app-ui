@@ -1,60 +1,70 @@
 import {MsClientService} from "./ms-client.service";
-import {Headers, Http, URLSearchParams} from '@angular/http';
 import {User} from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 import {Inject} from "@angular/core";
+import {AuthService} from "../auth.service";
+import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 
 export class MsUserClientService extends MsClientService {
 
     constructor(@Inject(Http) protected Http: Http,
                 @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
-                @Inject(Router) protected router: Router) {
-        super(Http, PendingRequestsService, router);
+                @Inject(Router) protected router: Router, @Inject(AuthService) protected AuthService: AuthService) {
+
+        super(Http, PendingRequestsService, router, AuthService);
 
         this.url = this.getServiceUrl('ms-user');
     }
 
-    getMe(): Promise< {user: User, auth_token_id: number}> {
-        return this.makeMsCall('me', 'GET');
-    }
-
-    getCompany(userId, authTokenId): Promise<any> {
+    getCompany(userId): Promise<any> {
         return this.makeMsCall('get-company', 'GET', {
             userId: userId
-        }, authTokenId);
+        });
     }
 
-    updatePbr(companyId, pbrId, authTokenId): Promise<any> {
+    updatePbr(companyId, pbrId): Promise<any> {
         return this.makeMsCall('update-pbr', 'POST', {
             pbrId: pbrId,
             companyId: companyId
-        }, authTokenId);
+        });
     }
 
-    getCompanyUsers(companyId, authTokenId): Promise<any> {
+    getCompanyUsers(companyId): Promise<any> {
         return this.makeMsCall('get-company-users', 'GET', {
             companyId: companyId
-        }, authTokenId);
+        });
     }
 
     defaultAuth() {
-        return this.makeMsCall('auth/default', 'GET');
+        return this.makeMsCall('auth/default', 'GET')
+            .then(response => window.location.replace('/'));
     }
 
     procoreAuth() {
         return this.makeMsCall('auth/procore', 'GET');
     }
 
-    removeSmartsheetAuth(userId, authTokenId) {
+    removeSmartsheetAuth(userId) {
         return this.makeMsCall('auth/remove/smartsheet', 'DELETE', {
             user_id: userId
-        }, authTokenId);
+        });
     }
 
-    logout(userId, authTokenId) {
+    logout(userId) {
         return this.makeMsCall('auth/logout', 'POST', {
             user_id: userId
-        }, authTokenId);
+        })
+            .then(() => {
+                this.AuthService.authUser = null;
+            });
+    }
+
+    getProcoreAuthLink() {
+        return this.url + 'auth/procore';
+    }
+
+    getSmartsheetAuthLink() {
+        return this.url + 'auth/smartsheet';
     }
 }

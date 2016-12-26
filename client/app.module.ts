@@ -48,7 +48,6 @@ import { UiDemoModule } from "./modules/ui-demo/ui-demo.module";
         AuthService,
         AuthGuardService,
         PendingRequestsService,
-        MsClientService,
         MsProjectClientService,
         MsUserClientService,
         MsLicenseClientService,

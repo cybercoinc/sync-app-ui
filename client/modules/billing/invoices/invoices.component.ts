@@ -11,7 +11,7 @@ export class InvoicesComponent {
     invoices = [];
 
     constructor(protected AuthService: AuthService, protected MsLicenseClientService: MsLicenseClientService) {
-        MsLicenseClientService.getInvoices(this.AuthService.authUser.id, this.AuthService.authTokenId)
+        MsLicenseClientService.getInvoices(this.AuthService.authUser.id)
             .then(invoices => {
                 this.invoices = invoices;
             });

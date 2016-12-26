@@ -26,8 +26,8 @@ export class ProjectSettingsComponent implements OnInit {
         });
 
         Promise.all([
-            this.MsProjectClientService.getPbrUser(projectId, this.AuthService.authTokenId),
-            this.MsProjectClientService.getProjectUsers(projectId, this.AuthService.authTokenId)
+            this.MsProjectClientService.getPbrUser(projectId),
+            this.MsProjectClientService.getProjectUsers(projectId)
         ])
             .then(resultsList => {
                 this.pbrUser = resultsList[0];

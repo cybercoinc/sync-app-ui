@@ -52,7 +52,7 @@ export class SyncSessionsListComponent implements OnInit {
         return this.MsProjectClientService.getPipesWhere({
             type: pipeType,
             project_fk_id: projectId
-        }, this.AuthService.authTokenId)
+        })
             .then((pipesList) => {
                 this.projectPipe = pipesList.shift();
 
@@ -60,7 +60,7 @@ export class SyncSessionsListComponent implements OnInit {
                     return [];
                 }
 
-                return this.MsSyncClientService.getLastPipeSyncSessions(this.projectPipe.id, this.onlyWithChanges, this.AuthService.authTokenId);
+                return this.MsSyncClientService.getLastPipeSyncSessions(this.projectPipe.id, this.onlyWithChanges);
             })
             .then(syncSessionsList => {
                 this.syncSessionsList = this.orderByDate(syncSessionsList);

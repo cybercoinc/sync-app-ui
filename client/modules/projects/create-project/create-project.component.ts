@@ -21,7 +21,7 @@ export class CreateProjectComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.MsProjectClientService.getConnectedProcoreProjectsIds(this.AuthService.authTokenId)
+        this.MsProjectClientService.getConnectedProcoreProjectsIds()
             .then(connectedProcoreProjectsIdsList => {
                 this.connectedProcoreProjectsIdsList = connectedProcoreProjectsIdsList;
 
@@ -60,7 +60,7 @@ export class CreateProjectComponent implements OnInit {
 
     getProcoreProjects() {
         return this.MsProjectClientService
-            .getProcoreProjects(this.AuthService.authUser.id, this.AuthService.authTokenId);
+            .getProcoreProjects(this.AuthService.authUser.id);
     }
 
     chooseProject(project: ProcoreProject) {
@@ -86,7 +86,7 @@ export class CreateProjectComponent implements OnInit {
 
         let _projectId;
 
-        this.MsProjectClientService.create(data, this.AuthService.authTokenId)
+        this.MsProjectClientService.create(data)
             .then(projectIds => {
                 _projectId = projectIds.shift();
 
@@ -96,8 +96,8 @@ export class CreateProjectComponent implements OnInit {
 
                 return Promise.all([
                     this.MsLicenseClientService.createStartLicense(_projectId, data.name,
-                        this.AuthService.authUser.id, this.AuthService.authTokenId),
-                    this.MsProjectClientService.syncProjectUsers(_projectId, this.AuthService.authTokenId)
+                        this.AuthService.authUser.id),
+                    this.MsProjectClientService.syncProjectUsers(_projectId)
                 ]);
             })
             .then(() => {

@@ -15,7 +15,7 @@ export class InfoComponent {
     private dialogComponent: Dialog;
 
     constructor(protected MsLicenseClientService: MsLicenseClientService, protected AuthService: AuthService) {
-        MsLicenseClientService.getCreditCard(AuthService.authUser.id, this.AuthService.authTokenId).then(response => {
+        MsLicenseClientService.getCreditCard(AuthService.authUser.id).then(response => {
             if (Object.keys(response).length > 0) {
                 this.dialogComponent.creditCard = new CreditCard({
                     id:               response.id,
@@ -38,7 +38,7 @@ export class InfoComponent {
     }
 
     clearCard() {
-        this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.AuthService.authTokenId, this.dialogComponent.creditCard.id).then(response => {
+        this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.dialogComponent.creditCard.id).then(response => {
             this.dialogComponent.creditCard = new CreditCard();
         });
     }

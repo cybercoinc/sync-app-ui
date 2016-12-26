@@ -24,7 +24,7 @@ export class ItemChangesComponent implements OnInit {
     @Input('sync-session') syncSession: SyncSession;
 
     ngOnInit() {
-        this.MsSyncClientService.getItemChangesBySyncSessionsId(this.syncSession.id, this.AuthService.authTokenId)
+        this.MsSyncClientService.getItemChangesBySyncSessionsId(this.syncSession.id)
             .then(itemChangesList => {
                 this.formattedItemChangesObj = {
                     created_one: [],

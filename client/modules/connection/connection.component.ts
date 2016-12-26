@@ -20,16 +20,16 @@ export class ConnectionComponent implements OnInit {
     }
 
     getProcoreAuthLink() {
-        return this.AuthService.getProcoreAuthLink();
+        return this.MsUserClientService.getProcoreAuthLink();
 
     }
 
     getSmartsheetAuthLink() {
-        return this.AuthService.getSmartsheetAuthLink();
+        return this.MsUserClientService.getSmartsheetAuthLink();
     }
 
     removeSmartsheetAuth() {
-        return this.MsUserClientService.removeSmartsheetAuth(this.AuthService.authUser.id, this.AuthService.authTokenId)
+        return this.MsUserClientService.removeSmartsheetAuth(this.AuthService.authUser.id)
             .then(() => {
                 this.me.smartsheet_oauth = null;
             })
