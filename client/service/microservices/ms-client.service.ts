@@ -16,22 +16,22 @@ export class MsClientService {
                 protected router: Router, protected AuthService: AuthService) {
     }
 
-    getServiceUrl(serviceName: string) {
-        let url = '';
-
-        this.services.forEach(function (service: {category: string, name: string, value: {url: string}}) {
-            if (service.category === 'services' && service.name === serviceName) {
-                url = service.value.url;
-                return;
-            }
-        });
-
-        if (!url) {
-            throw new Error('no url for ' + serviceName);
-        }
-
-        return url;
-    }
+    // getServiceUrl(serviceName: string) {
+    //     let url = '';
+    //
+    //     this.services.forEach(function (service: {category: string, name: string, value: {url: string}}) {
+    //         if (service.category === 'services' && service.name === serviceName) {
+    //             url = service.value.url;
+    //             return;
+    //         }
+    //     });
+    //
+    //     if (!url) {
+    //         throw new Error('no url for ' + serviceName);
+    //     }
+    //
+    //     return url;
+    // }
 
     /**
      * Make http call to microservice.
@@ -39,10 +39,9 @@ export class MsClientService {
      * @param {String} action
      * @param {String} method GET, POST, PUT, DELETE
      * @param {} data
-     * @param {Number|null} authTokenId
      *
      */
-    public makeMsCall(action: string, method: string, data: {} = {}, authTokenId = null) {
+    public makeMsCall(action: string, method: string, data: {} = {}) {
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -51,7 +50,7 @@ export class MsClientService {
 
         this.PendingRequestsService.hasPendingRequest = true;
 
-        console.log('makeMsCall ' + action, authTokenId);
+        console.log('make ms call', this.url, action);
 
         if (method === 'GET' || method === 'DELETE') {
             params = new URLSearchParams();

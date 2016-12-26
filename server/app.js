@@ -25,7 +25,7 @@ if (app.get("env") === "development") {
         });
     });
 }
-app.get('/config', function (req, res, next) {
+app.get('/configs', function (req, res, next) {
     return res.json({
         result: config
     });

@@ -1,20 +1,21 @@
 import {MsClientService} from "./ms-client.service";
-import {User} from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 import {Inject} from "@angular/core";
 import {AuthService} from "../auth.service";
 import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
+import {ConfigService} from "../config.service";
 
 export class MsUserClientService extends MsClientService {
-
     constructor(@Inject(Http) protected Http: Http,
                 @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
-                @Inject(Router) protected router: Router, @Inject(AuthService) protected AuthService: AuthService) {
-
+                @Inject(Router) protected router: Router,
+                @Inject(AuthService) protected AuthService: AuthService,
+                @Inject(ConfigService) protected ConfigService: ConfigService,
+    ) {
         super(Http, PendingRequestsService, router, AuthService);
 
-        this.url = this.getServiceUrl('ms-user');
+        this.url = this.ConfigService.getServiceUrl('ms-user');
     }
 
     getCompany(userId): Promise<any> {

@@ -31,7 +31,7 @@ if (app.get("env") === "development") {
     });
 }
 
-app.get('/config', (req, res, next) => {
+app.get('/configs', (req, res, next) => {
     return res.json({
         result: config
     })

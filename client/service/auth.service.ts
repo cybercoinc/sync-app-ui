@@ -1,24 +1,13 @@
 import {Injectable} from "@angular/core";
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {User} from 'client/entities/entities';
-import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 
 
 @Injectable()
-export class AuthService implements Resolve<{}> {
+export class AuthService {
 
     constructor(protected router: Router, protected Http: Http) {
-    }
-
-    /**
-     * @param route
-     * @param state
-     * @return {Promise<{}>}
-     */
-    resolve(route: ActivatedRouteSnapshot,
-            state: RouterStateSnapshot): Promise<any> {
-
-        return this.getAuthUser();
     }
 
     authUser: User = null;
@@ -26,6 +15,8 @@ export class AuthService implements Resolve<{}> {
 
     getAuthUser(): Promise<User> {
         return new Promise((resolve, reject) => {
+            console.log('start auth resolve');
+
             if (this.authUser && this.authTokenId) {
                 return resolve(this.authUser)
             }
@@ -62,7 +53,7 @@ export class AuthService implements Resolve<{}> {
             withCredentials: true
         });
 
-        return this.Http.request('http://localhost:3002' + '/me', requestOptions)
+        return this.Http.request('http://localhost:3002' + '/me', requestOptions) // todo hardcoded url
             .toPromise()
             .then(response => {
                 let resObj = response.json();

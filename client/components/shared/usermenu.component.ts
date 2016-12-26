@@ -30,7 +30,7 @@ import {MsUserClientService} from "../../service/microservices/ms-user-client.se
 })
 export class UserMenuComponent {
 
-    constructor(private _eref: ElementRef, protected AuthService: AuthService, protected MsUserClientService: MsUserClientService) {
+    constructor(private _eref: ElementRef, protected AuthService: AuthService) {
     }
 
     showUserMenu: boolean = false;
@@ -45,7 +45,7 @@ export class UserMenuComponent {
     }
 
     logout() {
-        return this.MsUserClientService.logout()
-            .then(response => window.location.replace('/'));
+        // return this.MsUserClientService.logout()
+        //     .then(response => window.location.replace('/'));
     }
 }

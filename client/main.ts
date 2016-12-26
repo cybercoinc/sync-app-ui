@@ -11,11 +11,13 @@ let env = Config.getEnvironmentVariable('environment');
     enableProdMode();
 // }
 
-fetch(Config.getEnvironmentVariable('ms-main-url') + '/services') // todo move this to root route resolver
-    .then(resp => resp.json())
-    .then(resJson => {
-        window['services'] = resJson.result;
+// fetch(Config.getEnvironmentVariable('ms-main-url') + '/services')
+//     .then(resp => resp.json())
+//     .then(resJson => {
+//         window['services'] = resJson.result;
+//
+//         platformBrowserDynamic().bootstrapModule(AppModule);
+//     });
 
-        platformBrowserDynamic().bootstrapModule(AppModule);
-    });
+platformBrowserDynamic().bootstrapModule(AppModule);
 

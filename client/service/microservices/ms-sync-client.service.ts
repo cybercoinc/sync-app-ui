@@ -5,15 +5,18 @@ import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 import {Inject} from "@angular/core";
 import {AuthService} from "../auth.service";
+import {ConfigService} from "../config.service";
 
 export class MsSyncClientService extends MsClientService {
-
     constructor(@Inject(Http) protected Http: Http,
                 @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
-                @Inject(Router) protected router: Router, @Inject(AuthService) protected AuthService: AuthService) {
+                @Inject(Router) protected router: Router,
+                @Inject(AuthService) protected AuthService: AuthService,
+                @Inject(ConfigService) protected ConfigService: ConfigService,
+    ) {
         super(Http, PendingRequestsService, router, AuthService);
 
-        this.url = this.getServiceUrl('ms-sync');
+        this.url = this.ConfigService.getServiceUrl('ms-sync');
     }
 
     getLastPipeSyncSessions(pipeId: number, onlyWithChanges: boolean): Promise<SyncSession[]> {

@@ -7,33 +7,32 @@ import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.s
 
 import {Project, ProjectPipe} from 'client/entities/entities';
 import {PIPE_STATUS_ACTIVE, PIPE_STATUS_DISABLED} from 'client/entities/entities';
+import {BootstrapService} from "client/service/bootstrap.service"
 
 @Injectable()
 export class PipeConnectionService implements Resolve<{}> {
 
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected MsSyncClientService: MsSyncClientService,
+                protected BootstrapService: BootstrapService,
                 protected AuthService: AuthService) {
     }
 
-    /**
-     * @param route
-     * @param state
-     * @return {Promise<{}>}
-     */
+
     resolve(route: ActivatedRouteSnapshot,
             state: RouterStateSnapshot): Promise<any> {
 
         let projectId = +route.params['project_id'];
 
+        console.log('start pipe connection resolver');
+
         // todo may double /me request. check it later
-        return this.AuthService.getAuthUser()
-            .then(authUser => {
+        return this.BootstrapService.load()
+            .then(() => {
                 return Promise.all([
                     this.getProject(projectId),
                     this.getPipesList(projectId)
                 ]);
-
             });
     }
 
