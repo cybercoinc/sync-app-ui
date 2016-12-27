@@ -37,6 +37,7 @@ import {DeleteProjectComponent} from "./delete-project/delete-project.component"
 import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-tasks.component";
 import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
 import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
+import {PipeDeleteComponent} from "./edit-project/components/shared/pipe-delete/pipe-delete.component";
 
 @NgModule({
     imports: [
@@ -76,6 +77,8 @@ import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks
         PipeSettingsPrivateComponent,
         PipeSettingsPublicComponent,
         PipeSettingsComponent,
+
+        PipeDeleteComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA

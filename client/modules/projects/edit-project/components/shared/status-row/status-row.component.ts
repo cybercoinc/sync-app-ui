@@ -1,6 +1,5 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {PipeConnectionService} from "client/service/pipe-connection.service";
-import {Router} from "@angular/router";
 
 @Component({
     selector: 'status-row',
@@ -12,8 +11,7 @@ import {Router} from "@angular/router";
 })
 export class StatusRowComponent implements OnInit {
 
-    constructor(protected PipeConnectionService: PipeConnectionService,
-                private router: Router) {
+    constructor(protected PipeConnectionService: PipeConnectionService) {
     }
 
     ngOnInit() {
@@ -22,21 +20,4 @@ export class StatusRowComponent implements OnInit {
 
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
     protected pipesListObj;
-
-    protected deleteConfirmationIsVisible: boolean = false;
-
-    hideDeleteConfirmation() {
-        this.deleteConfirmationIsVisible = false;
-    }
-
-    showDeleteConfirmation() {
-        this.deleteConfirmationIsVisible = true;
-    }
-
-    deletePipe(pipeId: number) {
-        return this.PipeConnectionService.deletePipe(pipeId)
-            .then(result => {
-                return this.router.navigate(['projects']);
-            })
-    }
 }
