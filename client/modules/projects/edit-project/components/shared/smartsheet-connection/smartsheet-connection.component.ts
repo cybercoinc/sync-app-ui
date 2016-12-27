@@ -4,9 +4,9 @@ import {AuthService} from 'client/service/auth.service';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
 import {Router, ActivatedRoute} from '@angular/router';
-import {Config} from 'client/config';
 import {SmartsheetSheet} from 'client/entities/entities';
 import {PendingRequestsService} from "client/service/pending-requests.service";
+import {ConfigService} from "client/service/config.service";
 
 @Component({
     selector: 'smartsheet-connection',
@@ -22,6 +22,7 @@ export class SmartsheetConnectionComponent implements OnInit {
                 protected PipeConnectionService: PipeConnectionService,
                 protected PendingRequestsService: PendingRequestsService,
                 private route: ActivatedRoute,
+                private ConfigService: ConfigService,
                 private router: Router) {
     }
 
@@ -125,7 +126,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(workspaceId => {
                 // create new sheet inside workspace
                 return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
-                    project.id, workspaceId, Config.getEnvironmentVariable('SM_PROJECT_TEMPLATE_ID'), newSheetName
+                    project.id, workspaceId, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
                 );
             })
             .then(createdSheetObj => {
