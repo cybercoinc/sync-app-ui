@@ -62,7 +62,7 @@ export class SmartsheetConnectionComponent implements OnInit {
     }
 
     cancel() {
-        this.haveExistingSheet = false;
+        this.haveExistingSheet = undefined;
         this.selectedSheet = null;
         this.columnsMatchingIsVisible = false;
     }
@@ -108,6 +108,8 @@ export class SmartsheetConnectionComponent implements OnInit {
         if (this.PendingRequestsService.hasPendingRequest) {
             return false;
         }
+
+        this.setExistingSheetParam(false);
 
         let project = this.PipeConnectionService.project;
 

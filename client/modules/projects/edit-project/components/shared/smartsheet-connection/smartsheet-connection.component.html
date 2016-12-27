@@ -5,9 +5,9 @@
                 schedule?</h5>
         </div>
 
-        <div class="col-xs-6 col-xs-offset-4" *ngIf="!haveExistingSheet">
-            <a class="btn btn-primary" (click)="setExistingSheetParam(true)">Yes</a>
-            <a class="btn btn-primary" (click)="createNewSheetWithWorkspace()">No</a>
+        <div class="col-xs-6 col-xs-offset-4">
+            <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"  (click)="setExistingSheetParam(true)">Yes</button>
+            <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined" (click)="createNewSheetWithWorkspace()">No</button>
         </div>
 
         <section *ngIf="haveExistingSheet">
