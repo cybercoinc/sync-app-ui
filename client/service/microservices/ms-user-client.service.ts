@@ -13,9 +13,9 @@ export class MsUserClientService extends MsClientService {
                 @Inject(AuthService) protected AuthService: AuthService,
                 @Inject(ConfigService) protected ConfigService: ConfigService,
     ) {
-        super(Http, PendingRequestsService, router, AuthService);
+        super(Http, PendingRequestsService, router, AuthService, ConfigService);
 
-        this.url = this.ConfigService.getServiceUrl('ms-user');
+        this.msName = 'ms-user';
     }
 
     getCompany(userId): Promise<any> {

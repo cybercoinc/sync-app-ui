@@ -1,11 +1,10 @@
 import {Routes, RouterModule} from '@angular/router';
-import {AuthService} from 'client/service/auth.service';
 import {AuthGuardService} from 'client/service/auth-guard.service';
-
 import {BillingComponent} from './billing.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {LicensesComponent} from './licenses/licenses.component';
 import {InfoComponent} from "./info/Info.component";
+import {BootstrapService} from "client/service/bootstrap.service";
 
 
 
@@ -14,7 +13,7 @@ export const routes: Routes = [
         component: BillingComponent,
         path: 'billing',
         resolve: {
-            authUser: AuthService
+            bootstrap: BootstrapService
         },
         canActivate: [AuthGuardService],
         children: [

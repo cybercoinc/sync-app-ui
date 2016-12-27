@@ -24,9 +24,7 @@ export class PipeConnectionService implements Resolve<{}> {
 
         let projectId = +route.params['project_id'];
 
-        console.log('start pipe connection resolver');
-
-        // todo may double /me request. check it later
+        //todo can't specify resolvers order. child loads first but need bootstrap service to start with
         return this.BootstrapService.load()
             .then(() => {
                 return Promise.all([

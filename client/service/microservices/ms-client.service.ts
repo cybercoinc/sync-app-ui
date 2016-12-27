@@ -1,37 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
-// import {Config} from 'client/config';
-
 import 'rxjs/add/operator/toPromise';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../auth.service";
+import {ConfigService} from "../config.service";
 
 @Injectable()
 export class MsClientService {
-    url: string;
-    services: [{}] = window['services']; // todo move this to root route resolver
+    msName: string;
 
     constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService,
-                protected router: Router, protected AuthService: AuthService) {
+                protected router: Router, protected AuthService: AuthService, protected ConfigService: ConfigService) {
     }
-
-    // getServiceUrl(serviceName: string) {
-    //     let url = '';
-    //
-    //     this.services.forEach(function (service: {category: string, name: string, value: {url: string}}) {
-    //         if (service.category === 'services' && service.name === serviceName) {
-    //             url = service.value.url;
-    //             return;
-    //         }
-    //     });
-    //
-    //     if (!url) {
-    //         throw new Error('no url for ' + serviceName);
-    //     }
-    //
-    //     return url;
-    // }
 
     /**
      * Make http call to microservice.
@@ -50,7 +31,9 @@ export class MsClientService {
 
         this.PendingRequestsService.hasPendingRequest = true;
 
-        console.log('make ms call', this.url, action);
+        let url = this.ConfigService.getServiceUrl(this.msName);
+
+        console.log('make ms call', url, action);
 
         if (method === 'GET' || method === 'DELETE') {
             params = new URLSearchParams();
@@ -79,7 +62,7 @@ export class MsClientService {
             withCredentials: true
         });
 
-        return this.Http.request(this.url + action, requestOptions)
+        return this.Http.request(url + action, requestOptions)
             .toPromise()
             .then(response => {
                 this.PendingRequestsService.hasPendingRequest = false;
@@ -114,8 +97,6 @@ export class MsClientService {
             Promise.reject(new Error('not authorized'));
 
             this.router.navigate(['/auth', 'procore']);
-
-            // return window.location.href = '/#/auth/procore'; // todo use app.router here
         }
 
         return Promise.reject(response.message || response);
@@ -144,7 +125,4 @@ export class MsClientService {
             idsList
         );
     }
-
-
-
 }
