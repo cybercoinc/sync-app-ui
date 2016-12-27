@@ -16,8 +16,6 @@ export class AuthService {
 
     getAuthUser(): Promise<User> {
         return new Promise((resolve, reject) => {
-            console.log('start auth resolve');
-
             if (this.authUser && this.authTokenId) {
                 return resolve(this.authUser)
             }

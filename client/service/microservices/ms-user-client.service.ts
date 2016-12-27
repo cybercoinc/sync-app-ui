@@ -62,10 +62,10 @@ export class MsUserClientService extends MsClientService {
     }
 
     getProcoreAuthLink() {
-        return this.url + 'auth/procore';
+        return this.ConfigService.getServiceUrl(this.msName) + 'auth/procore';
     }
 
     getSmartsheetAuthLink() {
-        return this.url + 'auth/smartsheet';
+        return this.ConfigService.getServiceUrl(this.msName) + 'auth/smartsheet';
     }
 }

@@ -12,8 +12,6 @@ export class ConfigService {
 
     load() {
         return new Promise((resolve, reject) => {
-            console.log('start config resolve');
-
             if (!this.configs) {
                 let requestOptions = new RequestOptions({
                     headers: new Headers({
