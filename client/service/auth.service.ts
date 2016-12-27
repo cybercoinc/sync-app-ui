@@ -2,12 +2,13 @@ import {Injectable} from "@angular/core";
 import {Router} from '@angular/router';
 import {User} from 'client/entities/entities';
 import {Headers, Http, RequestOptions} from '@angular/http';
+import {ConfigService} from "./config.service";
 
 
 @Injectable()
 export class AuthService {
 
-    constructor(protected router: Router, protected Http: Http) {
+    constructor(protected router: Router, protected Http: Http, protected ConfigService: ConfigService) {
     }
 
     authUser: User = null;
@@ -53,7 +54,7 @@ export class AuthService {
             withCredentials: true
         });
 
-        return this.Http.request('http://localhost:3002' + '/me', requestOptions) // todo hardcoded url
+        return this.Http.request(this.ConfigService.getServiceUrl('ms-user') + 'me', requestOptions)
             .toPromise()
             .then(response => {
                 let resObj = response.json();
