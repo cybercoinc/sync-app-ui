@@ -39,18 +39,18 @@ app.get('/configs', (req, res, next) => {
 
 // catch 404 and forward to error handler
 app.use(function (req: express.Request, res: express.Response, next) {
-    let err = new Error("Not Found");
-    next(err);
+    res.status(404).json({message: 'Not Found'});
 });
 
 // production error handler
 // no stacktrace leaked to user
 app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
-    res.status(err.status || 500);
-    res.json({
-        error: {},
-        message: err.message
-    });
+    let message = err.response || err.message || 'Something broke!';
+    res.status(err.status || 500)
+        .json({
+            'error': {},
+            'message': message
+        });
 });
 
 export {app}
