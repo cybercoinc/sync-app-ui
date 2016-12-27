@@ -32,16 +32,16 @@ app.get('/configs', function (req, res, next) {
 });
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error("Not Found");
-    next(err);
+    res.status(404).json({ message: 'Not Found' });
 });
 // production error handler
 // no stacktrace leaked to user
 app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.json({
-        error: {},
-        message: err.message
+    var message = err.response || err.message || 'Something broke!';
+    res.status(err.status || 500)
+        .json({
+        'error': {},
+        'message': message
     });
 });
 //# sourceMappingURL=app.js.map
