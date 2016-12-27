@@ -1,8 +1,8 @@
 .idea
 node_modules
-client/*.js
-client/*.map
-server/*.js
-server/*.map
+client/**/*.js
+client/**/*.js.map
+server/**/*.js
+server/**/*.map
 config/local.json
 typings
