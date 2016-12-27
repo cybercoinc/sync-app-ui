@@ -139,7 +139,7 @@ select > option:disabled {
 }
 
 .clickable-row:hover {
-    background-color: #F7F7F7;
+    background-color: #8591a0;
 }
 
 .project-row {
@@ -216,8 +216,10 @@ select > option:disabled {
 
 .error-row {
     padding: 5px 10px;
-    background-color: #FFCBCC;
-    border: 1px solid red;
-    border-radius: 2px;
-    color: #000;
+    background-color: #ff4f3e;
+    color: #ffffff;
+    font-size: 14px;
+}
+.error-row button.close {
+    color: #ffffff;
 }

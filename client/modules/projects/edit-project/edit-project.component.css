@@ -71,7 +71,8 @@
 }
 
 .pipe-step-active {
-    background-color: #F7F7F7;
+    background-color: #8591a0;
+    color: #ffffff;
 }
 
 .pipe-status-active i {
