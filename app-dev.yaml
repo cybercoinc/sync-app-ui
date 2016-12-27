@@ -2,6 +2,9 @@ service: ms-app-ui
 runtime: nodejs
 env: flex
 
+manual_scaling:
+  instances: 1
+
 env_variables:
   NODE_ENV: dev
 

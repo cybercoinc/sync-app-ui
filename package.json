@@ -13,7 +13,7 @@
     "bundle": "node tools/builder.js",
     "bundle:prod": "node tools/builder.js --prod",
     "devinstall": "typings install && tsc -p ./server && tsc -p ./client",
-    "compile": "tsc -p ./client && tsc -p ./server || true"
+    "compile": "tsc -p ./client && tsc -p ./server"
   },
   "engines": {
     "node": "^6.6.0"
