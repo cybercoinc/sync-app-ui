@@ -1,4 +1,4 @@
-service: ms-item
+service: ms-app-ui
 runtime: nodejs
 env: flex
 
