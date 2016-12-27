@@ -4,4 +4,5 @@ client/*.js
 client/*.map
 server/*.js
 server/*.map
+config/local.json
 typings
