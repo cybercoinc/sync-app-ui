@@ -57,7 +57,7 @@ export class ColumnsMatchingComponent implements OnInit {
         for (let prop in this.model) {
             if (this.model.hasOwnProperty(prop)) {
                 // if not in current dropdown
-                if (prop !== prColumn.slug && this.model[prop] === smColumn.id) {
+                if (prop !== prColumn.slug && Number(this.model[prop]) === Number(smColumn.id)) {
                     notAvailable = true;
                 } else if (smColumn.type !== prColumn.type) {
                     // if type is not allowed

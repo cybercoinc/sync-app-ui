@@ -31,9 +31,9 @@
                     <div class="col-xs-10">
                         <select [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug" required>
                             <option value="">- Smartsheet column -</option>
-                            <option *ngFor="let column of smColumns" [value]="column.id"
-                                    [disabled]="isNotAvailable(column, procoreTodoColumn)">
-                                {{column.title}}
+                            <option *ngFor="let smColumn of smColumns" [value]="smColumn.id"
+                                    [disabled]="isNotAvailable(smColumn, procoreTodoColumn)">
+                                {{smColumn.title}}
                             </option>
                         </select>
                     </div>
