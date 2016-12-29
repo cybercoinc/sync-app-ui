@@ -4,6 +4,7 @@ import { MaterialModule } from "@angular/material";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SearchPipe } from "./search.pipe";
+import { DropDownItemComponent } from "./item/drop-down-item.component";
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { SearchPipe } from "./search.pipe";
     exports: [DropDownComponent],
     declarations: [
         DropDownComponent,
+        DropDownItemComponent,
         SearchPipe
     ],
     bootstrap: [DropDownComponent],

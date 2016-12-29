@@ -1,6 +1,6 @@
-import { Component, ElementRef, Input, OnInit, forwardRef, ViewChild, OnChanges } from "@angular/core";
+import { Component, ElementRef, Input, OnInit, forwardRef, ViewChild } from "@angular/core";
 import { DropDownMixin } from "./drop-down.mixin";
-import { DropDownItemComponent } from "./drop-down-item.component";
+import { DropDownItemComponent } from "./item/drop-down-item.component";
 import { AuthService } from "client/service/auth.service";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { noop } from "rxjs/util/noop";
@@ -23,7 +23,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 export class DropDownComponent implements OnInit, ControlValueAccessor {
     @Input('service')      service:      DropDownMixin;
     @Input('searchEnable') searchEnable: boolean                      = false;
-    @Input('items')        items:        Array<DropDownItemComponent> = [];
+    @Input('items')        items                                      = [];
     @Input('placeholder')  placeholder:  string                       = 'Select Item';
     @Input('multiple')     multiple:     boolean                      = false;
 
@@ -32,14 +32,13 @@ export class DropDownComponent implements OnInit, ControlValueAccessor {
     private _onChangeCallback:  (value: any) => void = noop;
     private _onTouchedCallback: (value: any) => void = noop;
 
-    selected:   any     = null;
-    isVisible:  boolean = false;
+    selected:   DropDownItemComponent = null;
+    isVisible:  boolean               = false;
     searchText: string;
 
     constructor(private _eref: ElementRef, private user: AuthService) {}
 
     ngOnInit(): void {
-
         if (this.service) {
             this.service.getData(this.user.authTokenId);
         }
@@ -68,7 +67,10 @@ export class DropDownComponent implements OnInit, ControlValueAccessor {
     }
 
     public get placeholderDisplay(): string {
-        return this.selected || this.placeholder;
+        if (this.selected)
+            return this.selected.value;
+
+        return this.placeholder;
     }
 
     onClick(event) {

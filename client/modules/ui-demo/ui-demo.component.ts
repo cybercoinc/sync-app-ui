@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { DropDownItemComponent } from "../drop-down/item/drop-down-item.component";
 
 @Component({
     template: `
@@ -10,9 +11,11 @@ import { Component, OnInit } from "@angular/core";
 `
 })
 export class UiDemoComponent implements OnInit {
-    items;
+    items = [];
 
     ngOnInit(): void {
-        this.items = [1,2,3,4,5,6,7,8,9,10];
+        for (let i = 1; i < 10; i++) {
+            this.items.push(i);
+        }
     }
 }

@@ -20,10 +20,6 @@
     cursor: pointer;
 }
 
-:host ul li:hover {
-    background-color: #f1f1f1;
-}
-
 :host button {
     width: 100%;
 }

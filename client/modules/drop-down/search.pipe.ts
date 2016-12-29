@@ -1,5 +1,4 @@
 import { Pipe, Injectable, PipeTransform } from "@angular/core";
-import { DropDownItemComponent } from "./drop-down-item.component";
 
 @Pipe({
     name: 'search'
