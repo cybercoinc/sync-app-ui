@@ -3,6 +3,7 @@ import * as express from "express";
 import {join} from "path";
 import {json, urlencoded} from "body-parser";
 let config = require('config');
+let cors = require('cors');
 
 
 const app: express.Application = express();
@@ -13,6 +14,18 @@ app.use(json());
 app.use(urlencoded({extended: true}));
 
 app.use('/client', express.static(join(__dirname, '../client')));
+
+let originsWhitelist = [
+    'http://localhost:4500',
+];
+let corsOptions = {
+    origin: function(origin, callback){
+        let isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+        callback(null, isWhitelisted);
+    },
+    credentials:true
+};
+app.use(cors(corsOptions));
 
 // error handlers
 // development error handler
@@ -35,6 +48,17 @@ app.get('/configs', (req, res, next) => {
     return res.json({
         result: config
     })
+});
+
+app.get('/_status', function (req, res, next) {
+    let response = {
+        status: "Ok",
+        message: "",
+        details: [],
+        config: config.util.getConfigSources()
+    };
+
+    return res.json(response);
 });
 
 // catch 404 and forward to error handler
