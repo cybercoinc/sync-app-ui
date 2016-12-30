@@ -17,6 +17,9 @@ app.use('/client', express.static(join(__dirname, '../client')));
 
 let originsWhitelist = [
     'http://localhost:4500',
+    'https://sc-dot-app-status-page.appspot-preview.com',
+    'https://sc-dev-dot-app-status-page.appspot-preview.com',
+    'https://sc-qa-dot-app-status-page.appspot-preview.com',
 ];
 let corsOptions = {
     origin: function(origin, callback){
@@ -50,7 +53,7 @@ app.get('/configs', (req, res, next) => {
     })
 });
 
-app.get('/_status', function (req, res, next) {
+app.get('/_ah/health', function (req, res, next) {
     let response = {
         status: "Ok",
         message: "",
