@@ -56,7 +56,7 @@ app.get('/configs', (req, res, next) => {
 app.get('/_ah/health', function (req, res, next) {
     let response = {
         status: "Ok",
-        message: "",
+        message: "Microservice is available",
         details: [],
         config: config.util.getConfigSources()
     };
