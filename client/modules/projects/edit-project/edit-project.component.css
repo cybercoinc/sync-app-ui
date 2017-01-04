@@ -36,7 +36,6 @@
 
 .pipe-description {
     font-size: 12px;
-    color: grey;
     padding: 0px 20px 10px;
 }
 
@@ -75,6 +74,7 @@
     color: #ffffff;
 }
 
+/*
 .pipe-status-active i {
     color: #2A8039;
 }
@@ -86,6 +86,7 @@
 .pipe-status-inactive i {
     color: #B7B7B7;
 }
+*/
 
 @media only screen and (min-width: 768px) {
     .pipes-wizard-container {

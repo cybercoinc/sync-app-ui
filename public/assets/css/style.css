@@ -139,7 +139,7 @@ select > option:disabled {
 }
 
 .clickable-row:hover {
-    background-color: #8591a0;
+    background-color: #d0d5dc;
 }
 
 .project-row {
