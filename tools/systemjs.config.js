@@ -40,6 +40,7 @@ var isPublic = typeof window != "undefined";
                 format: 'cjs',
                 main: 'material.umd.js'
             },
+            "/cyberco-material-ng2": {"defaultExtension": "js"}
         }
     });
 })(this);

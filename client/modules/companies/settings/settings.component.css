@@ -8,6 +8,18 @@ md-card {
 font-size: 1.3em;
 }
 
+.active-user div {
+    float: left;
+}
+
+.active-user button {
+    float: none;
+}
+
+.current-user {
+    padding: 10px;
+}
+
 /* Style Select Field */
 .dem1k-md-dd select {
     font-family: inherit;

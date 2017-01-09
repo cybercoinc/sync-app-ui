@@ -1,57 +1,39 @@
 <md-card *ngIf="company" class="col-xs-12 company_settings_card">
     <md-card-subtitle><h1>{{company.name}}</h1></md-card-subtitle>
     <md-card-content>
-
         <div class="row">
             <div class="col-xs-12" >
                 <h3 style="font-size: 1.3em">Billing</h3>
                 <div class="row" *ngIf="company.pbr!= undefined">
-                    <div class="col-md-6">
-                        <div class="col-md-10">
-                            {{company.pbr.first_name}} {{company.pbr.last_name}} ({{company.pbr.email}})
+                    <div class="col-md-6 active-user">
+                        <div class="col-md-5">
+                            <div class="current-user" *ngIf="!showDropDown">{{currentUser}}</div>
+                            <drop-down *ngIf="showDropDown" [items]="ddUsersList" [(ngModel)]="pbrId"></drop-down>
                         </div>
-                        <div class="col-md-2">
-                            <a class="btn btn-success" (click)="showEditPBR()">Edit</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="col-md-10">
-                            <div class="dem1k-md-dd" *ngIf="showPbrDropDown">
-                                <div class="mdl-selectfield">
-                                    <select name="pbr" (change)="changePbrVal($event.target.value) "
-                                            class="browser-default">
-                                        <option *ngFor="let user of usersList" [value]="user.id">
-                                            {{user.first_name}} {{user.last_name}}({{user.email}})
-                                        </option>
-                                    </select>
-                                </div>
+                        <div class="col-md-7">
+                            <a class="btn btn-success" *ngIf="!showDropDown" (click)="showEditPBR()">Edit</a>
 
+                            <div class="col-md-12" *ngIf="showDropDown">
+                                <button type="button" class="btn btn-success col-md-2" (click)="saveUser()">Save</button>
+                                <button type="button" class="btn btn-danger col-md-2" (click)="cancel()">Cancel</button>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <a *ngIf="isPbrIdChanged" class="btn btn-success" (click)=savePbr()>Save</a>
                         </div>
                     </div>
                 </div>
                 <div class="row" *ngIf="company.pbr== undefined">
                     <p class="text-warn">PBR error</p>
                 </div>
-
-
             </div>
         </div>
         <div class="row">
-
             <div class="col-xs-12" *ngIf="usersList">
                 <h3 style="font-size: 1.3em">Users</h3>
                 <ul>
-                    <li *ngFor="let user of usersList">{{user.first_name}} {{user.last_name}}({{user.email}})</li>
+                    <li *ngFor="let user of usersList">{{user.first_name}} {{user.last_name}} ({{user.email}})</li>
                 </ul>
-
             </div>
         </div>
         <div class="row" *ngIf="!usersList">
-
             <div class=" col-xs-12">
                 <span>No users for this company yet</span>
             </div>

@@ -25,7 +25,6 @@ import {BillingModule} from 'client/modules/billing/billing.module';
 import {CompaniesModule} from 'client/modules/companies/companies.module';
 import {PendingRequestsService} from "./service/pending-requests.service";
 import {LoaderProgressBarComponent} from "./components/shared/loader.component";
-import { UiDemoModule } from "./modules/ui-demo/ui-demo.module";
 import {ConfigService} from "./service/config.service";
 import {BootstrapService} from "client/service/bootstrap.service";
 
@@ -40,7 +39,6 @@ import {BootstrapService} from "client/service/bootstrap.service";
         ProjectsModule,
         BillingModule,
         CompaniesModule,
-        UiDemoModule,
 
         routing,
     ],
