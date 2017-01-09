@@ -16,7 +16,7 @@ export class AuthService {
 
     getAuthUser(): Promise<User> {
         return new Promise((resolve, reject) => {
-            if (this.authUser && this.authTokenId) {
+            if (this.authUser) {
                 return resolve(this.authUser)
             }
 
@@ -38,6 +38,7 @@ export class AuthService {
 
                     return resolve(this.authUser);
                 })
+                .catch(err => reject(err));
         });
     }
 
