@@ -24,8 +24,8 @@ pipelines:
 
             # Deploy app
             - gcloud app deploy app-dev.yaml --version=master --verbosity=debug
-
-    deploy-qa:
+  branches:
+    qa:
       - step:
           script:
             - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
