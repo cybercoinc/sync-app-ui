@@ -25,7 +25,7 @@ var isPublic = typeof window != "undefined";
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             // other libraries
             'rxjs': 'npm:rxjs',
-            '@angular/material': 'npm:@angular/material',
+            '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
             'cyberco-material-ng2': 'npm:cyberco-material-ng2'
         },
         // packages tells the System loader how to load when no filename and/or no extension
@@ -36,10 +36,6 @@ var isPublic = typeof window != "undefined";
             },
             rxjs: {
                 defaultExtension: 'js'
-            },
-            '@angular/material': {
-                format: 'cjs',
-                main: 'material.umd.js'
             },
             "cyberco-material-ng2": {
                 "defaultExtension": "js"
