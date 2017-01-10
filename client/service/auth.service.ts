@@ -27,14 +27,15 @@ export class AuthService {
                     }
 
                     this.authUser = authUserResponse.user;
-                    this.authTokenId = authUserResponse.auth_token_id;
 
-                    if (this.authUser.role === 'guest') {
+                    if (this.authUser.role !== 'user') {
                         // todo https://angular.io/docs/ts/latest/guide/router.html#!#resolve-guard
 
                         this.router.navigate(['/auth', 'procore']);
                         return false;
                     }
+
+                    this.authTokenId = authUserResponse.auth_token_id;
 
                     return resolve(this.authUser);
                 })
