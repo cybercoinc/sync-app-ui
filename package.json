@@ -35,7 +35,7 @@
     "cookie-parser": "1.3.5",
     "core-js": "2.4.1",
     "cors": "2.8.1",
-    "cyberco-material-ng2": "1.0.4",
+    "cyberco-material-ng2": "1.0.5",
     "debug": "2.4.4",
     "express": "4.13.4",
     "hammerjs": "2.0.8",
