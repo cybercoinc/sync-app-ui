@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Router} from '@angular/router';
 import {User} from 'client/entities/entities';
-import {Headers, Http, RequestOptions} from '@angular/http';
+import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import {ConfigService} from "./config.service";
 
 
@@ -28,13 +28,6 @@ export class AuthService {
 
                     this.authUser = authUserResponse.user;
 
-                    if (this.authUser.role !== 'user') {
-                        // todo https://angular.io/docs/ts/latest/guide/router.html#!#resolve-guard
-
-                        this.router.navigate(['/auth', 'procore']);
-                        return false;
-                    }
-
                     this.authTokenId = authUserResponse.auth_token_id;
 
                     return resolve(this.authUser);
@@ -48,10 +41,14 @@ export class AuthService {
             'Content-Type': 'application/json',
         });
 
+        let params = new URLSearchParams();
+        params.set('role', 'user');
+
         let requestOptions = new RequestOptions({
             headers: headers,
             method: 'GET',
-            withCredentials: true
+            withCredentials: true,
+            search: params ? params : null
         });
 
         return this.Http.request(this.ConfigService.getServiceUrl('ms-user') + 'me', requestOptions)

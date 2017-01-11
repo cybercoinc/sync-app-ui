@@ -26,7 +26,9 @@ import {CompaniesModule} from 'client/modules/companies/companies.module';
 import {PendingRequestsService} from "./service/pending-requests.service";
 import {LoaderProgressBarComponent} from "./components/shared/loader.component";
 import {ConfigService} from "./service/config.service";
-import {BootstrapService} from "client/service/bootstrap.service";
+import {RbacService} from "./service/rbac.service";
+import {AuthBootstrapService} from "./service/resolvers/auth-bootstrap.service";
+import {GuestBootstrapService} from "./service/resolvers/guest-bootstrap.service";
 
 @NgModule({
     imports: [
@@ -45,6 +47,7 @@ import {BootstrapService} from "client/service/bootstrap.service";
 
     providers: [
         AuthService,
+        RbacService,
         AuthGuardService,
         PendingRequestsService,
         MsProjectClientService,
@@ -53,7 +56,8 @@ import {BootstrapService} from "client/service/bootstrap.service";
         MsSyncClientService,
         PipeConnectionService,
         ConfigService,
-        BootstrapService
+        GuestBootstrapService,
+        AuthBootstrapService
     ],
 
     declarations: [

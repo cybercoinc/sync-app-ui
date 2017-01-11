@@ -4,7 +4,7 @@ import {BillingComponent} from './billing.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {LicensesComponent} from './licenses/licenses.component';
 import {InfoComponent} from "./info/Info.component";
-import {BootstrapService} from "client/service/bootstrap.service";
+import {AuthBootstrapService} from "../../service/resolvers/auth-bootstrap.service";
 
 
 
@@ -13,7 +13,7 @@ export const routes: Routes = [
         component: BillingComponent,
         path: 'billing',
         resolve: {
-            bootstrap: BootstrapService
+            bootstrap: AuthBootstrapService
         },
         canActivate: [AuthGuardService],
         children: [

@@ -1,11 +1,11 @@
 import {Routes, RouterModule} from '@angular/router';
-import {BootstrapService} from "client/service/bootstrap.service";
+import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
 
 export const routes: Routes = [
     {
         path: '',
         resolve: {
-            bootstrap: BootstrapService,
+            bootstrap: AuthBootstrapService,
         },
         redirectTo: 'projects',
         pathMatch: 'full'

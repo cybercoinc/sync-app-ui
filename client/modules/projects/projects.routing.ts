@@ -24,13 +24,13 @@ import {DeleteProjectComponent} from "./delete-project/delete-project.component"
 import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-tasks.component";
 import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
 import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
-import {BootstrapService} from "client/service/bootstrap.service";
+import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
 
 export const routes: Routes = [
     {
         path: 'projects',
         resolve: {
-            bootstrap: BootstrapService,
+            bootstrap: AuthBootstrapService,
         },
         canActivate: [AuthGuardService],
         children: [

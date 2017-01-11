@@ -2,14 +2,14 @@ import {Routes, RouterModule} from '@angular/router';
 import {AuthGuardService} from 'client/service/auth-guard.service';
 import {CompaniesComponent} from './companies.component';
 import {CompanySettingsComponent} from './settings/settings.component';
-import {BootstrapService} from "client/service/bootstrap.service";
+import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
 
 export const routes: Routes = [
     {
         component: CompaniesComponent,
         path: 'companies',
         resolve: {
-            bootstrap: BootstrapService
+            bootstrap: AuthBootstrapService
         },
         canActivate: [AuthGuardService],
         children: [
