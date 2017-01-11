@@ -223,3 +223,7 @@ select > option:disabled {
 .error-row button.close {
     color: #ffffff;
 }
+
+.md-floating-placeholder {
+    visibility: hidden;
+}
