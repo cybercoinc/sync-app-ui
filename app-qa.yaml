@@ -1,4 +1,4 @@
-service: ms-app-ui
+service: qa
 runtime: nodejs
 env: flex
 
