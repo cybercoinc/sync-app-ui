@@ -57,6 +57,13 @@
     background-color: #FFFFFF;
 }
 
+.pipes-list {
+    width: 298px;
+}
+
+.pipe-edit-area {
+}
+
 /*.pipes-list {
     height: 700px;
 }
@@ -91,19 +98,21 @@
 @media only screen and (min-width: 768px) {
     .pipes-wizard-container {
         display: table;
-        height: calc(100vh - 81px);
+        height: calc(100vh - 140px);
         width: 100%;
     }
 
-    .pipes-wizard-container [class*="col-"] {
+    .pipes-wizard-container > div {
         float: none;
         display: table-cell;
         vertical-align: top;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     .pipe-step-container {
         display: table;
-        height: calc(100vh - 81px);
+        height: calc(100vh - 140px);
     }
 
     .pipe-step-container [class*="col-"] {
