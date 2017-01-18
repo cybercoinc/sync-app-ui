@@ -1,0 +1,17 @@
+<div class="col-md-offset-4 col-md-4 choose-company">
+    <md-card *ngIf="companiesList">
+        <md-card-title style="font-size: 20px">
+            <p>You have access to more than one Procore company.</p>
+            <p>Please choose which one you would like to integrate with ScheduleConnector.</p>
+        </md-card-title>
+
+        <div *ngFor="let company of companiesList" class="companies-button-group">
+            <button md-raised-button color="default" (click)="getCompany(company.id)" class="companies-button">
+                {{company.name}}
+            </button>
+        </div>
+    </md-card>
+</div>
+
+
+
