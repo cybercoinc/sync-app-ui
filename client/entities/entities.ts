@@ -25,6 +25,12 @@ export class User {
     }
 }
 
+export class Company {
+    id: number;
+    name: string;
+    is_active: boolean;
+}
+
 export class SyncSession {
     id: number;
     created_at: Date;

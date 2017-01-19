@@ -84,6 +84,7 @@ body h1 {
     padding-top: 32px;
     display: inline-flex;
     vertical-align: middle;
+    padding-bottom: 0px;
 }
 
 .module-header {
