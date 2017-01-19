@@ -9,33 +9,54 @@
         <div *ngIf="me && me.role && me.role !== 'guest'">
             <div class="col-xs-12">
                 <md-card>
-                    <h5>Procore connection:</h5>
+                    <div class="connection-app-info">
+                        <div class="connection-app-overview">
+                            <h4>Procore</h4>
+                            ScheduleConnector fetch data from Procore due synchronization process.
+                        </div>
+                        <div class="connection-app-logo">
+                            <img class="img-responsive" src="/assets/img/procore-logo-black.png" />
+                        </div>
+                    </div>
 
-                    <div *ngIf="me.procore_oauth">
-                        <ul>
-                            <li>Email: {{me.procore_oauth.account_email}}</li>
-                        </ul>
-
-                        <a class="btn btn-primary" href="{{getProcoreAuthLink()}}">Refresh Procore
-                            connection</a>
+                    <div *ngIf="me.procore_oauth" style="clear:both;">
+                        <hr />
+                        <span style="font-weight: bold; color: #3d8b40;">Already Connected</span>
+                        via
+                        <span style="font-weight: bold;">{{me.procore_oauth.account_email}}</span>
+                        <a class="btn btn-primary pull-right" href="{{getProcoreAuthLink()}}">Refresh</a>
+                    </div>
+                    <div *ngIf="!me.procore_oauth" style="clear:both;">
+                        <hr />
+                        <span style="color: darkred;">Something Wrong. Please contact support.</span>
                     </div>
                 </md-card>
 
                 <md-card>
-                    <h5>Smartsheet connection:</h5>
-
-                    <div *ngIf="me.smartsheet_oauth">
-                        <ul>
-                            <li>Email: {{me.smartsheet_oauth?.account_email}}</li>
-                        </ul>
-                        <a class="btn btn-default" (click)="removeSmartsheetAuth()">Remove Smartsheet
-                            connection</a>
+                    <div class="connection-app-info">
+                        <div class="connection-app-overview">
+                            <h4>Smartsheet</h4>
+                            ScheduleConnector fetch data from Smartsheet due synchronization process.
+                        </div>
+                        <div class="connection-app-logo">
+                            <img class="img-responsive" src="/assets/img/smartsheet-logo-navy.png" />
+                        </div>
                     </div>
 
+                    <div *ngIf="me.smartsheet_oauth" style="clear:both;">
+                        <hr />
+                        <span style="font-weight: bold; color: #3d8b40;">Already Connected</span>
+                        via
+                        <span style="font-weight: bold;">{{me.smartsheet_oauth.account_email}}</span>
 
-                    <div *ngIf="!me.smartsheet_oauth">
-                        <a class="btn btn-primary"  href="{{getSmartsheetAuthLink()}}">Get Smartsheet
-                            connection</a>
+                        <a class="btn btn-warning pull-right" (click)="removeSmartsheetAuth()">Disable Connection</a>
+                    </div>
+
+                    <div *ngIf="!me.smartsheet_oauth" style="clear:both;">
+                        <hr />
+                        <a class="btn btn-primary" href="{{getSmartsheetAuthLink()}}">
+                            Get Smartsheet connection
+                        </a>
                     </div>
                 </md-card>
             </div>
