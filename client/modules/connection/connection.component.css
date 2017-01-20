@@ -1,3 +1,26 @@
 md-card {
-    margin-bottom: 5px;
+    margin-bottom: 25px;
+    width: 700px;
 }
+
+.connection-app-info {
+    display: table;
+    width: 100%;
+}
+
+.connection-app-logo {
+    display: table-cell;
+    width: 195px;
+    vertical-align: middle;
+    padding-left: 25px;
+}
+
+.connection-app-overview {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.connection-app-overview h4 {
+    margin-top: 0;
+}
+
