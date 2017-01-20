@@ -37,13 +37,16 @@ export class MsUserClientService extends MsClientService {
         });
     }
 
-    getCompaniesList(): Promise<any> {
-        return this.makeMsCall('procore/companies', 'GET');
+    getCompaniesList(userId): Promise<any> {
+        return this.makeMsCall('procore/companies', 'GET',{
+            userId: userId
+        });
     }
 
-    getAuthWithCompany(companyId) {
+    getAuthWithCompany(companyId, userId) {
         return this.makeMsCall('auth/company', 'GET', {
-            companyId: companyId
+            companyId: companyId,
+            userId: userId
         });
     }
 

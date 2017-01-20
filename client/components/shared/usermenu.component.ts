@@ -25,7 +25,7 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
             <li><a [routerLink]="['/companies/settings']"  (click)="showUserMenu = !showUserMenu;">Company Settings</a></li>
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
             <li><a [routerLink]="['/billing/licenses']" (click)="showUserMenu = !showUserMenu;">Billing Information</a></li>
-            <li><a href="javascript: void(0);"  (click)="switchCompany()">Switch Company</a></li>
+            <li><a [routerLink]="['/auth/choose-company']" (click)="showUserMenu = !showUserMenu;">Switch Company</a></li>
             <li class="divider"></li>
             <li><a href="javascript: void(0);"  (click)="logout()">Log out</a></li>
         </ul>
@@ -54,7 +54,4 @@ export class UserMenuComponent {
             .then(response => window.location.replace('/'));
     }
 
-    switchCompany() {
-
-    }
 }
