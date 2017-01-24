@@ -20,7 +20,7 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
             {{authUser?.email}}
             <i class="material-icons">arrow_drop_down</i>    
         </a>
-        <span class="company-name">{{company.name}}</span> 
+        <span class="company-name">{{company?.name}}</span> 
         <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;">
             <li><a [routerLink]="['/companies/settings']"  (click)="showUserMenu = !showUserMenu;">Company Settings</a></li>
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
