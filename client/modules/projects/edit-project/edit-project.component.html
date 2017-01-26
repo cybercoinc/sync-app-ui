@@ -2,9 +2,9 @@
     <div class="pipes-wizard-container">
 
         <!-- PIPES LIST -->
-        <div class="col-xs-3 col-lg-2 pipes-list right-lined">
+        <div class="pipes-list right-lined">
 
-            <div class="row bottom-lined clickable-row">
+            <div class="row bottom-lined">
                 <div class="col-xs-12">
                     <div class="pipe-header-large">{{project.name}}</div>
                 </div>
@@ -12,23 +12,23 @@
 
             <pipe-row status="{{pipesListObj.public_todos? pipesListObj.public_todos.status : 'inactive'}}"
                       router-link="pipe-public-todo" material-icon="event_available" pipe-title="Public Todos"
-                      description="Description."></pipe-row>
+                      description="Procore public Todos synchronization."></pipe-row>
 
             <pipe-row status="{{pipesListObj.private_todos? pipesListObj.private_todos.status : 'inactive'}}"
                       router-link="pipe-private-todo" material-icon="verified_user" pipe-title="Private Todos"
-                      description="Another description for pipe here."></pipe-row>
+                      description="Procore private Todos synchronization."></pipe-row>
 
             <pipe-row status="{{pipesListObj.tasks? pipesListObj.tasks.status : 'inactive'}}"
                       router-link="pipe-tasks" material-icon="event" pipe-title="Tasks"
                       description="Procore Schedule Tasks synchronization."></pipe-row>
 
             <pipe-row material-icon="settings" router-link="settings" pipe-title="General Settings"
-                      description="Description for project settings."></pipe-row>
+                      description="Project settings."></pipe-row>
 
         </div>
         <!-- end PIPES LIST -->
 
-        <div class="col-xs-9 col-lg-10">
+        <div class="pipe-edit-area">
             <router-outlet></router-outlet>
         </div>
     </div>

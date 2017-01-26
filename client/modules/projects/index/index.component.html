@@ -3,7 +3,15 @@
     <div class="row module-header">
         <div class="col-xs-12">
             <div class="module-name">Projects</div>
-            <a [routerLink]="['create-project']" class="btn btn-success">create project</a>
+            <a [routerLink]="['create-project']"
+               [ngClass]="{'disabled': !this.AuthService.authUser.smartsheet_oauth }"
+               class="btn btn-success">create project</a>
+            <span *ngIf="!this.AuthService.authUser.smartsheet_oauth">
+                <span style="padding: 0 10px 0 40px;">
+                    Before creating project, you have to authorize with SmartSheet
+                </span>
+                <a [routerLink]="['/connection']" class="btn btn-success">go to connections</a>
+            </span>
         </div>
     </div>
 

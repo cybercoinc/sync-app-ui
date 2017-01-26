@@ -279,4 +279,15 @@ export class MsProjectClientService extends MsClientService {
             }
         );
     }
+
+    setPbrUser(userId: number, projectId: number): Promise<User> {
+        return this.makeMsCall(
+            'set-pbr-user',
+            'POST',
+            {
+                user_id:    userId,
+                project_id: projectId
+            }
+        );
+    }
 }

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Router} from '@angular/router';
-import {User} from 'client/entities/entities';
+import {User, Company} from 'client/entities/entities';
 import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
 import {ConfigService} from "./config.service";
 
@@ -13,6 +13,7 @@ export class AuthService {
 
     authUser: User = null;
     authTokenId: number = null;
+    company: Company = null;
 
     getAuthUser(): Promise<User> {
         return new Promise((resolve, reject) => {
@@ -29,6 +30,8 @@ export class AuthService {
                     this.authUser = authUserResponse.user;
 
                     this.authTokenId = authUserResponse.auth_token_id;
+
+                    this.company = authUserResponse.company;
 
                     return resolve(this.authUser);
                 })

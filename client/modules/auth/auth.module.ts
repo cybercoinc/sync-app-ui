@@ -6,11 +6,19 @@ import {AuthProcoreComponent} from './auth-procore/auth-procore.component';
 import {AuthComponent} from './auth.component';
 
 import {MaterialModule} from '@angular/material';
+import {ChooseCompanyComponent} from "./choose-company/choose-company.component";
+import {BrowserModule} from "@angular/platform-browser";
+import {AuthService} from "client/service/auth.service";
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         routing,
+        BrowserModule,
+    ],
+
+    providers: [
+        AuthService
     ],
 
     exports: [],
@@ -18,6 +26,7 @@ import {MaterialModule} from '@angular/material';
     declarations: [
         AuthDefaultComponent,
         AuthProcoreComponent,
+        ChooseCompanyComponent,
         AuthComponent
     ],
 

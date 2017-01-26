@@ -51,6 +51,24 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <b>Deleted ({{formattedItemChangesObj.deleted_one.length}}):</b>
+                    <ul class="item-changes-ul">
+                        <li *ngFor="let itemChangesObj of formattedItemChangesObj.deleted_one">
+                            <section *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.deleted_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
+                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
+                                                  [item-changes]="itemChangesObj"></item-changes-row>
+                            </section>
+                        </li>
+                    </ul>
+                    <div *ngIf="formattedItemChangesObj.deleted_one.length > ITEM_CHANGES_DEFAULT_NUM">
+                        <a (click)="viewAll()" *ngIf="itemChangesToShowNumber">View all</a>
+                        <a (click)="viewLess()" *ngIf="!itemChangesToShowNumber">View less</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="col-xs-6">

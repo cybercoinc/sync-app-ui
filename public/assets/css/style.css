@@ -84,6 +84,7 @@ body h1 {
     padding-top: 32px;
     display: inline-flex;
     vertical-align: middle;
+    padding-bottom: 0px;
 }
 
 .module-header {
@@ -226,4 +227,20 @@ select > option:disabled {
 
 .md-floating-placeholder {
     visibility: hidden;
+}
+
+.choose-company {
+    margin-top: 2%;
+    font-size: 17px;
+}
+
+.companies-button-group {
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.companies-button {
+    width: 100%;
+    height: 5%;
 }

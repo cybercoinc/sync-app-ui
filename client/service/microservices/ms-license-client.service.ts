@@ -40,25 +40,27 @@ export class MsLicenseClientService extends MsClientService {
     }
 
     getCreditCard(userId): Promise<any> {
-        return this.makeMsCall('credit-card', 'GET', {user_id: userId});
+        return this.makeMsCall('billing/get-credit-card', 'GET', {user_id: userId});
     }
 
-    createCustomer(userId, creditCard: CreditCard): Promise<any> {
+    createCreditCard(userId, creditCard: CreditCard): Promise<any> {
         return this.makeMsCall(
-            'create-customer',
+            'billing/create-credit-card',
             'POST',
             {
                 user_id: userId,
-                customerName: creditCard.name,
-                number: creditCard.encrypted_number,
-                expMonth: creditCard.expMonth,
-                expYear: creditCard.expYear,
-                csc: creditCard.encrypted_csc,
-                customer_name: creditCard.customerName,
-                street: creditCard.street,
-                city: creditCard.city,
-                state: creditCard.state,
-                zip: creditCard.zip,
+                credit_card: {
+                    customerName: creditCard.name,
+                    number: creditCard.encrypted_number,
+                    expMonth: creditCard.expMonth,
+                    expYear: creditCard.expYear,
+                    csc: creditCard.encrypted_csc,
+                    customer_name: creditCard.customerName,
+                    street: creditCard.street,
+                    city: creditCard.city,
+                    state: creditCard.state,
+                    zip: creditCard.zip,
+                }
             }
         );
     }
@@ -73,12 +75,11 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
-    removeCard(userId, cardId): Promise<any> {
+    removeCard(cardId): Promise<any> {
         return this.makeMsCall(
-            'remove-customer',
-            'POST',
+            'billing/remove-credit-card',
+            'DELETE',
             {
-                user_id: userId,
                 card_id: cardId
             }
         );

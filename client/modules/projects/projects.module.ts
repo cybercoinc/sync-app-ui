@@ -38,12 +38,14 @@ import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-
 import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
 import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
 import {PipeDeleteComponent} from "./edit-project/components/shared/pipe-delete/pipe-delete.component";
+import {CybercoMaterialNg2Module} from "cyberco-material-ng2/cyberco-material-ng2";
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
         FormsModule,
+        CybercoMaterialNg2Module,
 
         routing,
     ],
