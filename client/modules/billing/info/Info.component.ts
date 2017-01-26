@@ -38,7 +38,7 @@ export class InfoComponent {
     }
 
     clearCard() {
-        this.MsLicenseClientService.removeCard(this.AuthService.authUser.id, this.dialogComponent.creditCard.id).then(response => {
+        this.MsLicenseClientService.removeCard(this.dialogComponent.creditCard.id).then(response => {
             this.dialogComponent.creditCard = new CreditCard();
         });
     }

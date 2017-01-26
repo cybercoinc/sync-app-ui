@@ -79,4 +79,16 @@ export class MsUserClientService extends MsClientService {
     getSmartsheetAuthLink() {
         return this.ConfigService.getServiceUrl(this.msName) + 'auth/smartsheet';
     }
+
+    getPbrProjects(userId): Promise<any> {
+        return this.makeMsCall('pbr-projects', 'GET', {
+            user_id: userId
+        });
+    }
+
+    getCompanyPbr(companyId): Promise<any> {
+        return this.makeMsCall('get-company-pbr', 'GET', {
+            company_id: companyId
+        });
+    }
 }

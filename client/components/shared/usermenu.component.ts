@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input} from "@angular/core";
+import {Component, ElementRef, Input, OnInit} from "@angular/core";
 import {User, Company} from 'client/entities/entities';
 import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
 
@@ -18,13 +18,13 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
     <li>
         <a href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">
             {{authUser?.email}}
-            <i class="material-icons">arrow_drop_down</i>    
+            <i class="material-icons">arrow_drop_down</i>
         </a>
         <span class="company-name">{{company?.name}}</span> 
         <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;">
             <li><a [routerLink]="['/companies/settings']"  (click)="showUserMenu = !showUserMenu;">Company Settings</a></li>
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
-            <li><a [routerLink]="['/billing/licenses']" (click)="showUserMenu = !showUserMenu;">Billing Information</a></li>
+            <li *ngIf="isBillingUser" ><a [routerLink]="['/billing/info']" (click)="showUserMenu = !showUserMenu;">Billing Information</a></li>
             <li><a [routerLink]="['/auth/choose-company']" (click)="showUserMenu = !showUserMenu;">Switch Company</a></li>
             <li class="divider"></li>
             <li><a href="javascript: void(0);"  (click)="logout()">Log out</a></li>
@@ -33,13 +33,26 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
 </ul>
 `,
 })
-export class UserMenuComponent {
+export class UserMenuComponent implements OnInit {
     constructor(private _eref: ElementRef, protected MsUserClientService: MsUserClientService) {
     }
 
     showUserMenu: boolean = false;
+    isBillingUser: boolean = false;
     @Input('user') authUser: User;
     @Input('company') company: Company;
+
+    ngOnInit(): void {
+        if (this.authUser && this.authUser.role !== 'guest') {
+            Promise.all([
+                this.MsUserClientService.getPbrProjects(this.authUser.id),
+                this.MsUserClientService.getCompanyPbr(this.company.id)
+            ])
+                .then(result => {
+                    this.isBillingUser = result[0].length > 0 || result[1].id == this.authUser.id;
+                });
+        }
+    }
 
     onClick(event) {
         event.stopPropagation();

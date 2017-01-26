@@ -5,29 +5,41 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xs-12">
+    <div class="row primary-billing-person">
+        <div class="col-xs-4">
             <h5>Primary billing responsibility person:</h5>
 
-            <span *ngIf="pbrUser">
-                <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
-            </span>
-            <br>
+            <div *ngIf="pbrUser">
+                <div *ngIf="!isEdit">
+                    <div class="col-xs-8">
+                        <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
+                    </div>
+                    <div class="col-xs-8 button-group">
+                        <button class="btn btn-warning" (click)="editPbr()">Edit</button>
+                    </div>
+                </div>
+
+                <div *ngIf="isEdit">
+                    <div class="col-xs-8">
+                        <drop-down [items]="users" [searchEnable]="true" [(ngModel)]="pbrUser.id" #user="ngModel"></drop-down>
+                    </div>
+
+                    <div class="col-xs-8 button-group">
+                        <button class="btn btn-success" (click)="savePbr(user)">Save</button>
+                        <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <br>
-    <br>
-    <br>
 
     <div class="row">
         <div class="col-xs-12">
             <h5>Users allowed to access:</h5>
 
-            <span *ngFor="let user of usersList">
+            <div *ngFor="let user of usersList">
                 <b>{{user.first_name}} {{user.last_name}}</b> ({{user.email}})
-            </span>
-            <br>
+            </div>
         </div>
     </div>
 </div>

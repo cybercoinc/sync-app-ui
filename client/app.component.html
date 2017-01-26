@@ -6,7 +6,7 @@
             </a>
         </div>
 
-        <usermenu [user]="AuthService.authUser" [company]="AuthService.company"></usermenu>
+        <usermenu *ngIf="AuthService.authUser" [user]="AuthService.authUser" [company]="AuthService.company"></usermenu>
     </div>
     <loader-progress-bar [is-visible]="PendingRequestsService.hasPendingRequest"></loader-progress-bar>
 </nav>
