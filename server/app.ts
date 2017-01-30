@@ -58,7 +58,8 @@ app.get('/_ah/health', function (req, res, next) {
         status: "Ok",
         message: "Microservice is available",
         details: [],
-        config: config.util.getConfigSources()
+        config: config.util.getConfigSources(),
+        version: config.VERSION
     };
 
     return res.json(response);
