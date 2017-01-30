@@ -51,8 +51,10 @@ export class CompanySettingsComponent implements OnInit {
         this.MsUserClientService.getCompany(userId)
             .then(company => {
                 this.company     = company;
-                this.pbrId       = company.pbr.id;
-                this.currentUser = company.pbr.first_name+' '+company.pbr.last_name+' ('+company.pbr.email+')';
+                if (company.pbr) {
+                    this.pbrId       = company.pbr.id;
+                    this.currentUser = company.pbr.first_name+' '+company.pbr.last_name+' ('+company.pbr.email+')';
+                }
 
                 if (company) {
                     this.MsUserClientService.getCompanyUsers(company.id).then(usersList => {
