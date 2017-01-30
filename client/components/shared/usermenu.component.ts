@@ -49,7 +49,7 @@ export class UserMenuComponent implements OnInit {
                 this.MsUserClientService.getCompanyPbr(this.company.id)
             ])
                 .then(result => {
-                    this.isBillingUser = result[0].length > 0 || result[1].id == this.authUser.id;
+                    this.isBillingUser = result[0].length > 0 || (result[1] && result[1].id == this.authUser.id);
                 });
         }
     }
