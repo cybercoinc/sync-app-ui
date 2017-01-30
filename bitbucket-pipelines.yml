@@ -15,6 +15,9 @@ pipelines:
             - gcloud config set project ${PROJECT_KEY_SC_DEV};
             - gcloud auth activate-service-account --key-file client-secret.json
 
+            # create local.json to handle app-version
+            - bin/build.sh
+
             # Prepare app
             - npm install
             - npm run typings
@@ -36,6 +39,9 @@ pipelines:
             - echo ${JSON_SECRET_SC_QA} > client-secret.json
             - gcloud config set project ${PROJECT_KEY_SC_QA};
             - gcloud auth activate-service-account --key-file client-secret.json
+
+            # create local.json to handle app-version
+            - bin/build.sh
 
             # Prepare app
             - npm install
