@@ -20,4 +20,3 @@ skip_files:
   - ^(.*/)?.*/RCS/.*$
   - ^(.*/)?\..*$
   - ^(.*/)?node_modules/.*$
-  - ^(.*/)?local.json$
