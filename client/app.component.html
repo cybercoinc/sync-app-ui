@@ -1,9 +1,12 @@
 <nav class="navbar navbar-default navbar-sc">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand logo-container" [routerLink]="['/projects']">
+            <a *ngIf="AuthService.authUser && AuthService.authUser.role !== 'guest'" class="navbar-brand logo-container" [routerLink]="['/projects']">
                 <img src="/assets/img/logo.png" style="height: 40px;" alt="logo">
             </a>
+            <span *ngIf="!(AuthService.authUser && AuthService.authUser.role !== 'guest')" class="navbar-brand" style="height: auto;">
+                <img src="/assets/img/logo.png" style="height: 40px;" alt="logo">
+            </span>
         </div>
 
         <usermenu *ngIf="AuthService.authUser" [user]="AuthService.authUser" [company]="AuthService.company"></usermenu>
