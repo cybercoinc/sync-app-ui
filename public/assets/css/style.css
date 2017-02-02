@@ -238,9 +238,10 @@ select > option:disabled {
     margin-top: 2%;
     margin-left: 5%;
     margin-right: 5%;
+    text-align: center;
 }
 
-.companies-button {
+.companies-button-group .companies-button {
     width: 100%;
-    height: 5%;
+    margin-bottom: 20px;
 }

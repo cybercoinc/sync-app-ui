@@ -4,6 +4,7 @@ import {AuthProcoreComponent} from './auth-procore/auth-procore.component';
 import {AuthComponent} from './auth.component';
 import {GuestBootstrapService} from "client/service/resolvers/guest-bootstrap.service";
 import {ChooseCompanyComponent} from "./choose-company/choose-company.component";
+import {SelectCompanyComponent} from "./select-company/select-company.component";
 import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
 
 export const routes: Routes = [
@@ -35,7 +36,13 @@ export const routes: Routes = [
                 component: ChooseCompanyComponent,
                 resolve: {
                     guest: GuestBootstrapService
-                    // bootstrap: AuthBootstrapService // todo think something with guest+auth resolver
+                }
+            },
+            {
+                path: 'select-company',
+                component: SelectCompanyComponent,
+                resolve: {
+                    bootstrap: AuthBootstrapService
                 }
             },
         ]

@@ -3,10 +3,10 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
 import {AuthService} from "client/service/auth.service";
 
 @Component({
-    selector: "choose-company",
-    templateUrl: `client/modules/auth/choose-company/choose-company.component.html`
+    selector: "select-company",
+    templateUrl: `client/modules/auth/select-company/select-company.component.html`
 })
-export class ChooseCompanyComponent implements OnInit{
+export class SelectCompanyComponent implements OnInit{
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
     }
 
