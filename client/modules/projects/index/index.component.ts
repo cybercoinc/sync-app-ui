@@ -27,7 +27,7 @@ export class IndexComponent implements OnInit {
     getActiveProjectsWithPipes(): void {
         let _projects;
 
-        this.MsProjectClientService.getActiveProjects(this.AuthService.authUser.id)
+        this.MsProjectClientService.getActiveProjects(this.AuthService.authUser.id, this.AuthService.company.id)
             .then(projects => {
                 _projects = projects;
 

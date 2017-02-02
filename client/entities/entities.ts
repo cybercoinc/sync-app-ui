@@ -29,6 +29,7 @@ export class Company {
     id: number;
     name: string;
     is_active: boolean;
+    procore_id: boolean;
 }
 
 export class SyncSession {

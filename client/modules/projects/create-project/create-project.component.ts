@@ -60,7 +60,7 @@ export class CreateProjectComponent implements OnInit {
 
     getProcoreProjects() {
         return this.MsProjectClientService
-            .getProcoreProjects(this.AuthService.authUser.id);
+            .getProcoreProjects(this.AuthService.authUser.id, this.AuthService.company.procore_id);
     }
 
     chooseProject(project: ProcoreProject) {
@@ -81,7 +81,8 @@ export class CreateProjectComponent implements OnInit {
             status: this.selectedProject.active ? 'active' : 'inactive',
             procore_company_id: this.selectedProject.company.id,
             procore_project_id: this.selectedProject.id,
-            user_fk_id: this.AuthService.authUser.id
+            user_fk_id: this.AuthService.authUser.id,
+            company_fk_id: this.AuthService.company.id
         };
 
         let _projectId;

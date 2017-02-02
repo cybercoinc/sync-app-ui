@@ -27,12 +27,13 @@ export class MsProjectClientService extends MsClientService {
         this.msName = 'ms-project';
     }
 
-    getActiveProjects(userId): Promise<Project[]> {
+    getActiveProjects(userId, companyId): Promise<Project[]> {
         return this.makeMsCall(
             'get-active-projects',
             'GET',
             {
-                user_id: userId
+                user_id: userId,
+                company_id: companyId
             }
         );
     }
@@ -47,12 +48,13 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getProcoreProjects(userId): Promise<ProcoreProject[]> {
+    getProcoreProjects(userId, procoreCompanyId): Promise<ProcoreProject[]> {
         return this.makeMsCall(
             'procore/projects',
             'GET',
             {
-                user_id: userId
+                user_id: userId,
+                procore_company_id: procoreCompanyId
             }
         );
     }
