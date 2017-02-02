@@ -76,6 +76,8 @@ export class ColumnsMatchingComponent implements OnInit {
 
     protected validationError: boolean = false;
 
+    protected buttonSubmitted: boolean = false;
+
     public model: {} = {};
 
     @Output() columnsMatched = new EventEmitter();
@@ -93,6 +95,8 @@ export class ColumnsMatchingComponent implements OnInit {
                 }
             }
         }
+
+        this.buttonSubmitted = true;
 
         this.columnsMatched.emit(this.model);
     }
