@@ -1,13 +1,12 @@
-import {Component, OnInit, Inject} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
-import {AuthService} from "client/service/auth.service";
 
 @Component({
     selector: "choose-company",
     templateUrl: `client/modules/auth/choose-company/choose-company.component.html`
 })
 export class ChooseCompanyComponent implements OnInit{
-    constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
+    constructor(protected MsUserClientService: MsUserClientService) {
     }
 
     public companiesList = [{}];
@@ -18,7 +17,7 @@ export class ChooseCompanyComponent implements OnInit{
     }
 
     authWithProcoreCompany(procoreCompanyId) {
-        this.MsUserClientService.getAuthWithProcoreCompany(procoreCompanyId, this.AuthService.authUser.id)
+        this.MsUserClientService.getAuthWithProcoreCompany(procoreCompanyId)
             .then(() => {
                 window.location.replace('/')
             })
