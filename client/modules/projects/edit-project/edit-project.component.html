@@ -10,16 +10,13 @@
                 </div>
             </div>
 
-            <pipe-row status="{{pipesListObj.public_todos? pipesListObj.public_todos.status : 'inactive'}}"
-                      router-link="pipe-public-todo" material-icon="event_available" pipe-title="Public Todos"
+            <pipe-row router-link="pipe-public-todo" material-icon="event_available" pipe-title="Public Todos"
                       description="Procore public Todos synchronization."></pipe-row>
 
-            <pipe-row status="{{pipesListObj.private_todos? pipesListObj.private_todos.status : 'inactive'}}"
-                      router-link="pipe-private-todo" material-icon="verified_user" pipe-title="Private Todos"
+            <pipe-row router-link="pipe-private-todo" material-icon="verified_user" pipe-title="Private Todos"
                       description="Procore private Todos synchronization."></pipe-row>
 
-            <pipe-row status="{{pipesListObj.tasks? pipesListObj.tasks.status : 'inactive'}}"
-                      router-link="pipe-tasks" material-icon="event" pipe-title="Tasks"
+            <pipe-row router-link="pipe-tasks" material-icon="event" pipe-title="Tasks"
                       description="Procore Schedule Tasks synchronization."></pipe-row>
 
             <pipe-row material-icon="settings" router-link="settings" pipe-title="General Settings"
