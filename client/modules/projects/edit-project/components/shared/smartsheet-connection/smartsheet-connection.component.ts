@@ -31,23 +31,11 @@ export class SmartsheetConnectionComponent implements OnInit {
 
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
-
-        if (!this.pipesListObj[this.pipeType] || !this.pipesListObj[this.pipeType].sm_sheet_id) {
-            this.MsProjectClientService.getConnectedSmartsheetSheetsIds()
-                .then(connectedSmSheetsList => {
-                    this.connectedSmSheetsIdsList = connectedSmSheetsList;
-
-                    return this.getSmartsheetSheets();
-                })
-                .then(smartsheetSheets => {
-                    this.smartsheetSheets = smartsheetSheets;
-                });
-        }
     }
 
-    public smartsheetSheets: SmartsheetSheet[]|null = null;
+    public smartsheetSheets: SmartsheetSheet[] | null = null;
     public connectedSmSheetsIdsList: [number] | null = null;
-    public selectedSheet: SmartsheetSheet|null = null;
+    public selectedSheet: SmartsheetSheet | null = null;
 
     protected pipesListObj;
 
@@ -59,6 +47,19 @@ export class SmartsheetConnectionComponent implements OnInit {
 
     setExistingSheetParam(doHave: boolean) {
         this.haveExistingSheet = doHave;
+    }
+
+    startChoosingExistingSheet() {
+        this.setExistingSheetParam(true);
+
+        return Promise.all([
+            this.getSmartsheetSheets(),
+            this.MsProjectClientService.getConnectedSmartsheetSheetsIds()
+        ])
+            .then(results => {
+                this.smartsheetSheets = results[0];
+                this.connectedSmSheetsIdsList = results[1];
+            })
     }
 
     cancel() {
