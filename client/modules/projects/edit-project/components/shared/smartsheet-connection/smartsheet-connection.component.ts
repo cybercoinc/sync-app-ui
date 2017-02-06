@@ -136,7 +136,8 @@ export class SmartsheetConnectionComponent implements OnInit {
                 // updating pipe
                 return this.MsProjectClientService.updatePipe(_pipeId, {
                     sm_sheet_id: createdSheetObj.id,
-                    sm_permalink: createdSheetObj.permalink
+                    sm_permalink: createdSheetObj.permalink,
+                    sm_sheet_name: createdSheetObj.name,
                 });
             })
             .then(pipeId => {
@@ -179,11 +180,12 @@ export class SmartsheetConnectionComponent implements OnInit {
                     project.id, this.selectedSheet.id, workspaceId
                 );
             })
-            .then(sheetId => {
+            .then(smSheetObj => {
                 // updating pipe
                 return this.MsProjectClientService.updatePipe(_pipeId, {
-                    sm_sheet_id: sheetId.id,
-                    sm_permalink: sheetId.permalink
+                    sm_sheet_id: smSheetObj.id,
+                    sm_permalink: smSheetObj.permalink,
+                    sm_sheet_name: smSheetObj.name
                 });
             })
             .then(pipeId => {
