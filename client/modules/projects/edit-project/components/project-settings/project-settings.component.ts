@@ -3,6 +3,7 @@ import {AuthService} from "client/service/auth.service";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {User} from "client/entities/entities";
 import {ActivatedRoute} from "@angular/router";
+import {MsUserClientService} from "../../../../../service/microservices/ms-user-client.service";
 
 @Component({
     selector: 'project-settings',
@@ -14,6 +15,7 @@ import {ActivatedRoute} from "@angular/router";
 export class ProjectSettingsComponent implements OnInit {
     constructor(protected AuthService: AuthService,
                 protected MsProjectClientService: MsProjectClientService,
+                protected MsUserClientService: MsUserClientService,
                 protected ActivatedRoute: ActivatedRoute,
     ) {}
 
@@ -24,10 +26,13 @@ export class ProjectSettingsComponent implements OnInit {
 
         Promise.all([
             this.MsProjectClientService.getPbrUser(this.projectId),
-            this.MsProjectClientService.getProjectUsers(this.projectId)
+            this.MsProjectClientService.getProjectUsers(this.projectId),
+            this.MsUserClientService.getCompanyPbr(this.AuthService.company.id)
         ]).then(resultsList => {
             this.pbrUser = resultsList[0];
             this.usersList = resultsList[1];
+
+            this.isBillingUser = this.AuthService.authUser.id == this.pbrUser.id || resultsList[2].id == this.AuthService.authUser.id;
 
             this.usersList.forEach(user => {
                 this.users.push({
@@ -43,7 +48,7 @@ export class ProjectSettingsComponent implements OnInit {
     }
 
     savePbr(user) {
-        this.MsProjectClientService.setPbrUser(user.value, this.projectId)
+        this.MsProjectClientService.setPbrUser(user.model, this.projectId)
             .then(user => {
                 this.pbrUser = user;
                 this.isEdit  = false;
@@ -54,9 +59,10 @@ export class ProjectSettingsComponent implements OnInit {
         this.isEdit = false;
     }
 
-    protected projectId: number;
-    protected usersList: User[];
-    protected pbrUser:   User;
-    protected isEdit:    boolean = false;
-    protected users:     any     = [];
+    protected projectId:     number;
+    protected usersList:     User[];
+    protected pbrUser:       User;
+    protected isEdit:        boolean = false;
+    protected users:         any     = [];
+    private   isBillingUser: boolean = false;
 }

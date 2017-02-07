@@ -10,7 +10,7 @@
                             <div class="current-user" *ngIf="!showDropDown">{{currentUser}}</div>
                             <drop-down *ngIf="showDropDown" [items]="ddUsersList" [(ngModel)]="pbrId"></drop-down>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-7" *ngIf="isBillingUser">
                             <a class="btn btn-success" *ngIf="!showDropDown" (click)="showEditPBR()">Edit</a>
 
                             <div class="col-md-12" *ngIf="showDropDown">

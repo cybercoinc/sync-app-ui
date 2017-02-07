@@ -17,6 +17,7 @@ export class CompanySettingsComponent implements OnInit {
     usersList               = [];
     ddUsersList             = [];
     currentUser:    any     = null;
+    private isBillingUser: boolean = false;
 
     constructor(protected MsUserClientService:    MsUserClientService,
                 protected AuthService:            AuthService,
@@ -24,7 +25,10 @@ export class CompanySettingsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.getSettings(this.AuthService.authUser.id);
+        this.getSettings(this.AuthService.authUser.id)
+            .then(() => {
+                this.isBillingUser = this.AuthService.authUser.id == this.pbrId;
+            });
     }
 
     saveUser(){
@@ -48,7 +52,7 @@ export class CompanySettingsComponent implements OnInit {
     }
 
     getSettings(userId) {
-        this.MsUserClientService.getCompany(userId)
+        return this.MsUserClientService.getCompany(userId)
             .then(company => {
                 this.company     = company;
                 if (company.pbr) {

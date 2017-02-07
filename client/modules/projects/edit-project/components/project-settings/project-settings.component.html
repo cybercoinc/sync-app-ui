@@ -14,7 +14,7 @@
                     <div class="col-xs-8">
                         <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
                     </div>
-                    <div class="col-xs-8 button-group">
+                    <div class="col-xs-8 button-group" *ngIf="isBillingUser">
                         <button class="btn btn-warning" (click)="editPbr()">Edit</button>
                     </div>
                 </div>

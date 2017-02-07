@@ -2,6 +2,7 @@ import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule}   from '@angular/forms';
 import {MaterialModule} from '@angular/material';
+import {CybercoNg2Module} from "../cyberco-ng2/cyberco-ng2.module";
 
 import {routing} from './projects.routing';
 
@@ -38,15 +39,13 @@ import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-
 import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
 import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
 import {PipeDeleteComponent} from "./edit-project/components/shared/pipe-delete/pipe-delete.component";
-import {CybercoMaterialNg2Module} from "cyberco-material-ng2/cyberco-material-ng2";
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
         FormsModule,
-        CybercoMaterialNg2Module,
-
+        CybercoNg2Module,
         routing,
     ],
     exports: [],
