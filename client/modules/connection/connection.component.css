@@ -3,6 +3,10 @@ md-card {
     width: 700px;
 }
 
+md-card.no-connection {
+    background-color: #ffbfbf;
+}
+
 .connection-app-info {
     display: table;
     width: 100%;

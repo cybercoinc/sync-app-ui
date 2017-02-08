@@ -8,7 +8,7 @@
     <div class="row">
         <div *ngIf="me && me.role && me.role !== 'guest'">
             <div class="col-xs-12">
-                <md-card>
+                <md-card [ngClass]="{'no-connection': !me.smartsheet_oauth}">
                     <div class="connection-app-info">
                         <div class="connection-app-overview">
                             <h4>Procore</h4>
@@ -32,7 +32,7 @@
                     </div>
                 </md-card>
 
-                <md-card>
+                <md-card [ngClass]="{'no-connection': !me.smartsheet_oauth}">
                     <div class="connection-app-info">
                         <div class="connection-app-overview">
                             <h4>Smartsheet</h4>
@@ -54,7 +54,9 @@
 
                     <div *ngIf="!me.smartsheet_oauth" style="clear:both;">
                         <hr />
-                        <a class="btn btn-primary" href="{{getSmartsheetAuthLink()}}">
+                        <span style="font-weight: bold; color: #8b0305;">Not Connected</span>
+
+                        <a class="btn btn-primary pull-right" href="{{getSmartsheetAuthLink()}}">
                             Get Smartsheet connection
                         </a>
                     </div>
