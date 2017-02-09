@@ -89,9 +89,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 return this.MsProjectClientService.enablePipe(pipeId);
             })
             .then(() => {
-                this.refreshPipesList();
-
-                return this.MsSyncClientService.startPipeSync(pipeId);
+                return this.refreshPipesList();
             })
             .then(() => {
                 if (!_pipeObj.sm_webhook_id) {

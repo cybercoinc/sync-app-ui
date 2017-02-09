@@ -40,16 +40,6 @@ export class MsSyncClientService extends MsClientService {
         );
     }
 
-    startPipeSync(pipeId: number): Promise<boolean> {
-        return this.makeMsCall(
-            'start-pipe-sync',
-            'GET',
-            {
-                pipe_id: pipeId
-            }
-        );
-    }
-
     getProcoreTodosColumns(): Promise<[ProcoreTodoColumn]> {
         return this.makeMsCall(
             'get-procore-todos-columns',
