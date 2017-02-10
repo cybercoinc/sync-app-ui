@@ -29,7 +29,8 @@ export class SmartsheetConnectionComponent implements OnInit {
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
     @Input('redirect-route') redirectRoute;
 
-    private isShowAlert: boolean;
+    private isShowAlert:   boolean = false;
+    private isShowSuccess: boolean = false;
     private todos = [];
 
     ngOnInit() {
@@ -39,7 +40,7 @@ export class SmartsheetConnectionComponent implements OnInit {
         this.MsProjectClientService.getTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, isPrivate)
             .then(todos => {
                 if (todos.length > 0) {
-                    this.todos = todos;
+                    this.todos       = todos;
                     this.isShowAlert = true;
                 }
             });
@@ -54,7 +55,8 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         this.MsProjectClientService.deleteTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, todos)
             .then(result => {
-                this.isShowAlert = false;
+                this.isShowAlert   = false;
+                this.isShowSuccess = true;
             });
     }
 

@@ -1,13 +1,18 @@
 <div class="container-fluid" *ngIf="!pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
-        <md-card *ngIf="isShowAlert">
-            <div class="col-xs-12">
-                <h5>You have todos on Procore. Do you want to remove them?</h5>
-            </div>
+        <div *ngIf="isShowSuccess || isShowAlert">
+            <h5 *ngIf="isShowSuccess">Todos has been removed</h5>
 
-            <button class="btn btn-danger" (click)="removeTodos()">Remove</button>
-            <button class="btn btn-primary" (click)="hideAlert()">No, Thanks</button>
-        </md-card>
+            <div *ngIf="isShowAlert" class="col-xs-12">
+                <h5>
+                    <div>This project already have Public Todos on Procore. If you will connect it with Smartsheet which already contain them - then it will cause duplicates.  To avoid it we can firstly remove all Public Todos from Procore.</div>
+                    <div>Do you want remove them?</div>
+                </h5>
+
+                <button class="btn btn-danger" (click)="removeTodos()">Yes, please remove Public Todos from Procore</button>
+                <button class="btn btn-primary" (click)="hideAlert()">No, thanks</button>
+            </div>
+        </div>
 
         <div *ngIf="!isShowAlert">
             <div class="col-xs-12">
