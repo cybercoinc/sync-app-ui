@@ -7,12 +7,14 @@ import {CompanySettingsComponent} from './settings/settings.component';
 
 import {routing} from './companies.routing';
 import {FormsModule} from "@angular/forms";
+import {CybercoNg2Module} from "../cyberco-ng2/cyberco-ng2.module";
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
         FormsModule,
+        CybercoNg2Module,
         routing,
     ],
     exports: [],
