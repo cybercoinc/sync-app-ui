@@ -1,13 +1,31 @@
 <div class="container-fluid" *ngIf="!pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
-        <div class="col-xs-12">
-            <h5>Do you have an existing SmartSheet schedule that you would like to merge with your Procore project
-                schedule?</h5>
+        <div *ngIf="isShowSuccess || isShowAlert">
+            <md-card *ngIf="isShowSuccess" class="alert-dismissable">
+                <h5>Todos removed</h5>
+            </md-card>
+
+            <div *ngIf="isShowAlert" class="col-xs-12">
+                <h5>
+                    <div>This project already have Public Todos on Procore. If you will connect it with Smartsheet which already contain them - then it will cause duplicates.  To avoid it we can firstly remove all Public Todos from Procore.</div>
+                    <div>Do you want remove them?</div>
+                </h5>
+
+                <button class="btn btn-danger" (click)="removeTodos()">Yes, please remove Public Todos from Procore</button>
+                <button class="btn btn-primary" (click)="hideAlert()">No, thanks</button>
+            </div>
         </div>
 
-        <div class="col-xs-6 col-xs-offset-4">
-            <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"  (click)="startChoosingExistingSheet()">Yes</button>
-            <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined" (click)="createNewSheetWithWorkspace()">No</button>
+        <div *ngIf="!isShowAlert">
+            <div class="col-xs-12">
+                <h5>Do you have an existing SmartSheet schedule that you would like to merge with your Procore project
+                    schedule?</h5>
+            </div>
+
+            <div class="col-xs-6 col-xs-offset-4" *ngIf="!isShowAlert">
+                <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"  (click)="startChoosingExistingSheet()">Yes</button>
+                <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined" (click)="createNewSheetWithWorkspace()">No</button>
+            </div>
         </div>
 
         <section *ngIf="haveExistingSheet">

@@ -20,6 +20,7 @@ let originsWhitelist = [
     'https://sc-dot-app-status-page.appspot-preview.com',
     'https://sc-dev-dot-app-status-page.appspot-preview.com',
     'https://sc-qa-dot-app-status-page.appspot-preview.com',
+    'https://sc-prod-dot-app-status-page.appspot-preview.com',
 ];
 let corsOptions = {
     origin: function(origin, callback){

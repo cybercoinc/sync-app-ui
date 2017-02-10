@@ -29,8 +29,39 @@ export class SmartsheetConnectionComponent implements OnInit {
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
     @Input('redirect-route') redirectRoute;
 
+    private isShowAlert:   boolean = false;
+    private isShowSuccess: boolean = false;
+    private todos = [];
+
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
+
+        let isPrivate = this.pipeType == 'private_todos';
+        this.MsProjectClientService.getTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, isPrivate)
+            .then(todos => {
+                if (todos.length > 0) {
+                    this.todos       = todos;
+                    this.isShowAlert = true;
+                }
+            });
+    }
+
+    removeTodos(): void {
+        let todos = [];
+
+        this.todos.forEach(todo => {
+            todos.push(todo.id);
+        });
+
+        this.MsProjectClientService.deleteTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, todos)
+            .then(result => {
+                this.isShowAlert   = false;
+                this.isShowSuccess = true;
+            });
+    }
+
+    hideAlert(): void {
+        this.isShowAlert = false;
     }
 
     public smartsheetSheets: SmartsheetSheet[] | null = null;

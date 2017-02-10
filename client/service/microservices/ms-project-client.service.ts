@@ -292,4 +292,29 @@ export class MsProjectClientService extends MsClientService {
             }
         );
     }
+
+    getTodos(userId: number, projectId: number, isPrivate: boolean): Promise<any> {
+        return this.makeMsCall(
+            'get-todos',
+            'GET',
+            {
+                user_id:    userId,
+                project_id: projectId,
+                is_private: isPrivate
+            }
+        );
+    }
+
+
+    deleteTodos(userId, projectId, todos): Promise<any> {
+        return this.makeMsCall(
+            'delete-todos',
+            'POST',
+            {
+                user_id:    userId,
+                project_id: projectId,
+                todos:      todos
+            }
+        );
+    }
 }
