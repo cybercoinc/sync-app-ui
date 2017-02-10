@@ -76,5 +76,4 @@ pipelines:
             - unlink public/index.html; mv public/index-prod.html public/index.html
 
             # Deploy app
-            - gcloud app deploy app-prod.yaml --no-stop-previous-version
-
+            - gcloud app deploy app-prod.yaml --no-promote
