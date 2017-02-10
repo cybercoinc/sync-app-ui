@@ -8,7 +8,7 @@
     <div class="row">
         <div *ngIf="me && me.role && me.role !== 'guest'">
             <div class="col-xs-12">
-                <md-card [ngClass]="{'no-connection': !me.smartsheet_oauth}">
+                <md-card [ngClass]="{'no-connection': !me.procore_oauth}">
                     <div class="connection-app-info">
                         <div class="connection-app-overview">
                             <h4>Procore</h4>
