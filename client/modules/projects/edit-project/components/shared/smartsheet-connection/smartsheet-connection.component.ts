@@ -37,13 +37,16 @@ export class SmartsheetConnectionComponent implements OnInit {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
 
         let isPrivate = this.pipeType == 'private_todos';
-        this.MsProjectClientService.getTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, isPrivate)
-            .then(todos => {
-                if (todos.length > 0) {
-                    this.todos       = todos;
-                    this.isShowAlert = true;
-                }
-            });
+
+        if ((isPrivate && !this.pipesListObj.private_todos) || (!isPrivate && !this.pipesListObj.public_todos)) {
+            this.MsProjectClientService.getTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, isPrivate)
+                .then(todos => {
+                    if (todos.length > 0) {
+                        this.todos       = todos;
+                        this.isShowAlert = true;
+                    }
+                });
+        }
     }
 
     removeTodos(): void {
