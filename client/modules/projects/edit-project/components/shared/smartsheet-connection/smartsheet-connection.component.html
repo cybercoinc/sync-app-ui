@@ -1,7 +1,9 @@
 <div class="container-fluid" *ngIf="!pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
         <div *ngIf="isShowSuccess || isShowAlert">
-            <h5 *ngIf="isShowSuccess">Todos has been removed</h5>
+            <md-card *ngIf="isShowSuccess" class="alert-dismissable">
+                <h5>Todos has been removed</h5>
+            </md-card>
 
             <div *ngIf="isShowAlert" class="col-xs-12">
                 <h5>
