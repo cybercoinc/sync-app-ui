@@ -10,15 +10,15 @@
             </div>
 
             <pipe-row status="{{pipesListObj.public_todos? pipesListObj.public_todos.status : 'inactive'}}"
-                      router-link="public_todos" material-icon="event_available" pipe-title="Public Todos"
+                      router-link="public_todos" material-icon="event_available" pipe-title="Project Calendar Tasks"
                       description=""></pipe-row>
 
             <pipe-row status="{{pipesListObj.private_todos? pipesListObj.private_todos.status : 'inactive'}}"
-                      router-link="private_todos" material-icon="verified_user" pipe-title="Private Todos"
+                      router-link="private_todos" material-icon="verified_user" pipe-title="Company Calendar Tasks"
                       description=""></pipe-row>
 
             <pipe-row status="{{pipesListObj.tasks? pipesListObj.tasks.status : 'inactive'}}"
-                      router-link="tasks" material-icon="event" pipe-title="Tasks"
+                      router-link="tasks" material-icon="event" pipe-title="Project Schedule"
                       description=""></pipe-row>
 
         </div>
