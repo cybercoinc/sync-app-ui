@@ -18,8 +18,8 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
     `]
 })
 export class DropDownItemComponent {
-    @Input('name')     name:     string;
-    @Input('value')    value:    string;
+    @Input() name:  string;
+    @Input() value: string;
 
     @Output() select = new EventEmitter();
 

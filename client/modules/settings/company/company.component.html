@@ -1,6 +1,6 @@
-<md-card *ngIf="company" class="col-xs-12 company_settings_card">
-    <md-card-subtitle><h1>{{company.name}}</h1></md-card-subtitle>
-    <md-card-content>
+<div *ngIf="company" class="col-xs-12 company_settings_card">
+    <div><h1>{{company.name}}</h1></div>
+    <div>
         <div class="row">
             <div class="col-xs-12" >
                 <h3 style="font-size: 1.3em">Billing</h3>
@@ -14,8 +14,8 @@
                             <a class="btn btn-success" *ngIf="!showDropDown" (click)="showEditPBR()">Edit</a>
 
                             <div class="col-md-12" *ngIf="showDropDown">
-                                <button type="button" class="btn btn-success col-md-2" (click)="saveUser()">Save</button>
-                                <button type="button" class="btn btn-danger col-md-2" (click)="cancel()">Cancel</button>
+                                <button type="button" class="btn btn-success col-md-3" (click)="saveUser()">Save</button>
+                                <button type="button" class="btn btn-danger col-md-3" (click)="cancel()">Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -38,5 +38,5 @@
                 <span>No users for this company yet</span>
             </div>
         </div>
-    </md-card-content>
-</md-card>
+    </div>
+</div>

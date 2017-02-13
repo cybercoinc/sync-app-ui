@@ -22,7 +22,7 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
         </a>
         <span class="company-name">{{company?.name}}</span> 
         <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;">
-            <li><a [routerLink]="['/companies/settings']"  (click)="showUserMenu = !showUserMenu;">Company Settings</a></li>
+            <li><a [routerLink]="['/settings']"  (click)="showUserMenu = !showUserMenu;">Settings</a></li>
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
             <li *ngIf="isBillingUser" ><a [routerLink]="['/billing/info']" (click)="showUserMenu = !showUserMenu;">Billing Information</a></li>
             <li><a [routerLink]="['/auth/select-company']" (click)="showUserMenu = !showUserMenu;">Switch Company</a></li>

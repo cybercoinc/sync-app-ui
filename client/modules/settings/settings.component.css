@@ -1,0 +1,36 @@
+.right-lined {
+    border-right: 1px solid #A1A1A1;
+    height: 100%;
+}
+
+.bottom-lined {
+    border-bottom: 1px solid #A1A1A1;
+}
+
+.sc-sidebar-header-large {
+    font-size: 24px;
+    padding: 10px 10px 5px;
+}
+
+.sc-sidebar-header-med {
+    font-size: 16px;
+    padding: 15px 20px 0px;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.sc-sidebar-header-med i {
+    margin-right: 10px;
+    font-size: 30px;
+}
+
+.sc-sidebar-description {
+    font-size: 12px;
+    color: grey;
+    padding: 0px 20px 10px;
+}
+
+
+.sc-list {
+    height: 700px;
+}

@@ -22,7 +22,7 @@ import {AuthModule} from "./modules/auth/auth.module";
 import {ConnectionModule} from 'client/modules/connection/connection.module';
 import {ProjectsModule} from 'client/modules/projects/projects.module';
 import {BillingModule} from 'client/modules/billing/billing.module';
-import {CompaniesModule} from 'client/modules/companies/companies.module';
+import {SettingsModule} from 'client/modules/settings/settings.module';
 import {PendingRequestsService} from "./service/pending-requests.service";
 import {LoaderProgressBarComponent} from "./components/shared/loader.component";
 import {ConfigService} from "./service/config.service";
@@ -40,7 +40,7 @@ import {GuestBootstrapService} from "./service/resolvers/guest-bootstrap.service
         ConnectionModule,
         ProjectsModule,
         BillingModule,
-        CompaniesModule,
+        SettingsModule,
 
         routing,
     ],
