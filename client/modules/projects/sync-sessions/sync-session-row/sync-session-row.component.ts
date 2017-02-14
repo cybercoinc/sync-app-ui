@@ -20,10 +20,18 @@ export class SyncSessionRowComponent implements OnInit {
     @Input('sync-session') syncSession: SyncSession;
 
     getStatusLabel() {
+        if (!this.syncSession.status) {
+            return '';
+        }
+
         return this.syncSession.status.charAt(0).toUpperCase() + this.syncSession.status.slice(1);
     }
 
     getStartedByLabel() {
+        if (!this.syncSession.started_by) {
+            return '';
+        }
+
         return this.syncSession.started_by.charAt(0).toUpperCase() + this.syncSession.started_by.slice(1);
     }
 

@@ -2,12 +2,16 @@
     <div class="row">
         <div class="col-xs-12" *ngIf="itemChangesObj?.type === 'created_one'">
             <p *ngFor="let propToLabelObj of propertiesToLabels">
-                <span *ngIf="itemChangesObj.item[propToLabelObj.property]">{{propToLabelObj.label}}:
+                <span *ngIf="itemChangesObj.item[propToLabelObj.property]">{{propToLabelObj?.label}}:
                     {{itemChangesObj.item[propToLabelObj.property]}}</span>
             </p>
             <p>
-                <span *ngIf="itemChangesObj.assignee">Assignee:
-                    {{itemChangesObj.assignee}}</span>
+                <span *ngIf="itemChangesObj?.assignee">Assignee:
+                    {{itemChangesObj?.assignee}}</span>
+            </p>
+            <p>
+                <span *ngIf="itemChangesObj?.resource">Resource:
+                    {{itemChangesObj?.resource}}</span>
             </p>
         </div>
 
