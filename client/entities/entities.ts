@@ -181,8 +181,6 @@ export class ProjectPipe {
     sm_working_days: {};
     sm_weekends: [string];
     sm_webhook_id: number;
-    sm_webhook_status: string;
-    sm_sheet_name: string;
     summary_tasks_enabled: boolean;
     colors_coding_enabled: boolean;
 }
