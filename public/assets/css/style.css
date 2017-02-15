@@ -81,10 +81,14 @@ body h1 {
 .navbar-nav > li > a {
     color: #fff;
     font-size: 19px;
-    padding-top: 32px;
+    padding-top: 12px;
     display: inline-flex;
     vertical-align: middle;
     padding-bottom: 0px;
+}
+
+.navbar-nav > li > div {
+    padding-left: 15px;
 }
 
 .module-header {

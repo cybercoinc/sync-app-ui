@@ -16,6 +16,7 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
     template: `
 <ul class="nav navbar-nav navbar-right" *ngIf="authUser && authUser.role !== 'guest'">
     <li>
+        <div *ngIf="isAdmin">Logged by Admin</div>
         <a href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">
             {{authUser?.email}}
             <i class="material-icons">arrow_drop_down</i>
@@ -37,10 +38,12 @@ export class UserMenuComponent implements OnInit {
     constructor(private _eref: ElementRef, protected MsUserClientService: MsUserClientService) {
     }
 
-    showUserMenu: boolean = false;
+    showUserMenu:  boolean = false;
     isBillingUser: boolean = false;
-    @Input('user') authUser: User;
-    @Input('company') company: Company;
+    isAdmin:       boolean = false;
+
+    @Input('user')    authUser: User;
+    @Input('company') company:  Company;
 
     ngOnInit(): void {
         if (this.authUser && this.authUser.role !== 'guest') {
@@ -51,6 +54,8 @@ export class UserMenuComponent implements OnInit {
                 .then(result => {
                     this.isBillingUser = result[0].length > 0 || (result[1] && result[1].id == this.authUser.id);
                 });
+
+            this.isAdmin = this.authUser.as_admin;
         }
     }
 

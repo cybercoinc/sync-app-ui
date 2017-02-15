@@ -63,7 +63,7 @@ export class MsUserClientService extends MsClientService {
     }
 
     logout() {
-        return this.makeMsCall('auth/logout', 'POST')
+        return this.makeMsCall('auth/user-logout', 'POST')
             .then(() => {
                 this.AuthService.authUser = null;
             });
