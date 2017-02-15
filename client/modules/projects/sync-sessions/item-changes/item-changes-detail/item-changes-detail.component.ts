@@ -44,5 +44,17 @@ export class ItemChangesDetailComponent implements OnInit {
             property: 'assignee',
             label: 'Assignee'
         }
-    ]
+    ];
+
+    needToHideChange(propName) {
+        let colorWasChanged = !!this.itemChangesObj.changes.filter(changeObj => {
+            return changeObj.property === 'color' && changeObj.new_value !== changeObj.old_value;
+        }).shift();
+
+        let nameWasChanged = !!this.itemChangesObj.changes.filter(changeObj => {
+            return changeObj.property === 'name' && changeObj.new_value !== changeObj.old_value;
+        }).shift();
+
+        return propName === 'name' && colorWasChanged && !nameWasChanged;
+    }
 }
