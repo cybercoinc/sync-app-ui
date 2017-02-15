@@ -179,14 +179,14 @@ export class PipeConnectionService implements Resolve<{}> {
 
         switch (pipeType) {
             case 'public_todos':
-                label = 'Public Todos';
+                label = 'Project Calendar Items';
                 break;
             case 'private_todos': {
-                label = 'Private Todos';
+                label = 'Company Calendar Items';
                 break;
             }
             case 'tasks': {
-                label = 'Tasks';
+                label = 'Project Schedule';
                 break;
             }
         }
