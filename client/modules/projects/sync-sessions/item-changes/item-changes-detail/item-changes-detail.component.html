@@ -19,9 +19,9 @@
             <b>Changes:</b>
 
             <ul>
-                <li *ngFor="let changesObj of itemChangesObj.changes">
-                    <b>{{changesObj.property}}</b>: old value - {{changesObj.old_value}}, new value -
-                    {{changesObj.new_value}}
+                <li *ngFor="let changesObj of itemChangesObj.changes" [class.hide]="needToHideChange(changesObj.property)">
+                    <b>{{changesObj.property}}</b>: old value - <i>{{changesObj.old_value}}</i>,
+                    new value - <i>{{changesObj.new_value}}</i>
                 </li>
             </ul>
         </div>
