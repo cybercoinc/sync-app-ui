@@ -109,6 +109,16 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    disconnectWorkspace(projectId: number) {
+        return this.makeMsCall(
+            'smartsheet/workspace/disconnect',
+            'DELETE',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
     createSmartsheetSheetFromTemplate(projectId: number, workspaceId: number, templateId: number, sheetName: string): Promise<SmartsheetSheet> {
         return this.makeMsCall(
             'smartsheet/create-sheet-from-template-in-workspace',

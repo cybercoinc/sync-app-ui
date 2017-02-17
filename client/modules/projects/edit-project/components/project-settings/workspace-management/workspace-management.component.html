@@ -7,7 +7,15 @@
                 workspace information
             </div>
             <div class="col-xs-12" *ngIf="workspace === null">No workspace connected.</div>
-            <div class="col-xs-12" *ngIf="workspace"> {{workspace.name}}</div>
+
+            <div class="col-xs-12" *ngIf="workspace">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{workspace.name}} <a href="{{workspace.permalink}}" target="_blank" class="btn btn-success">Open</a>
+                        <a (click)=disconnectWorkspace() class="btn btn-danger">Disconnect from project</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -28,4 +28,10 @@ export class WorkspaceManagementComponent implements OnInit {
 
     protected workspace: SmartsheetWorkspace;
 
+    disconnectWorkspace() {
+        return this.msProjectClientService.disconnectWorkspace(this.projectId)
+            .then(() => {
+                this.workspace = null;
+            })
+    }
 }
