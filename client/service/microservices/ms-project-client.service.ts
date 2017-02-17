@@ -305,6 +305,16 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getTasks(userId: number, projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'get-tasks',
+            'GET',
+            {
+                user_id:    userId,
+                project_id: projectId
+            }
+        );
+    }
 
     deleteTodos(userId, projectId, todos): Promise<any> {
         return this.makeMsCall(
