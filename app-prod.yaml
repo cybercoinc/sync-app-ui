@@ -1,0 +1,18 @@
+service: ms-app-ui
+runtime: nodejs
+env: flex
+
+resources:
+  cpu: .5
+  memory_gb: .6
+
+env_variables:
+  NODE_ENV: prod
+
+skip_files:
+  - ^(.*/)?#.*#$
+  - ^(.*/)?.*~$
+  - ^(.*/)?.*\.py[co]$
+  - ^(.*/)?.*/RCS/.*$
+  - ^(.*/)?\..*$
+  - ^(.*/)?node_modules/.*$

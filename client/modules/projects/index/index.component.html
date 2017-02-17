@@ -5,7 +5,7 @@
             <div class="module-name">Projects</div>
             <a [routerLink]="['create-project']"
                [ngClass]="{'disabled': !this.AuthService.authUser.smartsheet_oauth }"
-               class="btn btn-success">create project</a>
+               class="btn btn-success">connect project</a>
             <span *ngIf="!this.AuthService.authUser.smartsheet_oauth">
                 <span style="padding: 0 10px 0 40px;">
                     Before creating project, you have to authorize with SmartSheet
