@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h5>Workspace Management:</h5>
+
+        <div class="row">
+            <div class="col-xs-12" *ngIf="workspace === undefined"><i class="fa fa-cog fa-spin fa-fw"></i> Getting
+                workspace information
+            </div>
+
+            <div class="col-xs-12" *ngIf="workspace === null">
+                <div class="row">
+                    <div class="col-xs-12">
+                        No workspace connected.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12" *ngIf="workspace">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{workspace.name}} <a href="{{workspace.permalink}}" target="_blank" class="btn btn-success">Open</a>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-xs-12">
+                        <a (click)=disconnectWorkspace() [class.disabled]="!canDisconnectWorkspace" class="btn btn-danger">Disconnect from project</a>
+                        <p *ngIf="!canDisconnectWorkspace">To disconnect Workspace you need to remove Project Pipes first.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
