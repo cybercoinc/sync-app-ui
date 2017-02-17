@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {AuthService} from "client/service/auth.service";
-import {ActivatedRoute} from "@angular/router";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {Project, SmartsheetWorkspace} from "client/entities/entities";
+import {PipeConnectionService} from "client/service/pipe-connection.service";
 
 @Component({
     selector: 'workspace-management',
@@ -13,7 +13,7 @@ import {Project, SmartsheetWorkspace} from "client/entities/entities";
 })
 export class WorkspaceManagementComponent implements OnInit {
     constructor(protected AuthService: AuthService,
-                protected ActivatedRoute: ActivatedRoute,
+                protected pipeConnectionService: PipeConnectionService,
                 protected msProjectClientService: MsProjectClientService) {
     }
 
@@ -38,6 +38,7 @@ export class WorkspaceManagementComponent implements OnInit {
     disconnectWorkspace() {
         return this.msProjectClientService.disconnectWorkspace(this.projectId)
             .then(() => {
+                this.pipeConnectionService.project.smartsheet_workspace_id = null;
                 this.workspace = null;
             })
     }
