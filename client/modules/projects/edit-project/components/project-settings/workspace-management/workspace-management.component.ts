@@ -36,8 +36,6 @@ export class WorkspaceManagementComponent implements OnInit {
     protected project: Project;
 
     disconnectWorkspace() {
-        this.canDisconnectWorkspace = false;
-
         return this.msProjectClientService.disconnectWorkspace(this.projectId)
             .then(() => {
                 this.workspace = null;
