@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from "@angular/core";
 import {AuthService} from "client/service/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
+import {SmartsheetWorkspace} from "client/entities/entities";
 
 @Component({
     selector: 'workspace-management',
@@ -18,10 +19,13 @@ export class WorkspaceManagementComponent implements OnInit {
 
     ngOnInit() {
         this.msProjectClientService.getSmartsheetWorkspace(this.projectId)
-            .then(result => console.log(result));
+            .then(workspace => {
+                this.workspace = workspace;
+            });
     }
 
     @Input('project-id') projectId: number;
 
+    protected workspace: SmartsheetWorkspace;
 
 }

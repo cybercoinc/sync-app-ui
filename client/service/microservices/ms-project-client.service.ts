@@ -6,7 +6,7 @@ import {
     Project,
     SmartsheetSheet,
     ProjectPipe,
-    User
+    User, SmartsheetWorkspace
 } from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
@@ -99,7 +99,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getSmartsheetWorkspace(projectId: number) {
+    getSmartsheetWorkspace(projectId: number): Promise<SmartsheetWorkspace> {
         return this.makeMsCall(
             'smartsheet/workspace',
             'GET',
