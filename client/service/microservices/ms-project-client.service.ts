@@ -66,13 +66,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getSmartsheetSheets(userId): Promise<SmartsheetSheet[]> {
+    getSmartsheetSheets(): Promise<SmartsheetSheet[]> {
         return this.makeMsCall(
             'smartsheet/sheets',
             'GET',
-            {
-                user_id: userId
-            }
+            {}
         );
     }
 

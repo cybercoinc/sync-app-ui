@@ -127,7 +127,7 @@ export class SmartsheetConnectionComponent implements OnInit {
 
     getSmartsheetSheets() {
         return this.MsProjectClientService
-            .getSmartsheetSheets(this.AuthService.authUser.id);
+            .getSmartsheetSheets();
     }
 
     chooseExistingSheet(sheet) {
