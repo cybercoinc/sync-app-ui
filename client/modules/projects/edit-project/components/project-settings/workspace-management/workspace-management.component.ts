@@ -20,23 +20,32 @@ export class WorkspaceManagementComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.authUserIsCreator) {
+            this.msProjectClientService.getSmartsheetWorkspace(this.projectId)
+                .then(workspace => {
+                    this.workspace = workspace;
+                })
+                .catch(err => {
+                    this.workspace = {};
+                    this.authUserIsCreator = false;
+                })
+        }
+
         Promise.all([
-            this.msProjectClientService.getSmartsheetWorkspace(this.projectId),
             this.msProjectClientService.getPipesWhere({
                 project_fk_id: this.projectId
             }),
             this.msUserClientService.getEmailByUserId(this.project.smartsheet_workspace_creator__user_fk_id.id)
         ])
             .then(results => {
-                this.workspace = results[0];
-                this.canDisconnectWorkspace = results[1].length === 0;
-                this.workspaceCreatorEmail = results[2];
+                this.canDisconnectWorkspace = results[0].length === 0;
+                this.workspaceCreatorEmail = results[1];
             });
     }
 
     @Input('project-id') projectId: number;
 
-    protected workspace: SmartsheetWorkspace;
+    protected workspace: SmartsheetWorkspace|{};
     protected project: Project = this.pipeConnectionService.project;
     protected workspaceCreatorEmail: string;
 
@@ -49,5 +58,6 @@ export class WorkspaceManagementComponent implements OnInit {
             })
     }
 
-    canDisconnectWorkspace: boolean = false;
+    protected canDisconnectWorkspace: boolean = false;
+    protected authUserIsCreator: boolean = this.project.smartsheet_workspace_creator__user_fk_id.id === this.AuthService.authUser.id;
 }
