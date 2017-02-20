@@ -118,7 +118,7 @@ export class Project {
     name: string;
     status: 'active'  | 'disabled';
     procore_company_id: number;
-    user_fk_id: {
+    creds_holder__user_fk_id: {
         id: number;
         kind: string;
         namespace: string;
@@ -173,7 +173,7 @@ export class ProjectPipe {
         namespace: string;
         path: string|number[]
     };
-    user_fk_id: {
+    creds_holder__user_fk_id: {
         id: number;
         kind: string;
         namespace: string;
