@@ -115,12 +115,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetSheetFromTemplate(projectId: number, workspaceId: number, templateId: number, sheetName: string): Promise<SmartsheetSheet> {
+    createSmartsheetSheetFromTemplate(projectId: number, templateId: number, sheetName: string): Promise<SmartsheetSheet> {
         return this.makeMsCall(
-            'smartsheet/create-sheet-from-template-in-workspace',
+            'smartsheet/create-sheet-from-template',
             'POST', {
                 project_id: projectId,
-                workspace_id: workspaceId,
                 template_id: templateId,
                 sheet_name: sheetName
             }

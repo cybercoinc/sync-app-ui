@@ -166,7 +166,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(workspaceId => {
                 // create new sheet inside workspace
                 return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
-                    project.id, workspaceId, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
+                    project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
                 );
             })
             .then(createdSheetObj => {
