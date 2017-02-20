@@ -156,12 +156,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getSmartsheetSheetColumns(userId: number, smSheetId: number): Promise<[SmartsheetSheetColumn]> {
+    getSmartsheetSheetColumns(smSheetId: number): Promise<[SmartsheetSheetColumn]> {
         return this.makeMsCall(
             'smartsheet/sheet-columns',
             'GET',
             {
-                user_id: userId,
                 sm_sheet_id: smSheetId
             }
         );

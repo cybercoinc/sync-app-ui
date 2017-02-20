@@ -18,10 +18,7 @@ export class ColumnsMatchingComponent implements OnInit {
 
     ngOnInit() {
         return Promise.all([
-            this.MsProjectClientService.getSmartsheetSheetColumns(
-                this.AuthService.authUser.id,
-                this.smartsheetSheetId
-            ),
+            this.MsProjectClientService.getSmartsheetSheetColumns(this.smartsheetSheetId),
             this.MsSyncClientService.getProcoreTodosColumns()
         ])
             .then(resultsList => {
