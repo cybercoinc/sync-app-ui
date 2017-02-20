@@ -29,7 +29,7 @@ export class SmartsheetConnectionComponent implements OnInit {
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
     @Input('redirect-route') redirectRoute;
 
-    private isShowAlert:   boolean = false;
+    private isShowAlert: boolean = false;
     private isShowSuccess: boolean = false;
     private todos = [];
 
@@ -61,7 +61,7 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         this.MsProjectClientService.deleteTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, todos)
             .then(result => {
-                this.isShowAlert   = false;
+                this.isShowAlert = false;
                 this.isShowSuccess = true;
             });
     }
@@ -213,9 +213,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             })
             .then(workspaceId => {
                 // move sheet to new workspace
-                return this.MsProjectClientService.moveSheetToWorkspace(
-                    project.id, this.selectedSheet.id, workspaceId
-                );
+                return this.MsProjectClientService.moveSheetToWorkspace(this.selectedSheet.id, workspaceId);
             })
             .then(smSheetObj => {
                 // updating pipe

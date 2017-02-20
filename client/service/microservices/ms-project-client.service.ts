@@ -124,11 +124,10 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    moveSheetToWorkspace(projectId: number, sheetId: number, workspaceId: number): Promise<SmartsheetSheet> {
+    moveSheetToWorkspace(sheetId: number, workspaceId: number): Promise<SmartsheetSheet> {
         return this.makeMsCall(
             'smartsheet/move-sheet-to-workspace',
             'POST', {
-                project_id: projectId,
                 workspace_id: workspaceId,
                 sheet_id: sheetId
             }
