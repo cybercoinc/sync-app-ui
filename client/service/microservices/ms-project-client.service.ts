@@ -84,12 +84,9 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetWorkspace(projectId: number, workspaceName: string): Promise<{
-        id: number,
-        permalink: string
-    }> {
+    createSmartsheetWorkspace(projectId: number, workspaceName: string): Promise<number> {
         return this.makeMsCall(
-            'smartsheet/create-workspace',
+            'smartsheet/workspace',
             'POST',
             {
                 workspace_name: workspaceName,

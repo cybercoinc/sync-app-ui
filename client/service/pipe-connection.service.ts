@@ -39,7 +39,7 @@ export class PipeConnectionService implements Resolve<{}> {
         public_todos: ProjectPipe,
         private_todos: ProjectPipe,
         tasks: ProjectPipe,
-    }|{} = {};
+    } | {} = {};
 
     getProject(projectId: number): Promise<Project> {
         return this.MsProjectClientService.getProjectByid(projectId)
@@ -144,24 +144,15 @@ export class PipeConnectionService implements Resolve<{}> {
 
     createNewOrGetExistingWorkspaceId(workspaceName): Promise<number> {
         let project = this.project;
-        let _workspaceId;
 
         return new Promise((resolve, reject) => {
             if (!project.smartsheet_workspace_id) {
                 // create new workspace at smartsheet
-                return this.MsProjectClientService
-                    .createSmartsheetWorkspace(project.id, workspaceName)
-                    .then(workspace => {
-                        _workspaceId = workspace.id;
+                return this.MsProjectClientService.createSmartsheetWorkspace(project.id, workspaceName)
+                    .then(workspaceId => {
+                        this.project.smartsheet_workspace_id = workspaceId;
 
-                        return this.MsProjectClientService.update(project.id, {
-                            smartsheet_workspace_id: _workspaceId
-                        });
-                    })
-                    .then(() => {
-                        this.project.smartsheet_workspace_id = _workspaceId;
-
-                        resolve(_workspaceId);
+                        resolve(workspaceId);
                     })
                     .catch(err => reject(err));
             } else {
