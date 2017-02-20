@@ -347,4 +347,12 @@ export class MsProjectClientService extends MsClientService {
             }
         );
     }
+
+    create(data) {
+        return this.makeMsCall(
+            'projects',
+            'POST',
+            data
+        );
+    }
 }
