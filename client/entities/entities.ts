@@ -124,6 +124,12 @@ export class Project {
         namespace: string;
         path: string|number[]
     };
+    smartsheet_workspace_creator__user_fk_id: {
+        id: number;
+        kind: string;
+        namespace: string;
+        path: string|number[]
+    };
     smartsheet_workspace_id: number;
 }
 

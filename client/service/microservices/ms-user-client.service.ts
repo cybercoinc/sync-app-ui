@@ -88,4 +88,10 @@ export class MsUserClientService extends MsClientService {
             company_id: companyId
         });
     }
+
+    getEmailByUserId(userId: number): Promise<string> {
+        return this.makeMsCall('get-email-by-user-id', 'GET', {
+            user_id: userId
+        });
+    }
 }
