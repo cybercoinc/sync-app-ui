@@ -20,8 +20,7 @@ export class MsProjectClientService extends MsClientService {
                 @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
                 @Inject(Router) protected router: Router,
                 @Inject(AuthService) protected AuthService: AuthService,
-                @Inject(ConfigService) protected ConfigService: ConfigService,
-    ) {
+                @Inject(ConfigService) protected ConfigService: ConfigService,) {
         super(Http, PendingRequestsService, router, AuthService, ConfigService);
 
         this.msName = 'ms-project';
@@ -193,15 +192,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createPipe(projectId: number, dataToSet, pipeName: string): Promise<number> {
+    createPipe(data): Promise<number> {
         return this.makeMsCall(
             'pipes/create-pipe',
             'POST',
-            {
-                project_id: projectId,
-                data: dataToSet,
-                pipe_name: pipeName
-            }
+            data
         );
     }
 
@@ -307,7 +302,7 @@ export class MsProjectClientService extends MsClientService {
             'set-pbr-user',
             'POST',
             {
-                user_id:    userId,
+                user_id: userId,
                 project_id: projectId
             }
         );
@@ -318,7 +313,7 @@ export class MsProjectClientService extends MsClientService {
             'get-todos',
             'GET',
             {
-                user_id:    userId,
+                user_id: userId,
                 project_id: projectId,
                 is_private: isPrivate
             }
@@ -330,7 +325,7 @@ export class MsProjectClientService extends MsClientService {
             'get-tasks',
             'GET',
             {
-                user_id:    userId,
+                user_id: userId,
                 project_id: projectId
             }
         );
@@ -341,9 +336,9 @@ export class MsProjectClientService extends MsClientService {
             'delete-todos',
             'POST',
             {
-                user_id:    userId,
+                user_id: userId,
                 project_id: projectId,
-                todos:      todos
+                todos: todos
             }
         );
     }

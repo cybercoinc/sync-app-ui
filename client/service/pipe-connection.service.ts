@@ -123,8 +123,6 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     createNewOrGetExistingPipe(pipeType) {
-        let project = this.project;
-
         return this.MsProjectClientService.getPipesWhere({
             project_fk_id: this.project.id,
             type: pipeType
@@ -135,13 +133,11 @@ export class PipeConnectionService implements Resolve<{}> {
                 if (existingPipeObj) {
                     return existingPipeObj.id;
                 } else {
-                    return this.MsProjectClientService.createPipe(project.id, {
+                    return this.MsProjectClientService.createPipe({
+                        project_id: this.project.id,
                         type: pipeType,
-                        status: PIPE_STATUS_DISABLED,
-                        procore_company_id: project.procore_company_id,
-                        procore_project_id: project.procore_project_id,
-                        user_fk_id: this.AuthService.authUser.id
-                    }, this.getPipeLabelByType(pipeType));
+                        name: this.getPipeLabelByType(pipeType)
+                    });
                 }
             });
     }
