@@ -1,0 +1,22 @@
+<md-card *ngIf="isShowAlert">
+    <md-card-content>
+        <h5>
+            <p>
+                We detected that this project already have uploaded schedule. To connect it via ScheduleConnector, you have to clear current schedule on Procore.
+            </p>
+
+            <p>
+                NOTE: you won't be able setup connection if Procore Project already have uploaded schedule.
+            </p>
+
+            <p>
+                To do this please follow to
+                <a href="https://app.procore.com/{{procoreProjectId}}/project/calendar/configure_tab" target="_blank">this Procore page</a>
+                and click
+                <a href="https://storage.googleapis.com/static-sc20/howto/Procore-ClearScheduleButton.png" target="_blank">Clear Schedule button</a>
+            </p>
+        </h5>
+    </md-card-content>
+</md-card>
+
+<smartsheet-connection pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>

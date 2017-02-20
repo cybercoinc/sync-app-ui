@@ -1,15 +1,15 @@
 import {Component, OnInit} from "@angular/core";
-import {MsUserClientService} from '../../../service/microservices/ms-user-client.service';
-import {MsProjectClientService} from '../../../service/microservices/ms-project-client.service';
-import {AuthService} from '../../../service/auth.service';
-import {User} from '../../../entities/entities';
+import {AuthService} from "../../../service/auth.service";
+import {User} from "../../../entities/entities";
+import {MsUserClientService} from "../../../service/microservices/ms-user-client.service";
+import {MsProjectClientService} from "../../../service/microservices/ms-project-client.service";
 
 @Component({
-    selector: "companies",
-    templateUrl: 'client/modules/companies/settings/settings.component.html',
-    styleUrls: ['client/modules/companies/settings/settings.component.css'],
+    selector: 'company',
+    templateUrl: 'client/modules/settings/company/company.component.html',
+    styleUrls: ['client/modules/settings/company/company.component.css']
 })
-export class CompanySettingsComponent implements OnInit {
+export class CompanyComponent implements OnInit {
     me:             User    = null;
     company                 = null;
     showDropDown            = false;

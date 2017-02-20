@@ -38,14 +38,17 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         let isPrivate = this.pipeType == 'private_todos';
 
-        if ((isPrivate && !this.pipesListObj.private_todos) || (!isPrivate && !this.pipesListObj.public_todos)) {
-            this.MsProjectClientService.getTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, isPrivate)
-                .then(todos => {
-                    if (todos.length > 0) {
-                        this.todos       = todos;
-                        this.isShowAlert = true;
-                    }
-                });
+        if (this.pipeType == 'public_todos' || this.pipeType == 'private_todos') {
+            if ((isPrivate && !this.pipesListObj.private_todos) || (!isPrivate && !this.pipesListObj.public_todos)) {
+                this.MsProjectClientService.getTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, isPrivate)
+                    .then(todos => {
+                        if (todos.length > 0) {
+                            this.todos = todos;
+                            this.isShowAlert = true;
+                        }
+                    });
+            }
+
         }
     }
 

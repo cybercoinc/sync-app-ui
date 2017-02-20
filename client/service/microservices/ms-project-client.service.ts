@@ -6,7 +6,7 @@ import {
     Project,
     SmartsheetSheet,
     ProjectPipe,
-    User
+    User, SmartsheetWorkspace
 } from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
@@ -94,6 +94,26 @@ export class MsProjectClientService extends MsClientService {
             'POST',
             {
                 workspace_name: workspaceName,
+                project_id: projectId
+            }
+        );
+    }
+
+    getSmartsheetWorkspace(projectId: number): Promise<SmartsheetWorkspace> {
+        return this.makeMsCall(
+            'smartsheet/workspace',
+            'GET',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
+    disconnectWorkspace(projectId: number) {
+        return this.makeMsCall(
+            'smartsheet/workspace/disconnect',
+            'DELETE',
+            {
                 project_id: projectId
             }
         );
@@ -305,6 +325,16 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getTasks(userId: number, projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'get-tasks',
+            'GET',
+            {
+                user_id:    userId,
+                project_id: projectId
+            }
+        );
+    }
 
     deleteTodos(userId, projectId, todos): Promise<any> {
         return this.makeMsCall(

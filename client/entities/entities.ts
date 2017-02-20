@@ -14,7 +14,9 @@ export class User {
     created_at: Date;
     role: string;
     email: string;
+    is_login_as_allowed: boolean;
     pr_user_id: number; // procore user id
+    as_admin: boolean;
     procore_oauth: {
         access_token: string;
         refresh_token: string;
@@ -123,6 +125,18 @@ export class Project {
         path: string|number[]
     };
     smartsheet_workspace_id: number;
+}
+
+export class SmartsheetWorkspace {
+    id: number;
+    name: string;
+    favorite: boolean; // Returned only if the user has marked the Workspace as a Favorite in their Home tab (value = “true”)
+    accessLevel: string; // User’s permissions on the Workspace
+    permalink: string;
+    sheets: SmartsheetSheet[];
+    folders: {}[]; // Array of Folder objects
+    reports: {}[]; // Array of Report objects
+    templates: {}[]; // Array of Template objects
 }
 
 export class ProcoreTodoColumn {

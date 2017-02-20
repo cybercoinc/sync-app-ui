@@ -1,6 +1,6 @@
-import { Component, ElementRef, Input, Output, EventEmitter, forwardRef, ViewChild } from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { noop } from "rxjs/util/noop";
+import {Component, ElementRef, Input, Output, EventEmitter, forwardRef, ViewChild} from "@angular/core";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {noop} from "rxjs/util/noop";
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
@@ -38,6 +38,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
         </div>`,
     styles:  [`
         :host .drop-down-header {
+            width: 100%;
             display: inline-flex;
             align-items: center;
             cursor: pointer;
