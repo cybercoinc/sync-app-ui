@@ -137,12 +137,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    matchDefaultSheetColumns(projectId: number, pipeId: number): Promise<number> {
+    matchDefaultSheetColumns(pipeId: number): Promise<number> {
         return this.makeMsCall(
             'smartsheet/match-default-sheet-columns',
             'POST',
             {
-                project_id: projectId,
                 pipe_id: pipeId
             }
         );

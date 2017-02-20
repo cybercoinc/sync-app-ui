@@ -179,7 +179,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             })
             .then(pipeId => {
                 // matching columns
-                return this.MsProjectClientService.matchDefaultSheetColumns(project.id, _pipeId);
+                return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
