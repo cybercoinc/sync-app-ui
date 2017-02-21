@@ -78,18 +78,16 @@ export class CreateProjectComponent implements OnInit {
     createNewProject() {
         let data = {
             name: this.selectedProject.name,
-            status: this.selectedProject.active ? 'active' : 'inactive',
             procore_company_id: this.selectedProject.company.id,
             procore_project_id: this.selectedProject.id,
-            user_fk_id: this.AuthService.authUser.id,
             company_fk_id: this.AuthService.company.id
         };
 
         let _projectId;
 
         this.MsProjectClientService.create(data)
-            .then(projectIds => {
-                _projectId = projectIds.shift();
+            .then(projectId => {
+                _projectId = projectId;
 
                 if (!_projectId) {
                     throw new Error('no project id found');

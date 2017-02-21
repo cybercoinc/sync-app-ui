@@ -29,7 +29,7 @@ export class SmartsheetConnectionComponent implements OnInit {
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
     @Input('redirect-route') redirectRoute;
 
-    private isShowAlert:   boolean = false;
+    private isShowAlert: boolean = false;
     private isShowSuccess: boolean = false;
     private todos = [];
 
@@ -61,7 +61,7 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         this.MsProjectClientService.deleteTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, todos)
             .then(result => {
-                this.isShowAlert   = false;
+                this.isShowAlert = false;
                 this.isShowSuccess = true;
             });
     }
@@ -127,7 +127,7 @@ export class SmartsheetConnectionComponent implements OnInit {
 
     getSmartsheetSheets() {
         return this.MsProjectClientService
-            .getSmartsheetSheets(this.AuthService.authUser.id);
+            .getSmartsheetSheets();
     }
 
     chooseExistingSheet(sheet) {
@@ -166,7 +166,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(workspaceId => {
                 // create new sheet inside workspace
                 return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
-                    project.id, workspaceId, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
+                    project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
                 );
             })
             .then(createdSheetObj => {
@@ -179,7 +179,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             })
             .then(pipeId => {
                 // matching columns
-                return this.MsProjectClientService.matchDefaultSheetColumns(project.id, _pipeId);
+                return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
@@ -213,9 +213,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             })
             .then(workspaceId => {
                 // move sheet to new workspace
-                return this.MsProjectClientService.moveSheetToWorkspace(
-                    project.id, this.selectedSheet.id, workspaceId
-                );
+                return this.MsProjectClientService.moveSheetToWorkspace(this.selectedSheet.id, workspaceId);
             })
             .then(smSheetObj => {
                 // updating pipe

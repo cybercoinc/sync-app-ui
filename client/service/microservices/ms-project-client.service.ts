@@ -20,8 +20,7 @@ export class MsProjectClientService extends MsClientService {
                 @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
                 @Inject(Router) protected router: Router,
                 @Inject(AuthService) protected AuthService: AuthService,
-                @Inject(ConfigService) protected ConfigService: ConfigService,
-    ) {
+                @Inject(ConfigService) protected ConfigService: ConfigService,) {
         super(Http, PendingRequestsService, router, AuthService, ConfigService);
 
         this.msName = 'ms-project';
@@ -67,13 +66,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getSmartsheetSheets(userId): Promise<SmartsheetSheet[]> {
+    getSmartsheetSheets(): Promise<SmartsheetSheet[]> {
         return this.makeMsCall(
             'smartsheet/sheets',
             'GET',
-            {
-                user_id: userId
-            }
+            {}
         );
     }
 
@@ -85,12 +82,9 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetWorkspace(projectId: number, workspaceName: string): Promise<{
-        id: number,
-        permalink: string
-    }> {
+    createSmartsheetWorkspace(projectId: number, workspaceName: string): Promise<number> {
         return this.makeMsCall(
-            'smartsheet/create-workspace',
+            'smartsheet/workspace',
             'POST',
             {
                 workspace_name: workspaceName,
@@ -119,35 +113,32 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetSheetFromTemplate(projectId: number, workspaceId: number, templateId: number, sheetName: string): Promise<SmartsheetSheet> {
+    createSmartsheetSheetFromTemplate(projectId: number, templateId: number, sheetName: string): Promise<SmartsheetSheet> {
         return this.makeMsCall(
-            'smartsheet/create-sheet-from-template-in-workspace',
+            'smartsheet/create-sheet-from-template',
             'POST', {
                 project_id: projectId,
-                workspace_id: workspaceId,
                 template_id: templateId,
                 sheet_name: sheetName
             }
         );
     }
 
-    moveSheetToWorkspace(projectId: number, sheetId: number, workspaceId: number): Promise<SmartsheetSheet> {
+    moveSheetToWorkspace(sheetId: number, workspaceId: number): Promise<SmartsheetSheet> {
         return this.makeMsCall(
             'smartsheet/move-sheet-to-workspace',
             'POST', {
-                project_id: projectId,
                 workspace_id: workspaceId,
                 sheet_id: sheetId
             }
         );
     }
 
-    matchDefaultSheetColumns(projectId: number, pipeId: number): Promise<number> {
+    matchDefaultSheetColumns(pipeId: number): Promise<number> {
         return this.makeMsCall(
             'smartsheet/match-default-sheet-columns',
             'POST',
             {
-                project_id: projectId,
                 pipe_id: pipeId
             }
         );
@@ -164,12 +155,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getSmartsheetSheetColumns(userId: number, smSheetId: number): Promise<[SmartsheetSheetColumn]> {
+    getSmartsheetSheetColumns(smSheetId: number): Promise<[SmartsheetSheetColumn]> {
         return this.makeMsCall(
             'smartsheet/sheet-columns',
             'GET',
             {
-                user_id: userId,
                 sm_sheet_id: smSheetId
             }
         );
@@ -193,15 +183,11 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createPipe(projectId: number, dataToSet, pipeName: string): Promise<number> {
+    createPipe(data): Promise<number> {
         return this.makeMsCall(
             'pipes/create-pipe',
             'POST',
-            {
-                project_id: projectId,
-                data: dataToSet,
-                pipe_name: pipeName
-            }
+            data
         );
     }
 
@@ -307,7 +293,7 @@ export class MsProjectClientService extends MsClientService {
             'set-pbr-user',
             'POST',
             {
-                user_id:    userId,
+                user_id: userId,
                 project_id: projectId
             }
         );
@@ -318,7 +304,7 @@ export class MsProjectClientService extends MsClientService {
             'get-todos',
             'GET',
             {
-                user_id:    userId,
+                user_id: userId,
                 project_id: projectId,
                 is_private: isPrivate
             }
@@ -330,7 +316,7 @@ export class MsProjectClientService extends MsClientService {
             'get-tasks',
             'GET',
             {
-                user_id:    userId,
+                user_id: userId,
                 project_id: projectId
             }
         );
@@ -341,10 +327,18 @@ export class MsProjectClientService extends MsClientService {
             'delete-todos',
             'POST',
             {
-                user_id:    userId,
+                user_id: userId,
                 project_id: projectId,
-                todos:      todos
+                todos: todos
             }
+        );
+    }
+
+    create(data) {
+        return this.makeMsCall(
+            'projects',
+            'POST',
+            data
         );
     }
 }

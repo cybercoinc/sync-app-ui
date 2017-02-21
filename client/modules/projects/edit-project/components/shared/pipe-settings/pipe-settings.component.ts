@@ -58,7 +58,7 @@ export class PipeSettingsComponent implements OnInit {
         },
         sm_weekends: '',
         summary_tasks_enabled: false,
-        colors_coding_enabled: false,
+        colors_coding_enabled: true,
     };
 
     saveAndContinue() {
