@@ -4,7 +4,7 @@ import {AuthService} from 'client/service/auth.service';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
 import {Router, ActivatedRoute} from '@angular/router';
-import {SmartsheetSheet} from 'client/entities/entities';
+import {SmartsheetSheet, PIPE_TYPE_TASKS} from 'client/entities/entities';
 import {PendingRequestsService} from "client/service/pending-requests.service";
 import {ConfigService} from "client/service/config.service";
 
@@ -177,7 +177,14 @@ export class SmartsheetConnectionComponent implements OnInit {
                     sm_sheet_name: createdSheetObj.name,
                 });
             })
-            .then(pipeId => {
+            .then(() => {
+                if (this.pipeType === PIPE_TYPE_TASKS) {
+                    return this.MsProjectClientService.addResourceColumnToSheet(_pipeId);
+                }
+            })
+            .then(columnObj => {
+                // todo return column obj to match it
+
                 // matching columns
                 return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
             })

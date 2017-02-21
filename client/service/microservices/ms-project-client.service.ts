@@ -124,6 +124,15 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    addResourceColumnToSheet(pipeId: number): Promise<any> {
+        return this.makeMsCall(
+            'smartsheet/add-resource-column-to-sheet',
+            'POST', {
+                pipe_id: pipeId
+            }
+        );
+    }
+
     moveSheetToWorkspace(sheetId: number, workspaceId: number): Promise<SmartsheetSheet> {
         return this.makeMsCall(
             'smartsheet/move-sheet-to-workspace',
