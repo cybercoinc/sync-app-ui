@@ -183,8 +183,7 @@ export class SmartsheetConnectionComponent implements OnInit {
                 }
             })
             .then(columnObj => {
-                // todo return column obj to match it
-
+                // todo add resource column to matched
                 // matching columns
                 return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
             })
