@@ -169,7 +169,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 label = 'Project Calendar Items';
                 break;
             case 'private_todos': {
-                label = 'Company Calendar Items';
+                label = 'Private Calendar Items';
                 break;
             }
             case 'tasks': {
