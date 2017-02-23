@@ -3,35 +3,41 @@
         <h5>Workspace Management:</h5>
 
         <div class="row">
-            <div class="col-xs-12" *ngIf="workspace === undefined"><i class="fa fa-cog fa-spin fa-fw"></i> Getting
-                workspace information
+            <div class="col-xs-12" *ngIf="!wpInfoReceived">
+                <i class="fa fa-cog fa-spin fa-fw"></i> Getting workspace information
             </div>
 
-            <div class="col-xs-12" *ngIf="workspace === null">
-                <div class="row">
+            <div class="col-xs-12" *ngIf="wpInfoReceived">
+                <div class="row" *ngIf="workspace === null">
                     <div class="col-xs-12">
                         No workspace connected.
                     </div>
                 </div>
-            </div>
 
-            <div class="col-xs-12" *ngIf="workspace">
-                <div class="row">
-                    <div class="col-xs-12" *ngIf="authUserIsCreator">
+                <div class="row" *ngIf="workspace">
+                    <div class="col-xs-12">
                         {{workspace?.name}} <a href="{{workspace?.permalink}}" target="_blank" class="btn btn-success">Open</a>
                     </div>
-                    <div class="col-xs-12" *ngIf="!authUserIsCreator">
-                        <u>Warning!</u> You do not have access to connected Workspace or it was deleted. Please, contact Workspace owner to get additional information.
+                </div>
+
+                <div class="row" *ngIf="errorGettingWpInfo">
+                    <div class="col-xs-12">
+                        <u>Warning!</u> You do not have access to connected Workspace or it was deleted. Please, contact
+                        Workspace owner to get additional information.
                     </div>
+
                     <div class="col-xs-12">
                         <b>Creator</b>: {{workspaceCreatorEmail}}
                     </div>
-                    <br>
-                    <br>
+                </div>
+
+                <div class="row" *ngIf="workspace || errorGettingWpInfo">
                     <br>
                     <div class="col-xs-12">
-                        <a (click)=disconnectWorkspace() [class.disabled]="!canDisconnectWorkspace" class="btn btn-danger">Disconnect from project</a>
-                        <p *ngIf="!canDisconnectWorkspace">To disconnect Workspace you need to remove Project Pipes first.</p>
+                        <a (click)=disconnectWorkspace() [class.disabled]="!canDisconnectWorkspace"
+                           class="btn btn-danger">Disconnect from project</a>
+                        <p *ngIf="!canDisconnectWorkspace">To disconnect Workspace you need to remove Project Pipes
+                            first.</p>
                     </div>
                 </div>
             </div>
