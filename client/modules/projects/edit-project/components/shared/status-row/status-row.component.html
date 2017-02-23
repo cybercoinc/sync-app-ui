@@ -11,7 +11,7 @@
                         <div *ngIf="(pipesListObj[pipeType]?.status != 'active')"
                              style="display: block; float: left">
                             <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
-                               [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id && pipesListObj[pipeType]?.sm_working_days)"
+                               [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id)"
                                class="btn btn-success">enable</a>
                         </div>
                         <div *ngIf="(pipesListObj[pipeType]?.status == 'active')"

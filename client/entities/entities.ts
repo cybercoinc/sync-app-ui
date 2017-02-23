@@ -43,7 +43,7 @@ export class SyncSession {
         id: number;
         kind: string;
         namespace: string;
-        path: string|number[]
+        path: string | number[]
     };
     started_by: 'cron' | 'user' | 'webhook';
     status: 'created' | 'completed' | 'failed';
@@ -88,11 +88,11 @@ export class ItemChanges {
         id: number;
         kind: string;
         namespace: string;
-        path: string|number[]
+        path: string | number[]
     };
-    type: 'created_one'|'changed_one'|'deleted_one';
+    type: 'created_one' | 'changed_one' | 'deleted_one';
     item: Item;
-    changes: [{property: string; old_value: string|number;new_value: string|number}];
+    changes: [{ property: string; old_value: string | number; new_value: string | number }];
 }
 
 export class ProcoreProject {
@@ -116,19 +116,19 @@ export class Project {
     id: number;
     procore_project_id: number;
     name: string;
-    status: 'active'  | 'disabled';
+    status: 'active' | 'disabled';
     procore_company_id: number;
     creds_holder__user_fk_id: {
         id: number;
         kind: string;
         namespace: string;
-        path: string|number[]
+        path: string | number[]
     };
     smartsheet_workspace_creator__user_fk_id: {
         id: number;
         kind: string;
         namespace: string;
-        path: string|number[]
+        path: string | number[]
     };
     smartsheet_workspace_id: number;
 }
@@ -159,6 +159,35 @@ export class SmartsheetSheet {
     permalink: string;
 }
 
+/**
+ * https://smartsheet-platform.github.io/api-docs/?shell#column-object
+ */
+export class SmartsheetColumn {
+    id: number;
+    index: number;
+    primary: boolean;
+    type:
+        'TEXT_NUMBER'
+        | 'DATE'
+        | 'DATETIME'
+        | 'CONTACT_LIST'
+        | 'CHECKBOX'
+        | 'PICKLIST'
+        | 'DURATION'
+        | 'PREDECESSOR'
+        | 'ABSTRACT_DATETIME';
+    options: string[];
+    hidden: boolean;
+    symbol: string;
+    systemColumnType: string;
+    tags: string[];
+    width: number;
+    format: string;
+    filter: {};
+    locked: boolean;
+    lockedForUser: boolean;
+}
+
 export class SmartsheetSheetColumn {
     id: number;
     index: number;
@@ -177,13 +206,13 @@ export class ProjectPipe {
         id: number;
         kind: string;
         namespace: string;
-        path: string|number[]
+        path: string | number[]
     };
     creds_holder__user_fk_id: {
         id: number;
         kind: string;
         namespace: string;
-        path: string|number[]
+        path: string | number[]
     };
     procore_project_id: number;
     procore_company_id: number;

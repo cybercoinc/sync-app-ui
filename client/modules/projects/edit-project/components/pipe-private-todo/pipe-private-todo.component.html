@@ -1,16 +1,6 @@
 <status-row pipe-type="{{pipeType}}"></status-row>
+
 <div class="row">
-    <div class="col-xs-3 pipe-config-steps">
-        <pipe-step-row step-status="{{pipesListObj[pipeType]?.sm_sheet_id? 'completed' : 'not-completed'}}"
-                       step-name="SmartSheet Connection" step-description=""
-                       [action]="['smartsheet-connection-private']"></pipe-step-row>
-
-        <pipe-step-row
-                step-status="{{pipesListObj[pipeType]?.sm_working_days && pipesListObj[pipeType]?.sm_weekends? 'completed' : 'not-completed'}}"
-                step-name="Settings" step-description=""
-                [action]="['settings-private']"></pipe-step-row>
-    </div>
-
     <div class="col-xs-9 pipe-step-container">
         <router-outlet></router-outlet>
     </div>
