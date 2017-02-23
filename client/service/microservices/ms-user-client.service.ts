@@ -18,9 +18,9 @@ export class MsUserClientService extends MsClientService {
         this.msName = 'ms-user';
     }
 
-    getCompany(userId): Promise<any> {
+    getCompany(companyId): Promise<any> {
         return this.makeMsCall('get-company', 'GET', {
-            userId: userId
+            companyId: companyId
         });
     }
 

@@ -25,7 +25,7 @@ export class CompanyComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.getSettings(this.AuthService.authUser.id)
+        this.getSettings()
             .then(() => {
                 this.isBillingUser = this.AuthService.authUser.id == this.pbrId;
             });
@@ -51,8 +51,8 @@ export class CompanyComponent implements OnInit {
         this.showDropDown = !this.showDropDown;
     }
 
-    getSettings(userId) {
-        return this.MsUserClientService.getCompany(userId)
+    getSettings() {
+        return this.MsUserClientService.getCompany(this.AuthService.company.id)
             .then(company => {
                 this.company     = company;
                 if (company.pbr) {

@@ -95,7 +95,7 @@ export class Dialog {
                 this.MsLicenseClientService.createCreditCard(this.AuthService.authUser.id, this.creditCard)
                     .then(response => {
                         if (response.success) {
-                            this.creditCard.maskedCardNumber = response.data.credit_card.masked_number;
+                            this.creditCard.maskedCardNumber = response.data.masked_number;
                             this.creditCard.customerId = response.data.customer_id;
                             this.creditCard.id = response.data.id;
                             this.isVisible = false;
