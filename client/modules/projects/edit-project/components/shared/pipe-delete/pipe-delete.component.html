@@ -11,7 +11,7 @@
     <div class="row" *ngIf="!isConfirmationVisible">
         <div class="col-xs-6">
             <button (click)="showConfirmation()" [disabled]="pipe?.status === 'active'" class="btn btn-warning">Remove this Pipe Connection</button>
-            <p *ngIf="pipe?.status === 'active'">To remove this Pipe Connection you should click to DISABLE button</p>
+            <p *ngIf="pipe?.status === 'active'">To remove this Pipe Connection you should disable it firstly</p>
         </div>
     </div>
 
