@@ -20,44 +20,57 @@ export class WorkspaceManagementComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.authUserIsCreator) {
-            this.msProjectClientService.getSmartsheetWorkspace(this.projectId)
-                .then(workspace => {
-                    this.workspace = workspace;
-                })
-                .catch(err => {
-                    this.workspace = {};
-                    this.authUserIsCreator = false;
-                })
-        }
+        this.msProjectClientService.getProjectByid(this.projectId)
+            .then(projects => {
+                this.project = projects.shift();
 
-        Promise.all([
-            this.msProjectClientService.getPipesWhere({
-                project_fk_id: this.projectId
-            }),
-            this.msUserClientService.getEmailByUserId(this.project.smartsheet_workspace_creator__user_fk_id.id)
-        ])
-            .then(results => {
-                this.canDisconnectWorkspace = results[0].length === 0;
-                this.workspaceCreatorEmail = results[1];
+                if (!this.project || !this.project.smartsheet_workspace_id || !this.project.smartsheet_workspace_creator__user_fk_id) {
+                    this.wpInfoReceived = true;
+                    this.workspace = null;
+
+                    return;
+                }
+
+                this.msProjectClientService.getSmartsheetWorkspace(this.projectId)
+                    .then(workspace => {
+                        this.wpInfoReceived = true;
+                        this.workspace = workspace;
+                    })
+                    .catch(err => {
+                        this.wpInfoReceived = true;
+                        this.errorGettingWpInfo = true;
+                    });
+
+                return Promise.all([
+                    this.msProjectClientService.getPipesWhere({
+                        project_fk_id: this.projectId
+                    }),
+                    this.msUserClientService.getEmailByUserId(this.project.smartsheet_workspace_creator__user_fk_id.id)
+                ])
+                    .then(results => {
+                        this.canDisconnectWorkspace = results[0].length === 0;
+                        this.workspaceCreatorEmail = results[1];
+                    });
             });
     }
 
     @Input('project-id') projectId: number;
 
-    protected workspace: SmartsheetWorkspace|{};
-    protected project: Project = this.pipeConnectionService.project;
+    protected workspace: SmartsheetWorkspace | {};
+    protected project: Project;
     protected workspaceCreatorEmail: string;
 
     disconnectWorkspace() {
         return this.msProjectClientService.disconnectWorkspace(this.projectId)
             .then(() => {
-                this.project.smartsheet_workspace_id = null;
+                this.pipeConnectionService.project.smartsheet_workspace_id = null;
                 this.workspace = null;
                 this.workspaceCreatorEmail = null;
             })
     }
 
     protected canDisconnectWorkspace: boolean = false;
-    protected authUserIsCreator: boolean = this.project.smartsheet_workspace_creator__user_fk_id.id === this.AuthService.authUser.id;
+
+    protected wpInfoReceived: boolean = false;
+    protected errorGettingWpInfo: boolean = false;
 }
