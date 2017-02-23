@@ -81,7 +81,7 @@ body h1 {
 .navbar-nav > li > a {
     color: #fff;
     font-size: 19px;
-    padding-top: 12px;
+    padding-top: 32px;
     display: inline-flex;
     vertical-align: middle;
     padding-bottom: 0px;
@@ -89,6 +89,7 @@ body h1 {
 
 .navbar-nav > li > div {
     padding-left: 15px;
+    margin-bottom: -22px;
 }
 
 .module-header {
