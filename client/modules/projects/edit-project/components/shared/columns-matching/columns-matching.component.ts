@@ -19,7 +19,7 @@ export class ColumnsMatchingComponent implements OnInit {
     ngOnInit() {
         return Promise.all([
             this.MsProjectClientService.getSmartsheetSheetColumns(this.smartsheetSheetId),
-            this.MsSyncClientService.getProcoreTodosColumns()
+            this.MsSyncClientService.getProcoreTodosColumns(this.pipeType)
         ])
             .then(resultsList => {
                 let smColumns = resultsList[0];
@@ -67,6 +67,7 @@ export class ColumnsMatchingComponent implements OnInit {
     }
 
     @Input('sheet-id') smartsheetSheetId: number;
+    @Input('pipe-type') pipeType: string;
 
     protected smColumns: SmartsheetSheetColumn[];
     protected prColumns: ProcoreTodoColumn[];
