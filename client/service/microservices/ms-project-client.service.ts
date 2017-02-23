@@ -6,7 +6,7 @@ import {
     Project,
     SmartsheetSheet,
     ProjectPipe,
-    User, SmartsheetWorkspace
+    User, SmartsheetWorkspace, SmartsheetColumn
 } from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
@@ -120,6 +120,15 @@ export class MsProjectClientService extends MsClientService {
                 project_id: projectId,
                 template_id: templateId,
                 sheet_name: sheetName
+            }
+        );
+    }
+
+    addResourceColumnToSheet(pipeId: number): Promise<SmartsheetColumn> {
+        return this.makeMsCall(
+            'smartsheet/add-resource-column-to-sheet',
+            'POST', {
+                pipe_id: pipeId
             }
         );
     }

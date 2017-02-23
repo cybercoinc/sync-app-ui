@@ -40,11 +40,13 @@ export class MsSyncClientService extends MsClientService {
         );
     }
 
-    getProcoreTodosColumns(): Promise<[ProcoreTodoColumn]> {
+    getProcoreTodosColumns(pipeType: string): Promise<[ProcoreTodoColumn]> {
         return this.makeMsCall(
             'get-procore-todos-columns',
             'GET',
-            {}
+            {
+                pipe_type: pipeType
+            }
         )
     }
 }

@@ -75,7 +75,7 @@
             </div>
 
             <div class="col-xs-8 col-xs-offset-2">
-                <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}"
+                <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}" [pipe-type]="pipeType"
                                   (columnsMatched)="onColumnsMatched($event)"></columns-matching>
             </div>
         </section>

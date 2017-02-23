@@ -1,5 +1,5 @@
 {
   "GCLOUD_PROJECT": "scheduleconnector-prod",
   "accessEndPointURL": "https://app.scheduleconnector.com/",
-  "ms_main_url": "https://ms-main-dot-scheduleconnector-prod.appspot.com/"
+  "ms_main_url": "https://ms-main-dot-scheduleconnector-prod.appspot-preview.com/"
 }
