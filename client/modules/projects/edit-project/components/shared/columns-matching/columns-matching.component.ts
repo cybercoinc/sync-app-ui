@@ -29,16 +29,16 @@ export class ColumnsMatchingComponent implements OnInit {
                 this.prColumns = prColumns;
 
                 this.prColumns.forEach(prColumn => {
-                    this.model[prColumn.slug] = this.prefillDropdownValue(prColumn.title) || '';
+                    this.model[prColumn.slug] = this.prefillDropdownValue(prColumn) || '';
                 });
             });
     }
 
-    prefillDropdownValue(prColumnName) {
+    prefillDropdownValue(prColumn) {
         let prefilledId = null;
 
         this.smColumns.forEach(smColumn => {
-            if (prColumnName === smColumn.title) {
+            if (prColumn.title === smColumn.title && !this.isNotAvailable(smColumn, prColumn)) {
                 prefilledId = smColumn.id;
 
                 return false;
@@ -56,7 +56,14 @@ export class ColumnsMatchingComponent implements OnInit {
                 // if not in current dropdown
                 if (prop !== prColumn.slug && Number(this.model[prop]) === Number(smColumn.id)) {
                     notAvailable = true;
-                } else if (smColumn.type !== prColumn.type) {
+                }
+
+                if (Array.isArray(prColumn.type) && prColumn.type.indexOf(smColumn.type) === -1) {
+                    // if type is array and value is not allowed
+                    notAvailable = true;
+                }
+
+                if (!Array.isArray(prColumn.type) && smColumn.type !== prColumn.type) {
                     // if type is not allowed
                     notAvailable = true;
                 }
