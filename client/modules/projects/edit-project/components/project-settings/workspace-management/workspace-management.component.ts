@@ -66,6 +66,7 @@ export class WorkspaceManagementComponent implements OnInit {
                 this.pipeConnectionService.project.smartsheet_workspace_id = null;
                 this.workspace = null;
                 this.workspaceCreatorEmail = null;
+                this.errorGettingWpInfo = false;
             })
     }
 
