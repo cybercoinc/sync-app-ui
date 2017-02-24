@@ -17,6 +17,7 @@ import {MsLicenseClientService} from './service/microservices/ms-license-client.
 import {AuthService} from './service/auth.service';
 import {PipeConnectionService} from './service/pipe-connection.service';
 import {AuthGuardService} from './service/auth-guard.service';
+import {ProjectGuardService} from './service/project-guard.service';
 
 import {AuthModule} from "./modules/auth/auth.module";
 import {ConnectionModule} from 'client/modules/connection/connection.module';
@@ -49,6 +50,7 @@ import {GuestBootstrapService} from "./service/resolvers/guest-bootstrap.service
         AuthService,
         RbacService,
         AuthGuardService,
+        ProjectGuardService,
         PendingRequestsService,
         MsProjectClientService,
         MsUserClientService,
