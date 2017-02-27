@@ -232,6 +232,7 @@ export class ProjectPipe {
     sm_webhook_id: number;
     sm_sheet_name: string;
     summary_tasks_enabled: boolean;
+    need_to_match_sm_columns: boolean;
     colors_coding_enabled: boolean;
 }
 

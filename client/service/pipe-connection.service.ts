@@ -104,9 +104,7 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     disablePipe(pipeId) {
-        return this.MsProjectClientService.updatePipe(pipeId, {
-            status: PIPE_STATUS_DISABLED
-        })
+        return this.MsProjectClientService.disablePipe(pipeId)
             .then(() => {
                 return this.refreshPipesList();
             })
@@ -169,7 +167,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 label = 'Project Items';
                 break;
             case 'private_todos':
-                label = 'Company Items';
+                label = 'Private Items';
                 break;
             case 'tasks':
                 label = 'Project Schedule';

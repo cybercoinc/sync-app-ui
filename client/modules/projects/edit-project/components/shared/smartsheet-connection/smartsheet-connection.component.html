@@ -9,9 +9,11 @@
                 <h5>
                     <div>We have detected that this project has existing Calendar Tasks in Procore.</div>
                     <div>Do you want to sync these tasks?</div>
-                    <br />
-                    <div><strong>Special Migration Note:</strong> For companies moving projects from Schedule Connector version 1.x to 2.0, avoid duplicates by selecting 'Remove Calendar Tasks'.</div>
-                    <br />
+                    <br/>
+                    <div><strong>Special Migration Note:</strong> For companies moving projects from Schedule Connector
+                        version 1.x to 2.0, avoid duplicates by selecting 'Remove Calendar Tasks'.
+                    </div>
+                    <br/>
                 </h5>
 
                 <button class="btn btn-primary" (click)="hideAlert()">Sync Tasks</button>
@@ -26,8 +28,12 @@
             </div>
 
             <div class="col-xs-6 col-xs-offset-4" *ngIf="!isShowAlert">
-                <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"  (click)="startChoosingExistingSheet()">Yes</button>
-                <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined" (click)="createNewSheetWithWorkspace()">No</button>
+                <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                        (click)="startChoosingExistingSheet()">Yes
+                </button>
+                <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                        (click)="createNewSheetWithWorkspace()">No
+                </button>
             </div>
         </div>
 
@@ -95,3 +101,11 @@
     <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
 </div>
 
+<div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <columns-matching sheet-id="{{pipesListObj[pipeType]?.sm_sheet_id}}"
+                              (columnsMatched)="onColumnsRematched($event)"></columns-matching>
+        </div>
+    </div>
+</div>
