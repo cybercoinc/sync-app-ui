@@ -9,20 +9,22 @@
                 <div class="row license-table-header bottom-lined">
                     <div class="col-xs-2">#ID</div>
                     <div class="col-xs-2">Status</div>
-                    <div class="col-xs-3">Type</div>
-                    <div class="col-xs-3">Project</div>
-                    <div class="col-xs-2">Exp.Date</div>
+                    <div class="col-xs-2">Created Date</div>
+                    <div class="col-xs-2">Project</div>
+                    <div class="col-xs-1">In use</div>
+                    <div class="col-xs-2">Last used</div>
                 </div>
 
                 <div>
                     <div class="row license-table-row bottom-lined" *ngFor="let license of licenses">
                         <div class="col-xs-2">{{license.id}}</div>
                         <div class="col-xs-2">{{license.status}}</div>
-                        <div class="col-xs-3">{{license.type}}</div>
-                        <div class="col-xs-3">
-                            <a [routerLink]="['/projects/' + license.project.id, 'edit-project']">{{license.project.name}}</a>
+                        <div class="col-xs-2">{{license.created_at|date}}</div>
+                        <div class="col-xs-2">
+                            <a *ngIf="license.project" [routerLink]="['/projects/' + license.project.id, 'edit-project']">{{license.project.name}}</a>
                         </div>
-                        <div class="col-xs-2">{{license.expiration_timestamp|date}}</div>
+                        <div class="col-xs-1">{{license.in_use}}</div>
+                        <div *ngIf="license.last_used_at" class="col-xs-2">{{license.last_used_at|date}}</div>
                     </div>
                 </div>
             </div>
