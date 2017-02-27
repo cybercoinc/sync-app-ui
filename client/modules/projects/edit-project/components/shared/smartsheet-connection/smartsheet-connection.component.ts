@@ -34,6 +34,8 @@ export class SmartsheetConnectionComponent implements OnInit {
     private todos = [];
 
     ngOnInit() {
+        this.PipeConnectionService.refreshPipesList();
+
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
 
         let isPrivate = this.pipeType == 'private_todos';
@@ -50,6 +52,9 @@ export class SmartsheetConnectionComponent implements OnInit {
             }
 
         }
+
+        // if need to rematch columns
+        this.needToRematchColumns = this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].need_to_match_sm_columns;
     }
 
     removeTodos(): void {
@@ -79,6 +84,7 @@ export class SmartsheetConnectionComponent implements OnInit {
     protected filterTimeout;
 
     protected columnsMatchingIsVisible: boolean = false;
+    protected needToRematchColumns: boolean = false;
 
     protected haveExistingSheet: boolean;
 
@@ -197,6 +203,17 @@ export class SmartsheetConnectionComponent implements OnInit {
 
     showColumnsMatching() {
         this.columnsMatchingIsVisible = true;
+    }
+
+    onColumnsRematched(columnsObj) {
+        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
+            .then(pipeId => {
+                // matching columns
+                return this.MsProjectClientService.saveMatchedColumns(pipeId, columnsObj);
+            })
+            .then(() => {
+                return this.PipeConnectionService.refreshPipesList();
+            })
     }
 
     onColumnsMatched(columnsObj): boolean | Promise<boolean> {
