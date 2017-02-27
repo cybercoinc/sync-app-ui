@@ -158,8 +158,8 @@ export class SmartsheetConnectionComponent implements OnInit {
         let project = this.PipeConnectionService.project;
 
         let procoreProjectName = project.name;
-        let workspaceName = procoreProjectName.length > 20 ? procoreProjectName.slice(0, 20) + '...' : procoreProjectName;
-        let newSheetName = workspaceName + ' ' + this.PipeConnectionService.getPipeLabelByType(this.pipeType) + ' Procore Sync';
+        let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) + '...' : procoreProjectName;
+        let newSheetName = workspaceName + ' ' + this.PipeConnectionService.getPipeLabelByType(this.pipeType);
 
         let _pipeId;
 

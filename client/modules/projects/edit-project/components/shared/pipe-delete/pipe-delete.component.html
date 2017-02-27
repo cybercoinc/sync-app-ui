@@ -1,4 +1,4 @@
-<div class="container-fluid pipe-delete-container" *ngIf="pipe?.status === 'disabled'">
+<div class="container-fluid pipe-delete-container">
     <div class="row">
         <div class="col-xs-12">
             <h5 class="warning-text">
@@ -9,8 +9,9 @@
     </div>
 
     <div class="row" *ngIf="!isConfirmationVisible">
-        <div class="col-xs-4">
-            <button (click)="showConfirmation()" [disabled]="deleteButtonDisabled" class="btn btn-warning">Remove this Pipe Connection</button>
+        <div class="col-xs-6">
+            <button (click)="showConfirmation()" [disabled]="pipe?.status === 'active'" class="btn btn-warning">Remove this Pipe Connection</button>
+            <p *ngIf="pipe?.status === 'active'">To remove this Pipe Connection you should disable it firstly</p>
         </div>
     </div>
 
