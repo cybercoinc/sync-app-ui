@@ -104,9 +104,7 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     disablePipe(pipeId) {
-        return this.MsProjectClientService.updatePipe(pipeId, {
-            status: PIPE_STATUS_DISABLED
-        })
+        return this.MsProjectClientService.disablePipe(pipeId)
             .then(() => {
                 return this.refreshPipesList();
             })
