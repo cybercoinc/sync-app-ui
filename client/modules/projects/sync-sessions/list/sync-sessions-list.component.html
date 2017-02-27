@@ -1,14 +1,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            <div class="filter-container" *ngIf="onlyWithChanges" >
-                Changes only | <a (click)="showOnlyWithItemChanges(false)">All</a>
-            </div>
-            <div class="filter-container" *ngIf="!onlyWithChanges" >
-                <a (click)="showOnlyWithItemChanges(true)">Changes only</a> | All
-            </div>
+            <button class="btn btn-default" [disabled]="filter === 'ALL'" (click)="showAll()">All</button>
+            <button class="btn btn-default" [disabled]="filter == 'CHANGES_ONLY'" (click)="showOnlyWithItemChanges()">
+                Changes only
+            </button>
+            <button class="btn btn-default" [disabled]="filter === 'FAILED'" (click)="showFailed()">Failed</button>
         </div>
     </div>
+    <br>
 
     <div class="row" *ngIf="!syncSessionsList">
         <div class="col-xs-12">
@@ -18,7 +18,7 @@
 
     <div class="row" *ngIf="syncSessionsList?.length === 0">
         <div class="col-xs-12">
-            <h5>No sync sessions <span *ngIf="onlyWithChanges">with changes</span>.</h5>
+            <h5>No such sync sessions.</h5>
         </div>
     </div>
 

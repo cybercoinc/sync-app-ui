@@ -32,7 +32,9 @@ export class SyncSessionsListComponent implements OnInit {
     syncSessionsList: SyncSession[] = null;
     projectPipe: ProjectPipe;
 
-    protected onlyWithChanges: boolean = true;
+    protected pipeObj: ProjectPipe;
+
+    protected filter: 'CHANGES_ONLY' | 'ALL' | 'FAILED';
 
     ngOnInit() {
         this.ActivatedRoute.parent.params.forEach((params) => {
@@ -42,26 +44,37 @@ export class SyncSessionsListComponent implements OnInit {
         this.sub = this.ActivatedRoute.params.subscribe(params => {
             this.pipeType = params['pipe_type'];
 
-            this.getSyncSessionsList(this.projectId, this.pipeType);
+            return this.MsProjectClientService.getPipesWhere({
+                type: this.pipeType,
+                project_fk_id: this.projectId
+            })
+                .then(pipesList => {
+                    this.projectPipe = pipesList.shift();
+
+                    return this.showAll();
+                });
         });
     }
 
-    getSyncSessionsList(projectId, pipeType) {
+    getSyncSessionsList() {
         this.syncSessionsList = null;
 
-        return this.MsProjectClientService.getPipesWhere({
-            type: pipeType,
-            project_fk_id: projectId
-        })
-            .then((pipesList) => {
-                this.projectPipe = pipesList.shift();
+        if (!this.projectPipe) {
+            this.syncSessionsList = [];
+        }
 
-                if (!this.projectPipe) {
-                    return [];
-                }
+        let filterObj = {};
 
-                return this.MsSyncClientService.getLastPipeSyncSessions(this.projectPipe.id, this.onlyWithChanges);
-            })
+        filterObj['pipe_fk_id'] = this.projectPipe.id;
+
+        if (this.filter === 'CHANGES_ONLY') {
+            filterObj['has_item_changes'] = true;
+
+        } else if (this.filter === 'FAILED') {
+            filterObj['status'] = 'failed';
+        }
+
+        return this.MsSyncClientService.getLastPipeSyncSessions(filterObj)
             .then(syncSessionsList => {
                 this.syncSessionsList = this.orderByDate(syncSessionsList);
 
@@ -75,8 +88,21 @@ export class SyncSessionsListComponent implements OnInit {
         });
     }
 
-    showOnlyWithItemChanges(onlyWithChanges) {
-        this.onlyWithChanges = onlyWithChanges;
-        return this.getSyncSessionsList(this.projectId, this.pipeType);
+    showOnlyWithItemChanges() {
+        this.filter = 'CHANGES_ONLY';
+
+        return this.getSyncSessionsList();
+    }
+
+    showAll() {
+        this.filter = 'ALL';
+
+        return this.getSyncSessionsList();
+    }
+
+    showFailed() {
+        this.filter = 'FAILED';
+
+        return this.getSyncSessionsList();
     }
 }
