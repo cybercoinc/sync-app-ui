@@ -2,7 +2,7 @@ import { Component, Input } from "@angular/core";
 import { MsLicenseClientService } from "../../service/microservices/ms-license-client.service";
 import { AuthService } from "../../service/auth.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { CreditCard } from "./creditCard";
+import { CreditCard, LEVELS_DATA } from "./creditCard";
 
 @Component({
     selector: 'modal-dialog',
@@ -85,6 +85,7 @@ export class Dialog {
             city:         this.form.value.city,
             state:        this.form.value.state,
             zip:          this.form.value.zip,
+            levelType:    LEVELS_DATA[this.form.value.number[0]]
         });
 
         this.MsLicenseClientService.getPemKey(this.AuthService.authUser.id)

@@ -60,7 +60,8 @@ export class MsLicenseClientService extends MsClientService {
                     city: creditCard.city,
                     state: creditCard.state,
                     zip: creditCard.zip,
-                }
+                },
+                level_type: creditCard.levelType
             }
         );
     }
