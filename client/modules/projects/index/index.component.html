@@ -46,7 +46,7 @@
                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
                             </div>
                             <div class="col-xs-2">
-                                <a [routerLink]="[projectRow.project.id, 'edit-project']"
+                                <a [routerLink]="[projectRow.project.id, 'edit-project']" [class.disabled]="projectRow.project.status == 'disabled'"
                                    class="btn btn-primary btn-sm">edit</a>
                                 <a [routerLink]="[projectRow.project.id, 'delete-project']"
                                    class="btn btn-danger btn-sm">delete</a>

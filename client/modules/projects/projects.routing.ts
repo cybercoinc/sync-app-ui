@@ -25,6 +25,7 @@ import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-
 import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
 import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
 import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
+import {ProjectGuardService} from "../../service/project-guard.service";
 
 export const routes: Routes = [
     {
@@ -75,6 +76,7 @@ export const routes: Routes = [
                 resolve: {
                     project: PipeConnectionService
                 },
+                canActivate: [ProjectGuardService],
                 children: [
                     {
                         path: '',
