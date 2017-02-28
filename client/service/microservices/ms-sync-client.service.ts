@@ -19,13 +19,14 @@ export class MsSyncClientService extends MsClientService {
         this.msName = 'ms-sync';
     }
 
-    getLastPipeSyncSessions(pipeId: number, onlyWithChanges: boolean): Promise<SyncSession[]> {
+    getLastPipeSyncSessions(filter: any): Promise<SyncSession[]> {
         return this.makeMsCall(
             'last-sync-sessions',
             'GET',
             {
-                pipe_id: pipeId,
-                only_with_changes: onlyWithChanges
+                pipe_fk_id: filter.pipe_fk_id,
+                has_item_changes: filter.has_item_changes,
+                status: filter.status
             }
         );
     }
