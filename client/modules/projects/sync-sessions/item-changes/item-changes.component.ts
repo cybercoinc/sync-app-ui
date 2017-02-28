@@ -59,4 +59,8 @@ export class ItemChangesComponent implements OnInit {
             && this.formattedItemChangesObj.changed_one && this.formattedItemChangesObj.changed_one.length === 0
             && this.formattedItemChangesObj.deleted_one && this.formattedItemChangesObj.deleted_one.length === 0
     }
+
+    getObjectKeys(obj) {
+        return Object.keys(obj);
+    }
 }

@@ -55,7 +55,7 @@ export class SyncSession {
     };
     err: {
         message: string;
-        stack: string;
+        refs: {}[];
     }
 }
 

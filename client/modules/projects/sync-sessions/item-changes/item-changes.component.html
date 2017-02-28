@@ -21,8 +21,10 @@
                     <b>Created ({{formattedItemChangesObj.created_one.length}}):</b>
                     <ul class="item-changes-ul">
                         <li *ngFor="let itemChangesObj of formattedItemChangesObj.created_one">
-                            <section *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.created_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
-                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
+                            <section
+                                    *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.created_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
+                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges"
+                                                  (click)="viewDetails(itemChangesObj)"
                                                   [item-changes]="itemChangesObj"></item-changes-row>
                             </section>
                         </li>
@@ -39,8 +41,10 @@
                     <b>Updated ({{formattedItemChangesObj.changed_one.length}}):</b>
                     <ul class="item-changes-ul">
                         <li *ngFor="let itemChangesObj of formattedItemChangesObj.changed_one">
-                            <section *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.changed_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
-                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
+                            <section
+                                    *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.changed_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
+                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges"
+                                                  (click)="viewDetails(itemChangesObj)"
                                                   [item-changes]="itemChangesObj"></item-changes-row>
                             </section>
                         </li>
@@ -57,8 +61,10 @@
                     <b>Deleted ({{formattedItemChangesObj.deleted_one.length}}):</b>
                     <ul class="item-changes-ul">
                         <li *ngFor="let itemChangesObj of formattedItemChangesObj.deleted_one">
-                            <section *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.deleted_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
-                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges" (click)="viewDetails(itemChangesObj)"
+                            <section
+                                    *ngIf="!itemChangesToShowNumber || formattedItemChangesObj.deleted_one.indexOf(itemChangesObj) < itemChangesToShowNumber">
+                                <item-changes-row [class.selected]="itemChangesObj == selectedItemChanges"
+                                                  (click)="viewDetails(itemChangesObj)"
                                                   [item-changes]="itemChangesObj"></item-changes-row>
                             </section>
                         </li>
@@ -85,6 +91,16 @@
             <ul>
                 <li>{{syncSession.err?.message}}</li>
             </ul>
+        </div>
+        <div class="col-xs-12" *ngIf="syncSession?.err?.refs">
+            <b>Refs:</b>
+            <div *ngFor="let refObj of syncSession.err.refs">
+                <span *ngFor="let prop of getObjectKeys(refObj)">
+                    <span *ngIf="refObj[prop]">
+                        {{prop}} - {{refObj[prop]}}
+                    </span>
+                </span>
+            </div>
         </div>
     </div>
 </div>
