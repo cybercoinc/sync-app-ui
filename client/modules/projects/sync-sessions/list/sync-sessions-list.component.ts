@@ -51,7 +51,7 @@ export class SyncSessionsListComponent implements OnInit {
                 .then(pipesList => {
                     this.projectPipe = pipesList.shift();
 
-                    return this.showAll();
+                    return this.showOnlyWithItemChanges();
                 });
         });
     }

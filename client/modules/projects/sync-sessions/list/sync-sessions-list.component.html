@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            <button class="btn btn-default" [disabled]="filter === 'ALL'" (click)="showAll()">All</button>
             <button class="btn btn-default" [disabled]="filter == 'CHANGES_ONLY'" (click)="showOnlyWithItemChanges()">
                 Changes only
             </button>
             <button class="btn btn-default" [disabled]="filter === 'FAILED'" (click)="showFailed()">Failed</button>
+            <button class="btn btn-default" [disabled]="filter === 'ALL'" (click)="showAll()">All</button>
         </div>
     </div>
     <br>
