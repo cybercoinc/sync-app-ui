@@ -1,5 +1,10 @@
 declare let paytrace:any;
 
+export const LEVELS_DATA = {
+    4: 'Visa',
+    5: 'MasterCard'
+};
+
 export class CreditCard {
     private paytraceModule = paytrace;
 
@@ -11,6 +16,7 @@ export class CreditCard {
     expMonth:         number;
     expYear:          number;
     cvv:              number;
+    levelType:        string;
 
     customerName: string;
     street:       string;
