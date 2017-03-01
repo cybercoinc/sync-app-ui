@@ -86,8 +86,8 @@
     <br>
     <div class="row">
         <div class="col-xs-12">
-            <a [class.disabled]="false" class="btn btn-success" (click)="saveAndContinue()">Save and continue</a>
-            <a class="btn btn-default" href="#">cancel</a>
+            <a [class.disabled]="pipesListObj[pipeType]?.status === 'active'" class="btn btn-success" (click)="saveAndContinue()">Save</a>
+            <p *ngIf="pipesListObj[pipeType]?.status === 'active'">To change this Pipe setting you should disable it firstly</p>
         </div>
     </div>
 </div>

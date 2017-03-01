@@ -75,7 +75,7 @@
             </div>
 
             <div class="col-xs-8 col-xs-offset-2">
-                <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}"
+                <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}" [pipe-type]="pipeType"
                                   (columnsMatched)="onColumnsMatched($event)"></columns-matching>
             </div>
         </section>
@@ -90,6 +90,16 @@
             <a href="{{pipesListObj[pipeType]?.sm_permalink}}"
                class="btn btn-success btn-sm"
                target="_blank">open</a>
+        </div>
+    </div>
+    <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+</div>
+
+<div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <columns-matching sheet-id="{{pipesListObj[pipeType]?.sm_sheet_id}}"
+                              (columnsMatched)="onColumnsRematched($event)"></columns-matching>
         </div>
     </div>
 </div>
