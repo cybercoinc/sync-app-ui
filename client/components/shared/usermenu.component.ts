@@ -11,13 +11,16 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
         '.dropdown-menu li a {color:#EBEBEB}',
         '.dropdown-menu li a:hover, .dropdown-menu li a:active {color:#666666}',
         'ul {background-color: #44556b;}',
-        '.company-name { display: block; text-align: right; padding-right: 10%;}'
+        '.company-name { display: block; text-align: right; padding-right: 10%;}',
+        '.as-admin-badge { padding-left: 15px; margin-bottom: -22px; background-color: #e20808; font-weight: bold;}',
+        '.usermenu-link { color: #fff;  font-size: 19px;  padding-top: 32px;  display: inline-flex;  vertical-align: middle;  padding-bottom: 0px;}',
+        '.usermenu-link:hover'
     ],
     template: `
 <ul class="nav navbar-nav navbar-right" *ngIf="authUser && authUser.role !== 'guest'">
     <li>
-        <div *ngIf="isAdmin">Logged by Admin</div>
-        <a href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">
+        <div *ngIf="isAdmin" class="as-admin-badge">Logged by Admin</div>
+        <a class="usermenu-link" href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">
             {{authUser?.email}}
             <i class="material-icons">arrow_drop_down</i>
         </a>
