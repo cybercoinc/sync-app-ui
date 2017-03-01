@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
-import {AuthService} from '../../../service/auth.service';
-import {MsLicenseClientService} from '../../../service/microservices/ms-license-client.service';
+import {AuthService} from 'client/service/auth.service';
+import {MsLicenseClientService} from 'client/service/microservices/ms-license-client.service';
+import {Invoice} from "client/entities/entities";
 
 @Component({
     selector: "billingInvoices",
@@ -8,7 +9,7 @@ import {MsLicenseClientService} from '../../../service/microservices/ms-license-
     styleUrls: ['client/modules/billing/invoices/invoices.component.css']
 })
 export class InvoicesComponent {
-    invoices = [];
+    protected invoices: Invoice[];
 
     constructor(protected AuthService: AuthService, protected MsLicenseClientService: MsLicenseClientService) {
         MsLicenseClientService.getInvoices(this.AuthService.authUser.id)

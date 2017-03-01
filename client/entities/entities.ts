@@ -236,6 +236,29 @@ export class ProjectPipe {
     colors_coding_enabled: boolean;
 }
 
+export class Invoice {
+    id:             number;
+    amount:         number;
+    created_at:     Date;
+    is_deleted:     boolean;
+    last_notified:  Date | null;
+    license_ids:    number[];
+    line_items:     [{}];
+    invoice_number: string;
+    payment_status: 'Open' | 'PAID';
+    xero_invoice_id: string;
+    payment_link:    string;
+    billing__user_fk_id: {
+        id:        number;
+        kind:      string;
+        namespace: string;
+        path:      string | number[]
+    } | null;
+}
+
+export const INVOICE_STATUS_OPEN = 'Open';
+export const INVOICE_STATUS_PAID = 'PAID';
+
 export const PIPE_TYPE_PUBLIC_TODOS = 'public_todos';
 export const PIPE_TYPE_PRIVATE_TODOS = 'private_todos';
 export const PIPE_TYPE_TASKS = 'tasks';
