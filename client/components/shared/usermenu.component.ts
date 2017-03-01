@@ -13,8 +13,9 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
         'ul {background-color: #44556b;}',
         '.company-name { display: block; text-align: right; padding-right: 10%;}',
         '.as-admin-badge { padding-left: 15px; margin-bottom: -22px; background-color: #e20808; font-weight: bold;}',
-        '.usermenu-link { color: #fff;  font-size: 19px;  padding-top: 32px;  display: inline-flex;  vertical-align: middle;  padding-bottom: 0px;}',
-        '.usermenu-link:hover'
+        '.usermenu-link { color: #fff !important; font-size: 19px;  padding-top: 32px;  display: inline-flex;  vertical-align: middle;  padding-bottom: 0px;}',
+        '.usermenu-link:hover, .usermenu-link:focus {color: #EBEBEB !important;}',
+        '.usermenu-link.active {text-decoration: underline !important;}'
     ],
     template: `
 <ul class="nav navbar-nav navbar-right" *ngIf="authUser && authUser.role !== 'guest'">
