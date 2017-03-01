@@ -76,7 +76,7 @@ export const routes: Routes = [
                 resolve: {
                     project: PipeConnectionService
                 },
-                canActivate: [ProjectGuardService],
+                // canActivate: [ProjectGuardService],
                 children: [
                     {
                         path: '',
