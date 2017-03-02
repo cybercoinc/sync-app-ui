@@ -56,10 +56,6 @@ body h1 {
     color: #fff;
 }
 
-.navbar-default .navbar-nav > li > a {
-    color: #fff;
-    font-size: 19px;
-}
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color: #EBEBEB;
@@ -76,20 +72,6 @@ body h1 {
 
 .navbar {
     margin-bottom: 0;
-}
-
-.navbar-nav > li > a {
-    color: #fff;
-    font-size: 19px;
-    padding-top: 32px;
-    display: inline-flex;
-    vertical-align: middle;
-    padding-bottom: 0px;
-}
-
-.navbar-nav > li > div {
-    padding-left: 15px;
-    margin-bottom: -22px;
 }
 
 .module-header {
