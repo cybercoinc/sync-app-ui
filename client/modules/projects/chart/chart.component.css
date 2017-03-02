@@ -1,0 +1,15 @@
+#chart {
+    margin-top: 20px;
+}
+
+#chart h1 {
+    text-align: center;
+}
+
+.gantt_task {
+    overflow-x: visible !important;
+}
+
+.gantt_hor_scroll {
+    display: none !important;
+}

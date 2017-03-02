@@ -371,4 +371,14 @@ export class MsProjectClientService extends MsClientService {
             data
         );
     }
+
+    getChartData(pipeId) {
+        return this.makeMsCall(
+            'get-chart-data',
+            'GET',
+            {
+                pipe_id: pipeId
+            }
+        );
+    }
 }

@@ -26,6 +26,7 @@ import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe
 import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
 import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
 import {ProjectGuardService} from "../../service/project-guard.service";
+import {ChartComponent} from "./chart/chart.component";
 
 export const routes: Routes = [
     {
@@ -69,7 +70,13 @@ export const routes: Routes = [
                     },
                 ],
             },
-
+            {
+                path: ':project_id/chart',
+                component: ChartComponent,
+                resolve: {
+                    project: PipeConnectionService
+                },
+            },
             {
                 path: ':project_id/edit-project',
                 component: EditProjectComponent,

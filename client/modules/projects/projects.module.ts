@@ -41,6 +41,8 @@ import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks
 import {PipeDeleteComponent} from "./edit-project/components/shared/pipe-delete/pipe-delete.component";
 import {WorkspaceManagementComponent} from "./edit-project/components/project-settings/workspace-management/workspace-management.component";
 
+import {ChartComponent} from "./chart/chart.component";
+
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
@@ -81,7 +83,9 @@ import {WorkspaceManagementComponent} from "./edit-project/components/project-se
         PipeSettingsComponent,
 
         PipeDeleteComponent,
-        WorkspaceManagementComponent
+        WorkspaceManagementComponent,
+
+        ChartComponent
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
