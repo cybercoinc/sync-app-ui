@@ -124,6 +124,17 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    createSmartsheetSheetFromTemplateInSheetsFolder(projectId: number, templateId: number, sheetName: string): Promise<SmartsheetSheet> {
+        return this.makeMsCall(
+            'smartsheet/create-sheet-from-template-in-sheets-folder',
+            'POST', {
+                project_id: projectId,
+                template_id: templateId,
+                sheet_name: sheetName
+            }
+        );
+    }
+
     addResourceColumnToSheet(pipeId: number): Promise<SmartsheetColumn> {
         return this.makeMsCall(
             'smartsheet/add-resource-column-to-sheet',

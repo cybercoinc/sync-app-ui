@@ -148,6 +148,10 @@ export class SmartsheetConnectionComponent implements OnInit {
         return this.connectedSmSheetsIdsList.indexOf(smSheet.id) !== -1;
     }
 
+    /**
+     * @todo workspace will not be used
+     * @returns {any}
+     */
     createNewSheetWithWorkspace(): boolean | Promise<boolean> {
         if (this.PendingRequestsService.hasPendingRequest) {
             return false;
@@ -167,11 +171,15 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(pipeId => {
                 _pipeId = pipeId;
 
-                return this.PipeConnectionService.createNewOrGetExistingWorkspaceId(workspaceName);
+                // return this.PipeConnectionService.createNewOrGetExistingWorkspaceId(workspaceName); // todo enable to use WP
             })
             .then(workspaceId => {
-                // create new sheet inside workspace
-                return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
+                // create new sheet inside workspace // todo enable to use WP
+                // return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
+                //     project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
+                // );
+
+                return this.MsProjectClientService.createSmartsheetSheetFromTemplateInSheetsFolder(
                     project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
                 );
             })
@@ -232,18 +240,24 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(pipeId => {
                 _pipeId = pipeId;
 
-                return this.PipeConnectionService.createNewOrGetExistingWorkspaceId(workspaceName);
+                // return this.PipeConnectionService.createNewOrGetExistingWorkspaceId(workspaceName);  //todo enable to use WP
             })
             .then(workspaceId => {
-                // move sheet to new workspace
-                return this.MsProjectClientService.moveSheetToWorkspace(this.selectedSheet.id, workspaceId);
+                // move sheet to new workspace //todo enable to use WP
+                // return this.MsProjectClientService.moveSheetToWorkspace(this.selectedSheet.id, workspaceId);
             })
             .then(smSheetObj => {
-                // updating pipe
+                // updating pipe //todo enable to use WP
+                // return this.MsProjectClientService.updatePipe(_pipeId, {
+                //     sm_sheet_id: smSheetObj.id,
+                //     sm_permalink: smSheetObj.permalink,
+                //     sm_sheet_name: smSheetObj.name
+                // });
+
                 return this.MsProjectClientService.updatePipe(_pipeId, {
-                    sm_sheet_id: smSheetObj.id,
-                    sm_permalink: smSheetObj.permalink,
-                    sm_sheet_name: smSheetObj.name
+                    sm_sheet_id: this.selectedSheet.id,
+                    sm_permalink: this.selectedSheet.permalink,
+                    sm_sheet_name: this.selectedSheet.name
                 });
             })
             .then(pipeId => {
