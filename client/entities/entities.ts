@@ -230,6 +230,7 @@ export class ProjectPipe {
     sm_working_days: {};
     sm_weekends: [string];
     sm_webhook_id: number;
+    sm_webhook_latest_status: string;
     sm_sheet_name: string;
     summary_tasks_enabled: boolean;
     need_to_match_sm_columns: boolean;
