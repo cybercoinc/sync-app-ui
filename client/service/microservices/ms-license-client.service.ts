@@ -6,6 +6,7 @@ import {CreditCard} from "../../modules/paytrace/creditCard";
 import {Inject} from "@angular/core";
 import {AuthService} from "../auth.service";
 import {ConfigService} from "../config.service";
+import {Invoice} from "client/entities/entities";
 
 export class MsLicenseClientService extends MsClientService {
     constructor(@Inject(Http) protected Http: Http,
@@ -35,7 +36,7 @@ export class MsLicenseClientService extends MsClientService {
         return this.makeMsCall('get-licenses', 'GET', {user_id: userId});
     }
 
-    getInvoices(userId): Promise<any> {
+    getInvoices(userId): Promise<Invoice[]> {
         return this.makeMsCall('get-invoices', 'GET', {user_id: userId});
     }
 
@@ -60,7 +61,8 @@ export class MsLicenseClientService extends MsClientService {
                     city: creditCard.city,
                     state: creditCard.state,
                     zip: creditCard.zip,
-                }
+                },
+                level_type: creditCard.levelType
             }
         );
     }
