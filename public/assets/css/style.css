@@ -232,3 +232,28 @@ select > option:disabled {
     width: 100%;
     margin-bottom: 20px;
 }
+
+.gantt_cal_light {
+    height: 275px !important;
+}
+
+.gantt_cal_larea {
+    height: 200px !important;
+}
+
+.gantt_section_time {
+    height: 30px !important;
+    padding-top: 0 !important;
+}
+
+.gantt_section_time select {
+    width: 16% !important;
+}
+
+.gantt_wrap_section textarea {
+    padding: 3px;
+}
+
+.gantt_cal_light {
+    height: 282px !important;
+}

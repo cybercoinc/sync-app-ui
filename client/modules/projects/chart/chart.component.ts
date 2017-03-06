@@ -10,7 +10,8 @@ import {Chart} from './chart';
     styleUrls:  ['client/modules/projects/chart/chart.component.css']
 })
 export class ChartComponent implements OnInit {
-    private chart = new Chart();
+    private chart   = new Chart();
+    private isShowToolbar = false;
 
     constructor(protected msProjectClient:       MsProjectClientService,
                 protected PipeConnectionService: PipeConnectionService) {}
@@ -19,10 +20,15 @@ export class ChartComponent implements OnInit {
         if (this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
             this.msProjectClient.getChartData(this.PipeConnectionService.pipesListObj['tasks'].id)
                 .then(response => {
-                    if (response.length > 0) {
-                       this.chart.buildChart(response)
+                    if (response.items.length > 0) {
+                       this.chart.buildChart(response.items, response.users);
+                       this.isShowToolbar = true;
                     }
                 });
         }
+    }
+
+    exportToPdf() {
+        this.chart.exportToPdf();
     }
 }

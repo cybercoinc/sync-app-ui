@@ -374,7 +374,7 @@ export class MsProjectClientService extends MsClientService {
 
     getChartData(pipeId) {
         return this.makeMsCall(
-            'get-chart-data',
+            'chart/get-data',
             'GET',
             {
                 pipe_id: pipeId

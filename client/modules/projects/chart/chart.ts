@@ -1,11 +1,7 @@
-import {Output, EventEmitter} from "@angular/core";
-
 declare let gantt: any;
 
 export class Chart {
-    @Output() emitter = new EventEmitter();
-
-    buildChart(data) {
+    constructor() {
         let link = document.createElement('link');
         link.setAttribute('rel', 'stylesheet');
         link.setAttribute('type', 'text/css');
@@ -15,13 +11,33 @@ export class Chart {
             document.getElementsByTagName("head")[0].appendChild(link);
         }
 
+        let exportJs = document.createElement('script');
+        exportJs.setAttribute('src', 'assets/js/api.js');
+
+        if (typeof exportJs != "undefined") {
+            document.getElementsByTagName("head")[0].appendChild(exportJs);
+        }
+    }
+
+    buildChart(data, users) {
         gantt.config.task_height = 16;
         gantt.config.row_height  = 40;
 
         gantt.config.columns = [
             {name:"text", label: "Task name", tree: true},
-            {name:"add", label:"", width:44 }
+            {name:"assignee", label: "Assignee"},
+            {name:"add", label:"", width:44 },
         ];
+
+        gantt.config.lightbox.sections = [
+            {name:"description", height:38, map_to:"text", type:"textarea"},
+            {name:"assignee", map_to: "assignee", type:"select", options: users},
+            {name:"parent", type:"parent", allow_root:"true", root_label:"No parent"},
+            {name:"time", type:"time", map_to:"auto"},
+        ];
+        gantt.locale.labels["section_parent"] = "Parent task";
+        gantt.locale.labels["section_assignee"] = "Assignee";
+
         gantt.config.autosize = "y";
 
         gantt.addTaskLayer(this.addBaseLines);
@@ -32,14 +48,20 @@ export class Chart {
             return true;
         });
 
-        gantt.attachEvent("onBeforeTaskAdd", function(id,item){
-            this.emitter.emit(item);
-        });
-
         gantt.init("chart");
         gantt.parse({data: data});
 
         gantt.sort('row_number', false);
+    }
+
+    getTasks() {
+        return gantt.serialize().data;
+    }
+
+    exportToPdf() {
+        gantt.exportToPDF({
+            header:'<link rel="stylesheet" href="//dhtmlx.com/docs/products/dhtmlxGantt/common/customstyles.css" type="text/css">'
+        });
     }
 
     addBaseLines(task): any {
