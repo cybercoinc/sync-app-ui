@@ -1,10 +1,12 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12" *ngIf="licenses.length < 1">
+        <div class="col-xs-12" *ngIf="activeProjects.length < 1 && deletedProjects.length < 1">
             <h5>No Licenses Yet.</h5>
         </div>
 
-        <div *ngIf="licenses.length > 0">
+        <div *ngIf="activeProjects.length > 0" class="col-xs-12 active-projects">
+            <h4>Licenses for Active projects</h4>
+
             <div class="col-xs-12">
                 <div class="row license-table-header bottom-lined">
                     <div class="col-xs-2">#ID</div>
@@ -16,15 +18,43 @@
                 </div>
 
                 <div>
-                    <div class="row license-table-row bottom-lined" *ngFor="let license of licenses">
-                        <div class="col-xs-2">{{license.id}}</div>
-                        <div class="col-xs-2">{{license.status}}</div>
-                        <div class="col-xs-2">{{license.created_at|date}}</div>
+                    <div class="row license-table-row bottom-lined" *ngFor="let project of activeProjects">
+                        <div class="col-xs-2">{{project.license.id}}</div>
+                        <div class="col-xs-2">{{project.license.status}}</div>
+                        <div class="col-xs-2">{{project.license.created_at | date}}</div>
                         <div class="col-xs-2">
-                            <a *ngIf="license.project" [routerLink]="['/projects/' + license.project.id, 'edit-project']">{{license.project.name}}</a>
+                            <a *ngIf="project" [routerLink]="['/projects/' + project.id, 'edit-project']">{{project.name}}</a>
                         </div>
-                        <div class="col-xs-1">{{license.in_use}}</div>
-                        <div *ngIf="license.last_used_at" class="col-xs-2">{{license.last_used_at|date}}</div>
+                        <div class="col-xs-1">{{project.license.in_use}}</div>
+                        <div *ngIf="project.license.last_used_at" class="col-xs-2">{{project.license.last_used_at | date}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="deletedProjects.length > 0" class="col-xs-12 deleted-projects">
+            <h4>Licenses for Deleted projects</h4>
+
+            <div class="col-xs-12">
+                <div class="row license-table-header bottom-lined">
+                    <div class="col-xs-2">#ID</div>
+                    <div class="col-xs-2">Status</div>
+                    <div class="col-xs-2">Created Date</div>
+                    <div class="col-xs-2">Project</div>
+                    <div class="col-xs-1">In use</div>
+                    <div class="col-xs-2">Last used</div>
+                </div>
+
+                <div>
+                    <div class="row license-table-row bottom-lined" *ngFor="let project of deletedProjects">
+                        <div class="col-xs-2">{{project.license.id}}</div>
+                        <div class="col-xs-2">{{project.license.status}}</div>
+                        <div class="col-xs-2">{{project.license.created_at | date}}</div>
+                        <div class="col-xs-2">
+                            <a *ngIf="project" [routerLink]="['/projects/' + project.id, 'edit-project']">{{project.name}}</a>
+                        </div>
+                        <div class="col-xs-1">{{project.license.in_use}}</div>
+                        <div *ngIf="project.license.last_used_at" class="col-xs-2">{{project.license.last_used_at | date}}</div>
                     </div>
                 </div>
             </div>
