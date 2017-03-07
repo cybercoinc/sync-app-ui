@@ -15,7 +15,7 @@
     color: green;
 }
 
-.deleted-projects {
+.deleted-projects h4 {
     margin-top: 100px;
     color: red;
 }
