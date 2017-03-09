@@ -13,7 +13,7 @@ export class LicensesComponent {
     deletedProjects = [];
 
     constructor(protected AuthService: AuthService, protected MsLicenseClientService: MsLicenseClientService, protected MsProjectClientService: MsProjectClientService) {
-        this.MsLicenseClientService.getLicenses(AuthService.authUser.id)
+        this.MsLicenseClientService.getLicenses(AuthService.authUser.id, AuthService.company.id)
             .then(projects => {
                 this.activeProjects  = projects.activeProjects;
                 this.deletedProjects = projects.deletedProjects;

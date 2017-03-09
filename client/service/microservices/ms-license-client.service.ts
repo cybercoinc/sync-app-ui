@@ -32,8 +32,8 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
-    getLicenses(userId): Promise<any> {
-        return this.makeMsCall('get-licenses', 'GET', {user_id: userId});
+    getLicenses(userId, companyId): Promise<any> {
+        return this.makeMsCall('get-licenses', 'GET', {user_id: userId, company_id: companyId});
     }
 
     getInvoices(userId): Promise<Invoice[]> {
