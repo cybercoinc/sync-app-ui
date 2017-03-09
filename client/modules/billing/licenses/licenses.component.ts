@@ -9,12 +9,14 @@ import {MsProjectClientService} from '../../../service/microservices/ms-project-
     styleUrls: ['client/modules/billing/licenses/licenses.component.css'],
 })
 export class LicensesComponent {
-    licenses = [];
+    activeProjects  = [];
+    deletedProjects = [];
 
     constructor(protected AuthService: AuthService, protected MsLicenseClientService: MsLicenseClientService, protected MsProjectClientService: MsProjectClientService) {
         this.MsLicenseClientService.getLicenses(AuthService.authUser.id)
-            .then(licenses => {
-                this.licenses = licenses;
+            .then(projects => {
+                this.activeProjects  = projects.activeProjects;
+                this.deletedProjects = projects.deletedProjects;
             });
     }
 }
