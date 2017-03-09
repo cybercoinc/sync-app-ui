@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {PipeConnectionService} from "client/service/pipe-connection.service";
+import {MsSyncClientService} from "client/service/microservices/ms-sync-client.service";
 
 import {Chart} from './chart';
 
@@ -14,6 +15,7 @@ export class ChartComponent implements OnInit {
     private isShowToolbar = false;
 
     constructor(protected msProjectClient:       MsProjectClientService,
+                protected msSyncClient:          MsSyncClientService,
                 protected PipeConnectionService: PipeConnectionService) {}
 
     ngOnInit() {
@@ -30,5 +32,11 @@ export class ChartComponent implements OnInit {
 
     exportToPdf() {
         this.chart.exportToPdf();
+    }
+
+    save() {
+        let tasks = this.chart.getTasks();
+
+        this.msSyncClient.saveChartTasks(this.PipeConnectionService.pipesListObj['tasks'].id, tasks);
     }
 }

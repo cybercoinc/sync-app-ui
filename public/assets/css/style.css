@@ -237,10 +237,6 @@ select > option:disabled {
     height: 275px !important;
 }
 
-.gantt_cal_larea {
-    height: 200px !important;
-}
-
 .gantt_section_time {
     height: 30px !important;
     padding-top: 0 !important;
@@ -256,4 +252,21 @@ select > option:disabled {
 
 .gantt_cal_light {
     height: 282px !important;
+}
+
+.select2.select2-container {
+    width: 87% !important;
+    margin-left: 10px !important;
+}
+
+.select2-container{
+    z-index:10002;
+}
+
+.gantt_cal_light_wide.gantt_cal_light_full {
+    height: auto !important;
+}
+
+.gantt_cal_light_wide .gantt_cal_larea {
+    height: auto !important;
 }

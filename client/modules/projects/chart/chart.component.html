@@ -5,3 +5,7 @@
 <div id="chart" style="width:100%; height:100%;">
     <h1>No data for chart</h1>
 </div>
+
+<div *ngIf="isShowToolbar">
+    <button class="btn btn-primary" (click)="save()">Save</button>
+</div>
