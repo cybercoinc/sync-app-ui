@@ -50,4 +50,15 @@ export class MsSyncClientService extends MsClientService {
             }
         )
     }
+
+    saveChartTasks(pipeId, tasks): Promise<any> {
+        return this.makeMsCall(
+            'process-gantt-chart-webhook',
+            'POST',
+            {
+                pipe_id: pipeId,
+                tasks:   tasks
+            }
+        )
+    }
 }
