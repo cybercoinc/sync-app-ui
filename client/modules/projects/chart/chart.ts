@@ -1,5 +1,4 @@
 declare let gantt: any;
-declare let $: any;
 
 export class Chart {
     model: any;
@@ -20,22 +19,6 @@ export class Chart {
         if (typeof exportJs != "undefined") {
             document.getElementsByTagName("head")[0].appendChild(exportJs);
         }
-
-        exportJs = document.createElement('script');
-        exportJs.setAttribute('src', 'assets/js/select2.min.js');
-
-        if (typeof exportJs != "undefined") {
-            document.getElementsByTagName("head")[0].appendChild(exportJs);
-        }
-
-        link = document.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('type', 'text/css');
-        link.setAttribute('href', 'assets/css/select2.min.css');
-
-        if (typeof link != "undefined") {
-            document.getElementsByTagName("head")[0].appendChild(link);
-        }
     }
 
     buildChart(data, users) {
@@ -47,9 +30,6 @@ export class Chart {
             {name:"assignee", label: "Assignee"},
             {name:"add", label:"", width:44 },
         ];
-
-        gantt.form_blocks["resources"] = this.buildResourceDropdown(users);
-        gantt.form_blocks["assignee"]  = this.buildAssigneeDropdown(users);
 
         gantt.config.lightbox.sections = [
             {name:"description", height:38, map_to:"text", type:"textarea"},
@@ -76,10 +56,6 @@ export class Chart {
         gantt.parse({data: data});
 
         gantt.sort('row_number', false);
-
-        gantt.attachEvent("onLightbox", function (task_id){
-            $('.select2').select2();
-        });
     }
 
     getTasks() {
@@ -106,59 +82,5 @@ export class Chart {
             return el;
         }
         return false;
-    }
-
-    buildResourceDropdown(resources) {
-        return {
-            render: function(sns){
-                let html = '<select onchange="onAssigneeChange()" class="select2" multiple="multiple">';
-
-                resources.forEach(item => {
-                    html += '<option value="' + item.id + '">' + item.email + '</option>'
-                });
-                html += '</select>';
-
-                return html;
-            },
-
-            set_value: function(node,value,task,section){
-                console.log('set');
-            },
-
-            get_value: function(node,task,section){
-                console.log('get');
-            },
-
-            focus: function(node){
-                console.log('focus');
-            }
-        };
-    }
-
-    buildAssigneeDropdown(assignee) {
-        return {
-            render: function(sns){
-                let html = '<select class="select2" multiple="multiple">';
-
-                assignee.forEach(item => {
-                    html += '<option value="' + item.id + '">' + item.email + '</option>'
-                });
-                html += '</select>';
-
-                return html;
-            },
-
-            set_value: function(node,value,task,section){
-                console.log('set');
-            },
-
-            get_value: function(node,task,section){
-                console.log('get');
-            },
-
-            focus: function(node){
-                console.log('focus');
-            }
-        };
     }
 }
