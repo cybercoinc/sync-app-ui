@@ -51,7 +51,6 @@ export class MsLicenseClientService extends MsClientService {
             {
                 user_id: userId,
                 credit_card: {
-                    customerName: creditCard.name,
                     number: creditCard.encrypted_number,
                     expMonth: creditCard.expMonth,
                     expYear: creditCard.expYear,

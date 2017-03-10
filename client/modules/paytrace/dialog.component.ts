@@ -14,7 +14,7 @@ export class Dialog {
 
     errors                    = [];
     creditCard                = new CreditCard();
-    billingEnable: boolean    = false;
+    billingEnable: boolean    = true;
     form:          FormGroup;
     isUpdate:      boolean    = false;
 
@@ -35,11 +35,15 @@ export class Dialog {
             cvv: ['', [
                 Validators.required
             ]],
-            name: [''],
+            customerName: [this.creditCard.customerName, [
+                Validators.required
+            ]],
             street: [''],
             city: [''],
             state: [''],
-            zip: ['']
+            zip: [this.creditCard.zip, [
+                Validators.required
+            ]]
         });
 
         this.form.valueChanges.subscribe(data => {
@@ -59,11 +63,7 @@ export class Dialog {
             }
         }
 
-        if (this.errors.length > 0) {
-            return false;
-        }
-
-        return true;
+        return this.errors.length < 1;
     }
 
     submit() {
@@ -80,7 +80,7 @@ export class Dialog {
             expMonth:     this.form.value.month,
             expYear:      this.form.value.year,
             cvv:          this.form.value.cvv,
-            customerName: this.form.value.name,
+            customerName: this.form.value.customerName,
             street:       this.form.value.street,
             city:         this.form.value.city,
             state:        this.form.value.state,
@@ -126,6 +126,12 @@ export class Dialog {
         },
         cvv: {
             required: 'CVV is required'
+        },
+        customerName: {
+            required: 'Customer name is required',
+        },
+        zip: {
+            required: 'Zip is required',
         }
     };
 
