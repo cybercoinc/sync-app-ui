@@ -1,42 +1,48 @@
-<div *ngIf="company" class="col-xs-12 company_settings_card">
-    <div><h1>{{company.name}}</h1></div>
-    <div>
-        <div class="row">
-            <div class="col-xs-12" >
-                <h3 style="font-size: 1.3em">Billing</h3>
-                <div class="row" *ngIf="company.pbr!= undefined">
-                    <div class="col-md-6 active-user">
-                        <div class="col-md-5">
-                            <div class="current-user" *ngIf="!showDropDown">{{currentUser}}</div>
-                            <drop-down *ngIf="showDropDown" [items]="ddUsersList" [(ngModel)]="pbrId"></drop-down>
-                        </div>
-                        <div class="col-md-7" *ngIf="isBillingUser">
-                            <a class="btn btn-success" *ngIf="!showDropDown" (click)="showEditPBR()">Edit</a>
+<md-card *ngIf="company" class="example-card">
+    <md-card-header>
+        <md-card-title>Company name</md-card-title>
+        <md-card-subtitle>{{company.name}}</md-card-subtitle>
+    </md-card-header>
+</md-card>
 
-                            <div class="col-md-12" *ngIf="showDropDown">
-                                <button type="button" class="btn btn-success col-md-3" (click)="saveUser()">Save</button>
-                                <button type="button" class="btn btn-danger col-md-3" (click)="cancel()">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" *ngIf="company.pbr== undefined">
-                    <p class="text-warn">PBR error</p>
-                </div>
-            </div>
+<md-card *ngIf="company" class="example-card">
+    <md-card-header>
+        <md-card-title>Billing</md-card-title>
+        <md-card-subtitle>Company billing responsible person</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+
+        <div class="row" *ngIf="company.pbr!= undefined">
+            <span class="current-user" *ngIf="!showDropDown">{{currentUser}}</span>
+            <drop-down *ngIf="showDropDown" class="custom-users-dropdown" [items]="ddUsersList" [(ngModel)]="pbrId"></drop-down>
+
+            <span class="" *ngIf="isBillingUser">
+                <a class="btn btn-success" *ngIf="!showDropDown" (click)="showEditPBR()">Edit</a>
+
+                <span class="" *ngIf="showDropDown">
+                    <button type="button" class="btn btn-success" (click)="saveUser()">Save</button>
+                    <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                </span>
+            </span>
         </div>
-        <div class="row">
-            <div class="col-xs-12" *ngIf="usersList">
-                <h3 style="font-size: 1.3em">Users</h3>
-                <ul>
-                    <li *ngFor="let user of usersList">{{user.first_name}} {{user.last_name}} ({{user.email}})</li>
-                </ul>
-            </div>
+        <div class="row" *ngIf="company.pbr== undefined">
+            <p class="text-warn">PBR error</p>
         </div>
-        <div class="row" *ngIf="!usersList">
-            <div class=" col-xs-12">
-                <span>No users for this company yet</span>
-            </div>
+    </md-card-content>
+</md-card>
+
+<md-card *ngIf="company" class="example-card">
+    <md-card-header>
+        <md-card-title>Company Users</md-card-title>
+    </md-card-header>
+    <md-card-content>
+        <div class="" *ngIf="usersList">
+            <ul>
+                <li *ngFor="let user of usersList">{{user.first_name}} {{user.last_name}} ({{user.email}})</li>
+            </ul>
         </div>
-    </div>
-</div>
+        <div *ngIf="!usersList">
+            <span>No users for this company yet</span>
+        </div>
+    </md-card-content>
+</md-card>

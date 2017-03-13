@@ -1,43 +1,25 @@
-<div class="">
-    <div class="row sc-sidebar-container">
-        <div class="col-xs-3 col-lg-2 sc-list right-lined">
-            <div class="row bottom-lined clickable-row" [routerLink]="['info']">
-                <div class="col-xs-12">
+<md-sidenav-container>
+    <md-sidenav #sc_sidenav mode="side" opened="true" class="sc-sidenav">
+        <md-toolbar>
+            <span>Billing</span>
 
-                    <div class="sc-sidebar-header-med">
-                        <i class="material-icons">attach_money</i>
-                        Billing Information
-                    </div>
-                </div>
-            </div>
-            <div class="row bottom-lined clickable-row" [routerLink]="['invoices']">
-                <div class="col-xs-12">
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['info']" [routerLinkActive]="['is-active']">
+                <md-icon>attach_money</md-icon>
+                <span>Billing Information</span>
+            </md-toolbar-row>
 
-                    <div class="sc-sidebar-header-med">
-                        <i class="material-icons">date_range</i>
-                        Invoices
-                    </div>
-                    <div class="sc-sidebar-description">
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['invoices']" [routerLinkActive]="['is-active']">
+                <md-icon>date_range</md-icon>
+                <span>Invoices</span>
+            </md-toolbar-row>
 
-                    </div>
-                </div>
-            </div>
-            <div class="row bottom-lined clickable-row" [routerLink]="['licenses']">
-                <div class="col-xs-12">
-                    <div class="sc-sidebar-header-med">
-                        <i class="material-icons">playlist_play</i>
-                        Licenses
-                    </div>
-                    <div class="sc-sidebar-description">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-9">
-            <router-outlet></router-outlet>
-        </div>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['licenses']" [routerLinkActive]="['is-active']">
+                <md-icon>playlist_play</md-icon>
+                <span>Licenses</span>
+            </md-toolbar-row>
+        </md-toolbar>
+    </md-sidenav>
+    <div>
+        <router-outlet></router-outlet>
     </div>
-
-</div>
+</md-sidenav-container>
