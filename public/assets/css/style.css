@@ -54,8 +54,63 @@ body h1 {
     background-color: #44556b;
     border-radius: 0px;
     color: #fff;
+    z-index: 10;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.3);
 }
 
+.sc-sidenav .mat-toolbar {
+    background-color: #ffffff;
+    padding: 0;
+    color: #666666;
+}
+
+.sc-sidenav .mat-toolbar-row {
+    border-bottom: 1px solid #A1A1A1;
+    padding: 0 16px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.2;
+
+    height: 74px;
+    cursor: pointer;
+}
+.mat-toolbar-row .mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+.sc-sidenav .mat-toolbar-row span {
+    margin-left: 5px;
+}
+
+.sc-sidenav md-toolbar-row:first-of-type {
+    background-color: #44556b;
+    color: #fff;
+}
+
+.sc-sidenav md-toolbar-row.is-active {
+    background-color: #8591a0;
+    color: #fff;
+}
+
+.mat-card {
+    color: #666666;
+}
+.mat-card .section-title {
+    font-weight: bold;
+}
+
+edit-project .mat-card, settings .mat-card {
+    margin: 20px;
+    max-width: 800px;
+}
+edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header {
+    border-bottom: 1px solid #c0c0c0;
+}
+
+settings .custom-users-dropdown {
+    max-width: 400px;
+}
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color: #EBEBEB;
@@ -72,6 +127,18 @@ body h1 {
 
 .navbar {
     margin-bottom: 0;
+}
+
+.mat-sidenav-container {
+    position: fixed !important;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    min-width: 100%;
+}
+.mat-sidenav {
+    width: 298px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.3);
 }
 
 .module-header {

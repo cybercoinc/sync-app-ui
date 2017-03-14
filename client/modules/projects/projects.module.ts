@@ -40,6 +40,7 @@ import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe
 import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
 import {PipeDeleteComponent} from "./edit-project/components/shared/pipe-delete/pipe-delete.component";
 import {WorkspaceManagementComponent} from "./edit-project/components/project-settings/workspace-management/workspace-management.component";
+import {ChooseResourceComponent} from "./edit-project/components/project-settings/choose-resource/choose-resource.component";
 
 import {ChartComponent} from "./chart/chart.component";
 
@@ -81,6 +82,7 @@ import {ChartComponent} from "./chart/chart.component";
         PipeSettingsPrivateComponent,
         PipeSettingsPublicComponent,
         PipeSettingsComponent,
+        ChooseResourceComponent,
 
         PipeDeleteComponent,
         WorkspaceManagementComponent,

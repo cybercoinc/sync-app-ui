@@ -1,51 +1,52 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12">
-            <h4>Project settings</h4>
-        </div>
-    </div>
-
-    <div class="row primary-billing-person">
-        <div class="col-xs-4">
-            <h5>Primary billing responsibility person:</h5>
-
+    <md-card class="example-card">
+        <md-card-header>
+            <md-card-title>Primary billing responsibility person</md-card-title>
+        </md-card-header>
+        <md-card-content>
             <div *ngIf="pbrUser">
                 <div *ngIf="!isEdit">
-                    <div class="col-xs-8">
+                    <span class="">
                         <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
-                    </div>
-                    <div class="col-xs-8 button-group" *ngIf="isBillingUser">
+                    </span>
+                    <span class="button-group" *ngIf="isBillingUser">
                         <button class="btn btn-warning" (click)="editPbr()">Edit</button>
-                    </div>
+                    </span>
                 </div>
 
                 <div *ngIf="isEdit">
-                    <div class="col-xs-8">
+                    <span class="">
                         <drop-down [items]="users" [searchEnable]="true" [(ngModel)]="pbrUser.id" #user="ngModel"></drop-down>
-                    </div>
+                    </span>
 
-                    <div class="col-xs-8 button-group">
+                    <span class="button-group">
                         <button class="btn btn-success" (click)="savePbr(user)">Save</button>
                         <button class="btn btn-danger" (click)="cancel()">Cancel</button>
-                    </div>
+                    </span>
                 </div>
             </div>
-        </div>
-    </div>
+        </md-card-content>
+    </md-card>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <h5>Users allowed to access:</h5>
-
+    <md-card class="example-card">
+        <md-card-header>
+            <md-card-title>Users allowed to access</md-card-title>
+        </md-card-header>
+        <md-card-content>
             <div *ngFor="let user of usersList">
                 <b>{{user.first_name}} {{user.last_name}}</b> ({{user.email}})
             </div>
-        </div>
-    </div>
+        </md-card-content>
+    </md-card>
 
     <br>
     <br>
     <br>
 
-    <!--<workspace-management project-id="{{projectId}}"></workspace-management>--> <!-- TODO uncomment to use WP -->
+    <workspace-management project-id="{{projectId}}"></workspace-management>
+
+    <md-card>
+        <choose-resource [projectId]="projectId"></choose-resource>
+    </md-card>
+
 </div>

@@ -381,4 +381,46 @@ export class MsProjectClientService extends MsClientService {
             }
         );
     }
+
+    getAssignees(projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'procore/get-assignees',
+            'GET',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
+    getResources(projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'procore/get-resources',
+            'GET',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
+    getTrades(projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'procore/project/trades',
+            'GET',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
+    setResourceToAssignee(data: any, projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'set-resource',
+            'POST',
+            {
+                data: data,
+                project_id: projectId
+            }
+        );
+    }
+
 }
