@@ -1,22 +1,23 @@
 <md-card style="max-width: initial;">
-    <div>
-        Current status: {{pipesListObj[pipeType]?.status || 'inactive'}}
-    </div>
 
-    <div>
-        <div *ngIf="pipesListObj[pipeType]">
-            <div *ngIf="(pipesListObj[pipeType]?.status != 'active')"
-                 style="display: block; float: left">
-                <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
-                   [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id)"
-                   class="btn btn-success">enable</a>
-            </div>
-            <div *ngIf="(pipesListObj[pipeType]?.status == 'active')"
-                 style="display: block; float: left">
-                <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
-                   class="btn btn-warning">disable</a>
-            </div>
-        </div>
-    </div>
+    <span *ngIf="!pipesListObj[pipeType]">
+        Connection not configured yet.
+    </span>
+
+    <span *ngIf="(pipesListObj[pipeType] && pipesListObj[pipeType].status != 'active')">
+        <span>
+            Current status: <span style="color: #8b0305; font-weight: bold; font-size: 16px; margin-right: 15px;">Disabled</span>
+        </span>
+        <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
+           [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id)"
+           class="btn btn-success">enable</a>
+    </span>
+    <span *ngIf="(pipesListObj[pipeType] && pipesListObj[pipeType].status == 'active')">
+        <span>
+            Current status: <span style="color: #3d8b40; font-weight: bold; font-size: 16px; margin-right: 15px;">Active</span>
+        </span>
+        <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
+           class="btn btn-warning">disable</a>
+    </span>
 
 </md-card>
