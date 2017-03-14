@@ -1,0 +1,20 @@
+.resource-header {
+    line-height: 55px;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.user-list {
+    margin-top: 2%;
+    font-size: 1.2em;
+}
+
+h4 {
+    display: inline;
+}
+
+md-select {
+    width: 70%;
+}
+
+
+

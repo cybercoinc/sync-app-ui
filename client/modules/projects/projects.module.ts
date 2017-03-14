@@ -40,6 +40,7 @@ import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe
 import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
 import {PipeDeleteComponent} from "./edit-project/components/shared/pipe-delete/pipe-delete.component";
 import {WorkspaceManagementComponent} from "./edit-project/components/project-settings/workspace-management/workspace-management.component";
+import {ChooseResourceComponent} from "./edit-project/components/project-settings/choose-resource/choose-resource.component";
 
 @NgModule({
     imports: [
@@ -79,6 +80,7 @@ import {WorkspaceManagementComponent} from "./edit-project/components/project-se
         PipeSettingsPrivateComponent,
         PipeSettingsPublicComponent,
         PipeSettingsComponent,
+        ChooseResourceComponent,
 
         PipeDeleteComponent,
         WorkspaceManagementComponent
