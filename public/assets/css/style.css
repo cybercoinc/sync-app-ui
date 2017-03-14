@@ -93,6 +93,12 @@ body h1 {
     color: #fff;
 }
 
+.mat-card {
+    color: #666666;
+}
+.mat-card .section-title {
+    font-weight: bold;
+}
 
 edit-project .mat-card, settings .mat-card {
     margin: 20px;

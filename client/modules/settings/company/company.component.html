@@ -1,22 +1,29 @@
 <md-card *ngIf="company" class="example-card">
     <md-card-header>
-        <md-card-title>Company name</md-card-title>
-        <md-card-subtitle>{{company.name}}</md-card-subtitle>
+        <md-card-title>General information</md-card-title>
     </md-card-header>
+    <md-card-content>
+        <div class="section">
+            <div class="section-title">Name</div>
+            <div class="section-content">{{company.name}}</div>
+        </div>
+    </md-card-content>
 </md-card>
 
 <md-card *ngIf="company" class="example-card">
     <md-card-header>
         <md-card-title>Billing</md-card-title>
-        <md-card-subtitle>Company billing responsible person</md-card-subtitle>
+        <md-card-subtitle></md-card-subtitle>
     </md-card-header>
     <md-card-content>
+        <div class="section">
+            <div class="section-title">Company billing responsible person</div>
+            <div class="section-content">
+                <div class="row" *ngIf="company.pbr!= undefined">
+                    <span class="current-user" *ngIf="!showDropDown">{{currentUser}}</span>
+                    <drop-down *ngIf="showDropDown" class="custom-users-dropdown" [items]="ddUsersList" [(ngModel)]="pbrId"></drop-down>
 
-        <div class="row" *ngIf="company.pbr!= undefined">
-            <span class="current-user" *ngIf="!showDropDown">{{currentUser}}</span>
-            <drop-down *ngIf="showDropDown" class="custom-users-dropdown" [items]="ddUsersList" [(ngModel)]="pbrId"></drop-down>
-
-            <span class="" *ngIf="isBillingUser">
+                    <span class="" *ngIf="isBillingUser">
                 <a class="btn btn-success" *ngIf="!showDropDown" (click)="showEditPBR()">Edit</a>
 
                 <span class="" *ngIf="showDropDown">
@@ -24,9 +31,11 @@
                     <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
                 </span>
             </span>
-        </div>
-        <div class="row" *ngIf="company.pbr== undefined">
-            <p class="text-warn">PBR error</p>
+                </div>
+                <div class="row" *ngIf="company.pbr== undefined">
+                    <p class="text-warn">PBR error</p>
+                </div>
+            </div>
         </div>
     </md-card-content>
 </md-card>
