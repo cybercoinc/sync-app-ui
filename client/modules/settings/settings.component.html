@@ -1,41 +1,19 @@
-<!--<div class="container-fluid">-->
-    <!--<div class="row module-header">-->
-        <!--<div class="col-xs-12">-->
-            <!--<div class="module-name">Company Settings</div>-->
-        <!--</div>-->
-    <!--</div>-->
+<md-sidenav-container>
+    <md-sidenav #sc_sidenav mode="side" opened="true" class="sc-sidenav">
+        <md-toolbar>
+            <span>Settings</span>
 
-    <!--<div class="row">-->
-
-    <!--</div>-->
-<!--</div>-->
-
-<div class="">
-    <div class="row sc-sidebar-container">
-        <div class="col-xs-3 col-lg-2 sc-list right-lined">
-            <div class="row bottom-lined clickable-row" [routerLink]="['company']">
-                <div class="col-xs-12">
-                    <div class="sc-sidebar-header-med">
-                        <i class="material-icons">attach_money</i>
-                        Company
-                    </div>
-                    <div class="sc-sidebar-description"></div>
-                </div>
-            </div>
-            <div class="row bottom-lined clickable-row" [routerLink]="['user']">
-                <div class="col-xs-12">
-
-                    <div class="sc-sidebar-header-med">
-                        <i class="material-icons">date_range</i>
-                        User
-                    </div>
-                    <div class="sc-sidebar-description"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-9">
-            <router-outlet></router-outlet>
-        </div>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['company']" [routerLinkActive]="['is-active']">
+                <md-icon>settings</md-icon>
+                <span>Company</span>
+            </md-toolbar-row>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['user']" [routerLinkActive]="['is-active']">
+                <md-icon>security</md-icon>
+                <span>Access</span>
+            </md-toolbar-row>
+        </md-toolbar>
+    </md-sidenav>
+    <div>
+        <router-outlet></router-outlet>
     </div>
-</div>
+</md-sidenav-container>

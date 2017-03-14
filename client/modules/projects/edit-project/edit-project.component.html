@@ -1,32 +1,43 @@
-<div class="row">
-    <div class="pipes-wizard-container">
 
-        <!-- PIPES LIST -->
-        <div class="pipes-list right-lined">
+<md-sidenav-container>
+    <md-sidenav #sc_sidenav mode="side" opened="true" class="sc-sidenav">
+        <md-toolbar>
+            <span>{{project.name}}</span>
 
-            <div class="row bottom-lined">
-                <div class="col-xs-12">
-                    <div class="pipe-header-large">{{project.name}}</div>
-                </div>
-            </div>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-public-todo']" [routerLinkActive]="['is-active']">
+                <md-icon>event_available</md-icon>
+                <span>
+                    <span>Project Calendar Items</span><br />
+                    <span class="pipe-description">Visible to anyone with Schedule Access</span>
+                </span>
+            </md-toolbar-row>
 
-            <pipe-row router-link="pipe-public-todo" material-icon="event_available" pipe-title="Project Calendar Items"
-                      description="Visible to anyone with Schedule Access"></pipe-row>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-private-todo']" [routerLinkActive]="['is-active']">
+                <md-icon>verified_user</md-icon>
+                <span>
+                    <span>Private Calendar Items</span><br />
+                    <span class="pipe-description">Visible only to your Company</span>
+                </span>
+            </md-toolbar-row>
 
-            <pipe-row router-link="pipe-private-todo" material-icon="verified_user" pipe-title="Private Calendar Items"
-                      description="Visible only to your Company"></pipe-row>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-tasks']" [routerLinkActive]="['is-active']">
+                <md-icon>event</md-icon>
+                <span>
+                    <span>Project Schedule</span><br />
+                    <span class="pipe-description">1-way sync to Procore</span>
+                </span>
+            </md-toolbar-row>
 
-            <pipe-row router-link="pipe-tasks" material-icon="event" pipe-title="Project Schedule"
-                      description="1-way sync to Procore"></pipe-row>
-
-            <pipe-row material-icon="settings" router-link="settings" pipe-title="General Settings"
-                      description="Project settings."></pipe-row>
-
-        </div>
-        <!-- end PIPES LIST -->
-
-        <div class="pipe-edit-area">
-            <router-outlet></router-outlet>
-        </div>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['settings']" [routerLinkActive]="['is-active']">
+                <md-icon>settings</md-icon>
+                <span>
+                    <span>General Settings</span><br />
+                    <span class="pipe-description">Project settings</span>
+                </span>
+            </md-toolbar-row>
+        </md-toolbar>
+    </md-sidenav>
+    <div class="pipe-edit-area">
+        <router-outlet></router-outlet>
     </div>
-</div>
+</md-sidenav-container>

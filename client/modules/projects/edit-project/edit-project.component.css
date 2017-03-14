@@ -29,14 +29,8 @@
     margin-bottom: 10px;
 }
 
-.pipe-header-average i {
-    margin-right: 10px;
-    font-size: 30px;
-}
-
-.pipe-description {
+.mat-toolbar-row .pipe-description {
     font-size: 12px;
-    padding: 0px 20px 10px;
 }
 
 .step-completed i {
