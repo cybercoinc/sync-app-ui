@@ -1,0 +1,24 @@
+<div class="row resource-header">
+    <div class="col-xs-6">
+        <h4>People</h4>
+    </div>
+    <div class="col-xs-6">
+        <h4>Resource</h4>
+    </div>
+</div>
+<div *ngIf="assignees && assignees.length" class="row">
+    <div class="row user-list" *ngFor="let assignee of assignees">
+        <div class="col-xs-6 assignee">
+            <p>{{assignee.first_name + ' ' + assignee.last_name + ' (' + assignee.email + ')'}}</p>
+        </div>
+        <div class="col-xs-6">
+            <md-select placeholder="- Choose Resource -" [(ngModel)]="model[assignee.id]"
+                       [name]=assignee.id>
+                <md-option *ngFor="let resourceName of resourcesDropdownValues" [value]="resourceName">
+                    {{resourceName}}
+                </md-option>
+            </md-select>
+        </div>
+    </div>
+    <button class="pull-right btn btn-success" (click)="save()" type="submit">SAVE</button>
+</div>

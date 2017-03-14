@@ -6,7 +6,7 @@ import {
     Project,
     SmartsheetSheet,
     ProjectPipe,
-    User, SmartsheetWorkspace, SmartsheetColumn
+    User, SmartsheetWorkspace
 } from 'client/entities/entities';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
@@ -124,26 +124,6 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createSmartsheetSheetFromTemplateInSheetsFolder(projectId: number, templateId: number, sheetName: string): Promise<SmartsheetSheet> {
-        return this.makeMsCall(
-            'smartsheet/create-sheet-from-template-in-sheets-folder',
-            'POST', {
-                project_id: projectId,
-                template_id: templateId,
-                sheet_name: sheetName
-            }
-        );
-    }
-
-    addResourceColumnToSheet(pipeId: number): Promise<SmartsheetColumn> {
-        return this.makeMsCall(
-            'smartsheet/add-resource-column-to-sheet',
-            'POST', {
-                pipe_id: pipeId
-            }
-        );
-    }
-
     moveSheetToWorkspace(sheetId: number, workspaceId: number): Promise<SmartsheetSheet> {
         return this.makeMsCall(
             'smartsheet/move-sheet-to-workspace',
@@ -225,16 +205,6 @@ export class MsProjectClientService extends MsClientService {
     enablePipe(pipeId: number): Promise<boolean> {
         return this.makeMsCall(
             'pipes/enable',
-            'PUT',
-            {
-                pipe_id: pipeId,
-            }
-        );
-    }
-
-    disablePipe(pipeId: number): Promise<boolean> {
-        return this.makeMsCall(
-            'pipes/disable',
             'PUT',
             {
                 pipe_id: pipeId,
@@ -381,4 +351,46 @@ export class MsProjectClientService extends MsClientService {
             }
         );
     }
+
+    getAssignees(projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'procore/get-assignees',
+            'GET',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
+    getResources(projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'procore/get-resources',
+            'GET',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
+    getTrades(projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'procore/project/trades',
+            'GET',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
+    setResourceToAssignee(data: any, projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'set-resource',
+            'POST',
+            {
+                data: data,
+                project_id: projectId
+            }
+        );
+    }
+
 }

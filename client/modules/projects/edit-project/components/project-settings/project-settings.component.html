@@ -47,5 +47,10 @@
     <br>
     <br>
 
-    <!--<workspace-management project-id="{{projectId}}"></workspace-management>--> <!-- TODO uncomment to use WP -->
+    <workspace-management project-id="{{projectId}}"></workspace-management>
+
+    <md-card>
+        <choose-resource [projectId]="projectId"></choose-resource>
+    </md-card>
+
 </div>
