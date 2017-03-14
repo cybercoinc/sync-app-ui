@@ -1,5 +1,14 @@
 <div *ngIf="isShowToolbar">
-    <button class="btn btn-default" (click)="exportToPdf()">Export To PDF</button>
+    <button class="btn btn-default" (click)="exportToPdf()">export to pdf</button>
+    <button class="btn btn-default" (click)="createBaseline()">create baseline</button>
+
+    <md-select placeholder="Select baseline" name="baseline" [(ngModel)]="selectedBaseline">
+        <md-option *ngFor="let baseline of baselines" [value]="baseline.id">
+            {{baseline.name}}
+        </md-option>
+    </md-select>
+
+    <button class="btn btn-success" [disabled]="!selectedBaseline" (click)="applyBaseline()">Apply baseline</button>
 </div>
 
 <div id="chart" style="width:100%; height:100%;">
