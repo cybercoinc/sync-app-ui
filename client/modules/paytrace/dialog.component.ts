@@ -23,7 +23,7 @@ export class Dialog {
             number: [this.creditCard.number, [
                 Validators.required,
                 Validators.maxLength(16),
-                Validators.minLength(16)
+                Validators.minLength(15)
             ]],
             month: ['', [
                 Validators.pattern('^([1-9]|[12]\d|1[0-2])$'),
@@ -114,8 +114,8 @@ export class Dialog {
     private validateMessages = {
         number: {
             required: 'Credit card number is required',
-            maxlength: 'Credit card number must be sixteen-digit',
-            minlength: 'Credit card number must be sixteen-digit'
+            maxlength: 'Maximum length of credit card number must be sixteen-digit',
+            minlength: 'Minimum length of credit card number must be fifteen-digit'
         },
         month: {
             required: 'Exp. month is required',
