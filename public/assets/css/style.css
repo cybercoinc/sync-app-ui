@@ -61,14 +61,25 @@ body h1 {
 .sc-sidenav .mat-toolbar {
     background-color: #ffffff;
     padding: 0;
+    color: #666666;
 }
 
-.sc-sidenav md-toolbar-row {
+.sc-sidenav .mat-toolbar-row {
     border-bottom: 1px solid #A1A1A1;
     padding: 0 16px;
     font-weight: normal;
+    font-size: 16px;
+    line-height: 1.2;
+
+    height: 74px;
+    cursor: pointer;
 }
-.sc-sidenav md-toolbar-row span {
+.mat-toolbar-row .mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+.sc-sidenav .mat-toolbar-row span {
     margin-left: 5px;
 }
 
@@ -83,9 +94,12 @@ body h1 {
 }
 
 
-settings .mat-card {
+edit-project .mat-card, settings .mat-card {
     margin: 20px;
     max-width: 800px;
+}
+edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header {
+    border-bottom: 1px solid #c0c0c0;
 }
 
 settings .custom-users-dropdown {
