@@ -423,4 +423,21 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getBaselines(pipeId): Promise<any> {
+        return this.makeMsCall(
+            'chart/get-baselines',
+            'GET',
+            {
+                pipe_id: pipeId
+            }
+        );
+    }
+
+    createBaseline(data): Promise<any> {
+        return this.makeMsCall(
+            'chart/create-baseline',
+            'POST',
+            data
+        );
+    }
 }

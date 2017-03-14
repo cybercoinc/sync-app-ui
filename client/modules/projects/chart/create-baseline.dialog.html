@@ -1,0 +1,11 @@
+<h1 md-dialog-title>Create Baseline</h1>
+<div md-dialog-content>
+    <form #baseline="ngForm" (ngSubmit)="submit(baseline.value)" id="baseline-form">
+        <input type="text" ngModel name="title" placeholder="Enter title for baseline" required>
+    </form>
+</div>
+
+<div md-dialog-actions>
+    <button class="btn btn-primary" form="baseline-form" type="submit">Save</button>
+    <button class="btn btn-default pull-right" (click)="dialogRef.close('close')">Close</button>
+</div>
