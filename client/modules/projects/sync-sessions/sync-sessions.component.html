@@ -1,32 +1,34 @@
-<div class="">
-    <div class="row">
-        <!-- PIPES LIST -->
-        <div class="col-xs-3">
 
-            <div class="row bottom-lined clickable-row">
-                <div class="col-xs-12">
-                    <div class="pipe-header-large">{{project?.name}}</div>
-                </div>
-            </div>
+<md-sidenav-container>
+    <md-sidenav #sc_sidenav mode="side" opened="true" class="sc-sidenav">
+        <md-toolbar>
+            <span>{{project?.name}}</span>
 
-            <pipe-row status="{{pipesListObj.public_todos? pipesListObj.public_todos.status : 'inactive'}}"
-                      router-link="public_todos" material-icon="event_available" pipe-title="Project Calendar Items"
-                      description=""></pipe-row>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['public_todos']" [routerLinkActive]="['is-active']">
+                <md-icon>event_available</md-icon>
+                <span>
+                    <span>Project Calendar Items</span><br />
+                </span>
+            </md-toolbar-row>
 
-            <pipe-row status="{{pipesListObj.private_todos? pipesListObj.private_todos.status : 'inactive'}}"
-                      router-link="private_todos" material-icon="verified_user" pipe-title="Private Calendar Items"
-                      description=""></pipe-row>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['private_todos']" [routerLinkActive]="['is-active']">
+                <md-icon>verified_user</md-icon>
+                <span>
+                    <span>Private Calendar Items</span><br />
+                </span>
+            </md-toolbar-row>
 
-            <pipe-row status="{{pipesListObj.tasks? pipesListObj.tasks.status : 'inactive'}}"
-                      router-link="tasks" material-icon="event" pipe-title="Project Schedule"
-                      description=""></pipe-row>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['tasks']" [routerLinkActive]="['is-active']">
+                <md-icon>event</md-icon>
+                <span>
+                    <span>Project Schedule</span><br />
+                </span>
+            </md-toolbar-row>
 
-        </div>
-        <!-- end PIPES LIST -->
-
-        <div class="col-xs-9 left-lined sync-sessions-container">
-            <router-outlet></router-outlet>
-        </div>
+        </md-toolbar>
+    </md-sidenav>
+    <div class="sync-sessions-container">
+        <router-outlet></router-outlet>
     </div>
-</div>
+</md-sidenav-container>
 
