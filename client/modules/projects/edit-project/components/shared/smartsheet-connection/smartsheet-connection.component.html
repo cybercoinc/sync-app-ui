@@ -1,3 +1,4 @@
+<md-card style="max-width: initial; margin-bottom: 100px;">
 <div class="container-fluid" *ngIf="!pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
         <div *ngIf="isShowSuccess || isShowAlert">
@@ -87,6 +88,8 @@
         </section>
     </div>
 </div>
+
+</md-card>
 
 <div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">

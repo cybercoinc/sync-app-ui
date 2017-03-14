@@ -135,6 +135,7 @@ settings .custom-users-dropdown {
     min-height: 100%;
     width: 100%;
     min-width: 100%;
+    color: #666666;
 }
 .mat-sidenav {
     width: 298px;

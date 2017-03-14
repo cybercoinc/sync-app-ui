@@ -1,28 +1,22 @@
-<div class="row bottom-lined">
-    <div class="col-xs-8 pipe-header-large">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-5">
-                    Current status: {{pipesListObj[pipeType]?.status || 'inactive'}}
-                </div>
+<md-card style="max-width: initial;">
+    <div>
+        Current status: {{pipesListObj[pipeType]?.status || 'inactive'}}
+    </div>
 
-                <div class="col-xs-7">
-                    <div *ngIf="pipesListObj[pipeType]">
-                        <div *ngIf="(pipesListObj[pipeType]?.status != 'active')"
-                             style="display: block; float: left">
-                            <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
-                               [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id)"
-                               class="btn btn-success">enable</a>
-                        </div>
-                        <div *ngIf="(pipesListObj[pipeType]?.status == 'active')"
-                             style="display: block; float: left">
-                            <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
-                               class="btn btn-warning">disable</a>
-                        </div>
-                    </div>
-                </div>
-
+    <div>
+        <div *ngIf="pipesListObj[pipeType]">
+            <div *ngIf="(pipesListObj[pipeType]?.status != 'active')"
+                 style="display: block; float: left">
+                <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
+                   [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id)"
+                   class="btn btn-success">enable</a>
+            </div>
+            <div *ngIf="(pipesListObj[pipeType]?.status == 'active')"
+                 style="display: block; float: left">
+                <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
+                   class="btn btn-warning">disable</a>
             </div>
         </div>
     </div>
-</div>
+
+</md-card>
