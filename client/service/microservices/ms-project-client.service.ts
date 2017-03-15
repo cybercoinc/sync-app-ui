@@ -433,6 +433,17 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    saveChartTasks(pipeId, tasks): Promise<any> {
+        return this.makeMsCall(
+            'chart/save-tasks',
+            'POST',
+            {
+                pipe_id: pipeId,
+                tasks:   tasks
+            }
+        )
+    }
+
     createBaseline(data): Promise<any> {
         return this.makeMsCall(
             'chart/create-baseline',

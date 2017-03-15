@@ -54,7 +54,7 @@ export class Chart {
             {name:"time", type:"time", map_to:"auto"},
         ];
 
-        gantt.locale.labels["section_parent"] = "Parent task";
+        gantt.locale.labels["section_parent"]   = "Parent task";
         gantt.locale.labels["section_assignee"] = "Assignee";
 
         gantt.config.autosize = "y";

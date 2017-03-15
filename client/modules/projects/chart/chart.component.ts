@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {PipeConnectionService} from "client/service/pipe-connection.service";
-import {MsSyncClientService} from "client/service/microservices/ms-sync-client.service";
 
 import {Chart} from './chart';
 import {MdDialog} from "@angular/material";
@@ -14,12 +13,11 @@ import {CreateBaselineDialog} from "./create-baseline.dialog";
 })
 export class ChartComponent implements OnInit {
     private chart            = new Chart();
-    private isShowToolbar    = false;
+    private isShowToolbar    = true;
     private baselines        = [];
     private selectedBaseline = null;
 
     constructor(protected msProjectClient:       MsProjectClientService,
-                protected msSyncClient:          MsSyncClientService,
                 protected PipeConnectionService: PipeConnectionService,
                 protected dialog:                MdDialog) {}
 
@@ -27,10 +25,7 @@ export class ChartComponent implements OnInit {
         if (this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
             this.msProjectClient.getChartData(this.PipeConnectionService.pipesListObj['tasks'].id)
                 .then(response => {
-                    if (response.items.length > 0) {
-                       this.chart.buildChart(response.items);
-                       this.isShowToolbar = true;
-                    }
+                    this.chart.buildChart(response.items);
                 });
 
             this.msProjectClient.getBaselines(this.PipeConnectionService.pipesListObj['tasks'].id)
@@ -68,7 +63,7 @@ export class ChartComponent implements OnInit {
     save() {
         let tasks = this.chart.getTasks();
 
-        this.msSyncClient.saveChartTasks(this.PipeConnectionService.pipesListObj['tasks'].id, tasks);
+        this.msProjectClient.saveChartTasks(this.PipeConnectionService.pipesListObj['tasks'].id, tasks);
     }
 
     exportToPdf() {
