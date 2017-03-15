@@ -44,6 +44,7 @@ import {ChooseResourceComponent} from "./edit-project/components/project-setting
 
 import {ChartComponent} from "./chart/chart.component";
 import {CreateBaselineDialog} from "./chart/create-baseline.dialog";
+import {AddResourceDialog} from "./edit-project/components/project-settings/choose-resource/add-resource.dialog";
 
 @NgModule({
     imports: [
@@ -85,6 +86,7 @@ import {CreateBaselineDialog} from "./chart/create-baseline.dialog";
         PipeSettingsPublicComponent,
         PipeSettingsComponent,
         ChooseResourceComponent,
+        AddResourceDialog,
 
         PipeDeleteComponent,
         WorkspaceManagementComponent,
@@ -92,7 +94,10 @@ import {CreateBaselineDialog} from "./chart/create-baseline.dialog";
         ChartComponent,
         CreateBaselineDialog
     ],
-    entryComponents: [CreateBaselineDialog],
+    entryComponents: [
+        AddResourceDialog,
+        CreateBaselineDialog
+    ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ]

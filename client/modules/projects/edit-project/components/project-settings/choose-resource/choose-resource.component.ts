@@ -1,6 +1,8 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {AuthService} from "client/service/auth.service";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
+import {MdDialog} from "@angular/material";
+import {AddResourceDialog} from "./add-resource.dialog";
 
 @Component({
     selector: 'choose-resource',
@@ -11,7 +13,8 @@ import {MsProjectClientService} from "client/service/microservices/ms-project-cl
 })
 export class ChooseResourceComponent implements OnInit {
     constructor(protected AuthService: AuthService,
-                protected MsProjectClientService: MsProjectClientService,) {
+                protected MsProjectClientService: MsProjectClientService,
+                public MdDialog: MdDialog) {
     }
 
     public assignees = [];
@@ -41,6 +44,18 @@ export class ChooseResourceComponent implements OnInit {
                     this.model[assigneeObj.id] = this.existingResourcesObj[assigneeObj.resource_id] || '';
                 });
             });
+    }
+
+    addResource() {
+        let dialogRef = this.MdDialog.open(AddResourceDialog);
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && result.resource !== "") {
+                if (this.resourcesDropdownValues.indexOf(result.resource) === -1) {
+                    this.resourcesDropdownValues.push(result.resource);
+                }
+            }
+
+        });
     }
 
     getResources() {
