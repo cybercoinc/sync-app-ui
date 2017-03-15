@@ -50,7 +50,6 @@ export class ChooseResourceComponent implements OnInit {
         let dialogRef = this.MdDialog.open(AddResourceDialog);
         dialogRef.afterClosed().subscribe(result => {
             if (result && result.resource !== "") {
-                console.log('result', result);
                 if (this.resourcesDropdownValues.indexOf(result.resource) === -1) {
                     this.resourcesDropdownValues.push(result.resource);
                 }
