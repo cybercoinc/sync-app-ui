@@ -13,7 +13,7 @@ import {CreateBaselineDialog} from "./create-baseline.dialog";
 })
 export class ChartComponent implements OnInit {
     private chart            = new Chart();
-    private isShowToolbar    = true;
+    private isShowToolbar    = false;
     private baselines        = [];
     private selectedBaseline = null;
 
@@ -25,7 +25,8 @@ export class ChartComponent implements OnInit {
         if (this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
             this.msProjectClient.getChartData(this.PipeConnectionService.pipesListObj['tasks'].id)
                 .then(response => {
-                    this.chart.buildChart(response.items);
+                    this.chart.buildChart(response);
+                    this.isShowToolbar = true;
                 });
 
             this.msProjectClient.getBaselines(this.PipeConnectionService.pipesListObj['tasks'].id)
