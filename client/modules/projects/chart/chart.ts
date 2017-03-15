@@ -49,7 +49,7 @@ export class Chart {
         ];
 
         gantt.config.lightbox.sections = [
-            {name:"description", height:38, map_to:"text", type:"textarea"},
+            {name:"description", height:38, map_to:"text", type:"textarea", focus: true},
             {name:"parent", type:"parent", allow_root:"true", root_label:"No parent"},
             {name:"time", type:"time", map_to:"auto"},
         ];
