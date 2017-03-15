@@ -44,7 +44,6 @@ export class Chart {
 
         gantt.config.columns = [
             {name:"text", label: "Task name", tree: true},
-            {name:"assignee", label: "Assignee"},
             {name:"add", label:"", width:44 },
         ];
 
@@ -55,7 +54,6 @@ export class Chart {
         ];
 
         gantt.locale.labels["section_parent"]   = "Parent task";
-        gantt.locale.labels["section_assignee"] = "Assignee";
 
         gantt.config.autosize = "y";
 
