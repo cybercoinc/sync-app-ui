@@ -1,6 +1,6 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule}   from '@angular/forms';
+import {FormsModule, ReactiveFormsModule}   from '@angular/forms';
 import {MaterialModule} from '@angular/material';
 import {CybercoNg2Module} from "../cyberco-ng2/cyberco-ng2.module";
 
@@ -43,12 +43,14 @@ import {WorkspaceManagementComponent} from "./edit-project/components/project-se
 import {ChooseResourceComponent} from "./edit-project/components/project-settings/choose-resource/choose-resource.component";
 
 import {ChartComponent} from "./chart/chart.component";
+import {CreateBaselineDialog} from "./chart/create-baseline.dialog";
 import {AddResourceDialog} from "./edit-project/components/project-settings/choose-resource/add-resource.dialog";
 
 @NgModule({
     imports: [
         MaterialModule.forRoot(),
         BrowserModule,
+        ReactiveFormsModule,
         FormsModule,
         CybercoNg2Module,
         routing,
@@ -89,10 +91,12 @@ import {AddResourceDialog} from "./edit-project/components/project-settings/choo
         PipeDeleteComponent,
         WorkspaceManagementComponent,
 
-        ChartComponent
+        ChartComponent,
+        CreateBaselineDialog
     ],
     entryComponents: [
         AddResourceDialog,
+        CreateBaselineDialog
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
