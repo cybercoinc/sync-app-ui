@@ -43,6 +43,7 @@ import {WorkspaceManagementComponent} from "./edit-project/components/project-se
 import {ChooseResourceComponent} from "./edit-project/components/project-settings/choose-resource/choose-resource.component";
 
 import {ChartComponent} from "./chart/chart.component";
+import {AddResourceDialog} from "./edit-project/components/project-settings/choose-resource/add-resource.dialog";
 
 @NgModule({
     imports: [
@@ -83,11 +84,15 @@ import {ChartComponent} from "./chart/chart.component";
         PipeSettingsPublicComponent,
         PipeSettingsComponent,
         ChooseResourceComponent,
+        AddResourceDialog,
 
         PipeDeleteComponent,
         WorkspaceManagementComponent,
 
         ChartComponent
+    ],
+    entryComponents: [
+        AddResourceDialog,
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
