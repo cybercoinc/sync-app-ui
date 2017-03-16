@@ -23,6 +23,8 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.pipesListObj = this.PipeConnectionService.pipesListObj;
+
         if (!this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
             this.MsProjectClientService.getTasks(this.AuthService.authUser.id, this.PipeConnectionService.project.id)
                 .then(tasks => {
@@ -32,8 +34,6 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
                     }
                 });
         }
-
-        this.pipesListObj = this.PipeConnectionService.pipesListObj;
     }
 
     protected procoreProjectId: number;
@@ -41,7 +41,7 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
 
     protected componentIsBusy: boolean = false;
 
-    protected pipesListObj;
+    protected pipesListObj = {};
 
     protected pipeType = PIPE_TYPE_TASKS;
     protected redirectRoute = ['projects', this.PipeConnectionService.project.id, 'edit-project', 'pipe-tasks', 'settings'];
