@@ -56,6 +56,10 @@ export class Chart {
             {name:"add", label:"", width:44 },
         ];
 
+        gantt.config.auto_scheduling         = true;
+        gantt.config.auto_scheduling_strict  = true;
+        gantt.config.auto_scheduling_initial = true;
+
         gantt.form_blocks["resources"] = this.buildResourceDropdown(this.resources);
         gantt.form_blocks["assignees"] = this.buildAssigneeDropdown(this.assignees);
 
@@ -114,7 +118,7 @@ export class Chart {
 
         this.assignees.forEach(item => {
             if (item.resource_id == resourceId) {
-                html += '<option value="' + item.id + '">' + item.email + '</option>';
+                html += '<option value="' + item.id + '" selected>' + item.email + '</option>';
             }
         });
 
@@ -143,7 +147,12 @@ export class Chart {
     }
 
     getTasks() {
-        return gantt.serialize().data;
+        return gantt.serialize().data.map(item => {
+            item.hasChild   = gantt.hasChild(item.id) > 0;
+            item.row_number = gantt.getGlobalTaskIndex(item.id);
+
+            return item;
+        });
     }
 
     exportToPdf() {
