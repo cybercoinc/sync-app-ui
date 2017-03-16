@@ -164,8 +164,8 @@ export class Chart {
             el.className = 'baseline';
             el.style.left = sizes.left + 'px';
             el.style.position = 'absolute';
-            el.style.height = '12px';
-            el.style.background = '#ffd180';
+            el.style.height = '7px';
+            el.style.background = '#bbbbbb';
             el.style.width = sizes.width + 'px';
             el.style.top = sizes.top + gantt.config.task_height  + 13 + 'px';
             return el;
