@@ -12,10 +12,11 @@ import {CreateBaselineDialog} from "./create-baseline.dialog";
     styleUrls:  ['client/modules/projects/chart/chart.component.css']
 })
 export class ChartComponent implements OnInit {
-    private chart            = new Chart();
+    private chart;
     private isShowToolbar    = false;
     private baselines        = [];
     private selectedBaseline = null;
+    private assignees        = [];
 
     constructor(protected msProjectClient:       MsProjectClientService,
                 protected PipeConnectionService: PipeConnectionService,
@@ -23,9 +24,19 @@ export class ChartComponent implements OnInit {
 
     ngOnInit() {
         if (this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
-            this.msProjectClient.getChartData(this.PipeConnectionService.pipesListObj['tasks'].id)
-                .then(response => {
-                    this.chart.buildChart(response);
+            Promise.all([
+                this.msProjectClient.getChartData(this.PipeConnectionService.pipesListObj['tasks'].id),
+                this.msProjectClient.getAssignees(this.PipeConnectionService.project.id),
+                this.getResources()
+            ])
+                .then(result => {
+                    let chartData = result[0],
+                        assignees = result[1],
+                        resources = result[2];
+
+                    this.chart = new Chart(resources, assignees);
+
+                    this.chart.buildChart(chartData);
                     this.isShowToolbar = true;
                 });
 
@@ -34,6 +45,41 @@ export class ChartComponent implements OnInit {
                     this.baselines = baselines;
                 });
         }
+    }
+
+    getAssignees() {
+        this.msProjectClient.getAssignees(this.PipeConnectionService.project.id)
+            .then(assigneeList => {
+                this.assignees = assigneeList;
+            });
+    }
+
+    getResources() {
+        return Promise.all([
+            this.msProjectClient.getResources(this.PipeConnectionService.project.id),
+            this.msProjectClient.getTrades(this.PipeConnectionService.project.id)
+        ])
+            .then(results => {
+                let resourcesList = results[0],
+                    tradesList    = results[1],
+                    result        = [];
+
+                resourcesList.forEach(resource => {
+                    result.push({
+                        id:   resource.id,
+                        name: resource.name
+                    });
+                });
+
+                tradesList.forEach(trade => {
+                    result.push({
+                        id:   trade.id,
+                        name: trade.name
+                    });
+                });
+
+                return result;
+            })
     }
 
     createBaseline() {

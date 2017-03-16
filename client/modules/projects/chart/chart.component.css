@@ -9,3 +9,7 @@
 button.btn {
     margin-top: 20px;
 }
+
+#assignee-select {
+    display: none;
+}

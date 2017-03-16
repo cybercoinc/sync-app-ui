@@ -2,9 +2,13 @@ declare let gantt: any;
 declare let $: any;
 
 export class Chart {
-    model: any;
+    resources: any;
+    assignees: any;
 
-    constructor() {
+    constructor(resources, assignees) {
+        this.resources = resources;
+        this.assignees = assignees;
+
         let link = document.createElement('link');
         link.setAttribute('rel', 'stylesheet');
         link.setAttribute('type', 'text/css');
@@ -39,21 +43,31 @@ export class Chart {
     }
 
     buildChart(data) {
+        let self = this;
+
         gantt.config.task_height = 16;
         gantt.config.row_height  = 40;
 
         gantt.config.columns = [
             {name:"text", label: "Task name", tree: true},
+            {name:"resources", label: "Resource"},
             {name:"add", label:"", width:44 },
         ];
 
+        gantt.form_blocks["resources"] = this.buildResourceDropdown(this.resources);
+        gantt.form_blocks["assignees"] = this.buildAssigneeDropdown(this.assignees);
+
         gantt.config.lightbox.sections = [
             {name:"description", height:38, map_to:"text", type:"textarea", focus: true},
+            {name:"resources", map_to:"resources", type:"resources"},
+            {name:"assignees", map_to:"assignees", type:"assignees"},
             {name:"parent", type:"parent", allow_root:"true", root_label:"No parent"},
             {name:"time", type:"time", map_to:"auto"},
         ];
 
-        gantt.locale.labels["section_parent"]   = "Parent task";
+        gantt.locale.labels["section_parent"]    = "Parent task";
+        gantt.locale.labels["section_assignees"] = "Assignees";
+        gantt.locale.labels["section_resources"] = "Resources";
 
         gantt.config.autosize = "y";
 
@@ -69,8 +83,39 @@ export class Chart {
         gantt.sort('row_number', false);
 
         gantt.attachEvent("onLightbox", function (task_id){
-            $('.select2').select2();
+            $('#resources-select').on('change', (e) => {
+                let resource = self.getResource();
+
+                if (resource) {
+                    $('#assignee-select')
+                        .prop('disabled', false)
+                        .html(self.getAssigneeList(resource.id))
+                        .select2();
+                }
+                else {
+                    $('#assignee-select').prop('disabled', true);
+                }
+            });
+
+            $('select.select2').select2();
         });
+
+        gantt.attachEvent("onAfterLightbox", function (){
+            $('#resources-select').off('change');
+            return true;
+        });
+    }
+
+    getAssigneeList(resourceId) {
+        let html = '';
+
+        this.assignees.forEach(item => {
+            if (item.resource_id == resourceId) {
+                html += '<option value="' + item.id + '">' + item.email + '</option>';
+            }
+        });
+
+        return html;
     }
 
     applyBaseline(baselines) {
@@ -90,6 +135,10 @@ export class Chart {
         gantt.refreshData();
     }
 
+    getResource() {
+        return this.resources.find(e => e.name == $('#resources-select').val());
+    }
+
     getTasks() {
         return gantt.serialize().data;
     }
@@ -98,6 +147,13 @@ export class Chart {
         gantt.exportToPDF({
             header:'<link rel="stylesheet" href="//dhtmlx.com/docs/products/dhtmlxGantt/common/customstyles.css" type="text/css">'
         });
+    }
+
+    refreshAssigneeList(html) {
+        $('#assignee-select')
+            .prop('disabled', false)
+            .html(html)
+            .select2();
     }
 
     addBaseLines(task): any {
@@ -114,5 +170,60 @@ export class Chart {
             return el;
         }
         return false;
+    }
+
+    buildResourceDropdown(options) {
+        let self = this;
+
+        return {
+            render: function(sns){
+                let html = '<select id="resources-select">' +
+                           '<option value="0">No resource</option>';
+
+                options.forEach(item => {
+                    html += '<option value="' + item.name + '">' + item.name + '</option>'
+                });
+                html += '</select>';
+
+                return '<div class="gantt_cal_ltext">' + html + '</div>';
+            },
+
+            set_value: function(node,value,task,section){
+                if (!value) { // new task
+                    $('#resources-select option').first().prop('selected', true);
+                    $('#assignee-select').empty().prop('disabled', true);
+                }
+                else {
+                    let resource = self.resources.find(e => e.name == value);
+                    if (resource) {
+                        $('#resources-select').val(resource.name).change();
+                        // $('#assignee-select')
+                        //     .prop('disabled', false)
+                        //     .html(self.getAssigneeList(resource.id))
+                        //     .select2();
+                    }
+                }
+            },
+            get_value: function(node,task,section){
+                if (self.getResource()) {
+                    return $('#resources-select').val();
+                }
+            },
+            focus: function(node){}
+        };
+    }
+
+    buildAssigneeDropdown(options) {
+        return {
+            render: function(sns){
+                return '<select id="assignee-select" multiple="multiple" class="select2"></select>';
+            },
+
+            set_value: function(node,value,task,section){},
+            get_value: function(node,task,section){
+                // if ($('#assignee-select').val())
+            },
+            focus: function(node){}
+        };
     }
 }
