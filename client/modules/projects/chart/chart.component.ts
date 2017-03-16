@@ -123,8 +123,8 @@ export class ChartComponent implements OnInit {
         return tasks.map(task => {
             return {
                 id:         task.id,
-                start_date: task.start_datetime,
-                end_date:   task.finish_datetime,
+                start_date: task.start_date,
+                end_date:   task.end_date,
             };
         });
     }

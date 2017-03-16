@@ -93,6 +93,7 @@ export class Chart {
                         .select2();
                 }
                 else {
+                    $('#assignee-select').empty();
                     $('#assignee-select').prop('disabled', true);
                 }
             });
@@ -125,8 +126,8 @@ export class Chart {
             let baseline = baselines.find(item => item.id == task.id);
 
             if (baseline != undefined)  {
-                task.planned_start = baseline.planned_start;
-                task.planned_end   = baseline.planned_end;
+                task.planned_start = baseline.start_date;
+                task.planned_end   = baseline.end_date;
             }
         });
 
@@ -197,10 +198,6 @@ export class Chart {
                     let resource = self.resources.find(e => e.name == value);
                     if (resource) {
                         $('#resources-select').val(resource.name).change();
-                        // $('#assignee-select')
-                        //     .prop('disabled', false)
-                        //     .html(self.getAssigneeList(resource.id))
-                        //     .select2();
                     }
                 }
             },
@@ -221,7 +218,9 @@ export class Chart {
 
             set_value: function(node,value,task,section){},
             get_value: function(node,task,section){
-                // if ($('#assignee-select').val())
+                if ($('#assignee-select').val()) {
+                    return $('#assignee-select').val();
+                }
             },
             focus: function(node){}
         };
