@@ -185,7 +185,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    getPipeById(pipeId: number): Promise<ProjectPipe> {
+    getPipeById(pipeId: number): Promise<ProjectPipe[]> {
         return this.makeMsCall(
             'pipes/find-where',
             'GET',

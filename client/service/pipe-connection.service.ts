@@ -83,8 +83,8 @@ export class PipeConnectionService implements Resolve<{}> {
         let _pipeObj;
 
         return this.MsProjectClientService.getPipeById(pipeId)
-            .then(pipeObj => {
-                _pipeObj = pipeObj;
+            .then(pipesList => {
+                _pipeObj = pipesList.shift();
 
                 return this.MsProjectClientService.enablePipe(pipeId);
             })
@@ -92,12 +92,16 @@ export class PipeConnectionService implements Resolve<{}> {
                 return this.refreshPipesList();
             })
             .then(() => {
-                if (!_pipeObj.use_schedule_chart && !_pipeObj.sm_webhook_id) {
+                if (_pipeObj.use_schedule_chart) {
+                    return;
+                }
+
+                if (!_pipeObj.sm_webhook_id) {
                     return this.MsProjectClientService.createSmPipeWebhook(pipeId);
                 }
             })
             .then(() => {
-                if (!_pipeObj.use_schedule_chart) {
+                if (_pipeObj.use_schedule_chart) {
                     return;
                 }
 
@@ -109,8 +113,8 @@ export class PipeConnectionService implements Resolve<{}> {
         let _pipeObj;
 
         return this.MsProjectClientService.getPipeById(pipeId)
-            .then(pipeObj => {
-                _pipeObj = pipeObj;
+            .then(pipesList => {
+                _pipeObj = pipesList.shift();
 
                 return this.MsProjectClientService.disablePipe(pipeId);
             })
@@ -118,7 +122,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 return this.refreshPipesList();
             })
             .then(() => {
-                if (!_pipeObj.use_schedule_chart) {
+                if (_pipeObj.use_schedule_chart) {
                     return;
                 }
 
