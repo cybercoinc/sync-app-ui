@@ -1,5 +1,4 @@
-<md-card style="max-width: initial; margin-bottom: 100px;" *ngIf="!pipesListObj[pipeType]?.sm_sheet_id">
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="!pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
         <div *ngIf="isShowSuccess || isShowAlert">
             <md-card *ngIf="isShowSuccess" class="alert-dismissable">
@@ -89,13 +88,10 @@
     </div>
 </div>
 
-</md-card>
-
-<md-card style="max-width: initial; margin-bottom: 100px;" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
     <div class="row">
         <div class="col-xs-12">
-            <h5> Smartsheet connected: </h5>
+            <h5> Connection Status: Connected to Smartsheet </h5>
             Sheet name: <i>{{pipesListObj[pipeType]?.sm_sheet_name}}</i>
             <a href="{{pipesListObj[pipeType]?.sm_permalink}}"
                class="btn btn-success btn-sm"
@@ -103,10 +99,8 @@
         </div>
     </div>
 </div>
-</md-card>
 
-<md-card style="max-width: initial; margin-bottom: 100px;" *ngIf="pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
             <columns-matching sheet-id="{{pipesListObj[pipeType]?.sm_sheet_id}}"
@@ -114,4 +108,3 @@
         </div>
     </div>
 </div>
-</md-card>

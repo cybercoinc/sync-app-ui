@@ -32,6 +32,8 @@
     </div>
 </md-card>
 
-<smartsheet-connection *ngIf="!useScheduleGanttIsAsked" pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>
-<pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+<md-card>
+    <smartsheet-connection *ngIf="!useScheduleGanttIsAsked" pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>
+    <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+</md-card>
 
