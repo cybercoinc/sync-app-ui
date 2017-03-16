@@ -148,7 +148,7 @@ export class Chart {
 
     getTasks() {
         return gantt.serialize().data.map(item => {
-            item.hasChild   = gantt.hasChild(item.id) > 0;
+            item.has_сhild   = gantt.hasChild(item.id) > 0;
             item.row_number = gantt.getGlobalTaskIndex(item.id);
 
             return item;
