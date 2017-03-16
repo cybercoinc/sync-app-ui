@@ -5,7 +5,7 @@
             <span>{{project.name}}</span>
 
             <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-public-todo']" [routerLinkActive]="['is-active']">
-                <div class="pipe-status-indicator" [ngClass]="pipesListObj.public_todos.status"></div>
+                <div class="pipe-status-indicator" [ngClass]="pipesListObj.public_todos?.status"></div>
                 <md-icon>event_available</md-icon>
                 <span>
                     <span>Project Calendar Items</span><br />
