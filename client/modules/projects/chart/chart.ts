@@ -50,7 +50,9 @@ export class Chart {
 
         gantt.config.columns = [
             {name:"text", label: "Task name", tree: true},
-            {name:"resources", label: "Resource"},
+            {name:"resources", label: "Resource", template: (obj) => {
+                return obj.resources == undefined ? '' : obj.resources;
+            }},
             {name:"add", label:"", width:44 },
         ];
 
