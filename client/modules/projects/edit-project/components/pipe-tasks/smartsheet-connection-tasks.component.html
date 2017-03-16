@@ -19,7 +19,7 @@
     </md-card-content>
 </md-card>
 
-<md-card *ngIf="!useScheduleGanttIsAsked && !pipesListObj[pipeType]" style="max-width: initial; background-color: #FFF">
+<md-card *ngIf="useScheduleGanttIsAsked && !pipesListObj[pipeType]" style="max-width: initial; background-color: #FFF">
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
             <h5>Do you want to use Schedule Gantt for tasks creating and editing?</h5>
