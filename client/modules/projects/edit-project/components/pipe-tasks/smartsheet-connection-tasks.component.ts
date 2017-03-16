@@ -32,12 +32,16 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
                     }
                 });
         }
+
+        this.pipesListObj = this.PipeConnectionService.pipesListObj;
     }
 
     protected procoreProjectId: number;
     protected isShowAlert: boolean = false;
 
     protected componentIsBusy: boolean = false;
+
+    protected pipesListObj;
 
     protected pipeType = PIPE_TYPE_TASKS;
     protected redirectRoute = ['projects', this.PipeConnectionService.project.id, 'edit-project', 'pipe-tasks', 'settings'];
