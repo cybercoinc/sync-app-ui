@@ -5,9 +5,10 @@ import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
 @Component({
     selector: 'smartsheet-connection-private',
-    template: `
+    template: `<md-card>
         <smartsheet-connection pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>
         <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+        </md-card>
     `
 })
 export class SmartsheetConnectionPrivateComponent implements OnInit {
