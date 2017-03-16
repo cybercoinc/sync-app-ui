@@ -19,6 +19,19 @@
     vertical-align: middle;
 }
 
+.pipe-status-indicator {
+    position: absolute;
+    width: 10px;
+    height: 74px;
+    right: 0px;
+}
+.pipe-status-indicator.active {
+    background-color: #2A8039;
+}
+.pipe-status-indicator.disabled {
+    background-color: #FF530D;
+}
+
 .pipe-step-header-large {
     font-size: 24px;
 }

@@ -5,6 +5,7 @@
             <span>{{project.name}}</span>
 
             <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-public-todo']" [routerLinkActive]="['is-active']">
+                <div class="pipe-status-indicator" [ngClass]="pipesListObj.public_todos.status"></div>
                 <md-icon>event_available</md-icon>
                 <span>
                     <span>Project Calendar Items</span><br />
@@ -13,6 +14,7 @@
             </md-toolbar-row>
 
             <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-private-todo']" [routerLinkActive]="['is-active']">
+                <div class="pipe-status-indicator" [ngClass]="pipesListObj.private_todos?.status"></div>
                 <md-icon>verified_user</md-icon>
                 <span>
                     <span>Private Calendar Items</span><br />
@@ -21,6 +23,7 @@
             </md-toolbar-row>
 
             <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-tasks']" [routerLinkActive]="['is-active']">
+                <div class="pipe-status-indicator" [ngClass]="pipesListObj.tasks?.status"></div>
                 <md-icon>event</md-icon>
                 <span>
                     <span>Project Schedule</span><br />
