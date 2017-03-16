@@ -1,22 +1,28 @@
 <div>
-    <div *ngIf="isShowToolbar">
-        <button class="btn btn-default" (click)="exportToPdf()">export to pdf</button>
-        <button class="btn btn-default" (click)="createBaseline()">create baseline</button>
 
-        <md-select placeholder="Select baseline" name="baseline" [(ngModel)]="selectedBaseline">
-            <md-option *ngFor="let baseline of baselines" [value]="baseline.id">
-                {{baseline.name}}
-            </md-option>
-        </md-select>
+    <md-card *ngIf="isShowToolbar">
+        <button class="btn btn-primary" (click)="save()">Save</button>
+        <button class="btn btn-default" (click)="exportToPdf()">Export PDF</button>
 
-        <button class="btn btn-success" [disabled]="!selectedBaseline" (click)="applyBaseline()">Apply baseline</button>
-    </div>
+        <span style="float: right;">
+
+            <button class="btn btn-default" (click)="createBaseline()">create baseline</button>
+
+            <md-select placeholder="Select baseline" name="baseline" [(ngModel)]="selectedBaseline">
+                <md-option *ngFor="let baseline of baselines" [value]="baseline.id">
+                    {{baseline.name}}
+                </md-option>
+            </md-select>
+
+            <button class="btn btn-success" [disabled]="!selectedBaseline" (click)="applyBaseline()">Apply baseline</button>
+        </span>
+    </md-card>
 
     <div id="chart" style="width:100%; height:100%;">
-        <h1>No data for chart</h1>
+        <h1>Loading... Please wait.</h1>
     </div>
 
     <div *ngIf="isShowToolbar">
-        <button class="btn btn-primary" (click)="save()">Save</button>
+
     </div>
 </div>
