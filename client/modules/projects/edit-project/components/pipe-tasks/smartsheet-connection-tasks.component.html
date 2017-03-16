@@ -19,4 +19,17 @@
     </md-card-content>
 </md-card>
 
-<smartsheet-connection pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>
+<md-card *ngIf="useScheduleGanttIsAsked" style="max-width: initial; background-color: #FFF">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <h5>Do you want to use Schedule Gantt for tasks creating and editing?</h5>
+        </div>
+
+        <div class="col-xs-6 col-xs-offset-4">
+            <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="useScheduleGantt()">Yes</button>
+            <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="doNotUseScheduleGantt()">No</button>
+        </div>
+    </div>
+</md-card>
+
+<smartsheet-connection *ngIf="!useScheduleGanttIsAsked" pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>

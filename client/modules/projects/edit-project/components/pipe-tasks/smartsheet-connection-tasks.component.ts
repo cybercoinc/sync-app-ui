@@ -4,6 +4,7 @@ import {PIPE_TYPE_TASKS} from 'client/entities/entities';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 import {MsProjectClientService} from "../../../../../service/microservices/ms-project-client.service";
 import {AuthService} from "../../../../../service/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'smartsheet-connection-tasks',
@@ -15,9 +16,10 @@ import {AuthService} from "../../../../../service/auth.service";
     `]
 })
 export class SmartsheetConnectionTasksComponent implements OnInit {
-    constructor(protected PipeConnectionService:  PipeConnectionService,
+    constructor(protected PipeConnectionService: PipeConnectionService,
                 protected MsProjectClientService: MsProjectClientService,
-                protected AuthService:            AuthService) {
+                private router: Router,
+                protected AuthService: AuthService) {
     }
 
     ngOnInit() {
@@ -34,6 +36,32 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
 
     protected procoreProjectId: number;
     protected isShowAlert: boolean = false;
+
+    protected componentIsBusy: boolean = false;
+
     protected pipeType = PIPE_TYPE_TASKS;
     protected redirectRoute = ['projects', this.PipeConnectionService.project.id, 'edit-project', 'pipe-tasks', 'settings'];
+
+    protected useScheduleGanttIsAsked: boolean = true;
+
+    protected useScheduleGantt() {
+        let useScheduleChart = true;
+        this.componentIsBusy = true;
+
+        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType, useScheduleChart)
+            .then(() => {
+                return this.PipeConnectionService.refreshPipesList();
+            })
+            .then(() => {
+                return this.router.navigate(this.redirectRoute);
+            });
+    }
+
+    protected doNotUseScheduleGantt() {
+        if (this.componentIsBusy) {
+            return;
+        }
+
+        this.useScheduleGanttIsAsked = false;
+    }
 }

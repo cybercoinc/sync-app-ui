@@ -9,7 +9,7 @@
             Current status: <span style="color: #8b0305; font-weight: bold; font-size: 16px; margin-right: 15px;">Disabled</span>
         </span>
         <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
-           [class.disabled]="!(pipesListObj[pipeType]?.sm_sheet_id)"
+           [class.disabled]="!canEnablePipe()"
            class="btn btn-success">enable</a>
     </span>
     <span *ngIf="(pipesListObj[pipeType] && pipesListObj[pipeType].status == 'active')">

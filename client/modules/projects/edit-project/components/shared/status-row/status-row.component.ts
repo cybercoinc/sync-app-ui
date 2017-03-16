@@ -18,6 +18,18 @@ export class StatusRowComponent implements OnInit {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
     }
 
+    canEnablePipe() {
+        let can = false;
+
+        if (this.pipesListObj[this.pipeType] &&
+            (this.pipesListObj[this.pipeType].sm_sheet_id || this.pipesListObj[this.pipeType].use_schedule_chart)
+        ) {
+            can = true;
+        }
+
+        return can;
+    }
+
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
     protected pipesListObj;
 }

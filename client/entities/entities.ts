@@ -235,6 +235,7 @@ export class ProjectPipe {
     summary_tasks_enabled: boolean;
     need_to_match_sm_columns: boolean;
     colors_coding_enabled: boolean;
+    use_schedule_chart: boolean;
 }
 
 export class Invoice {

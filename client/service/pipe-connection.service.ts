@@ -80,7 +80,7 @@ export class PipeConnectionService implements Resolve<{}> {
     }
 
     enablePipe(pipeId: number) {
-        let _pipeObj: ProjectPipe;
+        let _pipeObj;
 
         return this.MsProjectClientService.getPipeById(pipeId)
             .then(pipeObj => {
@@ -92,23 +92,36 @@ export class PipeConnectionService implements Resolve<{}> {
                 return this.refreshPipesList();
             })
             .then(() => {
-                if (!_pipeObj.sm_webhook_id) {
+                if (!_pipeObj.use_schedule_chart && !_pipeObj.sm_webhook_id) {
                     return this.MsProjectClientService.createSmPipeWebhook(pipeId);
                 }
-
-                return _pipeObj.sm_webhook_id;
             })
             .then(() => {
+                if (!_pipeObj.use_schedule_chart) {
+                    return;
+                }
+
                 return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, true);
             });
     }
 
     disablePipe(pipeId) {
-        return this.MsProjectClientService.disablePipe(pipeId)
+        let _pipeObj;
+
+        return this.MsProjectClientService.getPipeById(pipeId)
+            .then(pipeObj => {
+                _pipeObj = pipeObj;
+
+                return this.MsProjectClientService.disablePipe(pipeId);
+            })
             .then(() => {
                 return this.refreshPipesList();
             })
             .then(() => {
+                if (!_pipeObj.use_schedule_chart) {
+                    return;
+                }
+
                 return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, false);
             })
     }
@@ -120,7 +133,7 @@ export class PipeConnectionService implements Resolve<{}> {
             });
     }
 
-    createNewOrGetExistingPipe(pipeType) {
+    createNewOrGetExistingPipe(pipeType, useScheduleChart = false) {
         return this.MsProjectClientService.getPipesWhere({
             project_fk_id: this.project.id,
             type: pipeType
@@ -134,7 +147,8 @@ export class PipeConnectionService implements Resolve<{}> {
                     return this.MsProjectClientService.createPipe({
                         project_id: this.project.id,
                         type: pipeType,
-                        name: this.getPipeLabelByType(pipeType)
+                        name: this.getPipeLabelByType(pipeType),
+                        use_schedule_chart: useScheduleChart
                     });
                 }
             });
