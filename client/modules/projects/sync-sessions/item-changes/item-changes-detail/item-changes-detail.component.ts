@@ -47,6 +47,12 @@ export class ItemChangesDetailComponent implements OnInit {
     ];
 
     needToHideChange(propName) {
+        let needToHide = false;
+
+        let currentChangeObj = this.itemChangesObj.changes.filter(changeObj => changeObj.property === propName).shift();
+
+
+
         let colorWasChanged = !!this.itemChangesObj.changes.filter(changeObj => {
             return changeObj.property === 'color' && changeObj.new_value !== changeObj.old_value;
         }).shift();
@@ -55,6 +61,14 @@ export class ItemChangesDetailComponent implements OnInit {
             return changeObj.property === 'name' && changeObj.new_value !== changeObj.old_value;
         }).shift();
 
-        return propName === 'name' && colorWasChanged && !nameWasChanged;
+
+        // such happens if duration was changed, start_datetime was not changed and only finish_datetime was dirty
+        let propertyWasNotChanged = currentChangeObj.old_value === currentChangeObj.new_value;
+
+        if (propertyWasNotChanged || (propName === 'name' && colorWasChanged && !nameWasChanged)) {
+            needToHide = true;
+        }
+
+        return needToHide;
     }
 }
