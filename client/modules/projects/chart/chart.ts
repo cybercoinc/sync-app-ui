@@ -84,7 +84,7 @@ export class Chart {
         });
 
         gantt.init("chart");
-        gantt.parse({data: data});
+        gantt.parse({data: data.tasks, links: data.links});
 
         gantt.sort('row_number', false);
 
@@ -153,6 +153,10 @@ export class Chart {
 
             return item;
         });
+    }
+
+    getLinks() {
+        return gantt.getLinks();
     }
 
     exportToPdf() {
