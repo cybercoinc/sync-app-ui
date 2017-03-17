@@ -266,6 +266,10 @@ select > option:disabled {
     color: #2A8039;
 }
 
+.schedule-source-icon {
+    color: #4286f4;
+}
+
 .procore-source-icon {
     color: #FF530D;
 }

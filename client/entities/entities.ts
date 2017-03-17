@@ -83,7 +83,7 @@ export const ITEM_CHANGES_TYPE_DELETED_ONE = 'deleted_one';
 
 export class ItemChanges {
     created_at: Date;
-    source: 'smartsheet' | 'procore';
+    source: 'smartsheet' | 'procore' | 'schedule';
     sync_session_fk_id: {
         id: number;
         kind: string;
