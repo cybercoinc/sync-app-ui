@@ -433,13 +433,14 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    saveChartTasks(pipeId, tasks): Promise<any> {
+    saveScheduleGantt(pipeId, tasks, links): Promise<any> {
         return this.makeMsCall(
-            'chart/save-tasks',
+            'chart/save-schedule-gantt',
             'POST',
             {
                 pipe_id: pipeId,
-                tasks:   tasks
+                tasks:   tasks,
+                links:   links
             }
         )
     }

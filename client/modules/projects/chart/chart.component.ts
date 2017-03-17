@@ -108,9 +108,14 @@ export class ChartComponent implements OnInit {
     }
 
     save() {
-        let tasks = this.chart.getTasks();
+        let tasks = this.chart.getTasks(),
+            links = this.chart.getLinks();
 
-        this.msProjectClient.saveChartTasks(this.PipeConnectionService.pipesListObj['tasks'].id, tasks);
+        this.msProjectClient.saveScheduleGantt(
+            this.PipeConnectionService.pipesListObj['tasks'].id,
+            tasks,
+            links
+        );
     }
 
     exportToPdf() {
