@@ -26,6 +26,10 @@ export class ItemChangesRowComponent implements OnInit {
             case 'procore':
                 cl = 'procore-source-icon';
                 break;
+
+            case 'schedule':
+                cl = 'schedule-source-icon';
+                break;
         }
 
         return cl;
@@ -36,6 +40,10 @@ export class ItemChangesRowComponent implements OnInit {
 
         switch (this.itemChanges.source) {
             case 'smartsheet':
+                icon = 'arrow_back';
+                break;
+
+            case 'schedule':
                 icon = 'arrow_back';
                 break;
 
