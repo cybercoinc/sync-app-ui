@@ -19,9 +19,23 @@
             <b>Changes:</b>
 
             <ul>
-                <li *ngFor="let changesObj of itemChangesObj.changes" [class.hide]="needToHideChange(changesObj.property)">
-                    <b>{{changesObj.property}}</b>: old value - <i>{{changesObj.old_value}}</i>,
+                <li *ngFor="let changesObj of itemChangesObj.changes"
+                    [class.hide]="needToHideChange(changesObj.property)">
+                    {{changesObj.property}}
+                    <span [ngSwitch]="changesObj.property">
+                        <span *ngSwitchCase="'finish_datetime'">
+                            <b>{{changesObj.property}}</b>: old value - <i>{{changesObj.old_value | date: datesFormat}}</i>,
+                    new value - <i>{{changesObj.new_value | date: datesFormat}}</i>
+                        </span>
+                        <span *ngSwitchCase="'start_datetime'">
+                            <b>{{changesObj.property}}</b>: old value - <i>{{changesObj.old_value | date: datesFormat}}</i>,
+                    new value - <i>{{changesObj.new_value | date: datesFormat}}</i>
+                        </span>
+                        <span *ngSwitchDefault>
+                            <b>{{changesObj.property}}</b>: old value - <i>{{changesObj.old_value}}</i>,
                     new value - <i>{{changesObj.new_value}}</i>
+                        </span>
+                    </span>
                 </li>
             </ul>
         </div>

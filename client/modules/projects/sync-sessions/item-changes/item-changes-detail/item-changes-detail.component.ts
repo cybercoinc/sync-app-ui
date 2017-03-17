@@ -71,4 +71,6 @@ export class ItemChangesDetailComponent implements OnInit {
 
         return needToHide;
     }
+
+    protected datesFormat = 'yyyy-MM-dd';
 }
