@@ -3,7 +3,7 @@ import {MsProjectClientService} from "client/service/microservices/ms-project-cl
 import {PipeConnectionService} from "client/service/pipe-connection.service";
 
 import {Chart} from './chart';
-import {MdDialog} from "@angular/material";
+import {MdDialog, MdSnackBar} from "@angular/material";
 import {CreateBaselineDialog} from "./create-baseline.dialog";
 
 @Component({
@@ -20,7 +20,8 @@ export class ChartComponent implements OnInit {
 
     constructor(protected msProjectClient:       MsProjectClientService,
                 protected PipeConnectionService: PipeConnectionService,
-                protected dialog:                MdDialog) {}
+                protected dialog:                MdDialog,
+                protected snackBar:              MdSnackBar) {}
 
     ngOnInit() {
         if (this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
@@ -115,7 +116,13 @@ export class ChartComponent implements OnInit {
             this.PipeConnectionService.pipesListObj['tasks'].id,
             tasks,
             links
-        );
+        )
+            .then(() => {
+                this.snackBar.open('Chart has been successfully saved', null, {
+                    duration: 2000,
+                    extraClasses: ['alert-success']
+                });
+            });
     }
 
     exportToPdf() {

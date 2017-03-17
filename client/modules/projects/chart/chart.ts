@@ -50,6 +50,9 @@ export class Chart {
 
         gantt.config.columns = [
             {name:"text", label: "Task name", tree: true},
+            {name:"progress", label: "Complete %", template: (obj) => {
+                return (obj.progress * 100).toFixed(0);
+            }},
             {name:"resources", label: "Resource", template: (obj) => {
                 return obj.resources == undefined ? '' : obj.resources;
             }},
@@ -59,6 +62,9 @@ export class Chart {
         gantt.config.auto_scheduling         = true;
         gantt.config.auto_scheduling_strict  = true;
         gantt.config.auto_scheduling_initial = true;
+        gantt.config.work_time               = true;
+        gantt.config.autosize                = "y";
+        gantt._is_lightbox_timepicker        = function(){ return true;};
 
         gantt.form_blocks["resources"] = this.buildResourceDropdown(this.resources);
         gantt.form_blocks["assignees"] = this.buildAssigneeDropdown(this.assignees);
@@ -68,14 +74,12 @@ export class Chart {
             {name:"resources", map_to:"resources", type:"resources"},
             {name:"assignees", map_to:"assignees", type:"assignees"},
             {name:"parent", type:"parent", allow_root:"true", root_label:"No parent"},
-            {name:"time", type:"time", map_to:"auto"},
+            {name:"time", type:"duration", map_to:"auto"},
         ];
 
         gantt.locale.labels["section_parent"]    = "Parent task";
         gantt.locale.labels["section_assignees"] = "Assignees";
         gantt.locale.labels["section_resources"] = "Resources";
-
-        gantt.config.autosize = "y";
 
         gantt.attachEvent("onTaskLoading", function(task){
             task.planned_start = gantt.date.parseDate(task.planned_start, "xml_date");

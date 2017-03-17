@@ -338,3 +338,7 @@ select > option:disabled {
 .gantt_cal_light_wide .gantt_cal_larea {
     height: auto !important;
 }
+
+.gantt_time_selects select {
+    width: 100px !important;
+}
