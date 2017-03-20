@@ -1,0 +1,19 @@
+.projects-list {
+    height: 250px;
+    width: 500px;
+    overflow-x: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+md-radio-button {
+    margin-left: 20px;
+}
+
+.is-connected {
+    float: right;
+    font-size: 12px;
+    color: grey;
+    padding-left: 5px;
+}

@@ -2,7 +2,8 @@
     <md-card-content>
         <h5>
             <p>
-                We detected that this project already have uploaded schedule. To connect it via ScheduleConnector, you have to clear current schedule on Procore.
+                We detected that this project already have uploaded schedule. To connect it via ScheduleConnector, you
+                have to clear current schedule on Procore.
             </p>
 
             <p>
@@ -11,29 +12,35 @@
 
             <p>
                 To do this please follow to
-                <a href="https://app.procore.com/{{procoreProjectId}}/project/calendar/configure_tab" target="_blank">this Procore page</a>
+                <a href="https://app.procore.com/{{procoreProjectId}}/project/calendar/configure_tab" target="_blank">this
+                    Procore page</a>
                 and click
-                <a href="https://storage.googleapis.com/static-sc20/howto/Procore-ClearScheduleButton.png" target="_blank">Clear Schedule button</a>
+                <a href="https://storage.googleapis.com/static-sc20/howto/Procore-ClearScheduleButton.png"
+                   target="_blank">Clear Schedule button</a>
             </p>
         </h5>
     </md-card-content>
 </md-card>
 
-<md-card *ngIf="useScheduleGanttIsAsked && !pipesListObj[pipeType]" style="max-width: initial; background-color: #FFF">
-    <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-            <h5>Do you want to use Schedule Gantt for tasks creating and editing?</h5>
-        </div>
+<md-card class="row" *ngIf="useScheduleChartIsAsked && !pipesListObj[pipeType]"
+         style="max-width: 800px; background-color: #FFF">
+    <div class="col-xs-12">
+        <h5>Do you want to use Schedule Gantt for tasks creating and editing?</h5>
+    </div>
 
-        <div class="col-xs-6 col-xs-offset-4">
-            <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="useScheduleGantt()">Yes</button>
-            <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="doNotUseScheduleGantt()">No</button>
-        </div>
+    <div class="col-xs-6 col-xs-offset-4">
+        <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="useScheduleGantt()">Yes</button>
+        <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="doNotUseScheduleGantt()">No
+        </button>
     </div>
 </md-card>
 
-<md-card>
-    <smartsheet-connection *ngIf="!useScheduleGanttIsAsked" pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>
-    <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
-</md-card>
+<ng-container *ngIf="pipesListObj[pipeType]">
+    <schedule-connection *ngIf="scheduleChartIsUsed" pipe-type="{{pipeType}}"
+                         [redirect-route]="redirectRoute"></schedule-connection>
+
+    <smartsheet-connection *ngIf="!scheduleChartIsUsed" pipe-type="{{pipeType}}"
+                           [redirect-route]="redirectRoute"></smartsheet-connection>
+</ng-container>
+
 

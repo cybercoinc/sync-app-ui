@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {PIPE_TYPE_TASKS} from 'client/entities/entities';
+import {PIPE_TYPE_TASKS, ProjectPipe} from 'client/entities/entities';
 
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 import {MsProjectClientService} from "../../../../../service/microservices/ms-project-client.service";
@@ -34,6 +34,8 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
                     }
                 });
         }
+
+        this.scheduleChartIsUsed = this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].use_schedule_chart;
     }
 
     protected procoreProjectId: number;
@@ -46,18 +48,18 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
     protected pipeType = PIPE_TYPE_TASKS;
     protected redirectRoute = ['projects', this.PipeConnectionService.project.id, 'edit-project', 'pipe-tasks', 'settings'];
 
-    protected useScheduleGanttIsAsked: boolean = true;
+    protected useScheduleChartIsAsked: boolean = true;
+    protected scheduleChartIsUsed: boolean = false;
 
     protected useScheduleGantt() {
-        let useScheduleChart = true;
         this.componentIsBusy = true;
 
-        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType, useScheduleChart)
+        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType, true)
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
             })
             .then(() => {
-                return this.router.navigate(this.redirectRoute);
+                this.scheduleChartIsUsed = true;
             });
     }
 
@@ -66,6 +68,7 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
             return;
         }
 
-        this.useScheduleGanttIsAsked = false;
+        this.scheduleChartIsUsed = false;
+        this.useScheduleChartIsAsked = false;
     }
 }

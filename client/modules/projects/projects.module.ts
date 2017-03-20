@@ -45,6 +45,7 @@ import {ChooseResourceComponent} from "./edit-project/components/project-setting
 import {ChartComponent} from "./chart/chart.component";
 import {CreateBaselineDialog} from "./chart/create-baseline.dialog";
 import {AddResourceDialog} from "./edit-project/components/project-settings/choose-resource/add-resource.dialog";
+import {ScheduleConnectionComponent} from "./edit-project/components/shared/schedule-connection/schedule-connection.component";
 
 @NgModule({
     imports: [
@@ -79,6 +80,7 @@ import {AddResourceDialog} from "./edit-project/components/project-settings/choo
         SmartsheetConnectionPublicComponent,
         SmartsheetConnectionPrivateComponent,
         SmartsheetConnectionComponent,
+        ScheduleConnectionComponent,
         ColumnsMatchingComponent,
         StatusRowComponent,
         DeleteProjectComponent,
