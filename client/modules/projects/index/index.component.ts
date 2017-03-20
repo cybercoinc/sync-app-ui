@@ -1,7 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
 import {AuthService} from 'client/service/auth.service';
-import {Project, ProjectPipe} from 'client/entities/entities';
+import {
+    PIPE_TYPE_PRIVATE_TODOS, PIPE_TYPE_PUBLIC_TODOS, PIPE_TYPE_TASKS, Project,
+    ProjectPipe
+} from 'client/entities/entities';
 
 @Component({
     selector: 'index',
@@ -80,5 +83,23 @@ export class IndexComponent implements OnInit {
         });
 
         return status;
+    }
+
+    getPipeSyncSourceLink(projectPipesList, pipeType): string {
+        let link = '';
+
+        projectPipesList.forEach((pipe: ProjectPipe) => {
+            if (pipeType !== pipe.type) {
+                return;
+            }
+
+            if ([PIPE_TYPE_PRIVATE_TODOS, PIPE_TYPE_PUBLIC_TODOS].indexOf(pipe.type) !== -1) {
+                link = pipe.sm_permalink;
+            } else if (pipe.type === PIPE_TYPE_TASKS) {
+                link = '#/projects/' + pipe.project_fk_id.id + '/chart';
+            }
+        });
+
+        return link;
     }
 }

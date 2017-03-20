@@ -38,12 +38,12 @@
                                 </div>
                             </div>
                             <div class="col-xs-3">
-                                <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'public_todos']"
-                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
-                                <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'private_todos']"
-                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i>
-                                <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'tasks']"
-                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
+                                <a target="_blank" href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"><i
+                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i></a>
+                                <a target="_blank" href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"><i
+                                        class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i></a>
+                                <a target="_blank" href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"><i
+                                        class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i></a>
                             </div>
                             <div class="col-xs-2">
                                 <a [routerLink]="[projectRow.project.id, 'chart']"
