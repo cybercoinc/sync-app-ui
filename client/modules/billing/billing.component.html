@@ -3,6 +3,11 @@
         <md-toolbar>
             <span>Billing</span>
 
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['company']" [routerLinkActive]="['is-active']">
+                <md-icon>settings</md-icon>
+                <span>Company Settings</span>
+            </md-toolbar-row>
+
             <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['info']" [routerLinkActive]="['is-active']">
                 <md-icon>attach_money</md-icon>
                 <span>Billing Information</span>
