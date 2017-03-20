@@ -6,6 +6,7 @@ import {BillingComponent} from './billing.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {LicensesComponent} from './licenses/licenses.component';
 import {InfoComponent} from "./info/Info.component";
+import {CompanyComponent} from "./company/company.component";
 
 import {routing} from './billing.routing';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -25,6 +26,7 @@ import {Dialog} from "../paytrace/dialog.component";
         InvoicesComponent,
         LicensesComponent,
         InfoComponent,
+        CompanyComponent,
         Dialog
     ],
     bootstrap: [BillingComponent],

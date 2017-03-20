@@ -4,6 +4,7 @@ import {BillingComponent} from './billing.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 import {LicensesComponent} from './licenses/licenses.component';
 import {InfoComponent} from "./info/Info.component";
+import {CompanyComponent} from "./company/company.component";
 import {AuthBootstrapService} from "../../service/resolvers/auth-bootstrap.service";
 
 
@@ -21,6 +22,10 @@ export const routes: Routes = [
                 path: '',
                 redirectTo: 'licenses',
                 pathMatch: 'prefix'
+            },
+            {
+                path: 'company',
+                component: CompanyComponent,
             },
             {
                 path: 'info',

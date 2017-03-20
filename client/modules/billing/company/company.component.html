@@ -1,0 +1,29 @@
+<md-card *ngIf="company">
+    <md-card-content>
+        <div class="section">
+            <div class="section-content">
+                <div class="row" *ngIf="pbrId">
+                    <span class="current-user" *ngIf="!isEditMode">{{currentPBRUser}}</span>
+
+                    <md-select *ngIf="isEditMode" placeholder="Company billing responsible person" [(ngModel)]="pbrId" style="width: 300px;">
+                        <md-option *ngFor="let user of ddUsersList" [value]="user.key">
+                            {{user.value}}
+                        </md-option>
+                    </md-select>
+
+                    <span *ngIf="isBillingUser">
+                        <a class="btn btn-success" *ngIf="!isEditMode" (click)="showEditPBR()">Edit</a>
+
+                        <span *ngIf="isEditMode">
+                            <button type="button" class="btn btn-success" (click)="saveUser()">Save</button>
+                            <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                        </span>
+                    </span>
+                </div>
+                <div class="row" *ngIf="!pbrId">
+                    <p class="text-warn">PBR error</p>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
