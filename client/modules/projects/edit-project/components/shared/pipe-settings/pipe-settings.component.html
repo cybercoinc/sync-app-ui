@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<md-card style="max-width: 800px">
 
     <!-- TASK TITLES -->
     <br>
@@ -28,7 +28,4 @@
             <p *ngIf="pipesListObj[pipeType]?.status === 'active'">To change this Pipe setting you should disable it firstly</p>
         </div>
     </div>
-</div>
-
-
-<pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+</md-card>

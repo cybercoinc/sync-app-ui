@@ -1,1 +1,16 @@
-schedule connection
+<md-card *ngIf="pipesListObj[pipeType]?.use_schedule_chart" style="max-width: 800px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <h5> Connection Status: Connected to Schedule Gantt</h5>
+            </div>
+            <div class="col-xs-12">
+                <a [routerLink]="['/projects', project?.id, 'chart']"
+                   class="btn btn-success"
+                   target="_blank">open</a>
+
+                <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+            </div>
+        </div>
+    </div>
+</md-card>

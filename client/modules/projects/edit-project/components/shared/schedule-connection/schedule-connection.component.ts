@@ -4,7 +4,7 @@ import {AuthService} from 'client/service/auth.service';
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
 import {Router, ActivatedRoute} from '@angular/router';
-import {SmartsheetSheet, PIPE_TYPE_TASKS} from 'client/entities/entities';
+import {SmartsheetSheet, PIPE_TYPE_TASKS, Project} from 'client/entities/entities';
 import {PendingRequestsService} from "client/service/pending-requests.service";
 import {ConfigService} from "client/service/config.service";
 
@@ -33,7 +33,9 @@ export class ScheduleConnectionComponent implements OnInit {
         this.PipeConnectionService.refreshPipesList();
 
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
+        this.project = this.PipeConnectionService.project;
     }
 
     protected pipesListObj;
+    protected project: Project;
 }

@@ -36,6 +36,7 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
         }
 
         this.scheduleChartIsUsed = this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].use_schedule_chart;
+        this.useScheduleChartIsAsked = !this.pipesListObj[this.pipeType];
     }
 
     protected procoreProjectId: number;
@@ -48,7 +49,7 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
     protected pipeType = PIPE_TYPE_TASKS;
     protected redirectRoute = ['projects', this.PipeConnectionService.project.id, 'edit-project', 'pipe-tasks', 'settings'];
 
-    protected useScheduleChartIsAsked: boolean = true;
+    protected useScheduleChartIsAsked: boolean = false;
     protected scheduleChartIsUsed: boolean = false;
 
     protected useScheduleGantt() {
