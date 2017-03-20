@@ -452,4 +452,15 @@ export class MsProjectClientService extends MsClientService {
             data
         );
     }
+
+    saveNotificationSettings(projectId, isEnable: boolean, emails: string[]) {
+        return this.makeMsCall(
+            'update/' + projectId,
+            'PUT',
+            {
+                is_enable_notifications: isEnable,
+                notification_cc_emails:  emails
+            }
+        );
+    }
 }
