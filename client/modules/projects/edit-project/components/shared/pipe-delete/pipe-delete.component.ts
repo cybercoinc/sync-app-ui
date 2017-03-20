@@ -28,12 +28,28 @@ export class PipeDeleteComponent implements OnInit {
         return this.isConfirmationVisible = true;
     }
 
-    deletePipe() {
+    disconnectPipe() {
         this.deleteButtonDisabled = true;
 
-        return this.PipeConnectionService.deletePipe(this.pipe.id)
+        let promises = [];
+
+        if (this.pipe.status !== 'disabled') {
+            promises.push(
+                this.PipeConnectionService.disablePipe(this.pipe.id)
+            );
+        }
+
+        return Promise.all(promises)
+            .then(() => {
+                return this.PipeConnectionService.deletePipe(this.pipe.id);
+            })
             .then(() => {
                 return this.Router.navigate(['projects']);
+            })
+            .catch(err => {
+                this.deleteButtonDisabled = true;
+
+                throw err;
             });
     }
 

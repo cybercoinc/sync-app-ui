@@ -7,7 +7,6 @@ import {PipeConnectionService} from 'client/service/pipe-connection.service';
     selector: 'smartsheet-connection-public',
     template: `<md-card>
         <smartsheet-connection pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>
-        <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
         </md-card>
     `
 })

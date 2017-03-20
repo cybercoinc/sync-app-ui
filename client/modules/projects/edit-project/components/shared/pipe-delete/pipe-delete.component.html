@@ -1,25 +1,14 @@
-<div class="container-fluid pipe-delete-container" *ngIf="pipe">
-    <div class="row">
-        <div class="col-xs-12">
-            <h5 class="warning-text">
-                Dangerous section
-            </h5>
-        </div>
+<button (click)="showConfirmation()" [disabled]="isConfirmationVisible"
+        class="btn btn-warning">DISCONNECT
+    SCHEDULE
+</button>
 
-    </div>
-
-    <div class="row" *ngIf="!isConfirmationVisible">
-        <div class="col-xs-6">
-            <button (click)="showConfirmation()" [disabled]="pipe?.status === 'active'" class="btn btn-warning">Remove this Pipe Connection</button>
-            <p *ngIf="pipe?.status === 'active'">To remove this Pipe Connection you should disable it firstly</p>
-        </div>
-    </div>
-
-    <div class="row" *ngIf="isConfirmationVisible">
-        <div class="col-xs-12">
-            <h6>Connection for this type of date will be destroyed. All history of synchronization will be removed.
-                Note: data on SmartSheet and Procore will stay as is.</h6>
-            <button (click)="deletePipe()" [disabled]="deleteButtonDisabled" class="btn btn-danger">Confirm deleting</button>
-        </div>
+<div class="row" *ngIf="isConfirmationVisible">
+    <div class="col-xs-12">
+        <h6>Connection for this type of date will be destroyed. All history of synchronization will be removed.
+            Note: data on SmartSheet and Procore will stay as is.</h6>
+        <button (click)="disconnectPipe()" [disabled]="deleteButtonDisabled" class="btn btn-danger">Confirm
+            disconnecting
+        </button>
     </div>
 </div>

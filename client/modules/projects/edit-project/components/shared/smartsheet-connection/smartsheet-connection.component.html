@@ -81,7 +81,8 @@
             </div>
 
             <div class="col-xs-8 col-xs-offset-2">
-                <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}" [pipe-type]="pipeType"
+                <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}"
+                                  [pipe-type]="pipeType"
                                   (columnsMatched)="onColumnsMatched($event)"></columns-matching>
             </div>
         </section>
@@ -93,9 +94,13 @@
         <div class="col-xs-12">
             <h5> Connection Status: Connected to Smartsheet </h5>
             Sheet name: <i>{{pipesListObj[pipeType]?.sm_sheet_name}}</i>
+        </div>
+        <div class="col-xs-12">
             <a href="{{pipesListObj[pipeType]?.sm_permalink}}"
-               class="btn btn-success btn-sm"
+               class="btn btn-success"
                target="_blank">open</a>
+
+            <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
         </div>
     </div>
 </div>
