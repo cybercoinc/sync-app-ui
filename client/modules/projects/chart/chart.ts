@@ -64,6 +64,7 @@ export class Chart {
         gantt.config.auto_scheduling_initial = true;
         gantt.config.work_time               = true;
         gantt.config.autosize                = "y";
+        gantt.config.xml_date                = "%d-%m-%Y";
         gantt._is_lightbox_timepicker        = function(){ return true;};
 
         gantt.form_blocks["resources"] = this.buildResourceDropdown(this.resources);
