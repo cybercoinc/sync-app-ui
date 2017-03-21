@@ -42,6 +42,61 @@ export class Chart {
         if (typeof link != "undefined") {
             document.getElementsByTagName("head")[0].appendChild(link);
         }
+
+        gantt.attachEvent("onBeforeLightbox", function(id){
+            let task = gantt.getTask(id);
+            task.progress = 0;
+
+            return true;
+        });
+
+        gantt.eachSuccessor = function(callback, root){
+            if(!this.isTaskExists(root))
+                return;
+
+            // remember tasks we've already iterated in order to avoid infinite loops
+            var traversedTasks = arguments[2] || {};
+            if(traversedTasks[root])
+                return;
+            traversedTasks[root] = true;
+
+            var rootTask = this.getTask(root);
+            var links = rootTask.$source;
+            if(links){
+                for(var i=0; i < links.length; i++){
+                    var link = this.getLink(links[i]);
+                    if(this.isTaskExists(link.target)){
+                        callback.call(this, this.getTask(link.target));
+
+                        this.eachSuccessor(callback, link.target, traversedTasks);
+                    }
+                }
+            }
+        };
+
+        gantt.attachEvent("onTaskDrag", function(id, mode, task, original){
+            var modes = gantt.config.drag_mode;
+            if(mode == modes.move){
+                var diff = task.start_date - original.start_date;
+                gantt.eachSuccessor(function(child){
+                    child.start_date = new Date(+child.start_date + diff);
+                    child.end_date = new Date(+child.end_date + diff);
+                    gantt.refreshTask(child.id, true);
+                },id );
+            }
+            return true;
+        });
+
+        gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
+            var modes = gantt.config.drag_mode;
+            if(mode == modes.move ){
+                gantt.eachSuccessor(function(child){
+                    child.start_date = gantt.roundDate(child.start_date);
+                    child.end_date = gantt.calculateEndDate(child.start_date, child.duration);
+                    gantt.updateTask(child.id);
+                },id );
+            }
+        });
     }
 
     setWorkingDays(working_days, holidays) {
@@ -74,7 +129,11 @@ export class Chart {
         gantt.config.columns = [
             {name:"text", label: "Task name", tree: true},
             {name:"progress", label: "Complete %", template: (obj) => {
-                return (obj.progress * 100).toFixed(0);
+                if (obj.progress) {
+                    return (obj.progress * 100).toFixed(0);
+                }
+
+                return '0';
             }},
             {name:"resources", label: "Resource", template: (obj) => {
                 return obj.resources == undefined ? '' : obj.resources;
@@ -83,8 +142,8 @@ export class Chart {
         ];
 
         gantt.config.auto_scheduling         = true;
-        gantt.config.auto_scheduling_strict  = true;
-        gantt.config.auto_scheduling_initial = true;
+        // gantt.config.auto_scheduling_strict  = true;
+        // gantt.config.auto_scheduling_initial = true;
         gantt.config.work_time               = true;
         gantt.config.autosize                = "y";
         gantt.config.xml_date                = "%d-%m-%Y";
