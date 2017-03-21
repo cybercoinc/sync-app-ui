@@ -55,7 +55,7 @@ body h1 {
     border-radius: 0px;
     color: #fff;
     z-index: 10;
-    box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
 .sc-sidenav .mat-toolbar {
@@ -74,11 +74,13 @@ body h1 {
     height: 74px;
     cursor: pointer;
 }
+
 .mat-toolbar-row .mat-icon {
     font-size: 32px;
     width: 32px;
     height: 32px;
 }
+
 .sc-sidenav .mat-toolbar-row span {
     margin-left: 5px;
 }
@@ -98,6 +100,7 @@ body h1 {
     color: #666666;
     margin: 20px;
 }
+
 .mat-card .section-title {
     font-weight: bold;
 }
@@ -105,6 +108,7 @@ body h1 {
 edit-project .mat-card, settings .mat-card {
     max-width: 800px;
 }
+
 edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header {
     border-bottom: 1px solid #c0c0c0;
 }
@@ -138,9 +142,10 @@ settings .custom-users-dropdown {
     min-width: 100%;
     color: #666666;
 }
+
 .mat-sidenav {
     width: 298px;
-    box-shadow: 0 1px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
 .module-header {
@@ -203,8 +208,8 @@ select > option:disabled {
     background-color: #ffffff;
     margin-bottom: 10px;
     font-size: 16px;
-    /*padding: 10px 20px;*/
-    padding-top: 8px;
+    padding-top: 12px;
+    /*padding-top: 8px;*/
     -webkit-transition: max-height .1s;
     -moz-transition: max-height .1s;
     -ms-transition: max-height .1s;
@@ -216,7 +221,13 @@ select > option:disabled {
 }
 
 .project-row i {
+    font-size: 30px;
     cursor: pointer;
+    padding-right: 16px;
+}
+
+.row-label {
+    padding-left: 16px;
 }
 
 .expandable-row {
@@ -235,13 +246,42 @@ select > option:disabled {
 }
 
 .row-expanded {
-    max-height: 400px;
+    height: 400px;
     background-color: #fff;
     -webkit-transition: background .1s linear;
     -moz-transition: background .1s linear;
     -ms-transition: background .1s linear;
     -o-transition: background .1s linear;
     transition: background .1s linear;
+}
+
+.header-row {
+    padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.expanded-row-container {
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: -15px;
+    border: 1px solid #bdbdbd;
+}
+
+.connections-container {
+    padding: 20px;
+    margin-left: 10px;
+}
+
+.vertical-aligned {
+    vertical-align: middle;
+    display: flex;
+}
+
+.delete-button-container {
+    padding-bottom: 15px;
+    padding-right: 15px;
 }
 
 .left-lined {
@@ -283,6 +323,7 @@ select > option:disabled {
     color: #ffffff;
     font-size: 14px;
 }
+
 .error-row button.close {
     color: #ffffff;
 }
@@ -334,8 +375,8 @@ select > option:disabled {
     margin-left: 10px !important;
 }
 
-.select2-container{
-    z-index:10002;
+.select2-container {
+    z-index: 10002;
 }
 
 .gantt_cal_light_wide.gantt_cal_light_full {
