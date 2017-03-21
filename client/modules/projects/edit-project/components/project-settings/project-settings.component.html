@@ -33,17 +33,6 @@
 
     <task-notification [projectId]="projectId"></task-notification>
 
-    <md-card class="example-card">
-        <md-card-header>
-            <md-card-title>Users allowed to access</md-card-title>
-        </md-card-header>
-        <md-card-content>
-            <div *ngFor="let user of usersList">
-                <b>{{user.first_name}} {{user.last_name}}</b> ({{user.email}})
-            </div>
-        </md-card-content>
-    </md-card>
-
     <!--<workspace-management project-id="{{projectId}}"></workspace-management>-->
 
 
