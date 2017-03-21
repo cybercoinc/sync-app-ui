@@ -5,7 +5,7 @@ export class Chart {
     resources: any;
     assignees: any;
     weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    notWorkingDays = [];
+    notWorkingDays = [0 ,6];
 
     constructor(resources, assignees) {
         this.resources = resources;
@@ -45,20 +45,24 @@ export class Chart {
     }
 
     setWorkingDays(working_days, holidays) {
-        holidays.forEach(date => {
-            gantt.setWorkTime({date: new Date(date), hours:false});
-        });
+        if (holidays) {
+            holidays.forEach(date => {
+                gantt.setWorkTime({date: new Date(date), hours: false});
+            });
+        }
 
-        this.weekDays.forEach((day, index) => {
-            if (working_days.indexOf(day) < 0) { // not working day
-                this.notWorkingDays.push(index);
+        if (working_days) {
+            this.weekDays.forEach((day, index) => {
+                if (working_days.indexOf(day) < 0) { // not working day
+                    this.notWorkingDays.push(index);
 
-                gantt.setWorkTime({day: index, hours: false});
-            }
-            else { // working day
-                gantt.setWorkTime({day: index, hours: true});
-            }
-        });
+                    gantt.setWorkTime({day: index, hours: false});
+                }
+                else { // working day
+                    gantt.setWorkTime({day: index, hours: true});
+                }
+            });
+        }
     }
 
     buildChart(data) {
