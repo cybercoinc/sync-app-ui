@@ -1,0 +1,68 @@
+<div class="container-fluid">
+
+    <div class="row module-header">
+        <div class="col-xs-12">
+            <div class="module-name">Utilization Report</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="report-row">
+                <h4>1. Choose projects</h4>
+                <div *ngIf="projects && projects.length">
+                    <form (ngSubmit)="chooseProjects()" id="chooseProjectsForm">
+                        <div *ngFor="let project of projects">
+                            <md-checkbox [(ngModel)]="model.projects[project.id]" name="{{project.id}}">
+                                {{project.name}}
+                            </md-checkbox>
+                        </div>
+                    </form>
+                </div>
+                <button class="btn btn-success" form="chooseProjectsForm" type="submit">NEXT</button>
+            </div>
+
+            <div *ngIf="showAssigneesAndResources" id="chooseAssigneeForm">
+                <form>
+                    <div class="report-row">
+                        <h4>2. Choose people/resources</h4>
+
+                        <h5>People:</h5>
+                        <div *ngIf="assignees && assignees.length">
+                            <div *ngFor="let assignee of assignees">
+                                <md-checkbox [(ngModel)]="model.assignees[assignee.email]" name="{{assignee.email}}">
+                                    {{assignee.first_name + assignee.last_name}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+                        <h5>Resources:</h5>
+                        <div *ngIf="resources && resources.length">
+                            <div *ngFor="let resource of resources">
+                                <md-checkbox [(ngModel)]="model.resources[resource.name]" name="{{resource.name}}">
+                                    {{resource.name}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-row">
+                        <h4>3. Group by</h4>
+
+                        <div class="groupings">
+                            <md-select [(ngModel)]="model.group_by" name="group_by">
+                                <md-option *ngFor="let grouping of groupings" [value]="grouping" selected>
+                                    {{grouping}}
+                                </md-option>
+                            </md-select>
+                        </div>
+
+                        <button class="btn btn-success" form="chooseAssigneeForm" (click)="save()" type="submit">SUBMIT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

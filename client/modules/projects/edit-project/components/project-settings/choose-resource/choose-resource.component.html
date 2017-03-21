@@ -11,7 +11,8 @@
 <div *ngIf="assignees && assignees.length" class="row">
     <div class="row user-list" *ngFor="let assignee of assignees">
         <div class="col-xs-6 assignee">
-            <p>{{assignee.first_name + ' ' + assignee.last_name + ' (' + assignee.email + ')'}}</p>
+            {{assignee.first_name + ' ' + assignee.last_name + ' (' + assignee.email + ')'}}
+            <i *ngIf="systemConnectedAssigneesIdsList.indexOf(assignee.id) !== -1" style="color: green" class="material-icons">check_circle</i>
         </div>
         <div class="col-xs-6">
             <md-select placeholder="- Choose Resource -" [(ngModel)]="model[assignee.id]"

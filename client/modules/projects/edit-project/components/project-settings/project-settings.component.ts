@@ -28,22 +28,13 @@ export class ProjectSettingsComponent implements OnInit {
             .then(() => {
                 return Promise.all([
                     this.MsProjectClientService.getPbrUser(this.projectId),
-                    this.MsProjectClientService.getProjectUsers(this.projectId),
                     this.MsUserClientService.getCompanyPbr(this.AuthService.company.id)
                 ])
             })
             .then(resultsList => {
                 this.pbrUser = resultsList[0];
-                this.usersList = resultsList[1];
 
-                this.isBillingUser = this.AuthService.authUser.id == this.pbrUser.id || resultsList[2].id == this.AuthService.authUser.id;
-
-                this.usersList.forEach(user => {
-                    this.users.push({
-                        name: user.id,
-                        value: user.first_name + ' ' + user.last_name + '(' + user.email + ')'
-                    });
-                });
+                this.isBillingUser = this.AuthService.authUser.id == this.pbrUser.id || resultsList[1].id == this.AuthService.authUser.id;
             });
     }
 
@@ -64,7 +55,6 @@ export class ProjectSettingsComponent implements OnInit {
     }
 
     protected projectId: number;
-    protected usersList: User[];
     protected pbrUser: User;
     protected isEdit: boolean = false;
     protected users: any = [];
