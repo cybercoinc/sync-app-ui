@@ -4,6 +4,8 @@ declare let $: any;
 export class Chart {
     resources: any;
     assignees: any;
+    weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    notWorkingDays = [];
 
     constructor(resources, assignees) {
         this.resources = resources;
@@ -42,6 +44,23 @@ export class Chart {
         }
     }
 
+    setWorkingDays(working_days, holidays) {
+        holidays.forEach(date => {
+            gantt.setWorkTime({date: new Date(date), hours:false});
+        });
+
+        this.weekDays.forEach((day, index) => {
+            if (working_days.indexOf(day) < 0) { // not working day
+                this.notWorkingDays.push(index);
+
+                gantt.setWorkTime({day: index, hours: false});
+            }
+            else { // working day
+                gantt.setWorkTime({day: index, hours: true});
+            }
+        });
+    }
+
     buildChart(data) {
         let self = this;
 
@@ -65,7 +84,12 @@ export class Chart {
         gantt.config.work_time               = true;
         gantt.config.autosize                = "y";
         gantt.config.xml_date                = "%d-%m-%Y";
-        gantt._is_lightbox_timepicker        = function(){ return true;};
+        gantt.templates.task_cell_class = function(task, date){
+            if(self.notWorkingDays.indexOf(date.getDay()) > -1){
+                return "not-working-day";
+            }
+        };
+        gantt._is_lightbox_timepicker = function(){ return true;};
 
         gantt.form_blocks["resources"] = this.buildResourceDropdown(this.resources);
         gantt.form_blocks["assignees"] = this.buildAssigneeDropdown(this.assignees);

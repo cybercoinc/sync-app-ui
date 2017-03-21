@@ -1,0 +1,19 @@
+<md-card class="row">
+    <md-card-header>
+        <md-card-title>Schedule Settings</md-card-title>
+    </md-card-header>
+
+    <md-card-content>
+        <md-card-title>Working Days:</md-card-title>
+        <div class="working-days">
+            <md-checkbox *ngFor="let day of weekDays" [(ngModel)]="workingDays[day]">{{ day }}</md-checkbox>
+        </div>
+
+        <md-card-title>Holidays:</md-card-title>
+        <span>Please specify comma-separeted dates in format mm/dd/yyyy</span>
+
+        <textarea class="form-control" [(ngModel)]="holidays"></textarea>
+    </md-card-content>
+
+    <button class="pull-right btn btn-success" (click)="save()">save</button>
+</md-card>

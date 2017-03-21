@@ -1,0 +1,16 @@
+textarea {
+    resize: none;
+}
+
+md-card-content md-card-title {
+    margin: 0;
+}
+
+span {
+    color: #a1a1a1;
+    font-size: 12px;
+}
+
+.working-days {
+    margin-bottom: 30px;
+}

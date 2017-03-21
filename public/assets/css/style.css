@@ -347,3 +347,11 @@ select > option:disabled {
 .gantt_time_selects select {
     width: 100px !important;
 }
+
+.not-working-day {
+    background: #bbbbb8;
+}
+
+chart-working-days md-checkbox .mat-checkbox-layout .mat-checkbox-label {
+    margin-right: 20px;
+}
