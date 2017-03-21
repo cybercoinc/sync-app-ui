@@ -16,31 +16,35 @@ export class ProjectSettingsComponent implements OnInit {
     constructor(protected AuthService: AuthService,
                 protected MsProjectClientService: MsProjectClientService,
                 protected MsUserClientService: MsUserClientService,
-                protected ActivatedRoute: ActivatedRoute,
-    ) {}
+                protected ActivatedRoute: ActivatedRoute) {
+    }
 
     ngOnInit() {
         this.ActivatedRoute.parent.params.forEach((params) => {
-            this.projectId =+ params['project_id'];
+            this.projectId = +params['project_id'];
         });
 
-        Promise.all([
-            this.MsProjectClientService.getPbrUser(this.projectId),
-            this.MsProjectClientService.getProjectUsers(this.projectId),
-            this.MsUserClientService.getCompanyPbr(this.AuthService.company.id)
-        ]).then(resultsList => {
-            this.pbrUser = resultsList[0];
-            this.usersList = resultsList[1];
+        return this.MsProjectClientService.syncAssignees(this.projectId)
+            .then(() => {
+                return Promise.all([
+                    this.MsProjectClientService.getPbrUser(this.projectId),
+                    this.MsProjectClientService.getProjectUsers(this.projectId),
+                    this.MsUserClientService.getCompanyPbr(this.AuthService.company.id)
+                ])
+            })
+            .then(resultsList => {
+                this.pbrUser = resultsList[0];
+                this.usersList = resultsList[1];
 
-            this.isBillingUser = this.AuthService.authUser.id == this.pbrUser.id || resultsList[2].id == this.AuthService.authUser.id;
+                this.isBillingUser = this.AuthService.authUser.id == this.pbrUser.id || resultsList[2].id == this.AuthService.authUser.id;
 
-            this.usersList.forEach(user => {
-                this.users.push({
-                    name:  user.id,
-                    value: user.first_name + ' ' + user.last_name + '(' + user.email + ')'
+                this.usersList.forEach(user => {
+                    this.users.push({
+                        name: user.id,
+                        value: user.first_name + ' ' + user.last_name + '(' + user.email + ')'
+                    });
                 });
             });
-        });
     }
 
     editPbr() {
@@ -51,7 +55,7 @@ export class ProjectSettingsComponent implements OnInit {
         this.MsProjectClientService.setPbrUser(user.model, this.projectId)
             .then(user => {
                 this.pbrUser = user;
-                this.isEdit  = false;
+                this.isEdit = false;
             });
     }
 
@@ -59,10 +63,10 @@ export class ProjectSettingsComponent implements OnInit {
         this.isEdit = false;
     }
 
-    protected projectId:     number;
-    protected usersList:     User[];
-    protected pbrUser:       User;
-    protected isEdit:        boolean = false;
-    protected users:         any     = [];
-    private   isBillingUser: boolean = false;
+    protected projectId: number;
+    protected usersList: User[];
+    protected pbrUser: User;
+    protected isEdit: boolean = false;
+    protected users: any = [];
+    private isBillingUser: boolean = false;
 }
