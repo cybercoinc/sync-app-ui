@@ -460,4 +460,14 @@ export class MsProjectClientService extends MsClientService {
             data
         );
     }
+
+    syncAssignees(projectId): Promise<boolean> {
+        return this.makeMsCall(
+            'projects/sync-assignees',
+            'POST',
+            {
+                project_id: projectId
+            }
+        )
+    }
 }
