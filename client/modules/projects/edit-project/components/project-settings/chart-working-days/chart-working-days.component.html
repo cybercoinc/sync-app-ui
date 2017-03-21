@@ -6,7 +6,7 @@
     <md-card-content>
         <md-card-title>Working Days:</md-card-title>
         <div class="working-days">
-            <md-checkbox *ngFor="let day of weekDays" [(ngModel)]="workingDays[day]">{{ day }}</md-checkbox>
+            <md-checkbox *ngFor="let day of weekDays" [checked]="workingDays.indexOf(day) > -1" (change)="selectDay($event, day)">{{ day }}</md-checkbox>
         </div>
 
         <md-card-title>Holidays:</md-card-title>
