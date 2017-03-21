@@ -47,6 +47,16 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getSystemConnectedProjectAssigneesIds(projectId: number): Promise<number[]> {
+        return this.makeMsCall(
+            'projects/get-system-connected-assignees',
+            'GET',
+            {
+                project_id: projectId
+            }
+        );
+    }
+
     getProcoreProjects(userId, procoreCompanyId): Promise<ProcoreProject[]> {
         return this.makeMsCall(
             'procore/projects',

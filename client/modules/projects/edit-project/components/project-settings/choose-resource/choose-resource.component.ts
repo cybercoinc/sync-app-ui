@@ -26,11 +26,18 @@ export class ChooseResourceComponent implements OnInit {
 
     public model: {} = {};
 
+    protected systemConnectedAssigneesIdsList = [];
+
     @Input('projectId') projectId: number;
 
     ngOnInit() {
         return this.getResources()
             .then(() => {
+                return this.MsProjectClientService.getSystemConnectedProjectAssigneesIds(this.projectId)
+            })
+            .then(systemConnectedAssigneesIdsList => {
+                this.systemConnectedAssigneesIdsList = systemConnectedAssigneesIdsList;
+
                 return this.getAssignees()
             });
     }
