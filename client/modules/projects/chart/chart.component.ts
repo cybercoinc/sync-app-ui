@@ -36,6 +36,7 @@ export class ChartComponent implements OnInit {
                         resources = result[2];
 
                     this.chart = new Chart(resources, assignees);
+                    this.chart.setWorkingDays(this.PipeConnectionService.project.working_days, this.PipeConnectionService.project.holidays);
 
                     this.chart.buildChart(chartData);
                     this.isShowToolbar = true;

@@ -47,6 +47,7 @@ import {CreateBaselineDialog} from "./chart/create-baseline.dialog";
 import {AddResourceDialog} from "./edit-project/components/project-settings/choose-resource/add-resource.dialog";
 import {ScheduleConnectionComponent} from "./edit-project/components/shared/schedule-connection/schedule-connection.component";
 import {TaskNotificationsComponent} from "./edit-project/components/project-settings/task-notifications/task-notifications.component";
+import {ChartWorkingDaysComponent} from "./edit-project/components/project-settings/chart-working-days/chart-working-days.component";
 
 @NgModule({
     imports: [
@@ -96,6 +97,7 @@ import {TaskNotificationsComponent} from "./edit-project/components/project-sett
         WorkspaceManagementComponent,
 
         ChartComponent,
+        ChartWorkingDaysComponent,
         CreateBaselineDialog
     ],
     entryComponents: [

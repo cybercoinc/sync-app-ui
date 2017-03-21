@@ -26,6 +26,9 @@ export class TaskNotificationsComponent implements OnInit {
     }
 
     save() {
-        this.MsProjectClientService.saveNotificationSettings(this.projectId, this.project.is_enable_notifications, this.project.notification_cc_emails);
+        this.MsProjectClientService.update(this.projectId, {
+            is_enable_notifications: this.project.is_enable_notifications,
+            notification_cc_emails:  this.project.notification_cc_emails
+        });
     }
 }

@@ -133,6 +133,8 @@ export class Project {
     smartsheet_workspace_id: number;
     is_enable_notifications: boolean;
     notification_cc_emails: string[];
+    holidays:     string[];
+    working_days: string[];
 }
 
 export class SmartsheetWorkspace {
