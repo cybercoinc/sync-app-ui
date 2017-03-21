@@ -414,6 +414,20 @@ a.mat-button:hover, a.mat-icon-button:hover, a.mat-raised-button:hover {
     width: 100px !important;
 }
 
+.report-row {
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    -webkit-transition: max-height .1s;
+    -moz-transition: max-height .1s;
+    -ms-transition: max-height .1s;
+    -o-transition: max-height .1s;
+    transition: max-height .1s;
+    overflow: hidden;
+    min-height: 5%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 .not-working-day {
     background: #bbbbb8;
 }
