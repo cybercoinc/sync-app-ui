@@ -215,15 +215,8 @@ select > option:disabled {
     background-color: #ffffff;
     margin-bottom: 10px;
     font-size: 16px;
-    padding-top: 12px;
     /*padding-top: 8px;*/
-    -webkit-transition: max-height .1s;
-    -moz-transition: max-height .1s;
-    -ms-transition: max-height .1s;
-    -o-transition: max-height .1s;
-    transition: max-height .1s;
     overflow: hidden;
-    /*max-height: 45px;*/
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -235,6 +228,14 @@ select > option:disabled {
 
 .row-label {
     padding-left: 16px;
+    padding-top: 15px;
+    padding-bottom: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.row-label:hover {
+    background-color: #f7f7f7;
 }
 
 .expandable-row {
@@ -273,12 +274,16 @@ select > option:disabled {
     margin-left: -15px;
     margin-right: -15px;
     margin-bottom: -15px;
-    border: 1px solid #bdbdbd;
+    border-top: 1px solid #bdbdbd;
 }
 
 .connections-container {
     padding: 20px;
     margin-left: 10px;
+}
+
+.connections-container i {
+    cursor: default;
 }
 
 .vertical-aligned {

@@ -26,9 +26,9 @@
 
         <div *ngIf="projectRows && projectRows.length">
             <div class="col-xs-12" *ngFor="let projectRow of projectRows">
-                <div class="project-row" (click)="projectRowExpand(projectRow)">
+                <div class="project-row">
 
-                    <div class="row row-label">
+                    <div class="row row-label" (click)="projectRowExpand(projectRow)">
                         <div class="col-xs-6">
                             {{projectRow.project.name}}
                             <div class="project-status-warning" *ngIf="projectRow.project.status === 'disabled'">
@@ -36,7 +36,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-6 text-right">
+                        <div class="col-xs-6 text-right" *ngIf="!projectRow.is_expanded">
                             <a target="_blank"
                                href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"><i
                                     class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i></a>
