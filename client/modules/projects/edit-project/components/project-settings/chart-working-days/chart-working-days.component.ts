@@ -14,6 +14,7 @@ export class ChartWorkingDaysComponent implements OnInit {
 
     private holidays    = '';
     private workingDays = [];
+    private isLoaded = false;
     private weekDays    = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
     constructor(private msProjectClient: MsProjectClientService) {}
@@ -27,7 +28,8 @@ export class ChartWorkingDaysComponent implements OnInit {
                     this.holidays = project.holidays.join(',');
                 }
 
-                this.workingDays = project.working_days;
+                this.workingDays = project.working_days || [];
+                this.isLoaded = true;
             });
     }
 
