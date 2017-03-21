@@ -113,7 +113,8 @@ edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header {
     border-bottom: 1px solid #c0c0c0;
 }
 
-edit-project .sc-sidenav md-toolbar-row:first-of-type {
+edit-project .sc-sidenav md-toolbar-row:first-of-type,
+settings .sc-sidenav md-toolbar-row:first-of-type{
     display: none;
 }
 
