@@ -23,18 +23,30 @@ export class ChartWorkingDaysComponent implements OnInit {
             .then((response: Project[]) => {
                 let project = response.shift();
 
-                this.holidays = project.holidays.join(',');
+                if (project.holidays) {
+                    this.holidays = project.holidays.join(',');
+                }
 
-                project.working_days.forEach(item => {
-                    this.workingDays[item] = true;
-                });
+                this.workingDays = project.working_days;
             });
+    }
+
+    selectDay(e, day) {
+        if (e.checked) {
+            this.workingDays.push(day);
+        }
+        else {
+            let index = this.workingDays.indexOf(day);
+            if (index > -1) {
+                this.workingDays.splice(index, 1);
+            }
+        }
     }
 
     save() {
         this.msProjectClient.update(this.projectId, {
-            working_days: Object.keys(this.workingDays),
-            holidays:     this.holidays.split(','),
+            working_days: this.workingDays,
+            holidays:     this.holidays ? this.holidays.split(',') : '',
         });
     }
 }
