@@ -277,6 +277,12 @@ select > option:disabled {
     border-top: 1px solid #bdbdbd;
 }
 
+a.mat-button:hover, a.mat-icon-button:hover, a.mat-raised-button:hover {
+    color: currentColor;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
 .connections-container {
     padding: 20px;
     margin-left: 10px;
