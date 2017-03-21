@@ -1,12 +1,13 @@
-<div class="row resource-header">
-    <div class="col-xs-6">
-        <h4>People</h4>
-    </div>
-    <div class="col-xs-6">
-        <h4>Resource</h4>
-        <button class="pull-right btn btn-success"  (click)="addResource()">ADD RESOURCE</button>
-    </div>
-</div>
+<md-card>
+    <md-card-header>
+        <md-card-title>
+            <span style="flex: 1 1 auto;">Project Directory</span>
+            <button md-button (click)="addResource()" style="margin-top: -13px; margin-bottom:13px;">ADD RESOURCE</button>
+        </md-card-title>
+    </md-card-header>
+    <md-card-content>
+
+
 <div *ngIf="assignees && assignees.length" class="row">
     <div class="row user-list" *ngFor="let assignee of assignees">
         <div class="col-xs-6 assignee">
@@ -23,3 +24,5 @@
     </div>
     <button class="pull-right btn btn-success" (click)="save()">SAVE</button>
 </div>
+    </md-card-content>
+</md-card>

@@ -4,10 +4,16 @@
     </md-card-header>
 
     <md-card-content>
-        <md-checkbox [(ngModel)]="project.is_enable_notifications">Enable email notifications</md-checkbox>
+        <md-list>
+            <md-list-item>
+                <md-checkbox [(ngModel)]="project.is_enable_notifications">Enable email notifications</md-checkbox>
+            </md-list-item>
 
-        <md-card-title>Add these emails to CC for all notifications</md-card-title>
-        <textarea class="form-control" [(ngModel)]="project.notification_cc_emails" placeholder="Enumerate emails separated by commas" cols="6"></textarea>
+            <md-list-item>
+                <span md-line >Add these emails to CC for all notifications</span>
+                <textarea md-line class="form-control" [(ngModel)]="project.notification_cc_emails" placeholder="Enumerate emails separated by commas" cols="6"></textarea>
+            </md-list-item>
+        </md-list>
     </md-card-content>
 
     <button class="pull-right btn btn-success" (click)="save()">save</button>
