@@ -284,6 +284,10 @@ a.mat-button:hover, a.mat-icon-button:hover, a.mat-raised-button:hover {
     text-decoration: none;
 }
 
+.connection-row {
+    min-height: 35px;
+}
+
 .connections-container {
     padding: 20px;
     margin-left: 10px;
