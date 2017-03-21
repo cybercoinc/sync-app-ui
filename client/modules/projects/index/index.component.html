@@ -27,37 +27,110 @@
         <div *ngIf="projectRows && projectRows.length">
             <div class="col-xs-12" *ngFor="let projectRow of projectRows">
                 <div class="project-row">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-xs-5">
-                                {{projectRow.project.name}}
-                            </div>
-                            <div class="col-xs-2">
-                                <div class="project-status-warning" *ngIf="projectRow.project.status === 'disabled'">
-                                    <i title="project disabled" class="material-icons">warning</i> disabled
-                                </div>
-                            </div>
-                            <div class="col-xs-3">
-                                <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'public_todos']"
-                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
-                                <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'private_todos']"
-                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i>
-                                <i [routerLink]="[projectRow.project.id, 'sync-sessions', 'tasks']"
-                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
-                            </div>
-                            <div class="col-xs-2">
-                                <a [routerLink]="[projectRow.project.id, 'chart']"
-                                   class="btn btn-success btn-sm">chart</a>
-                                <a [routerLink]="[projectRow.project.id, 'edit-project']" [class.disabled]="projectRow.project.status == 'disabled'"
-                                   class="btn btn-primary btn-sm">edit</a>
-                                <a [routerLink]="[projectRow.project.id, 'delete-project']"
-                                   class="btn btn-danger btn-sm">delete</a>
+
+                    <div class="row row-label" (click)="projectRowExpand(projectRow)">
+                        <div class="col-xs-6">
+                            {{projectRow.project.name}}
+                            <div class="project-status-warning" *ngIf="projectRow.project.status === 'disabled'">
+                                <i title="project disabled" class="material-icons">warning</i> disabled
                             </div>
                         </div>
+
+                        <div class="col-xs-6 text-right" *ngIf="!projectRow.is_expanded">
+                            <a target="_blank"
+                               href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"><i
+                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i></a>
+                            <a target="_blank"
+                               href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"><i
+                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i></a>
+                            <a target="_blank"
+                               href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"><i
+                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i></a>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid" *ngIf="projectRow.is_expanded">
+                        <div class="expanded-row-container">
+                            <div class="row header-row">
+                                <div class="col-sm-6">
+                                    <a [routerLink]="[projectRow.project.id, 'edit-project', 'settings']"
+                                       class="btn btn-success"
+                                       [class.disabled]="projectRow.project.status == 'disabled'">
+                                        Project Settings</a>
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    Billing Responsibility Person
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="connections-container">
+                                        <h5>Connections:</h5>
+
+                                        <div class="row">
+                                            <div class="col-sm-4 col-lg-3 vertical-aligned">
+                                                <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
+                                                Project Calendar Items
+                                            </div>
+
+                                            <div class="col-sm-8 col-lg-9" *ngIf="isPipeExist(projectRow, 'public_todos')">
+                                                <a target="_blank"
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
+                                                   md-button>SMARTSHEET</a>
+                                                <a [routerLink]="[projectRow.project.id, 'sync-sessions', 'public_todos']"
+                                                   md-button>VIEW SYNC
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4 col-lg-3 vertical-aligned">
+                                                <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i>
+                                                Private Calendar Items
+                                            </div>
+
+                                            <div class="col-sm-8 col-lg-9" *ngIf="isPipeExist(projectRow, 'private_todos')">
+                                                <a target="_blank"
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
+                                                   md-button>SMARTSHEET</a>
+                                                <a [routerLink]="[projectRow.project.id, 'sync-sessions', 'private_todos']"
+                                                   md-button>VIEW SYNC
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-4 col-lg-3 vertical-aligned">
+                                                <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
+                                                Project Schedule
+                                            </div>
+
+                                            <div class="col-sm-8 col-lg-9" *ngIf="isPipeExist(projectRow, 'tasks')">
+                                                <a target="_blank"
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
+                                                   md-button>{{getPipeSyncSourceLabel(projectRow.projectPipesList, 'tasks')}}</a>
+                                                <a [routerLink]="[projectRow.project.id, 'sync-sessions', 'tasks']"
+                                                   md-button>VIEW SYNC
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-right">
+                                    <div class="delete-button-container">
+                                        <a [routerLink]="[projectRow.project.id, 'delete-project']"
+                                           class="btn btn-danger">DELETE PROJECT</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+</div>

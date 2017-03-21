@@ -1,7 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
 import {AuthService} from 'client/service/auth.service';
-import {Project, ProjectPipe} from 'client/entities/entities';
+import {
+    PIPE_TYPE_PRIVATE_TODOS, PIPE_TYPE_PUBLIC_TODOS, PIPE_TYPE_TASKS, Project,
+    ProjectPipe
+} from 'client/entities/entities';
 
 @Component({
     selector: 'index',
@@ -17,7 +20,8 @@ export class IndexComponent implements OnInit {
 
     projectRows: [{
         project: Project,
-        projectPipesList: ProjectPipe[]
+        projectPipesList: ProjectPipe[],
+        is_expanded: boolean
     }] | any;
 
     ngOnInit(): void {
@@ -62,7 +66,8 @@ export class IndexComponent implements OnInit {
 
                     this.projectRows.push({
                         project: project,
-                        projectPipesList: projectPipesList
+                        projectPipesList: projectPipesList,
+                        is_expanded: false
                     })
                 });
 
@@ -80,5 +85,65 @@ export class IndexComponent implements OnInit {
         });
 
         return status;
+    }
+
+    getPipeSyncSourceLink(projectPipesList, pipeType): string {
+        let link = '';
+
+        projectPipesList.forEach((pipe: ProjectPipe) => {
+            if (pipeType !== pipe.type) {
+                return;
+            }
+
+            if ([PIPE_TYPE_PRIVATE_TODOS, PIPE_TYPE_PUBLIC_TODOS].indexOf(pipe.type) !== -1) {
+                link = pipe.sm_permalink;
+            } else if (pipe.type === PIPE_TYPE_TASKS) {
+                link = '#/projects/' + pipe.project_fk_id.id + '/chart';
+            }
+        });
+
+        return link;
+    }
+
+    getPipeSyncSourceLabel(projectPipesList, pipeType): string {
+        let label = 'SMARTSHEET';
+
+        projectPipesList.forEach((pipe: ProjectPipe) => {
+            if (pipeType !== pipe.type) {
+                return;
+            }
+
+            if (pipe.type === PIPE_TYPE_TASKS) {
+                label = 'GANTT CHART';
+            }
+        });
+
+        return label;
+    }
+
+    projectRowExpand(projectRow): void {
+        this.projectRows.forEach(projRow => {
+            if (projectRow.project.id !== projRow.project.id) {
+                projRow.is_expanded = false;
+            }
+        });
+
+        projectRow.is_expanded = !projectRow.is_expanded;
+    }
+
+    isPipeExist(projectRow, pipeType): boolean {
+        let exists = false;
+
+        projectRow.projectPipesList.forEach(pipe => {
+            if (pipe.type === pipeType) {
+                exists = true;
+            }
+        });
+
+        return exists;
+    }
+
+    projectHasPipes(projectRow) {
+        return projectRow.projectPipesList.length > 0;
     }
 }

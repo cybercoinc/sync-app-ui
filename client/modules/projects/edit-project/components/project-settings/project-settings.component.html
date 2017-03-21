@@ -31,6 +31,8 @@
         </md-card-content>
     </md-card>
 
+    <task-notification [projectId]="projectId"></task-notification>
+
     <md-card class="example-card">
         <md-card-header>
             <md-card-title>Users allowed to access</md-card-title>
@@ -44,7 +46,7 @@
 
     <!--<workspace-management project-id="{{projectId}}"></workspace-management>-->
 
-    <md-card>
-        <choose-resource [projectId]="projectId"></choose-resource>
-    </md-card>
+
+    <choose-resource [projectId]="projectId"></choose-resource>
+
 </div>
