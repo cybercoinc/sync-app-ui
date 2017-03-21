@@ -471,6 +471,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+
     syncAssignees(projectId): Promise<boolean> {
         return this.makeMsCall(
             'projects/sync-assignees',
@@ -479,5 +480,55 @@ export class MsProjectClientService extends MsClientService {
                 project_id: projectId
             }
         )
+    }
+
+    getAssigneesForProjects(projectsList: any): Promise<any> {
+        return this.makeMsCall(
+            'report/get-assignees-for-projects',
+            'GET',
+            {
+                projects_list: projectsList
+            }
+        );
+    }
+
+    getResourcesForProjects(projectsList: any): Promise<any> {
+        return this.makeMsCall(
+            'report/get-resources-for-projects',
+            'GET',
+            {
+                projects_list: projectsList
+            }
+        );
+    }
+
+    setReportData(model: any): Promise<any> {
+        return this.makeMsCall(
+            'report/set-report-configurations',
+            'POST',
+            {
+                model: model
+            }
+        );
+    }
+
+    getReportConfigurations(reportId: number): Promise<any> {
+        return this.makeMsCall(
+            'report/get-report-information',
+            'GET',
+            {
+                report_id: reportId
+            }
+        );
+    }
+
+    getReportData(reportId: number): Promise<any> {
+        return this.makeMsCall(
+            'report/get-report-data',
+            'GET',
+            {
+                report_id: reportId
+            }
+        );
     }
 }

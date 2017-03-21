@@ -30,6 +30,7 @@ import {ConfigService} from "./service/config.service";
 import {RbacService} from "./service/rbac.service";
 import {AuthBootstrapService} from "./service/resolvers/auth-bootstrap.service";
 import {GuestBootstrapService} from "./service/resolvers/guest-bootstrap.service";
+import {ReportModule} from "./modules/report/report.module";
 
 @NgModule({
     imports: [
@@ -42,6 +43,7 @@ import {GuestBootstrapService} from "./service/resolvers/guest-bootstrap.service
         ProjectsModule,
         BillingModule,
         SettingsModule,
+        ReportModule,
 
         routing,
     ],
