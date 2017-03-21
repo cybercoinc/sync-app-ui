@@ -49,54 +49,6 @@ export class Chart {
 
             return true;
         });
-
-        gantt.eachSuccessor = function(callback, root){
-            if(!this.isTaskExists(root))
-                return;
-
-            // remember tasks we've already iterated in order to avoid infinite loops
-            var traversedTasks = arguments[2] || {};
-            if(traversedTasks[root])
-                return;
-            traversedTasks[root] = true;
-
-            var rootTask = this.getTask(root);
-            var links = rootTask.$source;
-            if(links){
-                for(var i=0; i < links.length; i++){
-                    var link = this.getLink(links[i]);
-                    if(this.isTaskExists(link.target)){
-                        callback.call(this, this.getTask(link.target));
-
-                        this.eachSuccessor(callback, link.target, traversedTasks);
-                    }
-                }
-            }
-        };
-
-        gantt.attachEvent("onTaskDrag", function(id, mode, task, original){
-            var modes = gantt.config.drag_mode;
-            if(mode == modes.move){
-                var diff = task.start_date - original.start_date;
-                gantt.eachSuccessor(function(child){
-                    child.start_date = new Date(+child.start_date + diff);
-                    child.end_date = new Date(+child.end_date + diff);
-                    gantt.refreshTask(child.id, true);
-                },id );
-            }
-            return true;
-        });
-
-        gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
-            var modes = gantt.config.drag_mode;
-            if(mode == modes.move ){
-                gantt.eachSuccessor(function(child){
-                    child.start_date = gantt.roundDate(child.start_date);
-                    child.end_date = gantt.calculateEndDate(child.start_date, child.duration);
-                    gantt.updateTask(child.id);
-                },id );
-            }
-        });
     }
 
     setWorkingDays(working_days, holidays) {
