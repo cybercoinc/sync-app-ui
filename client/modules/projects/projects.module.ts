@@ -46,6 +46,7 @@ import {ChartComponent} from "./chart/chart.component";
 import {CreateBaselineDialog} from "./chart/create-baseline.dialog";
 import {AddResourceDialog} from "./edit-project/components/project-settings/choose-resource/add-resource.dialog";
 import {ScheduleConnectionComponent} from "./edit-project/components/shared/schedule-connection/schedule-connection.component";
+import {TaskNotificationsComponent} from "./edit-project/components/project-settings/task-notifications/task-notifications.component";
 
 @NgModule({
     imports: [
@@ -88,6 +89,7 @@ import {ScheduleConnectionComponent} from "./edit-project/components/shared/sche
         PipeSettingsPublicComponent,
         PipeSettingsComponent,
         ChooseResourceComponent,
+        TaskNotificationsComponent,
         AddResourceDialog,
 
         PipeDeleteComponent,

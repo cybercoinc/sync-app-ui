@@ -131,6 +131,8 @@ export class Project {
         path: string | number[]
     };
     smartsheet_workspace_id: number;
+    is_enable_notifications: boolean;
+    notification_cc_emails: string[];
 }
 
 export class SmartsheetWorkspace {

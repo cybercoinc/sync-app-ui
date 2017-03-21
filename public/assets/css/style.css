@@ -113,6 +113,10 @@ edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header {
     border-bottom: 1px solid #c0c0c0;
 }
 
+edit-project .sc-sidenav md-toolbar-row:first-of-type {
+    display: none;
+}
+
 settings .custom-users-dropdown {
     max-width: 400px;
 }
@@ -125,8 +129,11 @@ settings .custom-users-dropdown {
     text-decoration: underline;
 }
 
-.logo-container {
+.navbar-brand.logo-container {
     height: auto;
+}
+
+.navbar-brand.logo-container:hover {
     background-color: #2c3e56;
 }
 
