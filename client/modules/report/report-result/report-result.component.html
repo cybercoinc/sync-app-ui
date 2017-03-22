@@ -118,6 +118,34 @@
                             </table>
                         </div>
                     </div>
+
+                    <div *ngIf="reportInformation.group_by === 'people'">
+                        <div *ngFor="let assigneeName of assigneesName">
+                            <h4>{{assigneeName}}</h4>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="col-md-3">Task</th>
+                                    <th class="col-md-2">Resource</th>
+                                    <th class="col-md-2">Progress</th>
+                                    <th class="col-md-3">Project</th>
+                                    <th class="col-md-1">Start Date</th>
+                                    <th class="col-md-1">Finish Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let data of reportData[assigneeName]">
+                                    <td>{{data.text}}</td>
+                                    <td>{{data.resources}}</td>
+                                    <td>{{data.progress ? data.progress + '%': '0%'}}</td>
+                                    <td>{{data.project_name}}</td>
+                                    <td>{{data.start_date| date: 'MMM dd, yyyy'}}</td>
+                                    <td>{{data.end_date| date: 'MMM dd, yyyy'}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

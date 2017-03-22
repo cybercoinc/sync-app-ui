@@ -8,6 +8,10 @@
         </div>
 
         <div class="form-group">
+            <md-checkbox class="example-margin" [(ngModel)]="AuthService.authUser.disable_task_notification">Don't send me email notifications</md-checkbox>
+        </div>
+
+        <div class="form-group">
             <button type="button" class="btn btn-success" (click)="save()">Save</button>
         </div>
     </md-card-content>

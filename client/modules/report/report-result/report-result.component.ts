@@ -21,27 +21,57 @@ export class ReportResultComponent implements OnInit {
     protected reportId: number;
     public reportInformation: any;
     public reportData: any;
+    public dataForHeaders = [];
+    public assigneesName = [];
 
     ngOnInit() {
         this.ActivatedRoute.params.forEach((params) => {
             this.reportId = +params['reportId'];
         });
 
-        this.getReportInformation();
-        this.getReportData();
-    }
-
-    getReportInformation() {
-        this.MsProjectClientService.getReportConfigurations(this.reportId)
-            .then(result => {
-                this.reportInformation = result;
+        return Promise.all([
+            this.getReportInformation(),
+            this.getReportData()
+        ])
+            .then(() => {
+                return this.setRenderData();
             })
     }
 
-    getReportData() {
-        this.MsProjectClientService.getReportData(this.reportId)
+    getReportInformation() {
+        return this.MsProjectClientService.getReportConfigurations(this.reportId)
             .then(result => {
-                this.reportData = result
+                return this.reportInformation = result;
+            });
+    }
+
+    setRenderData() {
+        switch(this.reportInformation.group_by) {
+            case 'project' :
+                this.dataForHeaders = this.reportInformation.projects;
+                break;
+            case 'resource' :
+                this.dataForHeaders = this.reportInformation.resource;
+                break;
+            case 'people' :
+                this.structurePeopleReport();
+                break;
+        }
+
+    }
+
+    structurePeopleReport() {
+        for (let assigneeName in this.reportData) {
+            if(this.reportData.hasOwnProperty(assigneeName)) {
+                this.assigneesName.push(assigneeName)
+            }
+        }
+    }
+
+    getReportData() {
+        return this.MsProjectClientService.getReportData(this.reportId)
+            .then(result => {
+                return this.reportData = result
             });
     }
 

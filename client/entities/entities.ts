@@ -15,6 +15,7 @@ export class User {
     role: string;
     email: string;
     is_login_as_allowed: boolean;
+    disable_task_notification: boolean;
     pr_user_id: number; // procore user id
     as_admin: boolean;
     procore_oauth: {
