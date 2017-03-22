@@ -4,59 +4,18 @@ declare let $: any;
 export class Chart {
     resources: any;
     assignees: any;
+    isAllowEdit: any;
     weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     notWorkingDays = [0 ,6];
 
-    constructor(resources, assignees) {
+    constructor(resources, assignees, isAllowEdit) {
         this.resources = resources;
         this.assignees = assignees;
+        this.isAllowEdit = isAllowEdit;
 
-        let link = document.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('type', 'text/css');
-        link.setAttribute('href', 'assets/css/dhtmlxgantt.css');
-
-        if (typeof link != "undefined") {
-            document.getElementsByTagName("head")[0].appendChild(link);
-        }
-
-        let exportJs = document.createElement('script');
-        exportJs.setAttribute('src', 'assets/js/api.js');
-
-        if (typeof exportJs != "undefined") {
-            document.getElementsByTagName("head")[0].appendChild(exportJs);
-        }
-
-        exportJs = document.createElement('script');
-        exportJs.setAttribute('src', 'assets/js/select2.min.js');
-
-        if (typeof exportJs != "undefined") {
-            document.getElementsByTagName("head")[0].appendChild(exportJs);
-        }
-
-        link = document.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('type', 'text/css');
-        link.setAttribute('href', 'assets/css/select2.min.css');
-
-        if (typeof link != "undefined") {
-            document.getElementsByTagName("head")[0].appendChild(link);
-        }
-
-        gantt.attachEvent("onBeforeLightbox", function(id){
-            let task = gantt.getTask(id);
-            task.progress = 0;
-
-            return true;
-        });
-
-        gantt.attachEvent("onTaskLoading", function(task){
-            if (task.has_сhildren) {
-                task.type = gantt.config.types.project;
-            }
-
-            return true;
-        });
+        this.loadScripts();
+        this.attachEvents();
+        this.setConfiguration();
     }
 
     setWorkingDays(working_days, holidays) {
@@ -83,35 +42,6 @@ export class Chart {
     buildChart(data) {
         let self = this;
 
-        gantt.config.task_height = 16;
-        gantt.config.row_height  = 40;
-
-        gantt.config.columns = [
-            {name:"text", label: "Task name", tree: true},
-            {name:"progress", label: "Complete %", template: (obj) => {
-                if (obj.progress) {
-                    return (obj.progress * 100).toFixed(0);
-                }
-
-                return '0';
-            }},
-            {name:"resources", label: "Resource", template: (obj) => {
-                return obj.resources == undefined ? '' : obj.resources;
-            }},
-            {name:"add", label:"", width:44 },
-        ];
-
-        gantt.config.auto_scheduling         = true;
-        gantt.config.work_time               = true;
-        gantt.config.autosize                = "y";
-        gantt.config.xml_date                = "%d-%m-%Y";
-        gantt.templates.task_cell_class = function(task, date){
-            if(self.notWorkingDays.indexOf(date.getDay()) > -1){
-                return "not-working-day";
-            }
-        };
-        gantt._is_lightbox_timepicker = function(){ return true;};
-
         gantt.form_blocks["resources"] = this.buildResourceDropdown(this.resources);
         gantt.form_blocks["assignees"] = this.buildAssigneeDropdown(this.assignees);
 
@@ -127,17 +57,11 @@ export class Chart {
         gantt.locale.labels["section_assignees"] = "Assignees";
         gantt.locale.labels["section_resources"] = "Resources";
 
-        gantt.attachEvent("onTaskLoading", function(task){
-            task.planned_start = gantt.date.parseDate(task.planned_start, "xml_date");
-            task.planned_end   = gantt.date.parseDate(task.planned_end, "xml_date");
-            return true;
-        });
-
         gantt.init("chart");
         gantt.parse({data: data.tasks, links: data.links});
         gantt.sort('row_number', false);
 
-        gantt.attachEvent("onLightbox", function (task_id){
+        gantt.attachEvent("onLightbox", (task_id => {
             $('#resources-select').on('change', (e) => {
                 let resource = self.getResource();
 
@@ -160,12 +84,13 @@ export class Chart {
             }
 
             $('select.select2').select2();
-        });
+        }));
 
-        gantt.attachEvent("onAfterLightbox", function (){
+        gantt.attachEvent("onAfterLightbox", (() => {
             $('#resources-select').off('change');
+
             return true;
-        });
+        }));
     }
 
     getAssigneeList(resourceId) {
@@ -247,6 +172,7 @@ export class Chart {
             el.style.top = sizes.top + gantt.config.task_height  + 13 + 'px';
             return el;
         }
+
         return false;
     }
 
@@ -254,7 +180,7 @@ export class Chart {
         let self = this;
 
         return {
-            render: function(sns){
+            render: (sns => {
                 let html = '<select id="resources-select">' +
                            '<option value="0">No resource</option>';
 
@@ -264,9 +190,9 @@ export class Chart {
                 html += '</select>';
 
                 return '<div class="gantt_cal_ltext">' + html + '</div>';
-            },
+            }),
 
-            set_value: function(node,value,task,section){
+            set_value: ((node,value, task, section) => {
                 if (!value) { // new task
                     $('#resources-select option').first().prop('selected', true);
                     $('#assignee-select').empty().prop('disabled', true);
@@ -277,29 +203,124 @@ export class Chart {
                         $('#resources-select').val(resource.name).change();
                     }
                 }
-            },
-            get_value: function(node,task,section){
+            }),
+            get_value: ((node, task, section) => {
                 if (self.getResource()) {
                     return $('#resources-select').val();
                 }
-            },
-            focus: function(node){}
+            }),
+            focus: (node => {})
         };
     }
 
     buildAssigneeDropdown(options) {
         return {
-            render: function(sns){
+            render: (sns => {
                 return '<select id="assignee-select" multiple="multiple" class="select2"></select>';
-            },
+            }),
 
-            set_value: function(node,value,task,section){},
-            get_value: function(node,task,section){
+            set_value: ((node, value, task, section) => {}),
+            get_value: ((node, task, section) => {
                 if ($('#assignee-select').val()) {
                     return $('#assignee-select').val();
                 }
-            },
-            focus: function(node){}
+            }),
+            focus: (node => {})
         };
+    }
+
+    loadScripts() {
+        let link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('href', 'assets/css/dhtmlxgantt.css');
+
+        if (typeof link != "undefined") {
+            document.getElementsByTagName("head")[0].appendChild(link);
+        }
+
+        let exportJs = document.createElement('script');
+        exportJs.setAttribute('src', 'assets/js/api.js');
+
+        if (typeof exportJs != "undefined") {
+            document.getElementsByTagName("head")[0].appendChild(exportJs);
+        }
+
+        exportJs = document.createElement('script');
+        exportJs.setAttribute('src', 'assets/js/select2.min.js');
+
+        if (typeof exportJs != "undefined") {
+            document.getElementsByTagName("head")[0].appendChild(exportJs);
+        }
+
+        link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('href', 'assets/css/select2.min.css');
+
+        if (typeof link != "undefined") {
+            document.getElementsByTagName("head")[0].appendChild(link);
+        }
+    }
+
+    attachEvents() {
+        gantt.attachEvent("onBeforeLightbox", (id => {
+            let task = gantt.getTask(id);
+            task.progress = 0;
+
+            return true;
+        }));
+
+        gantt.attachEvent("onTaskLoading", (task => {
+            if (task.has_сhildren) {
+                task.type = gantt.config.types.project;
+            }
+
+            return true;
+        }));
+
+        gantt.attachEvent("onTaskLoading", (task => {
+            task.planned_start = gantt.date.parseDate(task.planned_start, "xml_date");
+            task.planned_end   = gantt.date.parseDate(task.planned_end, "xml_date");
+
+            return true;
+        }));
+    }
+
+    setConfiguration() {
+        let self = this;
+
+        gantt.config.task_height = 16;
+        gantt.config.row_height  = 40;
+        gantt.config.readonly    = !this.isAllowEdit;
+
+        gantt.config.columns = [
+            {name:"text", label: "Task name", tree: true},
+            {name:"progress", label: "Complete %", template: (obj) => {
+                if (obj.progress) {
+                    return (obj.progress * 100).toFixed(0);
+                }
+
+                return '0';
+            }},
+            {name:"resources", label: "Resource", template: (obj) => {
+                return obj.resources == undefined ? '' : obj.resources;
+            }},
+        ];
+
+        if (this.isAllowEdit) {
+            gantt.config.columns.push({name:"add", label:"", width:44 });
+        }
+
+        gantt.config.auto_scheduling    = true;
+        gantt.config.work_time          = true;
+        gantt.config.autosize           = "y";
+        gantt.config.xml_date           = "%d-%m-%Y";
+        gantt.templates.task_cell_class = ((task, date) => {
+            if(self.notWorkingDays.indexOf(date.getDay()) > -1){
+                return "not-working-day";
+            }
+        });
+        gantt._is_lightbox_timepicker = (() => {return true});
     }
 }
