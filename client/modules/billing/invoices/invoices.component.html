@@ -1,11 +1,15 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12" *ngIf="!invoices">
-            <h5>No Invoices Yet.</h5>
+<md-card>
+    <md-card-content>
+        <div *ngIf="!invoices">
+            <h5>Loading...</h5>
         </div>
 
-        <div *ngIf="invoices">
-            <div class="col-xs-11">
+        <div *ngIf="invoices && invoices.length == 0">
+            <h5>No invoices found.</h5>
+        </div>
+
+        <div *ngIf="invoices && invoices.length > 0">
+            <div>
                 <div class="row invoice-table-header bottom-lined">
                     <div class="col-xs-3">Invoice Number</div>
                     <div class="col-xs-3">Payment Status</div>
@@ -25,5 +29,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </md-card-content>
+</md-card>
