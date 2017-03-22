@@ -16,8 +16,7 @@
                         </div>
                         <div class="col-md-10">
                             <span *ngFor="let project of reportInformation.projects">
-                                {{project.name}}
-                                <span *ngIf="reportInformation.projects.length > 1 && reportInformation.projects.length - 1 !== reportInformation.projects.indexOf(project)">, </span>
+                                {{project.name}}<span *ngIf="reportInformation.projects.length > 1 && reportInformation.projects.length - 1 !== reportInformation.projects.indexOf(project)">, </span>
                             </span>
                         </div>
                     </div>
@@ -28,8 +27,7 @@
                         </div>
                         <div class="col-md-10">
                             <span *ngFor="let assignee of reportInformation.assignees">
-                                {{assignee.first_name +' '+ assignee.last_name}}
-                                <span *ngIf="reportInformation.assignees.length > 1 && reportInformation.assignees.length - 1 !== reportInformation.assignees.indexOf(assignee)">, </span>
+                                {{assignee.first_name +' '+ assignee.last_name}}<span *ngIf="reportInformation.assignees.length > 1 && reportInformation.assignees.length - 1 !== reportInformation.assignees.indexOf(assignee)">, </span>
                             </span>
                         </div>
                     </div>
@@ -40,8 +38,7 @@
                         </div>
                         <div class="col-md-10">
                             <span *ngFor="let resource of reportInformation.resources">
-                                {{resource}}
-                                <span *ngIf="reportInformation.resources.length > 1 && reportInformation.resources.length - 1 !== reportInformation.resources.indexOf(resource)">, </span>
+                                {{resource}}<span *ngIf="reportInformation.resources.length > 1 && reportInformation.resources.length - 1 !== reportInformation.resources.indexOf(resource)">, </span>
                             </span>
                         </div>
                     </div>

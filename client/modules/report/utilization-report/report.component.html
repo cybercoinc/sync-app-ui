@@ -19,22 +19,25 @@
                         </div>
                     </form>
                 </div>
+                <br />
                 <button class="btn btn-success" form="chooseProjectsForm" type="submit">NEXT</button>
+                <br />
             </div>
 
             <div *ngIf="showAssigneesAndResources" id="chooseAssigneeForm">
                 <form>
                     <div class="report-row">
-                        <h4>2. Choose people/resources</h4>
+                        <h4>2. Define configuration</h4>
 
                         <h5>People:</h5>
                         <div *ngIf="assignees && assignees.length">
                             <div *ngFor="let assignee of assignees">
                                 <md-checkbox [(ngModel)]="model.assignees[assignee.email]" name="{{assignee.email}}">
-                                    {{assignee.first_name + assignee.last_name}}
+                                    {{assignee.first_name + ' ' + assignee.last_name}}
                                 </md-checkbox>
                             </div>
                         </div>
+                        <br />
 
                         <h5>Resources:</h5>
                         <div *ngIf="resources && resources.length">
@@ -44,11 +47,9 @@
                                 </md-checkbox>
                             </div>
                         </div>
-                    </div>
+                        <br />
 
-                    <div class="report-row">
-                        <h4>3. Group by</h4>
-
+                        <h5>Group by:</h5>
                         <div class="groupings">
                             <md-select [(ngModel)]="model.group_by" name="group_by">
                                 <md-option *ngFor="let grouping of groupings" [value]="grouping" selected>
@@ -57,7 +58,10 @@
                             </md-select>
                         </div>
 
+                        <br />
+                        <br />
                         <button class="btn btn-success" form="chooseAssigneeForm" (click)="save()" type="submit">SUBMIT</button>
+                        <br />
                     </div>
                 </form>
             </div>
