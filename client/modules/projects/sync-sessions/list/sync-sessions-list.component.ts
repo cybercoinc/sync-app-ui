@@ -65,13 +65,15 @@ export class SyncSessionsListComponent implements OnInit {
 
         let filterObj = {};
 
-        filterObj['pipe_fk_id'] = this.projectPipe.id;
+        if (this.projectPipe) {
+            filterObj['pipe_fk_id'] = this.projectPipe.id;
 
-        if (this.filter === 'CHANGES_ONLY') {
-            filterObj['has_item_changes'] = true;
+            if (this.filter === 'CHANGES_ONLY') {
+                filterObj['has_item_changes'] = true;
 
-        } else if (this.filter === 'FAILED') {
-            filterObj['status'] = 'failed';
+            } else if (this.filter === 'FAILED') {
+                filterObj['status'] = 'failed';
+            }
         }
 
         return this.MsSyncClientService.getLastPipeSyncSessions(filterObj)
