@@ -412,6 +412,29 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getUserToProjectPermissions(userId: number, projectId: number) {
+        return this.makeMsCall(
+            'get-assignee-to-project-permissions',
+            'GET',
+            {
+                project_id: projectId,
+                user_id: userId
+            }
+        );
+    }
+
+    setUserToProjectPermissions(userId: number, projectId: number, data = {}) {
+        return this.makeMsCall(
+            'set-assignee-to-project-permissions',
+            'POST',
+            {
+                project_id: projectId,
+                user_id: userId,
+                data: data,
+            }
+        );
+    }
+
     getTrades(projectId: number): Promise<any> {
         return this.makeMsCall(
             'procore/project/trades',

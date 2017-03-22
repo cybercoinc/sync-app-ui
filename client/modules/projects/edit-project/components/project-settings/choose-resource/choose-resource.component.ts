@@ -3,6 +3,7 @@ import {AuthService} from "client/service/auth.service";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {MdDialog} from "@angular/material";
 import {AddResourceDialog} from "./add-resource.dialog";
+import {SetGanttAccessDialog} from "./dialogs/set-gantt-access.dialog";
 
 @Component({
     selector: 'choose-resource',
@@ -26,20 +27,13 @@ export class ChooseResourceComponent implements OnInit {
 
     public model: {} = {};
 
-    protected systemConnectedAssigneesIdsList = [];
-
     @Input('projectId') projectId: number;
 
     ngOnInit() {
         return this.getResources()
             .then(() => {
-                return this.MsProjectClientService.getSystemConnectedProjectAssigneesIds(this.projectId)
+                return this.getAssignees();
             })
-            .then(systemConnectedAssigneesIdsList => {
-                this.systemConnectedAssigneesIdsList = systemConnectedAssigneesIdsList;
-
-                return this.getAssignees()
-            });
     }
 
     getAssignees() {
@@ -63,6 +57,19 @@ export class ChooseResourceComponent implements OnInit {
             }
 
         });
+    }
+
+    setGanttAccessForUser(userId) {
+        let dialogRef = this.MdDialog.open(SetGanttAccessDialog);
+
+        dialogRef.componentInstance.userId = userId;
+        dialogRef.componentInstance.projectId = this.projectId;
+
+        dialogRef
+            .afterClosed()
+            .subscribe(result => {
+                console.log('result', result);
+            });
     }
 
     getResources() {

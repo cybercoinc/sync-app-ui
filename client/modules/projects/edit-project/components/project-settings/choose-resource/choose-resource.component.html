@@ -19,13 +19,15 @@
                 <div class="col-xs-6 assignee">
                     <p>{{assignee.first_name + ' ' + assignee.last_name}} {{'(' + assignee.company_name + ')'}}</p>
 
-                    <p class="vertical-aligned">
-                        <i *ngIf="systemConnectedAssigneesIdsList.indexOf(assignee.id) !== -1" style="color: green"
+                    <p class="vertical-aligned" *ngIf="assignee.user_id">
+                        <i style="color: green"
                           class="material-icons">check_circle</i>{{assignee.email}}
+
+                        <i (click)="setGanttAccessForUser(assignee.user_id)" class="material-icons set-permissions-button">add_box</i>
                     </p>
                 </div>
 
-                <div class="col-xs-4">
+                <div class="col-xs-5">
                     <md-select placeholder="- Choose Resource -" [(ngModel)]="model[assignee.id]"
                                [name]=assignee.id>
                         <md-option *ngFor="let resourceName of resourcesDropdownValues" [value]="resourceName">

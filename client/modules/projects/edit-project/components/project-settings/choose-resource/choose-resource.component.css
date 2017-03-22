@@ -29,5 +29,9 @@ md-select {
     height: auto;
 }
 
+.set-permissions-button {
+    cursor: pointer;
+    font-size: 20px;
+}
 
 

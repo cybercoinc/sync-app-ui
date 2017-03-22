@@ -1,0 +1,14 @@
+<h1 style="width: 400px;" md-dialog-title>Set Gantt Schedule access <i *ngIf="componentIsBusy"
+                                                                       class="fa fa-cog fa-spin fa-fw"></i>
+</h1>
+<div md-dialog-content style="min-height: 40px;line-height: 70px;">
+    <form>
+        <md-checkbox [(ngModel)]="model.allow_edit_gantt_chart" [disabled]="componentIsBusy"
+                     name="allow_edit_gantt_chart">Edit Gantt Chart
+        </md-checkbox>
+    </form>
+
+</div>
+<div md-dialog-actions>
+    <button [disabled]="componentIsBusy" md-button (click)="save()">Save</button>
+</div>

@@ -45,6 +45,7 @@ import {ChooseResourceComponent} from "./edit-project/components/project-setting
 import {ChartComponent} from "./chart/chart.component";
 import {CreateBaselineDialog} from "./chart/create-baseline.dialog";
 import {AddResourceDialog} from "./edit-project/components/project-settings/choose-resource/add-resource.dialog";
+import {SetGanttAccessDialog} from "./edit-project/components/project-settings/choose-resource/dialogs/set-gantt-access.dialog";
 import {ScheduleConnectionComponent} from "./edit-project/components/shared/schedule-connection/schedule-connection.component";
 import {TaskNotificationsComponent} from "./edit-project/components/project-settings/task-notifications/task-notifications.component";
 import {ChartWorkingDaysComponent} from "./edit-project/components/project-settings/chart-working-days/chart-working-days.component";
@@ -92,6 +93,7 @@ import {ChartWorkingDaysComponent} from "./edit-project/components/project-setti
         ChooseResourceComponent,
         TaskNotificationsComponent,
         AddResourceDialog,
+        SetGanttAccessDialog,
 
         PipeDeleteComponent,
         WorkspaceManagementComponent,
@@ -102,6 +104,7 @@ import {ChartWorkingDaysComponent} from "./edit-project/components/project-setti
     ],
     entryComponents: [
         AddResourceDialog,
+        SetGanttAccessDialog,
         CreateBaselineDialog
     ],
     schemas: [
