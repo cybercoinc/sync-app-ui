@@ -3,6 +3,8 @@
         <div class="section">
             <div class="section-content">
                 <div class="row" *ngIf="pbrId">
+
+                    <span style="font-weight: bold;" *ngIf="!isEditMode">Company billing responsible person</span><br />
                     <span class="current-user" *ngIf="!isEditMode">{{currentPBRUser}}</span>
 
                     <md-select *ngIf="isEditMode" placeholder="Company billing responsible person" [(ngModel)]="pbrId" style="width: 300px;">
