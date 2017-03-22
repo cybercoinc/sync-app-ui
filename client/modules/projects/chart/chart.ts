@@ -49,6 +49,14 @@ export class Chart {
 
             return true;
         });
+
+        gantt.attachEvent("onTaskLoading", function(task){
+            if (task.has_сhildren) {
+                task.type = gantt.config.types.project;
+            }
+
+            return true;
+        });
     }
 
     setWorkingDays(working_days, holidays) {
@@ -94,8 +102,6 @@ export class Chart {
         ];
 
         gantt.config.auto_scheduling         = true;
-        // gantt.config.auto_scheduling_strict  = true;
-        // gantt.config.auto_scheduling_initial = true;
         gantt.config.work_time               = true;
         gantt.config.autosize                = "y";
         gantt.config.xml_date                = "%d-%m-%Y";
@@ -129,7 +135,6 @@ export class Chart {
 
         gantt.init("chart");
         gantt.parse({data: data.tasks, links: data.links});
-
         gantt.sort('row_number', false);
 
         gantt.attachEvent("onLightbox", function (task_id){
@@ -147,6 +152,12 @@ export class Chart {
                     $('#assignee-select').prop('disabled', true);
                 }
             });
+
+            let task = gantt.getTask(task_id);
+            if (task.type == gantt.config.types.project) {
+                let id = gantt.config.lightbox.project_sections[1].inputId;
+                $('#' + id).parents('.gantt_wrap_section').hide();
+            }
 
             $('select.select2').select2();
         });
@@ -181,6 +192,13 @@ export class Chart {
             }
         });
 
+        this.refreshData(data);
+    }
+
+    refreshData(data = null) {
+        if (!data) {
+            data = this.getTasks();
+        }
         gantt.addTaskLayer(this.addBaseLines);
         gantt.parse({data: data});
         gantt.refreshData();
