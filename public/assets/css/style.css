@@ -59,7 +59,7 @@ body h1 {
 }
 
 .sc-sidenav .mat-toolbar {
-    background-color: #ffffff;
+    background-color: #e2e2e2;
     padding: 0;
     color: #666666;
 }
@@ -73,6 +73,9 @@ body h1 {
 
     height: 74px;
     cursor: pointer;
+
+    z-index: 10;
+    position: relative;
 }
 
 .mat-toolbar-row .mat-icon {
@@ -90,10 +93,15 @@ body h1 {
     color: #fff;
     cursor: initial;
 }
+.sc-sidenav md-toolbar-row:last-of-type {
+    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.3);
+    z-index: 9;
+}
 
 .sc-sidenav md-toolbar-row.is-active {
     background-color: #8591a0;
     color: #fff;
+    border: none;
 }
 
 .mat-card {
@@ -154,6 +162,7 @@ settings .custom-users-dropdown {
 .mat-sidenav {
     width: 298px;
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+    background-color: #e2e2e2;
 }
 
 .module-header {
@@ -429,7 +438,7 @@ a.mat-button:hover, a.mat-icon-button:hover, a.mat-raised-button:hover {
 }
 
 .not-working-day {
-    background: #bbbbb8;
+    background: #dcdcdc;
 }
 
 chart-working-days md-checkbox .mat-checkbox-layout .mat-checkbox-label {
