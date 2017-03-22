@@ -110,8 +110,7 @@
                                     <td>{{data.text}}</td>
                                     <td>{{data.resources}}</td>
                                     <td>{{data.progress ? data.progress + '%': '0%'}}</td>
-                                    <td></td>
-                                    <!--<td *ngFor="let project of reportInformation.projects">{{project.name}}</td>-->
+                                    <td>{{data.project_name}}</td>
                                     <td>{{data.start_date| date: 'MMM dd, yyyy'}}</td>
                                     <td>{{data.end_date| date: 'MMM dd, yyyy'}}</td>
                                 </tr>
