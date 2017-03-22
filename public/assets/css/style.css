@@ -117,7 +117,7 @@ edit-project .mat-card, settings .mat-card {
     max-width: 800px;
 }
 
-edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header {
+edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header, billing .mat-card .mat-card-header {
     border-bottom: 1px solid #c0c0c0;
 }
 
