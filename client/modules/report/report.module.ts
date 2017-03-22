@@ -5,8 +5,9 @@ import {MaterialModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {routing} from './report.routing';
 
-import {ReportComponent} from './index/report.component';
+import {UtilizationReportComponent} from './utilization-report/report.component';
 import {ReportResultComponent} from "./report-result/report-result.component";
+import {ReportsComponent} from "./index/reports.component";
 
 @NgModule({
     imports: [
@@ -17,10 +18,11 @@ import {ReportResultComponent} from "./report-result/report-result.component";
         routing
     ],
     declarations: [
-        ReportComponent,
+        ReportsComponent,
+        UtilizationReportComponent,
         ReportResultComponent
     ],
-    bootstrap: [ReportComponent],
+    bootstrap: [UtilizationReportComponent, ReportsComponent],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ],

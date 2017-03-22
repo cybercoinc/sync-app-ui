@@ -123,6 +123,7 @@ export class ChartComponent implements OnInit {
                     duration: 2000,
                     extraClasses: ['alert-success']
                 });
+                this.chart.refreshData();
             });
     }
 
