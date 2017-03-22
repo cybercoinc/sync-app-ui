@@ -2,28 +2,39 @@
     <md-card-header>
         <md-card-title>
             <span style="flex: 1 1 auto;">Project Directory</span>
-            <button md-button (click)="addResource()" style="margin-top: -13px; margin-bottom:13px;">ADD RESOURCE</button>
+            <button md-button (click)="addResource()" style="margin-top: -13px; margin-bottom:13px;">ADD RESOURCE
+            </button>
         </md-card-title>
     </md-card-header>
+
     <md-card-content>
+        <div *ngIf="assignees && assignees.length" class="container-fluid">
+            <div class="row user-list" *ngFor="let assignee of assignees">
 
+                <div class="col-xs-1">
+                    <i *ngIf="!assignee.avatar" class="material-icons assignee-avatar">person</i>
+                    <img *ngIf="assignee.avatar" class="assignee-avatar-image" src="{{assignee.avatar}}">
+                </div>
 
-<div *ngIf="assignees && assignees.length" class="row">
-    <div class="row user-list" *ngFor="let assignee of assignees">
-        <div class="col-xs-6 assignee">
-            {{assignee.first_name + ' ' + assignee.last_name + ' (' + assignee.email + ')'}}
-            <i *ngIf="systemConnectedAssigneesIdsList.indexOf(assignee.id) !== -1" style="color: green" class="material-icons">check_circle</i>
+                <div class="col-xs-6 assignee">
+                    <p>{{assignee.first_name + ' ' + assignee.last_name}} {{'(' + assignee.company_name + ')'}}</p>
+
+                    <p class="vertical-aligned">
+                        <i *ngIf="systemConnectedAssigneesIdsList.indexOf(assignee.id) !== -1" style="color: green"
+                          class="material-icons">check_circle</i>{{assignee.email}}
+                    </p>
+                </div>
+
+                <div class="col-xs-4">
+                    <md-select placeholder="- Choose Resource -" [(ngModel)]="model[assignee.id]"
+                               [name]=assignee.id>
+                        <md-option *ngFor="let resourceName of resourcesDropdownValues" [value]="resourceName">
+                            {{resourceName}}
+                        </md-option>
+                    </md-select>
+                </div>
+            </div>
+            <button class="pull-right btn btn-success" (click)="save()">SAVE</button>
         </div>
-        <div class="col-xs-6">
-            <md-select placeholder="- Choose Resource -" [(ngModel)]="model[assignee.id]"
-                       [name]=assignee.id>
-                <md-option *ngFor="let resourceName of resourcesDropdownValues" [value]="resourceName">
-                    {{resourceName}}
-                </md-option>
-            </md-select>
-        </div>
-    </div>
-    <button class="pull-right btn btn-success" (click)="save()">SAVE</button>
-</div>
     </md-card-content>
 </md-card>

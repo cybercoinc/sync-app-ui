@@ -13,7 +13,20 @@ h4 {
 }
 
 md-select {
-    width: 70%;
+    width: 100%;
+}
+
+.assignee-avatar {
+    font-size: 60px;
+}
+
+.assignee p {
+    margin: 0;
+}
+
+.assignee-avatar-image {
+    width: 60px;
+    height: auto;
 }
 
 
