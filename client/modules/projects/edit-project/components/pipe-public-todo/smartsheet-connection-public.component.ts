@@ -5,7 +5,10 @@ import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
 @Component({
     selector: 'smartsheet-connection-public',
-    template: `<smartsheet-connection pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>`
+    template: `
+        <smartsheet-connection pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></smartsheet-connection>
+        <pipe-settings *ngIf="pipesListObj[pipeType]" pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></pipe-settings>
+    `
 })
 export class SmartsheetConnectionPublicComponent implements OnInit {
     constructor(protected PipeConnectionService: PipeConnectionService) {

@@ -204,9 +204,9 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
             })
-            .then(() => {
-                return this.router.navigate(this.redirectRoute);
-            });
+            // .then(() => {
+            //     return this.router.navigate(this.redirectRoute);
+            // });
     }
 
     showColumnsMatching() {
@@ -267,8 +267,8 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
             })
-            .then(() => {
-                return this.router.navigate(this.redirectRoute);
-            });
+            // .then(() => {
+            //     return this.router.navigate(this.redirectRoute);
+            // });
     }
 }
