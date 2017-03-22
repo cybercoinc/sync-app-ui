@@ -6,11 +6,11 @@ import 'rxjs/add/operator/startWith';
 import {Router} from '@angular/router';
 
 @Component({
-    selector: "report",
-    templateUrl: 'client/modules/report/index/report.component.html',
-    styleUrls: ['client/modules/report/index/report.component.css'],
+    selector: "utilization-report",
+    templateUrl: 'client/modules/report/utilization-report/report.component.html',
+    styleUrls: ['client/modules/report/utilization-report/report.component.css'],
 })
-export class ReportComponent implements OnInit {
+export class UtilizationReportComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService,
                 protected MsUserClientService: MsUserClientService,
@@ -101,7 +101,7 @@ export class ReportComponent implements OnInit {
 
         this.MsProjectClientService.setReportData(dataToSet)
             .then(result => {
-                return this.router.navigate(['/report/' + result.shift()]);
+                return this.router.navigate(['/utilization-report/' + result.shift()]);
             });
 
     }
