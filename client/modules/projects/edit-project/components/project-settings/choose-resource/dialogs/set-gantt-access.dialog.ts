@@ -19,7 +19,7 @@ export class SetGanttAccessDialog implements OnInit {
             });
     }
 
-    save() {
+    save(): any {
         if (this.componentIsBusy) {
             return false;
         }
