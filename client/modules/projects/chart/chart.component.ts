@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {PipeConnectionService} from "client/service/pipe-connection.service";
+import {AuthService} from "client/service/auth.service";
 
 import {Chart} from './chart';
 import {MdDialog, MdSnackBar} from "@angular/material";
@@ -17,29 +18,34 @@ export class ChartComponent implements OnInit {
     private baselines        = [];
     private selectedBaseline = null;
     private assignees        = [];
+    private isAllowEdit      = false;
 
     constructor(protected msProjectClient:       MsProjectClientService,
                 protected PipeConnectionService: PipeConnectionService,
                 protected dialog:                MdDialog,
-                protected snackBar:              MdSnackBar) {}
+                protected snackBar:              MdSnackBar,
+                protected authService:           AuthService) {}
 
     ngOnInit() {
         if (this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
             Promise.all([
                 this.msProjectClient.getChartData(this.PipeConnectionService.pipesListObj['tasks'].id),
                 this.msProjectClient.getAssignees(this.PipeConnectionService.project.id),
-                this.getResources()
+                this.getResources(),
+                this.msProjectClient.getUserToProjectPermissions(this.authService.authUser.id, this.PipeConnectionService.project.id),
             ])
                 .then(result => {
                     let chartData = result[0],
                         assignees = result[1],
-                        resources = result[2];
+                        resources = result[2],
+                        userInProject = result[3];
 
-                    this.chart = new Chart(resources, assignees);
+                    this.chart = new Chart(resources, assignees, userInProject.allow_edit_gantt_chart);
                     this.chart.setWorkingDays(this.PipeConnectionService.project.working_days, this.PipeConnectionService.project.holidays);
-
                     this.chart.buildChart(chartData);
+
                     this.isShowToolbar = true;
+                    this.isAllowEdit = userInProject.allow_edit_gantt_chart;
                 });
 
             this.msProjectClient.getBaselines(this.PipeConnectionService.pipesListObj['tasks'].id)
