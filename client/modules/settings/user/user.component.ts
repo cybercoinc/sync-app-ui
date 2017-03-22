@@ -12,7 +12,8 @@ export class UserComponent {
 
     save(): void {
         this.MsUserClientService.update(this.AuthService.authUser.id, {
-            is_login_as_allowed: this.AuthService.authUser.is_login_as_allowed
+            is_login_as_allowed:       this.AuthService.authUser.is_login_as_allowed,
+            disable_task_notification: this.AuthService.authUser.disable_task_notification
         });
     }
 }
