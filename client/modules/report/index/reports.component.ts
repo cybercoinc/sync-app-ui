@@ -6,7 +6,6 @@ import {Router} from "@angular/router";
 @Component({
     selector: "report",
     templateUrl: 'client/modules/report/index/reports.component.html',
-    styleUrls: ['client/modules/report/index/reports.component.css'],
 })
 export class ReportsComponent {
     constructor(protected MsProjectClientService: MsProjectClientService,

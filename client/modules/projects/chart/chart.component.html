@@ -1,6 +1,12 @@
 <div>
 
     <md-card *ngIf="isShowToolbar">
+        <span style="font-size: 20px;
+                    vertical-align: middle;
+                    border-right: 2px solid #ccc;
+                    padding-right: 20px;
+                    margin-right: 10px;">
+            {{PipeConnectionService.project.name}}</span>
         <button class="btn btn-primary" (click)="save()">Save</button>
         <button class="btn btn-default" (click)="exportToPdf()">Export PDF</button>
 
