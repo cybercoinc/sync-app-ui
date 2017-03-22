@@ -17,21 +17,30 @@ md-select {
 }
 
 .assignee-avatar {
-    font-size: 60px;
+    font-size: 45px;
 }
 
 .assignee p {
     margin: 0;
+    font-size: 14px;
 }
 
 .assignee-avatar-image {
-    width: 60px;
-    height: auto;
+    width: 45px;
+    height: 45px;
 }
 
 .set-permissions-button {
     cursor: pointer;
-    font-size: 20px;
+    font-size: 40px;
+    color: #949494;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
 }
-
+.set-permissions-button:hover {
+    color: #424242;
+}
 

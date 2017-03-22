@@ -2,9 +2,9 @@
     <md-card-header>
         <md-card-title>
             <span style="flex: 1 1 auto;">Project Directory</span>
-            <button md-button (click)="addResource()" style="margin-top: -13px; margin-bottom:13px;">ADD RESOURCE
-            </button>
         </md-card-title>
+        <span class="example-spacer"></span>
+        <button md-button (click)="addResource()" style="margin-top: -13px; margin-bottom:13px;">ADD RESOURCE</button>
     </md-card-header>
 
     <md-card-content>
@@ -17,17 +17,17 @@
                 </div>
 
                 <div class="col-xs-6 assignee">
-                    <p>{{assignee.first_name + ' ' + assignee.last_name}} {{'(' + assignee.company_name + ')'}}</p>
+                    <p>
+                        {{assignee.first_name + ' ' + assignee.last_name}} {{'(' + assignee.company_name + ')'}}
+                        <i *ngIf="assignee.user_id" style="color: green;font-size: 20px;"
+                           class="material-icons">check_circle</i>
+                    </p>
 
-                    <p class="vertical-aligned" *ngIf="assignee.user_id">
-                        <i style="color: green"
-                          class="material-icons">check_circle</i>{{assignee.email}}
-
-                        <i (click)="setGanttAccessForUser(assignee.user_id)" class="material-icons set-permissions-button">add_box</i>
+                    <p class="vertical-aligned">
+                        {{assignee.email}}
                     </p>
                 </div>
-
-                <div class="col-xs-5">
+                <div class="col-xs-4">
                     <md-select placeholder="- Choose Resource -" [(ngModel)]="model[assignee.id]"
                                [name]=assignee.id>
                         <md-option *ngFor="let resourceName of resourcesDropdownValues" [value]="resourceName">
@@ -35,7 +35,14 @@
                         </md-option>
                     </md-select>
                 </div>
+
+                <div class="col-xs-1">
+                    <i *ngIf="assignee.user_id" (click)="setGanttAccessForUser(assignee.user_id)" class="material-icons set-permissions-button">insert_chart</i>
+                </div>
+
             </div>
+            <br />
+            <br />
             <button class="pull-right btn btn-success" (click)="save()">SAVE</button>
         </div>
     </md-card-content>

@@ -444,3 +444,7 @@ a.mat-button:hover, a.mat-icon-button:hover, a.mat-raised-button:hover {
 chart-working-days md-checkbox .mat-checkbox-layout .mat-checkbox-label {
     margin-right: 20px;
 }
+
+.example-spacer {
+    flex: 1 1 auto;
+}
