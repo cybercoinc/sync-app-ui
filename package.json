@@ -37,7 +37,6 @@
     "cors": "2.8.1",
     "debug": "2.4.4",
     "express": "4.13.4",
-    "express-enforces-ssl": "^1.1.0",
     "hammerjs": "2.0.8",
     "ie-shim": "0.1.0",
     "ng2-material": "0.8.1",

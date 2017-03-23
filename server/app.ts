@@ -5,7 +5,6 @@ import {json, urlencoded} from "body-parser";
 let config = require('config');
 let cors = require('cors');
 
-let express_enforces_ssl = require('express-enforces-ssl');
 
 const app: express.Application = express();
 app.disable("x-powered-by");
@@ -13,11 +12,6 @@ app.disable("x-powered-by");
 app.use(express.static(join(__dirname, '../public')));
 app.use(json());
 app.use(urlencoded({extended: true}));
-
-if (process.env.NODE_ENV !== 'development') {
-    app.enable('trust proxy');
-    app.use(express_enforces_ssl());
-}
 
 app.use('/client', express.static(join(__dirname, '../client')));
 
