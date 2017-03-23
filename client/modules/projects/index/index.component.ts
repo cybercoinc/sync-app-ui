@@ -98,27 +98,31 @@ export class IndexComponent implements OnInit {
             if ([PIPE_TYPE_PRIVATE_TODOS, PIPE_TYPE_PUBLIC_TODOS].indexOf(pipe.type) !== -1) {
                 link = pipe.sm_permalink;
             } else if (pipe.type === PIPE_TYPE_TASKS) {
-                link = '#/projects/' + pipe.project_fk_id.id + '/chart';
+                if (pipe.use_schedule_chart) {
+                    link = '#/projects/' + pipe.project_fk_id.id + '/chart';
+                } else {
+                    link = pipe.sm_permalink;
+                }
             }
         });
 
         return link;
     }
 
-    getPipeSyncSourceLabel(projectPipesList, pipeType): string {
-        let label = 'SMARTSHEET';
+    getPipeSyncSource(projectPipesList, pipeType): string {
+        let source = 'smartsheet';
 
         projectPipesList.forEach((pipe: ProjectPipe) => {
             if (pipeType !== pipe.type) {
                 return;
             }
 
-            if (pipe.type === PIPE_TYPE_TASKS) {
-                label = 'GANTT CHART';
+            if (pipe.type === PIPE_TYPE_TASKS && pipe.use_schedule_chart) {
+                source = 'gantt-chart';
             }
         });
 
-        return label;
+        return source;
     }
 
     projectRowExpand(projectRow): void {

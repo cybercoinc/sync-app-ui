@@ -43,7 +43,7 @@
                             <a target="_blank"
                                href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"><i
                                     class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i></a>
-                            <a target="_blank"
+                            <a [attr.target]="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'tasks') ? '_blank' : null"
                                href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"><i
                                     class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i></a>
                         </div>
@@ -106,9 +106,13 @@
                                             </div>
 
                                             <div class="col-sm-8 col-lg-9" *ngIf="isPipeExist(projectRow, 'tasks')">
-                                                <a target="_blank"
+                                                <a *ngIf="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
+                                                   target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
-                                                   md-button>{{getPipeSyncSourceLabel(projectRow.projectPipesList, 'tasks')}}</a>
+                                                   md-button>SMARTSHEET</a>
+                                                <a *ngIf="'gantt-chart'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
+                                                   md-button>GANTT CHART</a>
                                                 <a [routerLink]="[projectRow.project.id, 'sync-sessions', 'tasks']"
                                                    md-button>VIEW SYNC
                                                 </a>
