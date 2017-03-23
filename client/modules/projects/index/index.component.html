@@ -28,25 +28,39 @@
             <div class="col-xs-12" *ngFor="let projectRow of projectRows">
                 <div class="project-row">
 
-                    <div class="row row-label" (click)="projectRowExpand(projectRow)">
-                        <div class="col-xs-6">
-                            {{projectRow.project.name}}
-                            <div class="project-status-warning" *ngIf="projectRow.project.status === 'disabled'">
-                                <i title="project disabled" class="material-icons">warning</i> disabled
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row-label" (click)="projectRowExpand(projectRow)">
+                                {{projectRow.project.name}}
+                                <div class="project-status-warning" *ngIf="projectRow.project.status === 'disabled'">
+                                    <i title="project disabled" class="material-icons">warning</i> disabled
+                                </div>
+                            </div>
+                            <div class="row-icons" *ngIf="!projectRow.is_expanded">
+                                <a *ngIf="getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')"
+                                    target="_blank"
+                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
+                                    ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i></a>
+                                <i *ngIf="!getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')"
+                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
+
+                                <a *ngIf="getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')"
+                                    target="_blank"
+                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
+                                    ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i></a>
+                                <i *ngIf="!getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')"
+                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i>
+
+                                <a *ngIf="getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')"
+                                    [attr.target]="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'tasks') ? '_blank' : null"
+                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
+                                    ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i></a>
+                                <i *ngIf="!getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')"
+                                   class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
                             </div>
                         </div>
 
-                        <div class="col-xs-6 text-right" *ngIf="!projectRow.is_expanded">
-                            <a target="_blank"
-                               href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"><i
-                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i></a>
-                            <a target="_blank"
-                               href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"><i
-                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i></a>
-                            <a [attr.target]="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'tasks') ? '_blank' : null"
-                               href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"><i
-                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i></a>
-                        </div>
+
                     </div>
 
                     <div class="container-fluid" *ngIf="projectRow.is_expanded">
