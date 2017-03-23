@@ -11,9 +11,10 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
         '.dropdown-menu li a {color:#EBEBEB}',
         '.dropdown-menu li a:hover, .dropdown-menu li a:active {color:#666666}',
         'ul {background-color: #44556b;}',
-        '.company-name { display: block; text-align: right; padding-right: 10%;}',
-        '.as-admin-badge { padding-left: 15px; margin-bottom: -22px; background-color: #e20808; font-weight: bold;}',
-        '.usermenu-link { color: #fff !important; font-size: 19px;  padding-top: 32px;  display: inline-flex;  vertical-align: middle;  padding-bottom: 0px;}',
+        '.company-name { display: block; text-align: right; padding: 5px 21px 0 0;}',
+        '.company-name:hover {text-decoration: underline;}',
+        '.as-admin-badge { padding-left: 15px; margin-bottom: -22px; background-color: #e20808; font-weight: bold; width: 140px;}',
+        '.usermenu-link { color: #fff !important; font-size: 19px;  padding-top: 0px;  display: inline-flex;  vertical-align: middle;  padding-bottom: 0px;}',
         '.usermenu-link:hover, .usermenu-link:focus {color: #EBEBEB !important;}',
         '.usermenu-link.active {text-decoration: underline !important;}'
     ],
@@ -21,17 +22,16 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
 <ul class="nav navbar-nav navbar-right" *ngIf="authUser && authUser.role !== 'guest'">
     <li>
         <div *ngIf="isAdmin" class="as-admin-badge">Logged by Admin</div>
+        <a class="company-name" style="color:#EBEBEB;" [routerLink]="['/auth/select-company']" >{{company?.name}}</a> 
         <a class="usermenu-link" href="javascript: void(0);" (click)="showUserMenu = !showUserMenu;">
             {{authUser?.email}}
             <i class="material-icons">arrow_drop_down</i>
         </a>
-        <span class="company-name">{{company?.name}}</span> 
-        <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;">
+        <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;margin-top: 19px;">
             <li><a [routerLink]="['/settings']"  (click)="showUserMenu = !showUserMenu;">Settings</a></li>
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
             <li *ngIf="isBillingUser" ><a [routerLink]="['/billing/info']" (click)="showUserMenu = !showUserMenu;">Billing</a></li>
             <li><a [routerLink]="['/reports']"  (click)="showUserMenu = !showUserMenu;">Reports</a></li>
-            <li><a [routerLink]="['/auth/select-company']" (click)="showUserMenu = !showUserMenu;">Switch Company</a></li>
             <li class="divider"></li>
             <li><a href="javascript: void(0);"  (click)="logout()">Log out</a></li>
         </ul>
