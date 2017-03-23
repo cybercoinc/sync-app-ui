@@ -94,21 +94,23 @@
         </div>
     </div>
 
-    <div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
-        <div class="row">
-            <div class="col-xs-12">
-                <h5> Connection Status: Connected to Smartsheet </h5>
-                Sheet name: <i>{{pipesListObj[pipeType]?.sm_sheet_name}}</i>
-            </div>
-            <div class="col-xs-12">
-                <a href="{{pipesListObj[pipeType]?.sm_permalink}}"
-                   class="btn btn-success"
-                   target="_blank">open</a>
+    <md-card-header *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
+        <md-card-title>Connection</md-card-title>
+    </md-card-header>
 
-                <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
-            </div>
+    <md-card-content *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
+        <div>
+            <h5> Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Connected to Smartsheet</span></h5>
+            Sheet name: <i>{{pipesListObj[pipeType]?.sm_sheet_name}}</i>
         </div>
-    </div>
+        <div>
+            <a href="{{pipesListObj[pipeType]?.sm_permalink}}"
+               class="btn btn-success pull-right"
+               target="_blank">open</a>
+
+            <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+        </div>
+    </md-card-content>
 
     <div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
         <div class="row">

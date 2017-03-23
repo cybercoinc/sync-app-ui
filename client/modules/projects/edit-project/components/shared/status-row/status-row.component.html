@@ -1,23 +1,26 @@
-<md-card style="max-width: initial;">
+<md-card *ngIf="pipesListObj[pipeType]" style="max-width: 800px;">
+    <md-card-header>
+        <md-card-title>Synchronization</md-card-title>
+    </md-card-header>
 
-    <span *ngIf="!pipesListObj[pipeType]">
-        Connection not configured yet.
-    </span>
+    <md-card-content>
+        <h5 *ngIf="(pipesListObj[pipeType].status != 'active')">
+            Status: <span style="color: #8b0305; font-weight: bold; margin-right: 15px;">Paused</span>
+        </h5>
+        <h5 *ngIf="(pipesListObj[pipeType].status == 'active')">
+            Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Active</span>
+        </h5>
 
-    <span *ngIf="(pipesListObj[pipeType] && pipesListObj[pipeType].status != 'active')">
-        <span>
-            Current status: <span style="color: #8b0305; font-weight: bold; font-size: 16px; margin-right: 15px;">Disabled</span>
-        </span>
-        <a (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
-           [class.disabled]="!canEnablePipe()"
-           class="btn btn-success">enable</a>
-    </span>
-    <span *ngIf="(pipesListObj[pipeType] && pipesListObj[pipeType].status == 'active')">
-        <span>
-            Current status: <span style="color: #3d8b40; font-weight: bold; font-size: 16px; margin-right: 15px;">Active</span>
-        </span>
-        <a (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
-           class="btn btn-warning">disable</a>
-    </span>
+        <div class="text-right">
+            <a *ngIf="(pipesListObj[pipeType].status != 'active')"
+               (click)="PipeConnectionService.enablePipe(pipesListObj[pipeType]?.id)"
+               [class.disabled]="!canEnablePipe()"
+               class="btn btn-success">start</a>
+
+            <a *ngIf="(pipesListObj[pipeType].status == 'active')"
+               (click)="PipeConnectionService.disablePipe(pipesListObj[pipeType]?.id)"
+               class="btn btn-warning">pause</a>
+        </div>
+    </md-card-content>
 
 </md-card>
