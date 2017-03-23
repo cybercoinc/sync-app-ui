@@ -24,6 +24,7 @@
     width: 10px;
     height: 74px;
     right: 0px;
+    background-color: #b5b5b5;
 }
 .pipe-status-indicator.active {
     background-color: #2A8039;
