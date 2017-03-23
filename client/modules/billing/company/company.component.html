@@ -7,11 +7,15 @@
                     <span style="font-weight: bold;" *ngIf="!isEditMode">Company billing responsible person</span><br />
                     <span class="current-user" *ngIf="!isEditMode">{{currentPBRUser}}</span>
 
-                    <md-select *ngIf="isEditMode" placeholder="Company billing responsible person" [(ngModel)]="pbrId" style="width: 300px;">
-                        <md-option *ngFor="let user of ddUsersList" [value]="user.key">
-                            {{user.value}}
+                    <md-input-container *ngIf="isEditMode" class="col-md-2">
+                        <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" [(ngModel)]="currentPBRUser">
+                    </md-input-container>
+
+                    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+                        <md-option *ngFor="let user of filtered | async" [value]="user">
+                            {{ user.value }}
                         </md-option>
-                    </md-select>
+                    </md-autocomplete>
 
                     <span *ngIf="isBillingUser">
                         <a class="btn btn-success" *ngIf="!isEditMode" (click)="showEditPBR()">Edit</a>

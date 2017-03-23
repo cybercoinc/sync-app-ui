@@ -49,6 +49,7 @@ import {SetGanttAccessDialog} from "./edit-project/components/project-settings/c
 import {ScheduleConnectionComponent} from "./edit-project/components/shared/schedule-connection/schedule-connection.component";
 import {TaskNotificationsComponent} from "./edit-project/components/project-settings/task-notifications/task-notifications.component";
 import {ChartWorkingDaysComponent} from "./edit-project/components/project-settings/chart-working-days/chart-working-days.component";
+import {PrimaryBillingUser} from "./edit-project/components/project-settings/primary-billing-user/primary-billing-user.component";
 
 @NgModule({
     imports: [
@@ -98,6 +99,7 @@ import {ChartWorkingDaysComponent} from "./edit-project/components/project-setti
         PipeDeleteComponent,
         WorkspaceManagementComponent,
 
+        PrimaryBillingUser,
         ChartComponent,
         ChartWorkingDaysComponent,
         CreateBaselineDialog

@@ -1,40 +1,6 @@
 <div class="container-fluid">
-
-    <md-card class="example-card">
-        <md-card-header>
-            <md-card-title>Primary billing responsibility person</md-card-title>
-        </md-card-header>
-        <md-card-content>
-            <div *ngIf="pbrUser">
-                <div *ngIf="!isEdit">
-                    <span class="">
-                        <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
-                    </span>
-                    <span class="button-group" *ngIf="isBillingUser">
-                        <button class="btn btn-warning" (click)="editPbr()">Edit</button>
-                    </span>
-                </div>
-
-                <div *ngIf="isEdit">
-                    <span class="">
-                        <drop-down [items]="users" [searchEnable]="true" [(ngModel)]="pbrUser.id" #user="ngModel"></drop-down>
-                    </span>
-
-                    <span class="button-group">
-                        <button class="btn btn-success" (click)="savePbr(user)">Save</button>
-                        <button class="btn btn-danger" (click)="cancel()">Cancel</button>
-                    </span>
-                </div>
-            </div>
-        </md-card-content>
-    </md-card>
-
+    <primary-billing-user [projectId]="projectId"></primary-billing-user>
     <task-notification [projectId]="projectId"></task-notification>
     <chart-working-days [projectId]="projectId"></chart-working-days>
-
-    <!--<workspace-management project-id="{{projectId}}"></workspace-management>-->
-
-
     <choose-resource [projectId]="projectId"></choose-resource>
-
 </div>
