@@ -93,7 +93,7 @@ export class Dialog {
                 this.creditCard.setKey(response);
                 this.creditCard.encrypt();
 
-                this.MsLicenseClientService.createCreditCard(this.AuthService.authUser.id, this.creditCard)
+                this.MsLicenseClientService.createCreditCard(this.AuthService.authUser.id, this.AuthService.company.id, this.creditCard)
                     .then(response => {
                         if (response.success) {
                             this.creditCard.maskedCardNumber = response.data.masked_number;

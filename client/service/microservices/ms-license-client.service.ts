@@ -40,16 +40,17 @@ export class MsLicenseClientService extends MsClientService {
         return this.makeMsCall('get-invoices', 'GET', {user_id: userId});
     }
 
-    getCreditCard(userId): Promise<any> {
-        return this.makeMsCall('billing/get-credit-card', 'GET', {user_id: userId});
+    getCreditCard(userId, companyId): Promise<any> {
+        return this.makeMsCall('billing/get-credit-card', 'GET', {user_id: userId, company_id: companyId});
     }
 
-    createCreditCard(userId, creditCard: CreditCard): Promise<any> {
+    createCreditCard(userId, companyId, creditCard: CreditCard): Promise<any> {
         return this.makeMsCall(
             'billing/create-credit-card',
             'POST',
             {
                 user_id: userId,
+                company_id: companyId,
                 credit_card: {
                     number: creditCard.encrypted_number,
                     expMonth: creditCard.expMonth,

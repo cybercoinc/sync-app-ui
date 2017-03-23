@@ -1,8 +1,8 @@
-import { Component, ViewChild } from "@angular/core";
-import { AuthService } from "../../../service/auth.service";
-import { MsLicenseClientService } from '../../../service/microservices/ms-license-client.service';
-import { Dialog } from "../../paytrace/dialog.component";
-import { CreditCard } from "../../paytrace/creditCard";
+import {Component, ViewChild, OnInit} from "@angular/core";
+import { AuthService } from "client/service/auth.service";
+import { MsLicenseClientService } from 'client/service/microservices/ms-license-client.service';
+import { Dialog } from "client/modules/paytrace/dialog.component";
+import { CreditCard } from "client/modules/paytrace/creditCard";
 
 @Component({
     selector: 'info',
@@ -10,12 +10,14 @@ import { CreditCard } from "../../paytrace/creditCard";
     styleUrls: ['client/modules/billing/info/info.component.css'],
     providers: [Dialog],
 })
-export class InfoComponent {
+export class InfoComponent implements OnInit {
     @ViewChild(Dialog)
     private dialogComponent: Dialog;
 
-    constructor(protected MsLicenseClientService: MsLicenseClientService, protected AuthService: AuthService) {
-        MsLicenseClientService.getCreditCard(AuthService.authUser.id).then(response => {
+    constructor(protected MsLicenseClientService: MsLicenseClientService, protected AuthService: AuthService) {}
+
+    ngOnInit(): void {
+        this.MsLicenseClientService.getCreditCard(this.AuthService.authUser.id, this.AuthService.company.id).then(response => {
             if (Object.keys(response).length > 0) {
                 this.dialogComponent.creditCard = new CreditCard({
                     id:               response.id,
