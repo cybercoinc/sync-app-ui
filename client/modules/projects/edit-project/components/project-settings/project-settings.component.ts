@@ -5,6 +5,7 @@ import {User} from "client/entities/entities";
 import {ActivatedRoute} from "@angular/router";
 import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
 import {FormControl} from "@angular/forms";
+import {NotificationsService} from "client/modules/notifications/notifications.service";
 
 @Component({
     selector: 'project-settings',
@@ -15,6 +16,7 @@ import {FormControl} from "@angular/forms";
 })
 export class ProjectSettingsComponent implements OnInit {
     constructor(protected AuthService: AuthService,
+                protected NotificationsService: NotificationsService,
                 protected MsProjectClientService: MsProjectClientService,
                 protected MsUserClientService: MsUserClientService,
                 protected ActivatedRoute: ActivatedRoute) {
@@ -24,6 +26,8 @@ export class ProjectSettingsComponent implements OnInit {
         this.ActivatedRoute.parent.params.forEach((params) => {
             this.projectId = +params['project_id'];
         });
+
+        // this.NotificationsService.addWarning('test');
 
         return this.MsProjectClientService.syncAssignees(this.projectId);
     }

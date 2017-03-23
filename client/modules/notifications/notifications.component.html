@@ -1,0 +1,11 @@
+<div class="container-fluid holder">
+    <div class="row">
+        <div class="message" *ngFor="let message of messages">
+            <div class="alert alert-dismissible" [class.alert-success]="message.type === 'info'"
+                 [class.alert-danger]="message.type === 'error'" [class.alert-warning]="message.type === 'warning'" *ngIf="!message.viewed">
+                <button type="button" class="close" (click)="hide(message)">&times;</button>
+                {{message.text}}
+            </div>
+        </div>
+    </div>
+</div>
