@@ -65,11 +65,11 @@ export class ChooseResourceComponent implements OnInit {
         dialogRef.componentInstance.userId = userId;
         dialogRef.componentInstance.projectId = this.projectId;
 
-        dialogRef
-            .afterClosed()
-            .subscribe(result => {
-                console.log('result', result);
-            });
+        // dialogRef
+        //     .afterClosed()
+        //     .subscribe(result => {
+        //         console.log('result', result);
+        //     });
     }
 
     getResources() {
