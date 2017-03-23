@@ -448,3 +448,6 @@ chart-working-days md-checkbox .mat-checkbox-layout .mat-checkbox-label {
 .example-spacer {
     flex: 1 1 auto;
 }
+.mat-sidenav-content {
+    padding-bottom: 200px;
+}
