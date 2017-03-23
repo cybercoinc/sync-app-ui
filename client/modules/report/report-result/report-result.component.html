@@ -10,46 +10,47 @@
             <div class="report-row">
                 <h4>Configuration:</h4>
                 <div *ngIf="reportInformation" class="configurations">
-                    <div class="row">
-                        <div class="col-md-1">
-                            Projects:
-                        </div>
-                        <div class="col-md-10">
-                            <span *ngFor="let project of reportInformation.projects">
-                                {{project.name}}<span *ngIf="reportInformation.projects.length > 1 && reportInformation.projects.length - 1 !== reportInformation.projects.indexOf(project)">, </span>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-1">
-                            People:
-                        </div>
-                        <div class="col-md-10">
-                            <span *ngFor="let assignee of reportInformation.assignees">
-                                {{assignee.first_name +' '+ assignee.last_name}}<span *ngIf="reportInformation.assignees.length > 1 && reportInformation.assignees.length - 1 !== reportInformation.assignees.indexOf(assignee)">, </span>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-1">
-                            Resources:
-                        </div>
-                        <div class="col-md-10">
-                            <span *ngFor="let resource of reportInformation.resources">
-                                {{resource}}<span *ngIf="reportInformation.resources.length > 1 && reportInformation.resources.length - 1 !== reportInformation.resources.indexOf(resource)">, </span>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-1">
-                            Group by:
-                        </div>
-                        <div class="col-md-10">
-                            <p>{{reportInformation.group_by}}</p>
-                        </div>
+                    <div>
+                        <table class="table borderless">
+                            <thead>
+                            <tr>
+                                <th class="col-md-1"></th>
+                                <th class="col-md-5"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Projects:</td>
+                                <td>
+                                    <span *ngFor="let project of reportInformation.projects">
+                                    {{project.name}}<span *ngIf="reportInformation.projects.length > 1 && reportInformation.projects.length - 1 !== reportInformation.projects.indexOf(project)">, </span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>People:</td>
+                                <td>
+                                    <span *ngFor="let assignee of reportInformation.assignees">
+                                    {{assignee.first_name +' '+ assignee.last_name}}<span *ngIf="reportInformation.assignees.length > 1 && reportInformation.assignees.length - 1 !== reportInformation.assignees.indexOf(assignee)">, </span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Resources:</td>
+                                <td>
+                                    <span *ngFor="let resource of reportInformation.resources">
+                                    {{resource}}<span *ngIf="reportInformation.resources.length > 1 && reportInformation.resources.length - 1 !== reportInformation.resources.indexOf(resource)">, </span>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Group by:</td>
+                                <td>
+                                    <span>{{reportInformation.group_by}}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -58,91 +59,31 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="report-row" *ngIf="reportInformation">
-                <div *ngIf="reportData">
-                    <div *ngIf="reportInformation.group_by === 'project'">
-                        <div *ngFor="let project of reportInformation.projects">
-                            <h4>{{project.name}}</h4>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-3">Task</th>
-                                    <th class="col-md-2">Resource</th>
-                                    <th class="col-md-2">Progress</th>
-                                    <th class="col-md-3">Project</th>
-                                    <th class="col-md-1">Start Date</th>
-                                    <th class="col-md-1">Finish Date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let data of reportData[project.id]">
-                                    <td>{{data.text}}</td>
-                                    <td>{{data.resources}}</td>
-                                    <td>{{data.progress ? data.progress + '%': '0%'}}</td>
-                                    <td>{{project.name}}</td>
-                                    <td>{{data.start_date| date: 'MMM dd, yyyy'}}</td>
-                                    <td>{{data.end_date| date: 'MMM dd, yyyy'}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div *ngIf="reportInformation.group_by === 'resource'">
-                        <div *ngFor="let resource of reportInformation.resources">
-                            <h4>{{resource}}</h4>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-3">Task</th>
-                                    <th class="col-md-2">Resource</th>
-                                    <th class="col-md-2">Progress</th>
-                                    <th class="col-md-3">Project</th>
-                                    <th class="col-md-1">Start Date</th>
-                                    <th class="col-md-1">Finish Date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let data of reportData[resource]">
-                                    <td>{{data.text}}</td>
-                                    <td>{{data.resources}}</td>
-                                    <td>{{data.progress ? data.progress + '%': '0%'}}</td>
-                                    <td>{{data.project_name}}</td>
-                                    <td>{{data.start_date| date: 'MMM dd, yyyy'}}</td>
-                                    <td>{{data.end_date| date: 'MMM dd, yyyy'}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div *ngIf="reportInformation.group_by === 'people'">
-                        <div *ngFor="let assigneeName of assigneesName">
-                            <h4>{{assigneeName}}</h4>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th class="col-md-3">Task</th>
-                                    <th class="col-md-2">Resource</th>
-                                    <th class="col-md-2">Progress</th>
-                                    <th class="col-md-3">Project</th>
-                                    <th class="col-md-1">Start Date</th>
-                                    <th class="col-md-1">Finish Date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let data of reportData[assigneeName]">
-                                    <td>{{data.text}}</td>
-                                    <td>{{data.resources}}</td>
-                                    <td>{{data.progress ? data.progress + '%': '0%'}}</td>
-                                    <td>{{data.project_name}}</td>
-                                    <td>{{data.start_date| date: 'MMM dd, yyyy'}}</td>
-                                    <td>{{data.end_date| date: 'MMM dd, yyyy'}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            <div class="report-row" *ngIf="reportData">
+                <div *ngFor="let report of reportData">
+                    <h4>{{report.name}}</h4>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3">Task</th>
+                            <th class="col-md-2">Resource</th>
+                            <th class="col-md-2">Progress</th>
+                            <th class="col-md-3">Project</th>
+                            <th class="col-md-1">Start Date</th>
+                            <th class="col-md-1">Finish Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of report.tasks">
+                            <td>{{data.text}}</td>
+                            <td>{{data.resources}}</td>
+                            <td>{{data.progress ? data.progress + '%': '0%'}}</td>
+                            <td>{{data.project_name}}</td>
+                            <td>{{data.start_date| date: 'MMM dd, yyyy'}}</td>
+                            <td>{{data.end_date| date: 'MMM dd, yyyy'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
