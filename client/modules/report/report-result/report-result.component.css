@@ -3,3 +3,7 @@
     margin-top: 1%;
     margin-bottom: 1%;
 }
+
+.borderless td, .borderless th {
+    border: none;
+}
