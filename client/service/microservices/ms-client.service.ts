@@ -83,10 +83,14 @@ export class MsClientService {
         let message = response.statusText;
 
         if (response['_body']) {
-            let jsonBody = JSON.parse(response['_body']);
+            try {
+                let jsonBody = JSON.parse(response['_body']);
 
-            if (jsonBody.message) {
-                message = jsonBody.message;
+                if (jsonBody.message) {
+                    message = jsonBody.message;
+                }
+            } catch (err) {
+                message = 'Error while parsing response from ' + this.msName + '. Service unavailable.';
             }
         }
 
