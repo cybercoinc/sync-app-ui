@@ -134,6 +134,12 @@ export class Project {
     smartsheet_workspace_id: number;
     is_enable_notifications: boolean;
     notification_cc_emails: string[];
+    creator__user_fk_id: {
+        id: number;
+        kind: string;
+        namespace: string;
+        path: string | number[]
+    };
     holidays:     string[];
     working_days: string[];
 }

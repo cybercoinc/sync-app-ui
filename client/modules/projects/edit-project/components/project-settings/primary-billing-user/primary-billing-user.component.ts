@@ -1,9 +1,10 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {AuthService} from "client/service/auth.service";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
 import {FormControl} from "@angular/forms";
 import {User} from "client/entities/entities";
+import {PipeConnectionService} from "client/service/pipe-connection.service";
 
 @Component({
     selector: 'primary-billing-user',
@@ -13,7 +14,6 @@ import {User} from "client/entities/entities";
     ],
 })
 export class PrimaryBillingUser implements OnInit {
-    @Input() projectId;
     userCtrl: FormControl;
     filtered: any;
     users:    User[];
@@ -21,9 +21,9 @@ export class PrimaryBillingUser implements OnInit {
     pbrUser:  User;
     isBillingUser: boolean;
     companyPbr: User;
-    pbrLabel;
 
     constructor(protected AuthService: AuthService,
+                protected pipeConnectionService: PipeConnectionService,
                 protected MsProjectClientService: MsProjectClientService,
                 protected MsUserClientService: MsUserClientService) {
         this.userCtrl = new FormControl();
@@ -34,9 +34,9 @@ export class PrimaryBillingUser implements OnInit {
 
     ngOnInit(): void {
             Promise.all([
-                this.MsProjectClientService.getPbrUser(this.projectId),
+                this.MsProjectClientService.getPbrUser(this.pipeConnectionService.project.id),
                 this.MsUserClientService.getCompanyPbr(this.AuthService.company.id),
-                this.MsProjectClientService.getProjectUsers(this.projectId),
+                this.MsProjectClientService.getProjectUsers(this.pipeConnectionService.project.id),
             ])
             .then(resultsList => {
                 this.pbrUser = resultsList[0];
@@ -60,7 +60,7 @@ export class PrimaryBillingUser implements OnInit {
     }
 
     resetPbrToCompanyDefault() {
-        this.MsProjectClientService.update(this.projectId, {
+        this.MsProjectClientService.update(this.pipeConnectionService.project.id, {
             billing__user_fk_id: null
         }).then(result => {
             this.pbrUser = this.companyPbr;
@@ -71,7 +71,7 @@ export class PrimaryBillingUser implements OnInit {
     }
 
     savePbr() {
-        this.MsProjectClientService.setPbrUser(this.pbrUser.id, this.projectId)
+        this.MsProjectClientService.setPbrUser(this.pbrUser.id, this.pipeConnectionService.project.id)
             .then(user => {
                 this.pbrUser = user;
                 this.isEdit  = false;
@@ -85,7 +85,7 @@ export class PrimaryBillingUser implements OnInit {
             this.isBillingUser = false;
         }
         else {
-            this.isBillingUser = this.AuthService.authUser.id == this.pbrUser.id || this.companyPbr.id == this.AuthService.authUser.id;
+            this.isBillingUser = [this.pbrUser.id, this.companyPbr.id, this.pipeConnectionService.project.creator__user_fk_id.id].indexOf(this.AuthService.authUser.id) > -1;
         }
     }
 
