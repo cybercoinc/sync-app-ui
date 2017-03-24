@@ -3,9 +3,9 @@
     vertical-align: middle;
     text-transform: uppercase;
     color: grey;
+    padding-left: 10px;
 }
 
 .project-status-warning i {
     padding-right: 5px;
-    cursor: default;
 }

@@ -5,12 +5,10 @@
             <div class="module-name">Projects</div>
             <a [routerLink]="['create-project']"
                [ngClass]="{'disabled': !this.AuthService.authUser.smartsheet_oauth }"
-               class="btn btn-success">connect project</a>
-            <span *ngIf="!this.AuthService.authUser.smartsheet_oauth">
-                <span style="padding: 0 10px 0 40px;">
-                    Before creating project, you have to authorize with SmartSheet
-                </span>
-                <a [routerLink]="['/connection']" class="btn btn-success">go to connections</a>
+               class="btn btn-success pull-right" style="top: 10px;">connect project</a>
+
+            <span *ngIf="!this.AuthService.authUser.smartsheet_oauth" style="padding: 0 10px 0 40px;" class="pull-right">
+                Before creating project, you have to <a [routerLink]="['/connection']">authorize with SmartSheet</a>
             </span>
         </div>
     </div>
@@ -32,9 +30,9 @@
                         <div class="col-xs-12">
                             <div class="row-label" (click)="projectRowExpand(projectRow)">
                                 {{projectRow.project.name}}
-                                <div class="project-status-warning" *ngIf="projectRow.project.status === 'disabled'">
+                                <span class="project-status-warning" *ngIf="projectRow.project.status !== 'disabled'">
                                     <i title="project disabled" class="material-icons">warning</i> disabled
-                                </div>
+                                </span>
                             </div>
                             <div class="row-icons" *ngIf="!projectRow.is_expanded">
                                 <a *ngIf="getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')"

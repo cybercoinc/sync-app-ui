@@ -122,7 +122,8 @@ edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header, bi
 }
 
 edit-project .sc-sidenav md-toolbar-row:first-of-type,
-settings .sc-sidenav md-toolbar-row:first-of-type{
+billing .sc-sidenav md-toolbar-row:first-of-type,
+settings .sc-sidenav md-toolbar-row:first-of-type {
     display: none;
 }
 
@@ -247,7 +248,6 @@ select > option:disabled {
     top: 0;
     height: 100%;
     padding: 16px;
-    border-left: 1px solid #ccc;
     background-color: #fff;
 }
 .project-row i {
