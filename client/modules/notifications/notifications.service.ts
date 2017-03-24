@@ -19,30 +19,37 @@ export class NotificationsService {
         this.notifications.next(notification);
     }
 
-    public addInfo(text: string) {
+    public addInfo(text: string, isQuitable: boolean = true) {
         let notification = new LineNotification();
 
         notification.setMessage(text);
         notification.setType(TYPE_INFO);
+        notification.setQuitableFlag(isQuitable);
 
         this.pushNotification(notification);
     }
 
-    public addError(text: string) {
+    public addError(text: string, isQuitable: boolean = true) {
         let notification = new LineNotification();
 
         notification.setMessage(text);
         notification.setType(TYPE_ERROR);
+        notification.setQuitableFlag(isQuitable);
 
         this.pushNotification(notification);
     }
 
-    public addWarning(text: string) {
+    public addWarning(text: string, isQuitable: boolean = true) {
         let notification = new LineNotification();
 
         notification.setMessage(text);
         notification.setType(TYPE_WARNING);
+        notification.setQuitableFlag(isQuitable);
 
         this.pushNotification(notification);
+    }
+
+    public addCustom() {
+        // todo implement later
     }
 }

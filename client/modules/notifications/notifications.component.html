@@ -3,7 +3,8 @@
         <div class="message" *ngFor="let notification of renderedNotifications">
             <div class="alert alert-dismissible" [class.alert-success]="notification.type === 'info'"
                  [class.alert-danger]="notification.type === 'error'" [class.alert-warning]="notification.type === 'warning'" *ngIf="!notification.viewed">
-                <button type="button" class="close" (click)="hide(notification)">&times;</button>
+
+                <button *ngIf="notification.isQuitable" type="button" class="close" (click)="hide(notification)">&times;</button>
                 {{notification.message}}
             </div>
         </div>

@@ -9,6 +9,8 @@ export class BaseNotification {
     }
 
     protected viewed: boolean = false;
+    protected isQuitable: boolean = true;
+
     protected message: string;
     protected position: string;
     protected type: 'error' | 'info' | 'warning';
@@ -19,5 +21,9 @@ export class BaseNotification {
 
     public setMessage(message) {
         this.message = message;
+    }
+
+    public setQuitableFlag(quitAllowed: boolean) {
+        this.isQuitable = quitAllowed;
     }
 }
