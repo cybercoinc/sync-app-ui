@@ -49,7 +49,7 @@ export class ChartComponent implements OnInit {
                     this.isShowToolbar = true;
                     this.isAllowEdit = userInProject.allow_edit_gantt_chart;
 
-                    if (this.isAllowEdit) {
+                    if (!this.isAllowEdit) {
                         this.notification.addWarning("You don't have permissions to edit this chart");
                     }
                 });
