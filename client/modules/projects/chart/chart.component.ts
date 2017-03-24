@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {PipeConnectionService} from "client/service/pipe-connection.service";
 import {AuthService} from "client/service/auth.service";
+import {NotificationsService} from "client/modules/notifications/notifications.service";
 
 import {Chart} from './chart';
 import {MdDialog, MdSnackBar} from "@angular/material";
@@ -24,7 +25,8 @@ export class ChartComponent implements OnInit {
                 protected PipeConnectionService: PipeConnectionService,
                 protected dialog:                MdDialog,
                 protected snackBar:              MdSnackBar,
-                protected authService:           AuthService) {}
+                protected authService:           AuthService,
+                protected notification:          NotificationsService) {}
 
     ngOnInit() {
         if (this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
@@ -46,6 +48,10 @@ export class ChartComponent implements OnInit {
 
                     this.isShowToolbar = true;
                     this.isAllowEdit = userInProject.allow_edit_gantt_chart;
+
+                    if (!this.isAllowEdit) {
+                        this.notification.addWarning("You don't have permissions to edit this chart");
+                    }
                 });
 
             this.msProjectClient.getBaselines(this.PipeConnectionService.pipesListObj['tasks'].id)
