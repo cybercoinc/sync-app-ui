@@ -7,7 +7,7 @@
                     <span style="font-weight: bold;" *ngIf="!isEditMode">Company billing responsible person</span><br />
                     <span class="current-user" *ngIf="!isEditMode">{{currentPBRUser}}</span>
 
-                    <md-input-container *ngIf="isEditMode" class="col-md-2">
+                    <md-input-container *ngIf="isEditMode" style="width: 350px;">
                         <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" [(ngModel)]="currentPBRUser">
                     </md-input-container>
 
