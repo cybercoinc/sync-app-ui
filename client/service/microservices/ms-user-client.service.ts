@@ -5,15 +5,17 @@ import {Inject} from "@angular/core";
 import {AuthService} from "../auth.service";
 import {Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 import {ConfigService} from "../config.service";
+import {NotificationsService} from "../../modules/notifications/notifications.service";
 
 export class MsUserClientService extends MsClientService {
     constructor(@Inject(Http) protected Http: Http,
                 @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
                 @Inject(Router) protected router: Router,
                 @Inject(AuthService) protected AuthService: AuthService,
+                @Inject(NotificationsService) protected NotificationsService: NotificationsService,
                 @Inject(ConfigService) protected ConfigService: ConfigService,
     ) {
-        super(Http, PendingRequestsService, router, AuthService, ConfigService);
+        super(Http, PendingRequestsService, router, AuthService, ConfigService, NotificationsService);
 
         this.msName = 'ms-user';
     }

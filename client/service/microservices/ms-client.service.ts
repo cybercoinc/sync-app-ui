@@ -5,13 +5,14 @@ import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../auth.service";
 import {ConfigService} from "../config.service";
+import {NotificationsService} from "client/modules/notifications/notifications.service";
 
 @Injectable()
 export class MsClientService {
     msName: string;
 
     constructor(protected Http: Http, protected PendingRequestsService: PendingRequestsService,
-                protected router: Router, protected AuthService: AuthService, protected ConfigService: ConfigService) {
+                protected router: Router, protected AuthService: AuthService, protected ConfigService: ConfigService, protected NotificationsService: NotificationsService) {
     }
 
     /**
@@ -26,7 +27,7 @@ export class MsClientService {
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'auth-token-id': this.AuthService? this.AuthService.authTokenId : null
+            'auth-token-id': this.AuthService ? this.AuthService.authTokenId : null
         });
 
         this.PendingRequestsService.hasPendingRequest = true;
@@ -78,7 +79,7 @@ export class MsClientService {
             });
     }
 
-    protected handleError(response: any): Promise<any>|string {
+    protected handleError(response: any): Promise<any> | string {
         let message = response.statusText;
 
         if (response['_body']) {
@@ -89,9 +90,11 @@ export class MsClientService {
             }
         }
 
-        this.PendingRequestsService.httpResponseErrors.push(
-            message
-        );
+        // this.PendingRequestsService.httpResponseErrors.push(
+        //     message
+        // );
+
+        this.NotificationsService.addError(message);
 
         if (response.status === 401) {
             Promise.reject(new Error('not authorized'));

@@ -13,6 +13,7 @@ import {Router} from "@angular/router";
 import {Inject} from "@angular/core";
 import {AuthService} from "../auth.service";
 import {ConfigService} from "../config.service";
+import {NotificationsService} from "../../modules/notifications/notifications.service";
 
 export class MsProjectClientService extends MsClientService {
 
@@ -20,8 +21,10 @@ export class MsProjectClientService extends MsClientService {
                 @Inject(PendingRequestsService) protected PendingRequestsService: PendingRequestsService,
                 @Inject(Router) protected router: Router,
                 @Inject(AuthService) protected AuthService: AuthService,
-                @Inject(ConfigService) protected ConfigService: ConfigService,) {
-        super(Http, PendingRequestsService, router, AuthService, ConfigService);
+                @Inject(ConfigService) protected ConfigService: ConfigService,
+                @Inject(NotificationsService) protected NotificationsService: NotificationsService,
+    ) {
+        super(Http, PendingRequestsService, router, AuthService, ConfigService, NotificationsService);
 
         this.msName = 'ms-project';
     }
