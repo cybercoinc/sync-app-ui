@@ -14,14 +14,14 @@ export class NotificationsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.NotificationsService.data
+        this.NotificationsService.notifications
             .subscribe({
-                next: messageObj => this.renderMessage(messageObj)
+                next: notification => this.render(notification)
             });
     }
 
-    protected renderMessage(messageObj) {
-        this.messages.push(messageObj);
+    protected render(notification) {
+        this.renderedNotifications.push(notification);
 
         // setTimeout(() => {
         //     this.hide(messageObj);
@@ -29,10 +29,10 @@ export class NotificationsComponent implements OnInit {
     }
 
     protected hide(messageObj) {
-        let mesObj = this.messages[this.messages.indexOf(messageObj)];
+        let mesObj = this.renderedNotifications[this.renderedNotifications.indexOf(messageObj)];
 
         mesObj.viewed = true;
     }
 
-    protected messages = [];
+    protected renderedNotifications = [];
 }

@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
+import {LineNotification} from "./kinds/line.notification";
+import {BaseNotification} from "./kinds/base.notification";
 
 const TYPE_INFO = 'info';
 const TYPE_ERROR = 'error';
@@ -8,37 +10,39 @@ const TYPE_WARNING = 'warning';
 @Injectable()
 export class NotificationsService {
     constructor() {
-        this.data = new Subject();
+        this.notifications = new Subject();
     }
 
-    public data: Subject<{
-        text: string,
-        type: string,
-        viewed: boolean
-    }>;
+    public notifications: Subject<BaseNotification[]>;
 
-    /**
-     * @private
-     * @param text
-     * @param type
-     */
-    private addData(text, type) {
-        this.data.next({
-            text: text,
-            type: type,
-            viewed: false
-        });
+    private pushNotification(notification) {
+        this.notifications.next(notification);
     }
 
     public addInfo(text: string) {
-        this.addData(text, TYPE_INFO);
+        let notification = new LineNotification();
+
+        notification.setMessage(text);
+        notification.setType(TYPE_INFO);
+
+        this.pushNotification(notification);
     }
 
     public addError(text: string) {
-        this.addData(text, TYPE_ERROR);
+        let notification = new LineNotification();
+
+        notification.setMessage(text);
+        notification.setType(TYPE_ERROR);
+
+        this.pushNotification(notification);
     }
 
     public addWarning(text: string) {
-        this.addData(text, TYPE_WARNING);
+        let notification = new LineNotification();
+
+        notification.setMessage(text);
+        notification.setType(TYPE_WARNING);
+
+        this.pushNotification(notification);
     }
 }

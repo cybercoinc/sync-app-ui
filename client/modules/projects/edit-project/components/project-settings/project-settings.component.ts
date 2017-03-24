@@ -27,7 +27,9 @@ export class ProjectSettingsComponent implements OnInit {
             this.projectId = +params['project_id'];
         });
 
+        // this.NotificationsService.addInfo('test');
         // this.NotificationsService.addWarning('test');
+        // this.NotificationsService.addError('test');
 
         return this.MsProjectClientService.syncAssignees(this.projectId);
     }
