@@ -36,7 +36,7 @@ export class InfoComponent implements OnInit {
 
         dialogRef.componentInstance.creditCard = this.creditCard;
         dialogRef.afterClosed().subscribe(result => {
-            if (result != 'close') {
+            if (result) {
                 this.creditCard = result;
             }
         });
