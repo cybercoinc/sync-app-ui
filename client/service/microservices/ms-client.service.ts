@@ -90,10 +90,6 @@ export class MsClientService {
             }
         }
 
-        // this.PendingRequestsService.httpResponseErrors.push(
-        //     message
-        // );
-
         this.NotificationsService.addError(message);
 
         if (response.status === 401) {

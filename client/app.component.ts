@@ -16,8 +16,4 @@ export class AppComponent {
 
     ngOnInit() {
     }
-
-    dismissResponseError(errorIndex) {
-        this.PendingRequestsService.httpResponseErrors.splice(errorIndex, 1);
-    }
 }
