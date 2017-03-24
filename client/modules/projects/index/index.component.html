@@ -3,6 +3,11 @@
     <div class="row module-header">
         <div class="col-xs-12">
             <div class="module-name">Projects</div>
+
+            <md-input-container style="font-size: 18px">
+                <input mdInput placeholder="Filter by project name" (keyup)="filterProjects($event.target.value)">
+            </md-input-container>
+
             <a [routerLink]="['create-project']"
                [ngClass]="{'disabled': !this.AuthService.authUser.smartsheet_oauth }"
                class="btn btn-success pull-right" style="top: 10px;">connect project</a>

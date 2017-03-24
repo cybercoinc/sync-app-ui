@@ -28,12 +28,15 @@ export class IndexComponent implements OnInit {
         this.getActiveProjectsWithPipes();
     }
 
-    getActiveProjectsWithPipes(): void {
+    getActiveProjectsWithPipes(projectNamePart = ''): void {
         let _projects;
 
         this.MsProjectClientService.getActiveProjects(this.AuthService.authUser.id, this.AuthService.company.id)
             .then(projects => {
-                _projects = projects;
+
+                _projects = projects.filter(project => {
+                    return project['name'].toLowerCase().indexOf(projectNamePart.toLowerCase()) !== -1;
+                });
 
                 if (_projects.length === 0) {
                     return [];
@@ -46,7 +49,7 @@ export class IndexComponent implements OnInit {
                         this.MsProjectClientService.getPipesWhere({
                             project_fk_id: project.id
                         })
-                    )
+                    );
                 });
 
                 return Promise.all(promises);
@@ -149,5 +152,19 @@ export class IndexComponent implements OnInit {
 
     projectHasPipes(projectRow) {
         return projectRow.projectPipesList.length > 0;
+    }
+
+    protected filterTimeout;
+
+    filterProjects(name: string): void {
+        if (this.filterTimeout) {
+            window.clearTimeout(this.filterTimeout);
+        }
+
+        this.filterTimeout = setTimeout(e => {
+            this.projectRows = null;
+
+            this.getActiveProjectsWithPipes(name);
+        }, 500);
     }
 }
