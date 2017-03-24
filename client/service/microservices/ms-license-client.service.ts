@@ -2,12 +2,12 @@ import {MsClientService} from "./ms-client.service";
 import {Http} from '@angular/http';
 import {PendingRequestsService} from "../pending-requests.service";
 import {Router} from "@angular/router";
-import {CreditCard} from "../../modules/paytrace/creditCard";
 import {Inject} from "@angular/core";
 import {AuthService} from "../auth.service";
 import {ConfigService} from "../config.service";
 import {Invoice} from "client/entities/entities";
 import {NotificationsService} from "client/modules/notifications/notifications.service";
+import {CreditCard} from "client/modules/billing/info/credit-card";
 
 export class MsLicenseClientService extends MsClientService {
     constructor(@Inject(Http) protected Http: Http,

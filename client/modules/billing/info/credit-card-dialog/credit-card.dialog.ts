@@ -1,24 +1,27 @@
-import { Component, Input } from "@angular/core";
-import { MsLicenseClientService } from "../../service/microservices/ms-license-client.service";
-import { AuthService } from "../../service/auth.service";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { CreditCard, LEVELS_DATA } from "./creditCard";
+import {Component, OnInit} from "@angular/core";
+import {MdDialogRef} from "@angular/material";
+import {FormBuilder, Validators, FormGroup} from "@angular/forms";
+import {LEVELS_DATA, CreditCard} from "../credit-card";
+import {MsLicenseClientService} from "client/service/microservices/ms-license-client.service";
+import {AuthService} from "client/service/auth.service";
 
 @Component({
-    selector: 'modal-dialog',
-    templateUrl: 'client/modules/paytrace/dialog.html',
-    styleUrls: ['client/modules/paytrace/dialog.css'],
+    selector: 'credit-card-dialog',
+    templateUrl: 'client/modules/billing/info/credit-card-dialog/credit-card.dialog.html',
+    styleUrls:  ['client/modules/billing/info/credit-card-dialog/credit-card.dialog.css']
 })
-export class Dialog {
-    @Input('is-visible') isVisible: boolean = false;
+export class CreditCardDialog implements OnInit {
+    creditCard: CreditCard;
+    errors = [];
+    form: FormGroup;
 
-    errors                    = [];
-    creditCard                = new CreditCard();
-    billingEnable: boolean    = true;
-    form:          FormGroup;
-    isUpdate:      boolean    = false;
+    constructor(public dialogRef: MdDialogRef<CreditCardDialog>,
+                protected fb: FormBuilder,
+                protected MsLicenseClientService: MsLicenseClientService,
+                protected AuthService: AuthService) {
+    }
 
-    constructor(protected MsLicenseClientService: MsLicenseClientService, protected AuthService: AuthService, private fb: FormBuilder) {
+    ngOnInit(): void {
         this.form = this.fb.group({
             number: [this.creditCard.number, [
                 Validators.required,
@@ -93,13 +96,14 @@ export class Dialog {
                 this.creditCard.setKey(response);
                 this.creditCard.encrypt();
 
-                this.MsLicenseClientService.createCreditCard(this.AuthService.authUser.id, this.AuthService.company.id, this.creditCard)
+                return this.MsLicenseClientService.createCreditCard(this.AuthService.authUser.id, this.AuthService.company.id, this.creditCard)
                     .then(response => {
                         if (response.success) {
                             this.creditCard.maskedCardNumber = response.data.masked_number;
                             this.creditCard.customerId = response.data.customer_id;
                             this.creditCard.id = response.data.id;
-                            this.isVisible = false;
+
+                            this.dialogRef.close(this.creditCard);
                         }
                         else {
                             this.errors = [];
@@ -134,10 +138,4 @@ export class Dialog {
             required: 'Zip is required',
         }
     };
-
-    closeDialog() {
-        return this.isVisible = false;
-    }
 }
-
-

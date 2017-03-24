@@ -1,0 +1,24 @@
+.title {
+    color: #171515;
+    font-size: 20px;
+}
+
+.mat-dialog-content {
+    width: 350px;
+    max-height: 500px;
+}
+
+.mat-dialog-actions {
+    display: block;
+}
+
+.form-fields {
+    margin-bottom: 25px;
+}
+
+#errors {
+    color: #af1515;
+    padding-left: 15px;
+    line-height: 2em;
+    font-size: 14px;
+}

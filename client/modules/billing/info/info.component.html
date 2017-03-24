@@ -6,15 +6,15 @@
     <p>Charges are incurred for each active project.</p>
     <p>An 'Active Project' is defined as any project that synced data within the preceding 30 days.</p>
 
-    <p *ngIf="!dialogComponent.creditCard.maskedCardNumber">
+    <p *ngIf="!creditCard.maskedCardNumber">
         <span class="title">Please provide billing information: </span>
         <button type="button" class="btn btn-success" (click)="open()">SETUP BILLING INFO</button>
     </p>
 
-    <div *ngIf="dialogComponent.creditCard.maskedCardNumber">
+    <div *ngIf="creditCard.maskedCardNumber">
         <p>
             <strong>Your billing information</strong>
-            <span class="masked-card">Credit Card: {{dialogComponent.creditCard.maskedCardNumber}}</span>
+            <span class="masked-card">Credit Card: {{creditCard.maskedCardNumber}}</span>
         </p>
 
         <div class="row">
@@ -22,7 +22,7 @@
                 <button type="button" class="col-md-12 btn btn-warning" (click)="clearCard()">Clear (and setup new)</button>
             </div>
             <div class="col-md-2">
-                <button type="button" class="col-md-12 btn btn-warning" (click)="updateCard()">Update Card</button>
+                <button type="button" class="col-md-12 btn btn-warning" (click)="open()">Update Card</button>
             </div>
         </div>
     </div>
