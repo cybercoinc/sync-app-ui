@@ -100,7 +100,7 @@ export class CreateProjectComponent implements OnInit {
                 ]);
             })
             .then(() => {
-                return this.router.navigate(['projects', _projectId, 'edit-project']);
+                return this.router.navigate(['projects', _projectId, 'edit-project', 'settings']);
             })
     }
 }
