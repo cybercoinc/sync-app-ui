@@ -4,18 +4,14 @@
         <md-toolbar>
             <span>{{project.name}}</span>
 
-            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['settings']" [routerLinkActive]="['is-active']"
-                style="margin-bottom: 30px;box-shadow:0 0px 6px rgba(0, 0, 0, 0.3);"
-            >
+            <md-toolbar-row class="bottom-lined clickable-row before-separator" [routerLink]="['settings']" [routerLinkActive]="['is-active']">
                 <span>
                     <span>{{project.name}}</span><br />
                     <span class="pipe-description">Project settings</span>
                 </span>
             </md-toolbar-row>
 
-            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-public-todo']" [routerLinkActive]="['is-active']"
-                            style="border-top: 1px solid #CCCCCC;"
-            >
+            <md-toolbar-row class="bottom-lined clickable-row after-separator" [routerLink]="['pipe-public-todo']" [routerLinkActive]="['is-active']">
                 <div class="pipe-status-indicator" [ngClass]="pipesListObj.public_todos?.status"></div>
                 <md-icon>event_available</md-icon>
                 <span>

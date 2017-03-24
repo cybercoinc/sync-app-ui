@@ -121,10 +121,21 @@ edit-project .mat-card .mat-card-header, settings .mat-card .mat-card-header, bi
     border-bottom: 1px solid #c0c0c0;
 }
 
-edit-project .sc-sidenav md-toolbar-row:first-of-type,
-billing .sc-sidenav md-toolbar-row:first-of-type,
-settings .sc-sidenav md-toolbar-row:first-of-type {
+edit-project .sc-sidenav md-toolbar-row:first-of-type {
     display: none;
+}
+
+
+.sc-sidenav .mat-toolbar-row.before-separator {
+    margin-bottom: 30px;box-shadow:0 0px 6px rgba(0, 0, 0, 0.3);
+}
+billing .sc-sidenav md-toolbar-row:first-of-type,
+settings .sc-sidenav md-toolbar-row:first-of-type,
+sync-sessions .sc-sidenav md-toolbar-row:first-of-type {
+    margin-bottom: 30px;box-shadow:0 0px 6px rgba(0, 0, 0, 0.3);
+}
+.sc-sidenav .mat-toolbar-row.after-separator {
+    border-top: 1px solid #CCCCCC;
 }
 
 settings .custom-users-dropdown {
