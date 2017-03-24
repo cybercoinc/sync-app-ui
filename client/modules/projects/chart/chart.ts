@@ -295,7 +295,7 @@ export class Chart {
         gantt.config.readonly    = !this.isAllowEdit;
 
         gantt.config.columns = [
-            {name:"text", label: "Task name", tree: true},
+            {name:"text", label: "Task name", tree: true, width: 200},
             {name:"progress", label: "Complete %", template: (obj) => {
                 if (obj.progress) {
                     return (obj.progress * 100).toFixed(0);
