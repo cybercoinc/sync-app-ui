@@ -285,6 +285,24 @@ export class Chart {
 
             return true;
         }));
+
+        gantt.attachEvent("onAfterTaskUpdate", function(id,item){
+            if (item.parent == 0) {
+                return;
+            }
+
+            let parentTask = gantt.getTask(item.parent),
+                childs = gantt.getChildren(parentTask.id),
+                totalProgress = 0;
+
+            for (let i = 0; i < childs.length; i++) {
+                let task = gantt.getTask(childs[i]);
+                totalProgress += parseFloat(task.progress);
+            }
+
+            parentTask.progress = (totalProgress / childs.length).toFixed(2);
+            gantt.updateTask(parentTask.id);
+        });
     }
 
     setConfiguration() {
