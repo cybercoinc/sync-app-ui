@@ -58,6 +58,8 @@ export class NotificationsService {
         notification.setType(TYPE_WARNING);
 
         this.pushNotification(notification);
+
+
     }
 
     public addCustom() {
