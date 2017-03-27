@@ -13,7 +13,7 @@ export class CanDeactivateChart implements CanDeactivate<ChartComponent> {
                   currentRoute: ActivatedRouteSnapshot,
                   currentState: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-        this.NotificationsService.addInfo('Deactivate?');
+        this.NotificationsService.addConfirm('Deactivate?');
 
         return confirm('deactivate?');
         // return false;

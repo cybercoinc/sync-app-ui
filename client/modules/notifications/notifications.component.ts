@@ -3,6 +3,7 @@ import {NotificationsService} from "./notifications.service";
 import {Router, NavigationStart} from "@angular/router";
 import 'rxjs/add/operator/filter';
 import {LineNotification} from "./kinds/line.notification";
+import {ModalNotification} from "./kinds/modal.notification";
 
 @Component({
     selector: 'notifications',
@@ -22,6 +23,10 @@ export class NotificationsComponent implements OnInit {
                 if (e instanceof LineNotification) {
                     this.renderLine(e)
                 }
+
+                if (e instanceof ModalNotification) {
+                    this.renderModal(e)
+                }
             });
 
         this.Router.events
@@ -35,6 +40,10 @@ export class NotificationsComponent implements OnInit {
 
     protected renderLine(notification) {
         this.lineNotifications.push(notification);
+    }
+
+    protected renderModal(notification: ModalNotification) {
+        notification.render();
     }
 
     protected lineNotifications: LineNotification[] = [];

@@ -3,6 +3,7 @@ import {Subject} from 'rxjs/Subject';
 import {LineNotification} from "./kinds/line.notification";
 import {BaseNotification} from "./kinds/base.notification";
 import {ModalNotification} from "./kinds/modal.notification";
+import {MdDialog} from "@angular/material";
 
 const TYPE_INFO = 'info';
 const TYPE_ERROR = 'error';
@@ -10,7 +11,7 @@ const TYPE_WARNING = 'warning';
 
 @Injectable()
 export class NotificationsService {
-    constructor() {
+    constructor(public MdDialog: MdDialog) {
         this.notifications = new Subject();
     }
 
@@ -51,7 +52,7 @@ export class NotificationsService {
     }
 
     public addConfirm(text) {
-        let notification = new ModalNotification();
+        let notification = new ModalNotification(this.MdDialog);
 
         notification.setMessage(text);
         notification.setType(TYPE_WARNING);

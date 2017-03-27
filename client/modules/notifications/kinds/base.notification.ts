@@ -35,10 +35,6 @@ export class BaseNotification {
         return this.type;
     }
 
-    public isViewed() {
-        return this.viewed;
-    }
-
     public isQuitable() {
         return this.quitable;
     }
