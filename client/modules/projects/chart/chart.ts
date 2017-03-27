@@ -143,6 +143,11 @@ export class Chart {
         return gantt.serialize().data.map(item => {
             item.has_сhildren = gantt.hasChild(item.id) > 0;
             item.row_number   = gantt.getGlobalTaskIndex(item.id);
+            item.open         = true;
+
+            if (gantt.hasChild(item.id) > 0) {
+                item.type = 'project';
+            }
 
             return item;
         });
@@ -274,10 +279,34 @@ export class Chart {
         }
     }
 
+    undo() {
+        if (gantt.getUndoStack().length < 1) {
+            return false;
+        }
+
+        gantt.undo();
+    }
+    redo() {
+        if (gantt.getRedoStack().length < 1) {
+            return false;
+        }
+
+        gantt.redo();
+    }
+
     attachEvents() {
+        let self = this;
+
+        gantt.attachEvent("onAfterTaskAdd", function(id, item){
+            let data = self.getTasks();
+            self.refreshData(data);
+        });
+
         gantt.attachEvent("onBeforeLightbox", (id => {
             let task = gantt.getTask(id);
-            task.progress = 0;
+            if ((task.progress * 100) < 1) {
+                task.progress = 0;
+            }
 
             return true;
         }));
@@ -287,10 +316,6 @@ export class Chart {
                 task.type = gantt.config.types.project;
             }
 
-            return true;
-        }));
-
-        gantt.attachEvent("onTaskLoading", (task => {
             task.planned_start = gantt.date.parseDate(task.planned_start, "xml_date");
             task.planned_end   = gantt.date.parseDate(task.planned_end, "xml_date");
 
@@ -340,7 +365,7 @@ export class Chart {
         if (this.isAllowEdit) {
             gantt.config.columns.push({name:"add", label:"", width:44 });
         }
-
+        gantt.config.grid_resize        = true;
         gantt.config.auto_scheduling    = true;
         gantt.config.work_time          = true;
         gantt.config.autosize           = "y";
