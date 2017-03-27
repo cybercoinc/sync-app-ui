@@ -285,6 +285,26 @@ export class Chart {
 
             return true;
         }));
+
+        gantt.attachEvent("onAfterTaskUpdate", function(id,item){
+            if (item.parent == 0) {
+                return;
+            }
+
+            let parentTask = gantt.getTask(item.parent);
+
+            let childs = gantt.getChildren(parentTask.id);
+            let totProgress = 0;
+
+            let tempTask;
+            for (let i = 0; i < childs.length; i++) {
+                tempTask = gantt.getTask(childs[i]);
+                totProgress += parseFloat(tempTask.progress);
+            }
+
+            parentTask.progress = (totProgress / childs.length).toFixed(2);
+            gantt.updateTask(parentTask.id);
+        });
     }
 
     setConfiguration() {
