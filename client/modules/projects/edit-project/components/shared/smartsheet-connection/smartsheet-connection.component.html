@@ -99,16 +99,24 @@
     </md-card-header>
 
     <md-card-content *ngIf="pipesListObj[pipeType]?.sm_sheet_id">
-        <div>
-            <h5> Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Connected to Smartsheet</span></h5>
-            Sheet name: <i>{{pipesListObj[pipeType]?.sm_sheet_name}}</i>
+        <div class="row">
+            <div class="col-xs-12">
+                <h5> Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Connected to Smartsheet</span></h5>
+            </div>
+            <div class="col-xs-12">Sheet name: <i>{{pipesListObj[pipeType]?.sm_sheet_name}}</i></div>
         </div>
-        <div>
-            <a href="{{pipesListObj[pipeType]?.sm_permalink}}"
-               class="btn btn-success pull-right"
-               target="_blank">open</a>
 
-            <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pull-right">
+                    <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
+
+                    <a href="{{pipesListObj[pipeType]?.sm_permalink}}"
+                       class="btn btn-success"
+                       target="_blank">open</a>
+                </div>
+            </div>
+
         </div>
     </md-card-content>
 

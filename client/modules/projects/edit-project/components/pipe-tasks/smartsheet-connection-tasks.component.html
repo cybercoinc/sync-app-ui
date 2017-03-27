@@ -25,13 +25,12 @@
 <md-card class="row" *ngIf="useScheduleChartIsAsked && !pipesListObj[pipeType]"
          style="max-width: 800px; background-color: #FFF">
     <div class="col-xs-12">
-        <h5>Do you want to use Schedule Gantt for tasks creating and editing?</h5>
+        <h5>Manage Project Schedule tasks with:</h5>
     </div>
 
     <div class="col-xs-6 col-xs-offset-4">
-        <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="useScheduleGantt()">Yes</button>
-        <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="doNotUseScheduleGantt()">No
-        </button>
+        <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="useScheduleGantt()">Gantt Chart</button>
+        <button class="btn btn-primary" [class.disabled]="componentIsBusy" (click)="doNotUseScheduleGantt()">Smartsheet</button>
     </div>
 </md-card>
 
