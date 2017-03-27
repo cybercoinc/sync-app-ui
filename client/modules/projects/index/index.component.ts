@@ -24,6 +24,12 @@ export class IndexComponent implements OnInit {
         is_expanded: boolean
     }] | any;
 
+    filteredProjectRows: [{
+        project: Project,
+        projectPipesList: ProjectPipe[],
+        is_expanded: boolean
+    }] | any;
+
     ngOnInit(): void {
         this.getActiveProjectsWithPipes();
     }
@@ -34,6 +40,7 @@ export class IndexComponent implements OnInit {
         this.MsProjectClientService.getActiveProjects(this.AuthService.authUser.id, this.AuthService.company.id)
             .then(projects => {
 
+                // to filter from backend
                 _projects = projects.filter(project => {
                     return project['name'].toLowerCase().indexOf(projectNamePart.toLowerCase()) !== -1;
                 });
@@ -57,6 +64,7 @@ export class IndexComponent implements OnInit {
             .then(stepResults => {
                 let pipesList = [];
                 this.projectRows = [];
+                this.filteredProjectRows = [];
 
                 stepResults.forEach(function (pipes) {
                     pipesList = pipesList.concat(pipes);
@@ -71,7 +79,13 @@ export class IndexComponent implements OnInit {
                         project: project,
                         projectPipesList: projectPipesList,
                         is_expanded: false
-                    })
+                    });
+
+                    this.filteredProjectRows.push({
+                        project: project,
+                        projectPipesList: projectPipesList,
+                        is_expanded: false
+                    });
                 });
 
                 return this.projectRows;
@@ -162,9 +176,11 @@ export class IndexComponent implements OnInit {
         }
 
         this.filterTimeout = setTimeout(e => {
-            this.projectRows = null;
-
-            this.getActiveProjectsWithPipes(name);
+            this.filteredProjectRows = null;
+            // to filter from backend
+            this.filteredProjectRows = this.projectRows.filter(projectRow => {
+                return projectRow.project['name'].toLowerCase().indexOf(name.toLowerCase()) !== -1;
+            });
         }, 500);
     }
 }

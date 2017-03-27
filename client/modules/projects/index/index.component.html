@@ -19,16 +19,16 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-12" *ngIf="!projectRows">
+        <div class="col-xs-12" *ngIf="!filteredProjectRows">
             <h5><i class="fa fa-cog fa-spin fa-fw"></i> Getting projects...</h5>
         </div>
 
-        <div class="col-xs-12" *ngIf="projectRows && !projectRows.length">
+        <div class="col-xs-12" *ngIf="filteredProjectRows && !filteredProjectRows.length">
             <h5>You have no connected projects.</h5>
         </div>
 
-        <div *ngIf="projectRows && projectRows.length">
-            <div class="col-xs-12" *ngFor="let projectRow of projectRows">
+        <div *ngIf="filteredProjectRows && filteredProjectRows.length">
+            <div class="col-xs-12" *ngFor="let projectRow of filteredProjectRows">
                 <div class="project-row">
 
                     <div class="row">
