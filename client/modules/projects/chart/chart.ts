@@ -62,10 +62,9 @@ export class Chart {
         gantt.sort('row_number', false);
 
         gantt.attachEvent("onLightbox", (task_id => {
-            let task = gantt.getTask(task_id);
-
             $('#resources-select').on('change', (e) => {
-                let resource = self.getResource();
+                let resource = self.getResource(),
+                    task = gantt.getTask(task_id);
 
                 if (resource) {
                     $('#assignee-select')
@@ -79,6 +78,7 @@ export class Chart {
                 }
             });
 
+            let task = gantt.getTask(task_id);
             if (task.type == gantt.config.types.project) {
                 let id = gantt.config.lightbox.project_sections[1].inputId;
                 $('#' + id).parents('.gantt_wrap_section').hide();
@@ -99,7 +99,7 @@ export class Chart {
 
         this.assignees.forEach(item => {
             let selected = '';
-            if (task.assignees.find(e => e == item.id)) {
+            if (!task.assignees || task.assignees.find(e => e == item.id)) {
                 selected = 'selected';
             }
 
