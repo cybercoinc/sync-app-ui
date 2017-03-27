@@ -291,18 +291,16 @@ export class Chart {
                 return;
             }
 
-            let parentTask = gantt.getTask(item.parent);
+            let parentTask = gantt.getTask(item.parent),
+                childs = gantt.getChildren(parentTask.id),
+                totalProgress = 0;
 
-            let childs = gantt.getChildren(parentTask.id);
-            let totProgress = 0;
-
-            let tempTask;
             for (let i = 0; i < childs.length; i++) {
-                tempTask = gantt.getTask(childs[i]);
-                totProgress += parseFloat(tempTask.progress);
+                let task = gantt.getTask(childs[i]);
+                totalProgress += parseFloat(task.progress);
             }
 
-            parentTask.progress = (totProgress / childs.length).toFixed(2);
+            parentTask.progress = (totalProgress / childs.length).toFixed(2);
             gantt.updateTask(parentTask.id);
         });
     }
