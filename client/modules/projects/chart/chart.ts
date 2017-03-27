@@ -62,13 +62,15 @@ export class Chart {
         gantt.sort('row_number', false);
 
         gantt.attachEvent("onLightbox", (task_id => {
+            let task = gantt.getTask(task_id);
+
             $('#resources-select').on('change', (e) => {
                 let resource = self.getResource();
 
                 if (resource) {
                     $('#assignee-select')
                         .prop('disabled', false)
-                        .html(self.getAssigneeList(resource.id))
+                        .html(self.getAssigneeList(task, resource.id))
                         .select2();
                 }
                 else {
@@ -77,7 +79,6 @@ export class Chart {
                 }
             });
 
-            let task = gantt.getTask(task_id);
             if (task.type == gantt.config.types.project) {
                 let id = gantt.config.lightbox.project_sections[1].inputId;
                 $('#' + id).parents('.gantt_wrap_section').hide();
@@ -93,12 +94,17 @@ export class Chart {
         }));
     }
 
-    getAssigneeList(resourceId) {
+    getAssigneeList(task, resourceId) {
         let html = '';
 
         this.assignees.forEach(item => {
+            let selected = '';
+            if (task.assignees.find(e => e == item.id)) {
+                selected = 'selected';
+            }
+
             if (item.resource_id == resourceId) {
-                html += '<option value="' + item.id + '" selected>' + item.email + '</option>';
+                html += '<option value="' + item.id + '" ' + selected + '>' + item.email + '</option>';
             }
         });
 
@@ -150,13 +156,6 @@ export class Chart {
         gantt.exportToPDF({
             header:'<link rel="stylesheet" href="//dhtmlx.com/docs/products/dhtmlxGantt/common/customstyles.css" type="text/css">'
         });
-    }
-
-    refreshAssigneeList(html) {
-        $('#assignee-select')
-            .prop('disabled', false)
-            .html(html)
-            .select2();
     }
 
     addBaseLines(task): any {
@@ -214,12 +213,24 @@ export class Chart {
     }
 
     buildAssigneeDropdown(options) {
+        let self = this;
+
         return {
             render: (sns => {
                 return '<select id="assignee-select" multiple="multiple" class="select2"></select>';
             }),
 
-            set_value: ((node, value, task, section) => {}),
+            set_value: ((node, value, task, section) => {
+                if (value && task.assignees) {
+                    $('#assignee-select')
+                        .prop('disabled', false)
+                        .html(self.getAssigneeList(task, self.getResource().id))
+                        .select2();
+                }
+                else {
+
+                }
+            }),
             get_value: ((node, task, section) => {
                 if ($('#assignee-select').val()) {
                     return $('#assignee-select').val();
