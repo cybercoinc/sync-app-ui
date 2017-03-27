@@ -62,7 +62,7 @@ export class ChooseResourceComponent implements OnInit {
     }
 
     setGanttAccessForUser(userId) {
-        if (!this.canEditGanttPermissions()) {
+        if (!this.canEditGanttPermissions() || !userId) {
             return false;
         }
 
