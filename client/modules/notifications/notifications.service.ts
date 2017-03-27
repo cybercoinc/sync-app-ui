@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {LineNotification} from "./kinds/line.notification";
 import {BaseNotification} from "./kinds/base.notification";
+import {ModalNotification} from "./kinds/modal.notification";
 
 const TYPE_INFO = 'info';
 const TYPE_ERROR = 'error';
@@ -50,7 +51,12 @@ export class NotificationsService {
     }
 
     public addConfirm(text) {
+        let notification = new ModalNotification();
 
+        notification.setMessage(text);
+        notification.setType(TYPE_WARNING);
+
+        this.pushNotification(notification);
     }
 
     public addCustom() {
