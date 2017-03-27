@@ -13,9 +13,16 @@ export class CanDeactivateChart implements CanDeactivate<ChartComponent> {
                   currentRoute: ActivatedRouteSnapshot,
                   currentState: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-        this.NotificationsService.addConfirm('Deactivate?');
+        let dialogRef = this.NotificationsService.addConfirm('Are you sure you want to continue without saving changes?');
 
-        return confirm('deactivate?');
-        // return false;
+        // todo find how to return observable value
+
+        return new Promise((resolve, reject) => {
+            dialogRef
+                .afterClosed()
+                .subscribe(res => {
+                    resolve(res);
+                });
+        });
     }
 }

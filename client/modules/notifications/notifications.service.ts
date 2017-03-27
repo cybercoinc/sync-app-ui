@@ -59,7 +59,7 @@ export class NotificationsService {
 
         this.pushNotification(notification);
 
-
+        return notification.getDialogRef();
     }
 
     public addCustom() {

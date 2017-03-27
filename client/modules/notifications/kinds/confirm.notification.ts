@@ -10,7 +10,8 @@ import {MdDialogRef} from "@angular/material";
            {{message}}
         </div>
         <div md-dialog-actions>
-            <button [disabled]="false" md-button>Save</button>
+            <button md-button (click)="close(true)">Yes</button>
+            <button md-button (click)="close(false)">No</button>
         </div>
     `
 })
@@ -20,6 +21,10 @@ export class ConfirmNotificationDialog implements OnInit {
 
     ngOnInit() {
 
+    }
+
+    close(result) {
+        return this.MdDialogRef.close(result);
     }
 
     protected message: string;
@@ -35,12 +40,16 @@ export class ConfirmNotification extends BaseNotification {
         this.mdDialog = mdDialog;
     }
 
-    protected component;
+    protected dialogRef;
     protected mdDialog;
 
     render() {
-        let dialogRef = this.mdDialog.open(ConfirmNotificationDialog);
+        this.dialogRef = this.mdDialog.open(ConfirmNotificationDialog);
 
-        dialogRef.componentInstance.message = this.message;
+        this.dialogRef.componentInstance.message = this.message;
+    }
+
+    getDialogRef() {
+        return this.dialogRef;
     }
 }
