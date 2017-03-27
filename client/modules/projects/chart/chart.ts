@@ -141,7 +141,7 @@ export class Chart {
 
     getTasks() {
         return gantt.serialize().data.map(item => {
-            item.has_сhildren = gantt.hasChild(item.id) > 0;
+            item.has_children = gantt.hasChild(item.id) > 0;
             item.row_number   = gantt.getGlobalTaskIndex(item.id);
 
             return item;
@@ -283,7 +283,7 @@ export class Chart {
         }));
 
         gantt.attachEvent("onTaskLoading", (task => {
-            if (task.has_сhildren) {
+            if (task.has_children) {
                 task.type = gantt.config.types.project;
             }
 
