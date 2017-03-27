@@ -1,5 +1,4 @@
 import {BaseNotification} from "./base.notification";
-import {MdDialog} from "ng2-material";
 import {Component, Input, OnInit} from "@angular/core";
 import {MdDialogRef} from "@angular/material";
 
@@ -15,8 +14,8 @@ import {MdDialogRef} from "@angular/material";
         </div>
     `
 })
-export class ModalNotificationDialog implements OnInit {
-    constructor(public MdDialogRef: MdDialogRef<ModalNotificationDialog>) {
+export class ConfirmNotificationDialog implements OnInit {
+    constructor(public MdDialogRef: MdDialogRef<ConfirmNotificationDialog>) {
     }
 
     ngOnInit() {
@@ -24,14 +23,11 @@ export class ModalNotificationDialog implements OnInit {
     }
 
     protected message: string;
-
-    save(): any {
-    }
 }
 
 
-export class ModalNotification extends BaseNotification {
-    protected position: 'modal';
+export class ConfirmNotification extends BaseNotification {
+    protected position: 'confirm';
 
     constructor(mdDialog) {
         super();
@@ -43,7 +39,7 @@ export class ModalNotification extends BaseNotification {
     protected mdDialog;
 
     render() {
-        let dialogRef = this.mdDialog.open(ModalNotificationDialog);
+        let dialogRef = this.mdDialog.open(ConfirmNotificationDialog);
 
         dialogRef.componentInstance.message = this.message;
     }

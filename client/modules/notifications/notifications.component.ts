@@ -3,7 +3,7 @@ import {NotificationsService} from "./notifications.service";
 import {Router, NavigationStart} from "@angular/router";
 import 'rxjs/add/operator/filter';
 import {LineNotification} from "./kinds/line.notification";
-import {ModalNotification} from "./kinds/modal.notification";
+import {ConfirmNotification} from "./kinds/confirm.notification";
 
 @Component({
     selector: 'notifications',
@@ -24,8 +24,8 @@ export class NotificationsComponent implements OnInit {
                     this.renderLine(e)
                 }
 
-                if (e instanceof ModalNotification) {
-                    this.renderModal(e)
+                if (e instanceof ConfirmNotification) {
+                    this.renderConfirm(e)
                 }
             });
 
@@ -42,7 +42,7 @@ export class NotificationsComponent implements OnInit {
         this.lineNotifications.push(notification);
     }
 
-    protected renderModal(notification: ModalNotification) {
+    protected renderConfirm(notification: ConfirmNotification) {
         notification.render();
     }
 

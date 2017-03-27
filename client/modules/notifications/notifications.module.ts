@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {MaterialModule} from '@angular/material';
 import {NotificationsComponent} from "./notifications.component";
 import {NotificationsService} from "./notifications.service";
-import {ModalNotification, ModalNotificationDialog} from "./kinds/modal.notification";
+import {ConfirmNotificationDialog} from "./kinds/confirm.notification";
 
 @NgModule({
     imports: [
@@ -15,13 +15,13 @@ import {ModalNotification, ModalNotificationDialog} from "./kinds/modal.notifica
     ],
     declarations: [
         NotificationsComponent,
-        ModalNotificationDialog
+        ConfirmNotificationDialog
     ],
     providers: [
         NotificationsService
     ],
     entryComponents: [
-        ModalNotificationDialog
+        ConfirmNotificationDialog
     ],
 })
 export class NotificationsModule {
