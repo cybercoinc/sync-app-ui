@@ -13,6 +13,12 @@ export class CanDeactivateChart implements CanDeactivate<ChartComponent> {
                   currentRoute: ActivatedRouteSnapshot,
                   currentState: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
+        let notSavedChanges = component.notSavedChanges;
+
+        if (!notSavedChanges) {
+            return true;
+        }
+
         let dialogRef = this.NotificationsService.addConfirm('Are you sure you want to continue without saving changes?');
 
         // todo find how to return observable value
