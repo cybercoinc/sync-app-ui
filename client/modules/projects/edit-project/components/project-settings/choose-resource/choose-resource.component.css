@@ -44,3 +44,11 @@ md-select {
     color: #424242;
 }
 
+i.disabled {
+    color: #c0c0c0;
+    cursor: default;
+}
+
+i.disabled:hover {
+    color: #c0c0c0;
+}

@@ -4,6 +4,7 @@ import {MsProjectClientService} from "client/service/microservices/ms-project-cl
 import {MdDialog} from "@angular/material";
 import {AddResourceDialog} from "./add-resource.dialog";
 import {SetGanttAccessDialog} from "./dialogs/set-gantt-access.dialog";
+import {PipeConnectionService} from "client/service/pipe-connection.service";
 
 @Component({
     selector: 'choose-resource',
@@ -15,6 +16,7 @@ import {SetGanttAccessDialog} from "./dialogs/set-gantt-access.dialog";
 export class ChooseResourceComponent implements OnInit {
     constructor(protected AuthService: AuthService,
                 protected MsProjectClientService: MsProjectClientService,
+                protected PipeConnectionService: PipeConnectionService,
                 public MdDialog: MdDialog) {
     }
 
@@ -60,16 +62,19 @@ export class ChooseResourceComponent implements OnInit {
     }
 
     setGanttAccessForUser(userId) {
+        if (!this.canEditGanttPermissions()) {
+            return false;
+        }
+
         let dialogRef = this.MdDialog.open(SetGanttAccessDialog);
 
         dialogRef.componentInstance.userId = userId;
         dialogRef.componentInstance.projectId = this.projectId;
+    }
 
-        // dialogRef
-        //     .afterClosed()
-        //     .subscribe(result => {
-        //         console.log('result', result);
-        //     });
+    canEditGanttPermissions(): boolean {
+        return this.PipeConnectionService.project.creator__user_fk_id &&
+            (this.PipeConnectionService.project.creator__user_fk_id.id === this.AuthService.authUser.id);
     }
 
     getResources() {

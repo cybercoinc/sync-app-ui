@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="col-xs-1">
-                    <i *ngIf="assignee.user_id && assignee.can_edit_gantt_permissions" (click)="setGanttAccessForUser(assignee.user_id)" class="material-icons set-permissions-button">insert_chart</i>
+                    <i [class.disabled]="!(assignee.user_id && canEditGanttPermissions())" (click)="setGanttAccessForUser(assignee.user_id)" class="material-icons set-permissions-button">insert_chart</i>
                 </div>
 
             </div>
