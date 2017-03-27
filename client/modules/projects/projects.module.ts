@@ -50,6 +50,7 @@ import {ScheduleConnectionComponent} from "./edit-project/components/shared/sche
 import {TaskNotificationsComponent} from "./edit-project/components/project-settings/task-notifications/task-notifications.component";
 import {ChartWorkingDaysComponent} from "./edit-project/components/project-settings/chart-working-days/chart-working-days.component";
 import {PrimaryBillingUser} from "./edit-project/components/project-settings/primary-billing-user/primary-billing-user.component";
+import {CanDeactivateChart} from "./chart/chart.deactivate";
 
 @NgModule({
     imports: [
@@ -59,6 +60,9 @@ import {PrimaryBillingUser} from "./edit-project/components/project-settings/pri
         FormsModule,
         CybercoNg2Module,
         routing,
+    ],
+    providers: [
+        CanDeactivateChart
     ],
     exports: [],
     declarations: [

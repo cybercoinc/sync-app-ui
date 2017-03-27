@@ -49,6 +49,10 @@ export class NotificationsService {
         this.pushNotification(notification);
     }
 
+    public addConfirm(text) {
+
+    }
+
     public addCustom() {
         // todo implement later
     }

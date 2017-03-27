@@ -27,6 +27,7 @@ import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks
 import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
 import {ProjectGuardService} from "../../service/project-guard.service";
 import {ChartComponent} from "./chart/chart.component";
+import {CanDeactivateChart} from "./chart/chart.deactivate";
 
 export const routes: Routes = [
     {
@@ -73,6 +74,7 @@ export const routes: Routes = [
             {
                 path: ':project_id/chart',
                 component: ChartComponent,
+                canDeactivate: [CanDeactivateChart],
                 resolve: {
                     project: PipeConnectionService
                 },
