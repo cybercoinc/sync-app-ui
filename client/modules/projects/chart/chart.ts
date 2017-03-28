@@ -5,6 +5,7 @@ export class Chart {
     resources: any;
     assignees: any;
     isAllowEdit: any;
+    needToSaveChanges: boolean = false;
     weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     notWorkingDays = [0 ,6];
 

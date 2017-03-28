@@ -9,7 +9,7 @@ export class BaseNotification {
     }
 
     protected viewed: boolean = false;
-    protected isQuitable: boolean = true;
+    protected quitable: boolean = true;
 
     protected message: string;
     protected position: string;
@@ -24,6 +24,18 @@ export class BaseNotification {
     }
 
     public setQuitableFlag(quitAllowed: boolean) {
-        this.isQuitable = quitAllowed;
+        this.quitable = quitAllowed;
+    }
+
+    public getMessage() {
+        return this.message;
+    }
+
+    public getType() {
+        return this.type;
+    }
+
+    public isQuitable() {
+        return this.quitable;
     }
 }

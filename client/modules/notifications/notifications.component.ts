@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {NotificationsService} from "./notifications.service";
 import {Router, NavigationStart} from "@angular/router";
 import 'rxjs/add/operator/filter';
+import {LineNotification} from "./kinds/line.notification";
+import {ConfirmNotification} from "./kinds/confirm.notification";
 
 @Component({
     selector: 'notifications',
@@ -17,32 +19,32 @@ export class NotificationsComponent implements OnInit {
 
     ngOnInit() {
         this.NotificationsService.notifications
-            .subscribe({
-                next: notification => this.render(notification)
+            .subscribe((e) => {
+                if (e instanceof LineNotification) {
+                    this.renderLine(e)
+                }
+
+                if (e instanceof ConfirmNotification) {
+                    this.renderConfirm(e)
+                }
             });
 
         this.Router.events
             .filter(event => event instanceof NavigationStart)
             .subscribe((e) => {
-                this.renderedNotifications.forEach(notification => {
-                    this.hide(notification);
+                this.lineNotifications.forEach(notification => {
+                    notification.hide();
                 })
             });
     }
 
-    protected render(notification) {
-        this.renderedNotifications.push(notification);
-
-        // setTimeout(() => {
-        //     this.hide(messageObj);
-        // }, 3000)
+    protected renderLine(notification) {
+        this.lineNotifications.push(notification);
     }
 
-    protected hide(notification) {
-        let notificationObj = this.renderedNotifications[this.renderedNotifications.indexOf(notification)];
-
-        notificationObj.viewed = true;
+    protected renderConfirm(notification: ConfirmNotification) {
+        notification.render();
     }
 
-    protected renderedNotifications = [];
+    protected lineNotifications: LineNotification[] = [];
 }
