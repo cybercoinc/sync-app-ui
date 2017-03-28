@@ -69,11 +69,7 @@ export class ChartComponent implements OnInit {
     }
 
     public haveNotSavedChanges(): boolean {
-        return this.chart.needToSaveChanges;
-    }
-
-    protected changesSaved() {
-        this.chart.needToSaveChanges = false;
+        return this.chart.needToSaveChanges();
     }
 
     getResources() {
@@ -139,8 +135,6 @@ export class ChartComponent implements OnInit {
             links
         )
             .then(() => {
-                this.changesSaved();
-
                 this.snackBar.open('Chart has been successfully saved', null, {
                     duration: 2000,
                     extraClasses: ['alert-success']
