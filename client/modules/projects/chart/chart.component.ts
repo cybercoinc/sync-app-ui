@@ -68,7 +68,13 @@ export class ChartComponent implements OnInit {
             });
     }
 
-    public notSavedChanges: boolean = false;
+    public haveNotSavedChanges(): boolean {
+        return this.chart.needToSaveChanges;
+    }
+
+    protected changesSaved() {
+        this.chart.needToSaveChanges = false;
+    }
 
     getResources() {
         return Promise.all([
@@ -133,7 +139,7 @@ export class ChartComponent implements OnInit {
             links
         )
             .then(() => {
-                this.notSavedChanges = false;
+                this.changesSaved();
 
                 this.snackBar.open('Chart has been successfully saved', null, {
                     duration: 2000,

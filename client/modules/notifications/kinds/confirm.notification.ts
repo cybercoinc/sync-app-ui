@@ -7,11 +7,13 @@ import {MdDialogRef} from "@angular/material";
     template: `
         <h1 style="width: 400px;" md-dialog-title>Confirm</h1>
         <div md-dialog-content style="min-height: 40px;line-height: 70px;">
-           {{message}}
+            {{message}}
         </div>
         <div md-dialog-actions>
-            <button md-button (click)="close(true)">Yes</button>
-            <button md-button (click)="close(false)">No</button>
+            <div style="width: 100%">
+                <button md-button class="pull-left" (click)="close(true)">Yes</button>
+                <button md-button class="pull-right" (click)="close(false)">No</button>
+            </div>
         </div>
     `
 })

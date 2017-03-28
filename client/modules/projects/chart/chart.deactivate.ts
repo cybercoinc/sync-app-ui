@@ -13,9 +13,7 @@ export class CanDeactivateChart implements CanDeactivate<ChartComponent> {
                   currentRoute: ActivatedRouteSnapshot,
                   currentState: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-        let notSavedChanges = component.notSavedChanges;
-
-        if (!notSavedChanges) {
+        if (!component.haveNotSavedChanges()) {
             return true;
         }
 
