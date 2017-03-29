@@ -12,7 +12,7 @@ export class InvoicesComponent {
     protected invoices: Invoice[];
 
     constructor(protected AuthService: AuthService, protected MsLicenseClientService: MsLicenseClientService) {
-        MsLicenseClientService.getInvoices(this.AuthService.authUser.id)
+        MsLicenseClientService.getInvoices(this.AuthService.authUser.id, this.AuthService.company.id)
             .then(invoices => {
                 this.invoices = invoices;
             });
