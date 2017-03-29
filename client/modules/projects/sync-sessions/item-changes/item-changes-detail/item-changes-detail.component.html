@@ -2,8 +2,21 @@
     <div class="row">
         <div class="col-xs-12" *ngIf="itemChangesObj?.type === 'created_one'">
             <p *ngFor="let propToLabelObj of propertiesToLabels">
-                <span *ngIf="itemChangesObj.item[propToLabelObj.property]">{{propToLabelObj?.label}}:
-                    {{itemChangesObj.item[propToLabelObj.property]}}</span>
+                <ng-container *ngIf="itemChangesObj.item[propToLabelObj.property]">
+                    <span [ngSwitch]="propToLabelObj?.property">
+                        {{propToLabelObj?.label}}:
+
+                        <span *ngSwitchCase="'finish_datetime'">
+                            <i>{{itemChangesObj.item[propToLabelObj.property] | date: datesFormat}}</i>
+                        </span>
+                        <span *ngSwitchCase="'start_datetime'">
+                            <i>{{itemChangesObj.item[propToLabelObj.property] | date: datesFormat}}</i>
+                        </span>
+                        <span *ngSwitchDefault>
+                            <i>{{itemChangesObj.item[propToLabelObj.property]}}</i>
+                        </span>
+                    </span>
+                </ng-container>
             </p>
             <p>
                 <span *ngIf="itemChangesObj?.assignee">Assignee:
@@ -21,18 +34,15 @@
             <ul>
                 <li *ngFor="let changesObj of itemChangesObj.changes"
                     [class.hide]="needToHideChange(changesObj.property)">
-                    {{changesObj.property}}
+                    <b>{{changesObj.property}}</b>
                     <span [ngSwitch]="changesObj.property">
-                        <span *ngSwitchCase="'finish_datetime'">
-                            <b>{{changesObj.property}}</b>: old value - <i>{{changesObj.old_value | date: datesFormat}}</i>,
+                        <span *ngSwitchCase="'finish_datetime'">old value - <i>{{changesObj.old_value | date: datesFormat}}</i>,
                     new value - <i>{{changesObj.new_value | date: datesFormat}}</i>
                         </span>
-                        <span *ngSwitchCase="'start_datetime'">
-                            <b>{{changesObj.property}}</b>: old value - <i>{{changesObj.old_value | date: datesFormat}}</i>,
+                        <span *ngSwitchCase="'start_datetime'">old value - <i>{{changesObj.old_value | date: datesFormat}}</i>,
                     new value - <i>{{changesObj.new_value | date: datesFormat}}</i>
                         </span>
-                        <span *ngSwitchDefault>
-                            <b>{{changesObj.property}}</b>: old value - <i>{{changesObj.old_value}}</i>,
+                        <span *ngSwitchDefault>old value - <i>{{changesObj.old_value}}</i>,
                     new value - <i>{{changesObj.new_value}}</i>
                         </span>
                     </span>
