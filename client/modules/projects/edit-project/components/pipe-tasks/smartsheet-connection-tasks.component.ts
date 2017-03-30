@@ -5,6 +5,7 @@ import {PipeConnectionService} from 'client/service/pipe-connection.service';
 import {MsProjectClientService} from "../../../../../service/microservices/ms-project-client.service";
 import {AuthService} from "../../../../../service/auth.service";
 import {Router} from "@angular/router";
+import {NotificationsService} from "client/modules/notifications/notifications.service";
 
 @Component({
     selector: 'smartsheet-connection-tasks',
@@ -18,6 +19,7 @@ import {Router} from "@angular/router";
 export class SmartsheetConnectionTasksComponent implements OnInit {
     constructor(protected PipeConnectionService: PipeConnectionService,
                 protected MsProjectClientService: MsProjectClientService,
+                protected NotificationsService: NotificationsService,
                 private router: Router,
                 protected AuthService: AuthService) {
     }
@@ -66,6 +68,17 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
 
     protected doNotUseScheduleGantt() {
         if (this.componentIsBusy) {
+            return;
+        }
+
+        if (!this.AuthService.authUser.smartsheet_oauth) {
+            this.NotificationsService.addReaction('Error. You don`t have Smartsheet credentials connected. Please connect your account.',
+                'error',
+                'Smartsheet connection required',
+                [
+                    {label: 'Connect Smartsheet', route: ['/', 'connection']},
+                    {label: 'Cancel', route: ['/']},
+                ]);
             return;
         }
 
