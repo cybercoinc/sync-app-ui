@@ -9,12 +9,11 @@
             </md-input-container>
 
             <a [routerLink]="['create-project']"
-               [ngClass]="{'disabled': !this.AuthService.authUser.smartsheet_oauth }"
                class="btn btn-success pull-right" style="top: 10px;">connect project</a>
 
-            <span *ngIf="!this.AuthService.authUser.smartsheet_oauth" style="padding: 0 10px 0 40px;" class="pull-right">
-                Before creating project, you have to <a [routerLink]="['/connection']">authorize with SmartSheet</a>
-            </span>
+            <!--<span *ngIf="!this.AuthService.authUser.smartsheet_oauth" style="padding: 0 10px 0 40px;" class="pull-right">-->
+                <!--Before creating project, you have to <a [routerLink]="['/connection']">authorize with SmartSheet</a>-->
+            <!--</span>-->
         </div>
     </div>
 
