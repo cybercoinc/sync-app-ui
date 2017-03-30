@@ -62,6 +62,8 @@ export class Chart {
         gantt.locale.labels["section_resources"] = "Resources";
 
         gantt.init("chart");
+
+        gantt.clearAll();
         gantt.parse({data: data.tasks, links: data.links});
         gantt.sort('row_number', false);
 
@@ -301,6 +303,18 @@ export class Chart {
     attachEvents() {
         let self = this;
 
+        gantt.attachEvent("onGridResizeEnd", function(old_width, new_width){
+            let columnsWidth = {};
+
+            gantt.config.columns.forEach(column => {
+                columnsWidth[column.name] = column.width;
+            });
+
+            localStorage.setItem('columns_width', JSON.stringify(columnsWidth));
+
+            return true;
+        });
+
         gantt.attachEvent("onAfterTaskAdd", function(id, item){
             let data = self.getTasks();
             self.refreshData(data);
@@ -337,7 +351,7 @@ export class Chart {
 
             for (let i = 0; i < childs.length; i++) {
                 let task = gantt.getTask(childs[i]);
-                totalProgress += parseFloat(task.progress);
+                totalProgress += parseFloat(task.progress || 0);
             }
 
             parentTask.progress = (totalProgress / childs.length).toFixed(2);
@@ -351,17 +365,28 @@ export class Chart {
         gantt.config.task_height = 16;
         gantt.config.row_height  = 40;
         gantt.config.readonly    = !this.isAllowEdit;
+        gantt.config.keep_grid_width = true;
+
+        let savedColumnsWidth = localStorage.getItem('columns_width'),
+            columnsWidth = {
+                text: 200,
+                progress: 'auto',
+                resources: 'auto',
+            };
+        if (savedColumnsWidth) {
+            columnsWidth = JSON.parse(savedColumnsWidth);
+        }
 
         gantt.config.columns = [
-            {name:"text", label: "Task name", tree: true, width: 200},
-            {name:"progress", label: "Complete %", template: (obj) => {
+            {name:"text", label: "Task name", tree: true, width: columnsWidth.text},
+            {name:"progress", label: "Complete %", width: columnsWidth.progress, template: (obj) => {
                 if (obj.progress) {
                     return (obj.progress * 100).toFixed(0);
                 }
 
                 return '0';
             }},
-            {name:"resources", label: "Resource", template: (obj) => {
+            {name:"resources", label: "Resource", width: columnsWidth.resources, template: (obj) => {
                 return obj.resources == undefined ? '' : obj.resources;
             }},
         ];
