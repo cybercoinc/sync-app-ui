@@ -54,35 +54,8 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
     protected useScheduleChartIsAsked: boolean = false;
     protected scheduleChartIsUsed: boolean = false;
 
-    protected useScheduleGantt() {
-        this.componentIsBusy = true;
-
-        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType, true)
-            .then(() => {
-                return this.PipeConnectionService.refreshPipesList();
-            })
-            .then(() => {
-                this.scheduleChartIsUsed = true;
-            });
-    }
-
-    protected doNotUseScheduleGantt() {
-        if (this.componentIsBusy) {
-            return;
-        }
-
-        if (!this.AuthService.authUser.smartsheet_oauth) {
-            this.NotificationsService.addReaction('Error. You don`t have Smartsheet credentials connected. Please connect your account.',
-                'error',
-                'Smartsheet connection required',
-                [
-                    {label: 'Connect Smartsheet', route: ['/', 'connection']},
-                    {label: 'Cancel', route: ['/']},
-                ]);
-            return;
-        }
-
-        this.scheduleChartIsUsed = false;
+    protected onSmartsheetScheduleDecisionMade(result) {
+        this.scheduleChartIsUsed = result === 'gantt_chart';
         this.useScheduleChartIsAsked = false;
     }
 }
