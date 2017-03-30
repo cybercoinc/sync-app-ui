@@ -99,7 +99,11 @@ export class CreateProjectComponent implements OnInit {
                     this.MsProjectClientService.syncProjectUsers(_projectId)
                 ]);
             })
-            .then(() => {
+            .then((result) => {
+                if (!result[0]) { // license has status 'suspended'
+                    return this.router.navigate(['projects']);
+                }
+
                 return this.router.navigate(['projects', _projectId, 'edit-project', 'settings']);
             })
     }
