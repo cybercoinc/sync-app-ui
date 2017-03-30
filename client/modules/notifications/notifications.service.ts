@@ -4,6 +4,7 @@ import {LineNotification} from "./kinds/line.notification";
 import {BaseNotification} from "./kinds/base.notification";
 import {MdDialog} from "@angular/material";
 import {ConfirmNotification} from "./kinds/confirm.notification";
+import {ReactionNotification, ReactionPossibility} from "./kinds/reaction.notification";
 
 const TYPE_INFO = 'info';
 const TYPE_ERROR = 'error';
@@ -15,7 +16,7 @@ export class NotificationsService {
         this.notifications = new Subject();
     }
 
-    public notifications: Subject<BaseNotification[]>;
+    public notifications: Subject<BaseNotification>;
 
     private pushNotification(notification) {
         this.notifications.next(notification);
@@ -60,6 +61,20 @@ export class NotificationsService {
         this.pushNotification(notification);
 
         return notification.getDialogRef();
+    }
+
+    public addReaction(message, type, title = '', possibilitiesList: ReactionPossibility[] = []) {
+        let notification = new ReactionNotification();
+
+        notification.setMessage(message);
+        notification.setType(type);
+        notification.setTitle(title);
+
+        possibilitiesList.forEach(poss => {
+            notification.addPossibility(poss);
+        });
+
+        this.pushNotification(notification);
     }
 
     public addCustom() {

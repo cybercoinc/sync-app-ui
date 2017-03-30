@@ -4,6 +4,7 @@ import {Router, NavigationStart} from "@angular/router";
 import 'rxjs/add/operator/filter';
 import {LineNotification} from "./kinds/line.notification";
 import {ConfirmNotification} from "./kinds/confirm.notification";
+import {ReactionNotification} from "./kinds/reaction.notification";
 
 @Component({
     selector: 'notifications',
@@ -19,14 +20,16 @@ export class NotificationsComponent implements OnInit {
 
     ngOnInit() {
         this.NotificationsService.notifications
-            .subscribe((e) => {
-                if (e instanceof LineNotification) {
-                    this.renderLine(e)
+            .subscribe((n) => {
+                if (n instanceof LineNotification) {
+                    this.renderLine(n);
                 }
 
-                if (e instanceof ConfirmNotification) {
-                    this.renderConfirm(e)
+                if (n instanceof ReactionNotification) {
+                    this.renderReaction(n);
                 }
+
+                n.render();
             });
 
         this.Router.events
@@ -42,9 +45,10 @@ export class NotificationsComponent implements OnInit {
         this.lineNotifications.push(notification);
     }
 
-    protected renderConfirm(notification: ConfirmNotification) {
-        notification.render();
+    protected renderReaction(notification) {
+        this.reactionNotifications.push(notification);
     }
 
     protected lineNotifications: LineNotification[] = [];
+    protected reactionNotifications: ReactionNotification[] = [];
 }

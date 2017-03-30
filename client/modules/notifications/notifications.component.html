@@ -13,3 +13,9 @@
         </div>
     </div>
 </div>
+
+<div class="container-fluid reaction-notification-container">
+    <div class="row" *ngFor="let notification of reactionNotifications">
+        <reaction-notification-card [notification]="notification"></reaction-notification-card>
+    </div>
+</div>
