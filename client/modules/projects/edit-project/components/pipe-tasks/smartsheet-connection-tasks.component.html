@@ -22,7 +22,7 @@
     </md-card-content>
 </md-card>
 
-<smartsheet-schedule-choose *ngIf="useScheduleChartIsAsked" [pipe-type]="pipeType"
+<smartsheet-schedule-choose *ngIf="useScheduleChartIsAsked" [pipe-type]="pipeType" [text]="'Manage Project Schedule tasks with:'"
                             (decisionMade)="onSmartsheetScheduleDecisionMade($event)"></smartsheet-schedule-choose>
 
 <schedule-connection *ngIf="scheduleChartIsUsed && pipesListObj[pipeType]" pipe-type="{{pipeType}}"

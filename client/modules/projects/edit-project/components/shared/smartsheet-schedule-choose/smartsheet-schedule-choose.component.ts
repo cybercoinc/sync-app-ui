@@ -65,5 +65,7 @@ export class SmartsheetScheduleChooseComponent implements OnInit {
     protected componentIsBusy: boolean = false;
 
     @Input('pipe-type') pipeType: string;
+    @Input('text') text: string;
+
     @Output() decisionMade = new EventEmitter();
 }
