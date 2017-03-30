@@ -557,4 +557,16 @@ export class MsProjectClientService extends MsClientService {
             }
         );
     }
+
+    saveToCsv(data: any, tableHeaders: any, reportId: number): Promise<any> {
+        return this.makeMsCall(
+            'report/save-to-csv',
+            'POST',
+            {
+                data: data,
+                table_headers: tableHeaders,
+                report_id: reportId
+            }
+        );
+    }
 }
