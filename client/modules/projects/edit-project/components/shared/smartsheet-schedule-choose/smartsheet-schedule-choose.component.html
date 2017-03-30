@@ -1,0 +1,11 @@
+<md-card class="row"
+         style="max-width: 800px; background-color: #FFF">
+    <div class="col-xs-12">
+        <h5>{{text}}</h5>
+    </div>
+
+    <div class="col-xs-6 col-xs-offset-4">
+        <button class="btn btn-primary" [class.disabled]="componentIsBusy"  (click)="useScheduleGantt()">Gantt Chart</button>
+        <button class="btn btn-primary" [class.disabled]="componentIsBusy"  (click)="doNotUseScheduleGantt()">Smartsheet</button>
+    </div>
+</md-card>
