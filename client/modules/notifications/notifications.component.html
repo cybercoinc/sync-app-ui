@@ -1,11 +1,14 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="message" *ngFor="let notification of renderedNotifications">
-            <div class="alert alert-dismissible" [class.alert-success]="notification.type === 'info'"
-                 [class.alert-danger]="notification.type === 'error'" [class.alert-warning]="notification.type === 'warning'" *ngIf="!notification.viewed">
+        <div class="message" *ngFor="let notification of lineNotifications">
+            <div class="alert alert-dismissible" [class.alert-success]="notification.getType() === 'info'"
+                 [class.alert-danger]="notification.getType() === 'error'"
+                 [class.alert-warning]="notification.getType() === 'warning'" *ngIf="!notification.isViewed()">
 
-                <button *ngIf="notification.isQuitable" type="button" class="close" (click)="hide(notification)">&times;</button>
-                {{notification.message}}
+                <button *ngIf="notification.isQuitable()" type="button" class="close" (click)="notification.hide()">
+                    &times;
+                </button>
+                {{notification.getMessage()}}
             </div>
         </div>
     </div>
