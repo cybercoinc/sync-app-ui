@@ -4,3 +4,14 @@
     margin-bottom: 0;
     border-radius: 0;
 }
+
+.reaction-notification-container {
+    position: absolute;
+    z-index: 9999;
+    right: 1%;
+    bottom: 1%;
+    width: 45%;
+    max-height: 70%;
+    overflow: scroll;
+    overflow-y: auto;
+}

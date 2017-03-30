@@ -3,7 +3,7 @@ const TYPE_ERROR = 'error';
 const TYPE_WARNING = 'warning';
 
 
-export class BaseNotification {
+export abstract class BaseNotification {
     constructor() {
 
     }
@@ -38,4 +38,8 @@ export class BaseNotification {
     public isQuitable() {
         return this.quitable;
     }
+
+    public render() {
+
+    };
 }
