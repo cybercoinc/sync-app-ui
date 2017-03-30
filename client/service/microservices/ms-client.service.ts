@@ -81,6 +81,7 @@ export class MsClientService {
 
     protected handleError(response: any): Promise<any> | string {
         let message = response.statusText;
+        let errorCode;
 
         if (response['_body']) {
             try {
@@ -89,12 +90,36 @@ export class MsClientService {
                 if (jsonBody.message) {
                     message = jsonBody.message;
                 }
+
+                if (jsonBody.result) {
+                    errorCode = jsonBody.result.code;
+                }
+
             } catch (err) {
                 message = 'Error while parsing response from ' + this.msName + '. Service unavailable.';
             }
         }
 
-        this.NotificationsService.addError(message);
+        if (errorCode === 2001) {
+            this.NotificationsService.addReaction('Error. You don`t have Smartsheet credentials connected. Please connect your account.',
+                'error',
+                'Smartsheet connection required',
+                [
+                    {label: 'Connect Smartsheet', route: ['/', 'connection']},
+                    {label: 'Cancel', route: ['/']},
+                ]);
+        } else if (errorCode === 2002) {
+            this.NotificationsService.addReaction('Error. You don`t have Procore credentials connected. Please connect your account.',
+                'error',
+                'Procore connection required',
+                [
+                    {label: 'Connect Procore', route: ['/', 'connection']},
+                    {label: 'Cancel', route: ['/']},
+                ]);
+        } else {
+            this.NotificationsService.addError(message);
+        }
+
 
         if (response.status === 401) {
             Promise.reject(new Error('not authorized'));

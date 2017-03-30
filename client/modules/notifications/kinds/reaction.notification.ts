@@ -23,7 +23,7 @@ import {Router} from "@angular/router";
                                 *ngFor="let possibilityObj of notification.getPossibilities()">
                             {{possibilityObj.label}}
                         </button>
-                        <button md-button (click)="cancel()">Cancel</button>
+                        <!--<button md-button (click)="cancel()">Cancel</button>-->
                     </div>
 
                 </md-card-actions>
