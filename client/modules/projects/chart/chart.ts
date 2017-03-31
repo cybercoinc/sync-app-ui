@@ -39,15 +39,6 @@ export class Chart {
         }
     }
 
-    setExportConfigs(server) {
-        // gantt.getUndoStack();
-        console.log(gantt);
-        console.log(gantt.exportToPNG);
-
-        gantt.exportToPNG({server: server});
-        gantt.exportToPDF({server: server});
-    }
-
     needToSaveChanges() {
         return gantt.getUndoStack().length > 0;
     }
@@ -172,9 +163,10 @@ export class Chart {
         return gantt.getLinks();
     }
 
-    exportToPdf() {
+    exportToPdf(serverUrl) {
         gantt.exportToPDF({
-            header:'<link rel="stylesheet" href="//dhtmlx.com/docs/products/dhtmlxGantt/common/customstyles.css" type="text/css">'
+            header:'<link rel="stylesheet" href="//dhtmlx.com/docs/products/dhtmlxGantt/common/customstyles.css" type="text/css">',
+            server: serverUrl
         });
     }
 

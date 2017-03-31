@@ -7,6 +7,7 @@ import {NotificationsService} from "client/modules/notifications/notifications.s
 import {Chart} from './chart';
 import {MdDialog, MdSnackBar} from "@angular/material";
 import {CreateBaselineDialog} from "./create-baseline.dialog";
+import {ConfigService} from "../../../service/config.service";
 
 @Component({
     selector: 'chart',
@@ -26,6 +27,7 @@ export class ChartComponent implements OnInit {
                 protected dialog:                MdDialog,
                 protected snackBar:              MdSnackBar,
                 protected authService:           AuthService,
+                protected configService:         ConfigService,
                 protected notification:          NotificationsService) {}
 
     ngOnInit() {
@@ -46,8 +48,6 @@ export class ChartComponent implements OnInit {
 
                     this.chart.setWorkingDays(this.PipeConnectionService.project.working_days, this.PipeConnectionService.project.holidays);
                     this.chart.buildChart(chartData);
-
-                    this.chart.setExportConfigs('http://localhost:80/chart');
 
                     this.isShowToolbar = true;
                     this.isAllowEdit = userInProject.allow_edit_gantt_chart;
@@ -147,7 +147,9 @@ export class ChartComponent implements OnInit {
     }
 
     exportToPdf() {
-        this.chart.exportToPdf();
+        let serverUrl = this.configService.getConfig('CHART_EXPORT_ENDPOINT');
+
+        this.chart.exportToPdf(serverUrl);
     }
 
     private filterTasks() {
