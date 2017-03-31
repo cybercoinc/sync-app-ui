@@ -116,7 +116,7 @@ export class IndexComponent implements OnInit {
                 link = pipe.sm_permalink;
             } else if (pipe.type === PIPE_TYPE_TASKS) {
                 if (pipe.use_schedule_chart) {
-                    link = '#/projects/' + pipe.project_fk_id.id + '/chart';
+                    link = '#/projects/' + pipe.project_fk_id.id + '/pipes/' + pipe.id + '/chart';
                 } else {
                     link = pipe.sm_permalink;
                 }
