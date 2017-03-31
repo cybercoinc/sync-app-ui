@@ -39,6 +39,15 @@ export class Chart {
         }
     }
 
+    setExportConfigs(server) {
+        // gantt.getUndoStack();
+        console.log(gantt);
+        console.log(gantt.exportToPNG);
+
+        gantt.exportToPNG({server: server});
+        gantt.exportToPDF({server: server});
+    }
+
     needToSaveChanges() {
         return gantt.getUndoStack().length > 0;
     }

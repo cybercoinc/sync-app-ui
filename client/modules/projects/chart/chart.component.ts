@@ -43,8 +43,11 @@ export class ChartComponent implements OnInit {
                         userInProject = result[3];
 
                     this.chart = new Chart(resources, assignees, userInProject.allow_edit_gantt_chart);
+
                     this.chart.setWorkingDays(this.PipeConnectionService.project.working_days, this.PipeConnectionService.project.holidays);
                     this.chart.buildChart(chartData);
+
+                    this.chart.setExportConfigs('http://localhost:80/chart');
 
                     this.isShowToolbar = true;
                     this.isAllowEdit = userInProject.allow_edit_gantt_chart;
