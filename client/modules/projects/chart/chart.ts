@@ -61,8 +61,7 @@ export class Chart {
         ];
 
         if (!this.resources) {
-            sections.splice(0, 1);
-            sections.splice(0, 1);
+            sections.splice(1, 1);
         }
 
         gantt.config.lightbox.sections = sections;
