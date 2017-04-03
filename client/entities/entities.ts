@@ -131,6 +131,7 @@ export class Project {
         namespace: string;
         path: string | number[]
     };
+    disabled_reason: string;
     smartsheet_workspace_id: number;
     is_enable_notifications: boolean;
     notification_cc_emails: string[];

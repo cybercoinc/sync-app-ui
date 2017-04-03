@@ -9,3 +9,8 @@
 .project-status-warning i {
     padding-right: 5px;
 }
+
+.disabled-reason {
+    text-transform: capitalize;
+    color: #ff0000;
+}
