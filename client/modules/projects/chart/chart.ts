@@ -4,11 +4,11 @@ declare let $: any;
 export class Chart {
     resources: any;
     assignees: any;
-    isAllowEdit: any;
+    isAllowEdit: boolean;
     weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     notWorkingDays = [0 ,6];
 
-    constructor(resources, assignees, isAllowEdit) {
+    constructor(assignees, isAllowEdit, resources = null) {
         this.resources = resources;
         this.assignees = assignees;
         this.isAllowEdit = isAllowEdit;
@@ -46,10 +46,13 @@ export class Chart {
     buildChart(data) {
         let self = this;
 
-        gantt.form_blocks["resources"] = this.buildResourceDropdown(this.resources);
+        if (this.resources) {
+            gantt.form_blocks["resources"] = this.buildResourceDropdown(this.resources);
+        }
+
         gantt.form_blocks["assignees"] = this.buildAssigneeDropdown(this.assignees);
 
-        gantt.config.lightbox.sections = [
+        let sections = [
             {name:"description", height:38, map_to:"text", type:"textarea", focus: true},
             {name:"resources", map_to:"resources", type:"resources"},
             {name:"assignees", map_to:"assignees", type:"assignees"},
@@ -57,9 +60,19 @@ export class Chart {
             {name:"time", type:"duration", map_to:"auto"},
         ];
 
+        if (!this.resources) {
+            sections.splice(0, 1);
+            sections.splice(0, 1);
+        }
+
+        gantt.config.lightbox.sections = sections;
+
         gantt.locale.labels["section_parent"]    = "Parent task";
         gantt.locale.labels["section_assignees"] = "Assignees";
-        gantt.locale.labels["section_resources"] = "Resources";
+
+        if (this.resources) {
+            gantt.locale.labels["section_resources"] = "Resources";
+        }
 
         gantt.init("chart");
 
@@ -68,26 +81,28 @@ export class Chart {
         gantt.sort('row_number', false);
 
         gantt.attachEvent("onLightbox", (task_id => {
-            $('#resources-select').on('change', (e) => {
-                let resource = self.getResource(),
-                    task = gantt.getTask(task_id);
+            if (self.resources) {
+                $('#resources-select').on('change', (e) => {
+                    let resource = self.getResource(),
+                        task = gantt.getTask(task_id);
 
-                if (resource) {
-                    $('#assignee-select')
-                        .prop('disabled', false)
-                        .html(self.getAssigneeList(task, resource.id))
-                        .select2();
-                }
-                else {
-                    $('#assignee-select').empty();
-                    $('#assignee-select').prop('disabled', true);
-                }
-            });
+                    if (resource) {
+                        $('#assignee-select')
+                            .prop('disabled', false)
+                            .html(self.getAssigneeList(task, resource.id))
+                            .select2();
+                    }
+                    else {
+                        $('#assignee-select').empty();
+                        $('#assignee-select').prop('disabled', true);
+                    }
+                });
 
-            let task = gantt.getTask(task_id);
-            if (task.type == gantt.config.types.project) {
-                let id = gantt.config.lightbox.project_sections[1].inputId;
-                $('#' + id).parents('.gantt_wrap_section').hide();
+                let task = gantt.getTask(task_id);
+                if (task.type == gantt.config.types.project) {
+                    let id = gantt.config.lightbox.project_sections[1].inputId;
+                    $('#' + id).parents('.gantt_wrap_section').hide();
+                }
             }
 
             $('select.select2').select2();
@@ -228,7 +243,22 @@ export class Chart {
 
         return {
             render: (sns => {
-                return '<select id="assignee-select" multiple="multiple" class="select2"></select>';
+                let attributes = {
+                    'id': "assignee-select",
+                    'class': "select2"
+                };
+
+                if (self.resources) {
+                    attributes['multiple'] = 'multiple';
+                }
+
+                let html = '<select';
+                for (let attr in attributes) {
+                    if (attributes.hasOwnProperty(attr)) {
+                        html += ' ' + attr + '=' + attributes[attr];
+                    }
+                }
+                return html + '></select>';
             }),
 
             set_value: ((node, value, task, section) => {
@@ -386,10 +416,13 @@ export class Chart {
 
                 return '0';
             }},
-            {name:"resources", label: "Resource", width: columnsWidth.resources, template: (obj) => {
-                return obj.resources == undefined ? '' : obj.resources;
-            }},
         ];
+
+        if (this.resources) {
+            gantt.config.columns.push({name:"resources", label: "Resource", width: columnsWidth.resources, template: (obj) => {
+                return obj.resources == undefined ? '' : obj.resources;
+            }});
+        }
 
         if (this.isAllowEdit) {
             gantt.config.columns.push({name:"add", label:"", width:44 });

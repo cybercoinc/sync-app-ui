@@ -72,7 +72,7 @@ export const routes: Routes = [
                 ],
             },
             {
-                path: ':project_id/chart',
+                path: ':project_id/pipes/:pipe_id/chart',
                 component: ChartComponent,
                 canDeactivate: [CanDeactivateChart],
                 resolve: {
