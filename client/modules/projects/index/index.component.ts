@@ -108,16 +108,10 @@ export class IndexComponent implements OnInit {
         let link = '';
 
         projectPipesList.forEach((pipe: ProjectPipe) => {
-            if (pipeType !== pipe.type) {
-                return;
-            }
-
-            if ([PIPE_TYPE_PRIVATE_TODOS, PIPE_TYPE_PUBLIC_TODOS].indexOf(pipe.type) !== -1) {
-                link = pipe.sm_permalink;
-            } else if (pipe.type === PIPE_TYPE_TASKS) {
+            if (pipeType === pipe.type) {
                 if (pipe.use_schedule_chart) {
                     link = '#/projects/' + pipe.project_fk_id.id + '/pipes/' + pipe.id + '/chart';
-                } else {
+                } else if (pipe.sm_permalink) {
                     link = pipe.sm_permalink;
                 }
             }
@@ -130,11 +124,7 @@ export class IndexComponent implements OnInit {
         let source = 'smartsheet';
 
         projectPipesList.forEach((pipe: ProjectPipe) => {
-            if (pipeType !== pipe.type) {
-                return;
-            }
-
-            if (pipe.type === PIPE_TYPE_TASKS && pipe.use_schedule_chart) {
+            if (pipeType === pipe.type && pipe.use_schedule_chart) {
                 source = 'gantt-chart';
             }
         });
