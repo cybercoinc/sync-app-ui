@@ -112,14 +112,10 @@ export class IndexComponent implements OnInit {
                 return;
             }
 
-            if ([PIPE_TYPE_PRIVATE_TODOS, PIPE_TYPE_PUBLIC_TODOS].indexOf(pipe.type) !== -1) {
+            if (pipe.use_schedule_chart) {
+                link = '#/projects/' + pipe.project_fk_id.id + '/pipes/' + pipe.id + '/chart';
+            } else {
                 link = pipe.sm_permalink;
-            } else if (pipe.type === PIPE_TYPE_TASKS) {
-                if (pipe.use_schedule_chart) {
-                    link = '#/projects/' + pipe.project_fk_id.id + '/pipes/' + pipe.id + '/chart';
-                } else {
-                    link = pipe.sm_permalink;
-                }
             }
         });
 
@@ -134,7 +130,7 @@ export class IndexComponent implements OnInit {
                 return;
             }
 
-            if (pipe.type === PIPE_TYPE_TASKS && pipe.use_schedule_chart) {
+            if (pipe.use_schedule_chart) {
                 source = 'gantt-chart';
             }
         });

@@ -1,13 +1,15 @@
 import {Component, OnInit} from "@angular/core";
+import {MdDialog, MdSnackBar} from "@angular/material";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
-import {PipeConnectionService} from "client/service/pipe-connection.service";
+import {CreateBaselineDialog} from "./create-baseline.dialog";
+import {Params, ActivatedRoute} from "@angular/router";
 import {AuthService} from "client/service/auth.service";
 import {NotificationsService} from "client/modules/notifications/notifications.service";
-
 import {Chart} from './chart';
 import {MdDialog, MdSnackBar} from "@angular/material";
 import {CreateBaselineDialog} from "./create-baseline.dialog";
 import {ConfigService} from "../../../service/config.service";
+import {PipeConnectionService} from "client/service/pipe-connection.service";
 
 @Component({
     selector: 'chart',
@@ -16,35 +18,47 @@ import {ConfigService} from "../../../service/config.service";
 })
 export class ChartComponent implements OnInit {
     private chart;
-    private isShowToolbar    = false;
-    private baselines        = [];
+    private baselines = [];
     private selectedBaseline = null;
-    private assignees        = [];
-    private isAllowEdit      = false;
+    private assignees = [];
+    private isShowToolbar = false;
+    private pipeId;
+    private isAllowEdit;
 
-    constructor(protected msProjectClient:       MsProjectClientService,
+    constructor(protected msProjectClient: MsProjectClientService,
+                protected activatedRoute: ActivatedRoute,
                 protected PipeConnectionService: PipeConnectionService,
-                protected dialog:                MdDialog,
-                protected snackBar:              MdSnackBar,
-                protected authService:           AuthService,
+                protected notification: NotificationsService,
+                protected snackBar:        MdSnackBar,
                 protected configService:         ConfigService,
-                protected notification:          NotificationsService) {}
+                protected dialog:          MdDialog,
+                protected authService: AuthService) {}
 
-    ngOnInit() {
-        if (this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
-            Promise.all([
-                this.msProjectClient.getChartData(this.PipeConnectionService.pipesListObj['tasks'].id),
-                this.msProjectClient.getAssignees(this.PipeConnectionService.project.id),
-                this.getResources(),
-                this.msProjectClient.getUserToProjectPermissions(this.authService.authUser.id, this.PipeConnectionService.project.id),
-            ])
+    ngOnInit(): void {
+        this.activatedRoute.params.subscribe((params: Params) => {
+            let pipeId = params['pipe_id'],
+                projectId = params['project_id'];
+
+            this.pipeId = pipeId;
+
+            let promises = [
+                this.msProjectClient.getChartData(pipeId),
+                this.msProjectClient.getAssignees(projectId),
+                this.msProjectClient.getUserToProjectPermissions(this.authService.authUser.id, projectId),
+            ];
+
+            if (this.PipeConnectionService.pipesListObj['tasks'].id == pipeId) {
+                promises.push(this.getResources());
+            }
+
+            Promise.all(promises)
                 .then(result => {
                     let chartData = result[0],
                         assignees = result[1],
-                        resources = result[2],
-                        userInProject = result[3];
+                        userInProject = result[2],
+                        resources = result[3];
 
-                    this.chart = new Chart(resources, assignees, userInProject.allow_edit_gantt_chart);
+                    this.chart = new Chart(assignees, userInProject.allow_edit_gantt_chart, resources);
 
                     this.chart.setWorkingDays(this.PipeConnectionService.project.working_days, this.PipeConnectionService.project.holidays);
                     this.chart.buildChart(chartData);
@@ -57,11 +71,11 @@ export class ChartComponent implements OnInit {
                     }
                 });
 
-            this.msProjectClient.getBaselines(this.PipeConnectionService.pipesListObj['tasks'].id)
+            this.msProjectClient.getBaselines(pipeId)
                 .then(baselines => {
                     this.baselines = baselines;
                 });
-        }
+        });
     }
 
     getAssignees() {
@@ -112,7 +126,7 @@ export class ChartComponent implements OnInit {
                     baselineData   = {
                         tasks:   this.filterTasks(),
                         name:    dialogFormData.title,
-                        pipe_id: this.PipeConnectionService.pipesListObj['tasks'].id
+                        pipe_id: this.pipeId,
                     };
 
                 this.msProjectClient.createBaseline(baselineData)
@@ -132,11 +146,7 @@ export class ChartComponent implements OnInit {
         let tasks = this.chart.getTasks(),
             links = this.chart.getLinks();
 
-        this.msProjectClient.saveScheduleGantt(
-            this.PipeConnectionService.pipesListObj['tasks'].id,
-            tasks,
-            links
-        )
+        this.msProjectClient.saveScheduleGantt(this.pipeId, tasks, links)
             .then(() => {
                 this.snackBar.open('Chart has been successfully saved', null, {
                     duration: 2000,
