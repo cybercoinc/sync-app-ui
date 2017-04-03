@@ -269,6 +269,35 @@ export class Invoice {
     } | null;
 }
 
+export class Assignee {
+    id: number;
+    email: string;
+    alternative_emails:  string | null;
+    first_name: string;
+    last_name: string;
+    procore_user_id: number;
+    resource_id: number | null;
+    project_fk_id: {
+        id:        number;
+        kind:      string;
+        namespace: string;
+        path:      string | number[]
+    };
+}
+
+export class Resource {
+    id: number;
+    name: string;
+    pr_resource_id: number;
+    pr_trade_id	: number;
+    project_fk_id: {
+        id:        number;
+        kind:      string;
+        namespace: string;
+        path:      string | number[]
+    };
+}
+
 export const INVOICE_STATUS_OPEN = 'Open';
 export const INVOICE_STATUS_PAID = 'PAID';
 

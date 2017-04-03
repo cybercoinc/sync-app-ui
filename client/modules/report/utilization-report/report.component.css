@@ -1,9 +1,42 @@
 .groupings {
     display: block;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    margin-left: 2%;
 }
 
 .configurations {
     margin-left: 2%;
+}
+
+.show-data {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 100%;
+}
+
+md-input-container {
+    font-size: 14px;
+    width: 100%;
+}
+
+.select-buttons {
+    padding: 1%;
+}
+
+.edit-button {
+    display: inline-block;
+    margin-right: 5%;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+table td, p {
+    margin-bottom: 0px;
+}
+
+table {
+    margin-bottom: 0px;
 }
