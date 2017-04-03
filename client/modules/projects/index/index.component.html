@@ -113,9 +113,13 @@
                                             </div>
 
                                             <div class="col-sm-8 col-lg-9" *ngIf="isPipeExist(projectRow, 'private_todos')">
-                                                <a target="_blank"
+                                                <a *ngIf="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
+                                                   target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
                                                    md-button>SMARTSHEET</a>
+                                                <a *ngIf="'gantt-chart'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
+                                                   md-button>GANTT CHART</a>
                                                 <a [routerLink]="[projectRow.project.id, 'sync-sessions', 'private_todos']"
                                                    md-button>VIEW SYNC
                                                 </a>
