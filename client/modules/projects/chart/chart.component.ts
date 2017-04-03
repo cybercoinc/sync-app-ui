@@ -6,8 +6,6 @@ import {Params, ActivatedRoute} from "@angular/router";
 import {AuthService} from "client/service/auth.service";
 import {NotificationsService} from "client/modules/notifications/notifications.service";
 import {Chart} from './chart';
-import {MdDialog, MdSnackBar} from "@angular/material";
-import {CreateBaselineDialog} from "./create-baseline.dialog";
 import {ConfigService} from "../../../service/config.service";
 import {PipeConnectionService} from "client/service/pipe-connection.service";
 
