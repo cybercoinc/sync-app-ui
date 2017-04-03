@@ -47,33 +47,36 @@ export class ChartComponent implements OnInit {
                 this.msProjectClient.getUserToProjectPermissions(this.authService.authUser.id, projectId),
             ];
 
-            if (this.PipeConnectionService.pipesListObj['tasks'].id == pipeId) {
-                promises.push(this.getResources());
-            }
-
-            Promise.all(promises)
-                .then(result => {
-                    let chartData = result[0],
-                        assignees = result[1],
-                        userInProject = result[2],
-                        resources = result[3];
-
-                    this.chart = new Chart(assignees, userInProject.allow_edit_gantt_chart, resources);
-
-                    this.chart.setWorkingDays(this.PipeConnectionService.project.working_days, this.PipeConnectionService.project.holidays);
-                    this.chart.buildChart(chartData);
-
-                    this.isShowToolbar = true;
-                    this.isAllowEdit = userInProject.allow_edit_gantt_chart;
-
-                    if (!this.isAllowEdit) {
-                        this.notification.addWarning("You don't have permissions to edit this chart");
+            this.msProjectClient.getPipeById(pipeId)
+                .then(pipe => {
+                    if (pipe[0].type == 'tasks') {
+                        promises.push(this.getResources());
                     }
-                });
 
-            this.msProjectClient.getBaselines(pipeId)
-                .then(baselines => {
-                    this.baselines = baselines;
+                    Promise.all(promises)
+                        .then(result => {
+                            let chartData = result[0],
+                                assignees = result[1],
+                                userInProject = result[2],
+                                resources = result[3];
+
+                            this.chart = new Chart(assignees, userInProject.allow_edit_gantt_chart, resources);
+
+                            this.chart.setWorkingDays(this.PipeConnectionService.project.working_days, this.PipeConnectionService.project.holidays);
+                            this.chart.buildChart(chartData);
+
+                            this.isShowToolbar = true;
+                            this.isAllowEdit = userInProject.allow_edit_gantt_chart;
+
+                            if (!this.isAllowEdit) {
+                                this.notification.addWarning("You don't have permissions to edit this chart");
+                            }
+                        });
+
+                    this.msProjectClient.getBaselines(pipeId)
+                        .then(baselines => {
+                            this.baselines = baselines;
+                        });
                 });
         });
     }
