@@ -87,8 +87,12 @@ export class ChartComponent implements OnInit {
             });
     }
 
+    protected chartUndoStackLength: number = 0;
+    protected chartRedoStackLength: number = 0;
+
     public haveNotSavedChanges(): boolean {
-        return this.chart.needToSaveChanges();
+        return this.chartUndoStackLength !== this.chart.getChartUndoStackLength()
+            || this.chartRedoStackLength !== this.chart.getChartRedoStackLength();
     }
 
     getResources() {
@@ -150,6 +154,9 @@ export class ChartComponent implements OnInit {
 
         this.msProjectClient.saveScheduleGantt(this.pipeId, tasks, links)
             .then(() => {
+                this.chartUndoStackLength = this.chart.getChartUndoStackLength();
+                this.chartRedoStackLength = this.chart.getChartRedoStackLength();
+
                 this.snackBar.open('Chart has been successfully saved', null, {
                     duration: 2000,
                     extraClasses: ['alert-success']
