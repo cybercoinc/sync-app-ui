@@ -39,8 +39,12 @@ export class Chart {
         }
     }
 
-    needToSaveChanges() {
-        return gantt.getUndoStack().length > 0;
+    getChartUndoStackLength() {
+        return gantt.getUndoStack().length;
+    }
+
+    getChartRedoStackLength() {
+        return gantt.getRedoStack().length;
     }
 
     buildChart(data) {
