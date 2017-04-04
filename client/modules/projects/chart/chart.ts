@@ -109,12 +109,12 @@ export class Chart {
                 }
             }
             else if (self.resources === null) {
-                let html = '<option value="">No assignee</option>',
+                let html = '<option selected value="">No assignee</option>',
                     task = gantt.getTask(task_id);
 
                 this.assignees.forEach(item => {
                     let selected = '';
-                    if (!task.assignees || task.assignees == item.id) {
+                    if (task.assignees == item.id) {
                         selected = 'selected';
                     }
 
@@ -293,11 +293,11 @@ export class Chart {
                             .select2();
                     }
                     else if (self.resources === null) {
-                        let html = '<option value="">No assignee</option>';
+                        let html = '<option selected value="">No assignee</option>';
 
                         this.assignees.forEach(item => {
                             let selected = '';
-                            if (!task.assignees || task.assignees == item.id) {
+                            if (task.assignees == item.id) {
                                 selected = 'selected';
                             }
 
