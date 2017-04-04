@@ -35,7 +35,7 @@
                             <div class="row-label" (click)="projectRowExpand(projectRow)">
                                 {{projectRow.project.name}}
                                 <span class="project-status-warning" *ngIf="projectRow.project.status === 'disabled'">
-                                    <i title="project disabled" class="material-icons">warning</i> disabled
+                                    <i title="project disabled" class="material-icons">warning</i> disabled <span class="disabled-reason"> ({{ projectRow.project.disabled_reason }})</span>
                                 </span>
                             </div>
                             <div class="row-icons" *ngIf="!projectRow.is_expanded">
