@@ -28,15 +28,3 @@ md-input-container {
     text-decoration: none;
     cursor:pointer;
 }
-
-.borderless td, .borderless th {
-    border: none;
-}
-
-table td, p {
-    margin-bottom: 0px;
-}
-
-table {
-    margin-bottom: 0px;
-}
