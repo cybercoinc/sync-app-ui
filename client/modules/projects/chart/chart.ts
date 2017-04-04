@@ -108,6 +108,24 @@ export class Chart {
                     $('#' + id).parents('.gantt_wrap_section').hide();
                 }
             }
+            else if (self.resources === null) {
+                let html = '',
+                    task = gantt.getTask(task_id);
+
+                this.assignees.forEach(item => {
+                    let selected = '';
+                    if (!task.assignees || task.assignees == item.id) {
+                        selected = 'selected';
+                    }
+
+                    html += '<option value="' + item.id + '" ' + selected + '>' + item.email + '</option>';
+                });
+
+                $('#assignee-select')
+                    .prop('disabled', false)
+                    .html(html)
+                    .select2();
+            }
 
             $('select.select2').select2();
         }));
@@ -268,13 +286,29 @@ export class Chart {
 
             set_value: ((node, value, task, section) => {
                 if (value && task.assignees) {
-                    $('#assignee-select')
-                        .prop('disabled', false)
-                        .html(self.getAssigneeList(task, self.getResource().id))
-                        .select2();
-                }
-                else {
+                    if (self.resources) {
+                        $('#assignee-select')
+                            .prop('disabled', false)
+                            .html(self.getAssigneeList(task, self.getResource().id))
+                            .select2();
+                    }
+                    else if (self.resources === null) {
+                        let html = '';
 
+                        this.assignees.forEach(item => {
+                            let selected = '';
+                            if (!task.assignees || task.assignees == item.id) {
+                                selected = 'selected';
+                            }
+
+                            html += '<option value="' + item.id + '" ' + selected + '>' + item.email + '</option>';
+                        });
+
+                        $('#assignee-select')
+                            .prop('disabled', false)
+                            .html(html)
+                            .select2();
+                    }
                 }
             }),
             get_value: ((node, task, section) => {
