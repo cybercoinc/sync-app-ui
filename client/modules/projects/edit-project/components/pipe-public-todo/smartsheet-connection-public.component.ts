@@ -14,6 +14,8 @@ import {PipeConnectionService} from 'client/service/pipe-connection.service';
 
         <smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed" pipe-type="{{pipeType}}"
                                [redirect-route]="redirectRoute"></smartsheet-connection>
+
+        <pipe-settings pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></pipe-settings>
     `
 })
 export class SmartsheetConnectionPublicComponent implements OnInit {
