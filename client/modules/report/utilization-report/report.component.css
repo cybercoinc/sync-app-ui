@@ -28,3 +28,7 @@ md-input-container {
     text-decoration: none;
     cursor:pointer;
 }
+
+.itemList {
+    margin-left: 0.5%;
+}
