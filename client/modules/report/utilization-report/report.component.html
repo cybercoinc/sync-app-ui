@@ -12,15 +12,17 @@
                 <div class="row header-row">
                     <h6>Configuration</h6>
                 </div>
+
+
                 <div *ngIf="!showAssigneesAndResources">
-                    <button md-button class="show-data" (click)="showProjectsInfo()">
+                    <button md-button class="show-data" (click)="showItemInfo('project')">
                         <h5 class="pull-left">
-                            <span class="glyphicon {{showProjects ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
+                            <span class="glyphicon {{showProjectsContainer ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
                                   aria-hidden="true"></span>
                             Projects
                         </h5>
                     </button>
-                    <div *ngIf="showProjects">
+                    <div *ngIf="showProjectsContainer">
                         <div class="row">
                             <div class="col-md-2">
                                 <md-input-container>
@@ -29,13 +31,13 @@
                                 </md-input-container>
                             </div>
                             <div class="col-md-1">
-                                <button md-button (click)="showAllProjects()">SHOW ALL</button>
+                                <button md-button (click)="showAllItems('project')">SHOW ALL</button>
                             </div>
                         </div>
 
                         <div *ngIf="filteredProjectRows && filteredProjectRows.length">
                             <div class="col-xs-12" *ngFor="let projectRow of filteredProjectRows">
-                                <md-checkbox [(ngModel)]="model.projects[projectRow.id]" (change)="getProjectCount()"
+                                <md-checkbox *ngIf="!showOnlySelectedProject || (showOnlySelectedProject && model.projects[projectRow.id])" [(ngModel)]="model.projects[projectRow.id]"
                                              name="{{projectRow.id}}">
                                     {{projectRow.name}}
                                 </md-checkbox>
@@ -43,18 +45,20 @@
                         </div>
 
                         <div class="row select-buttons">
-                            <button md-button (click)="showSelectedProjects()">SHOW SELECTED({{projectCount}})</button>
+                            <button md-button (click)="showSelectedItems('project')">SHOW SELECTED({{getItemsCount(model.projects)}})</button>
                             <button class="btn btn-success pull-right" (click)="chooseProjects()" type="submit">NEXT
                             </button>
                         </div>
                     </div>
                 </div>
+
+
                 <div *ngIf="showAssigneesAndResources">
                     <table class="table borderless">
                         <tr>
                             <td class="col-md-1">
                                 <p style="font-size: 18px">
-                                    <a class="edit-button" (click)="backToProjects()">
+                                    <a class="edit-button" (click)="backToItem('project')">
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </a>
                                     Projects:
@@ -72,14 +76,15 @@
                     </table>
 
                     <div *ngIf="!showGroupBy">
-                        <button md-button class="show-data" (click)="showPeopleInfo()" style="margin-top: 0px">
+                        <button md-button class="show-data" (click)="showItemInfo('people')" style="margin-top: 0px">
                             <h5 class="pull-left">
-                                <span class="glyphicon {{showPeople ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
+                                <span class="glyphicon {{showPeopleContainer ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
                                       aria-hidden="true"></span>
-                                People {{(showPeople || peopleCount === 0)? ' ' : '(' + peopleCount + ' selected)'}}
+                                People {{(showPeopleContainer || getItemsCount(model.assignees) === 0)? ' ' : '(' +
+                                getItemsCount(model.assignees) + ' selected)'}}
                             </h5>
                         </button>
-                        <div *ngIf="showPeople">
+                        <div *ngIf="showPeopleContainer">
                             <div class="row">
                                 <div class="col-md-2">
                                     <md-input-container>
@@ -88,21 +93,21 @@
                                     </md-input-container>
                                 </div>
                                 <div class="col-md-1">
-                                    <button md-button (click)="showAllPeople()">SHOW ALL</button>
+                                    <button md-button (click)="showAllItems('people')">SHOW ALL</button>
                                 </div>
                             </div>
 
                             <div *ngIf="filteredPeopleRows && filteredPeopleRows.length">
                                 <div class="col-xs-12" *ngFor="let peopleRow of filteredPeopleRows">
-                                    <md-checkbox [(ngModel)]="model.assignees[peopleRow.email]"
-                                                 (change)="getPeopleCount()" name="{{peopleRow.email}}">
+                                    <md-checkbox  *ngIf="!showOnlySelectedPeople || (showOnlySelectedPeople && model.assignees[peopleRow.email])"
+                                            [(ngModel)]="model.assignees[peopleRow.email]" name="{{peopleRow.email}}">
                                         {{peopleRow.first_name + ' ' + peopleRow.last_name}}
                                     </md-checkbox>
                                 </div>
                             </div>
 
                             <div class="row select-buttons">
-                                <button md-button (click)="showSelectedPeople()">SHOW SELECTED({{peopleCount}})</button>
+                                <button md-button (click)="showSelectedItems('people')">SHOW SELECTED({{getItemsCount(model.assignees)}})</button>
                             </div>
                         </div>
                         <br/>
@@ -112,7 +117,7 @@
                             <tr>
                                 <td class="col-md-1">
                                     <p style="font-size: 18px">
-                                        <a class="edit-button" (click)="backToPeople()">
+                                        <a class="edit-button" (click)="backToItem('people')">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </a>
                                         People:
@@ -131,15 +136,15 @@
                     </div>
 
                     <div *ngIf="!showGroupBy">
-                        <button md-button class="show-data" (click)="showResourcesInfo()" style="margin-top: 0px">
+                        <button md-button class="show-data" (click)="showItemInfo('resource')" style="margin-top: 0px">
                             <h5 class="pull-left">
-                                <span class="glyphicon {{showResources ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
+                                <span class="glyphicon {{showResourcesContainer ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
                                       aria-hidden="true"></span>
-                                Resources {{(showResources || resourceCount === 0)? ' ' : '(' + resourceCount + '
-                                selected)'}}
+                                Resources {{(showResourcesContainer || getItemsCount(model.resources) === 0)? ' ' : '('
+                                + getItemsCount(model.resources) + 'selected)'}}
                             </h5>
                         </button>
-                        <div *ngIf="showResources">
+                        <div *ngIf="showResourcesContainer">
                             <div class="row">
                                 <div class="col-md-2">
                                     <md-input-container>
@@ -148,21 +153,21 @@
                                     </md-input-container>
                                 </div>
                                 <div class="col-md-1">
-                                    <button md-button (click)="showAllResources()">SHOW ALL</button>
+                                    <button md-button (click)="showAllItems('resource')">SHOW ALL</button>
                                 </div>
                             </div>
 
                             <div *ngIf="filteredResourceRows && filteredResourceRows.length">
                                 <div class="col-xs-12" *ngFor="let resourceRow of filteredResourceRows">
-                                    <md-checkbox [(ngModel)]="model.resources[resourceRow.name]"
-                                                 (change)="getResourceCount()" name="{{resourceRow.name}}">
+                                    <md-checkbox  *ngIf="!showOnlySelectedResource || (showOnlySelectedResource && model.resources[resourceRow.name])"
+                                            [(ngModel)]="model.resources[resourceRow.name]" name="{{resourceRow.name}}">
                                         {{resourceRow.name}}
                                     </md-checkbox>
                                 </div>
                             </div>
 
                             <div class="row select-buttons">
-                                <button md-button (click)="showSelectedResources()">SHOW SELECTED({{resourceCount}})
+                                <button md-button (click)="showSelectedItems('resource')">SHOW SELECTED({{getItemsCount(model.resources)}})
                                 </button>
                             </div>
                         </div>
@@ -172,7 +177,7 @@
                             <tr>
                                 <td class="col-md-1">
                                     <p style="font-size: 18px">
-                                        <a class="edit-button" (click)="backToResources()">
+                                        <a class="edit-button" (click)="backToItem('resource')">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                         </a>
                                         Resources:
@@ -195,14 +200,14 @@
                     </button>
 
                     <div *ngIf="showGroupBy">
-                        <button md-button class="show-data" (click)="showGroupByInfo()" style="margin-top: 0px">
+                        <button md-button class="show-data" (click)="showItemInfo('groupBy')" style="margin-top: 0px">
                             <h5 class="pull-left">
-                                <span class="glyphicon {{showGroupByData ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
+                                <span class="glyphicon {{showGroupByContainer ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
                                       aria-hidden="true"></span>
                                 Group by
                             </h5>
                         </button>
-                        <div *ngIf="showGroupByData">
+                        <div *ngIf="showGroupByContainer">
                             <div class="row">
                                 <div class="groupings">
                                     <md-select [(ngModel)]="model.group_by" name="group_by">
@@ -222,5 +227,3 @@
         </div>
     </div>
 </div>
-
-
