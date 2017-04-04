@@ -20,6 +20,7 @@ export class ChartComponent implements OnInit {
     private selectedBaseline = null;
     private assignees = [];
     private isShowToolbar = false;
+    private isShowSidebar = true;
     private pipeId;
     private isAllowEdit;
 
@@ -161,6 +162,20 @@ export class ChartComponent implements OnInit {
         let serverUrl = this.configService.getConfig('CHART_EXPORT_ENDPOINT');
 
         this.chart.exportToPdf(serverUrl);
+    }
+
+    undo() {
+        this.chart.undo();
+    }
+
+    redo() {
+        this.chart.redo();
+    }
+
+    toggleSidebar() {
+        this.chart.toggleSidebar(this.isShowSidebar);
+
+        this.isShowSidebar = !this.isShowSidebar;
     }
 
     private filterTasks() {

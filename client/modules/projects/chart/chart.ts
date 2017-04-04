@@ -7,6 +7,7 @@ export class Chart {
     isAllowEdit: boolean;
     weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     notWorkingDays = [0 ,6];
+    columns = [];
 
     constructor(assignees, isAllowEdit, resources = null) {
         this.resources = resources;
@@ -408,7 +409,7 @@ export class Chart {
         }
 
         gantt.config.columns = [
-            {name:"text", label: "Task name", tree: true, width: columnsWidth.text},
+            {id: 1, name:"text", label: "Task name", tree: true, width: columnsWidth.text},
             {name:"progress", label: "Complete %", width: columnsWidth.progress, template: (obj) => {
                 if (obj.progress) {
                     return (obj.progress * 100).toFixed(0);
@@ -427,6 +428,9 @@ export class Chart {
         if (this.isAllowEdit) {
             gantt.config.columns.push({name:"add", label:"", width:44 });
         }
+
+        this.columns = gantt.config.columns;
+
         gantt.config.grid_resize        = true;
         gantt.config.auto_scheduling    = true;
         gantt.config.work_time          = true;
@@ -438,5 +442,14 @@ export class Chart {
             }
         });
         gantt._is_lightbox_timepicker = (() => {return true});
+    }
+
+    toggleSidebar(isHide) {
+        this.columns.forEach(col => {
+            let column = gantt.getGridColumn(col.name);
+            column.hide = isHide;
+        });
+
+        gantt.render();
     }
 }

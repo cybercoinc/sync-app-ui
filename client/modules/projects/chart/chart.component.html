@@ -25,10 +25,13 @@
     </md-card>
 
     <div *ngIf="isShowToolbar" id="chart-toolbar">
-        <md-icon>skip_previous</md-icon>
+        <md-icon (click)="toggleSidebar()">
+            <span *ngIf="isShowSidebar">skip_previous</span>
+            <span *ngIf="!isShowSidebar">skip_next</span>
+        </md-icon>
         <span class="icons-spacer"></span>
-        <md-icon>undo</md-icon>
-        <md-icon>redo</md-icon>
+        <md-icon (click)="undo()">undo</md-icon>
+        <md-icon (click)="redo()">redo</md-icon>
     </div>
     <div id="chart" style="width:100%; height:100%;">
         <h1>Loading... Please wait.</h1>
