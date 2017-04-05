@@ -1,0 +1,26 @@
+.row {
+    padding-bottom: 20px;
+}
+
+md-option:not(.time) {
+    text-transform: capitalize;
+}
+
+textarea {
+    resize: none;
+    margin-left: 45px;
+}
+
+.tooltip {
+    font-size: 12px;
+}
+
+.mat-card-actions {
+    color: #FFFFFF;
+    margin-bottom: 0;
+    padding: 0 15px 0 15px;
+}
+
+.cancel {
+    background: rgb(161, 161, 161);
+}

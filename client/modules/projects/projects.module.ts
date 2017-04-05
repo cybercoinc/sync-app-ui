@@ -51,6 +51,7 @@ import {TaskNotificationsComponent} from "./edit-project/components/project-sett
 import {ChartWorkingDaysComponent} from "./edit-project/components/project-settings/chart-working-days/chart-working-days.component";
 import {PrimaryBillingUser} from "./edit-project/components/project-settings/primary-billing-user/primary-billing-user.component";
 import {CanDeactivateChart} from "./chart/chart.deactivate";
+import {PolicyComponent} from "./edit-project/components/project-settings/task-notifications/policy/policy.component";
 
 @NgModule({
     imports: [
@@ -97,6 +98,7 @@ import {CanDeactivateChart} from "./chart/chart.deactivate";
         PipeSettingsComponent,
         ChooseResourceComponent,
         TaskNotificationsComponent,
+        PolicyComponent,
         AddResourceDialog,
         SetGanttAccessDialog,
 

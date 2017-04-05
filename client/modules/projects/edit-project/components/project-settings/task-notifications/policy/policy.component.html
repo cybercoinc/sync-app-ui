@@ -1,0 +1,56 @@
+<md-card class="row" *ngIf="policy">
+    <md-card-header>
+        <md-card-title>add notification policy</md-card-title>
+    </md-card-header>
+
+    <md-card-content>
+        <div class="row col-md-12">
+            <md-input-container>
+                <input mdInput [(ngModel)]="policy.name" placeholder="Label" class="col-md-2">
+            </md-input-container>
+        </div>
+
+        <div class="row">
+            <md-select [(ngModel)]="policy.type" placeholder="Type" class="col-md-6">
+                <md-option *ngFor="let type of types" [value]="type">{{ type }}</md-option>
+            </md-select>
+            <label class="col-md-12">Note: Will be send email with tasks finish between NOW and NOW+period</label>
+        </div>
+
+        <div class="row">
+            <md-select [(ngModel)]="policy.params.period" placeholder="Period" class="col-md-6">
+                <md-option *ngFor="let period of periods" [value]="period">{{ period }}</md-option>
+            </md-select>
+        </div>
+
+        <div class="row">
+            <md-select [(ngModel)]="policy.schedule" placeholder="Schedule" class="col-md-5">
+                <md-option *ngFor="let schedule of schedules" [value]="schedule">{{ schedule }}</md-option>
+            </md-select>
+
+            <md-select [(ngModel)]="policy.time" placeholder="Time" class="col-md-3">
+                <md-option class="time" *ngFor="let time of times" [value]="time">{{ time }}</md-option>
+            </md-select>
+        </div>
+
+        <span class="pull-left">Recipients</span>
+        <div class="row">
+            <div class="col-md-12">
+                <md-checkbox [(ngModel)]="isShowCustomEmails" class="pull-left">Custom emails <span class="tooltip">(will receive all matched tasks)</span></md-checkbox>
+            </div>
+            <textarea *ngIf="isShowCustomEmails" [(ngModel)]="policy.params.custom_emails" class="col-md-8" placeholder="Type comma-separated email addresses"></textarea>
+        </div>
+
+        <div class="row">
+            <md-checkbox [(ngModel)]="policy.params.project_employees" class="col-md-12">Company employees from this project</md-checkbox>
+            <!--<span class="tooltip">(will receive all matched tasks)</span>-->
+            <md-checkbox [(ngModel)]="policy.params.assignees" class="col-md-12">Assignees</md-checkbox>
+            <!--<span class="tooltip">(will receive only own tasks)</span>-->
+        </div>
+    </md-card-content>
+
+    <md-card-actions class="row">
+        <button md-button class="btn btn-default cancel" (click)="goBack()">cancel</button>
+        <button md-button class="btn btn-success pull-right" (click)="save()">save & enable</button>
+    </md-card-actions>
+</md-card>
