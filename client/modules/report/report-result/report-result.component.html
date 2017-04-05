@@ -61,29 +61,31 @@
         <div class="col-xs-12">
             <div class="report-row" *ngIf="reportData">
                 <div *ngFor="let report of reportData">
-                    <h4>{{report.name}}</h4>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th class="col-md-3">Task</th>
-                            <th class="col-md-2">Resource</th>
-                            <th class="col-md-2">Progress</th>
-                            <th class="col-md-3">Project</th>
-                            <th class="col-md-1">Start Date</th>
-                            <th class="col-md-1">Finish Date</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let data of report.tasks">
-                            <td>{{data.text}}</td>
-                            <td>{{data.resources}}</td>
-                            <td>{{data.progress ? data.progress + '%': '0%'}}</td>
-                            <td>{{data.project_name}}</td>
-                            <td>{{data.start_date| date: 'MMM dd, yyyy'}}</td>
-                            <td>{{data.end_date| date: 'MMM dd, yyyy'}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div *ngIf="report.tasks.length !== 0">
+                        <h4>{{report.name}}</h4>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="col-md-3">Task</th>
+                                <th class="col-md-2">Resource</th>
+                                <th class="col-md-2">Progress</th>
+                                <th class="col-md-3">Project</th>
+                                <th class="col-md-1">Start Date</th>
+                                <th class="col-md-1">Finish Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let data of report.tasks">
+                                <td>{{data.text}}</td>
+                                <td>{{data.resources}}</td>
+                                <td>{{data.progress ? data.progress + '%': '0%'}}</td>
+                                <td>{{data.project_name}}</td>
+                                <td>{{data.start_date| date: 'MMM dd, yyyy'}}</td>
+                                <td>{{data.end_date| date: 'MMM dd, yyyy'}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,13 +15,13 @@
 
 
                 <div *ngIf="!showAssigneesAndResources">
-                    <button md-button class="show-data" (click)="showItemInfo('project')">
+                    <div class="col-md-12 show-data" (click)="showItemInfo('project')">
                         <h5 class="pull-left">
                             <span class="glyphicon {{showProjectsContainer ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
                                   aria-hidden="true"></span>
                             Projects
                         </h5>
-                    </button>
+                    </div>
                     <div *ngIf="showProjectsContainer">
                         <div class="row">
                             <div class="col-md-2">
@@ -74,14 +74,14 @@
                     </div>
 
                     <div *ngIf="!showGroupBy">
-                        <button md-button class="show-data" (click)="showItemInfo('people')" style="margin-top: 0px">
+                        <div class="col-md-12 show-data" (click)="showItemInfo('people')" style="margin-top: 0px">
                             <h5 class="pull-left">
                                 <span class="glyphicon {{showPeopleContainer ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
                                       aria-hidden="true"></span>
                                 People {{(showPeopleContainer || getItemsCount(model.assignees) === 0)? ' ' : '(' +
                                 getItemsCount(model.assignees) + ' selected)'}}
                             </h5>
-                        </button>
+                        </div>
                         <div *ngIf="showPeopleContainer">
                             <div class="row">
                                 <div class="col-md-2">
@@ -122,24 +122,25 @@
                             </div>
                             <div class="col-md-11">
                                 <p style="font-size: 18px">
-                            <span *ngFor="let peopleRow of filteredPeopleRows">
-                                {{peopleRow.first_name + ' ' + peopleRow.last_name}}<span
-                                    *ngIf="filteredPeopleRows.length > 1 && filteredPeopleRows.length - 1 !== filteredPeopleRows.indexOf(peopleRow)">, </span>
-                            </span>
+                                    <span *ngFor="let peopleRow of filteredPeopleRows">
+                                        {{peopleRow.first_name + ' ' + peopleRow.last_name}}<span
+                                            *ngIf="filteredPeopleRows.length > 1 && filteredPeopleRows.length - 1 !== filteredPeopleRows.indexOf(peopleRow)">, </span>
+                                    </span>
+                                    <span *ngIf="filteredPeopleRows.length === 0">Any people</span>
                                 </p>
                             </div>
                         </div>
                     </div>
 
                     <div *ngIf="!showGroupBy">
-                        <button md-button class="show-data" (click)="showItemInfo('resource')" style="margin-top: 0px">
+                        <div class="col-md-12 show-data" (click)="showItemInfo('resource')" style="margin-top: 0px">
                             <h5 class="pull-left">
                                 <span class="glyphicon {{showResourcesContainer ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
                                       aria-hidden="true"></span>
                                 Resources {{(showResourcesContainer || getItemsCount(model.resources) === 0)? ' ' : '('
                                 + getItemsCount(model.resources) + 'selected)'}}
                             </h5>
-                        </button>
+                        </div>
                         <div *ngIf="showResourcesContainer">
                             <div class="row">
                                 <div class="col-md-2">
@@ -184,6 +185,7 @@
                                         {{resourceRow.name}}<span
                                             *ngIf="filteredResourceRows.length > 1 && filteredResourceRows.length - 1 !== filteredResourceRows.indexOf(resourceRow)">, </span>
                                     </span>
+                                    <span *ngIf="filteredResourceRows.length === 0">Any resource</span>
                                 </p>
                             </div>
                         </div>
