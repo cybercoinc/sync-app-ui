@@ -26,6 +26,7 @@
                         <div class="col-xs-2">{{project.license?.id}}</div>
                         <div class="col-xs-3">
                             <a *ngIf="project" [routerLink]="['/projects/' + project.id, 'edit-project']">{{project.name}}</a>
+                            <span *ngIf="project.billing_user">({{project.billing_user.first_name}} {{project.billing_user.last_name}})</span>
                         </div>
                         <div class="col-xs-2">{{project.license?.status}}</div>
                         <div class="col-xs-1">{{project.license?.in_use ? 'Enabled' : 'Disabled'}}</div>
