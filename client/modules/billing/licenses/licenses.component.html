@@ -14,21 +14,26 @@
             <div>
                 <div class="row license-table-header bottom-lined">
                     <div class="col-xs-2">#ID</div>
-                    <div class="col-xs-4">Project</div>
-                    <div class="col-xs-2">Status / In use</div>
+                    <div class="col-xs-3">Project</div>
+                    <div class="col-xs-2">License</div>
+                    <div class="col-xs-1">Sync</div>
+                    <div class="col-xs-2">Last sync</div>
                     <div class="col-xs-2">Created</div>
-                    <div class="col-xs-2">Last used</div>
                 </div>
 
                 <div>
                     <div class="row license-table-row bottom-lined" *ngFor="let project of activeProjects">
                         <div class="col-xs-2">{{project.license?.id}}</div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-3">
                             <a *ngIf="project" [routerLink]="['/projects/' + project.id, 'edit-project']">{{project.name}}</a>
                         </div>
-                        <div class="col-xs-2">{{project.license?.status}} / {{project.license?.in_use ? 'Yes' : 'No'}}</div>
+                        <div class="col-xs-2">{{project.license?.status}}</div>
+                        <div class="col-xs-1">{{project.license?.in_use ? 'Enabled' : 'Disabled'}}</div>
+                        <div class="col-xs-2">
+                            <span *ngIf="!project.license?.in_use">{{project.license?.last_used_at | date}}</span>
+                            <span *ngIf="project.license?.in_use">Today</span>
+                        </div>
                         <div class="col-xs-2">{{project.license?.created_at | date}}</div>
-                        <div *ngIf="project.license?.last_used_at" class="col-xs-2">{{project.license.last_used_at | date}}</div>
                     </div>
                 </div>
             </div>
@@ -40,19 +45,24 @@
             <div>
                 <div class="row license-table-header bottom-lined">
                     <div class="col-xs-2">#ID</div>
-                    <div class="col-xs-4">Project</div>
-                    <div class="col-xs-2">Status / In use</div>
+                    <div class="col-xs-3">Project</div>
+                    <div class="col-xs-2">License</div>
+                    <div class="col-xs-1">Sync</div>
+                    <div class="col-xs-2">Last sync</div>
                     <div class="col-xs-2">Created</div>
-                    <div class="col-xs-2">Last used</div>
                 </div>
 
                 <div>
                     <div class="row license-table-row bottom-lined" *ngFor="let project of deletedProjects">
                         <div class="col-xs-2">{{project.license?.id}}</div>
-                        <div class="col-xs-4">{{project.name}}</div>
-                        <div class="col-xs-2">{{project.license?.status}} / {{project.license?.in_use ? 'Yes' : 'No'}}</div>
+                        <div class="col-xs-3">{{project.name}}</div>
+                        <div class="col-xs-2">{{project.license?.status}}</div>
+                        <div class="col-xs-1">{{project.license?.in_use ? 'Enabled' : 'Disabled'}}</div>
+                        <div class="col-xs-2">
+                            <span *ngIf="!project.license?.in_use">{{project.license?.last_used_at | date}}</span>
+                            <span *ngIf="project.license?.in_use">Today</span>
+                        </div>
                         <div class="col-xs-2">{{project.license?.created_at | date}}</div>
-                        <div *ngIf="project.license?.last_used_at" class="col-xs-2">{{project.license.last_used_at | date}}</div>
                     </div>
                 </div>
             </div>
