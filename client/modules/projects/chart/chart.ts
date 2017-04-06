@@ -420,10 +420,11 @@ export class Chart {
 
             for (let i = 0; i < childs.length; i++) {
                 let task = gantt.getTask(childs[i]);
-                totalProgress += parseFloat(task.progress || 0);
+                totalProgress += task.progress || 0;
             }
 
-            parentTask.progress = (totalProgress / childs.length).toFixed(2);
+            parentTask.progress = totalProgress / childs.length;
+
             gantt.updateTask(parentTask.id);
         });
     }
