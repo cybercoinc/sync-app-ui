@@ -7,3 +7,7 @@
 .borderless td, .borderless th {
     border: none;
 }
+
+.attention-star {
+    color: red;
+}
