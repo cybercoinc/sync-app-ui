@@ -28,19 +28,21 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>People:</td>
+                                <td>People <span class="attention-star">*</span> :</td>
                                 <td>
                                     <span *ngFor="let assignee of reportInformation.assignees">
                                     {{assignee.first_name +' '+ assignee.last_name}}<span *ngIf="reportInformation.assignees.length > 1 && reportInformation.assignees.length - 1 !== reportInformation.assignees.indexOf(assignee)">, </span>
                                     </span>
+                                    <span *ngIf="reportInformation.assignees.length === 0">Any</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td>Resources:</td>
+                                <td>Resources <span class="attention-star">*</span> :</td>
                                 <td>
                                     <span *ngFor="let resource of reportInformation.resources">
                                     {{resource}}<span *ngIf="reportInformation.resources.length > 1 && reportInformation.resources.length - 1 !== reportInformation.resources.indexOf(resource)">, </span>
                                     </span>
+                                    <span *ngIf="reportInformation.resources.length === 0">Any</span>
                                 </td>
                             </tr>
                             <tr>
@@ -54,6 +56,7 @@
 
                         <button class="btn btn-success pull-right" (click)="saveToCsv()">EXPORT TO CSV</button>
                     </div>
+                    <p style="margin-left: 2%"><span class="attention-star">*</span> - this filters will work only if they are agreed with each other</p>
                 </div>
             </div>
         </div>
@@ -63,24 +66,26 @@
         <div class="col-xs-12">
             <div class="report-row" *ngIf="reportData">
                 <div *ngFor="let report of reportData">
-                    <h4>{{report.name}}</h4>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th *ngFor="let header of tableHeaders">{{header}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let data of report.tasks">
-                            <td class="col-md-3">{{data.text}}</td>
-                            <td class="col-md-2">{{data.resources}}</td>
-                            <td class="col-md-2">{{data.progress ? data.progress + '%': '0%'}}</td>
-                            <td class="col-md-3">{{data.project_name}}</td>
-                            <td class="col-md-1">{{data.start_date| date: 'MMM dd, yyyy'}}</td>
-                            <td class="col-md-1">{{data.end_date| date: 'MMM dd, yyyy'}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div *ngIf="report.tasks.length !== 0">
+                        <h4>{{report.name}}</h4>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th *ngFor="let header of tableHeaders">{{header}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let data of report.tasks">
+                                <td class="col-md-3">{{data.text}}</td>
+                                <td class="col-md-2">{{data.resources}}</td>
+                                <td class="col-md-2">{{data.progress ? data.progress + '%': '0%'}}</td>
+                                <td class="col-md-3">{{data.project_name}}</td>
+                                <td class="col-md-1">{{data.start_date| date: 'MMM dd, yyyy'}}</td>
+                                <td class="col-md-1">{{data.end_date| date: 'MMM dd, yyyy'}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

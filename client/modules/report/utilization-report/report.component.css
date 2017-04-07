@@ -11,6 +11,11 @@
     margin-top: 1%;
     margin-bottom: 1%;
     width: 100%;
+    cursor: pointer;
+}
+
+.show-data:hover {
+    background-color: #e6e6e6;
 }
 
 md-input-container {
@@ -26,17 +31,9 @@ md-input-container {
     display: inline-block;
     margin-right: 5%;
     text-decoration: none;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-.borderless td, .borderless th {
-    border: none;
-}
-
-table td, p {
-    margin-bottom: 0px;
-}
-
-table {
-    margin-bottom: 0px;
+.itemList {
+    margin-left: 0.5%;
 }
