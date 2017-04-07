@@ -25,7 +25,7 @@
                     <div class="row license-table-row bottom-lined" *ngFor="let project of activeProjects">
                         <div class="col-xs-2">{{project.license?.id}}</div>
                         <div class="col-xs-3">
-                            <a *ngIf="project" [routerLink]="['/projects/' + project.id, 'edit-project']">{{project.name}}</a>
+                            <a *ngIf="project" [routerLink]="['/projects/' + project.id, 'edit-project', 'settings']">{{project.name}}</a>
                             <span *ngIf="project.billing_user">({{project.billing_user.first_name}} {{project.billing_user.last_name}})</span>
                         </div>
                         <div class="col-xs-2">{{project.license?.status}}</div>

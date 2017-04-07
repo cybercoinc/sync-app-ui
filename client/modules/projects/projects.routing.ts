@@ -89,7 +89,7 @@ export const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'pipe-public-todo',
+                        redirectTo: 'settings',
                         pathMatch: 'full'
                     },
 
