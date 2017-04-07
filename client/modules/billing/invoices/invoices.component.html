@@ -23,8 +23,10 @@
                         <div class="col-xs-3">{{invoice.payment_status}}</div>
                         <div class="col-xs-3">{{invoice.created_at|date}}</div>
                         <div class="col-xs-1">${{invoice.amount}}</div>
-
-                        <a *ngIf="invoice.payment_status == 'Open'" href="{{ printPDFUrl + invoice.xero_invoice_id }}" target="_blank" class="btn btn-danger col-xs-1">Details</a>
+                        <div class="col-xs-1"><a *ngIf="invoice.xero_invoice_id"
+                                                 href="{{ printPDFUrl + invoice.xero_invoice_id }}"
+                                                 target="_blank"
+                                                 md-button>DETAILS</a></div>
                     </div>
                 </div>
             </div>
