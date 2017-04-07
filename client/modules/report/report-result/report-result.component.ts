@@ -21,6 +21,14 @@ export class ReportResultComponent implements OnInit {
     protected reportId: number;
     public reportInformation: any;
     public reportData: any;
+    public tableHeaders = [
+        'Task',
+        'Resource',
+        'Progress',
+        'Project',
+        'Start Date',
+        'Finish Date'
+    ];
 
     ngOnInit() {
         this.ActivatedRoute.params.forEach((params) => {
@@ -45,6 +53,15 @@ export class ReportResultComponent implements OnInit {
             .then(result => {
                 return this.reportData = result
             });
+    }
+
+    saveToCsv() {
+        return this.MsProjectClientService.saveToCsv(this.reportData, this.tableHeaders, this.reportId)
+            .then(downloadLink => {
+                setTimeout(function() {
+                    window.open(downloadLink);
+                }, 1500);
+            })
     }
 
 }
