@@ -196,13 +196,13 @@
                     </button>
 
                     <div *ngIf="showGroupBy">
-                        <button md-button class="show-data" (click)="showItemInfo('groupBy')" style="margin-top: 0px">
+                        <div class="col-md-12 show-data" (click)="showItemInfo('groupBy')" style="margin-top: 0px">
                             <h5 class="pull-left">
                                 <span class="glyphicon {{showGroupByContainer ? 'glyphicon-menu-down' : 'glyphicon-menu-right'}}"
                                       aria-hidden="true"></span>
                                 Group by
                             </h5>
-                        </button>
+                        </div>
                         <div *ngIf="showGroupByContainer">
                             <div class="row">
                                 <div class="groupings">
@@ -223,3 +223,5 @@
         </div>
     </div>
 </div>
+
+
