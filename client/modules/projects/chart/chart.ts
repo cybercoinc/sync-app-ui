@@ -182,7 +182,7 @@ export class Chart {
         return this.resources.find(e => e.name == $('#resources-select').val());
     }
 
-    getTasks() {
+    getTasks(): any[] {
         return gantt.serialize().data.map(item => {
             item.has_children = gantt.hasChild(item.id) > 0;
             item.row_number   = gantt.getGlobalTaskIndex(item.id);
@@ -409,24 +409,32 @@ export class Chart {
             return true;
         }));
 
-        gantt.attachEvent("onAfterTaskUpdate", function(id,item){
-            if (item.parent == 0) {
-                return;
-            }
-
-            let parentTask = gantt.getTask(item.parent),
-                childs = gantt.getChildren(parentTask.id),
-                totalProgress = 0;
-
-            for (let i = 0; i < childs.length; i++) {
-                let task = gantt.getTask(childs[i]);
-                totalProgress += task.progress || 0;
-            }
-
-            parentTask.progress = totalProgress / childs.length;
-
-            gantt.updateTask(parentTask.id);
+        // todo run calculation for all items after Gantt init
+        gantt.attachEvent("onAfterTaskUpdate", (id, item) => {
+            return this.calculateItemsProgress(item);
         });
+    }
+
+    protected calculateItemsProgress(item) {
+        if (!item.parent) {
+            return item;
+        }
+
+        let parentTask = gantt.getTask(item.parent);
+        let childrenIdsList = gantt.getChildren(parentTask.id);
+
+        let totalProgress = 0;
+
+        for (let i = 0; i < childrenIdsList.length; i++) {
+            let task = gantt.getTask(childrenIdsList[i]);
+
+            totalProgress += task.progress || 0;
+        }
+
+        parentTask.progress = totalProgress / childrenIdsList.length;
+        gantt.updateTask(parentTask.id);
+
+        return item;
     }
 
     setConfiguration() {

@@ -46,13 +46,13 @@ export class ChartComponent implements OnInit {
                 this.msProjectClient.getUserToProjectPermissions(this.authService.authUser.id, projectId),
             ];
 
-            this.msProjectClient.getPipeById(pipeId)
+            return this.msProjectClient.getPipeById(pipeId)
                 .then(pipe => {
                     if (pipe[0].type == 'tasks') {
                         promises.push(this.getResources());
                     }
 
-                    Promise.all(promises)
+                    return Promise.all(promises)
                         .then(result => {
                             let chartData = result[0],
                                 assignees = result[1],
@@ -70,11 +70,15 @@ export class ChartComponent implements OnInit {
                             if (!this.isAllowEdit) {
                                 this.notification.addWarning("You don't have permissions to edit this chart");
                             }
-                        });
-
-                    this.msProjectClient.getBaselines(pipeId)
+                        })
+                        .then(() => {
+                            return this.msProjectClient.getBaselines(pipeId)
+                        })
                         .then(baselines => {
                             this.baselines = baselines;
+                        })
+                        .then(() => {
+                            this.chart.refreshData();
                         });
                 });
         });
