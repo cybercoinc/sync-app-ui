@@ -7,7 +7,7 @@
     margin: 0;
 }
 
-md-card-header .mat-card-header-text {
+.mat-card-header .mat-card-header-text {
     width: 100% !important;
 }
 

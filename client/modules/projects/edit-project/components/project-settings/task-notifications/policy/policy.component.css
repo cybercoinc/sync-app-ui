@@ -24,3 +24,7 @@ textarea {
 .cancel {
     background: rgb(161, 161, 161);
 }
+
+md-select {
+    text-transform: capitalize;
+}
