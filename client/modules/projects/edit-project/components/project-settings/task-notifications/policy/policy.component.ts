@@ -11,10 +11,10 @@ import {Router, ActivatedRoute, Params} from "@angular/router";
 })
 export class PolicyComponent implements OnInit {
     private types = [
-        'due tasks reminder',
-        'upcoming tasks reminder',
-        'completed tasks reminder',
-        'active tasks reminder',
+        'due',
+        'upcoming',
+        'completed',
+        'active',
     ];
     private periods = [
         '1 day',
@@ -38,8 +38,8 @@ export class PolicyComponent implements OnInit {
         'every last day of month',
     ];
     private times = [
-        '1 am', '2 am', '3 am', '4 am', '5 am', '6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 am',
-        '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm', '8 pm', '9 pm', '10 pm', '11 pm', '12 pm',
+        '01:00 am', '02:00 am', '03:00 am', '04:00 am', '05:00 am', '06:00 am', '07:00 am', '08:00 am', '09:00 am', '10:00 am', '11:00 am', '12:00 am',
+        '01:00 pm', '02:00 pm', '03:00 pm', '04:00 pm', '05:00 pm', '06:00 pm', '07:00 pm', '08:00 pm', '09:00 pm', '10:00 pm', '11:00 pm', '12:00 pm',
     ];
 
     public policy: NotificationPolicy;

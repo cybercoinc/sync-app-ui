@@ -6,7 +6,9 @@
         </md-card-title>
     </md-card-header>
 
-    <md-card-content>
+    <md-card-content *ngIf="policies">
+        <div *ngIf="policies.length < 1">No policies</div>
+
         <div class="col-md-12 row" *ngFor="let policy of policies">
             <div class="col-md-11">
                 <md-slide-toggle [checked]="policy.is_enabled" (change)="switchEnabling(policy.id, $event)">{{ policy.name }}</md-slide-toggle>

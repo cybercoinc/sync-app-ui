@@ -311,7 +311,7 @@ export class NotificationPolicy {
         namespace: string;
         path:      string | number[]
     };
-    params: any;
+    params: any = {};
 }
 
 export const INVOICE_STATUS_OPEN = 'Open';

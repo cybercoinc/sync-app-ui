@@ -12,9 +12,9 @@
 
         <div class="row">
             <md-select [(ngModel)]="policy.type" placeholder="Type" class="col-md-6">
-                <md-option *ngFor="let type of types" [value]="type">{{ type }}</md-option>
+                <md-option *ngFor="let type of types" [value]="type">{{ type }} tasks</md-option>
             </md-select>
-            <label class="col-md-12">Note: Will be send email with tasks finish between NOW and NOW+period</label>
+            <label class="col-md-12">Note: Will be send email with tasks between NOW and NOW+period</label>
         </div>
 
         <div class="row">
@@ -42,9 +42,9 @@
         </div>
 
         <div class="row">
-            <md-checkbox [(ngModel)]="policy.params.project_employees" class="col-md-12">Company employees from this project</md-checkbox>
+            <md-checkbox [(ngModel)]="policy.params.is_send_project_employees" class="col-md-12">Company employees from this project</md-checkbox>
             <!--<span class="tooltip">(will receive all matched tasks)</span>-->
-            <md-checkbox [(ngModel)]="policy.params.assignees" class="col-md-12">Assignees</md-checkbox>
+            <md-checkbox [(ngModel)]="policy.params.is_send_assignees" class="col-md-12">Assignees</md-checkbox>
             <!--<span class="tooltip">(will receive only own tasks)</span>-->
         </div>
     </md-card-content>
