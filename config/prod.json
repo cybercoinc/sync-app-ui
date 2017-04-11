@@ -1,5 +1,7 @@
 {
   "GCLOUD_PROJECT": "scheduleconnector-prod",
   "accessEndPointURL": "https://app.scheduleconnector.com/",
-  "ms_main_url": "https://ms-main-dot-scheduleconnector-prod.appspot-preview.com/"
+  "ms_main_url": "https://ms-main-dot-scheduleconnector-prod.appspot-preview.com/",
+
+  "CHART_EXPORT_ENDPOINT": "https://gantt-pdf-dot-scheduleconnector-prod.appspot.com/gantt"
 }
