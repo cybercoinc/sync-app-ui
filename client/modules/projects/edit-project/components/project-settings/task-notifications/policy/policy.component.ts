@@ -24,7 +24,6 @@ export class PolicyComponent implements OnInit {
     ];
     private schedules = [
         'daily',
-        'separator',
         'monday',
         'tuesday',
         'wednesday',
@@ -32,7 +31,6 @@ export class PolicyComponent implements OnInit {
         'friday',
         'saturday',
         'sunday',
-        'separator',
         'every_1st_day_of_month',
         'every_15th_day_of_month',
         'every_last_day_of_month',
