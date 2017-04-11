@@ -437,8 +437,12 @@ export class Chart {
             totalProgress += task.progress || 0;
         }
 
+        let oldProgress = parentTask.progress;
         parentTask.progress = totalProgress / childrenIdsList.length;
-        gantt.updateTask(parentTask.id);
+
+        if (parentTask.progress != oldProgress) {
+            gantt.updateTask(parentTask.id);
+        }
 
         return item;
     }
