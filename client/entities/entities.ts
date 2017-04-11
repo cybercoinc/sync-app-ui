@@ -299,6 +299,22 @@ export class Resource {
     };
 }
 
+export class NotificationPolicy {
+    id: number;
+    name: string;
+    is_enabled: boolean;
+    type: string;
+    time: string;
+    schedule: string;
+    project_fk_id: {
+        id:        number;
+        kind:      string;
+        namespace: string;
+        path:      string | number[]
+    };
+    params: any = {};
+}
+
 export const INVOICE_STATUS_OPEN = 'Open';
 export const INVOICE_STATUS_PAID = 'PAID';
 

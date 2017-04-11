@@ -3,5 +3,5 @@
   "accessEndPointURL": null,
   "ms_main_url": null,
   "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
-  "CHART_EXPORT_ENDPOINT": "http://localhost:80/gantt"
+  "CHART_EXPORT_ENDPOINT": "https://gantt-pdf-dot-scheduleconnector-dev.appspot.com/gantt"
 }
