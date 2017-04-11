@@ -3,6 +3,7 @@ import {AuthService} from "client/service/auth.service";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {Project, NotificationPolicy} from "client/entities/entities";
 import {NotificationsService} from "client/modules/notifications/notifications.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'task-notification',
@@ -17,7 +18,8 @@ export class TaskNotificationsComponent implements OnInit {
 
     constructor(protected AuthService: AuthService,
                 protected MsProjectClientService: MsProjectClientService,
-                protected notificationsService: NotificationsService) {}
+                protected notificationsService: NotificationsService,
+                private router: Router) {}
 
     ngOnInit(): void {
         this.MsProjectClientService.getProjectByid(this.projectId)
@@ -31,6 +33,10 @@ export class TaskNotificationsComponent implements OnInit {
             .then(policies => {
                 this.policies = policies;
             });
+    }
+
+    addPolicy() {
+        return this.router.navigate(['projects', this.project.id, 'edit-project', 'policy']);
     }
 
     getPolicyLink(policyId = '') {

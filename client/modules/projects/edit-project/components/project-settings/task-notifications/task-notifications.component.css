@@ -7,8 +7,10 @@
     margin: 0;
 }
 
-.mat-card-header .mat-card-header-text {
-    width: 100% !important;
+.add-policy {
+    margin-top: -13px;
+    margin-bottom: 13px;
+    width: 120px;
 }
 
 a:hover {

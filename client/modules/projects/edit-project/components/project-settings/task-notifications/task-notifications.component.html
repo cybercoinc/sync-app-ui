@@ -1,9 +1,10 @@
 <md-card *ngIf="project" class="row">
-    <md-card-header>
+    <md-card-header id="task-notification-header">
         <md-card-title>
             <div class="pull-left">Notifications</div>
-            <a class="btn btn-default pull-right" href="{{ getPolicyLink() }}">add policy</a>
         </md-card-title>
+
+        <button md-button class="add-policy" (click)="addPolicy()">ADD POLICY</button>
     </md-card-header>
 
     <md-card-content *ngIf="policies">

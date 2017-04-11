@@ -25,7 +25,7 @@
 
         <div class="row">
             <md-select [(ngModel)]="policy.schedule" placeholder="Schedule" class="col-md-5">
-                <md-option *ngFor="let schedule of schedules" [value]="schedule">{{ schedule.split('_').join(' ') }}</md-option>
+                <md-option *ngFor="let schedule of schedules" [value]="schedule">{{ schedule.split('_').join('') }}</md-option>
             </md-select>
 
             <md-select [(ngModel)]="policy.time" placeholder="Time" class="col-md-3">
