@@ -196,6 +196,12 @@ export class Chart {
         });
     }
 
+    countTasksPercentage() {
+        return gantt.serialize().data.forEach(item => {
+            return this.calculateParentsProgress(item);
+        });
+    }
+
     getLinks() {
         return gantt.getLinks();
     }
@@ -411,11 +417,11 @@ export class Chart {
 
         // todo run calculation for all items after Gantt init
         gantt.attachEvent("onAfterTaskUpdate", (id, item) => {
-            return this.calculateItemsProgress(item);
+            return this.calculateParentsProgress(item);
         });
     }
 
-    protected calculateItemsProgress(item) {
+    protected calculateParentsProgress(item) {
         if (!item.parent) {
             return item;
         }

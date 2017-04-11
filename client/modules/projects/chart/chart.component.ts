@@ -79,6 +79,7 @@ export class ChartComponent implements OnInit {
                         })
                         .then(() => {
                             this.chart.refreshData();
+                            this.chart.countTasksPercentage();
                         });
                 });
         });
