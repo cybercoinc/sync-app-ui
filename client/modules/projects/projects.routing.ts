@@ -28,6 +28,7 @@ import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.serv
 import {ProjectGuardService} from "../../service/project-guard.service";
 import {ChartComponent} from "./chart/chart.component";
 import {CanDeactivateChart} from "./chart/chart.deactivate";
+import {PolicyComponent} from "./edit-project/components/project-settings/task-notifications/policy/policy.component";
 
 export const routes: Routes = [
     {
@@ -162,6 +163,14 @@ export const routes: Routes = [
                         path: 'settings',
                         component: ProjectSettingsComponent
                     },
+                    {
+                        path: 'policy',
+                        component: PolicyComponent,
+                    },
+                    {
+                        path: 'policy/:policy_id',
+                        component: PolicyComponent,
+                    }
                 ]
             },
         ],
