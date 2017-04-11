@@ -1,20 +1,36 @@
 <md-card *ngIf="project" class="row">
-    <md-card-header>
-        <md-card-title>Notifications</md-card-title>
+    <md-card-header id="task-notification-header">
+        <md-card-title>
+            <div class="pull-left">Notifications</div>
+        </md-card-title>
+
+        <button md-button class="add-policy" (click)="addPolicy()">ADD POLICY</button>
     </md-card-header>
 
-    <md-card-content>
-        <md-list>
-            <md-list-item>
-                <md-checkbox [(ngModel)]="project.is_enable_notifications">Enable email notifications</md-checkbox>
-            </md-list-item>
+    <md-card-content *ngIf="policies">
+        <div *ngIf="policies.length < 1">No policies</div>
 
-            <md-list-item>
-                <span md-line >Add these emails to CC for all notifications</span>
-                <textarea md-line class="form-control" [(ngModel)]="project.notification_cc_emails" placeholder="Enumerate emails separated by commas" cols="6"></textarea>
-            </md-list-item>
-        </md-list>
+        <div class="col-md-12 row" *ngFor="let policy of policies">
+            <div class="col-md-11">
+                <md-slide-toggle [checked]="policy.is_enabled" (change)="switchEnabling(policy.id, $event)">{{ policy.name }}</md-slide-toggle>
+            </div>
+
+            <div class="col-md-1">
+                <button md-icon-button [mdMenuTriggerFor]="menu">
+                    <md-icon>more_vert</md-icon>
+                </button>
+                <md-menu #menu="mdMenu">
+                    <a md-menu-item>
+                        <span>Clone</span>
+                    </a>
+                    <a md-menu-item href="{{ getPolicyLink(policy.id) }}">
+                        <span>Edit</span>
+                    </a>
+                    <a md-menu-item (click)="removePolicy(policy.id)">
+                        <span>Delete</span>
+                    </a>
+                </md-menu>
+            </div>
+        </div>
     </md-card-content>
-
-    <button class="pull-right btn btn-success" (click)="save()">save</button>
 </md-card>

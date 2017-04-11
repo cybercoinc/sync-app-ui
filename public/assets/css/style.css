@@ -481,3 +481,7 @@ chart-working-days md-checkbox .mat-checkbox-layout .mat-checkbox-label {
 .mat-sidenav-content {
     padding-bottom: 200px;
 }
+
+#task-notification-header > div.mat-card-header-text {
+    width: 82%;
+}

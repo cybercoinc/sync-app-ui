@@ -569,4 +569,38 @@ export class MsProjectClientService extends MsClientService {
             }
         );
     }
+
+    getNotificationPolicy(conditions): Promise<any> {
+        return this.makeMsCall(
+            'notification-policy/find-where',
+            'GET',
+            conditions
+        );
+    }
+
+    createNotificationPolicy(data): Promise<any> {
+        return this.makeMsCall(
+            'notification-policy/create',
+            'POST',
+            data,
+        );
+    }
+
+    updateNotificationPolicy(policyId, data): Promise<any> {
+        return this.makeMsCall(
+            'notification-policy/update/' + policyId,
+            'PUT',
+            data
+        );
+    }
+
+    removeNotificationPolicy(policyId): Promise<any> {
+        return this.makeMsCall(
+            'notification-policy/delete-where',
+            'POST',
+            {
+                id: policyId
+            }
+        );
+    }
 }

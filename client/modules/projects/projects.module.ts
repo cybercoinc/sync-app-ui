@@ -52,6 +52,7 @@ import {ChartWorkingDaysComponent} from "./edit-project/components/project-setti
 import {PrimaryBillingUser} from "./edit-project/components/project-settings/primary-billing-user/primary-billing-user.component";
 import {CanDeactivateChart} from "./chart/chart.deactivate";
 import {SmartsheetScheduleChooseComponent} from "./edit-project/components/shared/smartsheet-schedule-choose/smartsheet-schedule-choose.component";
+import {PolicyComponent} from "./edit-project/components/project-settings/task-notifications/policy/policy.component";
 
 @NgModule({
     imports: [
@@ -98,6 +99,7 @@ import {SmartsheetScheduleChooseComponent} from "./edit-project/components/share
         PipeSettingsComponent,
         ChooseResourceComponent,
         TaskNotificationsComponent,
+        PolicyComponent,
         AddResourceDialog,
         SetGanttAccessDialog,
 
