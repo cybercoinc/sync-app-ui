@@ -34,6 +34,29 @@ md-input-container {
     cursor: pointer;
 }
 
-.itemList {
+.item-list {
     margin-left: 0.5%;
 }
+
+.item-name {
+    display:inline-block;
+    width: 10%;
+}
+
+.item-data {
+    display:inline-block;
+    width: 80%;
+}
+
+@media screen and (max-width: 1300px) {
+    .item-name {
+        display:inline-block;
+        width: 20%;
+    }
+
+    .item-data {
+        display:inline-block;
+        width: 70%;
+    }
+}
+

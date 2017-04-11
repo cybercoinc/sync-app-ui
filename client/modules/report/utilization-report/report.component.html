@@ -54,8 +54,8 @@
 
 
                 <div *ngIf="showAssigneesAndResources">
-                    <div class="row itemList">
-                        <div class="col-md-1">
+                    <div class="row item-list">
+                        <div class="item-name">
                             <p style="font-size: 18px">
                                 <a class="edit-button" (click)="backToItem('project')">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -63,7 +63,7 @@
                                 Projects:
                             </p>
                         </div>
-                        <div class="col-md-11">
+                        <div  class="item-data">
                             <p style="font-size: 18px">
                             <span *ngFor="let projectRow of filteredProjectRows">
                                 {{projectRow.name}}<span
@@ -111,8 +111,8 @@
                         <br/>
                     </div>
                     <div *ngIf="showGroupBy">
-                        <div class="row itemList">
-                            <div class="col-md-1">
+                        <div class="row item-list">
+                            <div class="item-name">
                                 <p style="font-size: 18px">
                                     <a class="edit-button" (click)="backToItem('people')">
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -120,7 +120,7 @@
                                     People:
                                 </p>
                             </div>
-                            <div class="col-md-11">
+                            <div class="item-data">
                                 <p style="font-size: 18px">
                                     <span *ngFor="let peopleRow of filteredPeopleRows">
                                         {{peopleRow.first_name + ' ' + peopleRow.last_name}}<span
@@ -170,8 +170,8 @@
                         </div>
                     </div>
                     <div *ngIf="showGroupBy">
-                        <div class="row itemList">
-                            <div class="col-md-1">
+                        <div class="row item-list">
+                            <div class="item-name">
                                 <p style="font-size: 18px">
                                     <a class="edit-button" (click)="backToItem('resource')">
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -179,7 +179,7 @@
                                     Resources:
                                 </p>
                             </div>
-                            <div class="col-md-11">
+                            <div class="item-data">
                                 <p style="font-size: 18px">
                                     <span *ngFor="let resourceRow of filteredResourceRows">
                                         {{resourceRow.name}}<span

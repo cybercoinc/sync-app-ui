@@ -24,10 +24,10 @@ export class UtilizationReportComponent implements OnInit {
     public showAssigneesAndResources = false;
     public showGroupBy = false;
 
-    public showProjectsContainer = false;
+    public showProjectsContainer = true;
     public showPeopleContainer = false;
     public showResourcesContainer = false;
-    public showGroupByContainer = false;
+    public showGroupByContainer = true;
 
     public showOnlySelectedProject = false;
     public showOnlySelectedPeople = false;
@@ -73,6 +73,8 @@ export class UtilizationReportComponent implements OnInit {
                 allProjects.forEach(project => {
                     this.projectRows.push(project);
                 });
+
+                this.showAllItems('project');
 
                 return this.projectRows;
             })
