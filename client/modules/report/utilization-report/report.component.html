@@ -35,12 +35,38 @@
                             </div>
                         </div>
 
-                        <div *ngIf="filteredProjectRows && filteredProjectRows.length">
-                            <div class="col-xs-12" *ngFor="let projectRow of filteredProjectRows">
-                                <md-checkbox *ngIf="!showOnlySelectedProject || (showOnlySelectedProject && model.projects[projectRow.id])" [(ngModel)]="model.projects[projectRow.id]"
-                                             name="{{projectRow.id}}">
-                                    {{projectRow.name}}
-                                </md-checkbox>
+                        <div *ngIf="filteredProjectRows && filteredProjectRows.length > 0">
+                            <div class="row item-list">
+                                <div class="item-data-container">
+                                    <div *ngFor="let projectRow of filterDataForRow(filteredProjectRows, 1)">
+                                        <div *ngIf="projectRow">
+                                            <md-checkbox *ngIf="!showOnlySelectedProject || (showOnlySelectedProject && model.projects[projectRow.id])" [(ngModel)]="model.projects[projectRow.id]"
+                                                         name="{{projectRow.id}}">
+                                                {{projectRow.name}}
+                                            </md-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-data-container">
+                                    <div *ngFor="let projectRow of filterDataForRow(filteredProjectRows, 2)">
+                                        <div *ngIf="projectRow">
+                                            <md-checkbox *ngIf="!showOnlySelectedProject || (showOnlySelectedProject && model.projects[projectRow.id])" [(ngModel)]="model.projects[projectRow.id]"
+                                                         name="{{projectRow.id}}">
+                                                {{projectRow.name}}
+                                            </md-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-data-container">
+                                    <div *ngFor="let projectRow of filterDataForRow(filteredProjectRows, 3)">
+                                        <div *ngIf="projectRow">
+                                            <md-checkbox *ngIf="!showOnlySelectedProject || (showOnlySelectedProject && model.projects[projectRow.id])" [(ngModel)]="model.projects[projectRow.id]"
+                                                         name="{{projectRow.id}}">
+                                                {{projectRow.name}}
+                                            </md-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -95,12 +121,38 @@
                                 </div>
                             </div>
 
-                            <div *ngIf="filteredPeopleRows && filteredPeopleRows.length">
-                                <div class="col-xs-12" *ngFor="let peopleRow of filteredPeopleRows">
-                                    <md-checkbox  *ngIf="!showOnlySelectedPeople || (showOnlySelectedPeople && model.assignees[peopleRow.email])"
-                                            [(ngModel)]="model.assignees[peopleRow.email]" name="{{peopleRow.email}}">
-                                        {{peopleRow.first_name + ' ' + peopleRow.last_name}}
-                                    </md-checkbox>
+                            <div *ngIf="filteredPeopleRows && filteredPeopleRows.length > 0">
+                                <div class="row item-list">
+                                    <div class="item-data-container">
+                                        <div *ngFor="let peopleRow of filterDataForRow(filteredPeopleRows, 1)">
+                                            <div *ngIf="peopleRow">
+                                                <md-checkbox  *ngIf="!showOnlySelectedPeople || (showOnlySelectedPeople && model.assignees[peopleRow.email])"
+                                                              [(ngModel)]="model.assignees[peopleRow.email]" name="{{peopleRow.email}}">
+                                                    {{peopleRow.first_name + ' ' + peopleRow.last_name}}
+                                                </md-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-data-container">
+                                        <div *ngFor="let peopleRow of filterDataForRow(filteredPeopleRows, 2)">
+                                            <div *ngIf="peopleRow">
+                                                <md-checkbox  *ngIf="!showOnlySelectedPeople || (showOnlySelectedPeople && model.assignees[peopleRow.email])"
+                                                              [(ngModel)]="model.assignees[peopleRow.email]" name="{{peopleRow.email}}">
+                                                    {{peopleRow.first_name + ' ' + peopleRow.last_name}}
+                                                </md-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-data-container">
+                                        <div *ngFor="let peopleRow of filterDataForRow(filteredPeopleRows, 3)">
+                                            <div *ngIf="peopleRow">
+                                                <md-checkbox  *ngIf="!showOnlySelectedPeople || (showOnlySelectedPeople && model.assignees[peopleRow.email])"
+                                                              [(ngModel)]="model.assignees[peopleRow.email]" name="{{peopleRow.email}}">
+                                                    {{peopleRow.first_name + ' ' + peopleRow.last_name}}
+                                                </md-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -154,12 +206,38 @@
                                 </div>
                             </div>
 
-                            <div *ngIf="filteredResourceRows && filteredResourceRows.length">
-                                <div class="col-xs-12" *ngFor="let resourceRow of filteredResourceRows">
-                                    <md-checkbox  *ngIf="!showOnlySelectedResource || (showOnlySelectedResource && model.resources[resourceRow.name])"
-                                            [(ngModel)]="model.resources[resourceRow.name]" name="{{resourceRow.name}}">
-                                        {{resourceRow.name}}
-                                    </md-checkbox>
+                            <div *ngIf="filteredResourceRows && filteredResourceRows.length > 0">
+                                <div class="row item-list">
+                                    <div class="item-data-container">
+                                        <div *ngFor="let resourceRow of filterDataForRow(filteredResourceRows, 1)">
+                                            <div *ngIf="resourceRow">
+                                                <md-checkbox *ngIf="!showOnlySelectedResource || (showOnlySelectedResource && model.resources[resourceRow.name])"
+                                                              [(ngModel)]="model.resources[resourceRow.name]" name="{{resourceRow.name}}">
+                                                    {{resourceRow.name}}
+                                                </md-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-data-container">
+                                        <div *ngFor="let resourceRow of filterDataForRow(filteredResourceRows, 2)">
+                                            <div *ngIf="resourceRow">
+                                                <md-checkbox *ngIf="!showOnlySelectedResource || (showOnlySelectedResource && model.resources[resourceRow.name])"
+                                                              [(ngModel)]="model.resources[resourceRow.name]" name="{{resourceRow.name}}">
+                                                    {{resourceRow.name}}
+                                                </md-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item-data-container">
+                                        <div *ngFor="let resourceRow of filterDataForRow(filteredResourceRows, 3)">
+                                            <div *ngIf="resourceRow">
+                                                <md-checkbox *ngIf="!showOnlySelectedResource || (showOnlySelectedResource && model.resources[resourceRow.name])"
+                                                              [(ngModel)]="model.resources[resourceRow.name]" name="{{resourceRow.name}}">
+                                                    {{resourceRow.name}}
+                                                </md-checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

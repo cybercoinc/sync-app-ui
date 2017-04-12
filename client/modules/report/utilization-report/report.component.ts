@@ -59,44 +59,89 @@ export class UtilizationReportComponent implements OnInit {
         this.getProjects();
     }
 
+    compareName(a, b) {
+        let nameA = a.name.toLowerCase(),
+            nameB = b.name.toLowerCase();
+        if (nameA < nameB)
+            return -1;
+        if (nameA > nameB)
+            return 1;
+        return 0;
+    }
+
+    compareFirstName (a, b) {
+        let nameA = a.first_name.toLowerCase(),
+            nameB = b.first_name.toLowerCase();
+        if (nameA < nameB)
+            return -1;
+        if (nameA > nameB)
+            return 1;
+        return 0;
+    }
+
     getProjects(): void {
         this.MsProjectClientService.getActiveProjects(this.AuthService.authUser.id, this.AuthService.company.id)
             .then(allProjects => {
-
                 if (allProjects.length === 0) {
                     return [];
                 }
 
                 this.projectRows = [];
-                this.filteredProjectRows = [];
-
                 allProjects.forEach(project => {
                     this.projectRows.push(project);
                 });
 
                 this.showAllItems('project');
 
-                return this.projectRows;
+                return this.projectRows.sort(this.compareName);
             })
     }
 
     getAssignees() {
         this.MsProjectClientService.getAssigneesForProjects(this.projectToGetData)
             .then(assigneesList => {
-
                 if (assigneesList.length === 0) {
                     return [];
                 }
 
                 this.peopleRows = [];
-                this.filteredPeopleRows = [];
-
                 assigneesList.forEach(project => {
                     this.peopleRows.push(project);
                 });
 
-                return this.peopleRows;
+                return this.peopleRows.sort(this.compareFirstName);
             });
+    }
+
+    filterDataForRow(list, columnNumber) {
+        let finalList = [];
+        let listLength = list.length;
+
+        switch (columnNumber) {
+            case 1:
+                for (let i =  0; i < Math.ceil(listLength/3); i ++) {
+                    finalList.push(
+                        list[i]
+                    );
+                }
+                break;
+            case 2:
+                for (let i = Math.ceil(listLength/3); i < Math.ceil(listLength/3) * 2; i ++) {
+                    finalList.push(
+                        list[i]
+                    );
+                }
+                break;
+            case 3:
+                for (let i = Math.ceil(listLength/3) * 2; i < listLength; i ++) {
+                    finalList.push(
+                        list[i]
+                    );
+                }
+                break;
+        }
+
+        return finalList;
     }
 
     getResources() {
@@ -108,23 +153,21 @@ export class UtilizationReportComponent implements OnInit {
                 }
 
                 this.resourceRows = [];
-                this.filteredResourceRows = [];
-
                 resourcesList.forEach(resource => {
                     this.resourceRows.push(resource);
                 });
 
-                return this.resourceRows;
+                return this.resourceRows.sort(this.compareName);
             });
     }
 
     showItemInfo(item) {
-        switch(item) {
+        switch (item) {
             case 'project':
                 this.showProjectsContainer ? this.showProjectsContainer = false : this.showProjectsContainer = true;
                 break;
             case 'people':
-                this.showPeopleContainer ? this.showPeopleContainer = false : this.showPeopleContainer= true;
+                this.showPeopleContainer ? this.showPeopleContainer = false : this.showPeopleContainer = true;
                 break;
             case 'resource':
                 this.showResourcesContainer ? this.showResourcesContainer = false : this.showResourcesContainer = true;
@@ -230,7 +273,7 @@ export class UtilizationReportComponent implements OnInit {
     }
 
     showAllItems(item) {
-        switch(item) {
+        switch (item) {
             case 'project':
                 this.showOnlySelectedProject = false;
                 this.filteredProjectRows = this.projectRows;
@@ -261,7 +304,7 @@ export class UtilizationReportComponent implements OnInit {
     }
 
     showSelectedItems(item) {
-        switch(item) {
+        switch (item) {
             case 'project':
                 this.filteredProjectRows = this.projectRows;
                 this.showOnlySelectedProject = true;
@@ -308,7 +351,7 @@ export class UtilizationReportComponent implements OnInit {
     }
 
     backToItem(item) {
-        switch(item) {
+        switch (item) {
             case 'project':
                 this.showAssigneesAndResources = false;
                 this.showGroupBy = false;
