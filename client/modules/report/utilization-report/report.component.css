@@ -60,3 +60,25 @@ md-input-container {
     }
 }
 
+.item-data-container {
+    display:inline-block;
+    width: 20%;
+    vertical-align:top;
+}
+
+@media screen and (min-width: 1301px) and (max-width: 1500px) {
+    .item-data-container {
+        display:inline-block;
+        width: 25%;
+        vertical-align:top;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .item-data-container {
+        display:inline-block;
+        width: 30%;
+        vertical-align:top;
+    }
+}
+
