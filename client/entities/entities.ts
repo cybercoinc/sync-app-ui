@@ -143,6 +143,7 @@ export class Project {
     };
     holidays:     string[];
     working_days: string[];
+    is_separate_invoice: boolean;
 }
 
 export class SmartsheetWorkspace {
