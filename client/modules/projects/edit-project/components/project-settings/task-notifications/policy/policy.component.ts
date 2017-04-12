@@ -57,6 +57,10 @@ export class PolicyComponent implements OnInit {
                     .then(policy => {
                         this.policy = policy[0];
                         this.isShowCustomEmails = this.policy.params.custom_emails != null;
+
+                        if (params['type'] == 'clone') {
+                            this.policy.id = null;
+                        }
                     });
             }
             else {

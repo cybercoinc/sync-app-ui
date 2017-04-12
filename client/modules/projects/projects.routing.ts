@@ -170,6 +170,10 @@ export const routes: Routes = [
                     {
                         path: 'policy/:policy_id',
                         component: PolicyComponent,
+                    },
+                    {
+                        path: 'policy/:policy_id/:type',
+                        component: PolicyComponent,
                     }
                 ]
             },

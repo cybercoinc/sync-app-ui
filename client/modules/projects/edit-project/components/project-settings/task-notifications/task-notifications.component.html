@@ -20,6 +20,9 @@
                     <md-icon>more_vert</md-icon>
                 </button>
                 <md-menu #menu="mdMenu">
+                    <a md-menu-item href="{{ getPolicyLink(policy.id, true) }}">
+                        <span>Clone</span>
+                    </a>
                     <a md-menu-item href="{{ getPolicyLink(policy.id) }}">
                         <span>Edit</span>
                     </a>

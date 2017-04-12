@@ -39,8 +39,13 @@ export class TaskNotificationsComponent implements OnInit {
         return this.router.navigate(['projects', this.project.id, 'edit-project', 'policy']);
     }
 
-    getPolicyLink(policyId = '') {
-        return '#/projects/' + this.project.id + '/edit-project/policy/' + policyId;
+    getPolicyLink(policyId = '', isClone = false) {
+        let url = '#/projects/' + this.project.id + '/edit-project/policy/' + policyId;
+        if (isClone) {
+            url += '/clone';
+        }
+
+        return url;
     }
 
     switchEnabling(policyId, event) {
