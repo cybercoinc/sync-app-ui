@@ -3,7 +3,7 @@
         <md-card-title>Primary billing responsibility person</md-card-title>
     </md-card-header>
     <md-card-content>
-        <div *ngIf="pbrUser">
+        <div *ngIf="pbrUser !== null">
             <md-card-content>
                 <md-checkbox [(ngModel)]="project.is_separate_invoice" (change)="switchStatus()">Generate separate invoice for this project</md-checkbox>
             </md-card-content>

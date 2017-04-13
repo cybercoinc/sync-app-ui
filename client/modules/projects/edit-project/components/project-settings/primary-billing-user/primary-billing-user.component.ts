@@ -18,7 +18,7 @@ export class PrimaryBillingUser implements OnInit {
     filtered: any;
     users:    User[];
     isEdit:   boolean = false;
-    pbrUser:  User;
+    pbrUser:  User = null;
     isBillingUser: boolean;
     companyPbr: User;
     project: Project;
