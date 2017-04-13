@@ -4,8 +4,12 @@
     </md-card-header>
     <md-card-content>
         <div *ngIf="pbrUser">
+            <md-card-content>
+                <md-checkbox [(ngModel)]="project.is_separate_invoice" (change)="switchStatus()">Generate separate invoice for this project</md-checkbox>
+            </md-card-content>
+
             <div *ngIf="!isEdit">
-                    <span class="">
+                    <span>
                         <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
                     </span>
                 <span class="button-group" *ngIf="isBillingUser">

@@ -3,7 +3,7 @@ import {AuthService} from "client/service/auth.service";
 import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
 import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
 import {FormControl} from "@angular/forms";
-import {User} from "client/entities/entities";
+import {User, Project} from "client/entities/entities";
 import {PipeConnectionService} from "client/service/pipe-connection.service";
 
 @Component({
@@ -21,6 +21,7 @@ export class PrimaryBillingUser implements OnInit {
     pbrUser:  User;
     isBillingUser: boolean;
     companyPbr: User;
+    project: Project;
 
     constructor(protected AuthService: AuthService,
                 protected pipeConnectionService: PipeConnectionService,
@@ -42,6 +43,7 @@ export class PrimaryBillingUser implements OnInit {
                 this.pbrUser = resultsList[0];
                 this.users = resultsList[2];
                 this.companyPbr = resultsList[1];
+                this.project = this.pipeConnectionService.project;
 
                 this.checkIsBillingUser();
             });
@@ -91,5 +93,11 @@ export class PrimaryBillingUser implements OnInit {
 
     cancel() {
         this.isEdit = false;
+    }
+
+    switchStatus() {
+        this.MsProjectClientService.update(this.project.id, {
+            is_separate_invoice: this.project.is_separate_invoice,
+        });
     }
 }
