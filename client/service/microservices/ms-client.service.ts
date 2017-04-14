@@ -112,12 +112,25 @@ export class MsClientService {
 
                 break;
             }
+
             case 2002: {
                 this.NotificationsService.addReaction('Error. You don`t have Procore credentials connected. Please connect your account.',
                     'error',
                     'Procore connection required',
                     [
                         {label: 'Connect Procore', route: ['/', 'connection']},
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
+
+            case 2003: {
+                this.NotificationsService.addReaction('Error. Your Smartsheet access token is invalid. Please reconnect your account.',
+                    'error',
+                    'Smartsheet reconnection required',
+                    [
+                        {label: 'Reconnect Smartsheet', route: ['/', 'connection']},
                         {label: 'Cancel', route: ['/']},
                     ]);
 
