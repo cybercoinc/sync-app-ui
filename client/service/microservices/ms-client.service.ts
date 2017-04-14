@@ -100,24 +100,38 @@ export class MsClientService {
             }
         }
 
-        if (errorCode === 2001) {
-            this.NotificationsService.addReaction('Error. You don`t have Smartsheet credentials connected. Please connect your account.',
-                'error',
-                'Smartsheet connection required',
-                [
-                    {label: 'Connect Smartsheet', route: ['/', 'connection']},
-                    {label: 'Cancel', route: ['/']},
-                ]);
-        } else if (errorCode === 2002) {
-            this.NotificationsService.addReaction('Error. You don`t have Procore credentials connected. Please connect your account.',
-                'error',
-                'Procore connection required',
-                [
-                    {label: 'Connect Procore', route: ['/', 'connection']},
-                    {label: 'Cancel', route: ['/']},
-                ]);
-        } else {
-            this.NotificationsService.addError(message);
+        switch (errorCode) {
+            case 2001: {
+                this.NotificationsService.addReaction('Error. You don`t have Smartsheet credentials connected. Please connect your account.',
+                    'error',
+                    'Smartsheet connection required',
+                    [
+                        {label: 'Connect Smartsheet', route: ['/', 'connection']},
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
+            case 2002: {
+                this.NotificationsService.addReaction('Error. You don`t have Procore credentials connected. Please connect your account.',
+                    'error',
+                    'Procore connection required',
+                    [
+                        {label: 'Connect Procore', route: ['/', 'connection']},
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
+
+            // case 0: {
+            //
+            //     break;
+            // }
+
+            default: {
+                this.NotificationsService.addError(message);
+            }
         }
 
 
