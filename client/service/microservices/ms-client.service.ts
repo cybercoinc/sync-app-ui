@@ -21,9 +21,10 @@ export class MsClientService {
      * @param {String} action
      * @param {String} method GET, POST, PUT, DELETE
      * @param {} data
+     * @param {Boolean} needToGetServiceName
      *
      */
-    public makeMsCall(action: string, method: string, data: {} = {}) {
+    public makeMsCall(action: string, method: string, data: {} = {}, needToGetServiceName = true) {
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -32,7 +33,11 @@ export class MsClientService {
 
         this.PendingRequestsService.hasPendingRequest = true;
 
-        let url = this.ConfigService.getServiceUrl(this.msName);
+        let url = '';
+
+        if (needToGetServiceName) {
+            url = this.ConfigService.getServiceUrl(this.msName);
+        }
 
         console.log('make ms call', url, action);
 
@@ -137,10 +142,29 @@ export class MsClientService {
                 break;
             }
 
-            // case 0: {
-            //
-            //     break;
-            // }
+            case 2004: {
+                this.NotificationsService.addReaction('Error. Your Procore access token is invalid. Please relogin.',
+                    'error',
+                    'Relogin required',
+                    [
+                        {
+                            label: 'Relogin',
+                            action: () => {
+                                let url = this.ConfigService.getServiceUrl('ms-user');
+
+                                return this.makeMsCall(url + 'auth/user-logout', 'POST', {}, false)
+                                    .then(() => {
+                                        this.AuthService.authUser = null;
+
+                                        window.location.replace('/');
+                                    });
+                            }
+                        },
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
 
             default: {
                 this.NotificationsService.addError(message);
