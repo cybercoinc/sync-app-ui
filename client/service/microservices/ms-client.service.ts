@@ -21,9 +21,10 @@ export class MsClientService {
      * @param {String} action
      * @param {String} method GET, POST, PUT, DELETE
      * @param {} data
+     * @param {Boolean} needToGetServiceName
      *
      */
-    public makeMsCall(action: string, method: string, data: {} = {}) {
+    public makeMsCall(action: string, method: string, data: {} = {}, needToGetServiceName = true) {
         let params, body;
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -32,7 +33,11 @@ export class MsClientService {
 
         this.PendingRequestsService.hasPendingRequest = true;
 
-        let url = this.ConfigService.getServiceUrl(this.msName);
+        let url = '';
+
+        if (needToGetServiceName) {
+            url = this.ConfigService.getServiceUrl(this.msName);
+        }
 
         console.log('make ms call', url, action);
 
@@ -100,24 +105,70 @@ export class MsClientService {
             }
         }
 
-        if (errorCode === 2001) {
-            this.NotificationsService.addReaction('Error. You don`t have Smartsheet credentials connected. Please connect your account.',
-                'error',
-                'Smartsheet connection required',
-                [
-                    {label: 'Connect Smartsheet', route: ['/', 'connection']},
-                    {label: 'Cancel', route: ['/']},
-                ]);
-        } else if (errorCode === 2002) {
-            this.NotificationsService.addReaction('Error. You don`t have Procore credentials connected. Please connect your account.',
-                'error',
-                'Procore connection required',
-                [
-                    {label: 'Connect Procore', route: ['/', 'connection']},
-                    {label: 'Cancel', route: ['/']},
-                ]);
-        } else {
-            this.NotificationsService.addError(message);
+        switch (errorCode) {
+            case 2001: {
+                this.NotificationsService.addReaction('Error. You don`t have Smartsheet credentials connected. Please connect your account.',
+                    'error',
+                    'Smartsheet connection required',
+                    [
+                        {label: 'Connect Smartsheet', route: ['/', 'connection']},
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
+
+            case 2002: {
+                this.NotificationsService.addReaction('Error. You don`t have Procore credentials connected. Please connect your account.',
+                    'error',
+                    'Procore connection required',
+                    [
+                        {label: 'Connect Procore', route: ['/', 'connection']},
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
+
+            case 2003: {
+                this.NotificationsService.addReaction('Error. Your Smartsheet access token is invalid. Please reconnect your account.',
+                    'error',
+                    'Smartsheet reconnection required',
+                    [
+                        {label: 'Reconnect Smartsheet', route: ['/', 'connection']},
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
+
+            case 2004: {
+                this.NotificationsService.addReaction('Error. Your Procore access token is invalid. Please relogin.',
+                    'error',
+                    'Relogin required',
+                    [
+                        {
+                            label: 'Relogin',
+                            action: () => {
+                                let url = this.ConfigService.getServiceUrl('ms-user');
+
+                                return this.makeMsCall(url + 'auth/user-logout', 'POST', {}, false)
+                                    .then(() => {
+                                        this.AuthService.authUser = null;
+
+                                        window.location.replace('/');
+                                    });
+                            }
+                        },
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
+
+            default: {
+                this.NotificationsService.addError(message);
+            }
         }
 
 

@@ -19,7 +19,7 @@ import {Router} from "@angular/router";
 
                 <md-card-actions>
                     <div class="buttons-container">
-                        <button (click)="goTo(possibilityObj.route)" md-button
+                        <button (click)="possibilityObj.route? goTo(possibilityObj.route) : possibilityObj.action()" md-button
                                 *ngFor="let possibilityObj of notification.getPossibilities()">
                             {{possibilityObj.label}}
                         </button>
@@ -95,7 +95,8 @@ export class ReactionNotificationCard implements OnInit {
 
 export class ReactionPossibility {
     label: string;
-    route: string[]
+    route?: string[];
+    action?: Function;
 }
 
 
