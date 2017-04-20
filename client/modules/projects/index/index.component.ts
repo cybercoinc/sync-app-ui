@@ -49,26 +49,17 @@ export class IndexComponent implements OnInit {
                     return [];
                 }
 
-                let promises = [];
+                let projectsIds = [];
 
-                projects.forEach(project => {
-                    promises.push(
-                        this.MsProjectClientService.getPipesWhere({
-                            project_fk_id: project.id
-                        })
-                    );
+                _projects.forEach(project => {
+                    projectsIds.push(project.id);
                 });
 
-                return Promise.all(promises);
+                return this.MsProjectClientService.getPipesByProjectsIds(projectsIds);
             })
-            .then(stepResults => {
-                let pipesList = [];
+            .then(pipesList => {
                 this.projectRows = [];
                 this.filteredProjectRows = [];
-
-                stepResults.forEach(function (pipes) {
-                    pipesList = pipesList.concat(pipes);
-                });
 
                 _projects.forEach(project => {
                     let projectPipesList = pipesList.filter((pipeObj: ProjectPipe) => {
