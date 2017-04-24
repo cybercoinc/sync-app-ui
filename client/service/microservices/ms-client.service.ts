@@ -73,6 +73,10 @@ export class MsClientService {
             .then(response => {
                 this.PendingRequestsService.hasPendingRequest = false;
 
+                if (response.status === 202) {
+                    return this.handleError(response);
+                }
+
                 let resObj = response.json();
 
                 return resObj.result;
