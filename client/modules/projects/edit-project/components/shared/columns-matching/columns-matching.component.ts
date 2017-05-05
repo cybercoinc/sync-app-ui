@@ -38,10 +38,20 @@ export class ColumnsMatchingComponent implements OnInit {
         let prefilledId = null;
 
         this.smColumns.forEach(smColumn => {
-            if (prColumn.title === smColumn.title && !this.isNotAvailable(smColumn, prColumn)) {
-                prefilledId = smColumn.id;
+            if (!this.isNotAvailable(smColumn, prColumn)) {
+                if (Array.isArray(prColumn.title)) {
+                    if (prColumn.title.indexOf(smColumn.title) !== -1) {
+                        prefilledId = smColumn.id;
 
-                return false;
+                        return false;
+                    }
+                } else {
+                    if (prColumn.title === smColumn.title) {
+                        prefilledId = smColumn.id;
+
+                        return false;
+                    }
+                }
             }
         });
 
