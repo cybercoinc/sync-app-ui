@@ -214,6 +214,8 @@ export class SmartsheetConnectionComponent implements OnInit {
     }
 
     onColumnsRematched(columnsObj) {
+        this.needToRematchColumns = false;
+
         return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
             .then(pipeId => {
                 // matching columns
@@ -270,5 +272,9 @@ export class SmartsheetConnectionComponent implements OnInit {
             // .then(() => {
             //     return this.router.navigate(this.redirectRoute);
             // });
+    }
+
+    showColumnsRematch() {
+        this.needToRematchColumns = true;
     }
 }

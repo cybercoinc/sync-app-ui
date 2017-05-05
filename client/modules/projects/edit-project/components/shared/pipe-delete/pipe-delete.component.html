@@ -3,12 +3,10 @@
     SCHEDULE
 </button>
 
-<div class="row" *ngIf="isConfirmationVisible">
-    <div class="col-xs-12">
+<div *ngIf="isConfirmationVisible">
         <h6>Connection for this type of date will be destroyed. All history of synchronization will be removed.
             Note: data on SmartSheet and Procore will stay as is.</h6>
-        <button (click)="disconnectPipe()" [disabled]="deleteButtonDisabled" class="btn btn-danger">Confirm
+        <button style="float: left;" (click)="disconnectPipe()" [disabled]="deleteButtonDisabled" class="btn btn-danger">Confirm
             disconnecting
         </button>
-    </div>
 </div>

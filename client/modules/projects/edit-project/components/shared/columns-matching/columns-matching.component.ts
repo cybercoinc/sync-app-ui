@@ -89,11 +89,15 @@ export class ColumnsMatchingComponent implements OnInit {
 
     matchColumns() {
         this.validationError = false;
-        // check if all fields are filled
+
+        let notRequiredColumnsList = [
+            'actual_start_datetime',
+            'actual_end_datetime',
+        ];
 
         for (let columnConst in this.model) {
             if (this.model.hasOwnProperty(columnConst)) {
-                if (!this.model[columnConst]) {
+                if (notRequiredColumnsList.indexOf(columnConst) === -1 && !this.model[columnConst]) {
                     this.validationError = true;
 
                     return false;
