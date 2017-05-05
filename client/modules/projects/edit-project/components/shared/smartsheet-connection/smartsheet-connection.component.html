@@ -123,7 +123,7 @@
     <div class="container-fluid" *ngIf="pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
         <div class="row">
             <div class="col-xs-12">
-                <columns-matching sheet-id="{{pipesListObj[pipeType]?.sm_sheet_id}}"
+                <columns-matching sheet-id="{{pipesListObj[pipeType]?.sm_sheet_id}}" pipe-type="{{pipeType}}"
                                   (columnsMatched)="onColumnsRematched($event)"></columns-matching>
             </div>
         </div>
