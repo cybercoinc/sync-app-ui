@@ -160,7 +160,8 @@ export class SmartsheetWorkspace {
 
 export class ProcoreTodoColumn {
     slug: string;
-    title: string;
+    title: string | [string];
+    type: string | [string];
 }
 
 export class SmartsheetSheet {

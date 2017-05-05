@@ -17,10 +17,10 @@
         <div class="col-xs-12" *ngIf="smColumns?.length > 0 && prColumns?.length > 0">
             <form class="form-horizontal">
                 <div class="form-group" *ngFor="let procoreTodoColumn of prColumns">
-                    <div class="col-xs-10">
-                        <md-select placeholder="Smartsheet column for Procore {{procoreTodoColumn.title}}" [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
+                    <div class="col-xs-10" style="width: 100%">
+                        <md-select placeholder="Smartsheet column for Procore {{procoreTodoColumn.title}} (type: {{procoreTodoColumn.type}})" [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
                             <md-option *ngFor="let smColumn of smColumns" [value]="smColumn.id" [disabled]="isNotAvailable(smColumn, procoreTodoColumn)">
-                                {{ smColumn.title }}
+                                {{ smColumn.title }} (type: {{smColumn.type}})
                             </md-option>
                         </md-select>
                     </div>
