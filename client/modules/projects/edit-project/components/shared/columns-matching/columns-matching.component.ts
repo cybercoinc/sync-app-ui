@@ -91,8 +91,8 @@ export class ColumnsMatchingComponent implements OnInit {
         this.validationError = false;
 
         let notRequiredColumnsList = [
-            'actual_start_datetime',
-            'actual_end_datetime',
+            'actual_start',
+            'actual_finish',
         ];
 
         for (let columnConst in this.model) {
