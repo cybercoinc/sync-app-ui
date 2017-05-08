@@ -18,3 +18,8 @@ md-select {
     margin-bottom: 20px;
     margin-top: 3%;
 }
+
+.option-desc{
+    font-size: 10px;
+    color: grey;
+}
