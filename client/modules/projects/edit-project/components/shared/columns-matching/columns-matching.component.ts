@@ -83,6 +83,12 @@ export class ColumnsMatchingComponent implements OnInit {
         return notAvailable;
     }
 
+    getAvailableOptions(prColumn) {
+        return this.smColumns.filter(smColumn => {
+            return !this.isNotAvailable(smColumn, prColumn);
+        });
+    }
+
     @Input('sheet-id') smartsheetSheetId: number;
     @Input('pipe-type') pipeType: string;
 

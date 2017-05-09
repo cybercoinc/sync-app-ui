@@ -18,9 +18,14 @@
             <form class="form-horizontal">
                 <div class="form-group" *ngFor="let procoreTodoColumn of prColumns">
                     <div class="col-xs-10" style="width: 100%">
-                        <md-select placeholder="Smartsheet column for Procore {{procoreTodoColumn.title}} (type: {{procoreTodoColumn.type}})" [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
-                            <md-option *ngFor="let smColumn of smColumns" [value]="smColumn.id" [disabled]="isNotAvailable(smColumn, procoreTodoColumn)">
-                                {{ smColumn.title }}  <span class="option-desc">(type: {{smColumn.type}})</span>
+                        <md-select placeholder="Smartsheet column for Procore {{procoreTodoColumn.title}}"
+                                   [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
+                            <md-option [value]="">
+                                - Select column with type {{procoreTodoColumn.type}} -
+                            </md-option>
+                            <md-option *ngFor="let smColumn of getAvailableOptions(procoreTodoColumn)"
+                                       [value]="smColumn.id">
+                                {{ smColumn.title }}
                             </md-option>
                         </md-select>
                     </div>
