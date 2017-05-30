@@ -4,7 +4,7 @@
 }
 
 .mat-dialog-content {
-    width: 350px;
+    width: 500px;
     max-height: 500px;
 }
 
@@ -21,4 +21,34 @@
     padding-left: 15px;
     line-height: 2em;
     font-size: 14px;
+}
+
+md-input-container {
+    padding: 0;
+}
+
+.card-info {
+    margin-top: 10px;
+    padding: 0;
+}
+
+.card-info * {
+    display: flex;
+}
+
+.billing-info {
+    padding: 0;
+}
+
+.billing-info md-input-container:first-of-type {
+    padding-right: 30px;
+}
+
+.billing-info md-input-container:last-of-type {
+    padding-left: 30px;
+}
+
+.cvv .mat-input-wrapper {
+    padding: 0;
+    margin-top: 11px;
 }

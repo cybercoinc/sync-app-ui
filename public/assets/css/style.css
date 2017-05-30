@@ -485,3 +485,11 @@ chart-working-days md-checkbox .mat-checkbox-layout .mat-checkbox-label {
 #task-notification-header > div.mat-card-header-text {
     width: 82%;
 }
+
+credit-card-dialog .mat-input-underline {
+    display: none;
+}
+
+credit-card-dialog md-select {
+    padding: 0 !important;
+}

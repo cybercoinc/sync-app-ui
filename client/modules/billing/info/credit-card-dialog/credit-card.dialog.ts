@@ -14,6 +14,8 @@ export class CreditCardDialog implements OnInit {
     creditCard: CreditCard;
     errors = [];
     form: FormGroup;
+    months = [];
+    years = [];
 
     constructor(public dialogRef: MdDialogRef<CreditCardDialog>,
                 protected fb: FormBuilder,
@@ -22,6 +24,14 @@ export class CreditCardDialog implements OnInit {
     }
 
     ngOnInit(): void {
+        for (let i = 1; i <= 12; i++) {
+            this.months.push(i);
+        }
+
+        for (let i = 2017; i <= 2030; i++) {
+            this.years.push(i);
+        }
+
         this.form = this.fb.group({
             number: [this.creditCard.number, [
                 Validators.required,
