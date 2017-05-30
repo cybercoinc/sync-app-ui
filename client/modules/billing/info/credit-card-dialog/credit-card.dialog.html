@@ -3,20 +3,49 @@
         <div class="title">Credit Card</div>
 
         <div class="col-md-12 form-fields">
-            <input type="text" class="col-md-12" maxlength="16" formControlName="number" placeholder="Credit Card Number">
-            <input type="text" class="col-md-4"  maxlength="2" formControlName="month" placeholder="Exp. month" [(ngModel)]="creditCard.expMonth">
-            <input type="text" class="col-md-4"  maxlength="4" formControlName="year" placeholder="Exp. year" [(ngModel)]="creditCard.expYear">
-            <input type="text" class="col-md-4"  maxlength="3" formControlName="cvv" placeholder="CVV">
+            <md-input-container class="col-md-12">
+                <input type="text" mdInput maxlength="16" formControlName="number" placeholder="Credit Card Number">
+            </md-input-container>
+
+            <div class="col-md-12 card-info">
+                <md-select class="col-md-4" placeholder="Exp. month" formControlName="month" [(ngModel)]="creditCard.expMonth">
+                    <md-option *ngFor="let month of months" [value]="month">{{ month }}</md-option>
+                </md-select>
+
+                <md-select class="col-md-4" placeholder="Exp. year" formControlName="year" [(ngModel)]="creditCard.expYear">
+                    <md-option *ngFor="let year of years" [value]="year">{{ year }}</md-option>
+                </md-select>
+
+                <md-input-container class="col-md-4 cvv">
+                    <input type="password" mdInput maxlength="4" formControlName="cvv" placeholder="CVV">
+                </md-input-container>
+            </div>
         </div>
 
         <div class="title">Billing Address</div>
 
         <div class="col-md-12 form-fields">
-            <input type="text" class="col-md-12" formControlName="customerName" placeholder="Customer Name" [(ngModel)]="creditCard.customerName">
-            <input type="text" class="col-md-12" formControlName="street" placeholder="Street Address" [(ngModel)]="creditCard.street">
-            <input type="text" class="col-md-12" formControlName="city" placeholder="City" [(ngModel)]="creditCard.city">
-            <input type="text" class="col-md-12" formControlName="state" placeholder="State" [(ngModel)]="creditCard.state">
-            <input type="text" class="col-md-12" formControlName="zip" placeholder="Zip Code" [(ngModel)]="creditCard.zip">
+            <md-input-container class="col-md-12">
+                <input type="text" mdInput formControlName="customerName" placeholder="Customer Name" [(ngModel)]="creditCard.customerName">
+            </md-input-container>
+
+            <md-input-container class="col-md-12">
+                <input type="text" mdInput formControlName="street" placeholder="Street Address" [(ngModel)]="creditCard.street">
+            </md-input-container>
+
+            <div class="col-md-12 billing-info">
+                <md-input-container class="col-md-4">
+                    <input type="text" mdInput formControlName="city" placeholder="City" [(ngModel)]="creditCard.city">
+                </md-input-container>
+
+                <md-input-container class="col-md-4">
+                    <input type="text" mdInput formControlName="state" placeholder="State" [(ngModel)]="creditCard.state">
+                </md-input-container>
+
+                <md-input-container class="col-md-4">
+                    <input type="text" mdInput formControlName="zip" placeholder="Zip Code" [(ngModel)]="creditCard.zip">
+                </md-input-container>
+            </div>
         </div>
     </form>
 
