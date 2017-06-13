@@ -30,10 +30,7 @@
                         </div>
                         <div class="col-xs-2">{{project.license?.status}}</div>
                         <div class="col-xs-1">{{project.license?.in_use ? 'Enabled' : 'Disabled'}}</div>
-                        <div class="col-xs-2">
-                            <span *ngIf="!project.license?.in_use">{{project.license?.last_used_at | date}}</span>
-                            <span *ngIf="project.license?.in_use">Today</span>
-                        </div>
+                        <div class="col-xs-2">{{project.license?.last_sync_at | date}}</div>
                         <div class="col-xs-2">{{project.license?.created_at | date}}</div>
                     </div>
                 </div>
@@ -59,10 +56,7 @@
                         <div class="col-xs-3">{{project.name}}</div>
                         <div class="col-xs-2">{{project.license?.status}}</div>
                         <div class="col-xs-1">{{project.license?.in_use ? 'Enabled' : 'Disabled'}}</div>
-                        <div class="col-xs-2">
-                            <span *ngIf="!project.license?.in_use">{{project.license?.last_used_at | date}}</span>
-                            <span *ngIf="project.license?.in_use">Today</span>
-                        </div>
+                        <div class="col-xs-2">{{project.license?.last_sync_at | date}}</div>
                         <div class="col-xs-2">{{project.license?.created_at | date}}</div>
                     </div>
                 </div>
