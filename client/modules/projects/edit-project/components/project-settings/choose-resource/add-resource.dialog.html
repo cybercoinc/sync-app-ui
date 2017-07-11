@@ -1,11 +1,17 @@
 <h1 md-dialog-title>Add resource</h1>
 <div md-dialog-content>
-    <p>After you add new resource, it will appear in dropdown list</p>
+    <p>Resources added here will be available for this project. <br />
+        To make resources available across all projects<br />
+        please have your Procore Company Admin update the
+        <a href="https://app.procore.com/{{AuthService.company.procore_id}}/company/admin/trades"
+           target="_blank"
+           style="outline: none;"
+        >Trade Configuration page</a>.</p>
     <form #addResource="ngForm" id="addResource-form">
         <input type="text" ngModel name="resource" placeholder="Enter new resource">
     </form>
 
 </div>
-<div md-dialog-actions>
+<div md-dialog-actions style="flex-direction:row-reverse;" >
     <button md-button (click)="MdDialogRef.close(addResource.value)">Save</button>
 </div>
