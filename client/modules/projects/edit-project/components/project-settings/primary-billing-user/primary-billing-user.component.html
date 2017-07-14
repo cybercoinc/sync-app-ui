@@ -18,7 +18,7 @@
             </div>
 
             <div *ngIf="isEdit">
-                <md-input-container class="col-md-4">
+                <md-input-container style="width:350px;">
                     <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" [(ngModel)]="pbrUser">
                 </md-input-container>
 
@@ -28,7 +28,7 @@
                     </md-option>
                 </md-autocomplete>
 
-                <span class="button-group">
+                <span class="button-group" style="width:365px;">
                     <button class="btn btn-success" (click)="savePbr(user)">Save</button>
                     <button class="btn btn-default" (click)="cancel()">Cancel</button>
                     <button class="btn btn-warning" (click)="resetPbrToCompanyDefault()">Reset to company default</button>
