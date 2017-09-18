@@ -11,7 +11,7 @@ app.disable("x-powered-by");
 // forse HTTPS
 app.use(function (req, res, next) {
     let options = {
-        maxAge: 86400,
+        maxAge: 10886400,
         includeSubDomains: true,
         preload: true
     };
