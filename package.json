@@ -46,6 +46,7 @@
     "systemjs": "0.19.40",
     "systemjs-builder": "0.16.0",
     "typings": "2.1.0",
+    "yes-https": "0.0.4",
     "zone.js": "0.7.4"
   },
   "devDependencies": {
