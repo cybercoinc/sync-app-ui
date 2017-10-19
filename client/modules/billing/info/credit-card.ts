@@ -23,6 +23,7 @@ export class CreditCard {
     city:         string;
     state:        string;
     zip:          string;
+    country:      string;
 
     encrypted_number: string;
     encrypted_csc:    string;

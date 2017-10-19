@@ -34,13 +34,20 @@
             </md-input-container>
 
             <div class="col-md-12 billing-info">
-                <md-input-container class="col-md-4">
+                <md-input-container class="col-md-6">
                     <input type="text" mdInput formControlName="city" placeholder="City" [(ngModel)]="creditCard.city">
                 </md-input-container>
 
-                <md-input-container class="col-md-4">
+                <md-input-container class="col-md-6">
                     <input type="text" mdInput formControlName="state" placeholder="State" [(ngModel)]="creditCard.state">
                 </md-input-container>
+            </div>
+
+            <div class="col-md-12 billing-info">
+
+                <md-select class="col-md-8" placeholder="Country" formControlName="country" [(ngModel)]="creditCard.country">
+                    <md-option *ngFor="let c of countries" [value]="c.code">{{ c.label }}</md-option>
+                </md-select>
 
                 <md-input-container class="col-md-4">
                     <input type="text" mdInput formControlName="zip" placeholder="Zip Code" [(ngModel)]="creditCard.zip">
