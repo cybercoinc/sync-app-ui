@@ -32,4 +32,23 @@
             </div>
         </div>
     </md-card-content>
+
+    <md-card-content>
+        <div class="section">
+            <div class="section-content">
+                <div class="row" *ngIf="pbrId">
+
+                    <span style="font-weight: bold;">Notifications</span><br />
+                    <span>Put here email addresses, coma-separated. We will send there notifications on successful payments for your company invoices.</span>
+
+                    <md-form-feild style="width: 350px;">
+                        <textarea style="width: 350px;" mdInput placeholder="john@example.com" [(ngModel)]="extraBillingReceivers"></textarea>
+                    </md-form-feild>
+
+                    <button type="button" class="btn btn-success" (click)="saveExtraBillingReceivers()">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </md-card-content>
 </md-card>

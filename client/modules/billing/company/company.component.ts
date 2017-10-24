@@ -3,6 +3,7 @@ import {AuthService} from "client/service/auth.service";
 import {User} from "client/entities/entities";
 import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
 import {FormControl} from "@angular/forms";
+import {MdSnackBar} from "@angular/material";
 
 @Component({
     selector: 'company',
@@ -15,6 +16,7 @@ export class CompanyComponent {
 
 
     currentPBRUser: any;
+    extraBillingReceivers: string;
     pbrId = null;
     company = null;
     usersList = [];
@@ -24,7 +26,9 @@ export class CompanyComponent {
     me: User = null;
 
     constructor(protected MsUserClientService: MsUserClientService,
-                protected AuthService:         AuthService) {
+                protected AuthService:         AuthService,
+                protected snackBar:        MdSnackBar
+    ) {
         this.userCtrl = new FormControl();
         this.filtered = this.userCtrl.valueChanges
             .startWith(null)
@@ -55,6 +59,16 @@ export class CompanyComponent {
         })
     }
 
+    saveExtraBillingReceivers() {
+        this.MsUserClientService.updateExtraBillingReceivers(this.company.id, this.extraBillingReceivers)
+            .then(() => {
+                this.snackBar.open('Saved', 'Close', {
+                    duration: 2000,
+                    extraClasses: ['alert-success']
+                });
+            })
+    }
+
     cancel() {
         this.isEditMode = false;
     }
@@ -70,6 +84,7 @@ export class CompanyComponent {
                 if (company.pbr) {
                     this.pbrId = company.pbr.id;
                     this.currentPBRUser = company.pbr.first_name+' '+company.pbr.last_name+' ('+company.pbr.email+')';
+                    this.extraBillingReceivers = company.extraBillingReceivers || '';
                 }
 
                 if (company) {

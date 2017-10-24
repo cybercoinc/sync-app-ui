@@ -33,6 +33,13 @@ export class MsUserClientService extends MsClientService {
         });
     }
 
+    updateExtraBillingReceivers(companyId, extraBillingReceivers): Promise<any> {
+        return this.makeMsCall('update-extra-billing-receivers', 'PUT', {
+            extraBillingReceivers: extraBillingReceivers,
+            companyId: companyId
+        });
+    }
+
     getCompanyUsers(companyId): Promise<any> {
         return this.makeMsCall('get-company-users', 'GET', {
             companyId: companyId
