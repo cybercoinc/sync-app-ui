@@ -12,6 +12,7 @@ import {CreditCardDialog} from "./credit-card-dialog/credit-card.dialog";
 })
 export class InfoComponent implements OnInit {
     creditCard: CreditCard = new CreditCard();
+    mySubsciptions: any;
 
     constructor(protected MsLicenseClientService: MsLicenseClientService,
                 protected AuthService: AuthService,
@@ -29,6 +30,13 @@ export class InfoComponent implements OnInit {
                 });
             }
         });
+
+
+        this.MsLicenseClientService.getMySubsciptions(this.AuthService.company.id)
+            .then(response => {
+                this.mySubsciptions = response;
+        });
+
     }
 
     open() {
@@ -47,4 +55,16 @@ export class InfoComponent implements OnInit {
             this.creditCard = new CreditCard();
         });
     }
+
+
+    startSubscriptionSetup(subscription) {
+
+        this.MsLicenseClientService.getHPUpdateCard(this.AuthService.company.id, subscription.subscription_id)
+            .then(hostedPage => {
+                if (hostedPage.url) {
+                    window.location.href = hostedPage.url;
+                }
+            });
+    }
+
 }

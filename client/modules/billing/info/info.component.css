@@ -9,3 +9,17 @@ p {
 .masked-card {
     display: block;
 }
+
+.subscription-table-header {
+    font-weight: bold;
+
+    font-size: 18px;
+    border-bottom: solid 1px darkgray;
+    line-height: 32px;
+}
+.subscription-table-row {
+    font-size: 16px;
+    padding: 5px;
+    border-bottom: solid 1px darkgray;
+    line-height: 32px;
+}
