@@ -6,10 +6,10 @@
     <p>Charges are incurred for each active project.</p>
     <p>An 'Active Project' is defined as any project that synced data within the preceding 30 days.</p>
 
-    <p *ngIf="!creditCard.maskedCardNumber">
-        <span class="title">Please provide billing information: </span>
-        <button type="button" class="btn btn-success" (click)="open()">SETUP BILLING INFO</button>
-    </p>
+    <!--<p *ngIf="!creditCard.maskedCardNumber">-->
+        <!--<span class="title">Please provide billing information: </span>-->
+        <!--<button type="button" class="btn btn-success" (click)="open()">SETUP BILLING INFO</button>-->
+    <!--</p>-->
 
     <div *ngIf="creditCard.maskedCardNumber">
         <p>
@@ -25,36 +25,18 @@
     </md-card-content>
 </md-card>
 
-<md-card>
+<md-card *ngFor="let subscription of mySubsciptions.company_subscriptions">
     <md-card-content>
-        <div *ngIf="!mySubsciptions">
-            <h5>Loading...</h5>
+        <div style="font-size: 20px;">
+            Core ScheduleConnector Subscription
+            <span [ngStyle]="{'color':getStatusColor(subscription)}" style="font-size: 22px;">{{getStatusLabel(subscription)}}</span>
         </div>
-
-        <div *ngIf="mySubsciptions && mySubsciptions.company_subsriptions.length == 0">
-            <h5>No Company subscriptions.</h5>
-        </div>
-        <div *ngIf="mySubsciptions && mySubsciptions.company_subsriptions.length > 0">
-            <div>
-                <div class="row subscription-table-header bottom-lined">
-                    <div class="col-xs-3">Next Billing at</div>
-                    <div class="col-xs-2">Status</div>
-                    <div class="col-xs-2">Amount</div>
-                    <div class="col-xs-2">Auto Collect</div>
-                </div>
-
-                <div>
-                    <div class="row subscription-table-row bottom-lined" *ngFor="let subsciption of mySubsciptions.company_subsriptions">
-                        <div class="col-xs-3">{{subsciption.next_billing_at}}</div>
-                        <div class="col-xs-2">{{subsciption.status}}</div>
-                        <div class="col-xs-2">${{subsciption.amount}}</div>
-                        <div class="col-xs-2">{{subsciption.auto_collect?'Yes':'No'}}</div>
-                        <div class="col-xs-1"><button
-                                                 (click)="startSubscriptionSetup(subsciption)"
-                                                 md-button>Update Card</button></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <span>Price: ${{subscription.amount}}</span>
+        <span style="padding-left: 20px;">Next Billing Date: {{subscription.next_billing_at || 'N/A'}}</span>
     </md-card-content>
+    <md-card-actions align="end">
+        <button md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Update Card</button>
+        <span class="flex-spacer"></span>
+        <button md-button (click)="cancelSubscription(subscription)">Cancel Subscription</button>
+    </md-card-actions>
 </md-card>

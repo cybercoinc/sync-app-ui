@@ -10,6 +10,11 @@ p {
     display: block;
 }
 
+
+.flex-spacer {
+    flex: 1 1 auto;
+}
+
 .subscription-table-header {
     font-weight: bold;
 

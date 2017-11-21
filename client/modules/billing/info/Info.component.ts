@@ -31,7 +31,7 @@ export class InfoComponent implements OnInit {
             }
         });
 
-
+        this.mySubsciptions = {};
         this.MsLicenseClientService.getMySubsciptions(this.AuthService.company.id)
             .then(response => {
                 this.mySubsciptions = response;
@@ -57,7 +57,7 @@ export class InfoComponent implements OnInit {
     }
 
 
-    startSubscriptionSetup(subscription) {
+    updateSubscriptionCard(subscription) {
 
         this.MsLicenseClientService.getHPUpdateCard(this.AuthService.company.id, subscription.subscription_id)
             .then(hostedPage => {
@@ -67,4 +67,31 @@ export class InfoComponent implements OnInit {
             });
     }
 
+    cancelSubscription(subscription) {
+// @todo: need confiramtion!!!
+        this.MsLicenseClientService.cancelSubscription(this.AuthService.company.id, subscription.subscription_id)
+            .then(response => {
+                console.log(response);
+            });
+    }
+
+    getStatusLabel(subscription) {
+        switch (subscription.status) {
+            case 'trial': return 'TRIAL';
+            case 'live': return 'LIVE';
+            case 'cancelled': return 'CANCELLED';
+            case 'non_renewing': return 'NON RENEWING';
+            default: return subscription.status;
+        }
+    }
+
+    getStatusColor(subscription) {
+        switch (subscription.status) {
+            case 'trial': return '#155ffc';
+            case 'live': return '#03a803';
+            case 'cancelled': return '#444';
+            case 'non_renewing': return '#444';
+            default: return '#444';
+        }
+    }
 }
