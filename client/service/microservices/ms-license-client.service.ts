@@ -129,4 +129,15 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
+    reactivateSubscription(companyId, zohoSubscriptionId): Promise<any> {
+        return this.makeMsCall(
+            'billing/reactivate-subscription',
+            'PUT',
+            {
+                company_id: companyId,
+                zoho_subscription_id: zohoSubscriptionId
+            }
+        );
+    }
+
 }

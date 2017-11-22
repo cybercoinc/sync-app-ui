@@ -25,6 +25,13 @@
     </md-card-content>
 </md-card>
 
+<md-card *ngIf="mySubsciptions.company_subscriptions && mySubsciptions.company_subscriptions.length==0">
+    <md-card-content>
+        <div style="font-size: 20px;">
+            No Subscriptions
+        </div>
+    </md-card-content>
+</md-card>
 <md-card *ngFor="let subscription of mySubsciptions.company_subscriptions">
     <md-card-content>
         <div style="font-size: 20px;">
@@ -35,8 +42,10 @@
         <span style="padding-left: 20px;">Next Billing Date: {{subscription.next_billing_at || 'N/A'}}</span>
     </md-card-content>
     <md-card-actions align="end">
-        <button md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Update Card</button>
+        <button *ngIf="!subscription.auto_collect" md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Setup Billing</button>
+        <button *ngIf="subscription.auto_collect" md-button (click)="updateSubscriptionCard(subscription)">Update Card</button>
         <span class="flex-spacer"></span>
-        <button md-button (click)="cancelSubscription(subscription)">Cancel Subscription</button>
+        <button *ngIf="isCancellable(subscription)" md-button (click)="cancelSubscription(subscription)">Cancel Subscription</button>
+        <button *ngIf="isRenewable(subscription)" md-button (click)="reactivateSubscription(subscription)">Renew</button>
     </md-card-actions>
 </md-card>

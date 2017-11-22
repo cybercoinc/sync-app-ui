@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {MdDialog} from "@angular/material";
 import {AuthService} from "client/service/auth.service";
+import {NotificationsService} from "client/modules/notifications/notifications.service";
 import {MsLicenseClientService} from 'client/service/microservices/ms-license-client.service';
 import {CreditCard} from "./credit-card";
 import {CreditCardDialog} from "./credit-card-dialog/credit-card.dialog";
@@ -16,7 +17,11 @@ export class InfoComponent implements OnInit {
 
     constructor(protected MsLicenseClientService: MsLicenseClientService,
                 protected AuthService: AuthService,
-                protected dialog: MdDialog) {}
+                protected notificationService: NotificationsService,
+                protected dialog: MdDialog
+    ) {
+        this.mySubsciptions = {};
+    }
 
     ngOnInit(): void {
         this.MsLicenseClientService.getCreditCard(this.AuthService.authUser.id, this.AuthService.company.id).then(response => {
@@ -30,13 +35,15 @@ export class InfoComponent implements OnInit {
                 });
             }
         });
+        this.loadSubscriptions();
+    }
 
-        this.mySubsciptions = {};
+    loadSubscriptions () {
+
         this.MsLicenseClientService.getMySubsciptions(this.AuthService.company.id)
             .then(response => {
                 this.mySubsciptions = response;
-        });
-
+            });
     }
 
     open() {
@@ -68,11 +75,68 @@ export class InfoComponent implements OnInit {
     }
 
     cancelSubscription(subscription) {
-// @todo: need confiramtion!!!
-        this.MsLicenseClientService.cancelSubscription(this.AuthService.company.id, subscription.subscription_id)
-            .then(response => {
-                console.log(response);
+        let dialogRef = this.notificationService.addConfirm('Are you sure?');
+
+        dialogRef
+            .afterClosed()
+            .subscribe(res => {
+                if (res) {
+                    return this.MsLicenseClientService.cancelSubscription(this.AuthService.company.id, subscription.subscription_id)
+                        .then(updatedSubscription => {
+                            if (['non_renewing', 'cancelled'].indexOf(updatedSubscription.status) !== -1 ) {
+                                this.notificationService.addInfo('Subscription Cancelled');
+                                this.loadSubscriptions();
+                            } else {
+                                this.notificationService.addError('Something went wrong. Action not finished.');
+                            }
+                        });
+                }
             });
+    }
+
+    reactivateSubscription(subscription) {
+
+        let dialogRef = this.notificationService.addConfirm('Are you sure?');
+
+        dialogRef
+            .afterClosed()
+            .subscribe(res => {
+                if (res) {
+                    return this.MsLicenseClientService.reactivateSubscription(this.AuthService.company.id, subscription.subscription_id)
+                        .then(updatedSubscription => {
+                            if (['live', 'trial'].indexOf(updatedSubscription.status) !== -1 ) {
+                                this.notificationService.addInfo('Subscription Reactivated');
+                                this.loadSubscriptions();
+                            } else {
+                                this.notificationService.addError('Something went wrong. Action not finished.');
+                            }
+                        });
+                }
+            });
+    }
+
+    isCancellable(subscription) {
+        switch (subscription.status) {
+            case 'cancelled':
+            case 'non_renewing':
+                return false;
+            case 'trial':
+            case 'live':
+            default:
+                return true;
+        }
+    }
+
+    isRenewable(subscription) {
+        switch (subscription.status) {
+            case 'non_renewing':
+                return true;
+            case 'cancelled':
+            case 'trial':
+            case 'live':
+            default:
+                return false;
+        }
     }
 
     getStatusLabel(subscription) {
