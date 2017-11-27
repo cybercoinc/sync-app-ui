@@ -35,7 +35,7 @@
 <md-card *ngFor="let subscription of mySubsciptions.company_subscriptions">
     <md-card-content>
         <div style="font-size: 20px;">
-            Core ScheduleConnector Subscription
+            {{subscription.plan_name}}
             <span [ngStyle]="{'color':getStatusColor(subscription)}" style="font-size: 22px;">{{getStatusLabel(subscription)}}</span>
         </div>
         <span>Price: ${{subscription.amount}}</span>
