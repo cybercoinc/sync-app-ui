@@ -1,3 +1,27 @@
+
+<md-card *ngIf="newInvoices && newInvoices.length==0">
+    <md-card-content>
+        <div style="font-size: 20px;">
+            No new invoices
+        </div>
+    </md-card-content>
+</md-card>
+<md-card *ngFor="let invoice of newInvoices">
+    <md-card-content>
+        <div style="font-size: 20px;">
+            {{invoice.number}}
+            <span [ngStyle]="{'color':getStatusColor(invoice)}" style="font-size: 22px;">{{getStatusLabel(invoice)}}</span>
+        </div>
+        <span>Total: ${{invoice.total}}</span>
+        <span style="padding-left: 20px;">Invoice Date: {{invoice.invoice_date || 'N/A'}}</span>
+        <span style="padding-left: 20px;">Due Date: {{invoice.due_date || 'N/A'}}</span>
+    </md-card-content>
+    <md-card-actions align="end">
+        <!--<button md-button>Resend via email</button>-->
+    </md-card-actions>
+</md-card>
+
+
 <md-card>
     <md-card-content>
         <div *ngIf="!invoices">
@@ -9,6 +33,9 @@
         </div>
 
         <div *ngIf="invoices && invoices.length > 0">
+
+            History of invoices:
+
             <div>
                 <div class="row invoice-table-header bottom-lined">
                     <div class="col-xs-3">Invoice Number</div>
