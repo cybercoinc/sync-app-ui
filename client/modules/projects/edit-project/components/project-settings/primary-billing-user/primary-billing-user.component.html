@@ -12,12 +12,12 @@
                     <span>
                         <b>{{pbrUser.first_name}} {{pbrUser.last_name}}</b> ({{pbrUser.email}})
                     </span>
-                <span class="button-group" *ngIf="isBillingUser">
+                <span class="button-group" *ngIf="isBillingUser && project.is_separate_invoice">
                         <button class="btn btn-warning" (click)="editPbr()">Edit</button>
                     </span>
             </div>
 
-            <div *ngIf="isEdit">
+            <div *ngIf="isEdit && project.is_separate_invoice">
                 <md-input-container style="width:350px;">
                     <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" [(ngModel)]="pbrUser">
                 </md-input-container>
