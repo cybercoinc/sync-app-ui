@@ -108,7 +108,6 @@ export class MsLicenseClientService extends MsClientService {
     }
 
     getMyInvoices(companyId): Promise<any> {
-        console.log(66);
         return this.makeMsCall(
             'billing/get-my-invoices',
             'GET',
@@ -148,6 +147,31 @@ export class MsLicenseClientService extends MsClientService {
                 company_id: companyId,
                 zoho_subscription_id: zohoSubscriptionId
             }
+        );
+    }
+
+    getCompanyBillingUsers(companyId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/billing-users',
+            'GET'
+        );
+    }
+
+    addExtraBillingUser(companyId, userId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/billing-users',
+            'POST',
+            {
+                user_id: userId
+            }
+        );
+    }
+
+    deleteExtraBillingUser(companyId, userId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/billing-users/'+userId,
+            'DELETE',
+            null
         );
     }
 

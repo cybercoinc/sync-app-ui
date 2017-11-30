@@ -4,27 +4,34 @@
             <div class="section-content">
                 <div class="row" *ngIf="pbrId">
 
-                    <span style="font-weight: bold;" *ngIf="!isEditMode">Company billing responsible person</span><br />
-                    <span class="current-user" *ngIf="!isEditMode">{{currentPBRUser}}</span>
+                    <span style="font-weight: bold;" *ngIf="!isEditMode">Company billing responsible persons</span><br /><br />
 
-                    <md-input-container *ngIf="isEditMode" style="width: 350px;">
-                        <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" [(ngModel)]="currentPBRUser">
-                    </md-input-container>
+                    <div *ngFor="let billing_user of billingUsers">
+                        {{billing_user.first_name}} {{billing_user.last_name}} <{{billing_user.email}}>
 
-                    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-                        <md-option *ngFor="let user of filtered | async" [value]="user">
-                            {{ user.value }}
-                        </md-option>
-                    </md-autocomplete>
+                        <ng-container *ngIf="isBillingUser">
+                        <button *ngIf="!billing_user.is_pbr" type="button" class="btn btn-success" (click)="revokeBillingUser(billing_user)">Revoke</button>
+                        <button *ngIf="!billing_user.is_pbr" type="button" class="btn btn-success" (click)="setPrimaryBillingUser(billing_user)">Set Primary</button>
+                        </ng-container>
+                    </div>
+                    <br />
+                    <br />
 
-                    <span *ngIf="isBillingUser">
-                        <a class="btn btn-success" *ngIf="!isEditMode" (click)="showEditPBR()">Edit</a>
+                    <ng-container *ngIf="isBillingUser">
+                        Add more:
+                        <md-input-container style="width: 350px;">
+                            <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" (ngModel)="newPBRUser">
+                        </md-input-container>
 
-                        <span *ngIf="isEditMode">
-                            <button type="button" class="btn btn-success" (click)="saveUser()">Save</button>
-                            <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
-                        </span>
-                    </span>
+                        <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+                            <md-option *ngFor="let user of filtered | async" [value]="user">
+                                {{ user.value }}
+                            </md-option>
+                        </md-autocomplete>
+
+                        <button type="button" class="btn btn-success" (click)="addExtraBillingUser()">Add</button>
+                    </ng-container>
+
                 </div>
                 <div class="row" *ngIf="!pbrId">
                     <p class="text-warn">PBR error</p>
