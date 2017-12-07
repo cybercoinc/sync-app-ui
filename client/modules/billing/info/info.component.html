@@ -35,11 +35,18 @@
 <md-card *ngFor="let subscription of mySubsciptions.company_subscriptions">
     <md-card-content>
         <div style="font-size: 20px;">
-            {{subscription.plan_name}}
+            {{subscription.plan.name}}
             <span [ngStyle]="{'color':getStatusColor(subscription)}" style="font-size: 22px;">{{getStatusLabel(subscription)}}</span>
         </div>
+        <div><i>{{subscription.plan.description}}</i></div>
         <span>Price: ${{subscription.amount}}</span>
         <span style="padding-left: 20px;">Next Billing Date: {{subscription.next_billing_at || 'N/A'}}</span>
+        <div *ngIf="subscription.addons && subscription.addons.length">
+            <strong>Projects:</strong>
+            <ul>
+                <li *ngFor="let addon of subscription.addons">{{addon.description}}</li>
+            </ul>
+        </div>
     </md-card-content>
     <md-card-actions align="end">
         <button *ngIf="!subscription.auto_collect" md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Setup Billing</button>
