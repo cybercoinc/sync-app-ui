@@ -15,7 +15,7 @@ export class InfoComponent implements OnInit {
     creditCard: CreditCard = new CreditCard();
     mySubsciptions: any;
 
-    constructor(protected MsLicenseClientService: MsLicenseClientService,
+    constructor(protected msLicenseClientService: MsLicenseClientService,
                 protected AuthService: AuthService,
                 protected notificationService: NotificationsService,
                 protected dialog: MdDialog
@@ -24,7 +24,7 @@ export class InfoComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.MsLicenseClientService.getCreditCard(this.AuthService.authUser.id, this.AuthService.company.id).then(response => {
+        this.msLicenseClientService.getCreditCard(this.AuthService.authUser.id, this.AuthService.company.id).then(response => {
             if (Object.keys(response).length > 0) {
                 this.creditCard = new CreditCard({
                     id:               response.id,
@@ -40,7 +40,7 @@ export class InfoComponent implements OnInit {
 
     loadSubscriptions () {
 
-        this.MsLicenseClientService.getMySubsciptions(this.AuthService.company.id)
+        this.msLicenseClientService.getMySubsciptions(this.AuthService.company.id)
             .then(response => {
                 this.mySubsciptions = response;
             });
@@ -58,7 +58,7 @@ export class InfoComponent implements OnInit {
     }
 
     clearCard() {
-        this.MsLicenseClientService.removeCard(this.creditCard.id).then(response => {
+        this.msLicenseClientService.removeCard(this.creditCard.id).then(response => {
             this.creditCard = new CreditCard();
         });
     }
@@ -66,7 +66,7 @@ export class InfoComponent implements OnInit {
 
     updateSubscriptionCard(subscription) {
 
-        this.MsLicenseClientService.getHPUpdateCard(this.AuthService.company.id, subscription.subscription_id)
+        this.msLicenseClientService.getHPUpdateCard(this.AuthService.company.id, subscription.subscription_id)
             .then(hostedPage => {
                 if (hostedPage.url) {
                     window.location.href = hostedPage.url;
@@ -81,7 +81,7 @@ export class InfoComponent implements OnInit {
             .afterClosed()
             .subscribe(res => {
                 if (res) {
-                    return this.MsLicenseClientService.cancelSubscription(this.AuthService.company.id, subscription.subscription_id)
+                    return this.msLicenseClientService.cancelSubscription(this.AuthService.company.id, subscription.subscription_id)
                         .then(updatedSubscription => {
                             if (['non_renewing', 'cancelled'].indexOf(updatedSubscription.status) !== -1 ) {
                                 this.notificationService.addInfo('Subscription Cancelled');
@@ -102,7 +102,7 @@ export class InfoComponent implements OnInit {
             .afterClosed()
             .subscribe(res => {
                 if (res) {
-                    return this.MsLicenseClientService.reactivateSubscription(this.AuthService.company.id, subscription.subscription_id)
+                    return this.msLicenseClientService.reactivateSubscription(this.AuthService.company.id, subscription.subscription_id)
                         .then(updatedSubscription => {
                             if (['live', 'trial'].indexOf(updatedSubscription.status) !== -1 ) {
                                 this.notificationService.addInfo('Subscription Reactivated');
@@ -113,6 +113,35 @@ export class InfoComponent implements OnInit {
                         });
                 }
             });
+    }
+
+    startWatchingSubscription (subscription) {
+        this.msLicenseClientService.watchSubscription(this.AuthService.company.id, subscription.subscription_id)
+            .then(response => {
+                this.notificationService.addInfo('Watching activated');
+                this.loadSubscriptions();
+            });
+    }
+
+    stopWatchingSubscription (subscription) {
+        this.msLicenseClientService.stopWatchSubscription(this.AuthService.company.id, subscription.subscription_id)
+            .then(response => {
+                this.notificationService.addInfo('Watching stopped');
+                this.loadSubscriptions();
+            });
+    }
+
+    isIamAlreadyWatching(subscription) {
+
+        let response = false;
+
+        subscription.contactpersons.forEach((person) => {
+            if (person.email == this.AuthService.authUser.email) {
+                response = true;
+            }
+        });
+
+        return response;
     }
 
     isCancellable(subscription) {

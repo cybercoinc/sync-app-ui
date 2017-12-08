@@ -49,6 +49,13 @@
         <div><i>{{subscription.plan.description}}</i></div>
         <span>Price: ${{subscription.amount}}</span>
         <span style="padding-left: 20px;">Next Billing Date: {{subscription.next_billing_at || 'N/A'}}</span>
+        <div>
+            <strong>Watchers:</strong><br />
+            <span *ngFor="let person of subscription.contactpersons; let isLast = last;">
+                {{person.email}}{{!isLast?', ':''}}
+                <button md-button (click)="reactivateSubscription(subscription)">X</button>
+            </span>
+        </div>
         <div *ngIf="subscription.addons && subscription.addons.length">
             <strong>Projects:</strong>
             <ul>
@@ -69,6 +76,8 @@
     </md-card-content>
     <md-card-actions align="end">
         <button *ngIf="!subscription.auto_collect" md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Setup Billing</button>
+        <button *ngIf="isIamAlreadyWatching(subscription)" md-button (click)="stopWatchingSubscription(subscription)">Stop Watching</button>
+        <button *ngIf="!isIamAlreadyWatching(subscription)" md-button (click)="startWatchingSubscription(subscription)">Watch</button>
         <button *ngIf="subscription.auto_collect" md-button (click)="updateSubscriptionCard(subscription)">Update Card</button>
         <span class="flex-spacer"></span>
         <button *ngIf="isCancellable(subscription)" md-button (click)="cancelSubscription(subscription)">Cancel Subscription</button>

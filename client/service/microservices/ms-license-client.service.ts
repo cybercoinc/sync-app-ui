@@ -175,4 +175,24 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
+    watchSubscription(companyId, subscriptionId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/watch-subscription',
+            'POST',
+            {
+                subscription_id: subscriptionId
+            }
+        );
+    }
+
+    stopWatchSubscription(companyId, subscriptionId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/watch-subscription-stop',
+            'POST',
+            {
+                subscription_id: subscriptionId
+            }
+        );
+    }
+
 }
