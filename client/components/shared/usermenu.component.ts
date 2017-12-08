@@ -30,7 +30,7 @@ import {MsUserClientService} from "client/service/microservices/ms-user-client.s
         <ul *ngIf="showUserMenu" class="dropdown-menu" style="display: block;margin-top: 8px;">
             <li><a [routerLink]="['/settings']"  (click)="showUserMenu = !showUserMenu;">Settings</a></li>
             <li><a [routerLink]="['/connection']" (click)="showUserMenu = !showUserMenu;">Connections</a></li>
-            <li *ngIf="userInCompany && userInCompany.has_billing_permission" ><a [routerLink]="['/billing/info']" (click)="showUserMenu = !showUserMenu;">Billing</a></li>
+            <li *ngIf="userInCompany && userInCompany.has_billing_permission" ><a [routerLink]="['/billing/company']" (click)="showUserMenu = !showUserMenu;">Billing</a></li>
             <li><a [routerLink]="['/reports']"  (click)="showUserMenu = !showUserMenu;">Reports</a></li>
             <li class="divider"></li>
             <li><a href="javascript: void(0);"  (click)="logout()">Log out</a></li>
