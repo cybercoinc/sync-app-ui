@@ -28,3 +28,8 @@ p {
     border-bottom: solid 1px darkgray;
     line-height: 32px;
 }
+
+.scheduled-changes-area {
+    background-color: #f8eccb;
+    padding: 10px;
+}

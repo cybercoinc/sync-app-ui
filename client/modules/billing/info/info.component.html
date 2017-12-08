@@ -47,6 +47,17 @@
                 <li *ngFor="let addon of subscription.addons">{{addon.description}}</li>
             </ul>
         </div>
+        <div *ngIf="subscription.scheduled_changes" class="scheduled-changes-area">
+            <strong>Scheduled Changes:</strong><br/>
+            <span>Price: ${{subscription.scheduled_changes.amount}}</span>
+            <span style="padding-left: 20px;">Next Billing Date: {{subscription.scheduled_changes.next_billing_at || 'N/A'}}</span>
+            <div *ngIf="subscription.scheduled_changes.addons && subscription.scheduled_changes.addons.length">
+                <strong>Projects:</strong>
+                <ul>
+                    <li *ngFor="let addon of subscription.scheduled_changes.addons">{{addon.description}}</li>
+                </ul>
+            </div>
+        </div>
     </md-card-content>
     <md-card-actions align="end">
         <button *ngIf="!subscription.auto_collect" md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Setup Billing</button>
