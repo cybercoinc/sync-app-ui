@@ -33,3 +33,10 @@ p {
     background-color: #f8eccb;
     padding: 10px;
 }
+
+.watchers-list i.material-icons {
+    color: #8b0305;
+    vertical-align: middle;
+    cursor: pointer;
+}
+

@@ -3,8 +3,10 @@ import {MdDialog} from "@angular/material";
 import {AuthService} from "client/service/auth.service";
 import {NotificationsService} from "client/modules/notifications/notifications.service";
 import {MsLicenseClientService} from 'client/service/microservices/ms-license-client.service';
+import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
 import {CreditCard} from "./credit-card";
 import {CreditCardDialog} from "./credit-card-dialog/credit-card.dialog";
+import {MdSnackBar} from "@angular/material";
 
 @Component({
     selector: 'info',
@@ -14,17 +16,23 @@ import {CreditCardDialog} from "./credit-card-dialog/credit-card.dialog";
 export class InfoComponent implements OnInit {
     creditCard: CreditCard = new CreditCard();
     mySubsciptions: any;
+    currentUser: any;
+    companyInfo: any;
 
     constructor(protected msLicenseClientService: MsLicenseClientService,
-                protected AuthService: AuthService,
+                protected msUserClientService: MsUserClientService,
+                protected authService: AuthService,
                 protected notificationService: NotificationsService,
-                protected dialog: MdDialog
+                protected dialog: MdDialog,
+                protected snackBar: MdSnackBar
     ) {
         this.mySubsciptions = {};
+        this.companyInfo = {};
+        this.currentUser = authService.authUser;
     }
 
     ngOnInit(): void {
-        this.msLicenseClientService.getCreditCard(this.AuthService.authUser.id, this.AuthService.company.id).then(response => {
+        this.msLicenseClientService.getCreditCard(this.authService.authUser.id, this.authService.company.id).then(response => {
             if (Object.keys(response).length > 0) {
                 this.creditCard = new CreditCard({
                     id:               response.id,
@@ -36,13 +44,21 @@ export class InfoComponent implements OnInit {
             }
         });
         this.loadSubscriptions();
+        this.loadCompanyInfo();
     }
 
     loadSubscriptions () {
 
-        this.msLicenseClientService.getMySubsciptions(this.AuthService.company.id)
+        this.msLicenseClientService.getMySubsciptions(this.authService.company.id)
             .then(response => {
                 this.mySubsciptions = response;
+            });
+    }
+
+    loadCompanyInfo() {
+        return this.msUserClientService.getCompany(this.authService.company.id)
+            .then(company => {
+                this.companyInfo = company;
             });
     }
 
@@ -63,10 +79,18 @@ export class InfoComponent implements OnInit {
         });
     }
 
+    hasPrimaryPermission() {
+
+        if (this.companyInfo && this.companyInfo.pbr) {
+            return this.companyInfo.pbr.id === this.currentUser.id;
+        }
+
+        return false;
+    }
 
     updateSubscriptionCard(subscription) {
 
-        this.msLicenseClientService.getHPUpdateCard(this.AuthService.company.id, subscription.subscription_id)
+        this.msLicenseClientService.getHPUpdateCard(this.authService.company.id, subscription.subscription_id)
             .then(hostedPage => {
                 if (hostedPage.url) {
                     window.location.href = hostedPage.url;
@@ -81,7 +105,7 @@ export class InfoComponent implements OnInit {
             .afterClosed()
             .subscribe(res => {
                 if (res) {
-                    return this.msLicenseClientService.cancelSubscription(this.AuthService.company.id, subscription.subscription_id)
+                    return this.msLicenseClientService.cancelSubscription(this.authService.company.id, subscription.subscription_id)
                         .then(updatedSubscription => {
                             if (['non_renewing', 'cancelled'].indexOf(updatedSubscription.status) !== -1 ) {
                                 this.notificationService.addInfo('Subscription Cancelled');
@@ -102,7 +126,7 @@ export class InfoComponent implements OnInit {
             .afterClosed()
             .subscribe(res => {
                 if (res) {
-                    return this.msLicenseClientService.reactivateSubscription(this.AuthService.company.id, subscription.subscription_id)
+                    return this.msLicenseClientService.reactivateSubscription(this.authService.company.id, subscription.subscription_id)
                         .then(updatedSubscription => {
                             if (['live', 'trial'].indexOf(updatedSubscription.status) !== -1 ) {
                                 this.notificationService.addInfo('Subscription Reactivated');
@@ -115,28 +139,62 @@ export class InfoComponent implements OnInit {
             });
     }
 
-    startWatchingSubscription (subscription) {
-        this.msLicenseClientService.watchSubscription(this.AuthService.company.id, subscription.subscription_id)
+    startWatchingSubscription (subscription, email) {
+        this.msLicenseClientService.watchSubscription(this.authService.company.id, subscription.subscription_id, email)
             .then(response => {
-                this.notificationService.addInfo('Watching activated');
+                this.snackBar.open('Watching activated', 'Close', {
+                    duration: 2000,
+                    extraClasses: ['alert-success']
+                });
                 this.loadSubscriptions();
             });
     }
 
-    stopWatchingSubscription (subscription) {
-        this.msLicenseClientService.stopWatchSubscription(this.AuthService.company.id, subscription.subscription_id)
+    stopWatchingSubscription (subscription, email) {
+        this.msLicenseClientService.stopWatchSubscription(this.authService.company.id, subscription.subscription_id, email)
             .then(response => {
-                this.notificationService.addInfo('Watching stopped');
+
+                this.snackBar.open('Watching stopped', 'Close', {
+                    duration: 2000,
+                    extraClasses: ['alert-success']
+                });
                 this.loadSubscriptions();
             });
     }
 
-    isIamAlreadyWatching(subscription) {
+    addSubscriptionWatcher (subscription) {
+        let dialogRef = this.notificationService.addPrompt('Add Watcher',
+            'Provide email address. We will send there updates for this subscription.');
+
+        dialogRef
+            .afterClosed()
+            .subscribe(emailToAdd => {
+
+                if (!emailToAdd) {
+                    return ;
+                }
+
+                if (!/^[0-9a-zA-Z\.\+]+@[0-9a-zA-Z\.]+$/.test(emailToAdd) ) {
+                    this.notificationService.addError('Wrong email format.');
+                    return ;
+                }
+
+                if (this.isAlreadyWatching(subscription, emailToAdd)) {
+                    this.notificationService.addError('This user already in watchers list.');
+                    return ;
+                }
+
+                this.startWatchingSubscription(subscription, emailToAdd);
+
+            });
+    }
+
+    isAlreadyWatching(subscription, email) {
 
         let response = false;
 
         subscription.contactpersons.forEach((person) => {
-            if (person.email == this.AuthService.authUser.email) {
+            if (person.email == email) {
                 response = true;
             }
         });

@@ -4,6 +4,7 @@ import {LineNotification} from "./kinds/line.notification";
 import {BaseNotification} from "./kinds/base.notification";
 import {MdDialog} from "@angular/material";
 import {ConfirmNotification} from "./kinds/confirm.notification";
+import {PromptNotification} from "./kinds/prompt.notification";
 import {ReactionNotification, ReactionPossibility} from "./kinds/reaction.notification";
 
 const TYPE_INFO = 'info';
@@ -56,6 +57,18 @@ export class NotificationsService {
         let notification = new ConfirmNotification(this.MdDialog);
 
         notification.setMessage(text);
+        notification.setType(TYPE_WARNING);
+
+        this.pushNotification(notification);
+
+        return notification.getDialogRef();
+    }
+
+    public addPrompt(subject, message) {
+        let notification = new PromptNotification(this.MdDialog);
+
+        notification.setSubject(subject);
+        notification.setMessage(message);
         notification.setType(TYPE_WARNING);
 
         this.pushNotification(notification);
