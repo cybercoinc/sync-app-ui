@@ -4,7 +4,7 @@ import {join} from "path";
 import {json, urlencoded} from "body-parser";
 let config = require('config');
 let cors = require('cors');
-
+console.log(2);
 const app: express.Application = express();
 app.disable("x-powered-by");
 
@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
         next();
     }
 });
-
+console.log(3);
 app.use(express.static(join(__dirname, '../public')));
 app.use(json());
 app.use(urlencoded({extended: true}));
@@ -65,7 +65,7 @@ let corsOptions = {
     credentials:true
 };
 app.use(cors(corsOptions));
-
+console.log(4);
 // error handlers
 // development error handler
 // will print stacktrace
@@ -116,5 +116,5 @@ app.use(function (err: any, req: express.Request, res: express.Response, next: e
             'message': message
         });
 });
-
+console.log(5);
 export {app}
