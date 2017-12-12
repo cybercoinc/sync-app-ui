@@ -4,46 +4,46 @@ import {join} from "path";
 import {json, urlencoded} from "body-parser";
 let config = require('config');
 let cors = require('cors');
-console.log(2);
+
 const app: express.Application = express();
 app.disable("x-powered-by");
 
 // forse HTTPS
-// app.use(function (req, res, next) {
-//     let options = {
-//         maxAge: 10886400,
-//         includeSubDomains: true,
-//         preload: true
-//     };
-//     let ignoreRequest = (process.env.NODE_ENV !== "prod");
-//     let ignoreFilter = function (req) {
-//         return (req.url.indexOf('/_ah/health') > -1);
-//     };
-//
-//     let secure = (req.get('X-Forwarded-Proto') === "https");
-//
-//     if (ignoreFilter) {
-//         ignoreRequest = ignoreRequest || ignoreFilter(req);
-//     }
-//
-//     if (!ignoreRequest) {
-//         if (!secure) {
-//             res.writeHead(301, {
-//                 Location: 'https://' + req.get('host') + req.url
-//             });
-//             res.end();
-//         } else {
-//             let header = 'max-age=' + options.maxAge;
-//             if (options.includeSubDomains) header += '; includeSubDomains';
-//             if (options.preload) header += '; preload';
-//             res.setHeader('Strict-Transport-Security', header);
-//             next();
-//         }
-//     } else {
-//         next();
-//     }
-// });
-console.log(3);
+app.use(function (req, res, next) {
+    let options = {
+        maxAge: 10886400,
+        includeSubDomains: true,
+        preload: true
+    };
+    let ignoreRequest = (process.env.NODE_ENV !== "prod");
+    let ignoreFilter = function (req) {
+        return (req.url.indexOf('/_ah/health') > -1);
+    };
+
+    let secure = (req.get('X-Forwarded-Proto') === "https");
+
+    if (ignoreFilter) {
+        ignoreRequest = ignoreRequest || ignoreFilter(req);
+    }
+
+    if (!ignoreRequest) {
+        if (!secure) {
+            res.writeHead(301, {
+                Location: 'https://' + req.get('host') + req.url
+            });
+            res.end();
+        } else {
+            let header = 'max-age=' + options.maxAge;
+            if (options.includeSubDomains) header += '; includeSubDomains';
+            if (options.preload) header += '; preload';
+            res.setHeader('Strict-Transport-Security', header);
+            next();
+        }
+    } else {
+        next();
+    }
+});
+
 app.use(express.static(join(__dirname, '../public')));
 app.use(json());
 app.use(urlencoded({extended: true}));
@@ -65,7 +65,7 @@ let corsOptions = {
     credentials:true
 };
 app.use(cors(corsOptions));
-console.log(4);
+
 // error handlers
 // development error handler
 // will print stacktrace
@@ -116,5 +116,5 @@ app.use(function (err: any, req: express.Request, res: express.Response, next: e
             'message': message
         });
 });
-console.log(5);
+
 export {app}
