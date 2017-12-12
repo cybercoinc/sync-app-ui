@@ -96,13 +96,21 @@ export class PipeConnectionService implements Resolve<{}> {
                 return this.refreshPipesList();
             })
             .then(() => {
-                if (_pipeObj.use_schedule_chart) {
-                    return;
+                let promises = [];
+
+                if (!_pipeObj.use_schedule_chart && !_pipeObj.sm_webhook_id) {
+                    promises.push(
+                        this.MsProjectClientService.createSmPipeWebhook(pipeId)
+                    );
                 }
 
-                if (!_pipeObj.sm_webhook_id) {
-                    return this.MsProjectClientService.createSmPipeWebhook(pipeId);
+                if (!_pipeObj.procore_webhook_id) {
+                    promises.push(
+                        this.MsProjectClientService.createPipeProcoreWebhook(_pipeObj.project_fk_id, pipeId)
+                    );
                 }
+
+                return Promise.all(promises);
             })
             .then(() => {
                 if (_pipeObj.use_schedule_chart) {
