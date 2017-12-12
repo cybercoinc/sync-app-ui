@@ -86,6 +86,10 @@ export class PipeConnectionService implements Resolve<{}> {
             .then(pipesList => {
                 _pipeObj = pipesList.shift();
 
+                if (!_pipeObj) {
+                    throw new Error(`Pipe #${pipeId} was not found`);
+                }
+
                 return this.MsProjectClientService.enablePipe(pipeId);
             })
             .then(() => {

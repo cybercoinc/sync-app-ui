@@ -312,6 +312,16 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    createProcoreProjectWebhook(projectId: number) {
+        return this.makeMsCall(
+            'projects/create-procore-project-webhook',
+            'PUT',
+            {
+                project_id: projectId,
+            }
+        );
+    }
+
     syncProjectUsers(projectId: number): Promise<any> {
         return this.makeMsCall(
             'procore/sync-project-users',
