@@ -67,7 +67,12 @@
             </div>
         </div>
         <div class="watchers-list">
-            <strong>Watchers:</strong><br />
+            <strong>Notifications:</strong><br />
+
+            <button *ngIf="isAlreadyWatching(subscription, currentUser.email)" md-button (click)="stopWatchingSubscription(subscription, currentUser.email)">Disable Notifications</button>
+            <button *ngIf="!isAlreadyWatching(subscription, currentUser.email)" md-button (click)="startWatchingSubscription(subscription, currentUser.email)">Enable Notifications</button>
+            <button *ngIf="hasPrimaryPermission()" md-button (click)="addSubscriptionWatcher(subscription)">Add Additional Email</button>
+            <br />
             <span *ngFor="let person of subscription.contactpersons; let isLast = last;">
                 {{person.email}}
                 <i *ngIf="hasPrimaryPermission()" class="material-icons" (click)="stopWatchingSubscription(subscription, person.email)">close</i>
@@ -77,9 +82,6 @@
     </md-card-content>
     <md-card-actions align="end" style="border-top: 1px solid #aaaaaa;">
         <button *ngIf="!subscription.auto_collect" md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Setup Billing</button>
-        <button *ngIf="isAlreadyWatching(subscription, currentUser.email)" md-button (click)="stopWatchingSubscription(subscription, currentUser.email)">Stop Watching</button>
-        <button *ngIf="!isAlreadyWatching(subscription, currentUser.email)" md-button (click)="startWatchingSubscription(subscription, currentUser.email)">Watch</button>
-        <button *ngIf="hasPrimaryPermission()" md-button (click)="addSubscriptionWatcher(subscription)">Add Watcher</button>
         <button *ngIf="subscription.auto_collect" md-button (click)="updateSubscriptionCard(subscription)">Update Card</button>
         <span class="flex-spacer"></span>
         <button *ngIf="isCancellable(subscription)" md-button (click)="cancelSubscription(subscription)">Cancel Subscription</button>
