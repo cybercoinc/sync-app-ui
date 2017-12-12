@@ -104,12 +104,14 @@ export class PipeConnectionService implements Resolve<{}> {
                     );
                 }
 
-                // if (!_pipeObj.procore_webhook_trigger_id) {
-                //     promises.push(
-                        // todo call here Trigger adding
-                        // this.MsProjectClientService.createProcoreProjectWebhook(_pipeObj.project_fk_id)
-                    // );
-                // }
+                if (!_pipeObj.procore_webhook_triggers) {
+                    promises.push(
+                        this.MsProjectClientService.addProcoreWebhookTriggers(
+                            _pipeObj.id,
+                            ['public_todos', 'private_todos'].indexOf(_pipeObj.type) !== -1 ? 'ToDos' : 'Tasks'
+                        )
+                    );
+                }
 
                 return Promise.all(promises);
             })
