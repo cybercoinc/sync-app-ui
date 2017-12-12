@@ -42,6 +42,11 @@
 </md-card>
 <md-card *ngFor="let subscription of mySubsciptions.company_subscriptions">
     <md-card-content>
+
+        <div style="float: right;">
+            <button *ngIf="isAlreadyWatching(subscription, currentUser.email)" md-button (click)="stopWatchingSubscription(subscription, currentUser.email)">Disable Notifications</button>
+            <button *ngIf="!isAlreadyWatching(subscription, currentUser.email)" md-button (click)="startWatchingSubscription(subscription, currentUser.email)">Enable Notifications</button>
+        </div>
         <div style="font-size: 20px;">
             {{subscription.plan.name}}
             <span [ngStyle]="{'color':getStatusColor(subscription)}" style="font-size: 22px;">{{getStatusLabel(subscription)}}</span>
@@ -68,9 +73,6 @@
         </div>
         <div class="watchers-list">
             <strong>Notifications:</strong><br />
-
-            <button *ngIf="isAlreadyWatching(subscription, currentUser.email)" md-button (click)="stopWatchingSubscription(subscription, currentUser.email)">Disable Notifications</button>
-            <button *ngIf="!isAlreadyWatching(subscription, currentUser.email)" md-button (click)="startWatchingSubscription(subscription, currentUser.email)">Enable Notifications</button>
             <button *ngIf="hasPrimaryPermission()" md-button (click)="addSubscriptionWatcher(subscription)">Add Additional Email</button>
             <br />
             <span *ngFor="let person of subscription.contactpersons; let isLast = last;">
