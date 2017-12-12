@@ -16,7 +16,7 @@
     "compile": "tsc -p ./client && tsc -p ./server"
   },
   "engines": {
-    "node": "^6.6.0"
+    "node": "8.9.3"
   },
   "license": "MIT",
   "dependencies": {
