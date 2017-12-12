@@ -104,11 +104,12 @@ export class PipeConnectionService implements Resolve<{}> {
                     );
                 }
 
-                if (!_pipeObj.procore_webhook_id) {
-                    promises.push(
-                        this.MsProjectClientService.createPipeProcoreWebhook(_pipeObj.project_fk_id, pipeId)
-                    );
-                }
+                // if (!_pipeObj.procore_webhook_trigger_id) {
+                //     promises.push(
+                        // todo call here Trigger adding
+                        // this.MsProjectClientService.createProcoreProjectWebhook(_pipeObj.project_fk_id)
+                    // );
+                // }
 
                 return Promise.all(promises);
             })

@@ -312,12 +312,12 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createPipeProcoreWebhook(projectId: number, pipeId: number): Promise<{id: number}> {
+    createProcoreProjectWebhook(projectId: number): Promise<{id: number}> {
         return this.makeMsCall(
-            'pipes/create-pipe-procore-webhook',
-            'PUT',
+            'projects/create-procore-project-webhook',
+            'POST',
             {
-                pipe_id: pipeId
+                project_id: projectId
             }
         );
     }

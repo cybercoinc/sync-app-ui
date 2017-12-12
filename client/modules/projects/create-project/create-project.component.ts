@@ -100,11 +100,14 @@ export class CreateProjectComponent implements OnInit {
                 ]);
             })
             .then((result) => {
-                if (!result[0]) { // license has status 'suspended'
-                    return this.router.navigate(['projects']);
-                }
+                return this.MsProjectClientService.createProcoreProjectWebhook(_projectId)
+                    .then(() => {
+                        if (!result[0]) { // license has status 'suspended'
+                            return this.router.navigate(['projects']);
+                        }
 
-                return this.router.navigate(['projects', _projectId, 'edit-project', 'settings']);
+                        return this.router.navigate(['projects', _projectId, 'edit-project', 'settings']);
+                    });
             })
     }
 }
