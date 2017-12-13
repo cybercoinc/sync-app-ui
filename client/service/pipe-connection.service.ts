@@ -139,8 +139,23 @@ export class PipeConnectionService implements Resolve<{}> {
             .then(() => {
                 const triggerResourceName: 'ToDos' | 'Tasks' = ['public_todos', 'private_todos'].indexOf(_pipeObj.type) !== -1 ? 'ToDos' : 'Tasks';
 
-                // todo add check for private/public todos another pipe existing
-                return this.MsProjectClientService.removeProcoreWebhookTriggers(_pipeObj.project_fk_id.id, triggerResourceName);
+                let needToRemoveTriggers = true;
+
+                if (triggerResourceName === 'ToDos') {
+                    for (let type in this.pipesListObj) {
+                        if (this.pipesListObj.hasOwnProperty(type)) {
+                            let pipe = this.pipesListObj[type];
+
+                            if (pipe.id !== pipeId && type !== 'tasks' && pipe.status === 'active') {
+                                needToRemoveTriggers = false;
+                            }
+                        }
+                    }
+                }
+
+                if (needToRemoveTriggers) {
+                    return this.MsProjectClientService.removeProcoreWebhookTriggers(_pipeObj.project_fk_id.id, triggerResourceName);
+                }
             })
             .then(() => {
                 if (_pipeObj.use_schedule_chart) {
