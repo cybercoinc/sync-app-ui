@@ -104,11 +104,14 @@ export class PipeConnectionService implements Resolve<{}> {
                     );
                 }
 
-                if (!_pipeObj.procore_webhook_triggers) {
+                const triggerResourceName: 'ToDos' | 'Tasks' = ['public_todos', 'private_todos'].indexOf(_pipeObj.type) !== -1 ? 'ToDos' : 'Tasks';
+
+                if (!_pipeObj.procore_webhook_triggers
+                    || !_pipeObj.procore_webhook_triggers.find(existingTrigger => existingTrigger.resource_name === triggerResourceName)) {
                     promises.push(
                         this.MsProjectClientService.addProcoreWebhookTriggers(
                             _pipeObj.id,
-                            ['public_todos', 'private_todos'].indexOf(_pipeObj.type) !== -1 ? 'ToDos' : 'Tasks'
+                            triggerResourceName
                         )
                     );
                 }
