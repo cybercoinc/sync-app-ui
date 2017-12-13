@@ -1,7 +1,8 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {AuthService} from "client/service/auth.service";
 import {User} from "client/entities/entities";
 import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
+import {MsLicenseClientService} from "client/service/microservices/ms-license-client.service";
 import {FormControl} from "@angular/forms";
 import {MdSnackBar} from "@angular/material";
 
@@ -10,10 +11,11 @@ import {MdSnackBar} from "@angular/material";
     templateUrl: 'client/modules/billing/company/company.component.html',
     styleUrls: ['client/modules/billing/company/company.component.css'],
 })
-export class CompanyComponent {
+export class CompanyComponent implements OnInit {
     userCtrl: FormControl;
     filtered: any;
 
+    billingUsers: any;
 
     currentPBRUser: any;
     extraBillingReceivers: string;
@@ -26,6 +28,7 @@ export class CompanyComponent {
     me: User = null;
 
     constructor(protected MsUserClientService: MsUserClientService,
+                protected msLicenseClientService: MsLicenseClientService,
                 protected AuthService:         AuthService,
                 protected snackBar:        MdSnackBar
     ) {
@@ -39,6 +42,16 @@ export class CompanyComponent {
         this.getSettings()
             .then(() => {
                 this.isBillingUser = (this.AuthService.authUser.id == this.pbrId);
+            });
+
+        this.loadBillingUsers();
+    }
+
+    loadBillingUsers (): void {
+
+        this.msLicenseClientService.getCompanyBillingUsers(this.AuthService.company.id)
+            .then((response) => {
+                this.billingUsers = response;
             });
     }
 
@@ -100,5 +113,43 @@ export class CompanyComponent {
                     });
                 }
             });
+    }
+
+    addExtraBillingUser() {
+
+        this.msLicenseClientService.addExtraBillingUser(this.company.id, this.userCtrl.value.key)
+            .then(response => {
+                this.loadBillingUsers();
+                this.snackBar.open('Saved', 'Close', {
+                    duration: 2000,
+                    extraClasses: ['alert-success']
+                });
+            });
+    }
+
+    revokeBillingUser(billing_user) {
+
+        this.msLicenseClientService.deleteExtraBillingUser(this.company.id, billing_user.id)
+            .then(response => {
+                this.loadBillingUsers();
+
+                this.snackBar.open('Done', 'Close', {
+                    duration: 2000,
+                    extraClasses: ['alert-success']
+                });
+            });
+    }
+
+    setPrimaryBillingUser(billing_user) {
+
+        this.MsUserClientService.updatePbr(this.company.id, billing_user.id).then(() => {
+
+            this.snackBar.open('Saved', 'Close', {
+                duration: 2000,
+                extraClasses: ['alert-success']
+            });
+            this.isBillingUser = (this.AuthService.authUser.id == billing_user.id);
+        });
+
     }
 }

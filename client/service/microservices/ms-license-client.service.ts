@@ -96,4 +96,105 @@ export class MsLicenseClientService extends MsClientService {
             }
         );
     }
+
+    getMySubsciptions(companyId): Promise<any> {
+        return this.makeMsCall(
+            'billing/get-my-subscriptions',
+            'GET',
+            {
+                company_id: companyId
+            }
+        );
+    }
+
+    getMyInvoices(companyId): Promise<any> {
+        return this.makeMsCall(
+            'billing/get-my-invoices',
+            'GET',
+            {
+                company_id: companyId
+            }
+        );
+    }
+
+    getHPUpdateCard(companyId, zohoSubscriptionId): Promise<any> {
+        return this.makeMsCall(
+            'billing/get-hp-update-card',
+            'GET',
+            {
+                company_id: companyId,
+                zoho_subscription_id: zohoSubscriptionId
+            }
+        );
+    }
+
+    cancelSubscription(companyId, zohoSubscriptionId): Promise<any> {
+        return this.makeMsCall(
+            'billing/cancel-subscription',
+            'PUT',
+            {
+                company_id: companyId,
+                zoho_subscription_id: zohoSubscriptionId
+            }
+        );
+    }
+
+    reactivateSubscription(companyId, zohoSubscriptionId): Promise<any> {
+        return this.makeMsCall(
+            'billing/reactivate-subscription',
+            'PUT',
+            {
+                company_id: companyId,
+                zoho_subscription_id: zohoSubscriptionId
+            }
+        );
+    }
+
+    getCompanyBillingUsers(companyId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/billing-users',
+            'GET'
+        );
+    }
+
+    addExtraBillingUser(companyId, userId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/billing-users',
+            'POST',
+            {
+                user_id: userId
+            }
+        );
+    }
+
+    deleteExtraBillingUser(companyId, userId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/billing-users/'+userId,
+            'DELETE',
+            null
+        );
+    }
+
+    watchSubscription(companyId, subscriptionId, emailToAdd): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/watch-subscription',
+            'POST',
+            {
+                subscription_id: subscriptionId,
+                email: emailToAdd
+            }
+        );
+    }
+
+    stopWatchSubscription(companyId, subscriptionId, emailToAdd): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/watch-subscription-stop',
+            'POST',
+            {
+                subscription_id: subscriptionId,
+                email: emailToAdd
+            }
+        );
+    }
+
 }

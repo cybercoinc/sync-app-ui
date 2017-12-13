@@ -9,3 +9,34 @@ p {
 .masked-card {
     display: block;
 }
+
+
+.flex-spacer {
+    flex: 1 1 auto;
+}
+
+.subscription-table-header {
+    font-weight: bold;
+
+    font-size: 18px;
+    border-bottom: solid 1px darkgray;
+    line-height: 32px;
+}
+.subscription-table-row {
+    font-size: 16px;
+    padding: 5px;
+    border-bottom: solid 1px darkgray;
+    line-height: 32px;
+}
+
+.scheduled-changes-area {
+    background-color: #f8eccb;
+    padding: 10px;
+}
+
+.watchers-list i.material-icons {
+    color: #8b0305;
+    vertical-align: middle;
+    cursor: pointer;
+}
+

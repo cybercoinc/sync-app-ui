@@ -4,27 +4,36 @@
             <div class="section-content">
                 <div class="row" *ngIf="pbrId">
 
-                    <span style="font-weight: bold;" *ngIf="!isEditMode">Company billing responsible person</span><br />
-                    <span class="current-user" *ngIf="!isEditMode">{{currentPBRUser}}</span>
+                    <span style="font-weight: bold;" *ngIf="!isEditMode">Company billing responsible persons</span><br /><br />
 
-                    <md-input-container *ngIf="isEditMode" style="width: 350px;">
-                        <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" [(ngModel)]="currentPBRUser">
-                    </md-input-container>
+                    <div *ngFor="let billing_user of billingUsers">
+                        {{billing_user.first_name}} {{billing_user.last_name}} <{{billing_user.email}}>
 
-                    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-                        <md-option *ngFor="let user of filtered | async" [value]="user">
-                            {{ user.value }}
-                        </md-option>
-                    </md-autocomplete>
+                        <strong *ngIf="billing_user.is_pbr">(PRIMARY)</strong>
 
-                    <span *ngIf="isBillingUser">
-                        <a class="btn btn-success" *ngIf="!isEditMode" (click)="showEditPBR()">Edit</a>
+                        <ng-container *ngIf="isBillingUser">
+                        <button *ngIf="!billing_user.is_pbr" md-button (click)="revokeBillingUser(billing_user)">Revoke</button>
+                        <button *ngIf="!billing_user.is_pbr" md-button (click)="setPrimaryBillingUser(billing_user)">Set Primary</button>
+                        </ng-container>
+                    </div>
+                    <br />
+                    <br />
 
-                        <span *ngIf="isEditMode">
-                            <button type="button" class="btn btn-success" (click)="saveUser()">Save</button>
-                            <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
-                        </span>
-                    </span>
+                    <ng-container *ngIf="isBillingUser">
+                        Add more:
+                        <md-input-container style="width: 350px;">
+                            <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" (ngModel)="newPBRUser">
+                        </md-input-container>
+
+                        <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+                            <md-option *ngFor="let user of filtered | async" [value]="user">
+                                {{ user.value }}
+                            </md-option>
+                        </md-autocomplete>
+
+                        <button type="button" class="btn btn-success" (click)="addExtraBillingUser()">Add</button>
+                    </ng-container>
+
                 </div>
                 <div class="row" *ngIf="!pbrId">
                     <p class="text-warn">PBR error</p>
@@ -39,13 +48,14 @@
                 <div class="row">
 
                     <span style="font-weight: bold;">Notifications</span><br />
-                    <span>Put here email addresses, coma-separated. We will send there notifications on successful payments for your company invoices.</span><br /><br />
+                    <span>Put here email addresses, coma-separated. We will send there notifications on successful payments for your company invoices.</span><br />
+                    <strong>NOTE: This section depricated. Please use watching for subscriptions.</strong><br /><br />
 
                     <md-form-feild style="width: 350px;">
-                        <textarea style="width: 350px;" mdInput placeholder="john@example.com" [(ngModel)]="extraBillingReceivers"></textarea>
+                        <textarea style="width: 350px;" disabled mdInput placeholder="john@example.com" [(ngModel)]="extraBillingReceivers"></textarea>
                     </md-form-feild>
 
-                    <button type="button" class="btn btn-success" (click)="saveExtraBillingReceivers()">Save</button>
+                    <!--<button type="button" class="btn btn-success" (click)="saveExtraBillingReceivers()">Save</button>-->
 
                 </div>
             </div>

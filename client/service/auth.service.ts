@@ -14,6 +14,7 @@ export class AuthService {
     authUser: User = null;
     authTokenId: number = null;
     company: Company = null;
+    userInCompany: any;
 
     getAuthUser(): Promise<User> {
         return new Promise((resolve, reject) => {
@@ -31,6 +32,7 @@ export class AuthService {
 
                     this.authTokenId = authUserResponse.auth_token_id;
 
+                    this.userInCompany = authUserResponse.user_in_company;
                     this.company = authUserResponse.company;
 
                     return resolve(this.authUser);

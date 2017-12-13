@@ -1,15 +1,15 @@
 <md-card>
     <md-card-header>
-        <md-card-title>Your personal Billing Information</md-card-title>
+        <md-card-title>Your Billing Information</md-card-title>
     </md-card-header>
     <md-card-content>
     <p>Charges are incurred for each active project.</p>
     <p>An 'Active Project' is defined as any project that synced data within the preceding 30 days.</p>
 
-    <p *ngIf="!creditCard.maskedCardNumber">
-        <span class="title">Please provide billing information: </span>
-        <button type="button" class="btn btn-success" (click)="open()">SETUP BILLING INFO</button>
-    </p>
+    <!--<p *ngIf="!creditCard.maskedCardNumber">-->
+        <!--<span class="title">Please provide billing information: </span>-->
+        <!--<button type="button" class="btn btn-success" (click)="open()">SETUP BILLING INFO</button>-->
+    <!--</p>-->
 
     <div *ngIf="creditCard.maskedCardNumber">
         <p>
@@ -23,4 +23,70 @@
         </div>
     </div>
     </md-card-content>
+</md-card>
+
+<md-card *ngIf="!mySubsciptions.company_subscriptions">
+    <md-card-content>
+        <div style="font-size: 20px;">
+            Loading Subscriptions...
+        </div>
+    </md-card-content>
+</md-card>
+
+<md-card *ngIf="mySubsciptions.company_subscriptions && mySubsciptions.company_subscriptions.length==0">
+    <md-card-content>
+        <div style="font-size: 20px;">
+            No Subscriptions
+        </div>
+    </md-card-content>
+</md-card>
+<md-card *ngFor="let subscription of mySubsciptions.company_subscriptions">
+    <md-card-content>
+
+        <div style="float: right;">
+            <button *ngIf="isAlreadyWatching(subscription, currentUser.email)" md-button (click)="stopWatchingSubscription(subscription, currentUser.email)">Disable Notifications</button>
+            <button *ngIf="!isAlreadyWatching(subscription, currentUser.email)" md-button (click)="startWatchingSubscription(subscription, currentUser.email)">Enable Notifications</button>
+        </div>
+        <div style="font-size: 20px;">
+            {{subscription.plan.name}}
+            <span [ngStyle]="{'color':getStatusColor(subscription)}" style="font-size: 22px;">{{getStatusLabel(subscription)}}</span>
+        </div>
+        <div><i>{{subscription.plan.description}}</i></div>
+        <span>Price: ${{subscription.amount}}</span>
+        <span style="padding-left: 20px;">Next Billing Date: {{subscription.next_billing_at || 'N/A'}}</span>
+        <div *ngIf="subscription.addons && subscription.addons.length">
+            <strong>Projects:</strong>
+            <ul>
+                <li *ngFor="let addon of subscription.addons">{{addon.description}}</li>
+            </ul>
+        </div>
+        <div *ngIf="subscription.scheduled_changes" class="scheduled-changes-area">
+            <strong>Scheduled Changes:</strong><br/>
+            <span>Price: ${{subscription.scheduled_changes.amount}}</span>
+            <span style="padding-left: 20px;">Next Billing Date: {{subscription.scheduled_changes.next_billing_at || 'N/A'}}</span>
+            <div *ngIf="subscription.scheduled_changes.addons && subscription.scheduled_changes.addons.length">
+                <strong>Projects:</strong>
+                <ul>
+                    <li *ngFor="let addon of subscription.scheduled_changes.addons">{{addon.description}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="watchers-list">
+            <strong>Notifications:</strong><br />
+            <button *ngIf="hasPrimaryPermission()" md-button (click)="addSubscriptionWatcher(subscription)">Add Additional Email</button>
+            <br />
+            <span *ngFor="let person of subscription.contactpersons; let isLast = last;">
+                {{person.email}}
+                <i *ngIf="hasPrimaryPermission()" class="material-icons" (click)="stopWatchingSubscription(subscription, person.email)">close</i>
+                {{!isLast?', ':''}}
+            </span>
+        </div>
+    </md-card-content>
+    <md-card-actions align="end" style="border-top: 1px solid #aaaaaa;">
+        <button *ngIf="!subscription.auto_collect" md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Setup Billing</button>
+        <button *ngIf="subscription.auto_collect" md-button (click)="updateSubscriptionCard(subscription)">Update Card</button>
+        <span class="flex-spacer"></span>
+        <button *ngIf="isCancellable(subscription)" md-button (click)="cancelSubscription(subscription)">Cancel Subscription</button>
+        <button *ngIf="isRenewable(subscription)" md-button (click)="reactivateSubscription(subscription)">Renew</button>
+    </md-card-actions>
 </md-card>
