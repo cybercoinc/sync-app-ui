@@ -140,6 +140,11 @@ export class PipeConnectionService implements Resolve<{}> {
                 return this.refreshPipesList();
             })
             .then(() => {
+                const triggerResourceName: 'ToDos' | 'Tasks' = ['public_todos', 'private_todos'].indexOf(_pipeObj.type) !== -1 ? 'ToDos' : 'Tasks';
+
+                return this.MsProjectClientService.removeProcoreWebhookTriggers(pipeId, triggerResourceName);
+            })
+            .then(() => {
                 if (_pipeObj.use_schedule_chart) {
                     return;
                 }
