@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
         includeSubDomains: true,
         preload: true
     };
-    let ignoreRequest = (process.env.NODE_ENV !== "prod");
+    let ignoreRequest = (['prod', 'dev'].indexOf(process.env.NODE_ENV) === -1);
     let ignoreFilter = function (req) {
         return (req.url.indexOf('/_ah/health') > -1);
     };

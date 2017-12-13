@@ -12,11 +12,16 @@ export abstract class BaseNotification {
     protected quitable: boolean = true;
 
     protected message: string;
+    protected subject: string;
     protected position: string;
     protected type: 'error' | 'info' | 'warning';
 
     public setType(type) {
         this.type = type;
+    }
+
+    public setSubject(subject) {
+        this.subject = subject;
     }
 
     public setMessage(message) {

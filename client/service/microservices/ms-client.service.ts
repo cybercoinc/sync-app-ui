@@ -74,6 +74,7 @@ export class MsClientService {
                 this.PendingRequestsService.hasPendingRequest = false;
 
                 if (response.status === 202) {
+                    // return this.handleError(response);
                     throw response;
                 }
 
