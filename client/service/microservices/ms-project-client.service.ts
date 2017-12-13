@@ -322,23 +322,23 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    addProcoreWebhookTriggers(pipeId: number, resource: 'ToDos' | 'Tasks'): Promise<boolean> {
+    addProcoreWebhookTriggers(projectId: number, resource: 'ToDos' | 'Tasks'): Promise<boolean> {
         return this.makeMsCall(
-            'pipes/add-procore-webhook-triggers',
+            'projects/add-procore-webhook-triggers',
             'POST',
             {
-                pipe_id: pipeId,
+                project_id: projectId,
                 resource
             }
         );
     }
 
-    removeProcoreWebhookTriggers(pipeId: number, resource: 'ToDos' | 'Tasks'): Promise<boolean> {
+    removeProcoreWebhookTriggers(projectId: number, resource: 'ToDos' | 'Tasks'): Promise<boolean> {
         return this.makeMsCall(
-            'pipes/remove-procore-webhook-triggers',
+            'projects/remove-procore-webhook-triggers',
             'POST',
             {
-                pipe_id: pipeId,
+                project_id: projectId,
                 resource
             }
         );

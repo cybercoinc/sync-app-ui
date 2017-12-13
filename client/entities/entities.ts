@@ -144,6 +144,8 @@ export class Project {
     holidays:     string[];
     working_days: string[];
     is_separate_invoice: boolean;
+    procore_webhook_triggers: any[];
+    procore_webhook_id: number;
 }
 
 export class SmartsheetWorkspace {
