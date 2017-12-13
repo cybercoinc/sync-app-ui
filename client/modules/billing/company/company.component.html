@@ -20,7 +20,6 @@
                     <br />
 
                     <ng-container *ngIf="isBillingUser">
-                        Add more:
                         <md-input-container style="width: 350px;">
                             <input mdInput placeholder="Company billing responsible person" [mdAutocomplete]="auto" [formControl]="userCtrl" (ngModel)="newPBRUser">
                         </md-input-container>
@@ -42,23 +41,23 @@
         </div>
     </md-card-content>
 
-    <md-card-content *ngIf="isBillingUser">
-        <div class="section">
-            <div class="section-content">
-                <div class="row">
+    <!--<md-card-content *ngIf="isBillingUser">-->
+        <!--<div class="section">-->
+            <!--<div class="section-content">-->
+                <!--<div class="row">-->
 
-                    <span style="font-weight: bold;">Notifications</span><br />
-                    <span>Put here email addresses, coma-separated. We will send there notifications on successful payments for your company invoices.</span><br />
-                    <strong>NOTE: This section depricated. Please use watching for subscriptions.</strong><br /><br />
+                    <!--<span style="font-weight: bold;">Notifications</span><br />-->
+                    <!--<span>Put here email addresses, coma-separated. We will send there notifications on successful payments for your company invoices.</span><br />-->
+                    <!--<strong>NOTE: This section depricated. Please use watching for subscriptions.</strong><br /><br />-->
 
-                    <md-form-feild style="width: 350px;">
-                        <textarea style="width: 350px;" disabled mdInput placeholder="john@example.com" [(ngModel)]="extraBillingReceivers"></textarea>
-                    </md-form-feild>
+                    <!--<md-form-feild style="width: 350px;">-->
+                        <!--<textarea style="width: 350px;" disabled mdInput placeholder="john@example.com" [(ngModel)]="extraBillingReceivers"></textarea>-->
+                    <!--</md-form-feild>-->
 
-                    <!--<button type="button" class="btn btn-success" (click)="saveExtraBillingReceivers()">Save</button>-->
+                    <!--&lt;!&ndash;<button type="button" class="btn btn-success" (click)="saveExtraBillingReceivers()">Save</button>&ndash;&gt;-->
 
-                </div>
-            </div>
-        </div>
-    </md-card-content>
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</md-card-content>-->
 </md-card>

@@ -163,8 +163,8 @@ export class InfoComponent implements OnInit {
     }
 
     addSubscriptionWatcher (subscription) {
-        let dialogRef = this.notificationService.addPrompt('Add Watcher',
-            'Provide email address. We will send there updates for this subscription.');
+        let dialogRef = this.notificationService.addPrompt('',
+            'Provide email address of additional user that should receive billing related notifications.');
 
         dialogRef
             .afterClosed()
