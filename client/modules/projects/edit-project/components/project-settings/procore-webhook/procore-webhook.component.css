@@ -1,0 +1,19 @@
+:host textarea {
+    resize: none;
+}
+
+:host md-card-content md-card-title {
+    font-size: 18px;
+    margin: 0;
+}
+
+.add-policy {
+    margin-top: -13px;
+    margin-bottom: 13px;
+    width: 120px;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: none;
+}

@@ -53,6 +53,7 @@ import {PrimaryBillingUser} from "./edit-project/components/project-settings/pri
 import {CanDeactivateChart} from "./chart/chart.deactivate";
 import {SmartsheetScheduleChooseComponent} from "./edit-project/components/shared/smartsheet-schedule-choose/smartsheet-schedule-choose.component";
 import {PolicyComponent} from "./edit-project/components/project-settings/task-notifications/policy/policy.component";
+import { ProcoreWebhookComponent } from './edit-project/components/project-settings/procore-webhook/procore-webhook.component';
 
 @NgModule({
     imports: [
@@ -80,6 +81,8 @@ import {PolicyComponent} from "./edit-project/components/project-settings/task-n
         EditProjectComponent,
         PipeStepRowComponent,
         PipePublicTodoComponent,
+
+        ProcoreWebhookComponent,
 
         PipeTasksTodoComponent,
         SmartsheetConnectionTasksComponent,
