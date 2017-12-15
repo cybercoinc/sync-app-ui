@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'client/service/auth.service';
 import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
-import { NotificationsService } from 'client/modules/notifications/notifications.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'procore-webhook',
@@ -10,16 +8,33 @@ import { Router } from '@angular/router';
     styleUrls: ['client/modules/projects/edit-project/components/project-settings/procore-webhook/procore-webhook.component.css']
 })
 export class ProcoreWebhookComponent implements OnInit {
-    @Input() projectId;
+    @Input() projectId: number;
+
+    protected webhookEnabled: boolean;
 
     constructor(protected AuthService: AuthService,
-                protected MsProjectClientService: MsProjectClientService,
-                protected notificationsService: NotificationsService,
-                private router: Router) {
+                protected msProjectsService: MsProjectClientService,) {
     }
 
     ngOnInit() {
-        console.log('im here');
+        return this.msProjectsService.checkIfProcoreWebhookEnabled(this.projectId)
+            .then(webhookEnabled => {
+                this.webhookEnabled = webhookEnabled;
+            });
+    }
+
+    disable() {
+        return this.msProjectsService.removeProcoreProjectWebhook(this.projectId)
+            .then(() => {
+                this.webhookEnabled = false;
+            });
+    }
+
+    enable() {
+        return this.msProjectsService.createProcoreProjectWebhook(this.projectId)
+            .then(() => {
+                this.webhookEnabled = true;
+            });
     }
 
 }

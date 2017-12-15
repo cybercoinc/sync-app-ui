@@ -17,3 +17,11 @@ a:hover {
     color: #000;
     text-decoration: none;
 }
+
+.enabled {
+    color: green;
+}
+
+.disabled {
+    color: grey;
+}
