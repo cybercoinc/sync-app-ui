@@ -106,12 +106,15 @@ export class PipeConnectionService implements Resolve<{}> {
 
                 const triggerResourceName: 'ToDos' | 'Tasks' = ['public_todos', 'private_todos'].indexOf(_pipeObj.type) !== -1 ? 'ToDos' : 'Tasks';
 
-                promises.push(
-                    this.MsProjectClientService.addProcoreWebhookTriggers(
-                        _pipeObj.project_fk_id.id,
-                        triggerResourceName
-                    )
-                );
+                // todo currently not enabling triggers for tasks because we have no sync logic implemented (pr to sm)
+                if (triggerResourceName !== 'Tasks') {
+                    promises.push(
+                        this.MsProjectClientService.addProcoreWebhookTriggers(
+                            _pipeObj.project_fk_id.id,
+                            triggerResourceName
+                        )
+                    );
+                }
 
                 return Promise.all(promises);
             })
