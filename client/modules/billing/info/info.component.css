@@ -34,6 +34,10 @@ p {
     padding: 10px;
 }
 
+.watchers-list {
+    margin-top: 30px;
+}
+
 .watchers-list i.material-icons {
     color: #8b0305;
     vertical-align: middle;
