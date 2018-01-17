@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {AuthService} from 'client/service/auth.service';
 import {MsLicenseClientService} from 'client/service/microservices/ms-license-client.service';
 import {Invoice} from "client/entities/entities";
+import {NotificationsService} from "client/modules/notifications/notifications.service";
 import {ConfigService} from "client/service/config.service";
 
 @Component({
@@ -16,6 +17,7 @@ export class InvoicesComponent implements OnInit  {
 
     constructor(protected AuthService: AuthService,
                 protected MsLicenseClientService: MsLicenseClientService,
+                protected notificationService: NotificationsService,
                 protected ConfigService: ConfigService
     ) {
         this.printPDFUrl = this.ConfigService.getServiceUrl(this.MsLicenseClientService.msName) + 'print-invoice-pdf?invoice_id=';
@@ -36,6 +38,14 @@ export class InvoicesComponent implements OnInit  {
         this.MsLicenseClientService.getMyInvoices(this.AuthService.company.id)
             .then(response => {
                 this.newInvoices = response;
+            });
+    }
+
+    emailAnInvoice(invoice) {
+
+        this.MsLicenseClientService.emailAnInvoice(this.AuthService.company.id, invoice.invoice_id)
+            .then(response => {
+                this.notificationService.addInfo('Email sent. Check your inbox.');
             });
     }
 
