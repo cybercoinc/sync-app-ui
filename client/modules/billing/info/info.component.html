@@ -85,7 +85,6 @@
     <md-card-actions align="end" style="border-top: 1px solid #aaaaaa;">
         <button *ngIf="!subscription.auto_collect" md-raised-button color="accent" (click)="updateSubscriptionCard(subscription)">Setup Billing</button>
         <button *ngIf="subscription.auto_collect" md-button (click)="updateSubscriptionCard(subscription)">Update Card</button>
-        <span class="flex-spacer"></span>
         <button *ngIf="isCancellable(subscription)" md-button (click)="cancelSubscription(subscription)">Cancel Subscription</button>
         <button *ngIf="isRenewable(subscription)" md-button (click)="reactivateSubscription(subscription)">Renew</button>
     </md-card-actions>

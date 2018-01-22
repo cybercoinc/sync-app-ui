@@ -15,8 +15,7 @@
         <span>Total: ${{invoice.total}}</span>
         <span style="padding-left: 20px;">Invoice Date: {{invoice.invoice_date || 'N/A'}}</span>
         <span style="padding-left: 20px;">Due Date: {{invoice.due_date || 'N/A'}}</span>
-        <span class="flex-spacer"></span>
-        <button md-raised-button (click)="emailAnInvoice(invoice)">Send to Email</button>
+        <button style="float: right;" md-raised-button (click)="emailAnInvoice(invoice)">Send to Email</button>
     </md-card-content>
     <md-card-actions align="end">
         <!--<button md-button>Resend via email</button>-->
