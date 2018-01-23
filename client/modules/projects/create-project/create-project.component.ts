@@ -20,7 +20,15 @@ export class CreateProjectComponent implements OnInit {
                 private router: Router) {
     }
 
+    public canConnectNewProjects = true;
+
     ngOnInit() {
+
+        this.MsLicenseClientService.isCompanyCanCreateProjects(this.AuthService.company.id)
+            .then(response => {
+                this.canConnectNewProjects = response;
+            });
+
         this.MsProjectClientService.getConnectedProcoreProjectsIds()
             .then(connectedProcoreProjectsIdsList => {
                 this.connectedProcoreProjectsIdsList = connectedProcoreProjectsIdsList;
@@ -100,12 +108,13 @@ export class CreateProjectComponent implements OnInit {
                 ]);
             })
             .then((result) => {
+
+                if (!result[0]) { // license has status 'suspended'
+                    return this.router.navigate(['projects']);
+                }
+
                 return this.MsProjectClientService.createProcoreProjectWebhook(_projectId)
                     .then(() => {
-                        if (!result[0]) { // license has status 'suspended'
-                            return this.router.navigate(['projects']);
-                        }
-
                         return this.router.navigate(['projects', _projectId, 'edit-project', 'settings']);
                     });
             })

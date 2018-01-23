@@ -35,7 +35,11 @@
                     </div>
                 </div>
 
-                <a (click)="createNewProject()" class="btn btn-success" [class.disabled]="!selectedProject">CONNECT AND
+                <span *ngIf="!canConnectNewProjects" style="font-weight: bold; color:#8b0305;">
+                    Your company subscription is not active. You can't connect projects.
+                </span>
+
+                <a (click)="createNewProject()" class="btn btn-success" [class.disabled]="!selectedProject || !canConnectNewProjects">CONNECT AND
                     CONTINUE</a>
                 <a [routerLink]="['/','projects']" class="btn btn-warning">cancel</a>
             </md-card-content>

@@ -97,6 +97,16 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
+    isCompanyCanCreateProjects(companyId): Promise<any> {
+        return this.makeMsCall(
+            'billing/is-company-can-create-projects',
+            'GET',
+            {
+                company_id: companyId,
+            }
+        );
+    }
+
     getMySubsciptions(companyId): Promise<any> {
         return this.makeMsCall(
             'billing/get-my-subscriptions',
