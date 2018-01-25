@@ -14,6 +14,7 @@
                 <div class="pull-right">
                     <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
                     <a [routerLink]="['/projects', project?.id, 'pipes', pipesListObj[pipeType]?.id, 'chart']"
+                       target="_blank"
                        class="btn btn-success">open</a>
                 </div>
             </div>
