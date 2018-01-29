@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {PIPE_TYPE_TASKS, ProjectPipe} from 'client/entities/entities';
+import { PIPE_TYPE_TASKS, Project, ProjectPipe } from 'client/entities/entities';
 
 import {PipeConnectionService} from 'client/service/pipe-connection.service';
 import {MsProjectClientService} from "../../../../../service/microservices/ms-project-client.service";
@@ -27,11 +27,14 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
     ngOnInit() {
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
 
+        this.project = this.PipeConnectionService.project;
+
         if (!this.PipeConnectionService.pipesListObj.hasOwnProperty('tasks')) {
             this.MsProjectClientService.getTasks(this.AuthService.authUser.id, this.PipeConnectionService.project.id)
                 .then(tasks => {
                     if (tasks.length > 0) {
                         this.procoreProjectId = this.PipeConnectionService.project.procore_project_id;
+
                         this.isShowAlert = true;
                     }
                 });
@@ -42,6 +45,7 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
     }
 
     protected procoreProjectId: number;
+    protected project: Project;
     protected isShowAlert: boolean = false;
 
     protected componentIsBusy: boolean = false;

@@ -40,6 +40,7 @@ md-select {
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
 .set-permissions-button:hover {
     color: #424242;
 }

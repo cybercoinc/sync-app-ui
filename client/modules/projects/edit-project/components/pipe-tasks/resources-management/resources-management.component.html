@@ -1,7 +1,7 @@
 <md-card>
     <md-card-header>
         <md-card-title>
-            <span style="flex: 1 1 auto;">Project Directory</span>
+            <span style="flex: 1 1 auto;">Resources management</span>
         </md-card-title>
         <span class="example-spacer"></span>
         <button md-button (click)="addResource()" style="margin-top: -13px; margin-bottom:13px;">ADD RESOURCE</button>
@@ -36,13 +36,9 @@
                     </md-select>
                 </div>
 
-                <div class="col-xs-1">
-                    <i [class.disabled]="!(assignee.user_id && canEditGanttPermissions())" (click)="setGanttAccessForUser(assignee.user_id)" class="material-icons set-permissions-button">insert_chart</i>
-                </div>
-
             </div>
-            <br />
-            <br />
+            <br/>
+            <br/>
             <button class="pull-right btn btn-success" (click)="save()">SAVE</button>
         </div>
     </md-card-content>

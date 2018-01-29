@@ -1,7 +1,7 @@
 <h1 md-dialog-title>Add resource</h1>
 <div md-dialog-content>
-    <p>Resources added here will be available for this project. <br />
-        To make resources available across all projects<br />
+    <p>Resources added here will be available for this project. <br/>
+        To make resources available across all projects<br/>
         please have your Procore Company Admin update the
         <a href="https://app.procore.com/{{AuthService.company.procore_id}}/company/admin/trades"
            target="_blank"
@@ -12,6 +12,6 @@
     </form>
 
 </div>
-<div md-dialog-actions style="flex-direction:row-reverse;" >
+<div md-dialog-actions style="flex-direction:row-reverse;">
     <button md-button (click)="MdDialogRef.close(addResource.value)">Save</button>
 </div>

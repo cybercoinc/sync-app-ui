@@ -31,6 +31,5 @@
 <smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed" pipe-type="{{pipeType}}"
                        [redirect-route]="redirectRoute"></smartsheet-connection>
 
-
-
+<resources-management *ngIf="project && pipesListObj[pipeType]" [projectId]="project.id"></resources-management>
 

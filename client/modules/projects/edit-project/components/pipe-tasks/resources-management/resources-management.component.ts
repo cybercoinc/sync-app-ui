@@ -1,19 +1,18 @@
-import {Component, OnInit, Input} from "@angular/core";
-import {AuthService} from "client/service/auth.service";
-import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
-import {MdDialog} from "@angular/material";
-import {AddResourceDialog} from "./add-resource.dialog";
-import {SetGanttAccessDialog} from "./dialogs/set-gantt-access.dialog";
-import {PipeConnectionService} from "client/service/pipe-connection.service";
+import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from 'client/service/auth.service';
+import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
+import { MdDialog } from '@angular/material';
+import { AddResourceDialog } from './add-resource.dialog';
+import { PipeConnectionService } from 'client/service/pipe-connection.service';
 
 @Component({
-    selector: 'choose-resource',
-    templateUrl: 'client/modules/projects/edit-project/components/project-settings/choose-resource/choose-resource.component.html',
+    selector: 'resources-management',
+    templateUrl: 'client/modules/projects/edit-project/components/pipe-tasks/resources-management/resources-management.component.html',
     styleUrls: [
-        'client/modules/projects/edit-project/components/project-settings/choose-resource/choose-resource.component.css'
-    ],
+        'client/modules/projects/edit-project/components/pipe-tasks/resources-management/resources-management.component.css'
+    ]
 })
-export class ChooseResourceComponent implements OnInit {
+export class ResourcesManagementComponent implements OnInit {
     constructor(protected AuthService: AuthService,
                 protected MsProjectClientService: MsProjectClientService,
                 protected PipeConnectionService: PipeConnectionService,
@@ -51,30 +50,14 @@ export class ChooseResourceComponent implements OnInit {
 
     addResource() {
         let dialogRef = this.MdDialog.open(AddResourceDialog);
+
         dialogRef.afterClosed().subscribe(result => {
-            if (result && result.resource !== "") {
+            if (result && result.resource !== '') {
                 if (this.resourcesDropdownValues.indexOf(result.resource) === -1) {
                     this.resourcesDropdownValues.push(result.resource);
                 }
             }
-
         });
-    }
-
-    setGanttAccessForUser(userId) {
-        if (!this.canEditGanttPermissions() || !userId) {
-            return false;
-        }
-
-        let dialogRef = this.MdDialog.open(SetGanttAccessDialog);
-
-        dialogRef.componentInstance.userId = userId;
-        dialogRef.componentInstance.projectId = this.projectId;
-    }
-
-    canEditGanttPermissions(): boolean {
-        return this.PipeConnectionService.project.creator__user_fk_id &&
-            (this.PipeConnectionService.project.creator__user_fk_id.id === this.AuthService.authUser.id);
     }
 
     getResources() {

@@ -53,6 +53,8 @@ import { PolicyComponent } from './edit-project/components/project-settings/task
 import { ProcoreWebhookComponent } from './edit-project/components/project-settings/procore-webhook/procore-webhook.component';
 import { ProjectDirectoryComponent } from './edit-project/components/project-settings/project-directory/project-directory.component';
 import { SetGanttAccessDialog } from './edit-project/components/project-settings/project-directory/dialogs/set-gantt-access.dialog';
+import { ResourcesManagementComponent } from './edit-project/components/pipe-tasks/resources-management/resources-management.component';
+import { AddResourceDialog } from './edit-project/components/pipe-tasks/resources-management/add-resource.dialog';
 
 @NgModule({
     imports: [
@@ -113,10 +115,14 @@ import { SetGanttAccessDialog } from './edit-project/components/project-settings
         CreateBaselineDialog,
 
         ProjectDirectoryComponent,
-        SetGanttAccessDialog
+        SetGanttAccessDialog,
+
+        ResourcesManagementComponent,
+        AddResourceDialog
     ],
     entryComponents: [
         CreateBaselineDialog,
+        AddResourceDialog,
         SetGanttAccessDialog
     ],
     schemas: [
