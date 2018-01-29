@@ -1,0 +1,37 @@
+<md-card>
+    <md-card-header>
+        <md-card-title>
+            <span style="flex: 1 1 auto;">Project Directory</span>
+        </md-card-title>
+    </md-card-header>
+
+    <md-card-content>
+        <div *ngIf="assignees && assignees.length" class="container-fluid">
+            <div class="row user-list" *ngFor="let assignee of assignees">
+
+                <div class="col-xs-1">
+                    <i *ngIf="!assignee.avatar" class="material-icons assignee-avatar">person</i>
+                    <img *ngIf="assignee.avatar" class="assignee-avatar-image" src="{{assignee.avatar}}">
+                </div>
+
+                <div class="col-xs-6 assignee">
+                    <p>
+                        {{assignee.first_name + ' ' + assignee.last_name}} {{'(' + assignee.company_name + ')'}}
+                        <i *ngIf="assignee.user_id" style="color: green;font-size: 20px;"
+                           class="material-icons">check_circle</i>
+                    </p>
+
+                    <p class="vertical-aligned">
+                        {{assignee.email}}
+                    </p>
+                </div>
+
+                <div class="col-xs-1 col-xs-offset-3">
+                    <i [class.disabled]="!(assignee.user_id && canEditGanttPermissions())"
+                       (click)="setGanttAccessForUser(assignee.user_id)" class="material-icons set-permissions-button">insert_chart</i>
+                </div>
+
+            </div>
+        </div>
+    </md-card-content>
+</md-card>

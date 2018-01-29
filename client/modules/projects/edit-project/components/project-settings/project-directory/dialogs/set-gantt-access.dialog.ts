@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {MdDialogRef} from "@angular/material";
-import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
+import { Component, OnInit } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
+import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
 
 @Component({
     selector: 'set-gantt-access-dialog',
-    templateUrl: 'client/modules/projects/edit-project/components/project-settings/choose-resource/dialogs/set-gantt-access.dialog.html'
+    templateUrl: 'client/modules/projects/edit-project/components/project-settings/project-directory/dialogs/set-gantt-access.dialog.html'
 })
 export class SetGanttAccessDialog implements OnInit {
     constructor(public MdDialogRef: MdDialogRef<SetGanttAccessDialog>, protected MsProjectClientService: MsProjectClientService) {

@@ -1,0 +1,54 @@
+.resource-header {
+    line-height: 55px;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.user-list {
+    margin-top: 2%;
+    font-size: 1.2em;
+}
+
+h4 {
+    display: inline;
+}
+
+md-select {
+    width: 100%;
+}
+
+.assignee-avatar {
+    font-size: 45px;
+}
+
+.assignee p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.assignee-avatar-image {
+    width: 45px;
+    height: 45px;
+}
+
+.set-permissions-button {
+    cursor: pointer;
+    font-size: 40px;
+    color: #949494;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.set-permissions-button:hover {
+    color: #424242;
+}
+
+i.disabled {
+    color: #c0c0c0;
+    cursor: default;
+}
+
+i.disabled:hover {
+    color: #c0c0c0;
+}
