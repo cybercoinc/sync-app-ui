@@ -45,7 +45,7 @@ import { ChartComponent } from './chart/chart.component';
 import { CreateBaselineDialog } from './chart/create-baseline.dialog';
 import { ScheduleConnectionComponent } from './edit-project/components/shared/schedule-connection/schedule-connection.component';
 import { TaskNotificationsComponent } from './edit-project/components/project-settings/task-notifications/task-notifications.component';
-import { ChartWorkingDaysComponent } from './edit-project/components/project-settings/chart-working-days/chart-working-days.component';
+import { ChartWorkingDaysComponent } from './edit-project/components/shared/chart-working-days/chart-working-days.component';
 import { PrimaryBillingUser } from './edit-project/components/project-settings/primary-billing-user/primary-billing-user.component';
 import { CanDeactivateChart } from './chart/chart.deactivate';
 import { SmartsheetScheduleChooseComponent } from './edit-project/components/shared/smartsheet-schedule-choose/smartsheet-schedule-choose.component';

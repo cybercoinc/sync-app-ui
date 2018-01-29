@@ -1,26 +1,27 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
-import {Project} from "client/entities/entities";
+import { Component, Input, OnInit } from '@angular/core';
+import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
+import { Project } from 'client/entities/entities';
 
 @Component({
     selector: 'chart-working-days',
-    templateUrl: 'client/modules/projects/edit-project/components/project-settings/chart-working-days/chart-working-days.component.html',
+    templateUrl: 'client/modules/projects/edit-project/components/shared/chart-working-days/chart-working-days.component.html',
     styleUrls: [
-        'client/modules/projects/edit-project/components/project-settings/chart-working-days/chart-working-days.component.css'
-    ],
+        'client/modules/projects/edit-project/components/shared/chart-working-days/chart-working-days.component.css'
+    ]
 })
 export class ChartWorkingDaysComponent implements OnInit {
     @Input() projectId;
 
-    private holidays    = '';
+    private holidays = '';
     private workingDays = [];
     private isLoaded = false;
-    private weekDays    = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    private weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-    constructor(private msProjectClient: MsProjectClientService) {}
+    constructor(private msProjectClient: MsProjectClientService) {
+    }
 
-    ngOnInit(): void {
-        this.msProjectClient.getProjectByid(this.projectId)
+    ngOnInit() {
+        return this.msProjectClient.getProjectByid(this.projectId)
             .then((response: Project[]) => {
                 let project = response.shift();
 
@@ -36,9 +37,9 @@ export class ChartWorkingDaysComponent implements OnInit {
     selectDay(e, day) {
         if (e.checked) {
             this.workingDays.push(day);
-        }
-        else {
+        } else {
             let index = this.workingDays.indexOf(day);
+
             if (index > -1) {
                 this.workingDays.splice(index, 1);
             }
@@ -46,9 +47,9 @@ export class ChartWorkingDaysComponent implements OnInit {
     }
 
     save() {
-        this.msProjectClient.update(this.projectId, {
+        return this.msProjectClient.update(this.projectId, {
             working_days: this.workingDays,
-            holidays:     this.holidays ? this.holidays.split(',') : '',
+            holidays: this.holidays ? this.holidays.split(',') : ''
         });
     }
 }
