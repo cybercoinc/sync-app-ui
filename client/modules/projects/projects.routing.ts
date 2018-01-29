@@ -1,56 +1,57 @@
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-import {AuthService} from 'client/service/auth.service';
-import {PipeConnectionService} from 'client/service/pipe-connection.service';
-import {AuthGuardService} from 'client/service/auth-guard.service';
+import { AuthService } from 'client/service/auth.service';
+import { PipeConnectionService } from 'client/service/pipe-connection.service';
+import { AuthGuardService } from 'client/service/auth-guard.service';
 
-import {IndexComponent} from './index/index.component';
+import { IndexComponent } from './index/index.component';
 
-import {SyncSessionsComponent} from './sync-sessions/sync-sessions.component';
-import {CreateProjectComponent} from './create-project/create-project.component';
+import { SyncSessionsComponent } from './sync-sessions/sync-sessions.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
-import {EditProjectComponent} from './edit-project/edit-project.component';
-import {PipePrivateTodoComponent} from './edit-project/components/pipe-private-todo/pipe-private-todo.component';
-import {SmartsheetConnectionPrivateComponent} from './edit-project/components/pipe-private-todo/smartsheet-connection-private.component';
-import {PipeSettingsPrivateComponent} from './edit-project/components/pipe-private-todo/pipe-settings-private.component';
-import {PipePublicTodoComponent} from './edit-project/components/pipe-public-todo/pipe-public-todo.component';
-import {SmartsheetConnectionPublicComponent} from './edit-project/components/pipe-public-todo/smartsheet-connection-public.component';
-import {PipeSettingsPublicComponent} from './edit-project/components/pipe-public-todo/pipe-settings-public.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
+import { PipePrivateTodoComponent } from './edit-project/components/pipe-private-todo/pipe-private-todo.component';
+import { SmartsheetConnectionPrivateComponent } from './edit-project/components/pipe-private-todo/smartsheet-connection-private.component';
+import { PipeSettingsPrivateComponent } from './edit-project/components/pipe-private-todo/pipe-settings-private.component';
+import { PipePublicTodoComponent } from './edit-project/components/pipe-public-todo/pipe-public-todo.component';
+import { SmartsheetConnectionPublicComponent } from './edit-project/components/pipe-public-todo/smartsheet-connection-public.component';
+import { PipeSettingsPublicComponent } from './edit-project/components/pipe-public-todo/pipe-settings-public.component';
 
-import {SyncSessionsListComponent} from './sync-sessions/list/sync-sessions-list.component';
-import {ProjectSettingsComponent} from './edit-project/components/project-settings/project-settings.component';
-import {DeleteProjectComponent} from "./delete-project/delete-project.component";
+import { SyncSessionsListComponent } from './sync-sessions/list/sync-sessions-list.component';
+import { ProjectSettingsComponent } from './edit-project/components/project-settings/project-settings.component';
+import { DeleteProjectComponent } from './delete-project/delete-project.component';
 
-import {PipeTasksTodoComponent} from "./edit-project/components/pipe-tasks/pipe-tasks.component";
-import {SmartsheetConnectionTasksComponent} from "./edit-project/components/pipe-tasks/smartsheet-connection-tasks.component";
-import {TasksSettingsComponent} from "./edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component";
-import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
-import {ProjectGuardService} from "../../service/project-guard.service";
-import {ChartComponent} from "./chart/chart.component";
-import {CanDeactivateChart} from "./chart/chart.deactivate";
-import {PolicyComponent} from "./edit-project/components/project-settings/task-notifications/policy/policy.component";
+import { PipeTasksTodoComponent } from './edit-project/components/pipe-tasks/pipe-tasks.component';
+import { SmartsheetConnectionTasksComponent } from './edit-project/components/pipe-tasks/smartsheet-connection-tasks.component';
+import { TasksSettingsComponent } from './edit-project/components/pipe-tasks/tasks-settings/tasks-settings.component';
+import { AuthBootstrapService } from 'client/service/resolvers/auth-bootstrap.service';
+import { ProjectGuardService } from '../../service/project-guard.service';
+import { ChartComponent } from './chart/chart.component';
+import { CanDeactivateChart } from './chart/chart.deactivate';
+import { PolicyComponent } from './edit-project/components/project-settings/task-notifications/policy/policy.component';
+import { CreateDocumentPipeComponent } from './edit-project/components/document-pipes/create-document-pipe/create-document-pipe.component';
 
 export const routes: Routes = [
     {
         path: 'projects',
         resolve: {
-            bootstrap: AuthBootstrapService,
+            bootstrap: AuthBootstrapService
         },
         canActivate: [AuthGuardService],
         children: [
             {
                 path: '',
-                component: IndexComponent,
+                component: IndexComponent
             },
 
             {
                 path: 'create-project',
-                component: CreateProjectComponent,
+                component: CreateProjectComponent
             },
 
             {
                 path: ':project_id/delete-project',
-                component: DeleteProjectComponent,
+                component: DeleteProjectComponent
             },
 
             {
@@ -69,16 +70,17 @@ export const routes: Routes = [
                     {
                         path: ':pipe_type',
                         component: SyncSessionsListComponent
-                    },
-                ],
+                    }
+                ]
             },
+
             {
                 path: ':project_id/pipes/:pipe_id/chart',
                 component: ChartComponent,
                 canDeactivate: [CanDeactivateChart],
                 resolve: {
                     project: PipeConnectionService
-                },
+                }
             },
             {
                 path: ':project_id/edit-project',
@@ -92,6 +94,12 @@ export const routes: Routes = [
                         path: '',
                         redirectTo: 'settings',
                         pathMatch: 'full'
+                    },
+
+
+                    {
+                        path: 'create-document-pipe',
+                        component: CreateDocumentPipeComponent
                     },
 
                     {
@@ -111,8 +119,8 @@ export const routes: Routes = [
 
                             {
                                 path: 'settings-private',
-                                component: PipeSettingsPrivateComponent,
-                            },
+                                component: PipeSettingsPrivateComponent
+                            }
                         ]
                     },
 
@@ -128,13 +136,13 @@ export const routes: Routes = [
 
                             {
                                 path: 'smartsheet-connection-public',
-                                component: SmartsheetConnectionPublicComponent,
+                                component: SmartsheetConnectionPublicComponent
                             },
 
                             {
                                 path: 'settings-public',
-                                component: PipeSettingsPublicComponent,
-                            },
+                                component: PipeSettingsPublicComponent
+                            }
                         ]
                     },
                     {
@@ -149,13 +157,13 @@ export const routes: Routes = [
 
                             {
                                 path: 'smartsheet-connection',
-                                component: SmartsheetConnectionTasksComponent,
+                                component: SmartsheetConnectionTasksComponent
                             },
 
                             {
                                 path: 'settings',
-                                component: TasksSettingsComponent,
-                            },
+                                component: TasksSettingsComponent
+                            }
                         ]
                     },
 
@@ -165,20 +173,20 @@ export const routes: Routes = [
                     },
                     {
                         path: 'policy',
-                        component: PolicyComponent,
+                        component: PolicyComponent
                     },
                     {
                         path: 'policy/:policy_id',
-                        component: PolicyComponent,
+                        component: PolicyComponent
                     },
                     {
                         path: 'policy/:policy_id/:type',
-                        component: PolicyComponent,
+                        component: PolicyComponent
                     }
                 ]
-            },
-        ],
-    },
+            }
+        ]
+    }
 ];
 
 export const routing = RouterModule.forChild(routes);
