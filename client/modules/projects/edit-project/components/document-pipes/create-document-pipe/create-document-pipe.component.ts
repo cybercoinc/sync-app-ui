@@ -16,8 +16,6 @@ import { ConfigService } from '../../../../../../service/config.service';
     ]
 })
 export class CreateDocumentPipeComponent implements OnInit {
-    @Input() projectId: number;
-
     constructor(protected msProjectService: MsProjectClientService,
                 protected AuthService: AuthService,
                 protected pipesConnectionService: PipeConnectionService,
