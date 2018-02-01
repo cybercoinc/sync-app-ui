@@ -1,13 +1,13 @@
-import {Injectable} from "@angular/core";
-import {Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import {MsProjectClientService} from './microservices/ms-project-client.service';
-import {AuthService} from './auth.service';
-import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.service';
+import { MsProjectClientService } from './microservices/ms-project-client.service';
+import { AuthService } from './auth.service';
+import { MsSyncClientService } from 'client/service/microservices/ms-sync-client.service';
 
-import {Project, ProjectPipe} from 'client/entities/entities';
-import {PIPE_STATUS_ACTIVE, PIPE_STATUS_DISABLED} from 'client/entities/entities';
-import {AuthBootstrapService} from "./resolvers/auth-bootstrap.service";
+import { Project, ProjectPipe } from 'client/entities/entities';
+import { PIPE_STATUS_ACTIVE, PIPE_STATUS_DISABLED } from 'client/entities/entities';
+import { AuthBootstrapService } from './resolvers/auth-bootstrap.service';
 
 @Injectable()
 export class PipeConnectionService implements Resolve<{}> {
@@ -229,7 +229,9 @@ export class PipeConnectionService implements Resolve<{}> {
             case 'tasks':
                 label = 'Project Schedule';
                 break;
-
+            case 'document_pipe':
+                label = 'Document Pipe';
+                break;
         }
 
         return label;

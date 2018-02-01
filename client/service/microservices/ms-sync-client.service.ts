@@ -52,4 +52,14 @@ export class MsSyncClientService extends MsClientService {
             }
         )
     }
+
+    testPdfSave() {
+        return this.makeMsCall(
+            'test-pdf-sync',
+            'GET',
+            {
+                pipe_id: 5648986113310720
+            }
+        );
+    }
 }

@@ -1,1 +1,67 @@
-create document pipe
+<md-card>
+    <div class="container-fluid">
+        <div class="row">
+            <div *ngIf="!isShowAlert">
+                <div class="col-xs-12">
+                    <h5>Do you have an existing SmartSheet schedule that you would like to merge with your Procore
+                        project
+                        schedule?</h5>
+                </div>
+
+                <div class="col-xs-6 col-xs-offset-4" *ngIf="!isShowAlert">
+                    <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                            (click)="startChoosingExistingSheet()">Yes
+                    </button>
+                    <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                            (click)="createDocumentPipe()">No
+                    </button>
+                </div>
+            </div>
+
+            <section *ngIf="haveExistingSheet">
+                <div class="col-xs-12">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <input type="text" class="full-width" #search_filter
+                                       (keyup)="filterProjects(search_filter.value)"
+                                       placeholder="Filter by name">
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="projects-list">
+                                    <h5 *ngIf="!smartsheetSheets">
+                                        <i class="fa fa-cog fa-spin fa-fw"></i> Searching for sheets...
+                                    </h5>
+
+                                    <h5 *ngIf="smartsheetSheets && !smartsheetSheets.length">
+                                        No sheets found.
+                                    </h5>
+
+                                    <div *ngFor="let sheet of smartsheetSheets">
+                                        <md-radio-button
+                                                [disabled]="checkIfAlreadyConnected(sheet) || columnsMatchingIsVisible"
+                                                value="{{sheet.id}}"
+                                                (click)="chooseExistingSheet(sheet)">
+                                            {{sheet.name}}
+                                            <div class="is-connected" *ngIf="checkIfAlreadyConnected(sheet)">is
+                                                connected
+                                            </div>
+                                        </md-radio-button>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-xs-offset-4">
+                    <a [class.disabled]="!selectedSheet" class="btn btn-success"
+                       (click)="createDocumentPipe(selectedSheet)">Select and continue</a>
+                    <a class="btn btn-default" (click)="cancel()">cancel</a>
+                </div>
+            </section>
+        </div>
+    </div>
+</md-card>

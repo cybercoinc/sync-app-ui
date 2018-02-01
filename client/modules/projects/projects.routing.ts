@@ -103,6 +103,11 @@ export const routes: Routes = [
                     },
 
                     {
+                        path: 'edit-document-pipe/:pipe_id',
+                        component: CreateDocumentPipeComponent
+                    },
+
+                    {
                         path: 'pipe-private-todo',
                         component: PipePrivateTodoComponent,
                         children: [
