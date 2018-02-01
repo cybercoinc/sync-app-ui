@@ -147,7 +147,12 @@ export class CreateDocumentPipeComponent implements OnInit {
             .then((pipeId) => {
                 this.pipesConnectionService.refreshPipesList();
 
-                return this.router.navigate(['edit-document-pipe', pipeId]);
+                return this.router.navigate([
+                    'projects',
+                    this.pipesConnectionService.project.id,
+                    'edit-project',
+                    'edit-document-pipe',
+                    pipeId]);
             });
     }
 }

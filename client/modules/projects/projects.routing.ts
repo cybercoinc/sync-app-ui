@@ -30,6 +30,7 @@ import { ChartComponent } from './chart/chart.component';
 import { CanDeactivateChart } from './chart/chart.deactivate';
 import { PolicyComponent } from './edit-project/components/project-settings/task-notifications/policy/policy.component';
 import { CreateDocumentPipeComponent } from './edit-project/components/document-pipes/create-document-pipe/create-document-pipe.component';
+import { EditDocumentPipeComponent } from './edit-project/components/document-pipes/edit-document-pipe/edit-document-pipe.component';
 
 export const routes: Routes = [
     {
@@ -104,7 +105,7 @@ export const routes: Routes = [
 
                     {
                         path: 'edit-document-pipe/:pipe_id',
-                        component: CreateDocumentPipeComponent
+                        component: EditDocumentPipeComponent
                     },
 
                     {

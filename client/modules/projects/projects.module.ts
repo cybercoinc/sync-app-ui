@@ -56,6 +56,7 @@ import { SetGanttAccessDialog } from './edit-project/components/project-settings
 import { ResourcesManagementComponent } from './edit-project/components/pipe-tasks/resources-management/resources-management.component';
 import { AddResourceDialog } from './edit-project/components/pipe-tasks/resources-management/add-resource.dialog';
 import { CreateDocumentPipeComponent } from './edit-project/components/document-pipes/create-document-pipe/create-document-pipe.component';
+import { EditDocumentPipeComponent } from './edit-project/components/document-pipes/edit-document-pipe/edit-document-pipe.component';
 
 @NgModule({
     imports: [
@@ -121,8 +122,8 @@ import { CreateDocumentPipeComponent } from './edit-project/components/document-
         ResourcesManagementComponent,
         AddResourceDialog,
 
-        CreateDocumentPipeComponent
-
+        CreateDocumentPipeComponent,
+        EditDocumentPipeComponent
     ],
     entryComponents: [
         CreateBaselineDialog,
