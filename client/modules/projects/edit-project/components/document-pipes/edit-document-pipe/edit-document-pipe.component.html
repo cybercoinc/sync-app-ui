@@ -1,0 +1,29 @@
+<md-card>
+    <md-card-header>
+        <md-card-title>Connection</md-card-title>
+    </md-card-header>
+
+    <md-card-content>
+        <div class="row">
+            <div class="col-xs-12">
+                <h5> Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Connected to Smartsheet</span>
+                </h5>
+            </div>
+            <div class="col-xs-12">Sheet name: <i>{{pipe?.sm_sheet_name}}</i></div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+            </div>
+            <div class="col-xs-9">
+                <div class="pull-right">
+                    <pipe-delete [pipe]="pipe"></pipe-delete>
+
+                    <a href="{{pipe?.sm_permalink}}"
+                       class="btn btn-success"
+                       target="_blank">open</a>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>

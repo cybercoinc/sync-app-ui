@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
+import { MsProjectClientService } from '../../../../../../service/microservices/ms-project-client.service';
+import { ProjectPipe } from '../../../../../../entities/entities';
 
 
 @Component({
@@ -12,12 +14,17 @@ import { ActivatedRoute, Route } from '@angular/router';
 export class EditDocumentPipeComponent implements OnInit {
     protected pipeId: number;
 
-    ngOnInit() {
+    protected pipe: ProjectPipe;
 
-        console.log(this.pipeId);
+    ngOnInit() {
+        return this.msProjectService.getPipeById(this.pipeId)
+            .then(pipes => {
+                this.pipe = pipes.shift();
+            })
     }
 
-    constructor(protected activatedRoute: ActivatedRoute) {
+    constructor(protected activatedRoute: ActivatedRoute,
+                protected msProjectService: MsProjectClientService) {
         this.activatedRoute.params.subscribe(params => {
             this.pipeId = +params['pipe_id'];
         });
