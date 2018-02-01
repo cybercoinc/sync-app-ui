@@ -1,20 +1,20 @@
-import {Component, OnInit, Input} from "@angular/core";
-import {MsProjectClientService} from "client/service/microservices/ms-project-client.service";
-import {AuthService} from 'client/service/auth.service';
-import {PipeConnectionService} from 'client/service/pipe-connection.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
+import { AuthService } from 'client/service/auth.service';
+import { PipeConnectionService } from 'client/service/pipe-connection.service';
 
-import {Router, ActivatedRoute} from '@angular/router';
-import {SmartsheetSheet, PIPE_TYPE_TASKS} from 'client/entities/entities';
-import {PendingRequestsService} from "client/service/pending-requests.service";
-import {ConfigService} from "client/service/config.service";
+import { Router, ActivatedRoute } from '@angular/router';
+import { SmartsheetSheet, PIPE_TYPE_TASKS } from 'client/entities/entities';
+import { PendingRequestsService } from 'client/service/pending-requests.service';
+import { ConfigService } from 'client/service/config.service';
 
 @Component({
     selector: 'smartsheet-connection',
     templateUrl: 'client/modules/projects/edit-project/components/shared/smartsheet-connection/smartsheet-connection.component.html',
     styleUrls: [
         'client/modules/projects/edit-project/components/shared/smartsheet-connection/smartsheet-connection.component.css',
-        'client/modules/projects/edit-project/edit-project.component.css',
-    ],
+        'client/modules/projects/edit-project/edit-project.component.css'
+    ]
 })
 export class SmartsheetConnectionComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
@@ -36,12 +36,11 @@ export class SmartsheetConnectionComponent implements OnInit {
     ngOnInit() {
         this.PipeConnectionService.refreshPipesList();
 
-        this.pipesListObj = this.PipeConnectionService.pipesListObj;
-
         let isPrivate = this.pipeType == 'private_todos';
 
         if (this.pipeType == 'public_todos' || this.pipeType == 'private_todos') {
-            if ((isPrivate && !this.pipesListObj.private_todos) || (!isPrivate && !this.pipesListObj.public_todos)) {
+            if ((isPrivate && !this.PipeConnectionService.pipesListObj['private_todos']) ||
+                (!isPrivate && !this.PipeConnectionService.pipesListObj['public_todos'])) {
                 this.MsProjectClientService.getTodos(this.AuthService.authUser.id, this.PipeConnectionService.project.id, isPrivate)
                     .then(todos => {
                         if (todos.length > 0) {
@@ -54,7 +53,8 @@ export class SmartsheetConnectionComponent implements OnInit {
         }
 
         // if need to rematch columns
-        this.needToRematchColumns = this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].need_to_match_sm_columns;
+        this.needToRematchColumns = this.PipeConnectionService.pipesListObj[this.pipeType]
+            && this.PipeConnectionService.pipesListObj[this.pipeType].need_to_match_sm_columns;
     }
 
     removeTodos(): void {
@@ -78,8 +78,6 @@ export class SmartsheetConnectionComponent implements OnInit {
     public smartsheetSheets: SmartsheetSheet[] | null = null;
     public connectedSmSheetsIdsList: [number] | null = null;
     public selectedSheet: SmartsheetSheet | null = null;
-
-    protected pipesListObj;
 
     protected filterTimeout;
 
@@ -188,7 +186,7 @@ export class SmartsheetConnectionComponent implements OnInit {
                 return this.MsProjectClientService.updatePipe(_pipeId, {
                     sm_sheet_id: createdSheetObj.id,
                     sm_permalink: createdSheetObj.permalink,
-                    sm_sheet_name: createdSheetObj.name,
+                    sm_sheet_name: createdSheetObj.name
                 });
             })
             .then(() => {
@@ -202,11 +200,13 @@ export class SmartsheetConnectionComponent implements OnInit {
                 return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
             })
             .then(() => {
-                return this.PipeConnectionService.refreshPipesList();
+                this.PipeConnectionService.refreshPipesList();
+
+                return true;
             })
-            // .then(() => {
-            //     return this.router.navigate(this.redirectRoute);
-            // });
+        // .then(() => {
+        //     return this.router.navigate(this.redirectRoute);
+        // });
     }
 
     showColumnsMatching() {
@@ -267,11 +267,13 @@ export class SmartsheetConnectionComponent implements OnInit {
                 return this.MsProjectClientService.saveMatchedColumns(_pipeId, columnsObj);
             })
             .then(() => {
-                return this.PipeConnectionService.refreshPipesList();
+                this.PipeConnectionService.refreshPipesList();
+
+                return true;
             })
-            // .then(() => {
-            //     return this.router.navigate(this.redirectRoute);
-            // });
+        // .then(() => {
+        //     return this.router.navigate(this.redirectRoute);
+        // });
     }
 
     showColumnsRematch() {

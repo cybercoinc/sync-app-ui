@@ -41,6 +41,8 @@ export class PipeConnectionService implements Resolve<{}> {
         tasks: ProjectPipe,
     } | {} = {};
 
+    docPipes: ProjectPipe[] = [];
+
     getProject(projectId: number): Promise<Project> {
         return this.MsProjectClientService.getProjectByid(projectId)
             .then(projectsList => {
@@ -56,27 +58,29 @@ export class PipeConnectionService implements Resolve<{}> {
             project_fk_id: projectId
         })
             .then(pipesList => {
-                this.pipesListObj = [];
+                this.pipesListObj = {};
+                this.docPipes = [];
 
                 pipesList.forEach((pipe: ProjectPipe) => {
-                    this.pipesListObj[pipe.type] = pipe;
+                    if (pipe.type === 'document_pipe') {
+                        this.docPipes.push(pipe);
+                    } else {
+                        this.pipesListObj[pipe.type] = pipe;
+                    }
                 });
+
+                this.docPipes = this.docPipes.sort((a, b) => {
+                    return a.created_at === b.created_at ? 0 : (a.created_at > b.created_at ? 1 : -1);
+                });
+
+                console.log(this.pipesListObj);
 
                 return this.pipesListObj;
             })
     }
 
     refreshPipesList() {
-        return this.MsProjectClientService.getPipesWhere({
-            project_fk_id: this.project.id
-        })
-            .then(pipesList => {
-                pipesList.forEach((pipe: ProjectPipe) => {
-                    this.pipesListObj[pipe.type] = pipe;
-                });
-
-                return this.pipesListObj;
-            });
+        return this.getPipesList(this.project.id);
     }
 
     enablePipe(pipeId: number) {

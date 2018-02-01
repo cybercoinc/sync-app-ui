@@ -12,7 +12,7 @@
             </md-toolbar-row>
 
             <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-public-todo']" [routerLinkActive]="['is-active']">
-                <div class="pipe-status-indicator" [ngClass]="pipesListObj.public_todos?.status"></div>
+                <div class="pipe-status-indicator" [ngClass]="PipeConnectionService.pipesListObj.public_todos?.status"></div>
                 <md-icon>event_available</md-icon>
                 <span>
                     <span>Project Calendar Items</span><br />
@@ -21,7 +21,7 @@
             </md-toolbar-row>
 
             <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-private-todo']" [routerLinkActive]="['is-active']">
-                <div class="pipe-status-indicator" [ngClass]="pipesListObj.private_todos?.status"></div>
+                <div class="pipe-status-indicator" [ngClass]="PipeConnectionService.pipesListObj.private_todos?.status"></div>
                 <md-icon>verified_user</md-icon>
                 <span>
                     <span>Private Calendar Items</span><br />
@@ -30,13 +30,23 @@
             </md-toolbar-row>
 
             <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-tasks']" [routerLinkActive]="['is-active']">
-                <div class="pipe-status-indicator" [ngClass]="pipesListObj.tasks?.status"></div>
+                <div class="pipe-status-indicator" [ngClass]="PipeConnectionService.pipesListObj.tasks?.status"></div>
                 <md-icon>event</md-icon>
                 <span>
                     <span>Project Schedule</span><br />
                     <span class="pipe-description">1-way sync to Procore</span>
                 </span>
             </md-toolbar-row>
+
+            <md-toolbar-row *ngFor="let docPipe of PipeConnectionService.docPipes" class="bottom-lined clickable-row" [routerLink]="['edit-document-pipe', docPipe.id]" [routerLinkActive]="['is-active']">
+                <div class="pipe-status-indicator" [ngClass]="docPipe.status"></div>
+                <md-icon>perm_media</md-icon>
+                <span>
+                    <span>Document pipe</span><br />
+                    <span class="pipe-description">Smartsheet to Procore documents sync</span>
+                </span>
+            </md-toolbar-row>
+
 
             <md-toolbar-row>
                 <button md-button [routerLink]="['create-document-pipe']"><i class="material-icons">add</i>Add Document Pipe</button>

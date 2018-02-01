@@ -19,10 +19,8 @@ export class PipeSettingsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.pipesListObj = this.PipeConnectionService.pipesListObj;
-
-        if (this.pipesListObj[this.pipeType]) {
-            let pipeObj = this.pipesListObj[this.pipeType];
+        if (this.PipeConnectionService.pipesListObj[this.pipeType]) {
+            let pipeObj = this.PipeConnectionService.pipesListObj[this.pipeType];
 
             let propsToSet = [
                 'summary_tasks_enabled'
@@ -38,8 +36,6 @@ export class PipeSettingsComponent implements OnInit {
     }
 
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
-
-    protected pipesListObj;
 
     public model: {summary_tasks_enabled: boolean} = {
         summary_tasks_enabled: false

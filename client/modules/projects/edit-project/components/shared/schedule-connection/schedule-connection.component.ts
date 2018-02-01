@@ -20,10 +20,7 @@ export class ScheduleConnectionComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService,
                 protected PipeConnectionService: PipeConnectionService,
-                protected PendingRequestsService: PendingRequestsService,
-                private route: ActivatedRoute,
-                private ConfigService: ConfigService,
-                private router: Router) {
+                protected PendingRequestsService: PendingRequestsService) {
     }
 
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
@@ -32,10 +29,8 @@ export class ScheduleConnectionComponent implements OnInit {
     ngOnInit() {
         this.PipeConnectionService.refreshPipesList();
 
-        this.pipesListObj = this.PipeConnectionService.pipesListObj;
         this.project = this.PipeConnectionService.project;
     }
 
-    protected pipesListObj;
     protected project: Project;
 }

@@ -1,4 +1,4 @@
-<md-card style="max-width: 800px" *ngIf="pipesListObj[pipeType]">
+<md-card style="max-width: 800px" *ngIf="PipeConnectionService.pipesListObj[pipeType]">
 
     <!-- TASK TITLES -->
     <br>
@@ -24,8 +24,8 @@
     <br>
     <div class="row">
         <div class="col-xs-12">
-            <a [class.disabled]="pipesListObj[pipeType]?.status === 'active'" class="btn btn-success" (click)="saveAndContinue()">Save</a>
-            <p *ngIf="pipesListObj[pipeType]?.status === 'active'">To change this Pipe setting you should disable it firstly</p>
+            <a [class.disabled]="PipeConnectionService.pipesListObj[pipeType]?.status === 'active'" class="btn btn-success" (click)="saveAndContinue()">Save</a>
+            <p *ngIf="PipeConnectionService.pipesListObj[pipeType]?.status === 'active'">To change this Pipe setting you should disable it firstly</p>
         </div>
     </div>
 </md-card>

@@ -1,4 +1,4 @@
-<md-card *ngIf="pipesListObj[pipeType]?.use_schedule_chart" style="max-width: 800px">
+<md-card *ngIf="PipeConnectionService.pipesListObj[pipeType]?.use_schedule_chart" style="max-width: 800px">
     <md-card-header>
         <md-card-title>Manage Project Schedule</md-card-title>
     </md-card-header>
@@ -12,8 +12,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="pull-right">
-                    <pipe-delete [pipe]="pipesListObj[pipeType]"></pipe-delete>
-                    <a target="_blank" [routerLink]="['/projects', project?.id, 'pipes', pipesListObj[pipeType]?.id, 'chart']"
+                    <pipe-delete [pipe]="PipeConnectionService.pipesListObj[pipeType]"></pipe-delete>
+                    <a target="_blank" [routerLink]="['/projects', project?.id, 'pipes', PipeConnectionService.pipesListObj[pipeType]?.id, 'chart']"
                        class="btn btn-success">open</a>
                 </div>
             </div>
