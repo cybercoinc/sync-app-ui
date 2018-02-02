@@ -27,6 +27,8 @@ export class EditDocumentPipeComponent implements OnInit {
                 protected msProjectService: MsProjectClientService) {
         this.activatedRoute.params.subscribe(params => {
             this.pipeId = +params['pipe_id'];
+
+            return this.ngOnInit();
         });
     }
 }
