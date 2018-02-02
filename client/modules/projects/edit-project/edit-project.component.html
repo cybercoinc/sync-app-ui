@@ -1,56 +1,70 @@
-
 <md-sidenav-container>
     <md-sidenav #sc_sidenav mode="side" opened="true" class="sc-sidenav">
         <md-toolbar>
             <span>{{project.name}}</span>
 
-            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['settings']" [routerLinkActive]="['is-active']">
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['settings']"
+                            [routerLinkActive]="['is-active']">
                 <span>
-                    <span>{{project.name}}</span><br />
+                    <span>{{project.name}}</span><br/>
                     <span class="pipe-description">Project settings</span>
                 </span>
             </md-toolbar-row>
 
-            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-public-todo']" [routerLinkActive]="['is-active']">
-                <div class="pipe-status-indicator" [ngClass]="PipeConnectionService.pipesListObj.public_todos?.status"></div>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-public-todo']"
+                            [routerLinkActive]="['is-active']">
+                <div class="pipe-status-indicator"
+                     [ngClass]="PipeConnectionService.pipesListObj.public_todos?.status"></div>
                 <md-icon>event_available</md-icon>
                 <span>
-                    <span>Project Calendar Items</span><br />
+                    <span>Project Calendar Items</span><br/>
                     <span class="pipe-description">Visible to anyone with Schedule Access</span>
                 </span>
             </md-toolbar-row>
 
-            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-private-todo']" [routerLinkActive]="['is-active']">
-                <div class="pipe-status-indicator" [ngClass]="PipeConnectionService.pipesListObj.private_todos?.status"></div>
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-private-todo']"
+                            [routerLinkActive]="['is-active']">
+                <div class="pipe-status-indicator"
+                     [ngClass]="PipeConnectionService.pipesListObj.private_todos?.status"></div>
                 <md-icon>verified_user</md-icon>
                 <span>
-                    <span>Private Calendar Items</span><br />
+                    <span>Private Calendar Items</span><br/>
                     <span class="pipe-description">Visible only to your Company</span>
                 </span>
             </md-toolbar-row>
 
-            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-tasks']" [routerLinkActive]="['is-active']">
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['pipe-tasks']"
+                            [routerLinkActive]="['is-active']">
                 <div class="pipe-status-indicator" [ngClass]="PipeConnectionService.pipesListObj.tasks?.status"></div>
                 <md-icon>event</md-icon>
                 <span>
-                    <span>Project Schedule</span><br />
+                    <span>Project Schedule</span><br/>
                     <span class="pipe-description">1-way sync to Procore</span>
                 </span>
             </md-toolbar-row>
 
-            <md-toolbar-row *ngFor="let docPipe of PipeConnectionService.docPipes" class="bottom-lined clickable-row" [routerLink]="['edit-document-pipe', docPipe.id]" [routerLinkActive]="['is-active']">
+            <md-toolbar-row *ngFor="let docPipe of PipeConnectionService.docPipes" class="bottom-lined"
+                            [routerLink]="['edit-document-pipe', docPipe.id]" [routerLinkActive]="['is-active']">
                 <div class="pipe-status-indicator" [ngClass]="docPipe.status"></div>
                 <md-icon>perm_media</md-icon>
                 <span>
-                    <span>Document pipe</span><br />
-                    <span class="pipe-description">Smartsheet to Procore documents sync</span>
+                    <span>Document pipe</span><br/>
+                    <span class="pipe-description">{{docPipe.sm_sheet_name}}</span>
                 </span>
             </md-toolbar-row>
 
 
-            <md-toolbar-row>
-                <button md-button [routerLink]="['create-document-pipe']"><i class="material-icons">add</i>Add Document Pipe</button>
+            <md-toolbar-row class="bottom-lined">
+                <div class="pipe-status-indicator"></div>
+                <md-icon>add</md-icon>
+                <span>
+                    <button md-button [routerLink]="['create-document-pipe']">Add Document
+                        Pipe
+                    </button>
+                </span>
             </md-toolbar-row>
+
+            <md-toolbar-row></md-toolbar-row>
         </md-toolbar>
     </md-sidenav>
     <div class="pipe-edit-area" style="padding-bottom: 150px;">

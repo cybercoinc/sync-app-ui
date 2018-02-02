@@ -73,9 +73,6 @@ export class PipeConnectionService implements Resolve<{}> {
                     return a.created_at === b.created_at ? 0 : (a.created_at > b.created_at ? 1 : -1);
                 });
 
-                console.log(this.pipesListObj);
-                console.log(this.docPipes);
-
                 return this.pipesListObj;
             })
     }
