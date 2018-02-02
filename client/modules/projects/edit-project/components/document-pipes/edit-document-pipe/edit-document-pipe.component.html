@@ -1,3 +1,28 @@
+<md-card style="max-width: 800px;">
+    <md-card-header>
+        <md-card-title>Synchronization</md-card-title>
+    </md-card-header>
+
+    <md-card-content>
+        <h5 *ngIf="pipe?.status !== 'active'">
+            Status: <span style="color: #8b0305; font-weight: bold; margin-right: 15px;">Paused</span>
+        </h5>
+        <h5 *ngIf="pipe?.status === 'active'">
+            Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Active</span>
+        </h5>
+
+        <div class="text-right">
+            <a *ngIf="pipe?.status !== 'active'"
+               (click)="enable()"
+               class="btn btn-success">start</a>
+
+            <a *ngIf="pipe?.status === 'active'"
+               (click)="disable()"
+               class="btn btn-warning">pause</a>
+        </div>
+    </md-card-content>
+</md-card>
+
 <md-card>
     <md-card-header>
         <md-card-title>Connection</md-card-title>

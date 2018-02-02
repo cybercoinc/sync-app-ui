@@ -74,6 +74,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 });
 
                 console.log(this.pipesListObj);
+                console.log(this.docPipes);
 
                 return this.pipesListObj;
             })
@@ -111,7 +112,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 const triggerResourceName: 'ToDos' | 'Tasks' = ['public_todos', 'private_todos'].indexOf(_pipeObj.type) !== -1 ? 'ToDos' : 'Tasks';
 
                 // todo currently not enabling triggers for tasks because we have no sync logic implemented (pr to sm)
-                if (triggerResourceName !== 'Tasks') {
+                if (_pipeObj.type !== 'document_pipe' && triggerResourceName !== 'Tasks') {
                     promises.push(
                         this.MsProjectClientService.addProcoreWebhookTriggers(
                             _pipeObj.project_fk_id.id,
@@ -160,7 +161,7 @@ export class PipeConnectionService implements Resolve<{}> {
                     }
                 }
 
-                if (needToRemoveTriggers) {
+                if (_pipeObj.type !== 'document_pipe' && needToRemoveTriggers) {
                     return this.MsProjectClientService.removeProcoreWebhookTriggers(_pipeObj.project_fk_id.id, triggerResourceName);
                 }
             })

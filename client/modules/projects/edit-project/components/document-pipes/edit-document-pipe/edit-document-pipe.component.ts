@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route } from '@angular/router';
-import { MsProjectClientService } from '../../../../../../service/microservices/ms-project-client.service';
 import { ProjectPipe } from '../../../../../../entities/entities';
+import { PipeConnectionService } from '../../../../../../service/pipe-connection.service';
 
 
 @Component({
@@ -17,18 +17,35 @@ export class EditDocumentPipeComponent implements OnInit {
     protected pipe: ProjectPipe;
 
     ngOnInit() {
-        return this.msProjectService.getPipeById(this.pipeId)
-            .then(pipes => {
-                this.pipe = pipes.shift();
-            })
     }
 
     constructor(protected activatedRoute: ActivatedRoute,
-                protected msProjectService: MsProjectClientService) {
+                protected PipeConnectionService: PipeConnectionService) {
         this.activatedRoute.params.subscribe(params => {
             this.pipeId = +params['pipe_id'];
 
-            return this.ngOnInit();
+            return this.setActivePipe();
         });
+    }
+
+    enable() {
+        return this.PipeConnectionService.enablePipe(this.pipeId)
+            .then(() => {
+                return this.setActivePipe();
+            });
+    }
+
+    disable() {
+        return this.PipeConnectionService.disablePipe(this.pipeId)
+            .then(() => {
+                return this.setActivePipe();
+            });
+    }
+
+    /**
+     * @todo use ngrx
+     */
+    setActivePipe() {
+        this.pipe = this.PipeConnectionService.docPipes.find(pipe => pipe.id === this.pipeId);
     }
 }
