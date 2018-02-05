@@ -12,7 +12,7 @@
                class="btn btn-success pull-right" style="top: 10px;">connect project</a>
 
             <!--<span *ngIf="!this.AuthService.authUser.smartsheet_oauth" style="padding: 0 10px 0 40px;" class="pull-right">-->
-                <!--Before creating project, you have to <a [routerLink]="['/connection']">authorize with SmartSheet</a>-->
+            <!--Before creating project, you have to <a [routerLink]="['/connection']">authorize with SmartSheet</a>-->
             <!--</span>-->
         </div>
     </div>
@@ -41,23 +41,23 @@
                             </div>
                             <div class="row-icons" *ngIf="!projectRow.is_expanded">
                                 <a *ngIf="getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')"
-                                    target="_blank"
-                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
-                                    ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i></a>
+                                   target="_blank"
+                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
+                                ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i></a>
                                 <i *ngIf="!getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')"
                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
 
                                 <a *ngIf="getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')"
-                                    target="_blank"
-                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
-                                    ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i></a>
+                                   target="_blank"
+                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
+                                ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i></a>
                                 <i *ngIf="!getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')"
                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i>
 
                                 <a *ngIf="getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')"
-                                    [attr.target]="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'tasks') ? '_blank' : null"
-                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
-                                    ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i></a>
+                                   [attr.target]="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'tasks') ? '_blank' : null"
+                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
+                                ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i></a>
                                 <i *ngIf="!getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')"
                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
                             </div>
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="col-sm-6 text-right">
                                     <p>
-                                        Billing Responsibility<br />
+                                        Billing Responsibility<br/>
                                         <span style="font-weight: bold;">{{projectRow.project?.pbr_username}}</span>
                                     </p>
                                 </div>
@@ -93,7 +93,8 @@
                                                 Project Calendar Items
                                             </div>
 
-                                            <div class="col-sm-8 col-lg-9" *ngIf="isPipeExist(projectRow, 'public_todos')">
+                                            <div class="col-sm-8 col-lg-9"
+                                                 *ngIf="isPipeExist(projectRow, 'public_todos')">
                                                 <a *ngIf="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'public_todos')"
                                                    target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
@@ -114,7 +115,8 @@
                                                 Private Calendar Items
                                             </div>
 
-                                            <div class="col-sm-8 col-lg-9" *ngIf="isPipeExist(projectRow, 'private_todos')">
+                                            <div class="col-sm-8 col-lg-9"
+                                                 *ngIf="isPipeExist(projectRow, 'private_todos')">
                                                 <a *ngIf="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
                                                    target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
@@ -150,10 +152,20 @@
                                             </div>
                                         </div>
 
-                                        <div class="row connection-row" *ngFor="let docPipe of getPipesByType(projectRow, 'document_pipe')">
+                                        <div class="row connection-row"
+                                             *ngFor="let docPipe of getPipesByType(projectRow, 'document_pipe')">
                                             <div class="col-sm-4 col-lg-3 vertical-aligned">
                                                 <i class="material-icons pipe-{{getPipeStatusById(projectRow.projectPipesList, docPipe.id)}}">perm_media</i>
                                                 Document pipe {{ docPipe.name }}
+                                            </div>
+
+                                            <div class="col-sm-8 col-lg-9">
+                                                <a target="_blank"
+                                                   href="{{ docPipe.sm_permalink }}"
+                                                   md-button>SMARTSHEET</a>
+                                                <!--<a [routerLink]="[projectRow.project.id, 'sync-sessions', 'tasks']"-->
+                                                   <!--md-button>VIEW SYNC-->
+                                                <!--</a>-->
                                             </div>
                                         </div>
                                     </div>
