@@ -149,6 +149,13 @@
                                                 </a>
                                             </div>
                                         </div>
+
+                                        <div class="row connection-row" *ngFor="let docPipe of getPipesByType(projectRow, 'document_pipe')">
+                                            <div class="col-sm-4 col-lg-3 vertical-aligned">
+                                                <i class="material-icons pipe-{{getPipeStatusById(projectRow.projectPipesList, docPipe.id)}}">perm_media</i>
+                                                Document pipe {{ docPipe.name }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

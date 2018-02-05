@@ -95,6 +95,18 @@ export class IndexComponent implements OnInit {
         return status;
     }
 
+    getPipeStatusById(projectPipesList, pipeId: number): string {
+        let status = 'inactive';
+
+        projectPipesList.forEach((pipe: ProjectPipe) => {
+            if (pipe.id === pipeId) {
+                status = pipe.status;
+            }
+        });
+
+        return status;
+    }
+
     getPipeSyncSourceLink(projectPipesList, pipeType): string {
         let link = '';
 
@@ -143,6 +155,12 @@ export class IndexComponent implements OnInit {
         });
 
         return exists;
+    }
+
+    getPipesByType(projectRow, type: string): ProjectPipe {
+        return projectRow.projectPipesList.filter(pipe => pipe.type === type).sort((a, b) => {
+            return a.created_at === b.created_at ? 0 : (a.created_at > b.created_at ? 1 : -1);
+        });
     }
 
     projectHasPipes(projectRow) {
