@@ -71,6 +71,11 @@ export const routes: Routes = [
                     {
                         path: ':pipe_type',
                         component: SyncSessionsListComponent
+                    },
+
+                    {
+                        path: ':pipe_type/:pipe_id',
+                        component: SyncSessionsListComponent
                     }
                 ]
             },

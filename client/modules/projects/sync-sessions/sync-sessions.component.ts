@@ -1,11 +1,12 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.service';
-import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
-import {PipeConnectionService} from 'client/service/pipe-connection.service';
+import { MsSyncClientService } from 'client/service/microservices/ms-sync-client.service';
+import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
+import { PipeConnectionService } from 'client/service/pipe-connection.service';
 
-import {AuthService} from 'client/service/auth.service';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { AuthService } from 'client/service/auth.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ProjectPipe } from '../../../entities/entities';
 
 @Component({
     selector: 'sync-sessions',
@@ -17,7 +18,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class SyncSessionsComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
-                protected PipeConnectionService: PipeConnectionService,
+                protected PipeConnectionService: PipeConnectionService
     ) {
 
     }
@@ -26,13 +27,15 @@ export class SyncSessionsComponent implements OnInit {
 
     protected pipesListObj;
     protected project;
+    protected docPipes: ProjectPipe[] = [];
 
     ngOnInit() {
         this.project = this.PipeConnectionService.project;
         this.pipesListObj = this.PipeConnectionService.pipesListObj;
+        this.docPipes = this.PipeConnectionService.docPipes;
     }
 
-    orderByDate(list: [{created_at}]) { // todo move this to some common pipe filter
+    orderByDate(list: [{ created_at }]) { // todo move this to some common pipe filter
         return list.sort(function (b, a) {
             return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
         });

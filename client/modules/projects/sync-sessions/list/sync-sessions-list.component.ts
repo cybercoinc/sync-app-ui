@@ -1,15 +1,15 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 import 'rxjs/add/operator/filter';
 
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.service';
-import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
-import {PipeConnectionService} from 'client/service/pipe-connection.service';
-import {AuthService} from 'client/service/auth.service';
+import { MsSyncClientService } from 'client/service/microservices/ms-sync-client.service';
+import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
+import { PipeConnectionService } from 'client/service/pipe-connection.service';
+import { AuthService } from 'client/service/auth.service';
 
-import {SyncSession, ProjectPipe} from 'client/entities/entities';
+import { SyncSession, ProjectPipe } from 'client/entities/entities';
 
 @Component({
     selector: 'sync-sessions-list',
@@ -41,13 +41,26 @@ export class SyncSessionsListComponent implements OnInit {
             this.projectId = +params['project_id'];
         });
 
+        let pipeId;
+
+        // pipe_id is passed in case of document pipes
+        this.ActivatedRoute.params.forEach((params) => {
+            pipeId = +params['pipe_id'];
+        });
+
         this.sub = this.ActivatedRoute.params.subscribe(params => {
             this.pipeType = params['pipe_type'];
 
-            return this.MsProjectClientService.getPipesWhere({
+            let whereObj = {
                 type: this.pipeType,
                 project_fk_id: this.projectId
-            })
+            };
+
+            if (pipeId) {
+                whereObj['id'] = pipeId;
+            }
+
+            return this.MsProjectClientService.getPipesWhere(whereObj)
                 .then(pipesList => {
                     this.projectPipe = pipesList.shift();
 

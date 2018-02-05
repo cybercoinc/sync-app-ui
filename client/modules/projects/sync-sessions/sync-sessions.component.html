@@ -1,27 +1,40 @@
-
 <md-sidenav-container>
     <md-sidenav #sc_sidenav mode="side" opened="true" class="sc-sidenav">
         <md-toolbar>
             <span>{{project?.name}}</span>
 
-            <md-toolbar-row class="bottom-lined clickable-row after-separator" [routerLink]="['public_todos']" [routerLinkActive]="['is-active']">
+            <md-toolbar-row class="bottom-lined clickable-row after-separator" [routerLink]="['public_todos']"
+                            [routerLinkActive]="['is-active']">
                 <md-icon>event_available</md-icon>
                 <span>
-                    <span>Project Calendar Items</span><br />
+                    <span>Project Calendar Items</span><br/>
                 </span>
             </md-toolbar-row>
 
-            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['private_todos']" [routerLinkActive]="['is-active']">
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['private_todos']"
+                            [routerLinkActive]="['is-active']">
                 <md-icon>verified_user</md-icon>
                 <span>
-                    <span>Private Calendar Items</span><br />
+                    <span>Private Calendar Items</span><br/>
                 </span>
             </md-toolbar-row>
 
-            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['tasks']" [routerLinkActive]="['is-active']">
+            <md-toolbar-row class="bottom-lined clickable-row" [routerLink]="['tasks']"
+                            [routerLinkActive]="['is-active']">
                 <md-icon>event</md-icon>
                 <span>
-                    <span>Project Schedule</span><br />
+                    <span>Project Schedule</span><br/>
+                </span>
+            </md-toolbar-row>
+
+            <md-toolbar-row class="bottom-lined clickable-row"
+                            *ngFor="let docPipe of docPipes"
+                            [routerLink]="['document_pipe', docPipe.id]"
+                            [routerLinkActive]="['is-active']">
+                <md-icon>perm_media</md-icon>
+                <span>
+                    <span>Document Pipe</span><br/>
+                    <span style="font-size: 12px">{{ docPipe.name }}</span>
                 </span>
             </md-toolbar-row>
 
