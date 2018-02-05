@@ -95,6 +95,18 @@ export class IndexComponent implements OnInit {
         return status;
     }
 
+    getDocumentPipesStatus(projectPipesList): string {
+        let status = 'inactive';
+
+        projectPipesList.forEach((pipe: ProjectPipe) => {
+            if (pipe.status === 'active') {
+                status = pipe.status
+            }
+        });
+
+        return status;
+    }
+
     getPipeStatusById(projectPipesList, pipeId: number): string {
         let status = 'inactive';
 

@@ -200,6 +200,10 @@ settings .custom-users-dropdown {
     background-color: #10827B;
 }
 
+.pipe-dark {
+    color: #212121;
+}
+
 .pipe-active {
     color: #2A8039;
 }

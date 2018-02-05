@@ -60,6 +60,10 @@
                                 ><i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i></a>
                                 <i *ngIf="!getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')"
                                    class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
+
+                                <a (click)="projectRowExpand(projectRow)">
+                                    <i class="material-icons pipe-{{getDocumentPipesStatus(projectRow.projectPipesList)}}">perm_media</i>
+                                </a>
                             </div>
                         </div>
 
