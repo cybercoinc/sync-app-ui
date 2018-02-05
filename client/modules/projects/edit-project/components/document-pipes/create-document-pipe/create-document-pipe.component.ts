@@ -139,7 +139,7 @@ export class CreateDocumentPipeComponent implements OnInit {
                     sm_permalink: sheetToUse.permalink,
                     sm_sheet_name: sheetToUse.name,
                     project_id: project.id,
-                    name: this.pipesConnectionService.getPipeLabelByType('document_pipe'), // todo + ' ' + sheetToUse.name?,
+                    name: 'Document: ' + sheetToUse.name,
                     type: 'document_pipe',
                     use_schedule_chart: false
                 });
