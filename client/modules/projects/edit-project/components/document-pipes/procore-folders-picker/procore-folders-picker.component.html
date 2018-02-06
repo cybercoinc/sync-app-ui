@@ -2,17 +2,21 @@
     <div class="row">
         <div class="col-xs-12">
             <h5>Select Procore Folder</h5>
-            <ul class="col-xs-8 folders-picker-container">
-                <procore-folder-item *ngFor="let folder of folders"
-                                     [folder]="folder"
+
+
+            <div class="col-xs-8 folders-picker-container" *ngIf="rootFolder">
+                <procore-folder-item [folder]="rootFolder"
                                      [projectId]="projectId"></procore-folder-item>
-            </ul>
+            </div>
+
+
         </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-12">
-            <a [class.disabled]="foldersPickerService.selectedFolder === undefined" class="btn btn-primary">Select and continue</a>
+        <div class="col-xs-12 col-xs-offset-3">
+            <a [class.disabled]="foldersPickerService.selectedFolder === undefined" class="btn btn-primary">Select and
+                continue</a>
         </div>
     </div>
 

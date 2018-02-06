@@ -26,13 +26,13 @@ export interface ProcoreFolder {
 export class ProcoreFoldersPickerComponent implements OnInit {
     @Input() projectId: number;
 
-    folders: ProcoreFolder[] = [];
+    rootFolder: ProcoreFolder;
 
     constructor(protected projectsService: MsProjectClientService, protected foldersPickerService: FoldersPickerService) {
     }
 
     ngOnInit() {
         return this.projectsService.getProcoreProjectFolders(this.projectId)
-            .then(projectRootStructure => this.folders = projectRootStructure.folders);
+            .then(projectRootFolder => this.rootFolder = projectRootFolder);
     }
 }
