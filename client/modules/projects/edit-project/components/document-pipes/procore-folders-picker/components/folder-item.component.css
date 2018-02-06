@@ -1,0 +1,9 @@
+.toggle-folder {
+    cursor: pointer;
+    padding-right: 4px;
+}
+
+.name-container {
+    display: inline-flex;
+    vertical-align: middle;
+}

@@ -17,7 +17,6 @@ export interface ProcoreFolder {
     is_recycle_bin: boolean;
 }
 
-
 @Component({
     selector: 'procore-folders-picker',
     templateUrl: 'client/modules/projects/edit-project/components/document-pipes/procore-folders-picker/procore-folders-picker.component.html',
@@ -26,7 +25,7 @@ export interface ProcoreFolder {
 export class ProcoreFoldersPickerComponent implements OnInit {
     @Input() projectId: number;
 
-    folders: ProcoreFolder[];
+    folders: ProcoreFolder[] = [];
 
     constructor(protected projectsService: MsProjectClientService) {
     }
@@ -35,5 +34,4 @@ export class ProcoreFoldersPickerComponent implements OnInit {
         return this.projectsService.getProcoreProjectFolders(this.projectId)
             .then(projectRootStructure => this.folders = projectRootStructure.folders);
     }
-
 }

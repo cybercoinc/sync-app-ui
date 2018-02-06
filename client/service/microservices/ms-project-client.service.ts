@@ -677,7 +677,7 @@ export class MsProjectClientService extends MsClientService {
 
     getProcoreProjectFolder(procore_folder_id: number, project_id: number) {
         return this.makeMsCall(
-            'projects/procore-folders',
+            'projects/procore-folder',
             'GET',
             {procore_folder_id, project_id}
         );
