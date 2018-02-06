@@ -1,12 +1,12 @@
 <li>
-    <div class="name-container">
+    <div class="name-container" [class.selected]="foldersPickerService.selectedFolder?.id === folder.id" (click)="select()">
         <i class="material-icons toggle-folder" (click)="toggle()">{{ isOpened? 'folder_open' : 'folder'}}</i>
 
-        <div class="folder-name" (click)="selectFolder()">{{ folder.name }}</div>
+        <div class="folder-name">{{ folder.name }}</div>
     </div>
 
     <ul *ngIf="isOpened">
-        <procore-folder-item *ngFor="let nestedFolder of folder.folders; let i = index"
+        <procore-folder-item *ngFor="let nestedFolder of folder.folders"
                              [folder]="nestedFolder"
                              [projectId]="projectId"></procore-folder-item>
     </ul>

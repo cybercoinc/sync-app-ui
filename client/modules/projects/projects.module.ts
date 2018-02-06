@@ -59,6 +59,7 @@ import { CreateDocumentPipeComponent } from './edit-project/components/document-
 import { EditDocumentPipeComponent } from './edit-project/components/document-pipes/edit-document-pipe/edit-document-pipe.component';
 import { ProcoreFoldersPickerComponent } from './edit-project/components/document-pipes/procore-folders-picker/procore-folders-picker.component';
 import { FolderItemComponent } from './edit-project/components/document-pipes/procore-folders-picker/components/folder-item.component';
+import { FoldersPickerService } from './edit-project/components/document-pipes/procore-folders-picker/folders-picker.service';
 
 @NgModule({
     imports: [
@@ -70,7 +71,8 @@ import { FolderItemComponent } from './edit-project/components/document-pipes/pr
         routing
     ],
     providers: [
-        CanDeactivateChart
+        CanDeactivateChart,
+        FoldersPickerService
     ],
     exports: [],
     declarations: [

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProcoreFolder } from '../procore-folders-picker.component';
 import { MsProjectClientService } from '../../../../../../../service/microservices/ms-project-client.service';
+import { FoldersPickerService } from '../folders-picker.service';
 
 @Component({
     selector: 'procore-folder-item',
@@ -17,7 +18,9 @@ export class FolderItemComponent implements OnInit {
 
     protected isOpened: boolean = false;
 
-    constructor(protected projectsService: MsProjectClientService) {
+    @Input() selected: ProcoreFolder;
+
+    constructor(protected projectsService: MsProjectClientService, protected foldersPickerService: FoldersPickerService) {
     }
 
     ngOnInit() {
@@ -36,6 +39,10 @@ export class FolderItemComponent implements OnInit {
                     this.folder.folders = folderStructure.folders;
                 });
         }
+    }
+
+    select() {
+        this.foldersPickerService.selectedFolder = this.folder;
     }
 
 }

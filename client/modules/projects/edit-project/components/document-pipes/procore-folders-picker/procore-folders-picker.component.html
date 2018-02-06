@@ -1,12 +1,19 @@
 <md-card class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Select Procore Folder</h1>
-            <ul>
+        <div class="col-xs-12">
+            <h5>Select Procore Folder</h5>
+            <ul class="col-xs-8 folders-picker-container">
                 <procore-folder-item *ngFor="let folder of folders"
                                      [folder]="folder"
                                      [projectId]="projectId"></procore-folder-item>
             </ul>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a [class.disabled]="foldersPickerService.selectedFolder === undefined" class="btn btn-primary">Select and continue</a>
+        </div>
+    </div>
+
 </md-card>

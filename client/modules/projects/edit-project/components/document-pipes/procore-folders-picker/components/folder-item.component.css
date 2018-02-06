@@ -6,4 +6,13 @@
 .name-container {
     display: inline-flex;
     vertical-align: middle;
+    cursor: default;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 100%;
+}
+
+.name-container.selected {
+    background-color: #5383aa;
+    color: #f5fff6;
 }

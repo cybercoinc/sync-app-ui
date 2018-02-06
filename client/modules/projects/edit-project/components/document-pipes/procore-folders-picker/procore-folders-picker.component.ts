@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MsProjectClientService } from '../../../../../../service/microservices/ms-project-client.service';
+import { FoldersPickerService } from './folders-picker.service';
 
 export interface ProcoreFolder {
     id: number;
@@ -27,7 +28,7 @@ export class ProcoreFoldersPickerComponent implements OnInit {
 
     folders: ProcoreFolder[] = [];
 
-    constructor(protected projectsService: MsProjectClientService) {
+    constructor(protected projectsService: MsProjectClientService, protected foldersPickerService: FoldersPickerService) {
     }
 
     ngOnInit() {

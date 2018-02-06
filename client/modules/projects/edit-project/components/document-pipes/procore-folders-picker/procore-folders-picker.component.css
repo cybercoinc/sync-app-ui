@@ -1,3 +1,8 @@
 ul {
     list-style: none;
 }
+
+.folders-picker-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
