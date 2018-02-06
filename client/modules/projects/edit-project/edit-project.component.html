@@ -43,7 +43,7 @@
                 </span>
             </md-toolbar-row>
 
-            <md-toolbar-row *ngFor="let docPipe of PipeConnectionService.docPipes" class="bottom-lined"
+            <md-toolbar-row *ngFor="let docPipe of PipeConnectionService.docPipes" class="clickable-row bottom-lined"
                             [routerLink]="['edit-document-pipe', docPipe.id]" [routerLinkActive]="['is-active']">
                 <div class="pipe-status-indicator" [ngClass]="docPipe.status"></div>
                 <md-icon>perm_media</md-icon>
