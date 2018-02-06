@@ -169,7 +169,7 @@ settings .custom-users-dropdown {
 .mat-sidenav-container {
     position: fixed !important;
     height: 100%;
-    min-height: 100%;
+    /*min-height: 100%;*/
     width: 100%;
     min-width: 100%;
     color: #666666;
@@ -505,4 +505,9 @@ credit-card-dialog .mat-input-underline {
 
 credit-card-dialog md-select {
     padding: 0 !important;
+}
+
+.fix-sidenav-layout-row {
+    box-shadow: none !important;
+    border-bottom: none !important;
 }
