@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MsProjectClientService } from '../../../../../../service/microservices/ms-project-client.service';
 import { FoldersPickerService } from './folders-picker.service';
 
@@ -28,11 +28,28 @@ export class ProcoreFoldersPickerComponent implements OnInit {
 
     rootFolder: ProcoreFolder;
 
+    @Output() selectCanceled = new EventEmitter();
+    @Output() selectedFolderConfirmed = new EventEmitter();
+
     constructor(protected projectsService: MsProjectClientService, protected foldersPickerService: FoldersPickerService) {
     }
 
     ngOnInit() {
+        this.foldersPickerService.selectedFolder = undefined;
+
         return this.projectsService.getProcoreProjectFolders(this.projectId)
             .then(projectRootFolder => this.rootFolder = projectRootFolder);
+    }
+
+    cancel() {
+        this.selectCanceled.emit();
+    }
+
+    selectedFolderConfirm() {
+        if (this.foldersPickerService.selectedFolder === undefined) {
+            return;
+        }
+
+        return this.selectedFolderConfirmed.emit(this.foldersPickerService.selectedFolder);
     }
 }

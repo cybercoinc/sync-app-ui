@@ -12,8 +12,9 @@
 
     <div class="row">
         <div class="col-xs-12 col-xs-offset-4">
-            <a [class.disabled]="foldersPickerService.selectedFolder === undefined" class="btn btn-primary">Select and
-                continue</a>
+            <a [class.disabled]="foldersPickerService.selectedFolder === undefined" (click)="selectedFolderConfirm()"
+               class="btn btn-success">Create Document Pipe</a>
+            <a class="btn btn-default" (click)="cancel()">cancel</a>
         </div>
     </div>
 

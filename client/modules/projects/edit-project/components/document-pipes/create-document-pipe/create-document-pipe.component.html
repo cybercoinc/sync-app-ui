@@ -13,7 +13,7 @@
                             (click)="startChoosingExistingSheet()">Yes
                     </button>
                     <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
-                            (click)="createDocumentPipe()">No
+                            (click)="showProcoreFoldersPicker()">No
                     </button>
                 </div>
             </div>
@@ -57,13 +57,17 @@
                 </div>
 
                 <div class="col-xs-6 col-xs-offset-4">
-                    <a [class.disabled]="!selectedSheet" class="btn btn-success"
-                       (click)="createDocumentPipe(selectedSheet)">Select and continue</a>
-                    <a class="btn btn-default" (click)="cancel()">cancel</a>
+                    <a [class.disabled]="!selectedSheet || procoreFoldersPickersVisible" class="btn btn-success"
+                       (click)="showProcoreFoldersPicker()">Select and continue</a>
+                    <a class="btn btn-default" [class.disabled]="procoreFoldersPickersVisible"
+                       (click)="cancel()">cancel</a>
                 </div>
             </section>
         </div>
     </div>
 </md-card>
 
-<procore-folders-picker [projectId]="pipesConnectionService.project.id"></procore-folders-picker>
+<procore-folders-picker *ngIf="procoreFoldersPickersVisible"
+                        (selectCanceled)="hideProcoreFoldersPicker()"
+                        (selectedFolderConfirmed)="createDocumentPipe($event)"
+                        [projectId]="pipesConnectionService.project.id"></procore-folders-picker>

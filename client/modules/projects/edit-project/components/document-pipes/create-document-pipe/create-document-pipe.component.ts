@@ -7,6 +7,7 @@ import { AuthService } from '../../../../../../service/auth.service';
 import { MsProjectClientService } from '../../../../../../service/microservices/ms-project-client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigService } from '../../../../../../service/config.service';
+import { ProcoreFolder } from '../procore-folders-picker/procore-folders-picker.component';
 
 @Component({
     selector: 'create-document-pipe',
@@ -41,6 +42,16 @@ export class CreateDocumentPipeComponent implements OnInit {
     protected columnsMatchingIsVisible: boolean = false;
 
     protected haveExistingSheet: boolean;
+
+    protected procoreFoldersPickersVisible: boolean = false;
+
+    showProcoreFoldersPicker() {
+        this.procoreFoldersPickersVisible = true;
+    }
+
+    hideProcoreFoldersPicker() {
+        this.procoreFoldersPickersVisible = false;
+    }
 
     setExistingSheetParam(doHave: boolean) {
         this.haveExistingSheet = doHave;
@@ -105,7 +116,7 @@ export class CreateDocumentPipeComponent implements OnInit {
      * @todo workspace will not be used
      * @returns {any}
      */
-    createDocumentPipe(existingSheet?: SmartsheetSheet): boolean | Promise<boolean> {
+    createDocumentPipe(selectedProcoreFolder: ProcoreFolder): boolean | Promise<boolean> {
         if (this.PendingRequestsService.hasPendingRequest) {
             return false;
         }
@@ -120,7 +131,7 @@ export class CreateDocumentPipeComponent implements OnInit {
 
         let promises = [];
 
-        if (!existingSheet) {
+        if (!this.selectedSheet) {
             promises.push(
                 this.msProjectService.createSmartsheetSheetFromTemplateInSheetsFolder(
                     project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
@@ -131,7 +142,7 @@ export class CreateDocumentPipeComponent implements OnInit {
         return Promise.all(promises)
             .then(([sheetToUse]) => {
                 if (!sheetToUse) {
-                    sheetToUse = existingSheet;
+                    sheetToUse = this.selectedSheet;
                 }
 
                 return this.msProjectService.createPipe({
@@ -141,7 +152,8 @@ export class CreateDocumentPipeComponent implements OnInit {
                     project_id: project.id,
                     name: 'Document: ' + sheetToUse.name,
                     type: 'document_pipe',
-                    use_schedule_chart: false
+                    use_schedule_chart: false,
+                    procore_folder_id: selectedProcoreFolder.id
                 });
             })
             .then((pipeId) => {
