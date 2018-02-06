@@ -666,4 +666,20 @@ export class MsProjectClientService extends MsClientService {
             }
         );
     }
+
+    getProcoreProjectFolders(project_id: number) {
+        return this.makeMsCall(
+            'projects/procore-folders',
+            'GET',
+            {project_id}
+        );
+    }
+
+    getProcoreProjectFolder(procore_folder_id: number, project_id: number) {
+        return this.makeMsCall(
+            'projects/procore-folders',
+            'GET',
+            {procore_folder_id, project_id}
+        );
+    }
 }

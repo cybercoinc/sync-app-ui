@@ -57,6 +57,7 @@ import { ResourcesManagementComponent } from './edit-project/components/pipe-tas
 import { AddResourceDialog } from './edit-project/components/pipe-tasks/resources-management/add-resource.dialog';
 import { CreateDocumentPipeComponent } from './edit-project/components/document-pipes/create-document-pipe/create-document-pipe.component';
 import { EditDocumentPipeComponent } from './edit-project/components/document-pipes/edit-document-pipe/edit-document-pipe.component';
+import { ProcoreFoldersPickerComponent } from './edit-project/components/document-pipes/procore-folders-picker/procore-folders-picker.component';
 
 @NgModule({
     imports: [
@@ -123,7 +124,8 @@ import { EditDocumentPipeComponent } from './edit-project/components/document-pi
         AddResourceDialog,
 
         CreateDocumentPipeComponent,
-        EditDocumentPipeComponent
+        EditDocumentPipeComponent,
+        ProcoreFoldersPickerComponent
     ],
     entryComponents: [
         CreateBaselineDialog,

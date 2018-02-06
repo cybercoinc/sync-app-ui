@@ -1,0 +1,79 @@
+<md-card class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Select Procore Folder</h1>
+            <div class="css-treeview">
+                <ul>
+                    <li *ngFor="let folder of folders; let i = index">
+                        <input type="checkbox" id="item-{{ i }}" />
+                        <label for="item-{{ i }}">{{ folder.name }}</label>
+                    </li>
+
+
+
+
+                    <!--<li>-->
+                        <!--<input type="checkbox" id="item-0"/>-->
+                        <!--<label for="item-0">This Folder is Closed By Default</label>-->
+                        <!--<ul>-->
+                            <!--<li>-->
+                                <!--<input type="checkbox" id="item-0-0"/>-->
+                                <!--<label for="item-0-0">Ooops! A Nested Folder</label>-->
+                                <!--<ul>-->
+                                    <!--<li><input type="checkbox" id="item-0-0-0"/><label for="item-0-0-0">Look Ma - No-->
+                                        <!--Hands!</label>-->
+                                        <!--<ul>-->
+                                            <!--<li><a href="./">First Nested Item</a></li>-->
+                                            <!--<li><a href="./">Second Nested Item</a></li>-->
+                                            <!--<li><a href="./">Third Nested Item</a></li>-->
+                                            <!--<li><a href="./">Fourth Nested Item</a></li>-->
+                                        <!--</ul>-->
+                                    <!--</li>-->
+                                    <!--<li><a href="./">Item 1</a></li>-->
+                                    <!--<li><a href="./">Item 2</a></li>-->
+                                    <!--<li><a href="./">Item 3</a></li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+
+                            <!--<li>-->
+                                <!--<input type="checkbox" id="item-0-1"/>-->
+                                <!--<label for="item-0-1">Yet Another One</label>-->
+                                <!--<ul>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+
+                            <!--<li>-->
+                                <!--<input type="checkbox" id="item-0-2" disabled="disabled"/>-->
+                                <!--<label for="item-0-2">Disabled Nested Items</label>-->
+                                <!--<ul>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                    <!--<li><a href="./">item</a></li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li><a href="./">item</a></li>-->
+                            <!--<li><a href="./">item</a></li>-->
+                            <!--<li><a href="./">item</a></li>-->
+                            <!--<li><a href="./">item</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</md-card>
