@@ -169,14 +169,6 @@ export class SmartsheetConnectionComponent implements OnInit {
             .then(pipeId => {
                 _pipeId = pipeId;
 
-                // return this.PipeConnectionService.createNewOrGetExistingWorkspaceId(workspaceName); // todo enable to use WP
-            })
-            .then(workspaceId => {
-                // create new sheet inside workspace // todo enable to use WP
-                // return this.MsProjectClientService.createSmartsheetSheetFromTemplate(
-                //     project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
-                // );
-
                 return this.MsProjectClientService.createSmartsheetSheetFromTemplateInSheetsFolder(
                     project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
                 );
@@ -194,19 +186,17 @@ export class SmartsheetConnectionComponent implements OnInit {
                     return this.MsProjectClientService.addResourceColumnToSheet(_pipeId);
                 }
             })
-            .then(columnObj => {
-                // todo add resource column to matched
-                // matching columns
+            .then(() => {
                 return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
+            })
+            .then(() => {
+                return this.PipeConnectionService.enablePipe(_pipeId);
             })
             .then(() => {
                 this.PipeConnectionService.refreshPipesList();
 
                 return true;
-            })
-        // .then(() => {
-        //     return this.router.navigate(this.redirectRoute);
-        // });
+            });
     }
 
     showColumnsMatching() {
@@ -231,30 +221,11 @@ export class SmartsheetConnectionComponent implements OnInit {
             return false;
         }
 
-        let project = this.PipeConnectionService.project;
-
-        let procoreProjectName = project.name;
-        let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) : procoreProjectName;
-
         let _pipeId;
 
         return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
             .then(pipeId => {
                 _pipeId = pipeId;
-
-                // return this.PipeConnectionService.createNewOrGetExistingWorkspaceId(workspaceName);  //todo enable to use WP
-            })
-            .then(workspaceId => {
-                // move sheet to new workspace //todo enable to use WP
-                // return this.MsProjectClientService.moveSheetToWorkspace(this.selectedSheet.id, workspaceId);
-            })
-            .then(smSheetObj => {
-                // updating pipe //todo enable to use WP
-                // return this.MsProjectClientService.updatePipe(_pipeId, {
-                //     sm_sheet_id: smSheetObj.id,
-                //     sm_permalink: smSheetObj.permalink,
-                //     sm_sheet_name: smSheetObj.name
-                // });
 
                 return this.MsProjectClientService.updatePipe(_pipeId, {
                     sm_sheet_id: this.selectedSheet.id,
@@ -262,18 +233,17 @@ export class SmartsheetConnectionComponent implements OnInit {
                     sm_sheet_name: this.selectedSheet.name
                 });
             })
-            .then(pipeId => {
-                // matching columns
+            .then(() => {
                 return this.MsProjectClientService.saveMatchedColumns(_pipeId, columnsObj);
+            })
+            .then(() => {
+                return this.PipeConnectionService.enablePipe(_pipeId);
             })
             .then(() => {
                 this.PipeConnectionService.refreshPipesList();
 
                 return true;
-            })
-        // .then(() => {
-        //     return this.router.navigate(this.redirectRoute);
-        // });
+            });
     }
 
     showColumnsRematch() {
