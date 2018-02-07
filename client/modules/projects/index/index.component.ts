@@ -99,8 +99,8 @@ export class IndexComponent implements OnInit {
         let status = 'inactive';
 
         projectPipesList.forEach((pipe: ProjectPipe) => {
-            if (pipe.status === 'active') {
-                status = pipe.status
+            if (pipe.type === 'document_pipe' && pipe.status === 'active') {
+                status = pipe.status;
             }
         });
 
