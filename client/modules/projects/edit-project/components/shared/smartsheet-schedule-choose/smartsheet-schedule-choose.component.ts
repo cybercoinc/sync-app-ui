@@ -1,15 +1,15 @@
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
-import {PipeConnectionService} from 'client/service/pipe-connection.service';
-import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
-import {AuthService} from 'client/service/auth.service';
-import {NotificationsService} from "client/modules/notifications/notifications.service";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PipeConnectionService } from 'client/service/pipe-connection.service';
+import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
+import { AuthService } from 'client/service/auth.service';
+import { NotificationsService } from 'client/modules/notifications/notifications.service';
 
 @Component({
     selector: 'smartsheet-schedule-choose',
     templateUrl: 'client/modules/projects/edit-project/components/shared/smartsheet-schedule-choose/smartsheet-schedule-choose.component.html',
     styleUrls: [
-        // 'client/modules/projects/edit-project/components/shared/smartsheet-schedule-choose/smartsheet-schedule-choose.component.css'
-    ],
+        'client/modules/projects/edit-project/components/shared/smartsheet-schedule-choose/smartsheet-schedule-choose.component.css'
+    ]
 })
 export class SmartsheetScheduleChooseComponent implements OnInit {
 
@@ -19,32 +19,29 @@ export class SmartsheetScheduleChooseComponent implements OnInit {
                 protected AuthService: AuthService) {
     }
 
+    selectedTool: string = 'smartsheet';
+
     ngOnInit() {
     }
 
-    makeDecision(result) {
-        return this.decisionMade.emit(result);
-    }
-
-    protected useScheduleGantt() {
+    continueConnection(): any {
         if (this.componentIsBusy) {
             return;
         }
 
-        this.componentIsBusy = true;
+        if (this.selectedTool === 'gantt_chart') {
+            this.componentIsBusy = true;
 
-        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType, true)
-            .then(() => {
-                return this.PipeConnectionService.refreshPipesList();
-            })
-            .then(() => {
-                return this.makeDecision('gantt_chart');
-            });
-    }
-
-    protected doNotUseScheduleGantt() {
-        if (this.componentIsBusy) {
-            return;
+            return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType, true)
+                .then((pipeId) => {
+                    return this.PipeConnectionService.enablePipe(pipeId);
+                })
+                .then(() => {
+                    return this.PipeConnectionService.refreshPipesList();
+                })
+                .then(() => {
+                    return this.makeDecision('gantt_chart');
+                });
         }
 
         if (!this.AuthService.authUser.smartsheet_oauth) {
@@ -53,13 +50,18 @@ export class SmartsheetScheduleChooseComponent implements OnInit {
                 'Smartsheet connection required',
                 [
                     {label: 'Connect Smartsheet', route: ['/', 'connection']},
-                    {label: 'Cancel', route: ['/']},
+                    {label: 'Cancel', route: ['/']}
                 ]);
 
             return;
         }
 
         return this.makeDecision('smartsheet');
+    }
+
+
+    makeDecision(result) {
+        return this.decisionMade.emit(result);
     }
 
     protected componentIsBusy: boolean = false;

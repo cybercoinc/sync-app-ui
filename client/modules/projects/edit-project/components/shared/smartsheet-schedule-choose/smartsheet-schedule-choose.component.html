@@ -1,11 +1,24 @@
-<md-card class="row"
-         style="max-width: 800px; background-color: #FFF">
+<md-card class="row" style="max-width: 800px; background-color: #FFF">
     <div class="col-xs-12">
-        <h5>{{text}}</h5>
+        <h5>{{text}}
+
+            <md-select class="select-tool-dropdown" [(ngModel)]="selectedTool" name="selected_tool" placeholder="Select tool">
+                <md-option value="smartsheet">
+                    Smartsheet (recommended)
+                </md-option>
+                <md-option value="gantt_chart">
+                    Schedule Connector (basic)
+                </md-option>
+            </md-select>
+        </h5>
+
+        <br>
+
+        <!--<button class="btn btn-primary" [class.disabled]="componentIsBusy"  (click)="useScheduleGantt()">Gantt Chart</button>-->
+        <!--<button class="btn btn-primary" [class.disabled]="componentIsBusy"  (click)="doNotUseScheduleGantt()">Smartsheet</button>-->
     </div>
 
-    <div class="col-xs-6 col-xs-offset-4">
-        <button class="btn btn-primary" [class.disabled]="componentIsBusy"  (click)="useScheduleGantt()">Gantt Chart</button>
-        <button class="btn btn-primary" [class.disabled]="componentIsBusy"  (click)="doNotUseScheduleGantt()">Smartsheet</button>
+    <div class="col-xs-12 text-right">
+        <button class="btn btn-primary" [class.disabled]="false" (click)="continueConnection()">Continue</button>
     </div>
 </md-card>
