@@ -33,9 +33,9 @@ export class SmartsheetScheduleChooseComponent implements OnInit {
             this.componentIsBusy = true;
 
             return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType, true)
-                .then((pipeId) => {
-                    return this.PipeConnectionService.enablePipe(pipeId);
-                })
+                // .then((pipeId) => {
+                //     return this.PipeConnectionService.enablePipe(pipeId);
+                // })
                 .then(() => {
                     return this.PipeConnectionService.refreshPipesList();
                 })
