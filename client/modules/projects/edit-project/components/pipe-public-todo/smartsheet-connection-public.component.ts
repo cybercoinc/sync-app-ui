@@ -7,7 +7,7 @@ import { PipeConnectionService } from 'client/service/pipe-connection.service';
     selector: 'smartsheet-connection-public',
     template: `
         <smartsheet-schedule-choose *ngIf="useScheduleChartIsAsked" [pipe-type]="pipeType"
-                                    [text]="'Manage Project Calendar items with:'"
+                                    [text]="'Edit Procore\\'s Project Calendar items with:'"
                                     (decisionMade)="onSmartsheetScheduleDecisionMade($event)"></smartsheet-schedule-choose>
 
         <schedule-connection *ngIf="scheduleChartIsUsed && pipesListObj[pipeType]" pipe-type="{{pipeType}}"

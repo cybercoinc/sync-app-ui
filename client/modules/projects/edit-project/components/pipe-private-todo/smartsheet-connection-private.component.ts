@@ -8,7 +8,7 @@ import { Project } from '../../../../../entities/entities';
     selector: 'smartsheet-connection-private',
     template: `
         <smartsheet-schedule-choose *ngIf="useScheduleChartIsAsked" [pipe-type]="pipeType"
-                                    [text]="'Manage Private Calendar items with:'"
+                                    [text]="'Edit Procore\\'s Private Calendar items with:'"
                                     (decisionMade)="onSmartsheetScheduleDecisionMade($event)"></smartsheet-schedule-choose>
 
         <schedule-connection *ngIf="scheduleChartIsUsed && pipesListObj[pipeType]" pipe-type="{{pipeType}}"
