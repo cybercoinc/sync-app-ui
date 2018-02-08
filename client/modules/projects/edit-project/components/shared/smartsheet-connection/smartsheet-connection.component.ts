@@ -150,7 +150,7 @@ export class SmartsheetConnectionComponent implements OnInit {
      * @todo workspace will not be used
      * @returns {any}
      */
-    createNewSheetWithWorkspace(): boolean | Promise<boolean> {
+    createNewSheetWithWorkspace(): any | boolean | Promise<boolean> {
         if (this.PendingRequestsService.hasPendingRequest) {
             return false;
         }
@@ -165,23 +165,22 @@ export class SmartsheetConnectionComponent implements OnInit {
 
         let _pipeId;
 
-        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
+
+        return this.MsProjectClientService.createSmartsheetSheetFromTemplateInSheetsFolder(
+            project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
+        )
+            .then(createdSheetObj => {
+                return this.PipeConnectionService.createNewOrGetExistingPipe(
+                    this.pipeType,
+                    false, {
+                        sm_sheet_id: createdSheetObj.id,
+                        sm_permalink: createdSheetObj.permalink,
+                        sm_sheet_name: createdSheetObj.name
+                    })
+            })
             .then(pipeId => {
                 _pipeId = pipeId;
 
-                return this.MsProjectClientService.createSmartsheetSheetFromTemplateInSheetsFolder(
-                    project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
-                );
-            })
-            .then(createdSheetObj => {
-                // updating pipe
-                return this.MsProjectClientService.updatePipe(_pipeId, {
-                    sm_sheet_id: createdSheetObj.id,
-                    sm_permalink: createdSheetObj.permalink,
-                    sm_sheet_name: createdSheetObj.name
-                });
-            })
-            .then(() => {
                 if (this.pipeType === PIPE_TYPE_TASKS) {
                     return this.MsProjectClientService.addResourceColumnToSheet(_pipeId);
                 }
@@ -190,12 +189,7 @@ export class SmartsheetConnectionComponent implements OnInit {
                 return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
             })
             .then(() => {
-                return this.PipeConnectionService.enablePipe(_pipeId);
-            })
-            .then(() => {
-                this.PipeConnectionService.refreshPipesList();
-
-                return true;
+                return this.PipeConnectionService.refreshPipesList();
             });
     }
 
@@ -216,33 +210,28 @@ export class SmartsheetConnectionComponent implements OnInit {
             })
     }
 
-    onColumnsMatched(columnsObj): boolean | Promise<boolean> {
+    onColumnsMatched(columnsObj): boolean | Promise<any> {
         if (this.PendingRequestsService.hasPendingRequest) {
             return false;
         }
 
         let _pipeId;
 
-        return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
+        return this.PipeConnectionService.createNewOrGetExistingPipe(
+            this.pipeType,
+            false,
+            {
+                sm_sheet_id: this.selectedSheet.id,
+                sm_permalink: this.selectedSheet.permalink,
+                sm_sheet_name: this.selectedSheet.name
+            })
             .then(pipeId => {
                 _pipeId = pipeId;
 
-                return this.MsProjectClientService.updatePipe(_pipeId, {
-                    sm_sheet_id: this.selectedSheet.id,
-                    sm_permalink: this.selectedSheet.permalink,
-                    sm_sheet_name: this.selectedSheet.name
-                });
-            })
-            .then(() => {
                 return this.MsProjectClientService.saveMatchedColumns(_pipeId, columnsObj);
             })
             .then(() => {
-                return this.PipeConnectionService.enablePipe(_pipeId);
-            })
-            .then(() => {
-                this.PipeConnectionService.refreshPipesList();
-
-                return true;
+                return this.PipeConnectionService.refreshPipesList();
             });
     }
 
