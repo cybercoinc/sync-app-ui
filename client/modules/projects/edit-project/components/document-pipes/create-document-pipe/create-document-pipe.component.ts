@@ -161,9 +161,6 @@ export class CreateDocumentPipeComponent implements OnInit {
             .then((pipeId) => {
                 _pipeId = pipeId;
 
-                return this.pipesConnectionService.enablePipe(_pipeId);
-            })
-            .then(() => {
                 return this.pipesConnectionService.refreshPipesList();
             })
             .then(() => {

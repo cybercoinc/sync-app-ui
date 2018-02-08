@@ -190,7 +190,7 @@ export class PipeConnectionService implements Resolve<{}> {
                     return existingPipeObj.id;
                 } else {
                     return this.MsProjectClientService.createPipe(Object.assign(dataToSet, {
-                        procore_project_id: this.project.id,
+                        project_id: this.project.id,
                         type: pipeType,
                         name: this.getPipeLabelByType(pipeType),
                         use_schedule_chart: useScheduleChart
