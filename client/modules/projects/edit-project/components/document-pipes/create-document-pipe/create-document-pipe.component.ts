@@ -139,6 +139,8 @@ export class CreateDocumentPipeComponent implements OnInit {
             );
         }
 
+        let _pipeId;
+
         return Promise.all(promises)
             .then(([sheetToUse]) => {
                 if (!sheetToUse) {
@@ -157,18 +159,17 @@ export class CreateDocumentPipeComponent implements OnInit {
                 });
             })
             .then((pipeId) => {
-                return this.pipesConnectionService.refreshPipesList()
-                    .then(() => {
-                        return pipeId;
-                    });
+                _pipeId = pipeId;
+
+                return this.pipesConnectionService.refreshPipesList();
             })
-            .then((pipeId) => {
+            .then(() => {
                 return this.router.navigate([
                     'projects',
                     this.pipesConnectionService.project.id,
                     'edit-project',
                     'edit-document-pipe',
-                    pipeId
+                    _pipeId
                 ]);
             });
     }
