@@ -1,17 +1,17 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import {ProcoreProject} from 'client/entities/entities';
+import { ProcoreProject } from 'client/entities/entities';
 
-import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
-import {MsLicenseClientService} from "../../../service/microservices/ms-license-client.service";
+import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
+import { MsLicenseClientService } from '../../../service/microservices/ms-license-client.service';
 
-import {AuthService} from 'client/service/auth.service';
+import { AuthService } from 'client/service/auth.service';
 
 @Component({
-    selector: "create-project",
+    selector: 'create-project',
     templateUrl: 'client/modules/projects/create-project/create-project.component.html',
-    styleUrls: ['client/modules/projects/create-project/create-project.component.css'],
+    styleUrls: ['client/modules/projects/create-project/create-project.component.css']
 })
 export class CreateProjectComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
@@ -21,6 +21,8 @@ export class CreateProjectComponent implements OnInit {
     }
 
     public canConnectNewProjects = true;
+
+    public canUseQuickSetup: boolean = !!this.AuthService.authUser.smartsheet_oauth;
 
     ngOnInit() {
 
@@ -40,9 +42,9 @@ export class CreateProjectComponent implements OnInit {
             });
     }
 
-    protected procoreProjects: ProcoreProject[]|null = null;
+    protected procoreProjects: ProcoreProject[] | null = null;
     protected connectedProcoreProjectsIdsList: [number] = null;
-    protected selectedProject: ProcoreProject|null = null;
+    protected selectedProject: ProcoreProject | null = null;
 
     protected filterTimeout;
 
@@ -79,11 +81,11 @@ export class CreateProjectComponent implements OnInit {
         this.selectedProject = project;
     }
 
-    checkIfAlreadyConnected(procoreProject: ProcoreProject): boolean {
+    checkIfAlreadyConnected(procoreProject: ProcoreProject): boolean | Promise<any> {
         return this.connectedProcoreProjectsIdsList.indexOf(procoreProject.id) !== -1;
     }
 
-    createNewProject() {
+    createNewProject(quickSetupMode = false) {
         let data = {
             name: this.selectedProject.name,
             procore_company_id: this.selectedProject.company.id,
@@ -93,7 +95,7 @@ export class CreateProjectComponent implements OnInit {
 
         let _projectId;
 
-        this.MsProjectClientService.create(data)
+        return this.MsProjectClientService.create(data)
             .then(projectId => {
                 _projectId = projectId;
 
@@ -108,15 +110,25 @@ export class CreateProjectComponent implements OnInit {
                 ]);
             })
             .then((result) => {
-
                 if (!result[0]) { // license has status 'suspended'
                     return this.router.navigate(['projects']);
                 }
 
-                return this.MsProjectClientService.createProcoreProjectWebhook(_projectId)
+                let promises = [];
+
+                if (quickSetupMode) {
+                    promises.push(
+                        this.MsProjectClientService.quickSetupProject(_projectId)
+                    );
+                }
+
+                return Promise.all(promises)
+                    .then(() => {
+                        return this.MsProjectClientService.createProcoreProjectWebhook(_projectId);
+                    })
                     .then(() => {
                         return this.router.navigate(['projects', _projectId, 'edit-project', 'settings']);
                     });
             })
     }
-}
+} 

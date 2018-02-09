@@ -1,5 +1,5 @@
-import {MsClientService} from "./ms-client.service";
-import {Http} from '@angular/http';
+import { MsClientService } from './ms-client.service';
+import { Http } from '@angular/http';
 import {
     SmartsheetSheetColumn,
     ProcoreProject,
@@ -8,12 +8,12 @@ import {
     ProjectPipe,
     User, SmartsheetWorkspace, SmartsheetColumn
 } from 'client/entities/entities';
-import {PendingRequestsService} from "../pending-requests.service";
-import {Router} from "@angular/router";
-import {Inject} from "@angular/core";
-import {AuthService} from "../auth.service";
-import {ConfigService} from "../config.service";
-import {NotificationsService} from "../../modules/notifications/notifications.service";
+import { PendingRequestsService } from '../pending-requests.service';
+import { Router } from '@angular/router';
+import { Inject } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { ConfigService } from '../config.service';
+import { NotificationsService } from '../../modules/notifications/notifications.service';
 
 export class MsProjectClientService extends MsClientService {
 
@@ -22,8 +22,7 @@ export class MsProjectClientService extends MsClientService {
                 @Inject(Router) protected router: Router,
                 @Inject(AuthService) protected AuthService: AuthService,
                 @Inject(ConfigService) protected ConfigService: ConfigService,
-                @Inject(NotificationsService) protected NotificationsService: NotificationsService,
-    ) {
+                @Inject(NotificationsService) protected NotificationsService: NotificationsService) {
         super(Http, PendingRequestsService, router, AuthService, ConfigService, NotificationsService);
 
         this.msName = 'ms-project';
@@ -203,7 +202,7 @@ export class MsProjectClientService extends MsClientService {
             'pipes/find-where',
             'GET',
             {
-                id: pipeId,
+                id: pipeId
             }
         );
     }
@@ -241,7 +240,7 @@ export class MsProjectClientService extends MsClientService {
             'PUT',
             {
                 pipe_id: pipeId,
-                data: dataToSet,
+                data: dataToSet
             }
         );
     }
@@ -251,7 +250,7 @@ export class MsProjectClientService extends MsClientService {
             'pipes/enable',
             'PUT',
             {
-                pipe_id: pipeId,
+                pipe_id: pipeId
             }
         );
     }
@@ -261,7 +260,7 @@ export class MsProjectClientService extends MsClientService {
             'pipes/disable',
             'PUT',
             {
-                pipe_id: pipeId,
+                pipe_id: pipeId
             }
         );
     }
@@ -271,7 +270,7 @@ export class MsProjectClientService extends MsClientService {
             'pipes/delete-pipe',
             'DELETE',
             {
-                pipe_id: pipeId,
+                pipe_id: pipeId
             }
         );
     }
@@ -281,7 +280,7 @@ export class MsProjectClientService extends MsClientService {
             'delete-project',
             'DELETE',
             {
-                project_id: projectId,
+                project_id: projectId
             }
         );
     }
@@ -296,7 +295,7 @@ export class MsProjectClientService extends MsClientService {
             'pipes/create-pipe-webhook',
             'PUT',
             {
-                pipe_id: pipeId,
+                pipe_id: pipeId
             }
         );
     }
@@ -312,7 +311,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    createProcoreProjectWebhook(projectId: number): Promise<{id: number}> {
+    createProcoreProjectWebhook(projectId: number): Promise<{ id: number }> {
         return this.makeMsCall(
             'projects/create-procore-project-webhook',
             'POST',
@@ -496,7 +495,7 @@ export class MsProjectClientService extends MsClientService {
             {
                 project_id: projectId,
                 user_id: userId,
-                data: data,
+                data: data
             }
         );
     }
@@ -538,8 +537,8 @@ export class MsProjectClientService extends MsClientService {
             'POST',
             {
                 pipe_id: pipeId,
-                tasks:   tasks,
-                links:   links
+                tasks: tasks,
+                links: links
             }
         )
     }
@@ -645,7 +644,7 @@ export class MsProjectClientService extends MsClientService {
         return this.makeMsCall(
             'notification-policy/create',
             'POST',
-            data,
+            data
         );
     }
 
@@ -680,6 +679,14 @@ export class MsProjectClientService extends MsClientService {
             'projects/procore-folder',
             'GET',
             {procore_folder_id, project_id}
+        );
+    }
+
+    quickSetupProject(project_id: number) {
+        return this.makeMsCall(
+            'projects/quick-setup',
+            'POST',
+            {project_id}
         );
     }
 }
