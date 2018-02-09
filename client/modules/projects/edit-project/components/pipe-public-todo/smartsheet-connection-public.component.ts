@@ -10,7 +10,7 @@ import { PipeConnectionService } from 'client/service/pipe-connection.service';
                                     [text]="'Manage Project Calendar items with:'"
                                     (decisionMade)="onSmartsheetScheduleDecisionMade($event)"></smartsheet-schedule-choose>
 
-        <schedule-connection *ngIf="scheduleChartIsUsed && pipesListObj[pipeType]" pipe-type="{{pipeType}}"
+        <schedule-connection *ngIf="scheduleChartIsUsed" pipe-type="{{pipeType}}"
                              [redirect-route]="redirectRoute"></schedule-connection>
 
         <smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed" pipe-type="{{pipeType}}"
@@ -34,6 +34,7 @@ export class SmartsheetConnectionPublicComponent implements OnInit {
         this.project = this.PipeConnectionService.project;
 
         this.scheduleChartIsUsed = this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].use_schedule_chart;
+
         this.useScheduleChartIsAsked = !this.pipesListObj[this.pipeType];
     }
 

@@ -11,7 +11,7 @@ import { Project } from '../../../../../entities/entities';
                                     [text]="'Manage Private Calendar items with:'"
                                     (decisionMade)="onSmartsheetScheduleDecisionMade($event)"></smartsheet-schedule-choose>
 
-        <schedule-connection *ngIf="scheduleChartIsUsed && pipesListObj[pipeType]" pipe-type="{{pipeType}}"
+        <schedule-connection *ngIf="scheduleChartIsUsed" pipe-type="{{pipeType}}"
                              [redirect-route]="redirectRoute"></schedule-connection>
 
         <smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed" pipe-type="{{pipeType}}"
