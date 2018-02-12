@@ -40,22 +40,24 @@
                 </span>
 
                 <div class="row">
-                    <div class="col-xs-2">
-                        <a (click)="createNewProject()" class="btn btn-success full-width"
-                           [class.disabled]="!selectedProject || !canConnectNewProjects">Connect</a>
-                    </div>
                     <div class="col-xs-4">
                         <a (click)="createNewProject(true)" class="btn btn-danger full-width"
                            [class.disabled]="!selectedProject || !canConnectNewProjects || !canUseQuickSetup">Quick
                             Setup</a>
                     </div>
+
+                    <div class="col-xs-2">
+                        <a (click)="createNewProject()" class="btn btn-success full-width"
+                           [class.disabled]="!selectedProject || !canConnectNewProjects">Connect</a>
+                    </div>
+
                     <div class="col-xs-6 text-right">
                         <a [routerLink]="['/','projects']" class="btn btn-warning">cancel</a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4 col-xs-offset-2">
-                        <a *ngIf="!canUseQuickSetup" [routerLink]="['/', 'connection']">Connect a SmartSheet Account</a>
+                    <div class="col-xs-4 text-center">
+                        <a *ngIf="canUseQuickSetup" [routerLink]="['/', 'connection']">Connect a SmartSheet Account</a>
                     </div>
                 </div>
             </md-card-content>
