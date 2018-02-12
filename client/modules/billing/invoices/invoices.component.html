@@ -23,7 +23,7 @@
 </md-card>
 
 
-<md-card>
+<md-card *ngIf="invoices && invoices.length > 0">
     <md-card-content>
         <div *ngIf="!invoices">
             <h5>Loading...</h5>
@@ -33,7 +33,7 @@
             <!--<h5>No invoices found.</h5>-->
         <!--</div>-->
 
-        <div *ngIf="invoices && invoices.length > 0">
+        <div>
 
             History of invoices:
 
