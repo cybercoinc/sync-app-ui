@@ -40,18 +40,18 @@
                 </span>
 
                 <div class="row">
-                    <div class="col-xs-4">
-                        <a (click)="createNewProject(true)" class="btn btn-danger full-width"
+                    <div style="width: 130px; display: inline-block;">
+                        <a (click)="createNewProject(true)" class="btn btn-success full-width"
                            [class.disabled]="!selectedProject || !canConnectNewProjects || !canUseQuickSetup">Quick
                             Setup</a>
                     </div>
 
-                    <div class="col-xs-2">
+                    <div style="width: 100px; display: inline-block;">
                         <a (click)="createNewProject()" class="btn btn-success full-width"
                            [class.disabled]="!selectedProject || !canConnectNewProjects">Connect</a>
                     </div>
 
-                    <div class="col-xs-6 text-right">
+                    <div style="float: right; display: inline-block;">
                         <a [routerLink]="['/','projects']" class="btn btn-warning">cancel</a>
                     </div>
                 </div>
