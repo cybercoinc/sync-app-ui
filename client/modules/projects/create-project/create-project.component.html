@@ -57,7 +57,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-4 text-center">
-                        <a *ngIf="canUseQuickSetup" [routerLink]="['/', 'connection']">Connect a SmartSheet Account</a>
+                        <a *ngIf="!canUseQuickSetup" [routerLink]="['/', 'connection']">Connect a SmartSheet Account</a>
                     </div>
                 </div>
             </md-card-content>
