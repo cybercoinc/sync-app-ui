@@ -1,5 +1,5 @@
 
-<md-card *ngIf="newInvoices && newInvoices.length==0">
+<md-card *ngIf="newInvoices && newInvoices.length==0 && invoices && invoices.length == 0">
     <md-card-content>
         <div style="font-size: 20px;">
             No new invoices
@@ -29,9 +29,9 @@
             <h5>Loading...</h5>
         </div>
 
-        <div *ngIf="invoices && invoices.length == 0">
-            <h5>No invoices found.</h5>
-        </div>
+        <!--<div *ngIf="invoices && invoices.length == 0">-->
+            <!--<h5>No invoices found.</h5>-->
+        <!--</div>-->
 
         <div *ngIf="invoices && invoices.length > 0">
 
