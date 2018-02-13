@@ -16,7 +16,7 @@
                (click)="PipeConnectionService.enablePipe(PipeConnectionService.pipesListObj[pipeType]?.id)"
                [class.disabled]="!canEnablePipe"
                class="btn btn-success">start</a>
-            <div *ngIf="!canEnablePipe" style="font-weight: bold; color:#8b0305;">
+            <div *ngIf="canEnablePipe === false" style="font-weight: bold; color:#8b0305;">
                 Your company subscription is not active. You can't connect projects.
             </div>
 

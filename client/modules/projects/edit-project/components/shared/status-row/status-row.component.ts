@@ -13,7 +13,7 @@ import { AuthService } from 'client/service/auth.service';
 })
 export class StatusRowComponent implements OnInit {
 
-    public canEnablePipe = false;
+    public canEnablePipe = null;
 
     constructor(
         protected PipeConnectionService: PipeConnectionService,
