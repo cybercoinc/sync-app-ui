@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PipeConnectionService } from 'client/service/pipe-connection.service';
+import { MsLicenseClientService } from 'client/service/microservices/ms-license-client.service';
+import { AuthService } from 'client/service/auth.service';
 
 @Component({
     selector: 'status-row',
@@ -11,26 +13,46 @@ import { PipeConnectionService } from 'client/service/pipe-connection.service';
 })
 export class StatusRowComponent implements OnInit {
 
-    constructor(protected PipeConnectionService: PipeConnectionService) {
+    public canEnablePipe = false;
+
+    constructor(
+        protected PipeConnectionService: PipeConnectionService,
+        protected AuthService: AuthService,
+        protected MsLicenseClientService: MsLicenseClientService
+    ) {
+
     }
 
     ngOnInit() {
+        this.MsLicenseClientService.isCompanyCanCreateProjects(this.AuthService.company.id)
+            .then(response => {
+                if (response
+                    && this.PipeConnectionService.pipesListObj[this.pipeType]
+                    &&
+                    (this.PipeConnectionService.pipesListObj[this.pipeType].sm_sheet_id
+                        || this.PipeConnectionService.pipesListObj[this.pipeType].use_schedule_chart
+                    )
+                ) {
+                    this.canEnablePipe = true;
+                }
+
+            });
     }
 
-    canEnablePipe() {
-        let can = false;
-
-        if (this.PipeConnectionService.pipesListObj[this.pipeType]
-            &&
-            (this.PipeConnectionService.pipesListObj[this.pipeType].sm_sheet_id
-                || this.PipeConnectionService.pipesListObj[this.pipeType].use_schedule_chart
-            )
-        ) {
-            can = true;
-        }
-
-        return can;
-    }
+    // canEnablePipe() {
+    //     let can = false;
+    //
+    //     if (this.PipeConnectionService.pipesListObj[this.pipeType]
+    //         &&
+    //         (this.PipeConnectionService.pipesListObj[this.pipeType].sm_sheet_id
+    //             || this.PipeConnectionService.pipesListObj[this.pipeType].use_schedule_chart
+    //         )
+    //     ) {
+    //         can = true;
+    //     }
+    //
+    //     return can;
+    // }
 
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks' | 'document_pipe';
 }
