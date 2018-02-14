@@ -134,7 +134,7 @@ export class CreateDocumentPipeComponent implements OnInit {
         if (!this.selectedSheet) {
             promises.push(
                 this.msProjectService.createSmartsheetSheetFromTemplateInSheetsFolder(
-                    project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
+                    project.id, this.ConfigService.getConfig('SM_DOCUMENT_TEMPLATE_ID'), newSheetName
                 )
             );
         }
