@@ -91,14 +91,13 @@
                                     <div class="connections-container">
                                         <h5>Connections:</h5>
 
-                                        <div class="row connection-row">
+                                        <div class="row connection-row" *ngIf="isPipeExist(projectRow, 'public_todos')">
                                             <div class="col-sm-4 col-lg-3 vertical-aligned">
                                                 <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'public_todos')}}">event_available</i>
                                                 Project Calendar Items
                                             </div>
 
-                                            <div class="col-sm-8 col-lg-9"
-                                                 *ngIf="isPipeExist(projectRow, 'public_todos')">
+                                            <div class="col-sm-8 col-lg-9">
                                                 <a *ngIf="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'public_todos')"
                                                    target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
@@ -113,14 +112,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="row connection-row">
+                                        <div class="row connection-row" *ngIf="isPipeExist(projectRow, 'private_todos')">
                                             <div class="col-sm-4 col-lg-3 vertical-aligned">
                                                 <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'private_todos')}}">verified_user</i>
                                                 Private Calendar Items
                                             </div>
 
-                                            <div class="col-sm-8 col-lg-9"
-                                                 *ngIf="isPipeExist(projectRow, 'private_todos')">
+                                            <div class="col-sm-8 col-lg-9">
                                                 <a *ngIf="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
                                                    target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
@@ -135,13 +133,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="row connection-row">
+                                        <div class="row connection-row" *ngIf="isPipeExist(projectRow, 'tasks')">
                                             <div class="col-sm-4 col-lg-3 vertical-aligned">
                                                 <i class="material-icons pipe-{{getPipeStatus(projectRow.projectPipesList, 'tasks')}}">event</i>
                                                 Project Schedule
                                             </div>
 
-                                            <div class="col-sm-8 col-lg-9" *ngIf="isPipeExist(projectRow, 'tasks')">
+                                            <div class="col-sm-8 col-lg-9">
                                                 <a *ngIf="'smartsheet'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
                                                    target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
