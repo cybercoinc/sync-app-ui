@@ -4,8 +4,8 @@ import {AuthService} from "client/service/auth.service";
 import {NotificationsService} from "client/modules/notifications/notifications.service";
 import {MsLicenseClientService} from 'client/service/microservices/ms-license-client.service';
 import {MsUserClientService} from "client/service/microservices/ms-user-client.service";
-import {CreditCard} from "./credit-card";
-import {CreditCardDialog} from "./credit-card-dialog/credit-card.dialog";
+// import {CreditCard} from "./credit-card";
+// import {CreditCardDialog} from "./credit-card-dialog/credit-card.dialog";
 import {MdSnackBar} from "@angular/material";
 
 @Component({
@@ -14,7 +14,7 @@ import {MdSnackBar} from "@angular/material";
     styleUrls: ['client/modules/billing/info/info.component.css'],
 })
 export class InfoComponent implements OnInit {
-    creditCard: CreditCard = new CreditCard();
+    // creditCard: CreditCard = new CreditCard();
     mySubsciptions: any;
     currentUser: any;
     companyInfo: any;
@@ -32,17 +32,17 @@ export class InfoComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.msLicenseClientService.getCreditCard(this.authService.authUser.id, this.authService.company.id).then(response => {
-            if (Object.keys(response).length > 0) {
-                this.creditCard = new CreditCard({
-                    id:               response.id,
-                    maskedCardNumber: response.credit_card.masked_number,
-                    customerId:       response.customer_id,
-                    expMonth:         response.credit_card.expiration_month,
-                    expYear:          response.credit_card.expiration_year
-                });
-            }
-        });
+        // this.msLicenseClientService.getCreditCard(this.authService.authUser.id, this.authService.company.id).then(response => {
+        //     if (Object.keys(response).length > 0) {
+        //         this.creditCard = new CreditCard({
+        //             id:               response.id,
+        //             maskedCardNumber: response.credit_card.masked_number,
+        //             customerId:       response.customer_id,
+        //             expMonth:         response.credit_card.expiration_month,
+        //             expYear:          response.credit_card.expiration_year
+        //         });
+        //     }
+        // });
         this.loadSubscriptions();
         this.loadCompanyInfo();
     }
@@ -62,22 +62,22 @@ export class InfoComponent implements OnInit {
             });
     }
 
-    open() {
-        let dialogRef = this.dialog.open(CreditCardDialog);
+    // open() {
+    //     let dialogRef = this.dialog.open(CreditCardDialog);
+    //
+    //     dialogRef.componentInstance.creditCard = this.creditCard;
+    //     dialogRef.afterClosed().subscribe(result => {
+    //         if (result) {
+    //             this.creditCard = result;
+    //         }
+    //     });
+    // }
 
-        dialogRef.componentInstance.creditCard = this.creditCard;
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.creditCard = result;
-            }
-        });
-    }
-
-    clearCard() {
-        this.msLicenseClientService.removeCard(this.creditCard.id).then(response => {
-            this.creditCard = new CreditCard();
-        });
-    }
+    // clearCard() {
+    //     this.msLicenseClientService.removeCard(this.creditCard.id).then(response => {
+    //         this.creditCard = new CreditCard();
+    //     });
+    // }
 
     hasPrimaryPermission() {
 
