@@ -215,20 +215,15 @@ export class SmartsheetConnectionComponent implements OnInit {
             return false;
         }
 
-        let _pipeId;
-
         return this.PipeConnectionService.createNewOrGetExistingPipe(
             this.pipeType,
             false,
             {
                 sm_sheet_id: this.selectedSheet.id,
                 sm_permalink: this.selectedSheet.permalink,
-                sm_sheet_name: this.selectedSheet.name
-            })
-            .then(pipeId => {
-                _pipeId = pipeId;
-
-                return this.MsProjectClientService.saveMatchedColumns(_pipeId, columnsObj);
+                sm_sheet_name: this.selectedSheet.name,
+                sm_sheet_columns: columnsObj,
+                need_to_match_sm_columns: false
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
