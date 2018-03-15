@@ -118,7 +118,10 @@ export class CreateProjectComponent implements OnInit {
 
                 if (quickSetupMode) {
                     promises.push(
-                        this.MsProjectClientService.quickSetupProject(_projectId)
+                        this.MsProjectClientService.syncAssignees(_projectId)
+                            .then(() => {
+                                return this.MsProjectClientService.quickSetupProject(_projectId)
+                            })
                     );
                 }
 
