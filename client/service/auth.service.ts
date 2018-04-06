@@ -36,7 +36,7 @@ export class AuthService {
                     this.userInCompany = authUserResponse.user_in_company;
                     this.company = authUserResponse.company;
 
-                    if (this.userInCompany.has_billing_permission) {
+                    if (this.userInCompany && this.userInCompany.has_billing_permission) {
                         return this.getCompanyBillingStatus(this.company.id)
                             .then((result) => {
                                 this.companyBillingStatus = result;
