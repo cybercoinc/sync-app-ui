@@ -26,9 +26,9 @@ export class CreateProjectComponent implements OnInit {
 
     ngOnInit() {
 
-        this.MsLicenseClientService.isCompanyCanCreateProjects(this.AuthService.company.id)
+        this.MsLicenseClientService.getCompanyBillingStatus(this.AuthService.company.id)
             .then(response => {
-                this.canConnectNewProjects = response;
+                this.canConnectNewProjects = response.is_subscription_active;
             });
 
         this.MsProjectClientService.getConnectedProcoreProjectsIds()

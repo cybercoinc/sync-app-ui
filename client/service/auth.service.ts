@@ -15,6 +15,7 @@ export class AuthService {
     authTokenId: number = null;
     company: Company = null;
     userInCompany: any;
+    companyBillingStatus: any = null;
 
     getAuthUser(): Promise<User> {
         return new Promise((resolve, reject) => {
@@ -35,7 +36,16 @@ export class AuthService {
                     this.userInCompany = authUserResponse.user_in_company;
                     this.company = authUserResponse.company;
 
-                    return resolve(this.authUser);
+                    if (this.userInCompany.has_billing_permission) {
+                        return this.getCompanyBillingStatus(this.company.id)
+                            .then((result) => {
+                                this.companyBillingStatus = result;
+
+                                return resolve(this.authUser);
+                            });
+                    } else {
+                        return resolve(this.authUser);
+                    }
                 })
                 .catch(err => reject(err));
         });
@@ -57,6 +67,30 @@ export class AuthService {
         });
 
         return this.Http.request(this.ConfigService.getServiceUrl('ms-user') + 'me', requestOptions)
+            .toPromise()
+            .then(response => {
+                let resObj = response.json();
+
+                return resObj.result;
+            });
+    }
+
+    getCompanyBillingStatus(companyId) {
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'auth-token-id': this.authTokenId
+        });
+
+        let params = new URLSearchParams();
+        params.set('company_id', companyId);
+
+        let requestOptions = new RequestOptions({
+            headers: headers,
+            method: 'GET',
+            search: params ? params : null
+        });
+
+        return this.Http.request(this.ConfigService.getServiceUrl('ms-license') + 'billing/company-billing-status', requestOptions)
             .toPromise()
             .then(response => {
                 let resObj = response.json();

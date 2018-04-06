@@ -24,9 +24,9 @@ export class StatusRowComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.MsLicenseClientService.isCompanyCanCreateProjects(this.AuthService.company.id)
+        this.MsLicenseClientService.getCompanyBillingStatus(this.AuthService.company.id)
             .then(response => {
-                if (response
+                if (response.is_subscription_active
                     && this.PipeConnectionService.pipesListObj[this.pipeType]
                     &&
                     (this.PipeConnectionService.pipesListObj[this.pipeType].sm_sheet_id

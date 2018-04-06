@@ -11,6 +11,13 @@
             </span>
         </div>
 
+        <div class="trial-notification" *ngIf="isShowTrialNotification && AuthService.companyBillingStatus?.is_trial_notification_needed">
+            <a class="link" [routerLink]="['/billing/info']">
+                There are {{AuthService.companyBillingStatus?.trial_remaining_days}} days left in your trial, to avoid cancellation please provide a payment method here
+            </a>.
+            &nbsp;&nbsp;<a class="dismiss-link" href="javascript:void(0);" (click)="dismissTrialNotifications()">Dismiss</a>
+        </div>
+
         <usermenu *ngIf="AuthService.authUser" [user]="AuthService.authUser" [company]="AuthService.company" [userInCompany]="AuthService.userInCompany"></usermenu>
     </div>
     <loader-progress-bar [is-visible]="PendingRequestsService.hasPendingRequest"></loader-progress-bar>

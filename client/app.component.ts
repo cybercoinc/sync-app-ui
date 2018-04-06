@@ -10,10 +10,16 @@ import {AuthService} from "./service/auth.service";
 export class AppComponent {
     appName: string = 'Schedule Connector';
 
+    public isShowTrialNotification = true;
+
     constructor(protected AuthService: AuthService, protected PendingRequestsService: PendingRequestsService) {
 
     }
 
     ngOnInit() {
+    }
+
+    dismissTrialNotifications () {
+        this.isShowTrialNotification = false;
     }
 }
