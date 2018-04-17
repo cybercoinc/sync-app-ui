@@ -142,16 +142,16 @@ export class CompanyComponent implements OnInit {
 
     setPrimaryBillingUser(billing_user) {
 
-        this.msUserClientService.updatePbr(this.company.id, billing_user.id).then(() => {
+        this.msLicenseClientService.updatePrimaryContact(this.company.id, billing_user.id)
+            .then(() => {
+                this.msUserClientService.updatePbr(this.company.id, billing_user.id).then(() => {
 
-            this.snackBar.open('Saved', 'Close', {
-                duration: 2000,
-                extraClasses: ['alert-success']
+                    this.snackBar.open('Saved', 'Close', {
+                        duration: 2000,
+                        extraClasses: ['alert-success']
+                    });
+                    this.isBillingUser = (this.AuthService.authUser.id == billing_user.id);
+                });
             });
-            this.isBillingUser = (this.AuthService.authUser.id == billing_user.id);
-
-            this.msLicenseClientService.updatePrimaryContact(this.company.id, billing_user.id);
-        });
-
     }
 }
