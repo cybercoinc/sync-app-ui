@@ -174,10 +174,11 @@ export class InfoComponent implements OnInit {
                     return ;
                 }
 
-                if (!/^[0-9a-zA-Z\.\+]+@[0-9a-zA-Z\.]+$/.test(emailToAdd) ) {
+                if (!/^[0-9a-zA-Z\-\.\+]+@[0-9a-zA-Z\-\.]+$/.test(emailToAdd) ) {
                     this.notificationService.addError('Wrong email format.');
                     return ;
                 }
+                emailToAdd = emailToAdd.toLowerCase();
 
                 if (this.isAlreadyWatching(subscription, emailToAdd)) {
                     this.notificationService.addError('This user already in watchers list.');
