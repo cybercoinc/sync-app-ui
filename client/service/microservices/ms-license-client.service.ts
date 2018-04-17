@@ -196,6 +196,14 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
+    updatePrimaryContact(companyId, userId): Promise<any> {
+        return this.makeMsCall(
+            'billing/'+companyId+'/billing-users/'+userId+'/set-primary',
+            'PUT',
+            null
+        );
+    }
+
     watchSubscription(companyId, subscriptionId, emailToAdd): Promise<any> {
         return this.makeMsCall(
             'billing/'+companyId+'/watch-subscription',

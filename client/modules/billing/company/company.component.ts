@@ -27,7 +27,7 @@ export class CompanyComponent implements OnInit {
     isEditMode: boolean = false;
     me: User = null;
 
-    constructor(protected MsUserClientService: MsUserClientService,
+    constructor(protected msUserClientService: MsUserClientService,
                 protected msLicenseClientService: MsLicenseClientService,
                 protected AuthService:         AuthService,
                 protected snackBar:        MdSnackBar
@@ -64,7 +64,7 @@ export class CompanyComponent implements OnInit {
     }
 
     saveUser(){
-        this.MsUserClientService.updatePbr(this.company.id, this.currentPBRUser.key).then(() => {
+        this.msUserClientService.updatePbr(this.company.id, this.currentPBRUser.key).then(() => {
             this.isEditMode = false;
             this.currentPBRUser = this.currentPBRUser.value;
 
@@ -73,7 +73,7 @@ export class CompanyComponent implements OnInit {
     }
 
     saveExtraBillingReceivers() {
-        this.MsUserClientService.updateExtraBillingReceivers(this.company.id, this.extraBillingReceivers)
+        this.msUserClientService.updateExtraBillingReceivers(this.company.id, this.extraBillingReceivers)
             .then(() => {
                 this.snackBar.open('Saved', 'Close', {
                     duration: 2000,
@@ -91,7 +91,7 @@ export class CompanyComponent implements OnInit {
     }
 
     getSettings() {
-        return this.MsUserClientService.getCompany(this.AuthService.company.id)
+        return this.msUserClientService.getCompany(this.AuthService.company.id)
             .then(company => {
                 this.company = company;
                 if (company.pbr) {
@@ -101,7 +101,7 @@ export class CompanyComponent implements OnInit {
                 }
 
                 if (company) {
-                    this.MsUserClientService.getCompanyUsers(company.id).then(usersList => {
+                    this.msUserClientService.getCompanyUsers(company.id).then(usersList => {
                         this.usersList = usersList;
 
                         usersList.forEach(user => {
@@ -142,13 +142,15 @@ export class CompanyComponent implements OnInit {
 
     setPrimaryBillingUser(billing_user) {
 
-        this.MsUserClientService.updatePbr(this.company.id, billing_user.id).then(() => {
+        this.msUserClientService.updatePbr(this.company.id, billing_user.id).then(() => {
 
             this.snackBar.open('Saved', 'Close', {
                 duration: 2000,
                 extraClasses: ['alert-success']
             });
             this.isBillingUser = (this.AuthService.authUser.id == billing_user.id);
+
+            this.msLicenseClientService.updatePrimaryContact(this.company.id, billing_user.id);
         });
 
     }
