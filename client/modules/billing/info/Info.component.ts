@@ -154,7 +154,7 @@ export class InfoComponent implements OnInit {
         this.msLicenseClientService.stopWatchSubscription(this.authService.company.id, subscription.subscription_id, email)
             .then(response => {
 
-                this.snackBar.open('Watching stopped', 'Close', {
+                this.snackBar.open(response.message, 'Close', {
                     duration: 2000,
                     extraClasses: ['alert-success']
                 });
