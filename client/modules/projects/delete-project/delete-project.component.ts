@@ -25,9 +25,12 @@ export class DeleteProjectComponent implements OnInit {
     protected projectId: number;
 
     deleteProject() {
-        this.MsProjectClientService.deleteProject(this.projectId)
+        return this.MsProjectClientService.removeProcoreProjectWebhook(this.projectId)
+            .then(() => {
+                return this.MsProjectClientService.deleteProject(this.projectId)
+            })
             .then(() => {
                 return this.router.navigate(['projects']);
-            })
+            });
     }
 }
