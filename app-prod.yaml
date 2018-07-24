@@ -1,18 +1,8 @@
 service: ms-app-ui
-runtime: nodejs
-env: flex
+runtime: nodejs8
 
-resources:
-  cpu: .5
-  memory_gb: .6
+instance_class: F1
 
 env_variables:
   NODE_ENV: prod
-
-skip_files:
-  - ^(.*/)?#.*#$
-  - ^(.*/)?.*~$
-  - ^(.*/)?.*\.py[co]$
-  - ^(.*/)?.*/RCS/.*$
-  - ^(.*/)?\..*$
-  - ^(.*/)?node_modules/.*$
+  GCLOUD_PROJECT: scheduleconnector-prod
