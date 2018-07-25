@@ -3,6 +3,9 @@ runtime: nodejs8
 
 instance_class: F1
 
+automatic_scaling:
+  min_instances: 1
+
 env_variables:
   NODE_ENV: prod
   GCLOUD_PROJECT: scheduleconnector-prod
