@@ -101,6 +101,15 @@ app.get('/_ah/health', function (req, res, next) {
     return res.json(response);
 });
 
+app.get('/_ah/warmup', function (req, res, next) {
+    let response = {
+        status: "Ok",
+        message: "Warmup is done"
+    };
+
+    return res.json(response);
+});
+
 // catch 404 and forward to error handler
 app.use(function (req: express.Request, res: express.Response, next) {
     res.status(404).json({message: 'Not Found'});

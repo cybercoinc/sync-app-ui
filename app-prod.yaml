@@ -6,6 +6,9 @@ instance_class: F1
 automatic_scaling:
   min_instances: 1
 
+inbound_services:
+- warmup
+
 env_variables:
   NODE_ENV: prod
   GCLOUD_PROJECT: scheduleconnector-prod
