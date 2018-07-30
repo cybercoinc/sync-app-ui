@@ -3,8 +3,8 @@ runtime: nodejs8
 
 instance_class: F1
 
-automatic_scaling:
-  min_instances: 1
+#automatic_scaling:
+#  min_instances: 1
 
 inbound_services:
 - warmup
