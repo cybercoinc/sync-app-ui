@@ -1,7 +1,7 @@
 service: ms-app-ui
 runtime: nodejs8
 
-instance_class: F1
+instance_class: B1
 
 #automatic_scaling:
 #  min_instances: 1
