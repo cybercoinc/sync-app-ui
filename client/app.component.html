@@ -26,5 +26,8 @@
 <notifications></notifications>
 
 <div class="outer-outlet">
+    <div *ngIf="!AuthService.authUser" class="load-container">
+        <div class="loader">Loading...</div>
+    </div>
     <router-outlet></router-outlet>
 </div>
