@@ -71,6 +71,16 @@ export class MsUserClientService extends MsClientService {
         });
     }
 
+    /**
+     * Remove microsoft auth
+     * @param userId
+     */
+    removeMicrosoftAuth(userId) {
+        return this.makeMsCall('auth/remove/microsoft', 'DELETE', {
+            user_id: userId
+        });
+    }
+
     logout() {
         return this.makeMsCall('auth/user-logout', 'POST')
             .then(() => {
@@ -84,6 +94,10 @@ export class MsUserClientService extends MsClientService {
 
     getSmartsheetAuthLink() {
         return this.ConfigService.getServiceUrl(this.msName) + 'auth/smartsheet';
+    }
+
+    getMicrosoftAuthLink() {
+        return this.ConfigService.getServiceUrl(this.msName) + 'auth/microsoft';
     }
 
     getPbrProjects(userId): Promise<any> {

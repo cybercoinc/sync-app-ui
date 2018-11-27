@@ -28,6 +28,20 @@ export class ConnectionComponent implements OnInit {
         return this.MsUserClientService.getSmartsheetAuthLink();
     }
 
+    getMicrosoftAuthLink() {
+        return this.MsUserClientService.getMicrosoftAuthLink();
+    }
+
+    /**
+     * Remove microsoft auth
+     */
+    removeMicrosoftAuth() {
+        return this.MsUserClientService.removeMicrosoftAuth(this.AuthService.authUser.id)
+            .then(() => {
+                this.me.microsoft_oauth = null;
+            });
+    }
+
     removeSmartsheetAuth() {
         return this.MsUserClientService.removeSmartsheetAuth(this.AuthService.authUser.id)
             .then(() => {

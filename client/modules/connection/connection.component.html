@@ -61,6 +61,62 @@
                         </a>
                     </div>
                 </md-card>
+
+                <md-card [ngClass]="{'no-connection': !me.microsoft_oauth}">
+                    <div class="connection-app-info">
+                        <div class="connection-app-overview">
+                            <h4>Microsoft Project Online</h4>
+                            ScheduleConnector fetch data from Microsoft Project Online due synchronization process.
+                        </div>
+                        <div class="connection-app-logo">
+                            <img class="img-responsive" src="/assets/img/microsoft-project.png" />
+                        </div>
+                    </div>
+
+                    <div *ngIf="me.microsoft_oauth" style="clear:both;">
+                        <hr />
+                        <span style="font-weight: bold; color: #3d8b40;">Already Connected</span>
+                        via
+                        <span style="font-weight: bold;">{{me.microsoft_oauth.account_email}}</span>
+                        <a class="btn btn-warning pull-right" (click)="removeMicrosoftAuth()">Disable Connection</a>
+                    </div>
+                    <div *ngIf="!me.microsoft_oauth" style="clear:both;">
+                        <hr />
+                        <span style="font-weight: bold; color: #8b0305;">Not Connected</span>
+
+                        <a class="btn btn-primary pull-right" href="{{getMicrosoftAuthLink()}}">
+                            Get Microsoft connection
+                        </a>
+                    </div>
+                </md-card>
+
+                <md-card>
+                    <div class="connection-app-info">
+                        <div class="connection-app-overview">
+                            <h4>Microsoft Project Desktop</h4>
+                            ScheduleConnector fetch data from Microsoft Project Desktop due synchronization process.
+                        </div>
+                        <div class="connection-app-logo">
+                            <img class="img-responsive" src="/assets/img/microsoft-project-desktop.png" />
+                        </div>
+                    </div>
+
+                    <div *ngIf="me.microsoft_oauth_desktop" style="clear:both;">
+                        <hr />
+                        <span style="font-weight: bold; color: #3d8b40;"></span>
+                        via
+                        <span style="font-weight: bold;">{{me.microsoft_oauth.account_email}}</span>
+                        <a class="btn btn-warning pull-right"></a>
+                    </div>
+                    <div *ngIf="!me.microsoft_oauth_desktop" style="clear:both;">
+                        <hr />
+                        <span style="font-weight: bold; color: #8b0305;">Not Connected</span>
+
+                        <a class="btn btn-info pull-right">
+                            Will be soon
+                        </a>
+                    </div>
+                </md-card>
             </div>
         </div>
 

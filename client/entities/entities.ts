@@ -25,7 +25,18 @@ export class User {
         token_type: string;
         created_at: number;
         account_email: string
-    }
+    };
+    microsoft_oauth: {
+        expires_on: string,
+        resource: string,
+        token_type: string,
+        account_email: string,
+        refresh_token: string,
+        not_before: number,
+        expires_in: number,
+        created_at: number,
+        access_token: string,
+    };
 }
 
 export class Company {
