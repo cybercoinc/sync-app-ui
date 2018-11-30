@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {MsUserClientService} from 'client/service/microservices/ms-user-client.service';
 import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
-import {FormControl} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
     selector: "connection",
@@ -11,10 +11,10 @@ import {FormControl} from "@angular/forms";
 })
 export class ConnectionComponent implements OnInit {
     me: User = null;
-    formCtrl: FormControl;
+    microsoftForm: FormControl;
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
-        this.formCtrl = new FormControl();
+        this.microsoftForm = new FormControl(null, Validators.required);
     }
 
     ngOnInit() {
@@ -34,7 +34,9 @@ export class ConnectionComponent implements OnInit {
      * Get Microsoft auth link
      */
     getMicrosoftAuthLink() {
-        window.location.href = this.MsUserClientService.getMicrosoftAuthLink(this.formCtrl.value);
+        if (this.microsoftForm.valid) {
+            window.location.href = this.MsUserClientService.getMicrosoftAuthLink(this.microsoftForm.value);
+        }
     }
 
     /**

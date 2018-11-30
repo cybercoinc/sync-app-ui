@@ -28,3 +28,11 @@ md-card.no-connection {
     margin-top: 0;
 }
 
+.connection-control {
+    width: 280px;
+    margin: 0 0 0 40px;
+}
+
+.invalid-control {
+    color: #b90305;
+}

@@ -82,20 +82,20 @@
                     </div>
                     <div *ngIf="!me.microsoft_oauth" style="clear:both;">
                         <hr />
-                        <span style="font-weight: bold; color: #8b0305;">Not Connected</span>
-
-                        <md-input-container style="width: 280px; margin: 0 0 0 40px">
-                            <input mdInput placeholder="What is you URL to PWA" [formControl]="formCtrl" required />
+                        <span style="font-weight: bold; color: #b90305;">Not Connected</span>
+                        <md-input-container class="connection-control">
+                            <input mdInput placeholder="What is you URL to PWA" [formControl]="microsoftForm" required />
+                            <md-hint *ngIf="microsoftForm.invalid && (microsoftForm.dirty || microsoftForm.touched)">
+                                <span *ngIf="microsoftForm.errors.required" class="invalid-control">
+                                    PWA url is required.
+                                </span>
+                            </md-hint>
                         </md-input-container>
 
                         <button type="button" class="btn btn-primary pull-right" (click)="getMicrosoftAuthLink()">
                             Get Microsoft connection
                         </button>
 
-
-                        <!--<a class="btn btn-primary pull-right" href="{{getMicrosoftAuthLink()}}">-->
-                            <!--Get Microsoft connection-->
-                        <!--</a>-->
                     </div>
                 </md-card>
 
