@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {MsUserClientService} from 'client/service/microservices/ms-user-client.service';
 import {AuthService} from 'client/service/auth.service';
 import {User} from 'client/entities/entities';
+import {FormControl} from "@angular/forms";
 
 @Component({
     selector: "connection",
@@ -10,9 +11,10 @@ import {User} from 'client/entities/entities';
 })
 export class ConnectionComponent implements OnInit {
     me: User = null;
+    formCtrl: FormControl;
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
-
+        this.formCtrl = new FormControl();
     }
 
     ngOnInit() {
@@ -28,8 +30,11 @@ export class ConnectionComponent implements OnInit {
         return this.MsUserClientService.getSmartsheetAuthLink();
     }
 
+    /**
+     * Get Microsoft auth link
+     */
     getMicrosoftAuthLink() {
-        return this.MsUserClientService.getMicrosoftAuthLink();
+        window.location.href = this.MsUserClientService.getMicrosoftAuthLink(this.formCtrl.value);
     }
 
     /**

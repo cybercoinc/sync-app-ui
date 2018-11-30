@@ -96,8 +96,15 @@ export class MsUserClientService extends MsClientService {
         return this.ConfigService.getServiceUrl(this.msName) + 'auth/smartsheet';
     }
 
-    getMicrosoftAuthLink() {
-        return this.ConfigService.getServiceUrl(this.msName) + 'auth/microsoft';
+    /**
+     * Get microsoft auth link
+     * @param query
+     */
+    getMicrosoftAuthLink(query) {
+        let params = new URLSearchParams();
+        params.set('pwa_url', query);
+
+        return `${this.ConfigService.getServiceUrl(this.msName)}auth/microsoft?${params.toString()}`;
     }
 
     getPbrProjects(userId): Promise<any> {
