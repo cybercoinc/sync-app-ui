@@ -84,10 +84,13 @@
                         <hr />
                         <span style="font-weight: bold; color: #b90305;">Not Connected</span>
                         <md-input-container class="connection-control">
-                            <input mdInput placeholder="What is you URL to PWA" [formControl]="microsoftForm" required />
-                            <md-hint *ngIf="microsoftForm.invalid && (microsoftForm.dirty || microsoftForm.touched)">
-                                <span *ngIf="microsoftForm.errors.required" class="invalid-control">
+                            <input mdInput placeholder="What is you URL to PWA" [formControl]="microsoftFormControl" required />
+                            <md-hint *ngIf="microsoftFormControl.invalid && (microsoftFormControl.dirty || microsoftFormControl.touched)">
+                                <span *ngIf="microsoftFormControl.errors.required" class="invalid-control">
                                     PWA url is required.
+                                </span>
+                                <span *ngIf="microsoftFormControl.errors.pattern" class="invalid-control">
+                                    PWA url is invalid.
                                 </span>
                             </md-hint>
                         </md-input-container>

@@ -11,14 +11,22 @@ import {FormControl, Validators} from "@angular/forms";
 })
 export class ConnectionComponent implements OnInit {
     me: User = null;
-    microsoftForm: FormControl;
+    microsoftFormControl: FormControl;
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
-        this.microsoftForm = new FormControl(null, Validators.required);
+
     }
 
+    /**
+     * On init
+     */
     ngOnInit() {
         this.me = this.AuthService.authUser;
+
+        this.microsoftFormControl = new FormControl(null, [
+            Validators.required,
+            Validators.pattern('^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$'),
+        ]);
     }
 
     getProcoreAuthLink() {
@@ -34,8 +42,8 @@ export class ConnectionComponent implements OnInit {
      * Get Microsoft auth link
      */
     getMicrosoftAuthLink() {
-        if (this.microsoftForm.valid) {
-            window.location.href = this.MsUserClientService.getMicrosoftAuthLink(this.microsoftForm.value);
+        if (this.microsoftFormControl.valid) {
+            window.location.href = this.MsUserClientService.getMicrosoftAuthLink(this.microsoftFormControl.value);
         }
     }
 
