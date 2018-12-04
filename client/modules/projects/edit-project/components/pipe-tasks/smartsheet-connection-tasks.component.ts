@@ -42,11 +42,14 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
 
         this.scheduleChartIsUsed = this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].use_schedule_chart;
         this.useScheduleChartIsAsked = !this.pipesListObj[this.pipeType];
+        this.projectType = null;
+
     }
 
     protected procoreProjectId: number;
     protected project: Project;
     protected isShowAlert: boolean = false;
+    protected projectType: String = '';
 
     protected componentIsBusy: boolean = false;
 
@@ -61,5 +64,6 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
     protected onSmartsheetScheduleDecisionMade(result) {
         this.scheduleChartIsUsed = result === 'gantt_chart';
         this.useScheduleChartIsAsked = false;
+        this.projectType = result;
     }
 }

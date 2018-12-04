@@ -86,6 +86,14 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    getMicrosoftSheets(): Promise<SmartsheetSheet[]> {
+        return this.makeMsCall(
+            'microsoft-online/sheets',
+            'GET',
+            {}
+        );
+    }
+
     getConnectedSmartsheetSheetsIds(): Promise<[number]> {
         return this.makeMsCall(
             'get-connected-smartsheet-sheets-ids',

@@ -56,7 +56,7 @@ export class SmartsheetScheduleChooseComponent implements OnInit {
             return;
         }
 
-        return this.makeDecision('smartsheet');
+        return this.makeDecision(this.selectedTool);
     }
 
 

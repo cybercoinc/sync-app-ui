@@ -15,6 +15,7 @@ import { PipePrivateTodoComponent } from './edit-project/components/pipe-private
 import { SmartsheetConnectionPublicComponent } from './edit-project/components/pipe-public-todo/smartsheet-connection-public.component';
 import { SmartsheetConnectionPrivateComponent } from './edit-project/components/pipe-private-todo/smartsheet-connection-private.component';
 import { SmartsheetConnectionComponent } from './edit-project/components/shared/smartsheet-connection/smartsheet-connection.component';
+import { MicrosoftOnlineConnectionComponent } from './edit-project/components/shared/microsoft-online-connection/microsoft-online-connection.component';
 import { ColumnsMatchingComponent } from './edit-project/components/shared/columns-matching/columns-matching.component';
 
 import { PipeSettingsPrivateComponent } from './edit-project/components/pipe-private-todo/pipe-settings-private.component';
@@ -100,6 +101,7 @@ import { FoldersPickerService } from './edit-project/components/document-pipes/p
         SmartsheetConnectionPublicComponent,
         SmartsheetConnectionPrivateComponent,
         SmartsheetConnectionComponent,
+        MicrosoftOnlineConnectionComponent,
         ScheduleConnectionComponent,
         ColumnsMatchingComponent,
         StatusRowComponent,

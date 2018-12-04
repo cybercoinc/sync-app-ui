@@ -29,8 +29,11 @@
 <schedule-connection *ngIf="scheduleChartIsUsed" pipe-type="{{pipeType}}"
                      [redirect-route]="redirectRoute"></schedule-connection>
 
-<smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed" pipe-type="{{pipeType}}"
+<smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='smartsheet'" pipe-type="{{pipeType}}"
                        [redirect-route]="redirectRoute"></smartsheet-connection>
+
+<microsoft-online-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='microsoft_project_online'" pipe-type="{{pipeType}}"
+                       [redirect-route]="redirectRoute"></microsoft-online-connection>
 
 <resources-management *ngIf="project && pipesListObj[pipeType]" [projectId]="project.id"></resources-management>
 

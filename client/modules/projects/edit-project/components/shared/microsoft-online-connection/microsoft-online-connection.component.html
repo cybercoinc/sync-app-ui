@@ -1,0 +1,133 @@
+<md-card>
+
+    <div class="container-fluid" *ngIf="!PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id">
+        <div class="row">
+            <div *ngIf="isShowSuccess || isShowAlert">
+                <md-card *ngIf="isShowSuccess" class="alert-dismissable">
+                    <h5>Todos removed</h5>
+                </md-card>
+
+                <div *ngIf="isShowAlert" class="col-xs-12">
+                    <h5>
+                        <div>We have detected that this project has existing Calendar Tasks in Procore.</div>
+                        <div>Do you want to sync these tasks?</div>
+                        <br/>
+                        <div><strong>Special Migration Note:</strong> For companies moving projects from CybercoSync
+                            version 1.x to 2.0, avoid duplicates by selecting 'Remove Calendar Tasks'.
+                        </div>
+                        <br/>
+                    </h5>
+
+                    <button class="btn btn-primary" (click)="hideAlert()">Sync Tasks</button>
+                    <button class="btn btn-danger" (click)="removeTodos()">Remove Calendar Tasks</button>
+                </div>
+            </div>
+
+            <div *ngIf="!isShowAlert">
+                <div class="col-xs-12">
+                    <h5>Do you have an existing Microsoft Online schedule that you would like to merge with your Procore
+                        project
+                        schedule?</h5>
+                </div>
+
+                <div class="col-xs-6 col-xs-offset-4" *ngIf="!isShowAlert">
+                    <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                            (click)="startChoosingExistingSheet()">Yes
+                    </button>
+                    <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                            (click)="createNewSheetWithWorkspace()">No
+                    </button>
+                </div>
+            </div>
+
+            <section *ngIf="haveExistingSheet">
+                <div class="col-xs-12">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <input type="text" class="full-width" #search_filter
+                                       (keyup)="filterProjects(search_filter.value)"
+                                       placeholder="Filter by name">
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="projects-list">
+                                    <h5 *ngIf="!smartsheetSheets">
+                                        <i class="fa fa-cog fa-spin fa-fw"></i> Searching for sheets...
+                                    </h5>
+
+                                    <h5 *ngIf="smartsheetSheets && !smartsheetSheets.length">
+                                        No sheets found.
+                                    </h5>
+
+                                    <div *ngFor="let sheet of smartsheetSheets">
+                                        <md-radio-button
+                                                [disabled]="checkIfAlreadyConnected(sheet) || columnsMatchingIsVisible"
+                                                value="{{sheet.id}}"
+                                                (click)="chooseExistingSheet(sheet)">
+                                            {{sheet.name}}
+                                            <div class="is-connected" *ngIf="checkIfAlreadyConnected(sheet)">is
+                                                connected
+                                            </div>
+                                        </md-radio-button>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-xs-offset-4">
+                    <a [class.disabled]="!selectedSheet || columnsMatchingIsVisible" class="btn btn-success"
+                       (click)="showColumnsMatching()">Select and continue</a>
+                    <a class="btn btn-default" (click)="cancel()">cancel</a>
+                </div>
+
+                <div class="col-xs-8 col-xs-offset-2">
+                    <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}"
+                                      [pipe-type]="pipeType"
+                                      (columnsMatched)="onColumnsMatched($event)"></columns-matching>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <md-card-header *ngIf="PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id">
+        <md-card-title>Connection</md-card-title>
+    </md-card-header>
+
+    <md-card-content *ngIf="PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id">
+        <div class="row">
+            <div class="col-xs-12">
+                <h5> Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Connected to Smartsheet</span></h5>
+            </div>
+            <div class="col-xs-12">Sheet name: <i>{{PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_name}}</i></div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <button class="btn btn-success" [disabled]="PipeConnectionService.pipesListObj[pipeType]?.status === 'active'" (click)="showColumnsRematch()">Rematch Columns</button>
+            </div>
+            <div class="col-xs-9">
+                <div class="pull-right">
+                    <pipe-delete [pipe]="PipeConnectionService.pipesListObj[pipeType]"></pipe-delete>
+
+                    <a href="{{PipeConnectionService.pipesListObj[pipeType]?.sm_permalink}}"
+                       class="btn btn-success"
+                       target="_blank">open</a>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+
+    <div class="container-fluid" *ngIf="PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
+        <div class="row">
+            <div class="col-xs-12">
+                <columns-matching sheet-id="{{PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id}}" pipe-type="{{pipeType}}"
+                                  (columnsMatched)="onColumnsRematched($event)"></columns-matching>
+            </div>
+        </div>
+    </div>
+
+</md-card>
