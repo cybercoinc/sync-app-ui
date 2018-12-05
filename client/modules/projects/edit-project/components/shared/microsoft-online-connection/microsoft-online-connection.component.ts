@@ -32,8 +32,8 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
     private isShowAlert: boolean = false;
     private isShowSuccess: boolean = false;
     private todos = [];
-    public smartsheetSheets: SmartsheetSheet[] | null = null;
-    public connectedSmSheetsIdsList: [number] | null = null;
+    public microsoftProjects: SmartsheetSheet[] | null = null;
+    public connectedMsProjectIdsList: [number] | null = null;
     public selectedSheet: SmartsheetSheet | null = null;
 
     protected filterTimeout;
@@ -92,17 +92,16 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
         this.haveExistingSheet = doHave;
     }
 
-    startChoosingExistingSheet() {
+    startChoosingExistingProjects() {
         this.setExistingSheetParam(true);
 
         return Promise.all([
-            this.getMicrosoftOnlineSheets(),
-            this.MsProjectClientService.getConnectedSmartsheetSheetsIds()
+            this.getMicrosoftOnlineProjects(),
+            this.MsProjectClientService.getConnectedMicrosoftProjectsIds()
         ])
             .then(results => {
-                console.log(results);
-                this.smartsheetSheets = results[0];
-                this.connectedSmSheetsIdsList = results[1];
+                this.microsoftProjects = results[0];
+                this.connectedMsProjectIdsList = results[1];
             })
     }
 
@@ -118,16 +117,16 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
         }
 
         this.filterTimeout = setTimeout(e => {
-            this.smartsheetSheets = null;
+            this.microsoftProjects = null;
             this.selectedSheet = null;
 
-            this.getSmartsheetSheets()
-                .then(smartsheetSheetsList => {
-                    this.smartsheetSheets = smartsheetSheetsList.filter(sheet => {
+            this.getMicrosoftOnlineProjects()
+                .then(microsoftProjectsList => {
+                    this.microsoftProjects = microsoftProjectsList.filter(sheet => {
                         return sheet['name'].toLowerCase().indexOf(inputName.toLowerCase()) !== -1;
                     });
 
-                    return this.smartsheetSheets;
+                    return this.microsoftProjects;
                 })
         }, 500);
     }
@@ -137,9 +136,9 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             .getSmartsheetSheets();
     }
 
-    getMicrosoftOnlineSheets() {
+    getMicrosoftOnlineProjects() {
         return this.MsProjectClientService
-            .getMicrosoftSheets();
+            .getMicrosoftProjects();
     }
 
     chooseExistingSheet(sheet) {
@@ -151,7 +150,7 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
     }
 
     checkIfAlreadyConnected(smSheet: SmartsheetSheet): boolean {
-        return this.connectedSmSheetsIdsList.indexOf(smSheet.id) !== -1;
+        return this.connectedMsProjectIdsList.indexOf(smSheet.id) !== -1;
     }
 
     /**
