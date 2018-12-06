@@ -79,15 +79,15 @@
                 </div>
 
                 <div class="col-xs-6 col-xs-offset-4">
-                    <a [class.disabled]="!selectedSheet || columnsMatchingIsVisible" class="btn btn-success"
+                    <a [class.disabled]="!selectedProject || columnsMatchingIsVisible" class="btn btn-success"
                        (click)="showColumnsMatching()">Select and continue</a>
                     <a class="btn btn-default" (click)="cancel()">cancel</a>
                 </div>
 
                 <div class="col-xs-8 col-xs-offset-2">
-                    <columns-matching *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedSheet.id}}"
+                    <columns-matching-microsoft *ngIf="columnsMatchingIsVisible" sheet-id="{{selectedProject.id}}"
                                       [pipe-type]="pipeType"
-                                      (columnsMatched)="onColumnsMatched($event)"></columns-matching>
+                                      (columnsMatched)="onColumnsMatched($event)"></columns-matching-microsoft>
                 </div>
             </section>
         </div>

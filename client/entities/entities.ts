@@ -186,6 +186,13 @@ export class SmartsheetSheet {
     permalink: string;
 }
 
+export class MicrosoftProject {
+    createdAt: string;
+    id: number;
+    modifiedAt: string;
+    name: string;
+}
+
 /**
  * https://smartsheet-platform.github.io/api-docs/?shell#column-object
  */
@@ -216,6 +223,15 @@ export class SmartsheetColumn {
 }
 
 export class SmartsheetSheetColumn {
+    id: number;
+    index: number;
+    primary: string;
+    title: string;
+    type: string;
+    width: number;
+}
+
+export class MicrosoftProjectColumn {
     id: number;
     index: number;
     primary: string;

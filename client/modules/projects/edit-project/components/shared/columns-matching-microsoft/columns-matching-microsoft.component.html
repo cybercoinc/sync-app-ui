@@ -1,0 +1,42 @@
+<div class="container-fluid match-columns-container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h5>Match columns</h5>
+        </div>
+
+        <div class="col-xs-12" *ngIf="validationError">
+            <div class="alert alert-danger">
+                Match required columns.
+            </div>
+        </div>
+
+        <div class="col-xs-12" *ngIf="!smColumns && !prColumns">
+            <i class="fa fa-cog fa-spin fa-fw"></i> Loading columns...
+        </div>
+
+        <div class="col-xs-12" *ngIf="smColumns?.length > 0 && prColumns?.length > 0">
+            <form class="form-horizontal">
+                <div class="form-group" *ngFor="let procoreTodoColumn of prColumns">
+                    <div class="col-xs-10" style="width: 100%">
+                        <md-select placeholder="Microsoft column for Procore {{procoreTodoColumn.title}}"
+                                   [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
+                            <md-option [value]="">
+                                - Select column with type {{procoreTodoColumn.type}} -
+                            </md-option>
+                            <md-option *ngFor="let smColumn of getAvailableOptions(procoreTodoColumn)"
+                                       [value]="smColumn.id">
+                                {{ smColumn.title }}
+                            </md-option>
+                        </md-select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <a [class.disabled]="buttonSubmitted" class="btn btn-success" (click)="matchColumns()">Match Columns</a>
+        </div>
+    </div>
+</div>

@@ -5,11 +5,11 @@ import {AuthService} from 'client/service/auth.service';
 import {ProcoreTodoColumn, SmartsheetSheetColumn} from 'client/entities/entities';
 
 @Component({
-    selector: 'columns-matching',
-    templateUrl: 'client/modules/projects/edit-project/components/shared/columns-matching/columns-matching.component.html',
-    styleUrls: ['client/modules/projects/edit-project/components/shared/columns-matching/columns-matching.component.css']
+    selector: 'columns-matching-microsoft',
+    templateUrl: 'client/modules/projects/edit-project/components/shared/columns-matching-microsoft/columns-matching-microsoft.component.html',
+    styleUrls: ['client/modules/projects/edit-project/components/shared/columns-matching-microsoft/columns-matching-microsoft.component.css']
 })
-export class ColumnsMatchingComponent implements OnInit {
+export class ColumnsMatchingMicrosoftComponent implements OnInit {
 
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected MsSyncClientService: MsSyncClientService,
@@ -18,7 +18,7 @@ export class ColumnsMatchingComponent implements OnInit {
 
     ngOnInit() {
         return Promise.all([
-            this.MsProjectClientService.getSmartsheetSheetColumns(this.smartsheetSheetId),
+            this.MsProjectClientService.getMicrosoftProjectColumns(),
             this.MsSyncClientService.getProcoreTodosColumns(this.pipeType)
         ])
             .then(resultsList => {

@@ -6,7 +6,7 @@ import {
     Project,
     SmartsheetSheet,
     ProjectPipe,
-    User, SmartsheetWorkspace, SmartsheetColumn
+    User, SmartsheetWorkspace, SmartsheetColumn, MicrosoftProjectColumn
 } from 'client/entities/entities';
 import { PendingRequestsService } from '../pending-requests.service';
 import { Router } from '@angular/router';
@@ -93,6 +93,9 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    /**
+     * Get microsoft projects
+     */
     getMicrosoftProjects(): Promise<SmartsheetSheet[]> {
         return this.makeMsCall(
             'microsoft-online/projects',
@@ -101,11 +104,24 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    /**
+     * Get connected microsoft projects
+     */
     getConnectedMicrosoftProjectsIds(): Promise<[number]> {
         return this.makeMsCall(
             'get-connected-microsoft-projects-ids',
             'GET',
             {}
+        );
+    }
+
+    /**
+     * Get microsoft project columns
+     */
+    getMicrosoftProjectColumns(): Promise<[MicrosoftProjectColumn]> {
+        return this.makeMsCall(
+            'microsoft-online/project-columns',
+            'GET'
         );
     }
 

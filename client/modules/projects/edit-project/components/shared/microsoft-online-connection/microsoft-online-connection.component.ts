@@ -4,7 +4,7 @@ import { AuthService } from 'client/service/auth.service';
 import { PipeConnectionService } from 'client/service/pipe-connection.service';
 
 import { Router, ActivatedRoute } from '@angular/router';
-import { SmartsheetSheet, PIPE_TYPE_TASKS } from 'client/entities/entities';
+import { MicrosoftProject, PIPE_TYPE_TASKS } from 'client/entities/entities';
 import { PendingRequestsService } from 'client/service/pending-requests.service';
 import { ConfigService } from 'client/service/config.service';
 
@@ -32,9 +32,9 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
     private isShowAlert: boolean = false;
     private isShowSuccess: boolean = false;
     private todos = [];
-    public microsoftProjects: SmartsheetSheet[] | null = null;
+    public microsoftProjects: MicrosoftProject[] | null = null;
     public connectedMsProjectIdsList: [number] | null = null;
-    public selectedSheet: SmartsheetSheet | null = null;
+    public selectedProject: MicrosoftProject | null = null;
 
     protected filterTimeout;
 
@@ -107,7 +107,7 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
 
     cancel() {
         this.haveExistingSheet = undefined;
-        this.selectedSheet = null;
+        this.selectedProject = null;
         this.columnsMatchingIsVisible = false;
     }
 
@@ -118,7 +118,7 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
 
         this.filterTimeout = setTimeout(e => {
             this.microsoftProjects = null;
-            this.selectedSheet = null;
+            this.selectedProject = null;
 
             this.getMicrosoftOnlineProjects()
                 .then(microsoftProjectsList => {
@@ -141,15 +141,15 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             .getMicrosoftProjects();
     }
 
-    chooseExistingSheet(sheet) {
-        if (this.checkIfAlreadyConnected(sheet)) {
+    chooseExistingSheet(project) {
+        if (this.checkIfAlreadyConnected(project)) {
             return false;
         }
 
-        this.selectedSheet = sheet;
+        this.selectedProject = project;
     }
 
-    checkIfAlreadyConnected(smSheet: SmartsheetSheet): boolean {
+    checkIfAlreadyConnected(smSheet: MicrosoftProject): boolean {
         return this.connectedMsProjectIdsList.indexOf(smSheet.id) !== -1;
     }
 
@@ -226,9 +226,9 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             this.pipeType,
             false,
             {
-                sm_sheet_id: this.selectedSheet.id,
-                sm_permalink: this.selectedSheet.permalink,
-                sm_sheet_name: this.selectedSheet.name,
+                sm_sheet_id: this.selectedProject.id,
+                // sm_permalink: this.selectedProject.permalink,
+                sm_sheet_name: this.selectedProject.name,
                 sm_sheet_columns: columnsObj,
                 need_to_match_sm_columns: false
             })
