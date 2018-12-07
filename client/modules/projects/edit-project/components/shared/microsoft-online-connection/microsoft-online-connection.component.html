@@ -1,6 +1,6 @@
 <md-card>
 
-    <div class="container-fluid" *ngIf="!PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id">
+    <div class="container-fluid" *ngIf="!PipeConnectionService.pipesListObj[pipeType]?.ms_project_id">
         <div class="row">
             <div *ngIf="isShowSuccess || isShowAlert">
                 <md-card *ngIf="isShowSuccess" class="alert-dismissable">
@@ -57,7 +57,7 @@
                                     </h5>
 
                                     <h5 *ngIf="microsoftProjects && !microsoftProjects.length">
-                                        No sheets found.
+                                        No projects found.
                                     </h5>
 
                                     <div *ngFor="let sheet of microsoftProjects">
@@ -93,16 +93,16 @@
         </div>
     </div>
 
-    <md-card-header *ngIf="PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id">
+    <md-card-header *ngIf="PipeConnectionService.pipesListObj[pipeType]?.ms_project_id">
         <md-card-title>Connection</md-card-title>
     </md-card-header>
 
-    <md-card-content *ngIf="PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id">
+    <md-card-content *ngIf="PipeConnectionService.pipesListObj[pipeType]?.ms_project_id">
         <div class="row">
             <div class="col-xs-12">
-                <h5> Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Connected to Smartsheet</span></h5>
+                <h5> Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Connected to Microsoft Project Online</span></h5>
             </div>
-            <div class="col-xs-12">Sheet name: <i>{{PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_name}}</i></div>
+            <div class="col-xs-12">Sheet name: <i>{{PipeConnectionService.pipesListObj[pipeType]?.ms_project_name}}</i></div>
         </div>
 
         <div class="row">
@@ -113,7 +113,7 @@
                 <div class="pull-right">
                     <pipe-delete [pipe]="PipeConnectionService.pipesListObj[pipeType]"></pipe-delete>
 
-                    <a href="{{PipeConnectionService.pipesListObj[pipeType]?.sm_permalink}}"
+                    <a href="{{PipeConnectionService.pipesListObj[pipeType]?.ms_permalink}}"
                        class="btn btn-success"
                        target="_blank">open</a>
                 </div>
@@ -121,10 +121,10 @@
         </div>
     </md-card-content>
 
-    <div class="container-fluid" *ngIf="PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
+    <div class="container-fluid" *ngIf="PipeConnectionService.pipesListObj[pipeType]?.ms_project_id && needToRematchColumns">
         <div class="row">
             <div class="col-xs-12">
-                <columns-matching sheet-id="{{PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id}}" pipe-type="{{pipeType}}"
+                <columns-matching sheet-id="{{PipeConnectionService.pipesListObj[pipeType]?.ms_project_id}}" pipe-type="{{pipeType}}"
                                   (columnsMatched)="onColumnsRematched($event)"></columns-matching>
             </div>
         </div>

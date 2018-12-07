@@ -226,11 +226,12 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             this.pipeType,
             false,
             {
-                sm_sheet_id: this.selectedProject.id,
-                // sm_permalink: this.selectedProject.permalink,
-                sm_sheet_name: this.selectedProject.name,
-                sm_sheet_columns: columnsObj,
-                need_to_match_sm_columns: false
+                connected_to: 'microsoft',
+                ms_project_id: this.selectedProject.id,
+                ms_project_project_name: this.selectedProject.name,
+                ms_project_project_columns: columnsObj,
+                need_to_match_ms_project_columns: false,
+                ms_permalink: `${this.ConfigService.getConfig('MICROSOFT_BASE_API_URL')}/Project%20Detail%20Pages/Schedule.aspx?ProjUid=${this.selectedProject.id}&ret=0`,
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();

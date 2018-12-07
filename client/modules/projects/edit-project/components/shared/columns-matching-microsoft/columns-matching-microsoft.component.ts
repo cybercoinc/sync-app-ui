@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
 import {MsProjectClientService} from 'client/service/microservices/ms-project-client.service';
 import {MsSyncClientService} from 'client/service/microservices/ms-sync-client.service';
 import {AuthService} from 'client/service/auth.service';
-import {ProcoreTodoColumn, SmartsheetSheetColumn} from 'client/entities/entities';
+import {ProcoreTodoColumn, MicrosoftProjectColumn} from 'client/entities/entities';
 
 @Component({
     selector: 'columns-matching-microsoft',
@@ -22,10 +22,10 @@ export class ColumnsMatchingMicrosoftComponent implements OnInit {
             this.MsSyncClientService.getProcoreTodosColumns(this.pipeType)
         ])
             .then(resultsList => {
-                let smColumns = resultsList[0];
+                let mcColumns = resultsList[0];
                 let prColumns = resultsList[1];
 
-                this.smColumns = smColumns;
+                this.mcColumns = mcColumns;
                 this.prColumns = prColumns;
 
                 this.prColumns.forEach(prColumn => {
@@ -37,17 +37,17 @@ export class ColumnsMatchingMicrosoftComponent implements OnInit {
     prefillDropdownValue(prColumn) {
         let prefilledId = null;
 
-        this.smColumns.forEach(smColumn => {
-            if (!this.isNotAvailable(smColumn, prColumn)) {
+        this.mcColumns.forEach(mcColumns => {
+            if (!this.isNotAvailable(mcColumns, prColumn)) {
                 if (Array.isArray(prColumn.title)) {
-                    if (prColumn.title.indexOf(smColumn.title) !== -1) {
-                        prefilledId = smColumn.id;
+                    if (prColumn.title.indexOf(mcColumns.title) !== -1) {
+                        prefilledId = mcColumns.value;
 
                         return false;
                     }
                 } else {
-                    if (prColumn.title === smColumn.title) {
-                        prefilledId = smColumn.id;
+                    if (prColumn.title === mcColumns.title) {
+                        prefilledId = mcColumns.value;
 
                         return false;
                     }
@@ -58,22 +58,22 @@ export class ColumnsMatchingMicrosoftComponent implements OnInit {
         return prefilledId;
     }
 
-    isNotAvailable(smColumn, prColumn): boolean {
+    isNotAvailable(mcColumn, prColumn): boolean {
         let notAvailable = false;
 
         for (let prop in this.model) {
             if (this.model.hasOwnProperty(prop)) {
                 // if not in current dropdown
-                if (prop !== prColumn.slug && Number(this.model[prop]) === Number(smColumn.id)) {
+                if (prop !== prColumn.slug && Number(this.model[prop]) === Number(mcColumn.id)) {
                     notAvailable = true;
                 }
 
-                if (Array.isArray(prColumn.type) && prColumn.type.indexOf(smColumn.type) === -1) {
+                if (Array.isArray(prColumn.type) && prColumn.type.indexOf(mcColumn.type) === -1) {
                     // if type is array and value is not allowed
                     notAvailable = true;
                 }
 
-                if (!Array.isArray(prColumn.type) && smColumn.type !== prColumn.type) {
+                if (!Array.isArray(prColumn.type) && mcColumn.type !== prColumn.type) {
                     // if type is not allowed
                     notAvailable = true;
                 }
@@ -84,15 +84,15 @@ export class ColumnsMatchingMicrosoftComponent implements OnInit {
     }
 
     getAvailableOptions(prColumn) {
-        return this.smColumns.filter(smColumn => {
-            return !this.isNotAvailable(smColumn, prColumn);
+        return this.mcColumns.filter(mcColumns => {
+            return !this.isNotAvailable(mcColumns, prColumn);
         });
     }
 
     @Input('sheet-id') smartsheetSheetId: number;
     @Input('pipe-type') pipeType: string;
 
-    protected smColumns: SmartsheetSheetColumn[];
+    protected mcColumns: MicrosoftProjectColumn[];
     protected prColumns: ProcoreTodoColumn[];
 
     protected validationError: boolean = false;
@@ -109,6 +109,9 @@ export class ColumnsMatchingMicrosoftComponent implements OnInit {
         let notRequiredColumnsList = [
             'actual_start',
             'actual_finish',
+            'assigned_to',
+            'description',
+            'resource',
         ];
 
         for (let columnConst in this.model) {

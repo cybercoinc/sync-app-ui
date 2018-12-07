@@ -219,6 +219,7 @@ export class SmartsheetConnectionComponent implements OnInit {
             this.pipeType,
             false,
             {
+                connected_to: 'smartsheet',
                 sm_sheet_id: this.selectedSheet.id,
                 sm_permalink: this.selectedSheet.permalink,
                 sm_sheet_name: this.selectedSheet.name,

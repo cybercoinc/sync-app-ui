@@ -235,6 +235,7 @@ export class MicrosoftProjectColumn {
     id: number;
     index: number;
     primary: string;
+    value: string;
     title: string;
     type: string;
     width: number;
