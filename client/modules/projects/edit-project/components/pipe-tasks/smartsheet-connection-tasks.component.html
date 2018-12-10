@@ -32,7 +32,7 @@
 <smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='smartsheet'" pipe-type="{{pipeType}}"
                        [redirect-route]="redirectRoute"></smartsheet-connection>
 
-<microsoft-online-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='microsoft'" pipe-type="{{pipeType}}"
+<microsoft-online-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='microsoft-online'" pipe-type="{{pipeType}}"
                        [redirect-route]="redirectRoute"></microsoft-online-connection>
 
 <resources-management *ngIf="project && pipesListObj[pipeType]" [projectId]="project.id"></resources-management>

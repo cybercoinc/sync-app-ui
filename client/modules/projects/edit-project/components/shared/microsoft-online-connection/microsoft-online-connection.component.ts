@@ -228,8 +228,8 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             {
                 connected_to: 'microsoft-online',
                 ms_project_id: this.selectedProject.id,
-                ms_project_project_name: this.selectedProject.name,
-                ms_project_project_columns: columnsObj,
+                ms_project_name: this.selectedProject.name,
+                ms_project_columns: columnsObj,
                 need_to_match_ms_project_columns: false,
             })
             .then(() => {
