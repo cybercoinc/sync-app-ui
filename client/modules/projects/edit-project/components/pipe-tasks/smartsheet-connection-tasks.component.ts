@@ -42,7 +42,13 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
 
         this.scheduleChartIsUsed = this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].use_schedule_chart;
         this.useScheduleChartIsAsked = !this.pipesListObj[this.pipeType];
-        this.projectType = null;
+
+        if (this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].connected_to) {
+            this.projectType = this.pipesListObj[this.pipeType].connected_to;
+        } else {
+            this.projectType = 'smartsheet';
+        }
+
 
     }
 

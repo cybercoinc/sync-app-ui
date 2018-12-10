@@ -107,8 +107,6 @@ export class ColumnsMatchingMicrosoftComponent implements OnInit {
         this.validationError = false;
 
         let notRequiredColumnsList = [
-            'actual_start',
-            'actual_finish',
             'assigned_to',
             'description',
             'resource',
