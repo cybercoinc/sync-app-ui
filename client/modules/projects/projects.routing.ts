@@ -162,12 +162,12 @@ export const routes: Routes = [
                         children: [
                             {
                                 path: '',
-                                redirectTo: 'smartsheet-connection',
+                                redirectTo: 'connection',
                                 pathMatch: 'full'
                             },
 
                             {
-                                path: 'smartsheet-connection',
+                                path: 'connection',
                                 component: SmartsheetConnectionTasksComponent
                             },
 
