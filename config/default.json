@@ -4,6 +4,5 @@
   "ms_main_url": null,
   "SM_PROJECT_TEMPLATE_ID": 5066554783098756,
   "SM_DOCUMENT_TEMPLATE_ID": 7881304550205316,
-  "CHART_EXPORT_ENDPOINT": "https://gantt-pdf-dot-scheduleconnector-dev.appspot.com/gantt",
-  "MICROSOFT_BASE_API_URL": "https://shieldforamerica.sharepoint.com/sites/pwa"
+  "CHART_EXPORT_ENDPOINT": "https://gantt-pdf-dot-scheduleconnector-dev.appspot.com/gantt"
 }

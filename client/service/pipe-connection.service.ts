@@ -159,11 +159,20 @@ export class PipeConnectionService implements Resolve<{}> {
                 }
 
                 if (_pipeObj.type !== 'document_pipe' && needToRemoveTriggers) {
+                    if (_pipeObj.connected_to === 'microsoft-online') {
+                        // add webhook functionality here
+                        return;
+                    }
                     return this.MsProjectClientService.removeProcoreWebhookTriggers(_pipeObj.project_fk_id.id, triggerResourceName);
                 }
             })
             .then(() => {
                 if (_pipeObj.use_schedule_chart) {
+                    return;
+                }
+
+                if (_pipeObj.connected_to === 'microsoft-online') {
+                    // add webhook functionality here
                     return;
                 }
 
