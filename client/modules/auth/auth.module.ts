@@ -8,6 +8,8 @@ import {AuthComponent} from './auth.component';
 import {MaterialModule} from '@angular/material';
 import {ChooseCompanyComponent} from "./choose-company/choose-company.component";
 import {SelectCompanyComponent} from "./select-company/select-company.component";
+import {AuthDesktopComponent} from "./auth-desktop/auth-desktop.component";
+import {VerifyDesktopComponent} from "./verify-desktop/verify-desktop.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {AuthService} from "client/service/auth.service";
 
@@ -29,6 +31,8 @@ import {AuthService} from "client/service/auth.service";
         AuthProcoreComponent,
         ChooseCompanyComponent,
         SelectCompanyComponent,
+        AuthDesktopComponent,
+        VerifyDesktopComponent,
         AuthComponent
     ],
 

@@ -88,8 +88,19 @@ export class MsUserClientService extends MsClientService {
             });
     }
 
+    verifyDesktop (session_token: string, security_token: string): Promise<any> {
+        return this.makeMsCall('auth/verify-desktop', 'POST', {
+            session_token: session_token,
+            security_token: security_token,
+        });
+    }
+
     getProcoreAuthLink() {
         return this.ConfigService.getServiceUrl(this.msName) + 'auth/procore';
+    }
+
+    getProcoreDesktopAuthLink() {
+        return this.ConfigService.getServiceUrl(this.msName) + 'auth/procore/desktop';
     }
 
     getSmartsheetAuthLink() {
