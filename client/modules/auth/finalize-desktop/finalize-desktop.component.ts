@@ -33,7 +33,7 @@ export class FinalizeDesktopComponent implements OnInit {
                            localStorage.removeItem('session_token');
 
                            this.NotificationsService.addInfo('Your desktop app authorized. Please back there.');
-                       })
+                       });
                 }
                 return;
             });

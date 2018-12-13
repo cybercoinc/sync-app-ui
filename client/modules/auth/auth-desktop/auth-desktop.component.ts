@@ -52,6 +52,17 @@ export class AuthDesktopComponent implements OnInit {
 
                     window.location.href = this.MsUserClientService.getProcoreDesktopAuthLink();
                 }
+
+                // @todo
+                // else if (user.role === 'user') {
+                //     this.MsUserClientService.saveDesktopCredentials(sessionToken, securityToken)
+                //         .then(() => {
+                //             localStorage.removeItem('security_token');
+                //             localStorage.removeItem('session_token');
+                //
+                //             this.NotificationsService.addInfo('Your desktop app authorized. Please back there.');
+                //         });
+                // }
                 return;
             })
             .catch((error) => {
