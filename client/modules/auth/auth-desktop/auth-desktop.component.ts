@@ -29,21 +29,35 @@ export class AuthDesktopComponent implements OnInit {
             sessionToken = params['session_token'];
         });
 
+        let user;
+
         return this.ConfigService.load()
             .then(() => {
                 return this.AuthService.getAuthUser();
-            }).then((user) => {
-                if (user.role === 'guest'){
-                    if (!securityToken || !sessionToken) {
-                        this.NotificationsService.addError('Security token or Session token were not provided');
-                        return;
-                    }
+            }).then((authUser) => {
+                user = authUser;
+            })
+            .then(() => {
+                return this.MsUserClientService.verifyDesktopCredentials(sessionToken, securityToken);
+            })
+            .then(response => {
+                if (!response || !response.isValid) {
+                    throw new Error('Security token or Session token were not provided');
+                }
+            })
+            .then(() => {
+                if (user.role === 'guest') {
                     localStorage.setItem('security_token', securityToken);
                     localStorage.setItem('session_token', sessionToken);
 
                     window.location.href = this.MsUserClientService.getProcoreDesktopAuthLink();
                 }
                 return;
+            })
+            .catch((error) => {
+                if (error && error.name === 'Error') {
+                    this.NotificationsService.addError(error);
+                }
             });
     }
 }

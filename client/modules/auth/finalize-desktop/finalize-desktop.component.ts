@@ -6,9 +6,9 @@ import {NotificationsService} from "../../notifications/notifications.service";
 
 @Component({
     selector: "verify-desktop",
-    templateUrl: `client/modules/auth/verify-desktop/verify-desktop.component.html`
+    templateUrl: `client/modules/auth/finalize-desktop/finalize-desktop.component.html`
 })
-export class VerifyDesktopComponent implements OnInit {
+export class FinalizeDesktopComponent implements OnInit {
     constructor(protected MsUserClientService: MsUserClientService,
                 protected AuthService: AuthService,
                 protected ConfigService: ConfigService,
@@ -26,9 +26,9 @@ export class VerifyDesktopComponent implements OnInit {
             .then(() => {
                 return this.AuthService.getAuthUser();
             }).then((user) => {
-                if (user.role !== 'guest'){
-                   this.MsUserClientService.verifyDesktop(sessionToken, securityToken)
-                       .then(response => {
+                if (user.role !== 'guest') {
+                   this.MsUserClientService.saveDesktopCredentials(sessionToken, securityToken)
+                       .then(() => {
                            localStorage.removeItem('security_token');
                            localStorage.removeItem('session_token');
 

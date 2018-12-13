@@ -6,7 +6,7 @@ import {GuestBootstrapService} from "client/service/resolvers/guest-bootstrap.se
 import {ChooseCompanyComponent} from "./choose-company/choose-company.component";
 import {SelectCompanyComponent} from "./select-company/select-company.component";
 import {AuthDesktopComponent} from "./auth-desktop/auth-desktop.component";
-import {VerifyDesktopComponent} from "./verify-desktop/verify-desktop.component";
+import {FinalizeDesktopComponent} from "./finalize-desktop/finalize-desktop.component";
 import {AuthBootstrapService} from "client/service/resolvers/auth-bootstrap.service";
 
 export const routes: Routes = [
@@ -52,8 +52,8 @@ export const routes: Routes = [
                 component: AuthDesktopComponent,
             },
             {
-                path: 'desktop/verify',
-                component: VerifyDesktopComponent,
+                path: 'desktop/finalize',
+                component: FinalizeDesktopComponent,
             },
         ]
     },

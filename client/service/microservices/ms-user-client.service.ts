@@ -88,8 +88,25 @@ export class MsUserClientService extends MsClientService {
             });
     }
 
-    verifyDesktop (session_token: string, security_token: string): Promise<any> {
-        return this.makeMsCall('auth/verify-desktop', 'POST', {
+    /**
+     * Save Desktop credentials
+     * @param session_token
+     * @param security_token
+     */
+    saveDesktopCredentials (session_token: string, security_token: string): Promise<any> {
+        return this.makeMsCall('auth/desktop/finalize', 'POST', {
+            session_token: session_token,
+            security_token: security_token,
+        });
+    }
+
+    /**
+     * Verify desktop credentials
+     * @param session_token
+     * @param security_token
+     */
+    verifyDesktopCredentials (session_token: string, security_token: string): Promise<any> {
+        return this.makeMsCall('auth/desktop/verify', 'POST', {
             session_token: session_token,
             security_token: security_token,
         });
