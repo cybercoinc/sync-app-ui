@@ -88,36 +88,8 @@ export class MsUserClientService extends MsClientService {
             });
     }
 
-    /**
-     * Save Desktop credentials
-     * @param session_token
-     * @param security_token
-     */
-    saveDesktopCredentials (session_token: string, security_token: string): Promise<any> {
-        return this.makeMsCall('auth/desktop/finalize', 'POST', {
-            session_token: session_token,
-            security_token: security_token,
-        });
-    }
-
-    /**
-     * Verify desktop credentials
-     * @param session_token
-     * @param security_token
-     */
-    verifyDesktopCredentials (session_token: string, security_token: string): Promise<any> {
-        return this.makeMsCall('auth/desktop/verify', 'POST', {
-            session_token: session_token,
-            security_token: security_token,
-        });
-    }
-
     getProcoreAuthLink() {
         return this.ConfigService.getServiceUrl(this.msName) + 'auth/procore';
-    }
-
-    getProcoreDesktopAuthLink() {
-        return this.ConfigService.getServiceUrl(this.msName) + 'auth/procore/desktop';
     }
 
     getSmartsheetAuthLink() {
