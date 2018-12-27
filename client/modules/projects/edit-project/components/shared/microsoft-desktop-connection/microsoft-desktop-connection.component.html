@@ -8,10 +8,10 @@
                 </div>
 
                 <div class="col-xs-6 col-xs-offset-4" *ngIf="!isShowAlert">
-                    <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                    <button class="btn btn-primary"
                             (click)="confirmConnection()">Yes
                     </button>
-                    <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                    <button class="btn btn-primary"
                             (click)="cancelConnection()">No
                     </button>
                 </div>
