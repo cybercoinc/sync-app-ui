@@ -49,7 +49,6 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
             this.projectType = 'smartsheet';
         }
 
-
     }
 
     protected procoreProjectId: number;
@@ -68,8 +67,22 @@ export class SmartsheetConnectionTasksComponent implements OnInit {
     protected scheduleChartIsUsed: boolean = false;
 
     protected onSmartsheetScheduleDecisionMade(result) {
+        if (!result) {
+            this.displayChooseConnection();
+            return;
+        }
+
         this.scheduleChartIsUsed = result === 'gantt_chart';
         this.useScheduleChartIsAsked = false;
         this.projectType = result;
+    }
+
+    /**
+     * Display choose connection
+     */
+    protected displayChooseConnection() {
+        this.useScheduleChartIsAsked = true;
+        this.pipeType = 'tasks';
+        this.projectType = '';
     }
 }

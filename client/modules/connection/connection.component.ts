@@ -12,6 +12,8 @@ import {FormControl, Validators} from "@angular/forms";
 export class ConnectionComponent implements OnInit {
     me: User = null;
     microsoftFormControl: FormControl;
+    authDesktopTokens: Array<any> = [];
+    isLoadedDesktopTokens: Boolean = false;
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
 
@@ -27,6 +29,11 @@ export class ConnectionComponent implements OnInit {
             Validators.required,
             Validators.pattern('^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&\'\\(\\)\\*\\+,;=.]+$'),
         ]);
+
+        this.MsUserClientService.getUserDesktopTokens().then(response => {
+            this.authDesktopTokens = response;
+            this.isLoadedDesktopTokens = true;
+        });
     }
 
     getProcoreAuthLink() {
@@ -62,5 +69,19 @@ export class ConnectionComponent implements OnInit {
             .then(() => {
                 this.me.smartsheet_oauth = null;
             })
+    }
+
+    /**
+     * Remove user desktop token
+     * @param tokenId
+     */
+    removeUserDesktopToken(tokenId) {
+        this.MsUserClientService.removeUserDesktopToken(tokenId).then(() => {
+            this.isLoadedDesktopTokens = false;
+            this.MsUserClientService.getUserDesktopTokens().then(response => {
+                this.authDesktopTokens = response;
+                this.isLoadedDesktopTokens = true;
+            });
+        })
     }
 }

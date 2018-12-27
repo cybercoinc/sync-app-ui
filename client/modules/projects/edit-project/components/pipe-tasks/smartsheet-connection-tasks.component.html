@@ -35,6 +35,13 @@
 <microsoft-online-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='microsoft-online'" pipe-type="{{pipeType}}"
                        [redirect-route]="redirectRoute"></microsoft-online-connection>
 
+<microsoft-desktop-connection
+        *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='microsoft-desktop'"
+        pipe-type="{{pipeType}}"
+        [redirect-route]="redirectRoute"
+        (connection)="displayChooseConnection($event)">
+</microsoft-desktop-connection>
+
 <resources-management *ngIf="project && pipesListObj[pipeType]" [projectId]="project.id"></resources-management>
 
 <chart-working-days *ngIf="project && project.id && scheduleChartIsUsed" [projectId]="project.id"></chart-working-days>

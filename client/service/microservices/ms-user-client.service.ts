@@ -41,7 +41,7 @@ export class MsUserClientService extends MsClientService {
     }
 
     getCompanyUsers(companyId): Promise<any> {
-        return this.makeMsCall('get-company-users', 'GET', {
+        return this.makeMsCall('', 'GET', {
             companyId: companyId
         });
     }
@@ -123,5 +123,21 @@ export class MsUserClientService extends MsClientService {
         return this.makeMsCall('get-email-by-user-id', 'GET', {
             user_id: userId
         });
+    }
+
+    /**
+     * Get user desktop tokens
+     */
+    getUserDesktopTokens(): Promise<[{}]> {
+        return this.makeMsCall('user-desktop-tokens', 'GET', );
+    }
+
+
+    /**
+     * Remove user desktop token
+     * @param tokenId
+     */
+    removeUserDesktopToken(tokenId) {
+        return this.makeMsCall(`user-desktop-tokens/${tokenId}`, 'DELETE');
     }
 }

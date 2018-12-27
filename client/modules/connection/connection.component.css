@@ -36,3 +36,11 @@ md-card.no-connection {
 .invalid-control {
     color: #b90305;
 }
+
+.remove-token-icon {
+    font-size: 20px;
+    vertical-align: middle;
+    color: #a51010;
+    cursor: pointer;
+    margin: 0 0 0 10px;
+}

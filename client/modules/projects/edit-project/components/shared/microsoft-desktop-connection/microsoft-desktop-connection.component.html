@@ -1,0 +1,42 @@
+<md-card>
+
+    <div class="container-fluid" *ngIf="!PipeConnectionService.pipesListObj[pipeType]?.connected_to">
+        <div class="row">
+            <div *ngIf="!isShowAlert">
+                <div class="col-xs-12">
+                    <h5>You will create new connection with Microsoft Desktop application. Continue?</h5>
+                </div>
+
+                <div class="col-xs-6 col-xs-offset-4" *ngIf="!isShowAlert">
+                    <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                            (click)="confirmConnection()">Yes
+                    </button>
+                    <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
+                            (click)="cancelConnection()">No
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <md-card-header *ngIf="PipeConnectionService.pipesListObj[pipeType]?.connected_to === 'microsoft-desktop'">
+        <md-card-title>Connection</md-card-title>
+    </md-card-header>
+
+    <md-card-content *ngIf="PipeConnectionService.pipesListObj[pipeType]?.connected_to === 'microsoft-desktop'">
+        <div class="row">
+            <div class="col-xs-12">
+                <h5> Status: <span style="color: #3d8b40; font-weight: bold; margin-right: 15px;">Connected to Microsoft Desktop</span></h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pull-right">
+                    <pipe-delete [pipe]="PipeConnectionService.pipesListObj[pipeType]"></pipe-delete>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+
+</md-card>

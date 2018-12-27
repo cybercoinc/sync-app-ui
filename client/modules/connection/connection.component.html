@@ -102,7 +102,7 @@
                     </div>
                 </md-card>
 
-                <md-card>
+                <md-card *ngIf="isLoadedDesktopTokens" [ngClass]="{'no-connection': !authDesktopTokens.length}">
                     <div class="connection-app-info">
                         <div class="connection-app-overview">
                             <h4>Microsoft Project Desktop</h4>
@@ -120,13 +120,24 @@
                         <span style="font-weight: bold;">{{me.microsoft_oauth.account_email}}</span>
                         <a class="btn btn-warning pull-right"></a>
                     </div>
-                    <div *ngIf="!me.microsoft_oauth_desktop" style="clear:both;">
+                    <div style="clear:both;">
                         <hr />
-                        <span style="font-weight: bold; color: #8b0305;">Not Connected</span>
+                        <div>
+                            <span *ngIf="authDesktopTokens.length">
+                                <span style="font-weight: bold; color: #3d8b40;">Already Connected</span>
+                            via tokens:
+                            </span>
+                            <span *ngIf="!authDesktopTokens.length" style="font-weight: bold; color: #8b0305;">Not Connected</span>
+                        </div>
 
-                        <a class="btn btn-info pull-right">
-                            Will be soon
-                        </a>
+                        <div *ngIf="authDesktopTokens.length">
+                            <div *ngFor="let item of authDesktopTokens">
+                                <strong>{{item.session_token}}</strong>
+                                <span>(created-{{item.created_at}})</span>
+                                <md-icon (click)="removeUserDesktopToken(item.id)"
+                                         class="remove-token-icon">remove_circle_outline</md-icon>
+                            </div>
+                        </div>
                     </div>
                 </md-card>
             </div>
