@@ -44,12 +44,24 @@ export class SmartsheetScheduleChooseComponent implements OnInit {
                 });
         }
 
-        if (!this.AuthService.authUser.smartsheet_oauth) {
+        if (this.selectedTool === 'smartsheet' && !this.AuthService.authUser.smartsheet_oauth) {
             this.NotificationsService.addReaction('Error. You don`t have Smartsheet credentials connected. Please connect your account.',
                 'error',
                 'Smartsheet connection required',
                 [
                     {label: 'Connect Smartsheet', route: ['/', 'connection']},
+                    {label: 'Cancel', route: ['/']}
+                ]);
+
+            return;
+        }
+
+        if (this.selectedTool === 'microsoft-online' && !this.AuthService.authUser.microsoft_oauth) {
+            this.NotificationsService.addReaction('Error. You don`t have Microsoft Online Project credentials connected. Please connect your account.',
+                'error',
+                'Microsoft Project Online connection required',
+                [
+                    {label: 'Connect Microsoft Project Online', route: ['/', 'connection']},
                     {label: 'Cancel', route: ['/']}
                 ]);
 
