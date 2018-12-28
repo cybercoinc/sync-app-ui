@@ -176,6 +176,10 @@ export class PipeConnectionService implements Resolve<{}> {
                     return;
                 }
 
+                if (_pipeObj.connected_to === 'microsoft-desktop') {
+                    return;
+                }
+
                 return this.MsProjectClientService.changeSmPipeWebhookStatus(pipeId, false);
             })
     }
