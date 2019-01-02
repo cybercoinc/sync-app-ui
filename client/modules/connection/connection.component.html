@@ -75,10 +75,15 @@
 
                     <div *ngIf="me.microsoft_oauth" style="clear:both;">
                         <hr />
-                        <span style="font-weight: bold; color: #3d8b40;">Already Connected</span>
-                        via
-                        <span style="font-weight: bold;">{{me.microsoft_oauth.account_email}}</span>
-                        <a class="btn btn-warning pull-right" (click)="removeMicrosoftAuth()">Disable Connection</a>
+                        <div class="col-md-9" style="padding:0">
+                            <span style="font-weight: bold; color: #3d8b40;">Already Connected</span>
+                            via
+                            <span style="font-weight: bold;">{{microsoftConnected}}</span>
+                        </div>
+                        <div class="col-md-3" style="padding:0">
+                            <a class="btn btn-warning pull-right" (click)="removeMicrosoftAuth()">Disable Connection</a>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                     <div *ngIf="!me.microsoft_oauth" style="clear:both;">
                         <hr />

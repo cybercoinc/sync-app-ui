@@ -36,6 +36,7 @@ export class User {
         expires_in: number,
         created_at: number,
         access_token: string,
+        project_url: string,
     };
 }
 

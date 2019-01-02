@@ -14,6 +14,7 @@ export class ConnectionComponent implements OnInit {
     microsoftFormControl: FormControl;
     authDesktopTokens: Array<any> = [];
     isLoadedDesktopTokens: Boolean = false;
+    microsoftConnected: String = '';
 
     constructor(protected MsUserClientService: MsUserClientService, protected AuthService: AuthService) {
 
@@ -34,7 +35,21 @@ export class ConnectionComponent implements OnInit {
             this.authDesktopTokens = response;
             this.isLoadedDesktopTokens = true;
         });
+
+        if (this.me.microsoft_oauth) {
+            const connectedData = [];
+            if (this.me.microsoft_oauth.project_url) {
+                connectedData.push(this.me.microsoft_oauth.project_url);
+            }
+            if (this.me.microsoft_oauth.account_email) {
+                connectedData.push(this.me.microsoft_oauth.account_email);
+            }
+            this.microsoftConnected = connectedData.join(',');
+        }
     }
+
+       // this.connectedInfo.microsoft =
+
 
     getProcoreAuthLink() {
         return this.MsUserClientService.getProcoreAuthLink();
