@@ -35,15 +35,23 @@ export class SyncSessionRowComponent implements OnInit {
         return this.syncSession.started_by.charAt(0).toUpperCase() + this.syncSession.started_by.slice(1);
     }
 
-    getTotalTime() {
+    getTotalTime(): any {
         if (!this.syncSession.finished_at || !this.syncSession.started_at) {
             return 0;
         }
-
         let d2 = new Date(+this.syncSession.finished_at);
         let d1 = new Date(+this.syncSession.started_at);
 
-        return d2.getTime() - d1.getTime();
+        const diffSeconds = (d2.getTime() - d1.getTime()) / 1000;
+        const diffMinutes = Math.floor(diffSeconds / 60);
+        const restSeconds = Math.floor(diffSeconds - (diffMinutes * 60));
+
+        const date =  {
+            minutes: (diffMinutes < 10) ? `0${diffMinutes}` : diffMinutes,
+            seconds: (restSeconds < 10) ? `0${restSeconds}` : restSeconds,
+        };
+
+        return `${date.minutes}:${date.seconds}`;
     }
 
     protected isExpanded: boolean = false;
