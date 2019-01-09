@@ -12,9 +12,12 @@
         </h5>
 
         <div class="text-right">
+            <!--<a *ngIf="(PipeConnectionService.pipesListObj[pipeType].status != 'active')"-->
+               <!--(click)="PipeConnectionService.enablePipe(PipeConnectionService.pipesListObj[pipeType]?.id)"-->
+               <!--[class.disabled]="!canEnablePipe"-->
+               <!--class="btn btn-success">start</a>-->
             <a *ngIf="(PipeConnectionService.pipesListObj[pipeType].status != 'active')"
                (click)="PipeConnectionService.enablePipe(PipeConnectionService.pipesListObj[pipeType]?.id)"
-               [class.disabled]="!canEnablePipe"
                class="btn btn-success">start</a>
             <div *ngIf="canEnablePipe === false" style="font-weight: bold; color:#8b0305;">
                 Your company subscription is not active. You can't connect projects.
