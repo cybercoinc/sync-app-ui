@@ -281,6 +281,7 @@ export class ProjectPipe {
     need_to_match_sm_columns: boolean;
     colors_coding_enabled: boolean;
     use_schedule_chart: boolean;
+    connected_to: string;
 }
 
 export class Invoice {

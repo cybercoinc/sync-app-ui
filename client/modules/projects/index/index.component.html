@@ -144,6 +144,16 @@
                                                    target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
                                                    md-button>SMARTSHEET</a>
+                                                <a *ngIf="'microsoft-online'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
+                                                   disabled
+                                                   target="_blank"
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
+                                                   md-button>MS PROJECT ONLINE</a>
+                                                <a *ngIf="'microsoft-desktop'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
+                                                   target="_blank"
+                                                   disabled
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
+                                                   md-button>MS PROJECT DESKTOP</a>
                                                 <a *ngIf="'gantt-chart'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
                                                    target="_blank"

@@ -58,6 +58,7 @@ export class IndexComponent implements OnInit {
                 return this.MsProjectClientService.getPipesByProjectsIds(projectsIds);
             })
             .then(pipesList => {
+                console.log(_projects);
                 this.projectRows = [];
                 this.filteredProjectRows = [];
 
@@ -139,9 +140,16 @@ export class IndexComponent implements OnInit {
         let source = 'smartsheet';
 
         projectPipesList.forEach((pipe: ProjectPipe) => {
-            if (pipeType === pipe.type && pipe.use_schedule_chart) {
-                source = 'gantt-chart';
+            if (pipeType === pipe.type) {
+                if (pipe.connected_to === 'microsoft-online') {
+                    source = 'microsoft-online';
+                } else if (pipe.connected_to === 'microsoft-desktop') {
+                    source = 'microsoft-desktop';
+                } else if (pipe.use_schedule_chart) {
+                    source = 'gantt-chart';
+                }
             }
+
         });
 
         return source;
