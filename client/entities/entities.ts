@@ -194,6 +194,11 @@ export class MicrosoftProject {
     name: string;
 }
 
+export class MicrosoftProjectOnline {
+    Id: number;
+    Name: string;
+}
+
 /**
  * https://smartsheet-platform.github.io/api-docs/?shell#column-object
  */

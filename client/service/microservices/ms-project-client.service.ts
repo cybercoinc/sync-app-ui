@@ -6,7 +6,7 @@ import {
     Project,
     SmartsheetSheet,
     ProjectPipe,
-    User, SmartsheetWorkspace, SmartsheetColumn, MicrosoftProjectColumn
+    User, SmartsheetWorkspace, SmartsheetColumn, MicrosoftProjectColumn, MicrosoftProjectOnline
 } from 'client/entities/entities';
 import { PendingRequestsService } from '../pending-requests.service';
 import { Router } from '@angular/router';
@@ -101,6 +101,19 @@ export class MsProjectClientService extends MsClientService {
             'microsoft-online/projects',
             'GET',
             {}
+        );
+    }
+
+    /**
+     * Create microsoft projects
+     */
+    createMicrosoftProject(name: string): Promise<MicrosoftProjectOnline> {
+        return this.makeMsCall(
+            'microsoft-online/projects',
+            'POST',
+            {
+                name
+            }
         );
     }
 

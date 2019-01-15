@@ -172,28 +172,41 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
 
         let _pipeId;
 
+        const defaultColumns = {
+            actual_finish: "ActualFinish",
+            actual_start: "ActualStart",
+            assigned_to: "",
+            description: "",
+            duration: "Duration",
+            end_datetime: "Finish",
+            percentage_complete: "PercentComplete",
+            resource: "",
+            start_datetime: "Start",
+            task_name: "Name"
+        };
 
-        return this.MsProjectClientService.createSmartsheetSheetFromTemplateInSheetsFolder(
-            project.id, this.ConfigService.getConfig('SM_PROJECT_TEMPLATE_ID'), newSheetName
-        )
-            .then(createdSheetObj => {
+        return this.MsProjectClientService.createMicrosoftProject(newSheetName)
+            .then(response => {
                 return this.PipeConnectionService.createNewOrGetExistingPipe(
                     this.pipeType,
-                    false, {
-                        sm_sheet_id: createdSheetObj.id,
-                        sm_permalink: createdSheetObj.permalink,
-                        sm_sheet_name: createdSheetObj.name
+                    false,
+                    {
+                        connected_to: 'microsoft-online',
+                        ms_project_id: response.Id,
+                        ms_project_name: response.Name,
+                        ms_project_columns: defaultColumns,
+                        need_to_match_ms_project_columns: false,
                     })
             })
             .then(pipeId => {
-                _pipeId = pipeId;
-
-                if (this.pipeType === PIPE_TYPE_TASKS) {
-                    return this.MsProjectClientService.addResourceColumnToSheet(_pipeId);
-                }
+                // _pipeId = pipeId;
+                //
+                // if (this.pipeType === PIPE_TYPE_TASKS) {
+                //     return this.MsProjectClientService.addResourceColumnToSheet(_pipeId);
+                // }
             })
             .then(() => {
-                return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
+                // return this.MsProjectClientService.matchDefaultSheetColumns(_pipeId);
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();

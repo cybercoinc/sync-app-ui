@@ -58,7 +58,6 @@ export class IndexComponent implements OnInit {
                 return this.MsProjectClientService.getPipesByProjectsIds(projectsIds);
             })
             .then(pipesList => {
-                console.log(_projects);
                 this.projectRows = [];
                 this.filteredProjectRows = [];
 
@@ -94,6 +93,25 @@ export class IndexComponent implements OnInit {
         });
 
         return status;
+    }
+
+    /**
+     * Get microsoft online project link
+     * @param projectPipesList
+     * @param pipeType
+     */
+    getMicrosoftOnlineProjectLink(projectPipesList, pipeType): string {
+        let pipeObj;
+        projectPipesList.forEach((pipe: ProjectPipe) => {
+            if (pipe.type === pipeType) {
+                pipeObj = pipe;
+            }
+        });
+
+        if (pipeObj) {
+            return `${this.AuthService.authUser.microsoft_oauth.project_url}/project%20detail%20pages/schedule.aspx?projuid=${pipeObj.ms_project_id}`
+        }
+        return '';
     }
 
     getDocumentPipesStatus(projectPipesList): string {

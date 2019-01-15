@@ -145,9 +145,8 @@
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
                                                    md-button>SMARTSHEET</a>
                                                 <a *ngIf="'microsoft-online'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
-                                                   disabled
                                                    target="_blank"
-                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'tasks')}}"
+                                                   href="{{getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'tasks')}}"
                                                    md-button>MS PROJECT ONLINE</a>
                                                 <a *ngIf="'microsoft-desktop'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
                                                    target="_blank"
