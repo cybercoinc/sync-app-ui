@@ -157,7 +157,7 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
      * @todo workspace will not be used
      * @returns {any}
      */
-    createNewSheetWithWorkspace(): any | boolean | Promise<boolean> {
+    createNewMicrosoftProject(): any | boolean | Promise<boolean> {
         if (this.PendingRequestsService.hasPendingRequest) {
             return false;
         }
@@ -168,7 +168,7 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
 
         let procoreProjectName = project.name;
         let workspaceName = procoreProjectName.length > 30 ? procoreProjectName.slice(0, 30) + '...' : procoreProjectName;
-        let newSheetName = workspaceName + ' ' + this.PipeConnectionService.getPipeLabelByType(this.pipeType);
+        let newSheetName = `${workspaceName} ${this.PipeConnectionService.getPipeLabelByType(this.pipeType)}`;
 
         let _pipeId;
 
