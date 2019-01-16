@@ -42,8 +42,7 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
     protected needToRematchColumns: boolean = false;
 
     protected haveExistingSheet: boolean;
-
-
+    protected msProjectLink: string = null;
 
     ngOnInit() {
         this.PipeConnectionService.refreshPipesList();
@@ -63,10 +62,14 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
         //     }
         //
         // }
-
+        if (this.PipeConnectionService.pipesListObj && this.PipeConnectionService.pipesListObj[this.pipeType]) {
+            this.msProjectLink = `${this.AuthService.authUser.microsoft_oauth.project_url}/project%20detail%20pages/schedule.aspx?projuid=${this.PipeConnectionService.pipesListObj[this.pipeType].ms_project_id}`;
+        }
+        // this.msProjectLink = `${this.AuthService.authUser.microsoft_oauth.project_url}/project%20detail%20pages/schedule.aspx?projuid=${pipeObj.ms_project_id}`
         // if need to rematch columns
         // this.needToRematchColumns = this.PipeConnectionService.pipesListObj[this.pipeType]
         //     && this.PipeConnectionService.pipesListObj[this.pipeType].need_to_match_sm_columns;
+
     }
 
     removeTodos(): void {

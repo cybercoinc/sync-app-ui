@@ -92,7 +92,7 @@
             </section>
         </div>
     </div>
-
+    <!--getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'tasks'-->
     <md-card-header *ngIf="PipeConnectionService.pipesListObj[pipeType]?.ms_project_id">
         <md-card-title>Connection</md-card-title>
     </md-card-header>
@@ -113,7 +113,7 @@
                 <div class="pull-right">
                     <pipe-delete [pipe]="PipeConnectionService.pipesListObj[pipeType]"></pipe-delete>
 
-                    <a href="{{PipeConnectionService.pipesListObj[pipeType]?.ms_permalink}}"
+                    <a href="{{msProjectLink}}"
                        class="btn btn-success"
                        target="_blank">open</a>
                 </div>
