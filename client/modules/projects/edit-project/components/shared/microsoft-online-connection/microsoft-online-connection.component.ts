@@ -62,14 +62,20 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
         //     }
         //
         // }
-        if (this.PipeConnectionService.pipesListObj && this.PipeConnectionService.pipesListObj[this.pipeType]) {
-            this.msProjectLink = `${this.AuthService.authUser.microsoft_oauth.project_url}/project%20detail%20pages/schedule.aspx?projuid=${this.PipeConnectionService.pipesListObj[this.pipeType].ms_project_id}`;
-        }
+        this.msProjectLink = this.getMsProjectOnlineLink();
         // this.msProjectLink = `${this.AuthService.authUser.microsoft_oauth.project_url}/project%20detail%20pages/schedule.aspx?projuid=${pipeObj.ms_project_id}`
         // if need to rematch columns
         // this.needToRematchColumns = this.PipeConnectionService.pipesListObj[this.pipeType]
         //     && this.PipeConnectionService.pipesListObj[this.pipeType].need_to_match_sm_columns;
 
+    }
+
+    getMsProjectOnlineLink(): string {
+        if (this.PipeConnectionService.pipesListObj && this.PipeConnectionService.pipesListObj[this.pipeType]) {
+            return `${this.AuthService.authUser.microsoft_oauth.project_url}/project%20detail%20pages/schedule.aspx?projuid=${this.PipeConnectionService.pipesListObj[this.pipeType].ms_project_id}`;
+        }
+
+        return '';
     }
 
     removeTodos(): void {
@@ -250,6 +256,9 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
+            })
+            .then(() => {
+                this.msProjectLink = this.getMsProjectOnlineLink();
             });
     }
 
