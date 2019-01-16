@@ -219,6 +219,9 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             })
             .then(() => {
                 return this.PipeConnectionService.refreshPipesList();
+            })
+            .then(() => {
+                this.msProjectLink = this.getMsProjectOnlineLink();
             });
     }
 
