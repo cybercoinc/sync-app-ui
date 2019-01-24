@@ -103,6 +103,8 @@ export class CreateProjectComponent implements OnInit {
                     throw new Error('no project id found');
                 }
 
+                // @todo: here is place for DatastoreConsistency issue. We create project above and pass its ID
+                // below. But fetching by this ID might return empty response.
                 return Promise.all([
                     this.MsLicenseClientService.createStartLicense(_projectId, data.name,
                         this.AuthService.authUser.id),
