@@ -41,7 +41,7 @@ export class MsUserClientService extends MsClientService {
     }
 
     getCompanyUsers(companyId): Promise<any> {
-        return this.makeMsCall('', 'GET', {
+        return this.makeMsCall('get-company-users', 'GET', {
             companyId: companyId
         });
     }
