@@ -171,6 +171,18 @@ export class MsClientService {
                 break;
             }
 
+            case 2005: {
+                this.NotificationsService.addReaction('Error. You don`t have Microsoft Online credentials connected. Please connect your account.',
+                    'error',
+                    'Microsoft Online connection required',
+                    [
+                        {label: 'Connect Microsoft Online', route: ['/', 'connection']},
+                        {label: 'Cancel', route: ['/']},
+                    ]);
+
+                break;
+            }
+
             default: {
                 this.NotificationsService.addError(message);
             }
