@@ -14,13 +14,23 @@ import { Project } from '../../../../../entities/entities';
         <schedule-connection *ngIf="scheduleChartIsUsed" pipe-type="{{pipeType}}"
                              [redirect-route]="redirectRoute"></schedule-connection>
 
-        <smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed" pipe-type="{{pipeType}}"
+        <smartsheet-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='smartsheet'" pipe-type="{{pipeType}}"
                                [redirect-route]="redirectRoute"></smartsheet-connection>
 
         <pipe-settings pipe-type="{{pipeType}}" [redirect-route]="redirectRoute"></pipe-settings>
 
         <chart-working-days *ngIf="project && project.id && scheduleChartIsUsed"
                             [projectId]="project.id"></chart-working-days>
+
+        <microsoft-online-connection *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='microsoft-online'" pipe-type="{{pipeType}}"
+                                     [redirect-route]="redirectRoute"></microsoft-online-connection>
+
+        <microsoft-desktop-connection
+                *ngIf="!useScheduleChartIsAsked && !scheduleChartIsUsed && projectType==='microsoft-desktop'"
+                pipe-type="{{pipeType}}"
+                (connection)="displayChooseConnection($event)">
+        </microsoft-desktop-connection>
+
     `
 })
 export class SmartsheetConnectionPrivateComponent implements OnInit {
@@ -36,18 +46,41 @@ export class SmartsheetConnectionPrivateComponent implements OnInit {
 
         this.scheduleChartIsUsed = this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].use_schedule_chart;
         this.useScheduleChartIsAsked = !this.pipesListObj[this.pipeType];
+
+        if (this.pipesListObj[this.pipeType] && this.pipesListObj[this.pipeType].connected_to) {
+            this.projectType = this.pipesListObj[this.pipeType].connected_to;
+        } else {
+            this.projectType = 'smartsheet';
+        }
     }
 
     protected pipesListObj = {};
     protected pipeType = PIPE_TYPE_PRIVATE_TODOS;
     protected redirectRoute = ['projects', this.PipeConnectionService.project.id, 'edit-project', 'pipe-private-todo', 'settings-private'];
+    protected projectType: String = '';
 
 
     protected useScheduleChartIsAsked: boolean = false;
     protected scheduleChartIsUsed: boolean = false;
 
     protected onSmartsheetScheduleDecisionMade(result) {
+        if (!result) {
+            this.displayChooseConnection();
+            return;
+        }
+
         this.scheduleChartIsUsed = result === 'gantt_chart';
         this.useScheduleChartIsAsked = false;
+        this.projectType = result;
+    }
+
+
+    /**
+     * Display choose connection
+     */
+    protected displayChooseConnection() {
+        this.useScheduleChartIsAsked = true;
+        this.pipeType = 'tasks';
+        this.projectType = '';
     }
 }
