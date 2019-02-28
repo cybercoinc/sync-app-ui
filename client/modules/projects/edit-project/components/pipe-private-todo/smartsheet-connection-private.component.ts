@@ -80,7 +80,7 @@ export class SmartsheetConnectionPrivateComponent implements OnInit {
      */
     protected displayChooseConnection() {
         this.useScheduleChartIsAsked = true;
-        this.pipeType = 'tasks';
+        this.pipeType = 'private-todo';
         this.projectType = '';
     }
 }
