@@ -102,6 +102,15 @@
                                                    target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
                                                    md-button>SMARTSHEET</a>
+                                                <a *ngIf="'microsoft-online'===getPipeSyncSource(projectRow.projectPipesList, 'public_todos')"
+                                                   target="_blank"
+                                                   href="{{getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'public_todos')}}"
+                                                   md-button>MS PROJECT ONLINE</a>
+                                                <a *ngIf="'microsoft-desktop'===getPipeSyncSource(projectRow.projectPipesList, 'public_todos')"
+                                                   target="_blank"
+                                                   disabled
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
+                                                   md-button>MS PROJECT DESKTOP</a>
                                                 <a *ngIf="'gantt-chart'===getPipeSyncSource(projectRow.projectPipesList, 'public_todos')"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'public_todos')}}"
                                                    target="_blank"
@@ -123,6 +132,15 @@
                                                    target="_blank"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
                                                    md-button>SMARTSHEET</a>
+                                                <a *ngIf="'microsoft-online'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
+                                                   target="_blank"
+                                                   href="{{getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'private_todos')}}"
+                                                   md-button>MS PROJECT ONLINE</a>
+                                                <a *ngIf="'microsoft-desktop'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
+                                                   target="_blank"
+                                                   disabled
+                                                   href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
+                                                   md-button>MS PROJECT DESKTOP</a>
                                                 <a *ngIf="'gantt-chart'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
                                                    href="{{getPipeSyncSourceLink(projectRow.projectPipesList, 'private_todos')}}"
                                                    target="_blank"
