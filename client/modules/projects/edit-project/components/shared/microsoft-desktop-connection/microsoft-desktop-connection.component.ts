@@ -2,8 +2,8 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { MsProjectClientService } from 'client/service/microservices/ms-project-client.service';
 import { AuthService } from 'client/service/auth.service';
 import { PipeConnectionService } from 'client/service/pipe-connection.service';
+import { MsMainClientService } from 'client/service/microservices/ms-main-client.service';
 
-import { MicrosoftProject } from 'client/entities/entities';
 import { PendingRequestsService } from 'client/service/pending-requests.service';
 
 @Component({
@@ -17,17 +17,30 @@ export class MicrosoftDesktopConnectionComponent implements OnInit {
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected AuthService: AuthService,
                 protected PipeConnectionService: PipeConnectionService,
-                protected PendingRequestsService: PendingRequestsService) {
+                protected PendingRequestsService: PendingRequestsService,
+                protected MsMainClientService: MsMainClientService) {
     }
 
     @Input('pipe-type') pipeType: 'public_todos' | 'private_todos' | 'tasks';
     @Input('redirect-route') redirectRoute;
 
     private isShowAlert: boolean = false;
+    private microsoftDesktopUrl = null;
 
 
 
     ngOnInit() {
+        if (this.PipeConnectionService.pipesListObj[this.pipeType].connected_to === 'microsoft-desktop') {
+            this.MsMainClientService.getAppSettings().then(response => {
+                if (response) {
+                    response.forEach(item => {
+                        if (item.name === 'microsoft_desktop_url') {
+                            this.microsoftDesktopUrl = item.value.status;
+                        }
+                    })
+                }
+            });
+        }
     }
 
     cancelConnection() {

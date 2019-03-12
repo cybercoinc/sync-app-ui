@@ -13,6 +13,7 @@ import {MsProjectClientService} from './service/microservices/ms-project-client.
 import {MsUserClientService} from './service/microservices/ms-user-client.service';
 import {MsSyncClientService} from './service/microservices/ms-sync-client.service';
 import {MsLicenseClientService} from './service/microservices/ms-license-client.service';
+import {MsMainClientService} from './service/microservices/ms-main-client.service';
 
 import {AuthService} from './service/auth.service';
 import {PipeConnectionService} from './service/pipe-connection.service';
@@ -59,6 +60,7 @@ import {NotificationsModule} from "./modules/notifications/notifications.module"
         MsProjectClientService,
         MsUserClientService,
         MsLicenseClientService,
+        MsMainClientService,
         MsSyncClientService,
         PipeConnectionService,
         ConfigService,
