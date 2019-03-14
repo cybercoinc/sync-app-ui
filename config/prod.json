@@ -1,7 +1,7 @@
 {
   "GCLOUD_PROJECT": "scheduleconnector-prod",
   "accessEndPointURL": "https://sync.cyberco.com/",
-  "ms_main_url": "https://2.sync.cyberco.com/",
+  "ms_main_url": "https://1.sync.cyberco.com/",
 
   "CHART_EXPORT_ENDPOINT": "https://gantt-pdf-dot-scheduleconnector-prod.appspot.com/gantt"
 }
