@@ -30,7 +30,14 @@ export class MicrosoftDesktopConnectionComponent implements OnInit {
 
 
     ngOnInit() {
-        if (this.PipeConnectionService.pipesListObj[this.pipeType].connected_to === 'microsoft-desktop') {
+        if (
+            !this.PipeConnectionService.pipesListObj[this.pipeType]
+            ||
+            (
+                this.PipeConnectionService.pipesListObj[this.pipeType]
+                && this.PipeConnectionService.pipesListObj[this.pipeType].connected_to === 'microsoft-desktop'
+            )
+        ) {
             this.MsMainClientService.getAppSettings().then(response => {
                 if (response) {
                     response.forEach(item => {
