@@ -175,6 +175,8 @@ settings .custom-users-dropdown {
 
 .navbar-brand.logo-container {
     height: auto;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .navbar-brand.logo-container:hover {

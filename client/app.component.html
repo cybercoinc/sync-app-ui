@@ -3,11 +3,11 @@
         <div class="navbar-header">
             <a *ngIf="AuthService.authUser && AuthService.authUser.role !== 'guest'" class="navbar-brand logo-container"
                [routerLink]="['/projects']">
-                <img src="/assets/img/cyberco-sync-logo.png" style="height: 40px;" alt="logo">
+                <img src="/assets/img/cyberco-sync-logo-new.png" style="height: 69px;" alt="logo">
             </a>
-            <span *ngIf="!(AuthService.authUser && AuthService.authUser.role !== 'guest')" class="navbar-brand"
+            <span *ngIf="!(AuthService.authUser && AuthService.authUser.role !== 'guest')" class="navbar-brand logo-container"
                   style="height: auto;">
-                <img src="/assets/img/cyberco-sync-logo.png" style="height: 40px;" alt="logo">
+                <img src="/assets/img/cyberco-sync-logo-new.png" style="height: 69px;" alt="logo">
             </span>
         </div>
 
