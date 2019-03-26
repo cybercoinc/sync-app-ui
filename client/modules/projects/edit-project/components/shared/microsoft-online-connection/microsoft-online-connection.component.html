@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div *ngIf="!isShowAlert">
+            <div *ngIf="!isShowAlert" class="row">
                 <div class="col-xs-12">
                     <h5>Do you have an existing Microsoft Online schedule that you would like to merge with your Procore
                         project
@@ -37,6 +37,26 @@
                     <button class="btn btn-primary" [disabled]="haveExistingSheet !== undefined"
                             (click)="createNewMicrosoftProject()">No
                     </button>
+                </div>
+            </div>
+
+            <div *ngIf="isShowMsProjectRetry" class="row ms-project-info">
+                <div class="col-xs-12">
+                    <h5>Please enter new microsoft project name:</h5>
+                </div>
+
+                <div>
+                    <div class="col-xs-7">
+                        <input type="text" class="full-width"
+                               [(ngModel)]="msProjectName"
+                               placeholder="Microsoft project name">
+                    </div>
+
+                    <div class="col-xs-2">
+                        <button class="btn btn-primary"
+                                (click)="createNewMicrosoftProject('123213123123')">Retry
+                        </button>
+                    </div>
                 </div>
             </div>
 

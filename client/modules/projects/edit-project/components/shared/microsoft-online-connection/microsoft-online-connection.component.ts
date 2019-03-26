@@ -43,6 +43,8 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
 
     protected haveExistingSheet: boolean;
     protected msProjectLink: string = null;
+    protected msProjectName: string = '';
+    private isShowMsProjectRetry: boolean = false;
 
     ngOnInit() {
         this.PipeConnectionService.refreshPipesList();
@@ -167,6 +169,7 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
      * @returns {any}
      */
     createNewMicrosoftProject(): any | boolean | Promise<boolean> {
+        this.isShowMsProjectRetry = false;
         if (this.PendingRequestsService.hasPendingRequest) {
             return false;
         }
@@ -193,6 +196,12 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             start_datetime: "Start",
             task_name: "Name"
         };
+
+        if (this.msProjectName) {
+            newSheetName = this.msProjectName;
+        }
+        newSheetName = newSheetName.replace(/[^0-9a-zA-Z-_ ]/gm, '-');
+        this.msProjectName = newSheetName;
 
         return this.MsProjectClientService.createMicrosoftProject(newSheetName)
             .then(response => {
@@ -222,6 +231,10 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
             })
             .then(() => {
                 this.msProjectLink = this.getMsProjectOnlineLink();
+            }).catch((error) => {
+                if (error.status === 422) {
+                    this.isShowMsProjectRetry = true;
+                }
             });
     }
 
