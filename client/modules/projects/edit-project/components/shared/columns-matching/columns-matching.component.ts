@@ -23,8 +23,12 @@ export class ColumnsMatchingComponent implements OnInit {
         ])
             .then(resultsList => {
                 let smColumns = resultsList[0];
-                let prColumns = resultsList[1];
-
+                let prColumns = resultsList[1].filter(item => {
+                    if (this.pipeType === 'tasks') {
+                        return item.slug !== 'assigned_to'
+                    }
+                    return true;
+                });
                 this.smColumns = smColumns;
                 this.prColumns = prColumns;
 
@@ -104,6 +108,7 @@ export class ColumnsMatchingComponent implements OnInit {
     @Output() columnsMatched = new EventEmitter();
 
     matchColumns() {
+        console.log(this.model);
         this.validationError = false;
 
         let notRequiredColumnsList = [
