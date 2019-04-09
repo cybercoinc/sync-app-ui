@@ -46,6 +46,9 @@
         <div style="float: right;">
             <button md-button (click)="updateSubscriptionCard(subscription)">Payment Method</button>
         </div>
+        <div style="float: right;" class="btn-primary">
+            <button class="btn-primary" md-button (click)="createSubscriptionCard(subscription)">Payment Method</button>
+        </div>
         <div style="font-size: 20px;">
             {{subscription.plan.name}}
             <span [ngStyle]="{'color':getStatusColor(subscription)}" style="font-size: 22px;">{{getStatusLabel(subscription)}}</span>

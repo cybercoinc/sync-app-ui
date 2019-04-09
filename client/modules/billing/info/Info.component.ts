@@ -98,6 +98,16 @@ export class InfoComponent implements OnInit {
             });
     }
 
+    createSubscriptionCard(subscription) {
+
+        this.msLicenseClientService.getNewSubscriptionHostedPage(this.authService.company.id)
+            .then(hostedPage => {
+                if (hostedPage.url) {
+                    window.location.href = hostedPage.url;
+                }
+            });
+    }
+
     cancelSubscription(subscription) {
         let dialogRef = this.notificationService.addConfirm('Are you sure?');
 
