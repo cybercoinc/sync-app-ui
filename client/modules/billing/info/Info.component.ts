@@ -18,6 +18,9 @@ export class InfoComponent implements OnInit {
     mySubsciptions: any;
     currentUser: any;
     companyInfo: any;
+    subscriptionPlanCodeSync = 'sc-projectplan';
+    subscriptionPlanCodeSyncTrial = 'sc-projectplan-trial';
+
 
     constructor(protected msLicenseClientService: MsLicenseClientService,
                 protected msUserClientService: MsUserClientService,
@@ -98,7 +101,7 @@ export class InfoComponent implements OnInit {
             });
     }
 
-    createSubscriptionCard(subscription) {
+    createSubscriptionViaHostedPage() {
 
         this.msLicenseClientService.getNewSubscriptionHostedPage(this.authService.company.id)
             .then(hostedPage => {
@@ -106,6 +109,35 @@ export class InfoComponent implements OnInit {
                     window.location.href = hostedPage.url;
                 }
             });
+    }
+
+    updateSubscriptionViaHostedPage(subscription) {
+
+        this.msLicenseClientService.getUpdateSubscriptionHostedPage(this.authService.company.id, subscription.subscription_id)
+            .then(hostedPage => {
+                if (hostedPage.url) {
+                    window.location.href = hostedPage.url;
+                }
+            });
+    }
+
+    updateSubscription(subscription) {
+        const planCode = (subscription.plan && subscription.plan.plan_code) ? subscription.plan.plan_code : null;
+        const status = subscription.status;
+
+        switch (status) {
+            case 'cancelled':
+            case 'expired':
+                if (planCode === this.subscriptionPlanCodeSyncTrial){
+                    this.createSubscriptionViaHostedPage()
+                } else {
+                    this.updateSubscriptionViaHostedPage(subscription);
+                }
+                break;
+
+            default:
+                this.updateSubscriptionCard(subscription);
+        }
     }
 
     cancelSubscription(subscription) {

@@ -159,6 +159,17 @@ export class MsLicenseClientService extends MsClientService {
         );
     }
 
+    getUpdateSubscriptionHostedPage(companyId, zohoSubscriptionId): Promise<any> {
+        return this.makeMsCall(
+            'billing/get-update-subscription-hosted-page',
+            'GET',
+            {
+                company_id: companyId,
+                zoho_subscription_id: zohoSubscriptionId
+            }
+        );
+    }
+
     cancelSubscription(companyId, zohoSubscriptionId): Promise<any> {
         return this.makeMsCall(
             'billing/cancel-subscription',
