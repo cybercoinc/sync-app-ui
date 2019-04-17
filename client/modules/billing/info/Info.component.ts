@@ -272,6 +272,7 @@ export class InfoComponent implements OnInit {
     getStatusLabel(subscription) {
         switch (subscription.status) {
             case 'trial': return 'TRIAL';
+            case 'expired': return 'EXPIRED';
             case 'live': return 'LIVE';
             case 'cancelled': return 'CANCELLED';
             case 'non_renewing': return 'NON RENEWING';
