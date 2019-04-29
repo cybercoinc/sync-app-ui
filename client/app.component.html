@@ -13,8 +13,9 @@
 
         <div class="trial-notification" *ngIf="isShowTrialNotification && AuthService.companyBillingStatus?.is_trial_notification_needed">
             <a class="link" [routerLink]="['/billing/info']">
-                There are {{AuthService.companyBillingStatus?.trial_remaining_days}} days left in your trial, to avoid cancellation please provide a payment method here
-            </a>.
+                There are {{AuthService.companyBillingStatus?.trial_remaining_days}} days left in your trial.
+                <span *ngIf="AuthService.companyBillingStatus?.is_credit_card_exist"> To avoid cancellation please provide a payment method here.</span>
+            </a>
             &nbsp;&nbsp;<a class="dismiss-link" href="javascript:void(0);" (click)="dismissTrialNotifications()">Dismiss</a>
         </div>
 
