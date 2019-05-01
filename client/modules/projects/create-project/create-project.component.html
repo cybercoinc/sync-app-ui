@@ -42,13 +42,13 @@
                 <div class="row">
                     <div style="width: 130px; display: inline-block;">
                         <a (click)="createNewProject(true)" class="btn btn-success full-width"
-                           [class.disabled]="!selectedProject || !canConnectNewProjects || !canUseQuickSetup">Quick
+                           [class.disabled]="!selectedProject || !canConnectNewProjects || !canUseQuickSetup || isLoaded">Quick
                             Setup</a>
                     </div>
 
                     <div style="width: 100px; display: inline-block;">
                         <a (click)="createNewProject()" class="btn btn-success full-width"
-                           [class.disabled]="!selectedProject || !canConnectNewProjects">Connect</a>
+                           [class.disabled]="!selectedProject || !canConnectNewProjects || isLoaded">Connect</a>
                     </div>
 
                     <div style="float: right; display: inline-block;">

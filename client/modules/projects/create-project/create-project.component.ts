@@ -21,6 +21,7 @@ export class CreateProjectComponent implements OnInit {
     }
 
     public canConnectNewProjects = true;
+    public isLoaded = false;
 
     public canUseQuickSetup: boolean = !!this.AuthService.authUser.smartsheet_oauth;
 
@@ -94,6 +95,7 @@ export class CreateProjectComponent implements OnInit {
         };
 
         let _projectId;
+        this.isLoaded = true;
 
         return this.MsProjectClientService.create(data)
             .then(projectId => {
@@ -134,6 +136,9 @@ export class CreateProjectComponent implements OnInit {
                     .then(() => {
                         return this.router.navigate(['projects', _projectId, 'edit-project', 'settings']);
                     });
+            })
+            .then(() => {
+                this.isLoaded = false;
             })
     }
 } 
