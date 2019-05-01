@@ -24,13 +24,6 @@ export class StatusRowComponent implements OnInit {
     }
 
     ngOnInit() {
-        // fix for ms_project
-        if (this.PipeConnectionService.pipesListObj[this.pipeType]
-            && (this.PipeConnectionService.pipesListObj[this.pipeType].connected_to === 'microsoft-online'
-                || this.PipeConnectionService.pipesListObj[this.pipeType].connected_to === 'microsoft-desktop')) {
-            this.canEnablePipe = true;
-        }
-
         this.MsLicenseClientService.getCompanyBillingStatus(this.AuthService.company.id)
             .then(response => {
                 if (response.is_subscription_active
@@ -38,6 +31,8 @@ export class StatusRowComponent implements OnInit {
                     &&
                     (this.PipeConnectionService.pipesListObj[this.pipeType].sm_sheet_id
                         || this.PipeConnectionService.pipesListObj[this.pipeType].use_schedule_chart
+                        || this.PipeConnectionService.pipesListObj[this.pipeType].connected_to === 'microsoft-online'
+                        || this.PipeConnectionService.pipesListObj[this.pipeType].connected_to === 'microsoft-desktop'
                     )
                 ) {
                     this.canEnablePipe = true;
