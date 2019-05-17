@@ -287,6 +287,9 @@ export class ProjectPipe {
     colors_coding_enabled: boolean;
     use_schedule_chart: boolean;
     connected_to: string;
+    options: {
+        procore_pdf_size: string
+    };
 }
 
 export class Invoice {

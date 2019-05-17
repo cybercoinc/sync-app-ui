@@ -25,6 +25,33 @@
 
 <md-card>
     <md-card-header>
+        <md-card-title>Options</md-card-title>
+    </md-card-header>
+
+    <md-card-content>
+
+        <div class="row">
+            <div class="col-xs-9">
+                <span class="pdf-label">Procore PDF Size:</span>
+                <md-select class="select-tool-dropdown select-pdf" [(ngModel)]="selectedProcorePdfSize" name="selected_tool">
+                    <md-option *ngFor="let size of procorePdfSizes" [value]="size">
+                        {{size}}
+                    </md-option>
+                </md-select>
+            </div>
+            <div class="col-xs-3">
+                <div class="text-right">
+                    <button
+                       (click)="updatePipeOptions()"
+                       class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </md-card-content>
+</md-card>
+
+<md-card>
+    <md-card-header>
         <md-card-title>Connection</md-card-title>
     </md-card-header>
 

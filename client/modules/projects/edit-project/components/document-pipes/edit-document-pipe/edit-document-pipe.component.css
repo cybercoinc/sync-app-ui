@@ -1,3 +1,11 @@
 md-radio-button {
     margin-left: 20px;
 }
+.select-pdf {
+    margin-left: 10px;
+    width: 300px;
+}
+.pdf-label {
+    line-height: 30px;
+    vertical-align: bottom;
+}
