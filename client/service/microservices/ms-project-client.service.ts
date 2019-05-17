@@ -299,6 +299,16 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    pushStartPipeSyncToQueue(pipeId: number): Promise<boolean> {
+        return this.makeMsCall(
+            'pipes/push-start-pipe-sync-to-queue',
+            'POST',
+            {
+                pipe_id: pipeId
+            }
+        );
+    }
+
     disablePipe(pipeId: number): Promise<boolean> {
         return this.makeMsCall(
             'pipes/disable',

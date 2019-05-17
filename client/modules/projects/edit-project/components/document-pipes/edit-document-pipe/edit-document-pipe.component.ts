@@ -60,7 +60,8 @@ export class EditDocumentPipeComponent implements OnInit {
         return this.MsProjectClientService.updatePipe(this.pipeId, {
             options
         }).then(() => {
-            this.NotificationsService.addInfo('Options was successfully saved');
+            this.NotificationsService.addInfo('Saved.');
+            return this.MsProjectClientService.pushStartPipeSyncToQueue(this.pipeId);
         });
     }
 

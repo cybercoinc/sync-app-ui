@@ -245,7 +245,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 label = 'Project Schedule';
                 break;
             case 'document_pipe':
-                label = 'Document Pipe';
+                label = 'Document';
                 break;
         }
 
