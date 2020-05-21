@@ -126,10 +126,7 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-3">
-                <button class="btn btn-success" [disabled]="PipeConnectionService.pipesListObj[pipeType]?.status === 'active'" (click)="showColumnsRematch()">Rematch Columns</button>
-            </div>
-            <div class="col-xs-9">
+            <div class="col-xs-12">
                 <div class="pull-right">
                     <pipe-delete [pipe]="PipeConnectionService.pipesListObj[pipeType]"></pipe-delete>
 
@@ -140,14 +137,5 @@
             </div>
         </div>
     </md-card-content>
-
-    <div class="container-fluid" *ngIf="PipeConnectionService.pipesListObj[pipeType]?.ms_project_id && needToRematchColumns">
-        <div class="row">
-            <div class="col-xs-12">
-                <columns-matching sheet-id="{{PipeConnectionService.pipesListObj[pipeType]?.ms_project_id}}" pipe-type="{{pipeType}}"
-                                  (columnsMatched)="onColumnsRematched($event)"></columns-matching>
-            </div>
-        </div>
-    </div>
 
 </md-card>
