@@ -4,30 +4,15 @@
             <h5>Match columns</h5>
         </div>
 
-        <div class="col-xs-12" *ngIf="validationError">
-            <div class="alert alert-danger">
-                Match required columns.
-            </div>
-        </div>
-
-        <div class="col-xs-12" *ngIf="!mcColumns && !prColumns">
-            <i class="fa fa-cog fa-spin fa-fw"></i> Loading columns...
-        </div>
-
-        <div class="col-xs-12" *ngIf="mcColumns?.length > 0 && prColumns?.length > 0">
+        <div class="col-xs-12">
             <form class="form-horizontal">
-                <div class="form-group" *ngFor="let procoreTodoColumn of prColumns">
+                <div class="form-group" >
                     <div class="col-xs-10" style="width: 100%">
-                        <md-select placeholder="Microsoft column for Procore {{procoreTodoColumn.title}}"
-                                   [(ngModel)]="model[procoreTodoColumn.slug]" [name]="procoreTodoColumn.slug">
-                            <md-option [value]="">
-                                - Select column with type {{procoreTodoColumn.type}} -
-                            </md-option>
-                            <md-option *ngFor="let smColumn of getAvailableOptions(procoreTodoColumn)"
-                                       [value]="smColumn.value">
-                                {{ smColumn.title }}
-                            </md-option>
-                        </md-select>
+                        <p>Microsoft column <b>Task Name</b> will match with Procore column <b>Task Name</b></p>
+                        <p>Microsoft column <b>Start</b> will match with Procore column <b>Start</b></p>
+                        <p>Microsoft column <b>Finish</b> will match with Procore column <b>Finish</b></p>
+                        <p>Microsoft column <b>% Complete</b> will match with Procore column <b>Complete</b></p>
+                        <p>Microsoft column <b>Resource Name</b> will match with Procore column <b>Resource</b></p>
                     </div>
                 </div>
             </form>
@@ -36,7 +21,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <a [class.disabled]="buttonSubmitted" class="btn btn-success" (click)="matchColumns()">Match Columns</a>
+            <a [class.disabled]="buttonSubmitted" class="btn btn-success" (click)="matchColumns()">Continue</a>
         </div>
     </div>
 </div>

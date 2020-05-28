@@ -104,26 +104,26 @@ export class ColumnsMatchingMicrosoftComponent implements OnInit {
     @Output() columnsMatched = new EventEmitter();
 
     matchColumns() {
-        this.validationError = false;
+        // this.validationError = false;
+        //
+        // let notRequiredColumnsList = [
+        //     'assigned_to',
+        //     'description',
+        //     'resource',
+        // ];
+        //
+        // for (let columnConst in this.model) {
+        //     if (this.model.hasOwnProperty(columnConst)) {
+        //         if (notRequiredColumnsList.indexOf(columnConst) === -1 && !this.model[columnConst]) {
+        //             this.validationError = true;
+        //
+        //             return false;
+        //         }
+        //     }
+        // }
+        //
+        // this.buttonSubmitted = true;
 
-        let notRequiredColumnsList = [
-            'assigned_to',
-            'description',
-            'resource',
-        ];
-
-        for (let columnConst in this.model) {
-            if (this.model.hasOwnProperty(columnConst)) {
-                if (notRequiredColumnsList.indexOf(columnConst) === -1 && !this.model[columnConst]) {
-                    this.validationError = true;
-
-                    return false;
-                }
-            }
-        }
-
-        this.buttonSubmitted = true;
-
-        this.columnsMatched.emit(this.model);
+        this.columnsMatched.emit({});
     }
 }
