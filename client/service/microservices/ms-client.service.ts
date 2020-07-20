@@ -92,19 +92,20 @@ export class MsClientService {
     protected handleError(response: any): Promise<any> | string {
         let message = response.statusText;
         let errorCode;
-
         if (response['_body']) {
             try {
-                let jsonBody = JSON.parse(response['_body']);
-
-                if (jsonBody.message) {
-                    message = jsonBody.message;
+                if (typeof(response['_body']) === 'string') {
+                    message = response['_body'];
+                    errorCode = response['status'];
+                } else {
+                    let jsonBody = JSON.parse(response['_body']);
+                    if (jsonBody.message) {
+                        message = jsonBody.message;
+                    }
+                    if (jsonBody.result) {
+                        errorCode = jsonBody.result.code;
+                    }
                 }
-
-                if (jsonBody.result) {
-                    errorCode = jsonBody.result.code;
-                }
-
             } catch (err) {
                 message = 'Error while parsing response from ' + this.msName + '. Service unavailable.';
             }
