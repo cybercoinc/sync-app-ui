@@ -42,7 +42,7 @@ export class IndexComponent implements OnInit {
 
                 // to filter from backend
                 _projects = projects.filter(project => {
-                    return project['name'].toLowerCase().indexOf(projectNamePart.toLowerCase()) !== -1;
+                    return String(project['name']).toLowerCase().indexOf(String(projectNamePart).toLowerCase()) !== -1;
                 });
 
                 if (_projects.length === 0) {
@@ -216,7 +216,7 @@ export class IndexComponent implements OnInit {
             this.filteredProjectRows = null;
             // to filter from backend
             this.filteredProjectRows = this.projectRows.filter(projectRow => {
-                return projectRow.project['name'].toLowerCase().indexOf(name.toLowerCase()) !== -1;
+                return String(projectRow.project['name']).toLowerCase().indexOf(name.toLowerCase()) !== -1;
             });
         }, 500);
     }
