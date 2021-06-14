@@ -24,71 +24,44 @@ export class ResourcesManagementComponent implements OnInit {
     public existingResourcesObj = {};
     public tradesObj = {};
 
-    public resourcesDropdownValues = [];
+    public resources = [];
 
     public model: {} = {};
 
     @Input('projectId') projectId: number;
 
     ngOnInit() {
-        return this.getResources()
-            .then(() => {
-                return this.getAssignees();
-            })
-    }
-
-    getAssignees() {
-        this.MsProjectClientService.getAssignees(this.projectId)
-            .then(assigneeList => {
-                this.assignees = assigneeList;
-
-                this.assignees.forEach(assigneeObj => {
-                    this.model[assigneeObj.id] = this.existingResourcesObj[assigneeObj.resource_id] || '';
-                });
-            });
+        return this.getResources();
     }
 
     addResource() {
-        let dialogRef = this.MdDialog.open(AddResourceDialog);
+        let dialogRef = this.MdDialog.open(AddResourceDialog, {
+            data: {
+                projectId: this.projectId
+            }
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result && result.resource !== '') {
-                if (this.resourcesDropdownValues.indexOf(result.resource) === -1) {
-                    this.resourcesDropdownValues.push(result.resource);
+                if (this.resources.indexOf(result.resource) === -1) {
+                    this.resources.push(result.resource);
                 }
             }
         });
     }
 
     getResources() {
-        return Promise.all([
-            this.MsProjectClientService.getResources(this.projectId),
-            this.MsProjectClientService.getTrades(this.projectId)
-        ])
+        return this.MsProjectClientService.getResources(this.projectId)
             .then(results => {
-                let resourcesList = results[0];
-                let tradesList = results[1];
+                let resourcesList = results;
 
                 resourcesList.forEach(resource => {
                     this.existingResourcesObj[resource.id] = resource.name;
 
-                    if (this.resourcesDropdownValues.indexOf(resource.name) === -1) {
-                        this.resourcesDropdownValues.push(resource.name);
-                    }
-                });
-
-                tradesList.forEach(trade => {
-                    this.tradesObj[trade.id] = trade.name;
-
-                    if (this.resourcesDropdownValues.indexOf(trade.name) === -1) {
-                        this.resourcesDropdownValues.push(trade.name);
+                    if (this.resources.indexOf(resource.name) === -1) {
+                        this.resources.push(resource.name);
                     }
                 });
             })
     }
-
-    save() {
-        this.MsProjectClientService.setResourceToAssignee(this.model, this.projectId);
-    }
-
 }

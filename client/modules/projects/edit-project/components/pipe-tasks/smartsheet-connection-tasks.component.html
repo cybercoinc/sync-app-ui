@@ -41,6 +41,7 @@
         (connection)="displayChooseConnection($event)">
 </microsoft-desktop-connection>
 
+<people-list *ngIf="project && pipesListObj[pipeType]" [projectId]="project.id"></people-list>
 <resources-management *ngIf="project && pipesListObj[pipeType]" [projectId]="project.id"></resources-management>
 
 <chart-working-days *ngIf="project && project.id && scheduleChartIsUsed" [projectId]="project.id"></chart-working-days>

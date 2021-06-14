@@ -8,38 +8,17 @@
     </md-card-header>
 
     <md-card-content>
-        <div *ngIf="assignees && assignees.length" class="container-fluid">
-            <div class="row user-list" *ngFor="let assignee of assignees">
+        <div *ngIf="resources && resources.length" class="container-fluid">
+            <div class="row user-list" *ngFor="let resource of resources">
 
                 <div class="col-xs-1">
-                    <i *ngIf="!assignee.avatar" class="material-icons assignee-avatar">person</i>
-                    <img *ngIf="assignee.avatar" class="assignee-avatar-image" src="{{assignee.avatar}}">
+                    <i class="material-icons resource-logo">description</i>
                 </div>
 
                 <div class="col-xs-6 assignee">
-                    <p>
-                        {{assignee.first_name + ' ' + assignee.last_name}} {{'(' + assignee.company_name + ')'}}
-                        <i *ngIf="assignee.user_id" style="color: green;font-size: 20px;"
-                           class="material-icons">check_circle</i>
-                    </p>
-
-                    <p class="vertical-aligned">
-                        {{assignee.email}}
-                    </p>
+                    <p>{{resource}}</p>
                 </div>
-                <div class="col-xs-4">
-                    <md-select placeholder="- Choose Resource -" [(ngModel)]="model[assignee.id]"
-                               [name]=assignee.id>
-                        <md-option *ngFor="let resourceName of resourcesDropdownValues" [value]="resourceName">
-                            {{resourceName}}
-                        </md-option>
-                    </md-select>
-                </div>
-
             </div>
-            <br/>
-            <br/>
-            <button class="pull-right btn btn-success" (click)="save()">SAVE</button>
         </div>
     </md-card-content>
 </md-card>

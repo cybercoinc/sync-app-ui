@@ -575,6 +575,17 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
+    addResource(resource: string, projectId: number): Promise<any> {
+        return this.makeMsCall(
+            'add-resource',
+            'POST',
+            {
+                resource: resource,
+                project_id: projectId
+            }
+        );
+    }
+
     getBaselines(pipeId): Promise<any> {
         return this.makeMsCall(
             'chart/get-baselines',

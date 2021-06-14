@@ -63,6 +63,7 @@ import { EditDocumentPipeComponent } from './edit-project/components/document-pi
 import { ProcoreFoldersPickerComponent } from './edit-project/components/document-pipes/procore-folders-picker/procore-folders-picker.component';
 import { FolderItemComponent } from './edit-project/components/document-pipes/procore-folders-picker/components/folder-item.component';
 import { FoldersPickerService } from './edit-project/components/document-pipes/procore-folders-picker/folders-picker.service';
+import { PeopleListComponent } from './edit-project/components/pipe-tasks/people-list/people-list.component';
 
 @NgModule({
     imports: [
@@ -135,7 +136,8 @@ import { FoldersPickerService } from './edit-project/components/document-pipes/p
         CreateDocumentPipeComponent,
         EditDocumentPipeComponent,
         ProcoreFoldersPickerComponent,
-        FolderItemComponent
+        FolderItemComponent,
+        PeopleListComponent
     ],
     entryComponents: [
         CreateBaselineDialog,
