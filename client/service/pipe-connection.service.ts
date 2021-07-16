@@ -113,6 +113,7 @@ export class PipeConnectionService implements Resolve<{}> {
                     promises.push(
                         this.MsProjectClientService.addProcoreWebhookTriggers(
                             _pipeObj.project_fk_id.id,
+                            _pipeObj.id,
                             triggerResourceName
                         )
                     );

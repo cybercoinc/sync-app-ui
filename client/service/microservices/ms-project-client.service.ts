@@ -395,12 +395,13 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-    addProcoreWebhookTriggers(projectId: number, resource: 'ToDos' | 'Tasks'): Promise<boolean> {
+    addProcoreWebhookTriggers(projectId: number, pipeId: number, resource: 'ToDos' | 'Tasks'): Promise<boolean> {
         return this.makeMsCall(
             'projects/add-procore-webhook-triggers',
             'POST',
             {
                 project_id: projectId,
+                pipe_id: pipeId,
                 resource
             }
         );
