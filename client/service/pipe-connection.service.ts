@@ -109,7 +109,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 const triggerResourceName: 'ToDos' | 'Tasks' = ['public_todos', 'private_todos'].indexOf(_pipeObj.type) !== -1 ? 'ToDos' : 'Tasks';
 
                 // todo currently not enabling triggers for tasks because we have no sync logic implemented (pr to sm)
-                if (_pipeObj.type !== 'document_pipe' && triggerResourceName !== 'Tasks') {
+                if (_pipeObj.type !== 'document_pipe') {
                     promises.push(
                         this.MsProjectClientService.addProcoreWebhookTriggers(
                             _pipeObj.project_fk_id.id,
@@ -159,8 +159,7 @@ export class PipeConnectionService implements Resolve<{}> {
                 }
 
                 if (_pipeObj.type !== 'document_pipe' && needToRemoveTriggers) {
-                    if (_pipeObj.connected_to === 'microsoft-online') {
-                        // add webhook functionality here
+                    if (['microsoft-online', 'microsoft-desktop'].includes(_pipeObj.connected_to)) {
                         return;
                     }
                     return this.MsProjectClientService.removeProcoreWebhookTriggers(_pipeObj.project_fk_id.id, triggerResourceName);

@@ -114,6 +114,8 @@ export class ColumnsMatchingComponent implements OnInit {
         let notRequiredColumnsList = [
             'actual_start',
             'actual_finish',
+            'baseline_start',
+            'baseline_finish',
         ];
 
         for (let columnConst in this.model) {

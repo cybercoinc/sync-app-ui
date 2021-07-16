@@ -275,6 +275,8 @@ export class ProjectPipe {
         assigned_to: number,
         start_datetime: number,
         percentage_complete: number
+        baseline_start: number
+        baseline_end: number
     };
     sm_permalink: string;
     sm_working_days: {};
