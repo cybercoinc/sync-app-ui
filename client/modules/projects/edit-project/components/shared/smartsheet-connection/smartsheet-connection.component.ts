@@ -199,6 +199,11 @@ export class SmartsheetConnectionComponent implements OnInit {
 
     onColumnsRematched(columnsObj) {
         this.needToRematchColumns = false;
+        for (const prop in columnsObj) {
+            if (columnsObj[prop] === undefined) {
+                columnsObj[prop] = '';
+            }
+        }
 
         return this.PipeConnectionService.createNewOrGetExistingPipe(this.pipeType)
             .then(pipeId => {
