@@ -10,6 +10,20 @@ import {ProcoreTodoColumn, SmartsheetSheetColumn} from 'client/entities/entities
     styleUrls: ['client/modules/projects/edit-project/components/shared/columns-matching/columns-matching.component.css']
 })
 export class ColumnsMatchingComponent implements OnInit {
+    @Input('sheet-id') smartsheetSheetId: number;
+    @Input('pipe-type') pipeType: string;
+    @Input('saved-sheet-columns') savedSheetColumns: any = null;
+
+    protected smColumns: SmartsheetSheetColumn[];
+    protected prColumns: ProcoreTodoColumn[];
+
+    protected validationError: boolean = false;
+
+    protected buttonSubmitted: boolean = false;
+
+    public model: {} = {};
+
+    @Output() columnsMatched = new EventEmitter();
 
     constructor(protected MsProjectClientService: MsProjectClientService,
                 protected MsSyncClientService: MsSyncClientService,
@@ -33,7 +47,11 @@ export class ColumnsMatchingComponent implements OnInit {
                 this.prColumns = prColumns;
 
                 this.prColumns.forEach(prColumn => {
-                    this.model[prColumn.slug] = this.prefillDropdownValue(prColumn) || '';
+                    if (this.savedSheetColumns) {
+                        this.model[prColumn.slug] = this.savedSheetColumns[prColumn.slug] || '';
+                    } else {
+                        this.model[prColumn.slug] = this.prefillDropdownValue(prColumn) || '';
+                    }
                 });
             });
     }
@@ -93,22 +111,7 @@ export class ColumnsMatchingComponent implements OnInit {
         });
     }
 
-    @Input('sheet-id') smartsheetSheetId: number;
-    @Input('pipe-type') pipeType: string;
-
-    protected smColumns: SmartsheetSheetColumn[];
-    protected prColumns: ProcoreTodoColumn[];
-
-    protected validationError: boolean = false;
-
-    protected buttonSubmitted: boolean = false;
-
-    public model: {} = {};
-
-    @Output() columnsMatched = new EventEmitter();
-
     matchColumns() {
-        console.log(this.model);
         this.validationError = false;
 
         let notRequiredColumnsList = [

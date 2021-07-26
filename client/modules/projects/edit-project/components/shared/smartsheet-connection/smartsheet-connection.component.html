@@ -124,7 +124,9 @@
     <div class="container-fluid" *ngIf="PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id && needToRematchColumns">
         <div class="row">
             <div class="col-xs-12">
-                <columns-matching sheet-id="{{PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id}}" pipe-type="{{pipeType}}"
+                <columns-matching sheet-id="{{PipeConnectionService.pipesListObj[pipeType]?.sm_sheet_id}}"
+                                  pipe-type="{{pipeType}}"
+                                  [saved-sheet-columns]="PipeConnectionService.pipesListObj[pipeType].sm_sheet_columns"
                                   (columnsMatched)="onColumnsRematched($event)"></columns-matching>
             </div>
         </div>
