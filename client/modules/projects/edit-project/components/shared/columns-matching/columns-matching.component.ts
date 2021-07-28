@@ -12,7 +12,7 @@ import {ProcoreTodoColumn, SmartsheetSheetColumn} from 'client/entities/entities
 export class ColumnsMatchingComponent implements OnInit {
     @Input('sheet-id') smartsheetSheetId: number;
     @Input('pipe-type') pipeType: string;
-    @Input('saved-sheet-columns') savedSheetColumns: any = null;
+    @Input('saved-sheet-columns') savedSheetColumns: any = {};
 
     protected smColumns: SmartsheetSheetColumn[];
     protected prColumns: ProcoreTodoColumn[];
@@ -20,6 +20,7 @@ export class ColumnsMatchingComponent implements OnInit {
     protected validationError: boolean = false;
 
     protected buttonSubmitted: boolean = false;
+    protected fetchColumnsSubmitted: boolean = false;
 
     public model: {} = {};
 
@@ -43,17 +44,24 @@ export class ColumnsMatchingComponent implements OnInit {
                     }
                     return true;
                 });
-                this.smColumns = smColumns;
-                this.prColumns = prColumns;
-
-                this.prColumns.forEach(prColumn => {
-                    if (this.savedSheetColumns) {
-                        this.model[prColumn.slug] = this.savedSheetColumns[prColumn.slug] || '';
-                    } else {
-                        this.model[prColumn.slug] = this.prefillDropdownValue(prColumn) || '';
-                    }
+                prColumns.forEach(prColumn => {
+                    this.model[prColumn.slug] = this.savedSheetColumns[prColumn.slug] || '';
                 });
+
+                this.smColumns = smColumns;
+                this.prColumns = this.prepareAvailableProperties(prColumns, smColumns);
             });
+    }
+
+    prepareAvailableProperties(prColumns, smColumns) {
+        return prColumns.map(prColumn => {
+            const prType = Array.isArray(prColumn.type) ? prColumn.type : [prColumn.type];
+            const availableOptions = smColumns.filter(smColumn => {
+                return prType.includes(smColumn.type);
+            });
+
+            return Object.assign({}, prColumn, {options: availableOptions});
+        })
     }
 
     prefillDropdownValue(prColumn) {
@@ -82,18 +90,18 @@ export class ColumnsMatchingComponent implements OnInit {
 
     isNotAvailable(smColumn, prColumn): boolean {
         let notAvailable = false;
-
         for (let prop in this.model) {
             if (this.model.hasOwnProperty(prop)) {
                 // if not in current dropdown
-                if (prop !== prColumn.slug && Number(this.model[prop]) === Number(smColumn.id)) {
+                if (prop !== prColumn.slug && Number(this.model[prop]) === Number(smColumn.id) && (prColumn.type !== 'ABSTRACT_DATETIME' && prColumn.type !== 'DATE')) {
                     notAvailable = true;
                 }
 
                 if (Array.isArray(prColumn.type) && prColumn.type.indexOf(smColumn.type) === -1) {
                     // if type is array and value is not allowed
-                    notAvailable = true;
+                   notAvailable = true;
                 }
+
 
                 if (!Array.isArray(prColumn.type) && smColumn.type !== prColumn.type) {
                     // if type is not allowed
@@ -105,11 +113,11 @@ export class ColumnsMatchingComponent implements OnInit {
         return notAvailable;
     }
 
-    getAvailableOptions(prColumn) {
-        return this.smColumns.filter(smColumn => {
-            return !this.isNotAvailable(smColumn, prColumn);
-        });
-    }
+    // getAvailableOptions(prColumn) {
+    //     return this.smColumns.filter(smColumn => {
+    //         return !this.isNotAvailable(smColumn, prColumn);
+    //     });
+    // }
 
     matchColumns() {
         this.validationError = false;
@@ -134,5 +142,19 @@ export class ColumnsMatchingComponent implements OnInit {
         this.buttonSubmitted = true;
 
         this.columnsMatched.emit(this.model);
+    }
+
+    fetchColumnsFromSmartsheet() {
+        this.fetchColumnsSubmitted = true;
+        this.MsProjectClientService.getSmartsheetSheetColumns(this.smartsheetSheetId)
+            .then((smColumns) => {
+                this.fetchColumnsSubmitted = false;
+                this.smColumns = smColumns;
+                this.prColumns = this.prepareAvailableProperties(this.prColumns, smColumns);
+            })
+            .catch(() => {
+                this.fetchColumnsSubmitted = false;
+            })
+
     }
 }

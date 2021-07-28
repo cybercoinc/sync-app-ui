@@ -23,3 +23,16 @@ md-select {
     font-size: 10px;
     color: grey;
 }
+.match-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.fetch-columns {
+    margin: 0 0 0 10px;
+    height: 30px;
+    padding: 2px 10px;
+}
+
+
