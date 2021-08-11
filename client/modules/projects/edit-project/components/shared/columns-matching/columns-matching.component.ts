@@ -12,7 +12,7 @@ import {ProcoreTodoColumn, SmartsheetSheetColumn} from 'client/entities/entities
 export class ColumnsMatchingComponent implements OnInit {
     @Input('sheet-id') smartsheetSheetId: number;
     @Input('pipe-type') pipeType: string;
-    @Input('saved-sheet-columns') savedSheetColumns: any = {};
+    @Input('saved-sheet-columns') savedSheetColumns: any = null;
 
     protected smColumns: SmartsheetSheetColumn[];
     protected prColumns: ProcoreTodoColumn[];
@@ -44,12 +44,18 @@ export class ColumnsMatchingComponent implements OnInit {
                     }
                     return true;
                 });
-                prColumns.forEach(prColumn => {
-                    this.model[prColumn.slug] = this.savedSheetColumns[prColumn.slug] || '';
-                });
 
                 this.smColumns = smColumns;
                 this.prColumns = this.prepareAvailableProperties(prColumns, smColumns);
+
+                this.prColumns.forEach(prColumn => {
+                    if (this.savedSheetColumns) {
+                        this.model[prColumn.slug] = this.savedSheetColumns[prColumn.slug] || '';
+                    } else {
+                        this.model[prColumn.slug] = this.prefillDropdownValue(prColumn) || '';
+                    }
+
+                });
             });
     }
 
