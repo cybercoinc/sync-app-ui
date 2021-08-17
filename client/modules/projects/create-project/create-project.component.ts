@@ -140,5 +140,8 @@ export class CreateProjectComponent implements OnInit {
             .then(() => {
                 this.isLoaded = false;
             })
+            .catch(() => {
+                this.isLoaded = false;
+            })
     }
-} 
+}
