@@ -1,0 +1,44 @@
+steps:
+#### Build steps ####
+- name: 'ubuntu'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      ./bin/build.sh
+
+
+# npm install AND build app
+- name: node:10.16.0
+  entrypoint: npm
+  args: ['install']
+- name: node:10.16.0
+  entrypoint: npm
+  args: ['run', 'typings']
+- name: node:10.16.0
+  entrypoint: npm
+  args: ['run', 'compile']
+- name: node:10.16.0
+  entrypoint: npm
+  args: ['run', 'bundle:prod']
+
+
+# Replace index.html file
+- name: 'ubuntu'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      unlink ./public/index.html; mv ./public/index-prod.html ./public/index.html
+
+# Deploy app
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', 'app-prod.yaml', '--no-promote']
+
+
+#### Other settings/options ####
+#logsBucket: 'gs://prod_scheduleconnector-prod_cloud-builder-logs'
+#availableSecrets:
+#  secretManager:
+#  - versionName: projects/scheduleconnector-prod/secrets/NPM_DEPLOY_TOKEN/versions/latest
+#    env: NPM_DEPLOY_TOKEN
