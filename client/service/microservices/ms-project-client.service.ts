@@ -259,18 +259,7 @@ export class MsProjectClientService extends MsClientService {
         );
     }
 
-
     getPipesByProjectsIds(projectsIdsList: number[]): Promise<ProjectPipe[]> {
-        return this.makeMsCall(
-            'pipes/get-pipes-by-projects-ids',
-            'GET',
-            {
-                projects_ids: projectsIdsList
-            }
-        );
-    }
-
-    getPipesByProjectsIdsPOST(projectsIdsList: number[]): Promise<ProjectPipe[]> {
         return this.makeMsCall(
             'pipes/get-pipes-by-projects-ids',
             'POST',
