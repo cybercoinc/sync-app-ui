@@ -54,8 +54,11 @@ export class IndexComponent implements OnInit {
                 _projects.forEach(project => {
                     projectsIds.push(project.id);
                 });
-
-                return this.MsProjectClientService.getPipesByProjectsIds(projectsIds);
+if (Number(this.AuthService.company.id) === 5643792722100224) {
+    return this.MsProjectClientService.getPipesByProjectsIdsPOST(projectsIds);
+} else {
+    return this.MsProjectClientService.getPipesByProjectsIds(projectsIds);
+}
             })
             .then(pipesList => {
                 this.projectRows = [];
