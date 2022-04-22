@@ -36,6 +36,23 @@ export class AuthService {
                     this.userInCompany = authUserResponse.user_in_company;
                     this.company = authUserResponse.company;
 
+                    // Define variables for GoogleTagManager
+                    window['dataLayer'] = window['dataLayer'] || [];
+                    if (Array.isArray(window['dataLayer'])) {
+                        window['dataLayer'].push({
+                            'event': 'syncApp_UserDefined',
+                            'syncApp_UserId': this.authUser.id,
+                            'syncApp_UserEmail': this.authUser.email,
+                            'syncApp_UserFirstName': this.authUser.first_name,
+                            'syncApp_UserLastName': this.authUser.last_name,
+                            'syncApp_UserFullName': `${this.authUser.first_name} ${this.authUser.last_name}`,
+                            'syncApp_CompanyId': this.company.id,
+                            'syncApp_CompanyName': this.company.name,
+                            'syncApp_AsAdmin': this.authUser.as_admin,
+                        });
+                    }
+
+
                     if (this.userInCompany && this.userInCompany.has_billing_permission) {
                         return this.getCompanyBillingStatus(this.company.id)
                             .then((result) => {
