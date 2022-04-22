@@ -27,7 +27,7 @@
                                 - Select column with type {{procoreTodoColumn.type}} -
                             </md-option>
                             <md-option *ngFor="let smColumn of procoreTodoColumn.options"
-                                       [value]="smColumn.id">
+                                       [value]="smColumn.id" [disabled]="smColumn.isDisabled">
                                 {{ smColumn.title }}
                             </md-option>
                         </md-select>
