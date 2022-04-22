@@ -235,6 +235,7 @@ export class SmartsheetSheetColumn {
     title: string;
     type: string;
     width: number;
+    isDisabled: boolean;
 }
 
 export class MicrosoftProjectColumn {

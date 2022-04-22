@@ -62,8 +62,20 @@ export class ColumnsMatchingComponent implements OnInit {
     prepareAvailableProperties(prColumns, smColumns) {
         return prColumns.map(prColumn => {
             const prType = Array.isArray(prColumn.type) ? prColumn.type : [prColumn.type];
-            const availableOptions = smColumns.filter(smColumn => {
+            let availableOptions = smColumns.filter(smColumn => {
                 return prType.includes(smColumn.type);
+            });
+
+            availableOptions = availableOptions.map(option => {
+                // Do not allow pick column "Assigned To" from smartsheet to use in Tasks sync.
+                // Because for tasks we do not sync assignee at all, and instead sync Resources. And we auto-populate
+                // this column in smartsheet. Which is not desired for column "Assigned To".
+                if (this.pipeType === 'tasks' && option.title === 'Assigned To') {
+                    option.isDisabled = true;
+                } else {
+                    option.isDisabled = false;
+                }
+                return option;
             });
 
             return Object.assign({}, prColumn, {options: availableOptions});
