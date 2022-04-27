@@ -108,7 +108,10 @@ export class IndexComponent implements OnInit {
             }
         });
 
-        if (pipeObj) {
+        if (pipeObj
+            && this.AuthService.authUser.microsoft_oauth
+            && this.AuthService.authUser.microsoft_oauth.project_url
+        ) {
             return `${this.AuthService.authUser.microsoft_oauth.project_url}/project%20detail%20pages/schedule.aspx?projuid=${pipeObj.ms_project_id}`
         }
         return '';
