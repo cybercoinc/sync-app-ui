@@ -73,7 +73,11 @@ export class MicrosoftOnlineConnectionComponent implements OnInit {
     }
 
     getMsProjectOnlineLink(): string {
-        if (this.PipeConnectionService.pipesListObj && this.PipeConnectionService.pipesListObj[this.pipeType]) {
+        if (this.PipeConnectionService.pipesListObj
+            && this.PipeConnectionService.pipesListObj[this.pipeType]
+            && this.AuthService.authUser.microsoft_oauth
+            && this.AuthService.authUser.microsoft_oauth.project_url
+        ) {
             return `${this.AuthService.authUser.microsoft_oauth.project_url}/project%20detail%20pages/schedule.aspx?projuid=${this.PipeConnectionService.pipesListObj[this.pipeType].ms_project_id}`;
         }
 
