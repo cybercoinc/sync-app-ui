@@ -130,7 +130,7 @@
                 <div class="pull-right">
                     <pipe-delete [pipe]="PipeConnectionService.pipesListObj[pipeType]"></pipe-delete>
 
-                    <a href="{{msProjectLink}}"
+                    <a *ngIf="msProjectLink!==''" href="{{msProjectLink}}"
                        class="btn btn-success"
                        target="_blank">open</a>
                 </div>

@@ -104,6 +104,7 @@
                                                    md-button>SMARTSHEET</a>
                                                 <a *ngIf="'microsoft-online'===getPipeSyncSource(projectRow.projectPipesList, 'public_todos')"
                                                    target="_blank"
+                                                   [disabled]="(getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'public_todos')==='')"
                                                    href="{{getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'public_todos')}}"
                                                    md-button>MS PROJECT ONLINE</a>
                                                 <a *ngIf="'microsoft-desktop'===getPipeSyncSource(projectRow.projectPipesList, 'public_todos')"
@@ -134,6 +135,7 @@
                                                    md-button>SMARTSHEET</a>
                                                 <a *ngIf="'microsoft-online'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
                                                    target="_blank"
+                                                   [disabled]="(getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'private_todos')==='')"
                                                    href="{{getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'private_todos')}}"
                                                    md-button>MS PROJECT ONLINE</a>
                                                 <a *ngIf="'microsoft-desktop'===getPipeSyncSource(projectRow.projectPipesList, 'private_todos')"
@@ -164,6 +166,7 @@
                                                    md-button>SMARTSHEET</a>
                                                 <a *ngIf="'microsoft-online'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
                                                    target="_blank"
+                                                   [disabled]="(getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'tasks')==='')"
                                                    href="{{getMicrosoftOnlineProjectLink(projectRow.projectPipesList, 'tasks')}}"
                                                    md-button>MS PROJECT ONLINE</a>
                                                 <a *ngIf="'microsoft-desktop'===getPipeSyncSource(projectRow.projectPipesList, 'tasks')"
